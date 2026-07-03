@@ -1,44 +1,93 @@
 # Architecture
 
-## Current State
+## Current Technical Stack
 
-NoProblemo uses a minimal Next.js App Router architecture with locale-prefixed routing:
+- Next.js 16 App Router
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- `next-intl` for locale routing and UI messages
+- Supabase folder present for future auth/database/RLS work
+- Vercel production deployment
+- Domeneshop planned mainly for domain and DNS
 
-- `app/[locale]/` contains the locale root layout, public home page, support page, auth placeholders, and guest solve workspace.
-- `app/[locale]/solve/_components/guest-workspace.tsx` is the browser-only guest workspace that uses localStorage.
-- `app/globals.css` contains global styles imported by the locale layout.
-- `i18n/` contains shared `next-intl` routing, navigation, and request configuration.
-- `messages/` contains one JSON message catalog per supported locale.
-- `proxy.ts` redirects unprefixed routes and negotiates locale prefixes.
-- `public/` contains static assets from the initial scaffold.
-- `supabase/` contains Supabase project configuration and seed placeholder files.
-- `docs/` contains project operating notes for Codex and future maintainers.
+## Current Folder Structure
 
-## Runtime
+- `app/[locale]/layout.tsx`: locale root layout, metadata, `lang`, `dir`, and `NextIntlClientProvider`.
+- `app/[locale]/page.tsx`: localized public landing page.
+- `app/[locale]/solve/page.tsx`: localized guest solve page shell.
+- `app/[locale]/solve/_components/guest-workspace.tsx`: client component for localStorage guest drafts, Markdown copy/export, and login prompts.
+- `app/[locale]/support/page.tsx`: support/contact page.
+- `app/[locale]/login/page.tsx`: placeholder login page; no authentication implemented.
+- `app/[locale]/signup/page.tsx`: placeholder signup page; no account creation implemented.
+- `app/[locale]/_components/language-switcher.tsx`: locale switcher.
+- `app/[locale]/_components/site-footer.tsx`: shared footer with support email.
+- `app/globals.css`: global Tailwind CSS.
+- `i18n/`: `next-intl` routing, navigation, and request configuration.
+- `messages/`: UI message catalogs for all supported locales.
+- `proxy.ts`: locale negotiation and redirects for unprefixed routes.
+- `supabase/`: Supabase CLI configuration and seed file; no migrations.
+- `docs/`: Codex logs, handoff prompts, and project map.
 
-- Frontend: Next.js 16 App Router with React 19.
-- Styling: Tailwind CSS 4 through PostCSS.
-- Language: TypeScript with strict checking enabled.
-- Internationalization: `next-intl` with locale-prefixed routes.
-- Deployment: Vercel production deployment.
-- Backend: Supabase is configured externally, but application integration is deferred.
+No `components/` or `lib/` directory currently exists. Add them only when shared components or utilities are actually needed.
 
-## Phase 3 Design Choice
+## Main Routes
 
-The app remains frontend-only in Phase 3. There are no route handlers, server actions, database calls, authentication flows, background jobs, or third-party service calls.
+- `/` redirects to a detected locale or `en`.
+- `/[locale]` landing page.
+- `/[locale]/solve` guest problem-solving workspace.
+- `/[locale]/support` support/contact page.
+- `/[locale]/login` auth placeholder.
+- `/[locale]/signup` account placeholder.
 
-The root path `/` is handled by `next-intl` middleware and redirects to a locale route. Invalid locale segments return not found. Arabic and Urdu set `dir="rtl"` on the document; all other locales set `dir="ltr"`.
+Supported locales are `en`, `zh-CN`, `hi`, `es`, `ar`, `fr`, `bn`, `pt-BR`, `id`, `ur`, and `nb`. Arabic and Urdu use `dir="rtl"`.
 
-Guest workspace data is stored only in browser localStorage. Login and signup routes are placeholders that explain future auth behavior without implementing authentication.
+## Expected Frontend Structure
 
-## Future Structure
+Keep App Router pages route-focused. Use colocated `_components` folders for route-specific UI. Add shared top-level `components/` only when a component is reused across multiple route groups. Add `lib/` only for shared utilities such as Supabase clients, validation helpers, and typed data access.
 
-When later phases begin, prefer small, explicit folders such as:
+## Expected Backend/Supabase Structure
 
-- `app/(marketing)/` for public informational routes.
-- `app/(app)/` for authenticated product routes.
-- `app/_components/` for colocated route-specific components.
-- `lib/` for shared server-safe utilities.
-- `supabase/migrations/` only when database schema work is in scope.
+Future Supabase work should be deliberate:
 
-Do not add those folders until they are needed.
+- Define schema in `DATABASE_SCHEMA.md` first.
+- Add migrations under `supabase/migrations/` only when explicitly scoped.
+- Add typed client helpers only after environment variables and auth model are confirmed.
+- Enforce row-level security from the first migration.
+
+## Authentication Flow Direction
+
+Authentication is planned, not implemented. Expected future flow:
+
+1. User signs up or logs in through Supabase Auth.
+2. App creates or reads a `profiles` row linked to `auth.users`.
+3. Authenticated users can save challenges to Supabase.
+4. Guest localStorage drafts can optionally be copied into a saved challenge after login, if explicitly implemented.
+5. Groups, invites, messaging, and dashboard access require authenticated users.
+
+## Data Flow
+
+Current data flow:
+
+- UI messages load from `messages/*.json`.
+- Guest workspace state is stored in browser localStorage under `noproblemo.guestWorkspace.v1`.
+- No guest data is sent to Supabase.
+- No server actions, route handlers, or database queries exist.
+
+Planned data flow:
+
+- Authenticated UI reads/writes through Supabase with RLS.
+- Challenge access depends on ownership or accepted group membership.
+- Private messages and challenge content are never public.
+
+## Deployment Direction
+
+Deploy on Vercel. Configure production environment variables in Vercel, never in git. Domeneshop should be used for domain/DNS pointing to Vercel when the domain is ready.
+
+## What Should Stay Simple During MVP
+
+- No AI until the core challenge workflow is stable.
+- No payments until value and account model are clear.
+- No complex real-time collaboration before basic saved challenges and permissions exist.
+- No broad design system before recurring UI patterns emerge.
+- No database shortcuts that bypass RLS.

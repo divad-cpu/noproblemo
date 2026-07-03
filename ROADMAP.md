@@ -1,65 +1,86 @@
 # Roadmap
 
-## Phase 1: Project Foundation
+## Completed Based On Current Repository State
 
-Status: implemented in this repository.
+### Phase 1: Project Foundation
 
-Scope:
+Status: implemented.
 
-- Project structure review
-- Secret-safe environment templates
-- Documentation baseline
-- Minimal NoProblemo home page
-- Package scripts for lint, typecheck, and build
-- Validation commands
+- Next.js App Router project
+- TypeScript
+- Tailwind CSS
+- Supabase folder
+- Safe environment templates
+- Foundation documentation
+- Validation scripts
 
-## Phase 2: Internationalization Foundation
+### Phase 2: Internationalization Foundation
 
-Status: implemented in this repository.
+Status: implemented.
 
-Scope:
+- `next-intl` installed and configured
+- Locale-prefixed routes
+- Message files for `en`, `zh-CN`, `hi`, `es`, `ar`, `fr`, `bn`, `pt-BR`, `id`, `ur`, `nb`
+- RTL handling for Arabic and Urdu
+- Language switcher
 
-- `next-intl` installed and configured.
-- Locale-prefixed routes for supported languages.
-- Message catalogs for supported locales.
-- Simple language switcher.
-- RTL handling for Arabic and Urdu.
-- Guest-mode principle preserved without building the workspace.
+### Phase 3: Public Landing Page And Guest Mode
 
-## Phase 3: Guest Workspace Foundation
+Status: implemented.
 
-Status: implemented in this repository.
-
-Scope:
-
-- Public landing page
-- Support/contact page
-- Guest problem-solving workspace
-- Local browser storage for guest drafts
+- Landing page at `/[locale]`
+- Guest workspace at `/[locale]/solve`
+- Support/contact page at `/[locale]/support`
+- Placeholder login/signup routes
+- Guest localStorage drafts
 - Markdown copy/export
-- Login prompts for save and collaboration actions
-- Placeholder login and signup routes
+- Login prompt for save/collaboration actions
 
-## Phase 4: Supabase Foundation
+## Current Phase
 
-Status: deferred.
+Documentation and project orientation map. This task does not add product features.
 
-Possible scope:
+## Next Recommended Phase
 
-- Define database schema
-- Add Supabase migrations
-- Add row-level security design
-- Prepare cloud project saving
-- Keep auth and collaboration scoped to explicit phase requirements
+### Phase 4: Supabase Foundation
 
-## Later Phases
+Recommended scope:
 
-Deferred until explicitly requested:
+- Finalize initial database schema.
+- Create first Supabase migrations.
+- Add RLS policies from the start.
+- Add typed Supabase client/server helpers if needed.
+- Keep guest workspace local-only unless explicit import/save flow is scoped.
+- Do not build full auth UI unless Phase 4 explicitly includes it.
 
-- Authentication
-- Social login
-- Payments
-- Email
-- AI features
-- Scheduled jobs
-- Production monitoring and alerts
+## MVP Path
+
+1. Landing page: implemented.
+2. Authentication: planned.
+3. Dashboard: planned.
+4. Create and save a challenge: planned.
+5. Basic challenge workspace: guest-only implemented; saved workspace planned.
+6. Friends/invites: planned.
+7. Groups: planned.
+8. Simple messaging: planned.
+9. Basic admin/settings: planned.
+10. Deployment: Vercel works; hardening remains ongoing.
+
+## Future Expansion Path
+
+- AI-assisted problem analysis
+- Solution scoring
+- Templates
+- PDF/export reports
+- Real-time collaboration
+- Comments
+- Public/private challenge settings
+- Organization accounts
+- Voting
+- Task assignment
+- Calendar/deadlines
+- Knowledge library
+
+## Guardrail
+
+Do not pretend planned features are implemented. Add each phase incrementally and update `CURRENT_STATE.md` after completion.

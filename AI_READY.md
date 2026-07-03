@@ -2,30 +2,54 @@
 
 ## Purpose
 
-This file makes the project easier for AI coding agents to continue safely.
+This file helps future AI/Codex sessions continue NoProblemo without rebuilding, duplicating work, or losing product direction.
 
-## Current Scope
+## Read Order
 
-Phase 3 public landing page and guest mode are complete. Do not implement cloud, auth, or collaboration features until the user explicitly requests the next phase.
+1. `CURRENT_STATE.md`
+2. `docs/CODEX_PROJECT_MAP.md`
+3. `AGENTS.md`
+4. The task-specific docs, such as `DATABASE_SCHEMA.md`, `SECURITY.md`, or `UX_UI_GUIDE.md`
+5. Relevant installed Next.js docs in `node_modules/next/dist/docs/`
 
-## Read First
+## Decisions Already Made
 
-1. `AGENTS.md`
-2. `README.md`
-3. `PROJECT_BRIEF.md`
-4. `ARCHITECTURE.md`
-5. `ROADMAP.md`
-6. The relevant installed Next.js guide in `node_modules/next/dist/docs/`
+- Use Next.js App Router.
+- Use TypeScript.
+- Use Tailwind CSS.
+- Use `next-intl` and locale-prefixed routes.
+- Use Supabase for future authentication, database, and row-level security.
+- Deploy on Vercel.
+- Use Domeneshop mainly for domain and DNS.
+- Keep UI minimalistic, calm, professional, and responsive.
+- Keep guest work local until a future explicit save/import flow is implemented.
+- Do not automatically translate user-generated content.
 
-## Critical Guardrails
+## Must Not Change Without A Clear Reason
 
-- Never read or print `.env.local` values.
-- Never commit real secrets.
-- Keep `.env.local.example` and `.env.example` placeholders only.
-- Do not add real authentication, payments, email, AI, cron, database migrations, cloud saving, or real collaboration without explicit scope.
-- Validate with lint, typecheck, and build after changes.
+- Supported locale list and default locale.
+- RTL handling for `ar` and `ur`.
+- Guest localStorage key unless a migration plan is included.
+- Current route structure unless a phase explicitly changes it.
+- Security guardrails around `.env.local`, Supabase service role keys, and private data.
+- Minimal visual direction.
 
-## Current Validation Commands
+## How To Prepare Future Phase Prompts
+
+Use `docs/PHASE_HANDOFF_TEMPLATE.md`. A good prompt should name exactly one phase, list what is in scope, list what is out of scope, require inspection before edits, require docs updates, and require validation.
+
+## How To Avoid Duplicated Work
+
+- Read `CURRENT_STATE.md` first.
+- Check `git status --short`.
+- Inspect existing routes/components before creating new ones.
+- Search with `rg` before adding new concepts.
+- Prefer extending existing docs instead of creating overlapping docs.
+- Keep planned features marked as planned until code exists.
+
+## Validation
+
+Use:
 
 ```bash
 npm run lint

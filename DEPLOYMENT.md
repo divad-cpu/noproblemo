@@ -1,40 +1,69 @@
 # Deployment
 
-## Platform
+## Intended Setup
 
-NoProblemo deploys to Vercel.
+- Hosting: Vercel or similar, with Vercel currently working for production.
+- Backend: Supabase for future auth, database, and row-level security.
+- Domain/DNS: Domeneshop mainly for domain registration and DNS management.
 
-## Environment Variables
+## Vercel Direction
 
-Production environment variables are configured in Vercel. Local values belong in `.env.local`, which is ignored by git.
+- Connect the GitHub repository to Vercel.
+- Use the standard Next.js build.
+- Configure environment variables in Vercel project settings.
+- Do not commit production secrets.
+- Keep preview deployments useful for phase validation.
 
-Required placeholder variables:
+## Supabase Environment Variables
+
+Safe placeholders exist in `.env.example` and `.env.local.example`:
 
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 ```
 
-Do not place secret service keys in public variables.
+Future server-only values, such as service role keys, must never be exposed to the browser and must never be committed.
 
-## Build Commands
+## Domeneshop DNS Direction
 
-Use the package scripts:
+When ready to attach the domain:
+
+- Keep domain ownership and DNS in Domeneshop unless the user chooses otherwise.
+- Point DNS records to Vercel according to Vercel's current instructions.
+- Verify HTTPS after DNS propagation.
+- Keep email/DNS records documented if support email setup changes.
+
+## Local Development Commands
 
 ```bash
+npm install
+npm run dev
 npm run lint
 npm run typecheck
 npm run build
 ```
 
-## Phase 1 Deployment Scope
+For local env:
 
-The deployed app is a static foundation page. It does not connect to Supabase at runtime and does not include login, payments, email, AI, or scheduled jobs.
+```bash
+cp .env.local.example .env.local
+```
 
-## Release Checklist
+Do not print `.env.local` values.
+
+## Current Deployment Scope
+
+Current app includes localized public pages and a guest localStorage workspace. It does not connect to Supabase at runtime and does not include real login, saved cloud projects, payments, email sending, AI, or scheduled jobs.
+
+## Production Checklist
 
 - Git status reviewed.
-- No `.env.local` or secret values in the diff.
-- Lint passes.
-- Typecheck passes.
-- Build passes.
+- No `.env.local` or secret values in diff.
+- `npm run lint` passes.
+- `npm run typecheck` passes.
+- `npm run build` passes.
+- Vercel env vars are configured.
+- Supabase RLS policies are tested before any private data ships.
+- Auth redirect URLs match production domain before real auth launches.
+- Support contact remains `support@noproblemo.tech` unless intentionally changed.

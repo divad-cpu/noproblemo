@@ -6,20 +6,40 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # NoProblemo Agent Instructions
 
-## Current Scope
+## First Read
 
-The project has completed Phase 3: public landing page and guest mode. Do not implement later feature phases unless the user explicitly changes scope.
+Every Codex session must read these files before changing code:
 
-## Hard Boundaries
+1. `CURRENT_STATE.md`
+2. `docs/CODEX_PROJECT_MAP.md`
+3. `AGENTS.md`
+4. The relevant installed Next.js guide in `node_modules/next/dist/docs/`
 
-- Do not read, print, commit, or expose `.env.local` values.
-- Do not add real authentication, Supabase migrations, social login, payments, AI features, Resend, Vercel Cron, cloud saving, or real collaboration without explicit scope.
-- Do not change unrelated files.
-- Keep the app minimal, clean, mobile-friendly, and desktop-friendly.
+## How To Work Here
+
+- Inspect the current repository state before changing files.
+- Do not rebuild from scratch.
+- Do not duplicate existing routes, components, docs, or architecture.
+- Preserve the current stack: Next.js App Router, React, TypeScript, Tailwind CSS, `next-intl`, Supabase, and Vercel.
+- Prefer small, safe, incremental changes.
+- Keep the design minimalistic, clean, calm, professional, and responsive.
+- Avoid unnecessary abstractions, heavy dependencies, and broad refactors.
+- Use clear file names and readable code.
+- Avoid changing unrelated files.
+- Update `CURRENT_STATE.md` after each completed phase or major task.
+- Show changed files and validation results after each task.
+
+## Security Boundaries
+
+- Never read, print, commit, or expose `.env.local` values.
+- Never commit real secrets, Supabase service role keys, OAuth secrets, payment keys, email keys, AI keys, or Vercel tokens.
+- Protect authentication, Supabase row-level security policies, environment variables, private messages, group data, and challenge content.
+- Do not add real authentication, Supabase migrations, cloud saving, groups, invites, messaging, payments, AI, Resend, or Vercel Cron unless explicitly scoped.
+- Guest work currently stays in local browser storage only and must not be sent to Supabase unless a future phase explicitly requests it.
 
 ## Validation
 
-Run these commands after project changes:
+Run available validation after changes:
 
 ```bash
 npm run lint
@@ -27,18 +47,4 @@ npm run typecheck
 npm run build
 ```
 
-## Documentation
-
-Keep the foundation documents current:
-
-- `PROJECT_BRIEF.md`
-- `ARCHITECTURE.md`
-- `DATABASE_SCHEMA.md`
-- `SECURITY.md`
-- `UX_UI_GUIDE.md`
-- `ROADMAP.md`
-- `DEPLOYMENT.md`
-- `AI_READY.md`
-- `docs/CODEX_PROJECT_LOG.md`
-- `docs/NEXT_CODEX_PROMPT.md`
-- `docs/CHANGELOG.md`
+If validation fails, fix the cause and rerun the failed command before finishing.
