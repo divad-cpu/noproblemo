@@ -117,23 +117,44 @@ Needs verification:
 - Verify section create/update behavior with real Supabase data.
 - Verify solution/task CRUD against a running Supabase project.
 
+### Phase 8: Friends And Groups
+
+Status: implemented locally.
+
+- Friend requests with send, accept, decline, and cancel flows
+- Friendships with remove friend action
+- Groups with owner-created membership
+- Group invitations with accept, decline, and cancel flows
+- Group roles: owner, admin, member, viewer
+- 100-member group limit enforced by database trigger
+- Group challenge linking through `group_challenges`
+- RLS helper functions for group roles and linked challenge access
+- Authenticated limited profile search RPC
+- Protected friends and groups pages
+
+Needs verification:
+
+- Apply and test the Phase 8 migration.
+- Verify friend request and friendship RLS.
+- Verify group invitation, role, member removal, and 100-member limit behavior.
+- Verify linked challenge access for owner, admin, member, viewer, and outside users.
+- Verify profile search exposes only the intended fields.
+
 ## Current Phase
 
-Phase 7 challenge workspace has been implemented. Friends and groups are next.
+Phase 8 friends and groups has been implemented locally. Messaging, notifications and activity are next.
 
 ## Next Recommended Phase
 
-### Phase 8: Friends And Groups
+### Phase 9: Messaging, Notifications And Activity
 
 Recommended scope:
 
-- Friend requests
-- Accept/decline
-- Groups
-- Group invitations
-- Group roles
-- 100-member group limit
-- Group challenge access
+- Group messages
+- Challenge messages
+- Basic notifications
+- Activity events
+- Realtime only if simple and safe
 
 ## MVP Path
 
@@ -142,9 +163,9 @@ Recommended scope:
 3. Dashboard: implemented.
 4. Create and save a challenge: implemented.
 5. Basic challenge workspace: implemented.
-6. Friends/invites: planned for Phase 8.
-7. Groups: planned for Phase 8.
-8. Simple messaging: planned.
+6. Friends/invites: implemented locally.
+7. Groups: implemented locally.
+8. Simple messaging: planned for Phase 9.
 9. Basic admin/settings: planned.
 10. Deployment: Vercel works; hardening remains ongoing.
 

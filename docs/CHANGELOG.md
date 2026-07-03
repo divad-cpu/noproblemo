@@ -90,3 +90,16 @@
 - Updated all locale message catalogs with Phase 7 UI keys.
 - Updated documentation for Phase 8 friends and groups handoff.
 - Confirmed lint, typecheck, and production build pass.
+
+## 2026-07-03 Phase 8
+
+- Added Phase 8 Supabase migration for friend requests, friendships, groups, group members, group invitations, and group challenge links.
+- Added RLS helper functions and policies for friends, groups, group invitations, roles, 100-member group limit, and linked challenge access.
+- Added limited authenticated profile search RPC that returns only `id`, `display_name`, and `avatar_url`.
+- Added protected friends page with send, accept, decline, cancel, and remove friend flows.
+- Added protected groups pages with create group, invite users, accept/decline invitations, manage roles, remove members, and link owned challenges.
+- Updated challenge workspace access to read through RLS so linked group challenges can open for authorized group members.
+- Updated dashboard and protected navigation for friends and groups.
+- Updated all locale message catalogs with Phase 8 UI keys.
+- Updated documentation for Phase 9 messaging, notifications, and activity handoff.
+- Confirmed lint, typecheck, and production build pass.

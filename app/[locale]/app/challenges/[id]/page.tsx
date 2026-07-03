@@ -205,7 +205,6 @@ export default async function ChallengePage({
         .from("challenges")
         .select("*")
         .eq("id", id)
-        .eq("owner_id", user.id)
         .maybeSingle(),
       supabase
         .from("challenge_sections")

@@ -22,6 +22,9 @@ export type Locale =
 export type ProfileRole = "user" | "admin";
 export type ChallengeStatus = "draft" | "active" | "completed" | "archived";
 export type ChallengeVisibility = "private" | "group";
+export type FriendRequestStatus = "pending" | "accepted" | "declined" | "canceled";
+export type GroupRole = "owner" | "admin" | "member" | "viewer";
+export type GroupInvitationStatus = "pending" | "accepted" | "declined" | "canceled";
 export type ChallengeSectionKey =
   | "problem_title"
   | "short_description"
@@ -250,9 +253,185 @@ export type Database = {
           },
         ];
       };
+      friend_requests: {
+        Row: {
+          id: string;
+          sender_id: string;
+          receiver_id: string;
+          status: FriendRequestStatus;
+          created_at: string;
+          updated_at: string;
+          responded_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          sender_id: string;
+          receiver_id: string;
+          status?: FriendRequestStatus;
+          created_at?: string;
+          updated_at?: string;
+          responded_at?: string | null;
+        };
+        Update: {
+          id?: string;
+          sender_id?: string;
+          receiver_id?: string;
+          status?: FriendRequestStatus;
+          created_at?: string;
+          updated_at?: string;
+          responded_at?: string | null;
+        };
+        Relationships: [];
+      };
+      friendships: {
+        Row: {
+          id: string;
+          user_one_id: string;
+          user_two_id: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_one_id: string;
+          user_two_id: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_one_id?: string;
+          user_two_id?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      groups: {
+        Row: {
+          id: string;
+          owner_id: string;
+          name: string;
+          description: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          owner_id: string;
+          name: string;
+          description?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          owner_id?: string;
+          name?: string;
+          description?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      group_members: {
+        Row: {
+          id: string;
+          group_id: string;
+          user_id: string;
+          role: GroupRole;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          group_id: string;
+          user_id: string;
+          role: GroupRole;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          group_id?: string;
+          user_id?: string;
+          role?: GroupRole;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      group_invitations: {
+        Row: {
+          id: string;
+          group_id: string;
+          inviter_id: string;
+          invitee_id: string;
+          role: Exclude<GroupRole, "owner">;
+          status: GroupInvitationStatus;
+          created_at: string;
+          updated_at: string;
+          responded_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          group_id: string;
+          inviter_id: string;
+          invitee_id: string;
+          role?: Exclude<GroupRole, "owner">;
+          status?: GroupInvitationStatus;
+          created_at?: string;
+          updated_at?: string;
+          responded_at?: string | null;
+        };
+        Update: {
+          id?: string;
+          group_id?: string;
+          inviter_id?: string;
+          invitee_id?: string;
+          role?: Exclude<GroupRole, "owner">;
+          status?: GroupInvitationStatus;
+          created_at?: string;
+          updated_at?: string;
+          responded_at?: string | null;
+        };
+        Relationships: [];
+      };
+      group_challenges: {
+        Row: {
+          id: string;
+          group_id: string;
+          challenge_id: string;
+          created_by: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          group_id: string;
+          challenge_id: string;
+          created_by?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          group_id?: string;
+          challenge_id?: string;
+          created_by?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
-    Functions: Record<string, never>;
+    Functions: {
+      search_profiles: {
+        Args: {
+          search_term: string;
+        };
+        Returns: Array<{
+          id: string;
+          display_name: string | null;
+          avatar_url: string | null;
+        }>;
+      };
+    };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;
   };

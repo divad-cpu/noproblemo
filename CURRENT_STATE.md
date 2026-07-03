@@ -15,8 +15,9 @@ NoProblemo has completed:
 - Phase 5: authentication
 - Phase 6: dashboard and guest import
 - Phase 7: challenge workspace
+- Phase 8: friends and groups
 
-Phase 8 Friends and groups is next. Messaging, notifications, admin, payments, AI, email automation, Resend, and Vercel Cron remain future phases.
+Phase 9 Messaging, notifications and activity is next. Admin, payments, AI, email automation, Resend, and Vercel Cron remain future phases.
 
 ## Already Implemented
 
@@ -45,6 +46,12 @@ Phase 8 Friends and groups is next. Messaging, notifications, admin, payments, A
 - Possible solution create/edit/delete with pros, cons, risk, effort, impact, resources, and priority
 - Task/action create/edit/delete with completion, responsible person, deadline, and position
 - Markdown copy/download export for saved challenges
+- Protected friends page at `/[locale]/app/friends`
+- Friend request send, accept, decline, cancel, and remove friend actions
+- Protected groups pages at `/[locale]/app/groups`, `/[locale]/app/groups/new`, and `/[locale]/app/groups/[id]`
+- Group creation, group settings, invitations, accept/decline/cancel flows, member roles, member removal, and group challenge linking
+- Phase 8 local migration for friends, friendships, groups, memberships, invitations, group challenge links, group access helpers, and RLS policies
+- Authenticated limited profile search RPC that exposes only `id`, `display_name`, and `avatar_url`
 - Google and Apple OAuth start actions prepared through Supabase Auth
 - Shared language switcher and footer
 - Guest localStorage draft persistence under `noproblemo.guestWorkspace.v1`
@@ -55,7 +62,7 @@ Phase 8 Friends and groups is next. Messaging, notifications, admin, payments, A
 - Tables in migration: `profiles`, `challenges`, `challenge_sections`, `challenge_solutions`, `challenge_tasks`
 - Updated-at trigger function and triggers
 - Auth user profile creation trigger
-- Owner-only RLS policies for Phase 4 tables
+- Owner-only RLS policies for Phase 4 tables, extended in Phase 8 for explicitly linked group challenges
 - Supabase browser/server helper scaffolding in `lib/supabase/`
 - Manual database types in `lib/supabase/types.ts`
 - Documentation baseline and project map
@@ -63,17 +70,18 @@ Phase 8 Friends and groups is next. Messaging, notifications, admin, payments, A
 ## Partially Implemented
 
 - Problem-solving workflow exists as guest browser-local form fields and as an editable saved workspace for authenticated challenge owners.
+- Group-linked challenge read/edit access is represented in RLS. The workspace now reads challenges through RLS, but viewer read-only UX is still mostly enforced by server/RLS failures rather than fully hiding every edit control.
+- Group challenge linking currently links a user's own challenges to a group. Linking challenges owned by another group member remains future refinement.
 - Google and Apple login buttons are present, but they require Supabase provider setup and external provider configuration before they work in production.
-- Supabase schema exists as a local migration but has not been verified against the live Supabase project in this task.
+- Supabase schema exists as local migrations but has not been verified against the live Supabase project in this task.
 - Supabase helpers are used by auth actions, callback/logout handlers, auth-aware landing links, and the protected app layout.
 - Deployment works on Vercel, but production hardening is ongoing.
 - Translations currently include complete UI keys, but non-English content quality should be reviewed by fluent speakers before launch.
 
 ## Not Yet Implemented
 
-- Friends/invites
-- Groups
 - Simple messaging
+- Notifications and activity feed
 - Admin panel
 - Real-time collaboration
 - AI features
@@ -95,6 +103,10 @@ Phase 8 Friends and groups is next. Messaging, notifications, admin, payments, A
 - `app/[locale]/app/layout.tsx`: protected app layout with server-side auth check and app navigation.
 - `app/[locale]/app/page.tsx`: logged-in dashboard with challenge lists and guest import prompt.
 - `app/[locale]/app/actions.ts`: server actions for challenge creation, guest import, and profile updates.
+- `app/[locale]/app/friends/page.tsx`: protected friend request and friendship management page.
+- `app/[locale]/app/groups/page.tsx`: protected groups list and pending group invitations page.
+- `app/[locale]/app/groups/new/page.tsx`: protected group creation page.
+- `app/[locale]/app/groups/[id]/page.tsx`: protected group detail, member, invitation, and linked challenge page.
 - `app/[locale]/app/_components/guest-import-card.tsx`: client-side localStorage detection and import UI.
 - `app/[locale]/app/challenges/new/page.tsx`: minimal protected create challenge page.
 - `app/[locale]/app/challenges/[id]/page.tsx`: protected saved challenge workspace.
@@ -107,6 +119,7 @@ Phase 8 Friends and groups is next. Messaging, notifications, admin, payments, A
 - `lib/supabase/client.ts`: browser Supabase anon client helper.
 - `lib/supabase/server.ts`: server Supabase cookie-aware helper scaffold.
 - `lib/supabase/types.ts`: manual Phase 4 database types.
+- `supabase/migrations/20260703210000_phase8_friends_groups.sql`: Phase 8 friends, groups, group challenge access, helper functions, and RLS migration.
 - `supabase/config.toml`: Supabase CLI config.
 - `supabase/seed.sql`: empty seed file.
 - `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`: Phase 4 schema and RLS migration.
@@ -116,7 +129,8 @@ Phase 8 Friends and groups is next. Messaging, notifications, admin, payments, A
 ## Known Issues
 
 - Phase 4 migration needs to be applied and tested in Supabase.
-- RLS policies, profile trigger, and workspace writes need verification with authenticated users.
+- Phase 8 migration needs to be applied and tested in Supabase.
+- RLS policies, profile trigger, workspace writes, friend/group writes, and group challenge access need verification with authenticated users.
 - Google and Apple OAuth require provider configuration in Supabase, Google Cloud, and Apple Developer.
 - Guest drafts are browser-local and can be lost if localStorage is cleared.
 - Non-English translations need human review.
@@ -125,7 +139,7 @@ Phase 8 Friends and groups is next. Messaging, notifications, admin, payments, A
 
 ## Current Risks
 
-- Future agents must not add friends/groups/messaging before Phase 8 is explicitly scoped.
+- Future agents must not add messaging, notifications, or admin before Phase 9 or a later explicit scope.
 - Future agents might use service role keys in frontend code; do not do this.
 - RLS policies are written but still need live/local Supabase verification.
 - User-generated problem content may be sensitive; privacy must be designed into auth and dashboard phases.
@@ -133,19 +147,16 @@ Phase 8 Friends and groups is next. Messaging, notifications, admin, payments, A
 
 ## Next Recommended Phase
 
-Phase 8: Friends and groups.
+Phase 9: Messaging, notifications and activity.
 
 Recommended scope:
 
-- Friend requests
-- Accept/decline flow
-- Groups
-- Group invitations
-- Group roles
-- 100-member group limit
-- Group challenge access
+- Group and challenge messages
+- Basic notifications
+- Activity events
+- Realtime only if simple and safe
 
-Do not implement messaging, notifications, or admin in Phase 8 unless explicitly scoped.
+Do not implement admin in Phase 9 unless explicitly scoped.
 
 ## Validation Commands
 
@@ -176,6 +187,12 @@ Validation for Phase 6:
 - `npm run build`: passed on 2026-07-03 after rerunning with escalation for the known Turbopack sandbox port-bind issue.
 
 Validation for Phase 7:
+
+- `npm run lint`: passed on 2026-07-03.
+- `npm run typecheck`: passed on 2026-07-03.
+- `npm run build`: passed on 2026-07-03.
+
+Validation for Phase 8:
 
 - `npm run lint`: passed on 2026-07-03.
 - `npm run typecheck`: passed on 2026-07-03.

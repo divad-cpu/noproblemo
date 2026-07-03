@@ -224,7 +224,9 @@
       "signedIn": "Signed in",
       "logout": "Log out",
       "dashboard": "Dashboard",
-      "settings": "Settings"
+      "settings": "Settings",
+      "friends": "Friends",
+      "groups": "Groups"
     },
     "eyebrow": "Protected area",
     "title": "Authentication is ready.",
@@ -295,6 +297,12 @@
     "errors": {
       "listTitle": "Challenges could not be loaded.",
       "listBody": "Check Supabase configuration, migration status, and RLS policies."
+    },
+    "social": {
+      "friendRequests": "Incoming friend requests",
+      "groupInvitations": "Group invitations",
+      "groups": "Groups",
+      "noGroups": "No groups yet."
     }
   },
   "CreateChallenge": {
@@ -534,6 +542,157 @@
       "position": "Position",
       "yes": "Yes",
       "no": "No"
+    }
+  },
+  "Friends": {
+    "eyebrow": "Friends",
+    "title": "Friends and requests",
+    "body": "Send requests by display name or exact profile id. Friendship does not grant access to private challenges.",
+    "search": {
+      "title": "Find a profile",
+      "body": "Search is limited to display name or exact profile id and does not expose email addresses.",
+      "placeholder": "Display name or profile id",
+      "submit": "Search",
+      "send": "Send request",
+      "empty": "No matching profiles found.",
+      "unnamed": "Unnamed profile"
+    },
+    "incoming": {
+      "title": "Incoming requests",
+      "empty": "No incoming requests.",
+      "accept": "Accept",
+      "decline": "Decline"
+    },
+    "outgoing": {
+      "title": "Outgoing requests",
+      "empty": "No outgoing requests.",
+      "cancel": "Cancel request"
+    },
+    "friends": {
+      "title": "Current friends",
+      "empty": "No friends yet.",
+      "remove": "Remove friend"
+    },
+    "status": {
+      "friend-request-sent": "Friend request sent.",
+      "friend-accepted": "Friend request accepted.",
+      "friend-declined": "Friend request declined.",
+      "friend-canceled": "Friend request canceled.",
+      "friend-removed": "Friend removed."
+    },
+    "errors": {
+      "friend-invalid-user": "Choose another user before sending a request.",
+      "friend-request-failed": "Friend request could not be sent. It may already be pending.",
+      "friend-response-failed": "Friend request could not be updated.",
+      "friend-remove-failed": "Friendship could not be removed."
+    }
+  },
+  "Groups": {
+    "eyebrow": "Groups",
+    "title": "Groups",
+    "body": "Create private groups, invite members, and link selected challenges for collaboration.",
+    "create": "Create group",
+    "unnamed": "Unnamed group",
+    "role": "Role",
+    "roles": {
+      "owner": "Owner",
+      "admin": "Admin",
+      "member": "Member",
+      "viewer": "Viewer"
+    },
+    "invitations": {
+      "title": "Pending invitations",
+      "empty": "No pending group invitations.",
+      "accepted": "Accept",
+      "declined": "Decline"
+    },
+    "mine": {
+      "title": "My groups",
+      "empty": "You are not a member of any groups yet."
+    },
+    "status": {
+      "group-invitation-accepted": "Group invitation accepted.",
+      "group-invitation-declined": "Group invitation declined.",
+      "group-invitation-canceled": "Group invitation canceled."
+    },
+    "errors": {
+      "group-invitation-response-failed": "Group invitation could not be updated."
+    }
+  },
+  "GroupsNew": {
+    "back": "Back to groups",
+    "eyebrow": "New group",
+    "title": "Create a private group.",
+    "body": "Start a group for selected collaborators. Groups are private in this phase.",
+    "fields": {
+      "name": "Group name",
+      "description": "Description"
+    },
+    "submit": "Create group",
+    "errors": {
+      "group-name-required": "Add a group name before creating the group.",
+      "group-create-failed": "Group could not be created."
+    }
+  },
+  "GroupDetail": {
+    "back": "Back to groups",
+    "eyebrow": "Group",
+    "noDescription": "No group description yet.",
+    "yourRole": "Your role",
+    "role": "Role",
+    "unnamed": "Unnamed profile",
+    "roles": {
+      "owner": "Owner",
+      "admin": "Admin",
+      "member": "Member",
+      "viewer": "Viewer"
+    },
+    "settings": {
+      "title": "Group settings",
+      "save": "Save group"
+    },
+    "members": {
+      "title": "Members",
+      "limit": "Groups are limited to 100 members.",
+      "updateRole": "Update role",
+      "remove": "Remove member"
+    },
+    "invite": {
+      "title": "Invite user",
+      "searchPlaceholder": "Display name or profile id",
+      "search": "Search",
+      "send": "Invite",
+      "empty": "No matching profiles found."
+    },
+    "invitations": {
+      "title": "Pending invitations",
+      "empty": "No pending invitations.",
+      "cancel": "Cancel invite"
+    },
+    "challenges": {
+      "title": "Linked challenges",
+      "empty": "No challenges linked to this group yet.",
+      "noneToLink": "No owned challenges available to link.",
+      "link": "Link challenge",
+      "unlink": "Unlink"
+    },
+    "status": {
+      "group-created": "Group created.",
+      "group-saved": "Group saved.",
+      "group-invite-sent": "Group invitation sent.",
+      "group-invitation-canceled": "Group invitation canceled.",
+      "group-member-removed": "Member removed.",
+      "group-role-updated": "Member role updated.",
+      "group-challenge-linked": "Challenge linked to group.",
+      "group-challenge-unlinked": "Challenge unlinked from group."
+    },
+    "errors": {
+      "group-save-failed": "Group could not be saved.",
+      "group-invite-failed": "Group invitation could not be sent.",
+      "group-member-remove-failed": "Member could not be removed.",
+      "group-role-update-failed": "Member role could not be updated.",
+      "group-challenge-link-failed": "Challenge could not be linked.",
+      "group-challenge-unlink-failed": "Challenge could not be unlinked."
     }
   }
 }

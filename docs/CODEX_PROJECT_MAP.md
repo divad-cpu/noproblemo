@@ -37,15 +37,17 @@ Implemented:
 - Display name and preferred locale profile settings.
 - Seven-step problem-solving workflow.
 - Editable challenge sections, solutions, tasks, final recommendation, summary, and Markdown export.
+- Friends page with request send, accept, decline, cancel, and remove friend actions.
+- Groups pages with group creation, invitations, roles, member removal, and explicit group challenge links.
 - Google and Apple OAuth provider start actions prepared through Supabase Auth.
 - Supabase migration for profiles and core challenge tables.
-- Owner-only RLS policies for Phase 4 tables.
+- Phase 8 migration for friends, groups, profile search, group challenge links, and group-aware RLS.
 - Supabase client/server helper scaffolding.
 - Manual database types.
 
 Not implemented:
 
-- Friends, invites, groups, messaging.
+- Messaging, notifications, and activity.
 - Admin panel.
 - AI, payments, email sending, cron.
 
@@ -62,6 +64,10 @@ Not implemented:
 - `/[locale]/app`: protected dashboard.
 - `/[locale]/app/challenges/new`: minimal protected challenge creation.
 - `/[locale]/app/challenges/[id]`: protected saved challenge workspace.
+- `/[locale]/app/friends`: protected friends page.
+- `/[locale]/app/groups`: protected groups list and pending invitations.
+- `/[locale]/app/groups/new`: protected group creation.
+- `/[locale]/app/groups/[id]`: protected group detail, member management, invitations, and linked challenges.
 - `/[locale]/app/settings`: protected profile/settings.
 
 ## Data Model Map
@@ -71,6 +77,7 @@ Current:
 - UI strings: `messages/*.json`.
 - Guest draft: browser localStorage key `noproblemo.guestWorkspace.v1`.
 - Supabase migration: `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`.
+- Supabase migration: `supabase/migrations/20260703210000_phase8_friends_groups.sql`.
 - Typed helpers: `lib/supabase/`.
 - Dashboard reads/writes use the authenticated Supabase session and Phase 4 tables.
 - Guest import maps `problem`, `context`, `outcome`, `options`, and `nextStep` into `challenge_sections`.
@@ -78,6 +85,11 @@ Current:
 - Workspace saves section text to `challenge_sections`.
 - Workspace saves possible solutions to `challenge_solutions`.
 - Workspace saves tasks/actions to `challenge_tasks`.
+- Friend requests use `friend_requests`.
+- Friendships use canonical rows in `friendships`.
+- Groups use `groups`, `group_members`, and `group_invitations`.
+- Group challenge access uses explicit `group_challenges` links.
+- Profile discovery uses authenticated RPC `search_profiles(search_term)` and exposes only `id`, `display_name`, and `avatar_url`.
 
 Implemented Phase 4 tables:
 
@@ -86,15 +98,18 @@ Implemented Phase 4 tables:
 - `challenge_sections`
 - `challenge_solutions`
 - `challenge_tasks`
+- `friend_requests`
+- `friendships`
+- `groups`
+- `group_members`
+- `group_invitations`
+- `group_challenges`
 
 Planned data concepts:
 
-- `friendships`
-- `groups`
-- `group_memberships`
-- `group_invites`
-- `challenge_collaborators`
 - `messages`
+- `notifications`
+- `activity_events`
 
 See `DATABASE_SCHEMA.md` before any future migration work.
 
@@ -107,18 +122,22 @@ Current:
 - Google and Apple OAuth starts exist, but require provider setup before production use.
 - Dashboard, minimal create, profile update, and guest import use server-side session checks and RLS.
 - Phase 4 migration enables RLS for `profiles`, `challenges`, `challenge_sections`, `challenge_solutions`, and `challenge_tasks`.
-- Phase 4 RLS is owner-only and must still be verified in Supabase.
+- Phase 8 migration enables RLS for friends/groups tables and extends challenge RLS for explicitly linked group challenges.
+- Friendships alone do not grant challenge access.
+- Group invitation acceptance is required before membership access is granted.
+- Group challenge viewers should read but not edit linked challenges.
+- RLS migrations must still be verified in Supabase.
 - No service-role helper exists.
 
 Planned:
 
-- Phase 8 friends, groups, invites, roles, and group challenge access.
-- Later messaging policies.
+- Phase 9 messaging, notifications, and activity.
+- Later admin policies.
 
 Rules:
 
-- Users can access only owned challenges in the Phase 4 schema.
-- Group invites must require accept/decline when implemented.
+- Users can access owned private challenges and explicitly linked group challenges allowed by RLS.
+- Group invites require accept/decline.
 - Private messages and challenge content must not be public.
 - Service role key never reaches browser code.
 
@@ -131,9 +150,9 @@ See `SECURITY.md` before implementing auth, database writes, or messaging.
 3. Dashboard: implemented.
 4. Create and save a challenge: implemented.
 5. Basic challenge workspace: implemented.
-6. Friends/invites: planned for Phase 8.
-7. Groups: planned for Phase 8.
-8. Simple messaging: planned.
+6. Friends/invites: implemented locally.
+7. Groups: implemented locally.
+8. Simple messaging: planned for Phase 9.
 9. Basic admin/settings: planned.
 10. Deployment: Vercel works; security hardening ongoing.
 

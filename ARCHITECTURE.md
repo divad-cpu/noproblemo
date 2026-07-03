@@ -26,10 +26,15 @@
 - `app/[locale]/app/layout.tsx`: protected app route boundary with server-side session check and app navigation.
 - `app/[locale]/app/page.tsx`: logged-in dashboard with profile summary, saved challenge lists, guest import prompt, and empty/error states.
 - `app/[locale]/app/actions.ts`: server actions for creating draft challenges, importing guest drafts, updating profile settings, editing workspace sections, managing solutions, and managing tasks.
+- `app/[locale]/app/actions.ts`: server actions for creating draft challenges, importing guest drafts, updating profile settings, editing workspace sections, managing solutions, managing tasks, friend requests, friendships, groups, invitations, member roles, and group challenge links.
 - `app/[locale]/app/_components/guest-import-card.tsx`: client component that detects the existing guest localStorage draft and submits it for server-side import.
 - `app/[locale]/app/_components/challenge-markdown-export.tsx`: client component for Markdown copy/download export.
 - `app/[locale]/app/challenges/new/page.tsx`: minimal protected cloud challenge creation page.
 - `app/[locale]/app/challenges/[id]/page.tsx`: protected saved challenge workspace with sections, solutions, tasks, and Markdown export.
+- `app/[locale]/app/friends/page.tsx`: protected friend request and friendship management page.
+- `app/[locale]/app/groups/page.tsx`: protected groups list and pending group invitations page.
+- `app/[locale]/app/groups/new/page.tsx`: protected group creation page.
+- `app/[locale]/app/groups/[id]/page.tsx`: protected group detail page with members, invitations, roles, and linked challenges.
 - `app/[locale]/app/settings/page.tsx`: protected profile/settings page for display name and preferred locale.
 - `app/[locale]/_components/auth-status.tsx`: auth-aware landing links.
 - `app/[locale]/_components/language-switcher.tsx`: locale switcher.
@@ -58,6 +63,10 @@ No shared top-level `components/` directory currently exists. Add it only when s
 - `/[locale]/app` protected dashboard.
 - `/[locale]/app/challenges/new` minimal protected create challenge page.
 - `/[locale]/app/challenges/[id]` protected saved challenge workspace.
+- `/[locale]/app/friends` protected friends page.
+- `/[locale]/app/groups` protected groups list.
+- `/[locale]/app/groups/new` protected group creation.
+- `/[locale]/app/groups/[id]` protected group detail and challenge linking.
 - `/[locale]/app/settings` protected profile/settings page.
 
 Supported locales are `en`, `zh-CN`, `hi`, `es`, `ar`, `fr`, `bn`, `pt-BR`, `id`, `ur`, and `nb`. Arabic and Urdu use `dir="rtl"`.
@@ -86,7 +95,20 @@ The migration creates:
 - profile creation trigger for new `auth.users`
 - owner-only RLS policies
 
-The migration still needs to be applied and verified in Supabase.
+Implemented in Phase 8:
+
+- `supabase/migrations/20260703210000_phase8_friends_groups.sql`
+- `friend_requests`
+- `friendships`
+- `groups`
+- `group_members`
+- `group_invitations`
+- `group_challenges`
+- helper functions for group roles and group challenge access
+- limited authenticated profile search RPC
+- RLS policies for friends, groups, invitations, membership, group challenge links, and linked challenge access
+
+The migrations still need to be applied and verified in Supabase.
 
 ## Authentication Flow
 
@@ -121,11 +143,15 @@ Current data flow:
 - Workspace creates, edits, and deletes possible solutions in `challenge_solutions`.
 - Workspace creates, edits, completes, and deletes tasks/actions in `challenge_tasks`.
 - Markdown export is generated client-side from server-fetched challenge data.
+- Friends page reads friend requests and friendships involving the authenticated user, and uses a limited profile search RPC for display-name lookup.
+- Groups pages read only groups the authenticated user belongs to, pending invitations involving the user, and linked group challenges visible through RLS.
+- Group challenge linking marks a linked challenge with `visibility = 'group'` and records the explicit link in `group_challenges`.
+- Group members can open linked challenges through the existing workspace route when RLS permits access.
 
 Planned data flow:
 
-- Phase 8: friends, groups, invites, roles, and group challenge access.
-- Later: messaging policies.
+- Phase 9: messaging, notifications, and activity events.
+- Later: admin policies.
 
 ## Deployment Direction
 

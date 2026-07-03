@@ -12,6 +12,7 @@ type DashboardPageProps = {
 
 type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
+type Group = Database["public"]["Tables"]["groups"]["Row"];
 
 function formatDate(value: string, locale: Locale) {
   return new Intl.DateTimeFormat(locale, {
@@ -85,6 +86,9 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
   const [
     { data: profile },
     { data: challenges, error: challengesError },
+    { count: incomingFriendRequests },
+    { count: groupInvitations },
+    { data: groupMemberships },
   ] = await Promise.all([
     supabase.from("profiles").select("*").eq("id", user.id).maybeSingle(),
     supabase
@@ -93,7 +97,29 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
       .eq("owner_id", user.id)
       .order("updated_at", { ascending: false })
       .limit(12),
+    supabase
+      .from("friend_requests")
+      .select("id", { count: "exact", head: true })
+      .eq("receiver_id", user.id)
+      .eq("status", "pending"),
+    supabase
+      .from("group_invitations")
+      .select("id", { count: "exact", head: true })
+      .eq("invitee_id", user.id)
+      .eq("status", "pending"),
+    supabase
+      .from("group_members")
+      .select("id, role, group_id")
+      .eq("user_id", user.id)
+      .order("created_at", { ascending: false })
+      .limit(3),
   ]);
+  const groupIds = (groupMemberships ?? []).map((membership) => membership.group_id);
+  const { data: dashboardGroups } =
+    groupIds.length > 0
+      ? await supabase.from("groups").select("*").in("id", groupIds)
+      : { data: [] as Group[] };
+  const groupMap = new Map((dashboardGroups ?? []).map((group) => [group.id, group]));
 
   const savedChallenges = challenges ?? [];
   const activeChallenges = savedChallenges.filter((challenge) =>
@@ -169,6 +195,47 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
             {t("futureNote")}
           </p>
         </div>
+      </section>
+
+      <section className="grid gap-4 md:grid-cols-3">
+        <Link
+          href="/app/friends"
+          className="rounded-lg border border-[#dad8d0] bg-white p-5 hover:border-[#8b897f]"
+        >
+          <p className="text-sm font-medium text-[#706f68]">
+            {t("social.friendRequests")}
+          </p>
+          <p className="mt-2 text-3xl font-semibold text-[#22211e]">
+            {incomingFriendRequests ?? 0}
+          </p>
+        </Link>
+        <Link
+          href="/app/groups"
+          className="rounded-lg border border-[#dad8d0] bg-white p-5 hover:border-[#8b897f]"
+        >
+          <p className="text-sm font-medium text-[#706f68]">
+            {t("social.groupInvitations")}
+          </p>
+          <p className="mt-2 text-3xl font-semibold text-[#22211e]">
+            {groupInvitations ?? 0}
+          </p>
+        </Link>
+        <Link
+          href="/app/groups"
+          className="rounded-lg border border-[#dad8d0] bg-white p-5 hover:border-[#8b897f]"
+        >
+          <p className="text-sm font-medium text-[#706f68]">
+            {t("social.groups")}
+          </p>
+          <p className="mt-2 text-sm leading-6 text-[#55544f]">
+            {groupMemberships && groupMemberships.length > 0
+              ? groupMemberships
+                  .map((membership) => groupMap.get(membership.group_id)?.name)
+                  .filter(Boolean)
+                  .join(", ")
+              : t("social.noGroups")}
+          </p>
+        </Link>
       </section>
 
       {challengesError ? (

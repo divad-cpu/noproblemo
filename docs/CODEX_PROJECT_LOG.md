@@ -104,3 +104,19 @@ Phase 7 challenge workspace:
 - Updated all eleven message catalogs with Phase 7 UI keys.
 - Did not implement friends, groups, messaging, notifications, admin, payments, AI, email automation, Resend, Vercel Cron, public sharing, comments, voting, or realtime collaboration.
 - Validation passed: `npm run lint`, `npm run typecheck`, and `npm run build`.
+
+Phase 8 friends and groups:
+
+- Inspected required handoff docs, package scripts, App Router routes, Supabase helpers/types, Phase 4 and Phase 7 migration constraints, message catalogs, and installed Next.js server action/form docs.
+- Added `supabase/migrations/20260703210000_phase8_friends_groups.sql`.
+- Added `friend_requests`, `friendships`, `groups`, `group_members`, `group_invitations`, and `group_challenges`.
+- Added helper functions for group roles, group challenge read/edit access, the 100-member group limit, owner membership creation, last-owner protection, and limited authenticated profile search.
+- Added RLS policies for friend requests, friendships, groups, members, invitations, group challenge links, and linked challenge access.
+- Updated manual database types for Phase 8 tables and search RPC.
+- Added protected `/[locale]/app/friends` page.
+- Added protected `/[locale]/app/groups`, `/[locale]/app/groups/new`, and `/[locale]/app/groups/[id]` pages.
+- Added server actions for friend requests, friendship removal, group creation/settings, group invitations, member roles/removal, and group challenge linking/unlinking.
+- Updated protected navigation and dashboard previews for friend requests, group invitations, and groups.
+- Updated all eleven message catalogs with Phase 8 UI keys.
+- Did not implement messaging, notifications, activity feed, admin, payments, AI, email automation, Resend, Vercel Cron, public sharing, voting, comments, or realtime collaboration.
+- Validation passed: `npm run lint`, `npm run typecheck`, and `npm run build`.

@@ -8,6 +8,7 @@ import type {
   ChallengeSectionKey,
   ChallengeStatus,
   Database,
+  GroupRole,
 } from "@/lib/supabase/types";
 
 type GuestDraft = {
@@ -35,6 +36,12 @@ const challengeStatuses: ChallengeStatus[] = [
   "active",
   "completed",
   "archived",
+];
+const groupRoles: GroupRole[] = ["owner", "admin", "member", "viewer"];
+const invitationRoles: Array<Exclude<GroupRole, "owner">> = [
+  "admin",
+  "member",
+  "viewer",
 ];
 const sectionKeys: ChallengeSectionKey[] = [
   "problem_title",
@@ -94,6 +101,10 @@ function parseScore(value: FormDataEntryValue | null) {
 
 function getChallengeId(formData: FormData) {
   return firstString(formData.get("challengeId"));
+}
+
+function getGroupId(formData: FormData) {
+  return firstString(formData.get("groupId"));
 }
 
 function getWorkspaceUrl(locale: Locale, challengeId: string, params: URLSearchParams) {
@@ -203,10 +214,15 @@ async function requireOwnedChallenge(
     .from("challenges")
     .select("*")
     .eq("id", challengeId)
-    .eq("owner_id", user.id)
     .maybeSingle();
 
   return { supabase, userId: user.id, challenge };
+}
+
+function canonicalFriendPair(userA: string, userB: string) {
+  return userA < userB
+    ? { user_one_id: userA, user_two_id: userB }
+    : { user_one_id: userB, user_two_id: userA };
 }
 
 export async function createChallenge(formData: FormData) {
@@ -633,4 +649,403 @@ export async function deleteTask(formData: FormData) {
 
   revalidatePath(`/${locale}/app/challenges/${challengeId}`);
   redirect(workspaceStatusUrl(locale, challengeId, "task-deleted"));
+}
+
+export async function sendFriendRequest(formData: FormData) {
+  const locale = getLocale(formData);
+  const receiverId = firstString(formData.get("receiverId"));
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/friends`);
+  }
+
+  if (!receiverId || receiverId === user.id) {
+    redirect(`/${locale}/app/friends?error=friend-invalid-user`);
+  }
+
+  const { error } = await supabase.from("friend_requests").insert({
+    sender_id: user.id,
+    receiver_id: receiverId,
+    status: "pending",
+  });
+
+  if (error) {
+    redirect(`/${locale}/app/friends?error=friend-request-failed`);
+  }
+
+  revalidatePath(`/${locale}/app/friends`);
+  redirect(`/${locale}/app/friends?status=friend-request-sent`);
+}
+
+export async function respondFriendRequest(formData: FormData) {
+  const locale = getLocale(formData);
+  const requestId = firstString(formData.get("requestId"));
+  const response = firstString(formData.get("response"));
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/friends`);
+  }
+
+  if (!requestId || !["accepted", "declined", "canceled"].includes(response)) {
+    redirect(`/${locale}/app/friends?error=friend-response-failed`);
+  }
+
+  const { data: request } = await supabase
+    .from("friend_requests")
+    .select("*")
+    .eq("id", requestId)
+    .eq("status", "pending")
+    .maybeSingle();
+
+  if (!request) {
+    redirect(`/${locale}/app/friends?error=friend-response-failed`);
+  }
+
+  const canRespond =
+    (response === "canceled" && request.sender_id === user.id) ||
+    (["accepted", "declined"].includes(response) && request.receiver_id === user.id);
+
+  if (!canRespond) {
+    redirect(`/${locale}/app/friends?error=friend-response-failed`);
+  }
+
+  const { error: updateError } = await supabase
+    .from("friend_requests")
+    .update({
+      status: response as "accepted" | "declined" | "canceled",
+      responded_at: new Date().toISOString(),
+    })
+    .eq("id", request.id);
+
+  if (updateError) {
+    redirect(`/${locale}/app/friends?error=friend-response-failed`);
+  }
+
+  if (response === "accepted") {
+    const { error: friendshipError } = await supabase.from("friendships").insert(
+      canonicalFriendPair(request.sender_id, request.receiver_id),
+    );
+
+    if (friendshipError) {
+      redirect(`/${locale}/app/friends?error=friend-response-failed`);
+    }
+  }
+
+  revalidatePath(`/${locale}/app/friends`);
+  redirect(`/${locale}/app/friends?status=friend-${response}`);
+}
+
+export async function removeFriend(formData: FormData) {
+  const locale = getLocale(formData);
+  const friendshipId = firstString(formData.get("friendshipId"));
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/friends`);
+  }
+
+  if (!friendshipId) {
+    redirect(`/${locale}/app/friends?error=friend-remove-failed`);
+  }
+
+  const { error } = await supabase
+    .from("friendships")
+    .delete()
+    .eq("id", friendshipId);
+
+  if (error) {
+    redirect(`/${locale}/app/friends?error=friend-remove-failed`);
+  }
+
+  revalidatePath(`/${locale}/app/friends`);
+  redirect(`/${locale}/app/friends?status=friend-removed`);
+}
+
+export async function createGroup(formData: FormData) {
+  const locale = getLocale(formData);
+  const name = truncate(firstString(formData.get("name")), maxTitleLength);
+  const description = nullableText(firstString(formData.get("description")), 1000);
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/groups`);
+  }
+
+  if (!name) {
+    redirect(`/${locale}/app/groups/new?error=group-name-required`);
+  }
+
+  const { data, error } = await supabase
+    .from("groups")
+    .insert({ owner_id: user.id, name, description })
+    .select("id")
+    .single();
+
+  if (error || !data) {
+    redirect(`/${locale}/app/groups/new?error=group-create-failed`);
+  }
+
+  revalidatePath(`/${locale}/app/groups`);
+  redirect(`/${locale}/app/groups/${data.id}?status=group-created`);
+}
+
+export async function updateGroup(formData: FormData) {
+  const locale = getLocale(formData);
+  const groupId = getGroupId(formData);
+  const name = truncate(firstString(formData.get("name")), maxTitleLength);
+  const description = nullableText(firstString(formData.get("description")), 1000);
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/groups`);
+  }
+
+  if (!groupId || !name) {
+    redirect(`/${locale}/app/groups/${groupId}?error=group-save-failed`);
+  }
+
+  const { error } = await supabase
+    .from("groups")
+    .update({ name, description })
+    .eq("id", groupId);
+
+  if (error) {
+    redirect(`/${locale}/app/groups/${groupId}?error=group-save-failed`);
+  }
+
+  revalidatePath(`/${locale}/app/groups`);
+  revalidatePath(`/${locale}/app/groups/${groupId}`);
+  redirect(`/${locale}/app/groups/${groupId}?status=group-saved`);
+}
+
+export async function inviteUserToGroup(formData: FormData) {
+  const locale = getLocale(formData);
+  const groupId = getGroupId(formData);
+  const inviteeId = firstString(formData.get("inviteeId"));
+  const role = firstString(formData.get("role")) as Exclude<GroupRole, "owner">;
+  const safeRole = invitationRoles.includes(role) ? role : "member";
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/groups`);
+  }
+
+  if (!groupId || !inviteeId || inviteeId === user.id) {
+    redirect(`/${locale}/app/groups/${groupId}?error=group-invite-failed`);
+  }
+
+  const { error } = await supabase.from("group_invitations").insert({
+    group_id: groupId,
+    inviter_id: user.id,
+    invitee_id: inviteeId,
+    role: safeRole,
+    status: "pending",
+  });
+
+  if (error) {
+    redirect(`/${locale}/app/groups/${groupId}?error=group-invite-failed`);
+  }
+
+  revalidatePath(`/${locale}/app/groups/${groupId}`);
+  redirect(`/${locale}/app/groups/${groupId}?status=group-invite-sent`);
+}
+
+export async function respondGroupInvitation(formData: FormData) {
+  const locale = getLocale(formData);
+  const invitationId = firstString(formData.get("invitationId"));
+  const response = firstString(formData.get("response"));
+  const returnTo = firstString(formData.get("returnTo")) || "groups";
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/groups`);
+  }
+
+  if (!invitationId || !["accepted", "declined", "canceled"].includes(response)) {
+    redirect(`/${locale}/app/groups?error=group-invitation-response-failed`);
+  }
+
+  const { data: invitation } = await supabase
+    .from("group_invitations")
+    .select("*")
+    .eq("id", invitationId)
+    .eq("status", "pending")
+    .maybeSingle();
+
+  if (!invitation) {
+    redirect(`/${locale}/app/groups?error=group-invitation-response-failed`);
+  }
+
+  const canRespond =
+    (response === "canceled" && invitation.inviter_id === user.id) ||
+    (["accepted", "declined"].includes(response) && invitation.invitee_id === user.id);
+
+  if (!canRespond) {
+    redirect(`/${locale}/app/groups?error=group-invitation-response-failed`);
+  }
+
+  const { error: updateError } = await supabase
+    .from("group_invitations")
+    .update({
+      status: response as "accepted" | "declined" | "canceled",
+      responded_at: new Date().toISOString(),
+    })
+    .eq("id", invitation.id);
+
+  if (updateError) {
+    redirect(`/${locale}/app/groups?error=group-invitation-response-failed`);
+  }
+
+  if (response === "accepted") {
+    const { error: memberError } = await supabase.from("group_members").insert({
+      group_id: invitation.group_id,
+      user_id: user.id,
+      role: invitation.role,
+    });
+
+    if (memberError) {
+      redirect(`/${locale}/app/groups?error=group-invitation-response-failed`);
+    }
+  }
+
+  const destination =
+    returnTo === "detail"
+      ? `/${locale}/app/groups/${invitation.group_id}`
+      : `/${locale}/app/groups`;
+
+  revalidatePath(destination);
+  redirect(`${destination}?status=group-invitation-${response}`);
+}
+
+export async function removeGroupMember(formData: FormData) {
+  const locale = getLocale(formData);
+  const groupId = getGroupId(formData);
+  const memberId = firstString(formData.get("memberId"));
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/groups`);
+  }
+
+  if (!groupId || !memberId) {
+    redirect(`/${locale}/app/groups/${groupId}?error=group-member-remove-failed`);
+  }
+
+  const { error } = await supabase
+    .from("group_members")
+    .delete()
+    .eq("id", memberId)
+    .eq("group_id", groupId);
+
+  if (error) {
+    redirect(`/${locale}/app/groups/${groupId}?error=group-member-remove-failed`);
+  }
+
+  revalidatePath(`/${locale}/app/groups/${groupId}`);
+  redirect(`/${locale}/app/groups/${groupId}?status=group-member-removed`);
+}
+
+export async function updateGroupMemberRole(formData: FormData) {
+  const locale = getLocale(formData);
+  const groupId = getGroupId(formData);
+  const memberId = firstString(formData.get("memberId"));
+  const role = firstString(formData.get("role")) as GroupRole;
+  const safeRole = groupRoles.includes(role) ? role : "member";
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/groups`);
+  }
+
+  if (!groupId || !memberId) {
+    redirect(`/${locale}/app/groups/${groupId}?error=group-role-update-failed`);
+  }
+
+  const { error } = await supabase
+    .from("group_members")
+    .update({ role: safeRole })
+    .eq("id", memberId)
+    .eq("group_id", groupId);
+
+  if (error) {
+    redirect(`/${locale}/app/groups/${groupId}?error=group-role-update-failed`);
+  }
+
+  revalidatePath(`/${locale}/app/groups/${groupId}`);
+  redirect(`/${locale}/app/groups/${groupId}?status=group-role-updated`);
+}
+
+export async function linkChallengeToGroup(formData: FormData) {
+  const locale = getLocale(formData);
+  const groupId = getGroupId(formData);
+  const challengeId = getChallengeId(formData);
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/groups`);
+  }
+
+  if (!groupId || !challengeId) {
+    redirect(`/${locale}/app/groups/${groupId}?error=group-challenge-link-failed`);
+  }
+
+  const { data: challenge } = await supabase
+    .from("challenges")
+    .select("id, owner_id")
+    .eq("id", challengeId)
+    .eq("owner_id", user.id)
+    .maybeSingle();
+
+  if (!challenge) {
+    redirect(`/${locale}/app/groups/${groupId}?error=group-challenge-link-failed`);
+  }
+
+  const { error } = await supabase.from("group_challenges").insert({
+    group_id: groupId,
+    challenge_id: challengeId,
+    created_by: user.id,
+  });
+
+  if (error) {
+    redirect(`/${locale}/app/groups/${groupId}?error=group-challenge-link-failed`);
+  }
+
+  await supabase
+    .from("challenges")
+    .update({ visibility: "group" })
+    .eq("id", challengeId)
+    .eq("owner_id", user.id);
+
+  revalidatePath(`/${locale}/app/groups/${groupId}`);
+  redirect(`/${locale}/app/groups/${groupId}?status=group-challenge-linked`);
+}
+
+export async function unlinkChallengeFromGroup(formData: FormData) {
+  const locale = getLocale(formData);
+  const groupId = getGroupId(formData);
+  const groupChallengeId = firstString(formData.get("groupChallengeId"));
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/groups`);
+  }
+
+  if (!groupId || !groupChallengeId) {
+    redirect(`/${locale}/app/groups/${groupId}?error=group-challenge-unlink-failed`);
+  }
+
+  const { error } = await supabase
+    .from("group_challenges")
+    .delete()
+    .eq("id", groupChallengeId)
+    .eq("group_id", groupId);
+
+  if (error) {
+    redirect(`/${locale}/app/groups/${groupId}?error=group-challenge-unlink-failed`);
+  }
+
+  revalidatePath(`/${locale}/app/groups/${groupId}`);
+  redirect(`/${locale}/app/groups/${groupId}?status=group-challenge-unlinked`);
 }

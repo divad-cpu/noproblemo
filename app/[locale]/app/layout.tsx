@@ -55,6 +55,18 @@ export default async function ProtectedAppLayout({
             >
               {t("nav.settings")}
             </Link>
+            <Link
+              href="/app/friends"
+              className="text-sm font-semibold text-[#373632] underline-offset-4 hover:underline"
+            >
+              {t("nav.friends")}
+            </Link>
+            <Link
+              href="/app/groups"
+              className="text-sm font-semibold text-[#373632] underline-offset-4 hover:underline"
+            >
+              {t("nav.groups")}
+            </Link>
             <span className="text-sm text-[#706f68]">{t("nav.signedIn")}</span>
             <form action={`/${locale}/auth/logout`} method="post">
               <button

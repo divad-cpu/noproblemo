@@ -2,7 +2,7 @@
 
 ## Current Security Posture
 
-Phase 7 adds the protected saved challenge workspace on top of the Phase 6 dashboard and Phase 5 auth foundation.
+Phase 8 adds protected friends, groups, invitations, roles, and explicit group challenge links on top of the Phase 7 saved challenge workspace.
 
 Guest challenge drafts remain in browser localStorage until an authenticated user explicitly imports them from the dashboard.
 
@@ -44,21 +44,59 @@ Current access model:
 
 These policies still need to be applied and tested in Supabase.
 
+## Phase 8 Friends And Groups Security
+
+Migration:
+
+- `supabase/migrations/20260703210000_phase8_friends_groups.sql`
+
+RLS is enabled on:
+
+- `friend_requests`
+- `friendships`
+- `groups`
+- `group_members`
+- `group_invitations`
+- `group_challenges`
+
+Current access model:
+
+- Users can see friend requests only when they are the sender or receiver.
+- Users can create friend requests only as themselves.
+- Receivers can accept or decline pending requests; senders can cancel pending requests.
+- Accepting a pending friend request creates the friendship through a database trigger.
+- Users can see and remove friendships involving themselves.
+- Friendship alone never grants access to private challenges.
+- Users can see only groups they belong to.
+- Group owners/admins can manage group settings, regular members, and invitations.
+- Invited users must accept before membership is created.
+- Accepting a pending group invitation creates the group membership through a database trigger.
+- Pending invitations do not grant group access.
+- Groups are private; no public groups are implemented.
+- Group membership is limited to 100 members by database trigger.
+- `group_challenges` creates explicit challenge access for a group.
+- Group viewers can read linked challenges but should not be able to edit them.
+- Group owners/admins/members can collaborate on linked challenges through RLS.
+- Users outside the group cannot read group content or linked group challenges.
+
+Profile discovery uses the authenticated `search_profiles(search_term)` RPC and returns only `id`, `display_name`, and `avatar_url`. It does not expose email addresses, `auth.users`, profile role, or support/private profile fields.
+
+Known MVP limitation: viewer read-only behavior is enforced by RLS and server-side write failures. The workspace UI may still render some edit controls for viewers until role-aware read-only rendering is added.
+
 ## Not Implemented Yet
 
-- Group access policies
-- Friend/invite policies
 - Messaging policies
 - Admin policies
 - Organization account policies
-- Group challenge access policies
-- Messaging policies
+- Notifications and activity policies
 
 ## User Ownership Rules
 
 - A user can manage their own profile.
 - A user can create challenges they own.
-- A user can access only their own challenge records in the Phase 4 schema.
+- A user can access their own private challenge records.
+- A group member can access only challenges explicitly linked to their group through `group_challenges`, subject to their role.
+- Friendship alone does not grant access to challenge records.
 - Guest localStorage data has no server-side owner until an authenticated user imports it.
 - Imported guest work is created with `owner_id = auth.uid()` through the authenticated Supabase session.
 
@@ -78,9 +116,9 @@ Phase 6 dashboard operations use `lib/supabase/server.ts`, the public Supabase a
 
 Phase 7 workspace operations use `lib/supabase/server.ts`, the public Supabase anon key, and request cookies. No service-role key is used.
 
-- The workspace page fetches `challenges` by `id` and `owner_id = auth.uid()`.
+- The workspace page fetches `challenges` by `id` through the authenticated Supabase session and relies on RLS for owner or explicit group access.
 - Missing or inaccessible challenges render a not-found state without revealing whether another user's challenge exists.
-- Every workspace server action re-checks the authenticated user and challenge ownership before writing.
+- Every workspace server action re-checks the authenticated user and fetches the challenge through RLS before writing.
 - Challenge details update only title, short description, and allowed status values.
 - Section saves use the existing `challenge_sections` table and create missing rows without deleting existing content unexpectedly.
 - Solution writes validate 1-to-5 risk, effort, and impact scores.
@@ -89,15 +127,20 @@ Phase 7 workspace operations use `lib/supabase/server.ts`, the public Supabase a
 
 ## Group Access Rules
 
-Groups are planned, not implemented.
+Implemented Phase 8 rules:
+
+- Group invites require accept/decline.
+- Pending invites do not grant group access.
+- Group membership determines group visibility.
+- Group owners/admins can manage membership only within their group.
+- Group challenge access requires an explicit `group_challenges` row.
+- Private challenges remain private until explicitly linked.
+- Users outside a group must not see group challenges or member details.
 
 Future rules:
 
-- Group invites must require accept/decline.
-- Pending invites must not grant group access.
-- Group membership must determine group visibility.
-- Group owners/admins can manage membership only within their group.
-- Users outside a group must not see group challenges, messages, or member details.
+- Messaging access must follow the same accepted-member model.
+- Blocking, abuse handling, and detailed audit events are not implemented yet.
 
 ## Private Message Rules
 
