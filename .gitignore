@@ -42,3 +42,4 @@ next-env.d.ts
 
 # Allow safe environment template
 !.env.example
+!.env.local.example
