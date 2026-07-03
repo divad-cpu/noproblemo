@@ -166,10 +166,14 @@ Group and collaboration access policies are intentionally not implemented in Pha
 
 Manual database types were added in `lib/supabase/types.ts`. They should be regenerated from Supabase once the project has a stable live schema and generation workflow.
 
+## Phase 5 Auth Notes
+
+Phase 5 uses the Phase 4 `auth_users_create_profile` trigger for profile creation after signup. No new schema migration was added in Phase 5. The trigger still needs to be verified after the Phase 4 migration is applied to Supabase.
+
 ## Needs Verification
 
 - Apply migration in local Supabase and/or linked Supabase project.
-- Test profile trigger after signup in Phase 5.
+- Test profile trigger after signup.
 - Test every RLS policy with authenticated users.
 - Confirm whether the challenge section list is sufficient for the MVP saved workspace.
 - Confirm whether organization accounts need schema support before MVP launch.

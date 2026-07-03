@@ -18,8 +18,14 @@
 - `app/[locale]/solve/page.tsx`: localized guest solve page shell.
 - `app/[locale]/solve/_components/guest-workspace.tsx`: client component for localStorage guest drafts, Markdown copy/export, and login prompts.
 - `app/[locale]/support/page.tsx`: support/contact page.
-- `app/[locale]/login/page.tsx`: placeholder login page; no real authentication UI yet.
-- `app/[locale]/signup/page.tsx`: placeholder signup page; no real account creation UI yet.
+- `app/[locale]/login/page.tsx`: email login form and Google/Apple OAuth start buttons.
+- `app/[locale]/signup/page.tsx`: email signup form and Google/Apple OAuth start buttons.
+- `app/[locale]/auth/actions.ts`: Supabase Auth server actions for email and provider login.
+- `app/[locale]/auth/callback/route.ts`: Supabase callback handler for email confirmation, magic link, and OAuth session exchange.
+- `app/[locale]/auth/logout/route.ts`: logout handler.
+- `app/[locale]/app/layout.tsx`: protected app route boundary with server-side session check.
+- `app/[locale]/app/page.tsx`: minimal protected placeholder; dashboard remains planned for Phase 6.
+- `app/[locale]/_components/auth-status.tsx`: auth-aware landing links.
 - `app/[locale]/_components/language-switcher.tsx`: locale switcher.
 - `app/[locale]/_components/site-footer.tsx`: shared footer with support email.
 - `app/globals.css`: global Tailwind CSS.
@@ -39,8 +45,11 @@ No shared top-level `components/` directory currently exists. Add it only when s
 - `/[locale]` landing page.
 - `/[locale]/solve` guest problem-solving workspace.
 - `/[locale]/support` support/contact page.
-- `/[locale]/login` auth placeholder.
-- `/[locale]/signup` account placeholder.
+- `/[locale]/login` email login and OAuth start.
+- `/[locale]/signup` email signup and OAuth start.
+- `/[locale]/auth/callback` Supabase auth callback route handler.
+- `/[locale]/auth/logout` logout route handler.
+- `/[locale]/app` protected placeholder route, not the full dashboard.
 
 Supported locales are `en`, `zh-CN`, `hi`, `es`, `ar`, `fr`, `bn`, `pt-BR`, `id`, `ur`, and `nb`. Arabic and Urdu use `dir="rtl"`.
 
@@ -70,17 +79,20 @@ The migration creates:
 
 The migration still needs to be applied and verified in Supabase.
 
-## Authentication Flow Direction
+## Authentication Flow
 
-Authentication is the next recommended phase, not implemented in Phase 4.
+Implemented in Phase 5:
 
-Expected Phase 5 flow:
-
-1. User signs up or logs in through Supabase Auth.
+1. User signs up or logs in through Supabase Auth using email/password.
 2. Supabase database trigger creates a `profiles` row after auth user creation.
-3. App reads the profile through RLS using the authenticated session.
-4. Authenticated users can reach protected app layout/routes.
-5. Dashboard and guest import remain Phase 6 unless explicitly scoped earlier.
+3. Supabase callback route exchanges auth codes for a cookie-backed session.
+4. Authenticated users can reach `/[locale]/app`.
+5. Unauthenticated users are redirected to `/[locale]/login`.
+6. Logout clears the Supabase session and redirects to the login page.
+
+Google and Apple OAuth flows are prepared through Supabase Auth provider starts, but they require external provider configuration before production use.
+
+Dashboard and guest import remain Phase 6.
 
 ## Data Flow
 
@@ -89,13 +101,13 @@ Current data flow:
 - UI messages load from `messages/*.json`.
 - Guest workspace state is stored in browser localStorage under `noproblemo.guestWorkspace.v1`.
 - Guest data is not sent to Supabase.
-- Supabase helpers exist but are not used by UI routes yet.
-- No server actions, route handlers, or dashboard database queries exist.
+- Supabase helpers are used by auth actions, callback/logout route handlers, auth-aware landing links, and protected route checks.
+- Auth server actions validate basic form shape and then call Supabase Auth.
+- No dashboard database queries or challenge cloud-saving writes exist yet.
 
 Planned data flow:
 
-- Phase 5: authentication session handling.
-- Phase 6: authenticated dashboard and saved challenge reads/writes through Supabase RLS.
+- Phase 6: authenticated dashboard, profile/settings, guest import, and saved challenge reads/writes through Supabase RLS.
 - Later: friends, groups, invites, and messaging policies.
 
 ## Deployment Direction

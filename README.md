@@ -1,15 +1,13 @@
 # NoProblemo
 
-NoProblemo is a Next.js App Router project prepared for incremental product development. Phase 4 adds the Supabase database/RLS foundation needed before authentication and cloud saving.
+NoProblemo is a Next.js App Router project prepared for incremental product development. Phase 5 adds Supabase authentication foundation before dashboard, guest import, and cloud saving.
 
 ## Current Phase
 
-Phase 4 is complete when the Supabase migration, helper scaffolding, documentation, linting, type checking, and production build all pass. Authentication UI and cloud-saving UI remain intentionally deferred.
+Phase 5 is complete when email auth, OAuth provider starts, logout, a protected route boundary, documentation, linting, type checking, and production build all pass. Dashboard, guest import, and cloud-saving UI remain intentionally deferred.
 
-Not included in Phase 4:
+Not included in Phase 5:
 
-- Real authentication
-- Google or Apple login
 - Dashboard
 - Guest import after login
 - Payments
@@ -26,7 +24,7 @@ Not included in Phase 4:
 - TypeScript
 - Tailwind CSS 4
 - `next-intl`
-- Supabase database/RLS foundation
+- Supabase Auth and database/RLS foundation
 - Vercel deployment
 
 ## Internationalization
@@ -54,14 +52,23 @@ Arabic (`ar`) and Urdu (`ur`) render with `dir="rtl"`. All other supported local
 - `/[locale]` public landing page
 - `/[locale]/solve` guest problem-solving workspace
 - `/[locale]/support` support/contact page
-- `/[locale]/login` placeholder login route
-- `/[locale]/signup` placeholder account route
+- `/[locale]/login` email login and Google/Apple OAuth start route
+- `/[locale]/signup` email signup and Google/Apple OAuth start route
+- `/[locale]/auth/callback` Supabase auth callback
+- `/[locale]/auth/logout` logout handler
+- `/[locale]/app` protected placeholder route, not the full dashboard
 
 ## Guest Mode
 
 Guest users can start a problem-solving session without login. Drafts are stored in local browser storage under `noproblemo.guestWorkspace.v1` and are not sent to Supabase. Guests can copy or export a Markdown summary.
 
 Actions that require cloud saving or collaboration show a login prompt instead of performing the action.
+
+## Authentication
+
+Email login/signup uses Supabase Auth. Google and Apple login buttons are prepared through Supabase OAuth, but they require provider configuration in Supabase, Google Cloud, and Apple Developer before production use.
+
+The Phase 4 database trigger is expected to create `profiles` rows after signup, but it still needs verification after the migration is applied to the real Supabase project.
 
 ## Local Setup
 

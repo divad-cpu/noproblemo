@@ -2,22 +2,21 @@
 
 ## Current Security Posture
 
-Phase 4 adds a local Supabase schema foundation, RLS policies, typed Supabase helpers, and environment placeholders. Real authentication UI and cloud-saving UI are not implemented yet.
+Phase 5 adds Supabase Auth email login/signup, callback handling, logout, OAuth provider starts, and a minimal protected route. Cloud-saving UI is not implemented yet.
 
 Guest challenge drafts still remain in browser localStorage only. Existing app routes do not write guest data to Supabase.
 
 ## Authentication Security
 
-Phase 5 is expected to implement authentication.
+Implemented in Phase 5:
 
-Requirements for Phase 5:
-
-- Use Supabase Auth.
-- Never implement custom password storage.
-- Keep auth callbacks and redirects locale-aware.
-- Validate session state server-side before reading private data.
-- Use the profile auto-create trigger from Phase 4, or document/fix any verified gap.
-- Treat existing `/[locale]/login` and `/[locale]/signup` as placeholders until real auth UI replaces them.
+- Email signup and login use Supabase Auth.
+- No custom password storage exists in app code.
+- Auth callbacks and redirects are locale-aware.
+- `/[locale]/app` checks Supabase session state server-side before rendering.
+- Logout is handled by a route handler that signs out through Supabase.
+- Google and Apple OAuth start actions are prepared, but provider configuration is still required.
+- Profile creation relies on the Phase 4 database trigger and still needs verification after the migration is applied.
 
 ## Supabase RLS Implemented In Phase 4
 
@@ -52,8 +51,8 @@ These policies still need to be applied and tested in Supabase.
 - Messaging policies
 - Admin policies
 - Organization account policies
-- Dashboard authorization checks
-- Server actions or route handlers for database writes
+- Dashboard authorization checks beyond the minimal protected placeholder
+- Server actions or route handlers for challenge database writes
 
 ## User Ownership Rules
 
@@ -108,8 +107,25 @@ Rules:
 ## Supabase Helper Security
 
 - `lib/supabase/client.ts` uses only public Supabase URL and anon key.
-- `lib/supabase/server.ts` uses the public URL and anon key with request cookies for future server-side auth flows.
+- `lib/supabase/server.ts` uses the public URL and anon key with request cookies for server-side auth actions and route checks.
 - No service-role helper was added in Phase 4.
+
+## OAuth Provider Configuration
+
+Google login requires:
+
+- A Google Cloud OAuth app.
+- Supabase Google provider enabled.
+- Correct authorized redirect URLs for local and production domains.
+- No Google client secret committed to git.
+
+Apple login requires:
+
+- An Apple Developer account.
+- A Services ID and verified domain.
+- Supabase Apple provider enabled.
+- Correct return URL for local and production domains.
+- No Apple private key or secret committed to git.
 
 ## GDPR And Privacy-Aware Principles
 

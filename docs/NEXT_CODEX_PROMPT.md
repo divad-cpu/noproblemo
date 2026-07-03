@@ -14,7 +14,7 @@ Before changing anything:
 8. Do not print Supabase `.temp` file contents.
 
 Task:
-Implement Phase 5 only: Authentication.
+Implement Phase 6 only: Dashboard and guest import.
 
 Current foundation:
 
@@ -25,27 +25,25 @@ Current foundation:
 - Supported locales: `en`, `zh-CN`, `hi`, `es`, `ar`, `fr`, `bn`, `pt-BR`, `id`, `ur`, `nb`
 - RTL handling for `ar` and `ur`
 - Public routes: `/[locale]`, `/[locale]/solve`, `/[locale]/support`
-- Placeholder routes: `/[locale]/login`, `/[locale]/signup`
+- Auth routes: `/[locale]/login`, `/[locale]/signup`, `/[locale]/auth/callback`, `/[locale]/auth/logout`
+- Minimal protected placeholder route: `/[locale]/app`
 - Guest workspace stores drafts in localStorage only
 - Supabase migration exists for profiles and core challenge tables
 - Supabase RLS foundation exists and needs verification
-- Supabase helpers exist in `lib/supabase/`
+- Email login/signup is implemented through Supabase Auth
+- Google and Apple OAuth starts are prepared but require provider configuration
 
-Phase 5 should include:
+Phase 6 should include:
 
-- Email login
-- Signup
-- Logout
-- Protected app layout
-- Profile creation after signup if the Phase 4 database trigger is not sufficient after testing
-- Google login prepared
-- Apple login prepared
-- Auth documentation
+- Logged-in dashboard
+- Profile/settings page
+- Save/import guest challenge after login
+- Continue previous saved work
+- Language preference saving
+- Basic saved challenge list and create flow if needed for dashboard usefulness
 
-Phase 5 should not include unless explicitly required as a minimal placeholder:
+Phase 6 should not include:
 
-- Full dashboard
-- Guest import after login
 - Friends
 - Groups
 - Messaging
@@ -58,11 +56,22 @@ Phase 5 should not include unless explicitly required as a minimal placeholder:
 
 Security requirements:
 
-- Use Supabase Auth.
-- Do not use `SUPABASE_SERVICE_ROLE_KEY` in frontend code.
-- Do not fake authorization with frontend-only checks.
+- Use Supabase Auth sessions server-side for protected routes.
+- Use RLS as the real authorization boundary for saved challenge data.
+- Do not use `SUPABASE_SERVICE_ROLE_KEY` in frontend/client code.
+- Do not send guest localStorage data to Supabase without explicit user action.
+- Validate all server action inputs.
 - Keep user-generated content separate from UI translations.
-- Preserve guest mode and do not send guest drafts to Supabase unless explicitly scoped.
+
+Documentation updates:
+
+- `CURRENT_STATE.md`
+- `ARCHITECTURE.md`
+- `SECURITY.md`
+- `DATABASE_SCHEMA.md` if data usage changes
+- `docs/CODEX_PROJECT_MAP.md`
+- `docs/CODEX_PROJECT_LOG.md`
+- `docs/CHANGELOG.md`
 
 After changes, run:
 
@@ -72,11 +81,4 @@ npm run typecheck
 npm run build
 ```
 
-Update:
-
-- `CURRENT_STATE.md`
-- `SECURITY.md`
-- `ARCHITECTURE.md` if auth architecture changes
-- `docs/CODEX_PROJECT_MAP.md`
-- `docs/CODEX_PROJECT_LOG.md`
-- `docs/CHANGELOG.md`
+Finish with changed files, validation results, security impact, remaining planned work, and warnings or unknowns.

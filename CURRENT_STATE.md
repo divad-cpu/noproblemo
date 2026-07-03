@@ -12,8 +12,9 @@ NoProblemo has completed:
 - Phase 2: internationalization foundation
 - Phase 3: public landing page and guest mode
 - Phase 4: Supabase foundation
+- Phase 5: authentication
 
-Phase 5 Authentication is next. Dashboard and guest import belong to Phase 6. Friends, groups, messaging, notifications, admin, payments, AI, email automation, Resend, and Vercel Cron remain future phases.
+Phase 6 Dashboard and guest import is next. Friends, groups, messaging, notifications, admin, payments, AI, email automation, Resend, and Vercel Cron remain future phases.
 
 ## Already Implemented
 
@@ -27,7 +28,11 @@ Phase 5 Authentication is next. Dashboard and guest import belong to Phase 6. Fr
 - Public landing page at `/[locale]`
 - Guest workspace at `/[locale]/solve`
 - Support/contact page at `/[locale]/support`
-- Placeholder auth routes at `/[locale]/login` and `/[locale]/signup`
+- Email login and signup routes at `/[locale]/login` and `/[locale]/signup`
+- Supabase auth callback route at `/[locale]/auth/callback`
+- Logout route at `/[locale]/auth/logout`
+- Minimal protected placeholder route at `/[locale]/app`
+- Google and Apple OAuth start actions prepared through Supabase Auth
 - Shared language switcher and footer
 - Guest localStorage draft persistence under `noproblemo.guestWorkspace.v1`
 - Markdown copy/export for guest drafts
@@ -45,19 +50,14 @@ Phase 5 Authentication is next. Dashboard and guest import belong to Phase 6. Fr
 ## Partially Implemented
 
 - Problem-solving workflow exists as guest browser-local form fields and as planned database tables, but no UI writes to Supabase yet.
-- Login/signup routes exist only as placeholders.
+- Google and Apple login buttons are present, but they require Supabase provider setup and external provider configuration before they work in production.
 - Supabase schema exists as a local migration but has not been verified against the live Supabase project in this task.
-- Supabase helpers exist but are not used by app routes yet.
+- Supabase helpers are used by auth actions, callback/logout handlers, auth-aware landing links, and the protected app layout.
 - Deployment works on Vercel, but production hardening is ongoing.
 - Translations currently include complete UI keys, but non-English content quality should be reviewed by fluent speakers before launch.
 
 ## Not Yet Implemented
 
-- Real authentication UI/actions
-- Auth callback routes
-- Google OAuth UI
-- Apple OAuth UI
-- Protected app layout
 - Dashboard
 - Guest import after login
 - Saved cloud challenge UI
@@ -77,8 +77,14 @@ Phase 5 Authentication is next. Dashboard and guest import belong to Phase 6. Fr
 - `app/[locale]/page.tsx`: public landing page.
 - `app/[locale]/solve/_components/guest-workspace.tsx`: guest localStorage workspace.
 - `app/[locale]/support/page.tsx`: support page.
-- `app/[locale]/login/page.tsx`: login placeholder.
-- `app/[locale]/signup/page.tsx`: signup placeholder.
+- `app/[locale]/login/page.tsx`: email login form and OAuth provider start buttons.
+- `app/[locale]/signup/page.tsx`: email signup form and OAuth provider start buttons.
+- `app/[locale]/auth/actions.ts`: Supabase Auth server actions.
+- `app/[locale]/auth/callback/route.ts`: Supabase auth callback handler.
+- `app/[locale]/auth/logout/route.ts`: logout handler.
+- `app/[locale]/app/layout.tsx`: protected app layout with server-side auth check.
+- `app/[locale]/app/page.tsx`: minimal protected placeholder; dashboard remains Phase 6.
+- `app/[locale]/_components/auth-status.tsx`: auth-aware landing links.
 - `i18n/routing.ts`: supported locales and RTL logic.
 - `messages/*.json`: UI messages.
 - `proxy.ts`: locale middleware.
@@ -93,9 +99,10 @@ Phase 5 Authentication is next. Dashboard and guest import belong to Phase 6. Fr
 
 ## Known Issues
 
-- No real auth or cloud saving UI exists yet.
+- No dashboard, guest import, saved cloud challenge UI, or cloud-saving workflow exists yet.
 - Phase 4 migration needs to be applied and tested in Supabase.
-- RLS policies need verification with authenticated users.
+- RLS policies and profile trigger need verification with authenticated users.
+- Google and Apple OAuth require provider configuration in Supabase, Google Cloud, and Apple Developer.
 - Guest drafts are browser-local and can be lost if localStorage is cleared.
 - Non-English translations need human review.
 - Supabase `.temp` files exist from linking/local CLI state; do not print their contents.
@@ -103,7 +110,7 @@ Phase 5 Authentication is next. Dashboard and guest import belong to Phase 6. Fr
 
 ## Current Risks
 
-- Future agents might mistake placeholder auth routes for real authentication.
+- Future agents might mistake the protected `/[locale]/app` placeholder for a dashboard; it is not the Phase 6 dashboard.
 - Future agents might use service role keys in frontend code; do not do this.
 - RLS policies are written but still need live/local Supabase verification.
 - User-generated problem content may be sensitive; privacy must be designed into auth and dashboard phases.
@@ -111,20 +118,17 @@ Phase 5 Authentication is next. Dashboard and guest import belong to Phase 6. Fr
 
 ## Next Recommended Phase
 
-Phase 5: Authentication.
+Phase 6: Dashboard and guest import.
 
 Recommended scope:
 
-- Email login
-- Signup
-- Logout
-- Protected app layout
-- Profile creation verification after signup
-- Prepare Google login
-- Prepare Apple login
-- Auth documentation
+- Logged-in dashboard
+- Profile/settings page
+- Save/import guest challenge after login
+- Continue previous saved work
+- Language preference saving
 
-Do not implement full dashboard or guest import in Phase 5 unless explicitly required as minimal placeholders.
+Do not implement friends, groups, messaging, notifications, or admin in Phase 6 unless explicitly scoped.
 
 ## Validation Commands
 
@@ -137,6 +141,12 @@ npm run build
 ```
 
 Validation for Phase 4:
+
+- `npm run lint`: passed on 2026-07-03.
+- `npm run typecheck`: passed on 2026-07-03.
+- `npm run build`: passed on 2026-07-03 after rerunning with escalation for the known Turbopack sandbox port-bind issue.
+
+Validation for Phase 5:
 
 - `npm run lint`: passed on 2026-07-03.
 - `npm run typecheck`: passed on 2026-07-03.

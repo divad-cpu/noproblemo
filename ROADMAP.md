@@ -51,30 +51,38 @@ Needs verification:
 
 - Apply migration to local/linked Supabase.
 - Test RLS with authenticated users.
-- Confirm profile trigger during Phase 5 signup.
-
-## Current Phase
-
-Phase 4 Supabase foundation has been implemented locally. Authentication is next.
-
-## Next Recommended Phase
+- Confirm profile trigger during signup.
 
 ### Phase 5: Authentication
 
-Recommended scope:
+Status: implemented.
 
-- Email login
-- Signup
-- Logout
-- Protected app layout
-- Profile creation verification
-- Google login prepared
-- Apple login prepared
+- Email login through Supabase Auth
+- Email signup through Supabase Auth
+- Supabase auth callback route
+- Logout route
+- Minimal protected app layout at `/[locale]/app`
+- Auth-aware landing links
+- Google OAuth start prepared through Supabase Auth
+- Apple OAuth start prepared through Supabase Auth
 - Auth documentation
+
+Needs configuration/verification:
+
+- Apply and test the Phase 4 migration.
+- Verify profile trigger after signup.
+- Configure Google provider in Google Cloud and Supabase.
+- Configure Apple provider in Apple Developer and Supabase.
+
+## Current Phase
+
+Phase 5 authentication has been implemented. Dashboard and guest import are next.
+
+## Next Recommended Phase
 
 ### Phase 6: Dashboard And Guest Import
 
-Deferred scope:
+Recommended scope:
 
 - Authenticated dashboard
 - Saved challenge list
@@ -85,7 +93,7 @@ Deferred scope:
 ## MVP Path
 
 1. Landing page: implemented.
-2. Authentication: planned for Phase 5.
+2. Authentication: implemented.
 3. Dashboard: planned for Phase 6.
 4. Create and save a challenge: database foundation implemented; UI planned.
 5. Basic challenge workspace: guest-only implemented; saved workspace planned.

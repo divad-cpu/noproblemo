@@ -27,7 +27,10 @@ Implemented:
 - Markdown copy/export for guest summary.
 - Login prompt for unavailable guest save/collaboration actions.
 - Support page.
-- Placeholder login/signup pages.
+- Email login/signup pages.
+- Supabase auth callback and logout routes.
+- Minimal protected `/[locale]/app` placeholder route.
+- Google and Apple OAuth provider start actions prepared through Supabase Auth.
 - Supabase migration for profiles and core challenge tables.
 - Owner-only RLS policies for Phase 4 tables.
 - Supabase client/server helper scaffolding.
@@ -35,7 +38,6 @@ Implemented:
 
 Not implemented:
 
-- Real authentication UI/actions.
 - Dashboard.
 - Guest import after login.
 - Cloud saved challenge UI.
@@ -49,8 +51,11 @@ Not implemented:
 - `/[locale]`: landing page.
 - `/[locale]/solve`: guest workspace.
 - `/[locale]/support`: support/contact.
-- `/[locale]/login`: login placeholder.
-- `/[locale]/signup`: account placeholder.
+- `/[locale]/login`: email login and OAuth start.
+- `/[locale]/signup`: email signup and OAuth start.
+- `/[locale]/auth/callback`: Supabase auth callback.
+- `/[locale]/auth/logout`: logout handler.
+- `/[locale]/app`: protected placeholder route; full dashboard is not implemented.
 
 ## Data Model Map
 
@@ -85,15 +90,15 @@ See `DATABASE_SCHEMA.md` before any future migration work.
 Current:
 
 - Guest data is local-only.
-- No real auth UI exists.
+- Supabase Auth email UI/actions exist.
+- Google and Apple OAuth starts exist, but require provider setup before production use.
 - Phase 4 migration enables RLS for `profiles`, `challenges`, `challenge_sections`, `challenge_solutions`, and `challenge_tasks`.
 - Phase 4 RLS is owner-only and must still be verified in Supabase.
 - No service-role helper exists.
 
 Planned:
 
-- Phase 5 Supabase Auth UI/actions.
-- Phase 6 dashboard and saved challenge UI.
+- Phase 6 dashboard, guest import, and saved challenge UI.
 - Later group/friend/message policies.
 
 Rules:
@@ -108,7 +113,7 @@ See `SECURITY.md` before implementing auth, database writes, or messaging.
 ## MVP Map
 
 1. Landing page: implemented.
-2. Authentication: planned for Phase 5.
+2. Authentication: implemented.
 3. Dashboard: planned for Phase 6.
 4. Create and save a challenge: database foundation implemented; UI planned.
 5. Basic challenge workspace: guest-only implemented; saved workspace planned.

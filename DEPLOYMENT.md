@@ -28,6 +28,30 @@ NEXT_PUBLIC_SUPPORT_EMAIL=support@noproblemo.tech
 
 `SUPABASE_SERVICE_ROLE_KEY` is server-only. It must never be exposed to the browser and must never be committed.
 
+## Auth Deployment Setup
+
+Phase 5 uses Supabase Auth. Before relying on production login:
+
+- Apply and verify the Phase 4 Supabase migration.
+- Confirm the profile creation trigger creates `profiles` rows after signup.
+- Add local and production auth redirect URLs in Supabase.
+- Ensure `NEXT_PUBLIC_SITE_URL` matches the deployed site URL in Vercel.
+- Keep `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` configured in Vercel.
+- Do not expose `SUPABASE_SERVICE_ROLE_KEY` to client code.
+
+Google login preparation requires:
+
+- Google Cloud OAuth app credentials.
+- Supabase Google provider configuration.
+- Authorized redirect URLs for local development and production.
+
+Apple login preparation requires:
+
+- Apple Developer account.
+- Services ID and domain verification.
+- Supabase Apple provider configuration.
+- Return URL matching the deployed site.
+
 ## Domeneshop DNS Direction
 
 When ready to attach the domain:
@@ -57,7 +81,7 @@ Do not print `.env.local` values.
 
 ## Current Deployment Scope
 
-Current app includes localized public pages, a guest localStorage workspace, Supabase helpers, and a local migration. The UI does not connect to Supabase at runtime yet and does not include real login, saved cloud projects, payments, email sending, AI, or scheduled jobs.
+Current app includes localized public pages, a guest localStorage workspace, Supabase helpers, a local migration, and Supabase Auth UI/actions. It does not include dashboard, guest import, saved cloud projects, payments, email sending, AI, or scheduled jobs.
 
 ## Production Checklist
 

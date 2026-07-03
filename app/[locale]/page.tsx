@@ -5,6 +5,7 @@ import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "./_components/language-switcher";
 import { SiteFooter } from "./_components/site-footer";
+import { AuthStatus } from "./_components/auth-status";
 
 type HomeProps = {
   params: Promise<{ locale: Locale }>;
@@ -36,7 +37,10 @@ export default function Home({ params }: HomeProps) {
                   {t("description")}
                 </p>
               </div>
-              <LanguageSwitcher locale={locale} />
+              <div className="flex flex-col gap-5 sm:items-end">
+                <LanguageSwitcher locale={locale} />
+                <AuthStatus locale={locale} />
+              </div>
             </header>
 
             <div className="flex flex-col gap-3 sm:flex-row">

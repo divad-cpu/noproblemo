@@ -59,3 +59,16 @@ Phase 4 Supabase foundation:
 - Updated env examples with site URL, support email, public Supabase keys, and server-only service role placeholder.
 - Did not implement authentication UI, dashboard, guest import, groups, friends, messages, admin, email, cron, payments, or AI.
 - Validation passed: `npm run lint`, `npm run typecheck`, and `npm run build`.
+
+Phase 5 authentication:
+
+- Inspected required handoff docs, package scripts, App Router routes, message files, Supabase helpers, Phase 4 migration state, and installed Next.js authentication/server action/route handler docs.
+- Replaced placeholder login/signup pages with Supabase Auth email forms.
+- Added Google and Apple OAuth provider start actions through Supabase Auth.
+- Added Supabase auth callback route for exchanging auth codes into cookie-backed sessions.
+- Added logout route.
+- Added a minimal protected `/[locale]/app` route boundary with server-side session checks.
+- Added auth-aware landing links for logged-in and logged-out users.
+- Updated all eleven message catalogs with auth UI keys.
+- Did not implement dashboard, guest import, cloud challenge saving, groups, friends, messages, admin, email, cron, payments, or AI.
+- Validation passed: `npm run lint`, `npm run typecheck`, and `npm run build`.

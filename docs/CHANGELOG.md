@@ -51,3 +51,14 @@
 - Updated environment examples for Supabase and support variables.
 - Updated documentation for Phase 5 authentication handoff.
 - Confirmed lint, typecheck, and production build pass.
+
+## 2026-07-03 Phase 5
+
+- Replaced auth placeholder pages with Supabase Auth email login and signup.
+- Added Google and Apple OAuth start actions using Supabase Auth providers.
+- Added Supabase auth callback and logout route handlers.
+- Added a minimal protected `/[locale]/app` route boundary.
+- Added auth-aware landing page links for logged-in/logged-out states.
+- Updated all locale message catalogs with auth UI keys.
+- Updated documentation for Phase 6 dashboard and guest import handoff.
+- Confirmed lint, typecheck, and production build pass.

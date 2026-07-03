@@ -163,5 +163,74 @@
       "ur": "اردو",
       "nb": "Norsk bokmål"
     }
+  },
+  "Auth": {
+    "shared": {
+      "continueGuest": "Continue as guest"
+    },
+    "fields": {
+      "displayName": "Display name",
+      "displayNamePlaceholder": "Your name, optional",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "Your password",
+      "newPasswordPlaceholder": "At least 8 characters"
+    },
+    "login": {
+      "eyebrow": "Account access",
+      "title": "Log in to save your work.",
+      "body": "Guest mode stays available. Log in when you want cloud saving and future collaboration features.",
+      "submit": "Log in",
+      "createAccount": "Create account"
+    },
+    "signup": {
+      "eyebrow": "Create account",
+      "title": "Create an account for future saved work.",
+      "body": "Use email signup now. Saved dashboards and guest import are planned for the next phase.",
+      "submit": "Create account",
+      "logIn": "Already have an account? Log in"
+    },
+    "oauth": {
+      "title": "Or continue with a provider",
+      "google": "Continue with Google",
+      "apple": "Continue with Apple",
+      "note": "Google and Apple require provider configuration in Supabase before they work in production."
+    },
+    "status": {
+      "check-email": "Check your email to confirm the account, then return to NoProblemo.",
+      "signed-out": "You have been logged out."
+    },
+    "errors": {
+      "missing-fields": "Enter both email and password to continue.",
+      "invalid-credentials": "The email or password did not match an account.",
+      "weak-password": "Use a password with at least 8 characters.",
+      "signup-failed": "The account could not be created. Check the email address or try again.",
+      "oauth-provider": "That login provider is not available.",
+      "oauth-start": "The provider login could not start. Check Supabase provider setup.",
+      "callback": "The login callback could not be completed. Try logging in again.",
+      "auth-required": "Log in to access saved work. Guest mode remains available without an account."
+    }
+  },
+  "AuthStatus": {
+    "login": "Log in",
+    "signup": "Create account",
+    "openApp": "Open app",
+    "logout": "Log out"
+  },
+  "ProtectedApp": {
+    "nav": {
+      "home": "Back to home",
+      "signedIn": "Signed in",
+      "logout": "Log out"
+    },
+    "eyebrow": "Protected area",
+    "title": "Authentication is ready.",
+    "body": "This protected placeholder verifies the session flow. The full dashboard, saved challenges, and guest import begin in Phase 6.",
+    "actions": {
+      "solve": "Continue guest workspace",
+      "support": "Contact support"
+    },
+    "phaseNote": "No dashboard data is saved or imported in Phase 5."
   }
 }
