@@ -31,3 +31,12 @@
 - Added placeholder login and signup routes without implementing authentication.
 - Updated documentation for Phase 4 Supabase foundation handoff.
 - Confirmed lint, typecheck, and production build pass.
+
+## 2026-07-03 Project Map
+
+- Added `CURRENT_STATE.md`.
+- Added `docs/CODEX_PROJECT_MAP.md`.
+- Added `docs/PHASE_HANDOFF_TEMPLATE.md`.
+- Updated core project documentation for durable Codex handoff.
+- Clarified implemented versus planned product areas.
+- Confirmed lint, typecheck, and production build pass.

@@ -35,3 +35,13 @@ Phase 3 public landing page and guest mode:
 - Added placeholder `/[locale]/login` and `/[locale]/signup` routes without implementing authentication.
 - Kept guest data local to the browser and did not add Supabase migrations or cloud persistence.
 - Validation passed: `npm run lint`, `npm run typecheck`, and `npm run build`.
+
+Documentation and project orientation map:
+
+- Inspected repository structure, package scripts, App Router routes, i18n files, Supabase folder, README, AGENTS, and existing project docs.
+- Created `CURRENT_STATE.md` as the required first-read handoff file.
+- Created `docs/CODEX_PROJECT_MAP.md` as the central durable map for routes, data model, security model, MVP state, and future work rules.
+- Created `docs/PHASE_HANDOFF_TEMPLATE.md` for future phase prompts.
+- Updated core docs to distinguish implemented Phase 1-3 work from planned auth, Supabase, dashboard, groups, invites, messaging, and admin/settings.
+- Did not implement Phase 4 or change application features.
+- Validation passed: `npm run lint`, `npm run typecheck`, and `npm run build`.

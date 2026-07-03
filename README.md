@@ -98,6 +98,7 @@ npm run build
 
 ## Project Documents
 
+- `CURRENT_STATE.md`
 - `PROJECT_BRIEF.md`
 - `ARCHITECTURE.md`
 - `DATABASE_SCHEMA.md`
@@ -106,6 +107,8 @@ npm run build
 - `ROADMAP.md`
 - `DEPLOYMENT.md`
 - `AI_READY.md`
+- `docs/CODEX_PROJECT_MAP.md`
+- `docs/PHASE_HANDOFF_TEMPLATE.md`
 - `docs/CODEX_PROJECT_LOG.md`
 - `docs/NEXT_CODEX_PROMPT.md`
 - `docs/CHANGELOG.md`
@@ -113,6 +116,6 @@ npm run build
 ## Repository Hygiene
 
 - Keep `.env*` files ignored except committed templates.
-- Read `AGENTS.md` before making code changes.
+- Read `CURRENT_STATE.md`, `docs/CODEX_PROJECT_MAP.md`, and `AGENTS.md` before making code changes.
 - Read the installed Next.js docs in `node_modules/next/dist/docs/` before using Next APIs.
 - Keep the next phase limited to the explicitly requested scope.

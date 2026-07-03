@@ -7,9 +7,11 @@ Current scope is Phase 4 only if the user explicitly requests it: Supabase found
 Before editing:
 
 1. Read `AGENTS.md`.
-2. Read the relevant installed Next.js docs in `node_modules/next/dist/docs/`.
-3. Inspect `git status --short`.
-4. Do not read or print `.env.local` values.
+2. Read `CURRENT_STATE.md`.
+3. Read `docs/CODEX_PROJECT_MAP.md`.
+4. Read the relevant installed Next.js docs in `node_modules/next/dist/docs/`.
+5. Inspect `git status --short`.
+6. Do not read or print `.env.local` values.
 
 Current foundation:
 
