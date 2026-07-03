@@ -6,6 +6,7 @@ Phase 4 Supabase foundation is implemented locally in migration:
 
 - `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`
 - `supabase/migrations/20260703210000_phase8_friends_groups.sql`
+- `supabase/migrations/20260703220000_phase9_messaging_notifications_activity.sql`
 
 The migrations have not been verified against the live Supabase project in this task. They should be applied and tested in Supabase before any production data depends on them.
 
@@ -226,6 +227,84 @@ Constraints:
 - Unique `group_id, challenge_id`.
 - Friendship alone does not create or imply challenge access.
 
+### `messages`
+
+Internal group or challenge messages.
+
+Fields:
+
+- `id uuid primary key default gen_random_uuid()`
+- `sender_id uuid references auth.users(id) on delete set null`
+- `group_id uuid references groups(id) on delete cascade`
+- `challenge_id uuid references challenges(id) on delete cascade`
+- `body text not null`
+- `is_deleted boolean default false`
+- `created_at timestamptz default now()`
+- `updated_at timestamptz default now()`
+
+Constraints:
+
+- A message belongs to exactly one scope: either `group_id` or `challenge_id`.
+- Message body must be non-empty after trimming and at most 2000 characters.
+- Messages are soft-deleted with `is_deleted`.
+
+### `notifications`
+
+Private user notifications.
+
+Fields:
+
+- `id uuid primary key default gen_random_uuid()`
+- `user_id uuid references auth.users(id) on delete cascade`
+- `type text not null`
+- `title text not null`
+- `body text`
+- `related_group_id uuid references groups(id) on delete set null`
+- `related_challenge_id uuid references challenges(id) on delete set null`
+- `related_message_id uuid references messages(id) on delete set null`
+- `read_at timestamptz`
+- `created_at timestamptz default now()`
+
+Implemented types:
+
+- `friend_request`
+- `friend_request_accepted`
+- `group_invitation`
+- `group_invitation_accepted`
+- `group_invitation_declined`
+- `group_message`
+- `challenge_message`
+- `challenge_updated`
+- `group_updated`
+
+### `activity_events`
+
+Basic group/challenge activity visible only to authorized users.
+
+Fields:
+
+- `id uuid primary key default gen_random_uuid()`
+- `actor_id uuid references auth.users(id) on delete set null`
+- `group_id uuid references groups(id) on delete cascade`
+- `challenge_id uuid references challenges(id) on delete cascade`
+- `type text not null`
+- `summary text`
+- `created_at timestamptz default now()`
+
+Implemented types:
+
+- `challenge_created`
+- `challenge_updated`
+- `challenge_linked_to_group`
+- `group_created`
+- `group_updated`
+- `group_member_joined`
+- `group_member_removed`
+- `group_message_created`
+- `challenge_message_created`
+- `task_updated`
+- `solution_updated`
+
 ## Implemented Functions And Triggers
 
 - `public.set_updated_at()` updates `updated_at` before row updates.
@@ -247,6 +326,12 @@ Constraints:
 - `public.create_friendship_from_accepted_request()` creates a canonical friendship when a pending friend request is accepted.
 - `public.create_group_member_from_accepted_invitation()` creates a group membership when a pending invitation is accepted.
 - `public.search_profiles(search_term)` returns limited authenticated profile search results: `id`, `display_name`, and `avatar_url`.
+- `public.can_read_challenge(challenge_id, user_id)` checks owner or explicit group challenge read access.
+- `public.can_participate_challenge(challenge_id, user_id)` checks owner or explicit group challenge edit/collaboration access.
+- `public.notify_user(...)` inserts private notifications from trusted database triggers.
+- Notification triggers are attached to friend requests and group invitations.
+- Activity triggers are attached to groups, group members, group challenge links, and messages.
+- Message triggers create group/challenge activity and private notifications for other authorized participants.
 
 ## Implemented RLS Policies
 
@@ -263,6 +348,9 @@ RLS is enabled on:
 - `group_members`
 - `group_invitations`
 - `group_challenges`
+- `messages`
+- `notifications`
+- `activity_events`
 
 Policies:
 
@@ -287,16 +375,21 @@ Policies:
 - Group challenge read access is granted only through explicit `group_challenges` links.
 - Group owner/admin/member roles can edit linked group challenges; viewer can read but not edit.
 - `challenge_sections`, `challenge_solutions`, and `challenge_tasks` inherit group read/edit behavior through the parent challenge.
+- Group messages are selectable only by accepted group members.
+- Group message insert is allowed only for group owner/admin/member roles.
+- Challenge messages are selectable only by users who can read the challenge.
+- Challenge message insert is allowed only for users who can participate in the challenge.
+- Message soft-delete is limited to the sender or a group owner/admin for group messages.
+- Notifications are selectable only by their recipient.
+- Notification updates are limited to the recipient's `read_at` state.
+- Activity events are selectable only by authorized group members or challenge readers.
 
 ## Planned Tables Not Implemented Yet
 
-- `messages`
-- `notifications`
-- `activity_events`
 - Organization/account tables
 - Audit/history tables
 
-Messaging, notifications, activity, admin, and organization access policies are not implemented yet.
+Admin, organization, and audit/history policies are not implemented yet.
 
 ## TypeScript Types
 
@@ -366,6 +459,23 @@ Known MVP limitations:
 - Group challenge linking currently links the authenticated user's own challenges.
 - Viewer read-only behavior is enforced by RLS/server writes. The workspace UI may still render edit controls for viewers until a future polish pass adds role-aware read-only rendering.
 
+## Phase 9 Messaging, Notifications And Activity Notes
+
+Phase 9 adds a third migration for messages, notifications, and activity events.
+
+The app currently supports:
+
+- group messages on `/[locale]/app/groups/[id]`
+- challenge discussion messages on `/[locale]/app/challenges/[id]`
+- message soft-delete
+- private notifications on `/[locale]/app/notifications`
+- marking one or all notifications as read
+- recent activity on dashboard, group detail, and challenge workspace pages
+
+Notification creation is mostly database-triggered for cross-user events, so client actions do not create arbitrary notifications for other users. Activity events are created by database triggers and a few authenticated challenge actions.
+
+Realtime subscriptions are not implemented in Phase 9. Message sends use normal server action redirects and route revalidation.
+
 ## Needs Verification
 
 - Apply migration in local Supabase and/or linked Supabase project.
@@ -378,5 +488,10 @@ Known MVP limitations:
 - Test group creation, invitations, role changes, member removal, and 100-member limit.
 - Test group challenge read/edit RLS for owner, admin, member, viewer, and outside users.
 - Test `search_profiles` result limits and exposed fields.
+- Apply and test the Phase 9 migration.
+- Test group/challenge message RLS with owner, admin, member, viewer, and outside users.
+- Test message soft-delete permissions.
+- Test notification privacy and read-state updates.
+- Test activity event visibility for group/challenge users and outside users.
 - Confirm whether the challenge section list is sufficient for the MVP saved workspace.
 - Confirm whether organization accounts need schema support before MVP launch.

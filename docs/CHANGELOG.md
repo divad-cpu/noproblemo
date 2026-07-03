@@ -103,3 +103,17 @@
 - Updated all locale message catalogs with Phase 8 UI keys.
 - Updated documentation for Phase 9 messaging, notifications, and activity handoff.
 - Confirmed lint, typecheck, and production build pass.
+
+## 2026-07-03 Phase 9
+
+- Added Phase 9 Supabase migration for messages, notifications, and activity events.
+- Added RLS helper functions and policies for group messages, challenge messages, private notifications, and activity visibility.
+- Added database-triggered notification and activity side effects for key collaboration events.
+- Added protected notifications page.
+- Added group messages and group activity to group detail pages.
+- Added challenge discussion messages and challenge activity to saved challenge workspaces.
+- Added message send, soft-delete, mark notification read, and mark all notifications read server actions.
+- Updated dashboard and protected navigation for notifications and recent activity.
+- Updated all locale message catalogs with Phase 9 UI keys.
+- Updated documentation for Phase 10 admin/settings and local project logs handoff.
+- Confirmed lint, typecheck, and production build pass.

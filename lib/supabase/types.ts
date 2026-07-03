@@ -25,6 +25,28 @@ export type ChallengeVisibility = "private" | "group";
 export type FriendRequestStatus = "pending" | "accepted" | "declined" | "canceled";
 export type GroupRole = "owner" | "admin" | "member" | "viewer";
 export type GroupInvitationStatus = "pending" | "accepted" | "declined" | "canceled";
+export type NotificationType =
+  | "friend_request"
+  | "friend_request_accepted"
+  | "group_invitation"
+  | "group_invitation_accepted"
+  | "group_invitation_declined"
+  | "group_message"
+  | "challenge_message"
+  | "challenge_updated"
+  | "group_updated";
+export type ActivityType =
+  | "challenge_created"
+  | "challenge_updated"
+  | "challenge_linked_to_group"
+  | "group_created"
+  | "group_updated"
+  | "group_member_joined"
+  | "group_member_removed"
+  | "group_message_created"
+  | "challenge_message_created"
+  | "task_updated"
+  | "solution_updated";
 export type ChallengeSectionKey =
   | "problem_title"
   | "short_description"
@@ -414,6 +436,108 @@ export type Database = {
           group_id?: string;
           challenge_id?: string;
           created_by?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      messages: {
+        Row: {
+          id: string;
+          sender_id: string | null;
+          group_id: string | null;
+          challenge_id: string | null;
+          body: string;
+          is_deleted: boolean;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          sender_id?: string | null;
+          group_id?: string | null;
+          challenge_id?: string | null;
+          body: string;
+          is_deleted?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          sender_id?: string | null;
+          group_id?: string | null;
+          challenge_id?: string | null;
+          body?: string;
+          is_deleted?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      notifications: {
+        Row: {
+          id: string;
+          user_id: string;
+          type: NotificationType;
+          title: string;
+          body: string | null;
+          related_group_id: string | null;
+          related_challenge_id: string | null;
+          related_message_id: string | null;
+          read_at: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          type: NotificationType;
+          title: string;
+          body?: string | null;
+          related_group_id?: string | null;
+          related_challenge_id?: string | null;
+          related_message_id?: string | null;
+          read_at?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          type?: NotificationType;
+          title?: string;
+          body?: string | null;
+          related_group_id?: string | null;
+          related_challenge_id?: string | null;
+          related_message_id?: string | null;
+          read_at?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      activity_events: {
+        Row: {
+          id: string;
+          actor_id: string | null;
+          group_id: string | null;
+          challenge_id: string | null;
+          type: ActivityType;
+          summary: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          actor_id?: string | null;
+          group_id?: string | null;
+          challenge_id?: string | null;
+          type: ActivityType;
+          summary?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          actor_id?: string | null;
+          group_id?: string | null;
+          challenge_id?: string | null;
+          type?: ActivityType;
+          summary?: string | null;
           created_at?: string;
         };
         Relationships: [];

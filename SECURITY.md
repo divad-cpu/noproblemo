@@ -2,7 +2,7 @@
 
 ## Current Security Posture
 
-Phase 8 adds protected friends, groups, invitations, roles, and explicit group challenge links on top of the Phase 7 saved challenge workspace.
+Phase 9 adds protected group messages, challenge messages, private notifications, and activity events on top of the Phase 8 friends/groups foundation.
 
 Guest challenge drafts remain in browser localStorage until an authenticated user explicitly imports them from the dashboard.
 
@@ -85,10 +85,36 @@ Known MVP limitation: viewer read-only behavior is enforced by RLS and server-si
 
 ## Not Implemented Yet
 
-- Messaging policies
 - Admin policies
 - Organization account policies
-- Notifications and activity policies
+
+## Phase 9 Messaging, Notifications And Activity Security
+
+Migration:
+
+- `supabase/migrations/20260703220000_phase9_messaging_notifications_activity.sql`
+
+RLS is enabled on:
+
+- `messages`
+- `notifications`
+- `activity_events`
+
+Current access model:
+
+- Group messages are visible only to accepted members of that group.
+- Group messages can be inserted only by group owner/admin/member roles.
+- Group viewers can read messages but cannot send them.
+- Challenge messages are visible only to users who can read the challenge.
+- Challenge messages can be inserted only by challenge owners or group collaborators with edit/collaboration access.
+- Message soft-delete is limited to the sender or a group owner/admin for group messages.
+- Notifications are visible only to `notifications.user_id = auth.uid()`.
+- Notification updates are limited to marking the recipient's own notifications as read.
+- Activity events are visible only to authorized members of the related group or users who can read the related challenge.
+- Notification creation for cross-user events is handled by database triggers, not arbitrary client inserts.
+- Activity creation is handled by database triggers and limited authenticated app actions.
+
+Realtime subscriptions are not implemented in Phase 9. Message actions use server action redirects and route revalidation.
 
 ## User Ownership Rules
 
@@ -139,19 +165,21 @@ Implemented Phase 8 rules:
 
 Future rules:
 
-- Messaging access must follow the same accepted-member model.
 - Blocking, abuse handling, and detailed audit events are not implemented yet.
 
 ## Private Message Rules
 
-Messaging is planned, not implemented.
+Implemented Phase 9 rules:
+
+- Private messages and challenge discussion must not be public.
+- Group messages should be visible only to accepted group members.
+- Challenge messages should be visible only to users with challenge access.
+- Direct one-to-one messages are not implemented.
 
 Future rules:
 
-- Private messages and challenge discussion must not be public.
-- Direct messages should be visible only to sender and recipient.
-- Group messages should be visible only to accepted group members.
-- Challenge messages should be visible only to users with challenge access.
+- Direct messages should be visible only to sender and recipient if implemented.
+- Read receipts, typing indicators, reactions, attachments, and threads are not implemented.
 
 ## Environment Variables
 
@@ -222,6 +250,7 @@ Users may write personal, workplace, public-sector, or organizational problems. 
 - Vercel environment variables configured with least privilege.
 - Supabase migration applied.
 - RLS policies tested with authenticated users.
+- Message RLS, notification privacy, and activity visibility tested with authenticated users.
 - Supabase anon key is the only browser key.
 - Service role key unavailable to client bundles.
 - Auth redirect URLs verified.

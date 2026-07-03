@@ -39,15 +39,18 @@ Implemented:
 - Editable challenge sections, solutions, tasks, final recommendation, summary, and Markdown export.
 - Friends page with request send, accept, decline, cancel, and remove friend actions.
 - Groups pages with group creation, invitations, roles, member removal, and explicit group challenge links.
+- Group messages and challenge discussion messages.
+- Private notifications page.
+- Basic group/challenge activity lists.
 - Google and Apple OAuth provider start actions prepared through Supabase Auth.
 - Supabase migration for profiles and core challenge tables.
 - Phase 8 migration for friends, groups, profile search, group challenge links, and group-aware RLS.
+- Phase 9 migration for messages, notifications, activity events, triggers, and RLS.
 - Supabase client/server helper scaffolding.
 - Manual database types.
 
 Not implemented:
 
-- Messaging, notifications, and activity.
 - Admin panel.
 - AI, payments, email sending, cron.
 
@@ -68,6 +71,7 @@ Not implemented:
 - `/[locale]/app/groups`: protected groups list and pending invitations.
 - `/[locale]/app/groups/new`: protected group creation.
 - `/[locale]/app/groups/[id]`: protected group detail, member management, invitations, and linked challenges.
+- `/[locale]/app/notifications`: protected private notifications.
 - `/[locale]/app/settings`: protected profile/settings.
 
 ## Data Model Map
@@ -78,6 +82,7 @@ Current:
 - Guest draft: browser localStorage key `noproblemo.guestWorkspace.v1`.
 - Supabase migration: `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`.
 - Supabase migration: `supabase/migrations/20260703210000_phase8_friends_groups.sql`.
+- Supabase migration: `supabase/migrations/20260703220000_phase9_messaging_notifications_activity.sql`.
 - Typed helpers: `lib/supabase/`.
 - Dashboard reads/writes use the authenticated Supabase session and Phase 4 tables.
 - Guest import maps `problem`, `context`, `outcome`, `options`, and `nextStep` into `challenge_sections`.
@@ -90,6 +95,9 @@ Current:
 - Groups use `groups`, `group_members`, and `group_invitations`.
 - Group challenge access uses explicit `group_challenges` links.
 - Profile discovery uses authenticated RPC `search_profiles(search_term)` and exposes only `id`, `display_name`, and `avatar_url`.
+- Group and challenge messages use `messages`.
+- Private user notifications use `notifications`.
+- Basic group/challenge activity uses `activity_events`.
 
 Implemented Phase 4 tables:
 
@@ -104,12 +112,13 @@ Implemented Phase 4 tables:
 - `group_members`
 - `group_invitations`
 - `group_challenges`
-
-Planned data concepts:
-
 - `messages`
 - `notifications`
 - `activity_events`
+
+Planned data concepts:
+
+- Admin/settings records if Phase 10 needs more than existing `profiles.role`
 
 See `DATABASE_SCHEMA.md` before any future migration work.
 
@@ -123,16 +132,21 @@ Current:
 - Dashboard, minimal create, profile update, and guest import use server-side session checks and RLS.
 - Phase 4 migration enables RLS for `profiles`, `challenges`, `challenge_sections`, `challenge_solutions`, and `challenge_tasks`.
 - Phase 8 migration enables RLS for friends/groups tables and extends challenge RLS for explicitly linked group challenges.
+- Phase 9 migration enables RLS for messages, notifications, and activity events.
 - Friendships alone do not grant challenge access.
 - Group invitation acceptance is required before membership access is granted.
 - Group challenge viewers should read but not edit linked challenges.
+- Group messages are visible only to group members.
+- Challenge messages are visible only to users with challenge read access.
+- Notifications are visible only to recipients.
+- Activity events are visible only through group/challenge access.
 - RLS migrations must still be verified in Supabase.
 - No service-role helper exists.
 
 Planned:
 
-- Phase 9 messaging, notifications, and activity.
-- Later admin policies.
+- Phase 10 admin/settings and local project logs.
+- Later admin policies beyond the MVP.
 
 Rules:
 
@@ -152,8 +166,8 @@ See `SECURITY.md` before implementing auth, database writes, or messaging.
 5. Basic challenge workspace: implemented.
 6. Friends/invites: implemented locally.
 7. Groups: implemented locally.
-8. Simple messaging: planned for Phase 9.
-9. Basic admin/settings: planned.
+8. Simple messaging: implemented locally.
+9. Basic admin/settings: planned for Phase 10.
 10. Deployment: Vercel works; security hardening ongoing.
 
 ## Future Feature Map

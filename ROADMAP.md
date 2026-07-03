@@ -140,21 +140,40 @@ Needs verification:
 - Verify linked challenge access for owner, admin, member, viewer, and outside users.
 - Verify profile search exposes only the intended fields.
 
+### Phase 9: Messaging, Notifications And Activity
+
+Status: implemented locally.
+
+- Group messages on protected group detail pages
+- Challenge discussion messages on protected challenge workspaces
+- Private notifications page
+- Basic activity events for groups, group membership, group challenge links, messages, challenge updates, solution updates, and task updates
+- Database triggers for notification/activity side effects
+- RLS helper functions for challenge read/participation checks
+- RLS policies for messages, notifications, and activity events
+
+Needs verification:
+
+- Apply and test the Phase 9 migration.
+- Verify group message access for owner, admin, member, viewer, and outside users.
+- Verify challenge message access for owners, group collaborators, viewers, and outside users.
+- Verify notifications are visible only to recipients.
+- Verify activity events are visible only to authorized group/challenge users.
+
 ## Current Phase
 
-Phase 8 friends and groups has been implemented locally. Messaging, notifications and activity are next.
+Phase 9 messaging, notifications and activity has been implemented locally. Admin/settings and local project logs are next.
 
 ## Next Recommended Phase
 
-### Phase 9: Messaging, Notifications And Activity
+### Phase 10: Admin/Settings And Local Project Logs
 
 Recommended scope:
 
-- Group messages
-- Challenge messages
-- Basic notifications
-- Activity events
-- Realtime only if simple and safe
+- Basic admin/settings area
+- Admin role protection
+- Activity/admin overview if simple
+- Complete local Codex project log documentation
 
 ## MVP Path
 
@@ -165,8 +184,8 @@ Recommended scope:
 5. Basic challenge workspace: implemented.
 6. Friends/invites: implemented locally.
 7. Groups: implemented locally.
-8. Simple messaging: planned for Phase 9.
-9. Basic admin/settings: planned.
+8. Simple messaging: implemented locally.
+9. Basic admin/settings: planned for Phase 10.
 10. Deployment: Vercel works; hardening remains ongoing.
 
 ## Future Expansion Path

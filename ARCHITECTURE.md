@@ -25,16 +25,16 @@
 - `app/[locale]/auth/logout/route.ts`: logout handler.
 - `app/[locale]/app/layout.tsx`: protected app route boundary with server-side session check and app navigation.
 - `app/[locale]/app/page.tsx`: logged-in dashboard with profile summary, saved challenge lists, guest import prompt, and empty/error states.
-- `app/[locale]/app/actions.ts`: server actions for creating draft challenges, importing guest drafts, updating profile settings, editing workspace sections, managing solutions, and managing tasks.
-- `app/[locale]/app/actions.ts`: server actions for creating draft challenges, importing guest drafts, updating profile settings, editing workspace sections, managing solutions, managing tasks, friend requests, friendships, groups, invitations, member roles, and group challenge links.
+- `app/[locale]/app/actions.ts`: server actions for creating draft challenges, importing guest drafts, updating profile settings, editing workspace sections, managing solutions, managing tasks, friend requests, friendships, groups, invitations, member roles, group challenge links, messages, notification read state, and basic activity events.
 - `app/[locale]/app/_components/guest-import-card.tsx`: client component that detects the existing guest localStorage draft and submits it for server-side import.
 - `app/[locale]/app/_components/challenge-markdown-export.tsx`: client component for Markdown copy/download export.
 - `app/[locale]/app/challenges/new/page.tsx`: minimal protected cloud challenge creation page.
-- `app/[locale]/app/challenges/[id]/page.tsx`: protected saved challenge workspace with sections, solutions, tasks, and Markdown export.
+- `app/[locale]/app/challenges/[id]/page.tsx`: protected saved challenge workspace with sections, solutions, tasks, challenge messages, activity, and Markdown export.
 - `app/[locale]/app/friends/page.tsx`: protected friend request and friendship management page.
 - `app/[locale]/app/groups/page.tsx`: protected groups list and pending group invitations page.
 - `app/[locale]/app/groups/new/page.tsx`: protected group creation page.
-- `app/[locale]/app/groups/[id]/page.tsx`: protected group detail page with members, invitations, roles, and linked challenges.
+- `app/[locale]/app/groups/[id]/page.tsx`: protected group detail page with members, invitations, roles, linked challenges, group messages, and group activity.
+- `app/[locale]/app/notifications/page.tsx`: protected private notifications page.
 - `app/[locale]/app/settings/page.tsx`: protected profile/settings page for display name and preferred locale.
 - `app/[locale]/_components/auth-status.tsx`: auth-aware landing links.
 - `app/[locale]/_components/language-switcher.tsx`: locale switcher.
@@ -67,6 +67,7 @@ No shared top-level `components/` directory currently exists. Add it only when s
 - `/[locale]/app/groups` protected groups list.
 - `/[locale]/app/groups/new` protected group creation.
 - `/[locale]/app/groups/[id]` protected group detail and challenge linking.
+- `/[locale]/app/notifications` protected private notifications.
 - `/[locale]/app/settings` protected profile/settings page.
 
 Supported locales are `en`, `zh-CN`, `hi`, `es`, `ar`, `fr`, `bn`, `pt-BR`, `id`, `ur`, and `nb`. Arabic and Urdu use `dir="rtl"`.
@@ -108,6 +109,16 @@ Implemented in Phase 8:
 - limited authenticated profile search RPC
 - RLS policies for friends, groups, invitations, membership, group challenge links, and linked challenge access
 
+Implemented in Phase 9:
+
+- `supabase/migrations/20260703220000_phase9_messaging_notifications_activity.sql`
+- `messages`
+- `notifications`
+- `activity_events`
+- helper functions for challenge read and participation checks
+- database-triggered notifications and activity events
+- RLS policies for group messages, challenge messages, private notifications, and activity visibility
+
 The migrations still need to be applied and verified in Supabase.
 
 ## Authentication Flow
@@ -147,11 +158,16 @@ Current data flow:
 - Groups pages read only groups the authenticated user belongs to, pending invitations involving the user, and linked group challenges visible through RLS.
 - Group challenge linking marks a linked challenge with `visibility = 'group'` and records the explicit link in `group_challenges`.
 - Group members can open linked challenges through the existing workspace route when RLS permits access.
+- Group detail reads and writes `messages` scoped to the current group.
+- Challenge workspace reads and writes `messages` scoped to the current challenge.
+- Notifications are read from `notifications` and can be marked read only by the recipient.
+- Activity lists read from `activity_events` through RLS on the dashboard, group detail, and challenge workspace.
+- Notification/activity side effects are mostly database-triggered by friend requests, group invitations, group membership, group links, and message creation.
 
 Planned data flow:
 
-- Phase 9: messaging, notifications, and activity events.
-- Later: admin policies.
+- Phase 10: admin/settings and local project logs.
+- Later: admin policies beyond MVP and optional realtime messaging.
 
 ## Deployment Direction
 

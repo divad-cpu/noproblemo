@@ -14,7 +14,7 @@ Before changing anything:
 8. Do not print Supabase `.temp` file contents.
 
 Task:
-Implement Phase 9 only: Messaging, notifications and activity.
+Implement Phase 10 only: Admin/settings and local project logs.
 
 Current foundation:
 
@@ -25,6 +25,7 @@ Current foundation:
 - Supabase Auth
 - Supabase Phase 4 schema/RLS migration
 - Supabase Phase 8 friends/groups migration
+- Supabase Phase 9 messaging/notifications/activity migration
 - Email login/signup
 - Protected dashboard at `/[locale]/app`
 - Guest import from `noproblemo.guestWorkspace.v1`
@@ -32,22 +33,23 @@ Current foundation:
 - Protected saved challenge workspace
 - Friend requests and friendships
 - Groups, group invitations, roles, 100-member group limit, and explicit group challenge links
+- Group messages and challenge discussion messages
+- Private notifications and basic activity events
 
-Phase 9 should include:
+Phase 10 should include:
 
-- Group messages
-- Challenge messages
-- Basic notifications
-- Activity events
-- Realtime only if simple and safe
+- Basic admin/settings area
+- Admin role protection using `profiles.role = 'admin'`
+- Activity/admin overview if simple
+- Complete local Codex project log documentation
 
-Phase 9 should not include unless explicitly required as a minimal placeholder:
+Phase 10 must not include:
 
-- Admin panel
-- Payments
-- AI features
+- Email automation
 - Resend
 - Vercel Cron
+- Payments
+- AI features
 - Organization accounts
 - Voting
 - Comments
@@ -60,9 +62,8 @@ Security requirements:
 - Use RLS as the real authorization boundary.
 - Do not use `SUPABASE_SERVICE_ROLE_KEY` in frontend/client code.
 - Validate all server action inputs.
-- Do not fetch or expose another user's private data.
-- Messages must be visible only to users with the relevant group or challenge access.
-- Notifications and activity events must not reveal private group/challenge names to unauthorized users.
+- Do not expose private user, group, challenge, message, notification, or activity data to non-admin users.
+- Admin routes must be protected server-side.
 - Keep user-generated content separate from UI translations.
 
 Documentation updates:
@@ -70,7 +71,7 @@ Documentation updates:
 - `CURRENT_STATE.md`
 - `ARCHITECTURE.md`
 - `SECURITY.md`
-- `DATABASE_SCHEMA.md`
+- `DATABASE_SCHEMA.md` if schema notes changed
 - `ROADMAP.md`
 - `docs/CODEX_PROJECT_MAP.md`
 - `docs/CODEX_PROJECT_LOG.md`

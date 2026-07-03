@@ -16,8 +16,9 @@ NoProblemo has completed:
 - Phase 6: dashboard and guest import
 - Phase 7: challenge workspace
 - Phase 8: friends and groups
+- Phase 9: messaging, notifications and activity
 
-Phase 9 Messaging, notifications and activity is next. Admin, payments, AI, email automation, Resend, and Vercel Cron remain future phases.
+Phase 10 Admin/settings and local project logs is next. Payments, AI, email automation, Resend, and Vercel Cron remain future phases.
 
 ## Already Implemented
 
@@ -52,6 +53,12 @@ Phase 9 Messaging, notifications and activity is next. Admin, payments, AI, emai
 - Group creation, group settings, invitations, accept/decline/cancel flows, member roles, member removal, and group challenge linking
 - Phase 8 local migration for friends, friendships, groups, memberships, invitations, group challenge links, group access helpers, and RLS policies
 - Authenticated limited profile search RPC that exposes only `id`, `display_name`, and `avatar_url`
+- Phase 9 local migration for messages, notifications, activity events, helper functions, triggers, and RLS policies
+- Group messages on `/[locale]/app/groups/[id]`
+- Challenge discussion messages on `/[locale]/app/challenges/[id]`
+- Protected notifications page at `/[locale]/app/notifications`
+- Basic activity lists on dashboard, group detail, and challenge workspace
+- Notification/activity triggers for friend requests, group invitations, group/member events, group challenge links, and messages
 - Google and Apple OAuth start actions prepared through Supabase Auth
 - Shared language switcher and footer
 - Guest localStorage draft persistence under `noproblemo.guestWorkspace.v1`
@@ -72,6 +79,7 @@ Phase 9 Messaging, notifications and activity is next. Admin, payments, AI, emai
 - Problem-solving workflow exists as guest browser-local form fields and as an editable saved workspace for authenticated challenge owners.
 - Group-linked challenge read/edit access is represented in RLS. The workspace now reads challenges through RLS, but viewer read-only UX is still mostly enforced by server/RLS failures rather than fully hiding every edit control.
 - Group challenge linking currently links a user's own challenges to a group. Linking challenges owned by another group member remains future refinement.
+- Supabase Realtime is documented as future work; Phase 9 uses server-rendered refresh/revalidation after message actions.
 - Google and Apple login buttons are present, but they require Supabase provider setup and external provider configuration before they work in production.
 - Supabase schema exists as local migrations but has not been verified against the live Supabase project in this task.
 - Supabase helpers are used by auth actions, callback/logout handlers, auth-aware landing links, and the protected app layout.
@@ -80,8 +88,6 @@ Phase 9 Messaging, notifications and activity is next. Admin, payments, AI, emai
 
 ## Not Yet Implemented
 
-- Simple messaging
-- Notifications and activity feed
 - Admin panel
 - Real-time collaboration
 - AI features
@@ -107,6 +113,7 @@ Phase 9 Messaging, notifications and activity is next. Admin, payments, AI, emai
 - `app/[locale]/app/groups/page.tsx`: protected groups list and pending group invitations page.
 - `app/[locale]/app/groups/new/page.tsx`: protected group creation page.
 - `app/[locale]/app/groups/[id]/page.tsx`: protected group detail, member, invitation, and linked challenge page.
+- `app/[locale]/app/notifications/page.tsx`: protected private notifications page.
 - `app/[locale]/app/_components/guest-import-card.tsx`: client-side localStorage detection and import UI.
 - `app/[locale]/app/challenges/new/page.tsx`: minimal protected create challenge page.
 - `app/[locale]/app/challenges/[id]/page.tsx`: protected saved challenge workspace.
@@ -120,6 +127,7 @@ Phase 9 Messaging, notifications and activity is next. Admin, payments, AI, emai
 - `lib/supabase/server.ts`: server Supabase cookie-aware helper scaffold.
 - `lib/supabase/types.ts`: manual Phase 4 database types.
 - `supabase/migrations/20260703210000_phase8_friends_groups.sql`: Phase 8 friends, groups, group challenge access, helper functions, and RLS migration.
+- `supabase/migrations/20260703220000_phase9_messaging_notifications_activity.sql`: Phase 9 messages, notifications, activity events, triggers, and RLS migration.
 - `supabase/config.toml`: Supabase CLI config.
 - `supabase/seed.sql`: empty seed file.
 - `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`: Phase 4 schema and RLS migration.
@@ -130,7 +138,8 @@ Phase 9 Messaging, notifications and activity is next. Admin, payments, AI, emai
 
 - Phase 4 migration needs to be applied and tested in Supabase.
 - Phase 8 migration needs to be applied and tested in Supabase.
-- RLS policies, profile trigger, workspace writes, friend/group writes, and group challenge access need verification with authenticated users.
+- Phase 9 migration needs to be applied and tested in Supabase.
+- RLS policies, profile trigger, workspace writes, friend/group writes, group challenge access, message writes, notification privacy, and activity visibility need verification with authenticated users.
 - Google and Apple OAuth require provider configuration in Supabase, Google Cloud, and Apple Developer.
 - Guest drafts are browser-local and can be lost if localStorage is cleared.
 - Non-English translations need human review.
@@ -139,7 +148,7 @@ Phase 9 Messaging, notifications and activity is next. Admin, payments, AI, emai
 
 ## Current Risks
 
-- Future agents must not add messaging, notifications, or admin before Phase 9 or a later explicit scope.
+- Future agents must not add admin, payments, AI, email automation, Resend, or Vercel Cron before explicitly scoped.
 - Future agents might use service role keys in frontend code; do not do this.
 - RLS policies are written but still need live/local Supabase verification.
 - User-generated problem content may be sensitive; privacy must be designed into auth and dashboard phases.
@@ -147,16 +156,16 @@ Phase 9 Messaging, notifications and activity is next. Admin, payments, AI, emai
 
 ## Next Recommended Phase
 
-Phase 9: Messaging, notifications and activity.
+Phase 10: Admin/settings and local project logs.
 
 Recommended scope:
 
-- Group and challenge messages
-- Basic notifications
-- Activity events
-- Realtime only if simple and safe
+- Basic admin/settings area
+- Admin role protection
+- Activity/admin overview if simple
+- Complete local Codex project log documentation
 
-Do not implement admin in Phase 9 unless explicitly scoped.
+Do not implement email automation, Resend, or Vercel Cron in Phase 10.
 
 ## Validation Commands
 
@@ -193,6 +202,12 @@ Validation for Phase 7:
 - `npm run build`: passed on 2026-07-03.
 
 Validation for Phase 8:
+
+- `npm run lint`: passed on 2026-07-03.
+- `npm run typecheck`: passed on 2026-07-03.
+- `npm run build`: passed on 2026-07-03.
+
+Validation for Phase 9:
 
 - `npm run lint`: passed on 2026-07-03.
 - `npm run typecheck`: passed on 2026-07-03.

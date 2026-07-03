@@ -13,6 +13,7 @@ type DashboardPageProps = {
 type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 type Group = Database["public"]["Tables"]["groups"]["Row"];
+type ActivityEvent = Database["public"]["Tables"]["activity_events"]["Row"];
 
 function formatDate(value: string, locale: Locale) {
   return new Intl.DateTimeFormat(locale, {
@@ -88,7 +89,9 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
     { data: challenges, error: challengesError },
     { count: incomingFriendRequests },
     { count: groupInvitations },
+    { count: unreadNotifications },
     { data: groupMemberships },
+    { data: activityEvents },
   ] = await Promise.all([
     supabase.from("profiles").select("*").eq("id", user.id).maybeSingle(),
     supabase
@@ -108,11 +111,21 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
       .eq("invitee_id", user.id)
       .eq("status", "pending"),
     supabase
+      .from("notifications")
+      .select("id", { count: "exact", head: true })
+      .eq("user_id", user.id)
+      .is("read_at", null),
+    supabase
       .from("group_members")
       .select("id, role, group_id")
       .eq("user_id", user.id)
       .order("created_at", { ascending: false })
       .limit(3),
+    supabase
+      .from("activity_events")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(5),
   ]);
   const groupIds = (groupMemberships ?? []).map((membership) => membership.group_id);
   const { data: dashboardGroups } =
@@ -126,6 +139,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
     ["draft", "active"].includes(challenge.status),
   );
   const latestChallenges = savedChallenges.slice(0, 5);
+  const recentActivity = (activityEvents ?? []) as ActivityEvent[];
   const displayName = getDisplayName(profile, user.email);
   const cardLabels = {
     status: t("challenge.status"),
@@ -170,7 +184,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
 
       <GuestImportCard locale={locale} />
 
-      <section className="grid gap-4 md:grid-cols-3">
+      <section className="grid gap-4 md:grid-cols-4">
         <div className="rounded-lg border border-[#dad8d0] bg-white p-5">
           <p className="text-sm font-medium text-[#706f68]">
             {t("summary.total")}
@@ -234,6 +248,17 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
                   .filter(Boolean)
                   .join(", ")
               : t("social.noGroups")}
+          </p>
+        </Link>
+        <Link
+          href="/app/notifications"
+          className="rounded-lg border border-[#dad8d0] bg-white p-5 hover:border-[#8b897f]"
+        >
+          <p className="text-sm font-medium text-[#706f68]">
+            {t("social.notifications")}
+          </p>
+          <p className="mt-2 text-3xl font-semibold text-[#22211e]">
+            {unreadNotifications ?? 0}
           </p>
         </Link>
       </section>
@@ -314,6 +339,33 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
             )}
           </div>
         </aside>
+      </section>
+
+      <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+        <h2 className="text-2xl font-semibold text-[#22211e]">
+          {t("activity.title")}
+        </h2>
+        <div className="mt-5 grid gap-3">
+          {recentActivity.length > 0 ? (
+            recentActivity.map((event) => (
+              <div
+                key={event.id}
+                className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4"
+              >
+                <p className="font-semibold text-[#22211e]">
+                  {t(`activity.types.${event.type}`)}
+                </p>
+                <p className="mt-1 text-sm text-[#706f68]">
+                  {formatDate(event.created_at, locale)}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p className="text-sm leading-6 text-[#55544f]">
+              {t("activity.empty")}
+            </p>
+          )}
+        </div>
       </section>
     </div>
   );

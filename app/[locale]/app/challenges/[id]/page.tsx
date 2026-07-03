@@ -14,6 +14,8 @@ import {
   saveChallengeSections,
   saveSolution,
   saveTask,
+  sendChallengeMessage,
+  softDeleteMessage,
   updateChallengeDetails,
 } from "../../actions";
 import { ChallengeMarkdownExport } from "../../_components/challenge-markdown-export";
@@ -27,6 +29,10 @@ type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
 type Section = Database["public"]["Tables"]["challenge_sections"]["Row"];
 type Solution = Database["public"]["Tables"]["challenge_solutions"]["Row"];
 type Task = Database["public"]["Tables"]["challenge_tasks"]["Row"];
+type Message = Database["public"]["Tables"]["messages"]["Row"];
+type ActivityEvent = Database["public"]["Tables"]["activity_events"]["Row"];
+type ProfileResult =
+  Database["public"]["Functions"]["search_profiles"]["Returns"][number];
 
 const sectionKeys: ChallengeSectionKey[] = [
   "problem_title",
@@ -82,6 +88,37 @@ function formatDate(value: string, locale: Locale) {
     month: "short",
     day: "numeric",
   }).format(new Date(value));
+}
+
+function formatDateTime(value: string, locale: Locale) {
+  return new Intl.DateTimeFormat(locale, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(value));
+}
+
+async function getProfileMap(
+  supabase: Awaited<ReturnType<typeof createServerSupabaseClient>>,
+  ids: string[],
+) {
+  const entries = await Promise.all(
+    [...new Set(ids)].map(async (profileId) => {
+      const { data } = await supabase.rpc("search_profiles", {
+        search_term: profileId,
+      });
+
+      return [profileId, data?.[0] ?? null] as const;
+    }),
+  );
+
+  return new Map(entries);
+}
+
+function profileName(profile: ProfileResult | null, fallback: string) {
+  return profile?.display_name || fallback;
 }
 
 function getSectionContent(sections: Section[], sectionKey: ChallengeSectionKey) {
@@ -199,8 +236,15 @@ export default async function ChallengePage({
     redirect(`/${locale}/login?error=auth-required&next=/${locale}/app`);
   }
 
-  const [{ data: challenge }, { data: sections }, { data: solutions }, { data: tasks }] =
-    await Promise.all([
+  const [
+    { data: challenge },
+    { data: sections },
+    { data: solutions },
+    { data: tasks },
+    { data: messages },
+    { data: activityEvents },
+    { data: groupLinks },
+  ] = await Promise.all([
       supabase
         .from("challenges")
         .select("*")
@@ -223,6 +267,22 @@ export default async function ChallengePage({
         .eq("challenge_id", id)
         .order("position", { ascending: true })
         .order("created_at", { ascending: true }),
+      supabase
+        .from("messages")
+        .select("*")
+        .eq("challenge_id", id)
+        .order("created_at", { ascending: false })
+        .limit(20),
+      supabase
+        .from("activity_events")
+        .select("*")
+        .eq("challenge_id", id)
+        .order("created_at", { ascending: false })
+        .limit(8),
+      supabase
+        .from("group_challenges")
+        .select("group_id")
+        .eq("challenge_id", id),
     ]);
 
   if (!challenge) {
@@ -232,6 +292,30 @@ export default async function ChallengePage({
   const savedSections = sections ?? [];
   const savedSolutions = solutions ?? [];
   const savedTasks = tasks ?? [];
+  const savedMessages = (messages ?? []) as Message[];
+  const savedActivityEvents = (activityEvents ?? []) as ActivityEvent[];
+  const groupIds = (groupLinks ?? []).map((link) => link.group_id);
+  const { data: currentUserMemberships } =
+    groupIds.length > 0
+      ? await supabase
+          .from("group_members")
+          .select("role")
+          .in("group_id", groupIds)
+          .eq("user_id", user.id)
+      : { data: [] };
+  const canSendMessage =
+    challenge.owner_id === user.id ||
+    (currentUserMemberships ?? []).some((membership) =>
+      ["owner", "admin", "member"].includes(membership.role),
+    );
+  const profiles = await getProfileMap(supabase, [
+    ...savedMessages.flatMap((message) =>
+      message.sender_id ? [message.sender_id] : [],
+    ),
+    ...savedActivityEvents.flatMap((event) =>
+      event.actor_id ? [event.actor_id] : [],
+    ),
+  ]);
   const status = getQueryValue(query, "status");
   const error = getQueryValue(query, "error");
   const sectionLabels = Object.fromEntries(
@@ -761,6 +845,129 @@ export default async function ChallengePage({
         tasks={savedTasks}
         sectionLabels={sectionLabels}
       />
+
+      <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+        <h2 className="text-2xl font-semibold text-[#22211e]">
+          {t("messages.title")}
+        </h2>
+        <p className="mt-2 text-sm leading-6 text-[#55544f]">
+          {t("messages.body")}
+        </p>
+        {canSendMessage ? (
+          <form action={sendChallengeMessage} className="mt-5 grid gap-3">
+            <input type="hidden" name="locale" value={locale} />
+            <input type="hidden" name="challengeId" value={challenge.id} />
+            <textarea
+              name="body"
+              required
+              maxLength={2000}
+              rows={3}
+              placeholder={t("messages.placeholder")}
+              className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
+            />
+            <button className="inline-flex min-h-11 items-center justify-center rounded-md bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]">
+              {t("messages.send")}
+            </button>
+          </form>
+        ) : (
+          <p className="mt-4 rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4 text-sm leading-6 text-[#55544f]">
+            {t("messages.viewerReadOnly")}
+          </p>
+        )}
+        <div className="mt-5 grid gap-3">
+          {savedMessages.length > 0 ? (
+            savedMessages.map((message) => (
+              <ChallengeMessageRow
+                key={message.id}
+                message={message}
+                locale={locale}
+                challengeId={challenge.id}
+                author={profileName(
+                  message.sender_id
+                    ? profiles.get(message.sender_id) ?? null
+                    : null,
+                  t("messages.unknownSender"),
+                )}
+                t={t}
+                canDelete={message.sender_id === user.id}
+              />
+            ))
+          ) : (
+            <p className="text-sm leading-6 text-[#55544f]">
+              {t("messages.empty")}
+            </p>
+          )}
+        </div>
+      </section>
+
+      <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+        <h2 className="text-2xl font-semibold text-[#22211e]">
+          {t("activity.title")}
+        </h2>
+        <div className="mt-5 grid gap-3">
+          {savedActivityEvents.length > 0 ? (
+            savedActivityEvents.map((event) => (
+              <div
+                key={event.id}
+                className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4"
+              >
+                <p className="font-semibold text-[#22211e]">
+                  {t(`activity.types.${event.type}`)}
+                </p>
+                <p className="mt-1 text-sm text-[#706f68]">
+                  {formatDateTime(event.created_at, locale)}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p className="text-sm leading-6 text-[#55544f]">
+              {t("activity.empty")}
+            </p>
+          )}
+        </div>
+      </section>
     </div>
+  );
+}
+
+function ChallengeMessageRow({
+  message,
+  locale,
+  challengeId,
+  author,
+  t,
+  canDelete,
+}: {
+  message: Message;
+  locale: Locale;
+  challengeId: string;
+  author: string;
+  t: Awaited<ReturnType<typeof getTranslations>>;
+  canDelete: boolean;
+}) {
+  return (
+    <article className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <p className="font-semibold text-[#22211e]">{author}</p>
+          <p className="text-sm text-[#706f68]">
+            {formatDateTime(message.created_at, locale)}
+          </p>
+        </div>
+        {canDelete && !message.is_deleted ? (
+          <form action={softDeleteMessage}>
+            <input type="hidden" name="locale" value={locale} />
+            <input type="hidden" name="challengeId" value={challengeId} />
+            <input type="hidden" name="messageId" value={message.id} />
+            <button className="text-sm font-semibold text-[#7a2f1d] underline-offset-4 hover:underline">
+              {t("messages.delete")}
+            </button>
+          </form>
+        ) : null}
+      </div>
+      <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-[#373632]">
+        {message.is_deleted ? t("messages.deleted") : message.body}
+      </p>
+    </article>
   );
 }

@@ -31,6 +31,7 @@ const maxShortDescriptionLength = 500;
 const maxSectionLength = 8000;
 const maxLongTextLength = 8000;
 const maxPersonLength = 160;
+const maxMessageLength = 2000;
 const challengeStatuses: ChallengeStatus[] = [
   "draft",
   "active",
@@ -105,6 +106,10 @@ function getChallengeId(formData: FormData) {
 
 function getGroupId(formData: FormData) {
   return firstString(formData.get("groupId"));
+}
+
+function getMessageId(formData: FormData) {
+  return firstString(formData.get("messageId"));
 }
 
 function getWorkspaceUrl(locale: Locale, challengeId: string, params: URLSearchParams) {
@@ -223,6 +228,21 @@ function canonicalFriendPair(userA: string, userB: string) {
   return userA < userB
     ? { user_one_id: userA, user_two_id: userB }
     : { user_one_id: userB, user_two_id: userA };
+}
+
+async function logChallengeActivity(
+  supabase: Awaited<ReturnType<typeof createServerSupabaseClient>>,
+  userId: string,
+  challengeId: string,
+  type: "challenge_updated" | "task_updated" | "solution_updated",
+  summary: string,
+) {
+  await supabase.from("activity_events").insert({
+    actor_id: userId,
+    challenge_id: challengeId,
+    type,
+    summary,
+  });
 }
 
 export async function createChallenge(formData: FormData) {
@@ -395,7 +415,7 @@ export async function updateChallengeDetails(formData: FormData) {
     redirect(workspaceErrorUrl(locale, challengeId, "details-missing-title"));
   }
 
-  const { supabase, challenge } = await requireOwnedChallenge(challengeId);
+  const { supabase, userId, challenge } = await requireOwnedChallenge(challengeId);
 
   if (!challenge) {
     redirect(`/${locale}/login?error=auth-required&next=/${locale}/app`);
@@ -414,6 +434,14 @@ export async function updateChallengeDetails(formData: FormData) {
   if (error) {
     redirect(workspaceErrorUrl(locale, challengeId, "details-save-failed"));
   }
+
+  await logChallengeActivity(
+    supabase,
+    userId,
+    challengeId,
+    "challenge_updated",
+    "Challenge details updated.",
+  );
 
   revalidatePath(`/${locale}/app`);
   revalidatePath(`/${locale}/app/challenges/${challengeId}`);
@@ -496,7 +524,7 @@ export async function saveSolution(formData: FormData) {
     redirect(workspaceErrorUrl(locale, challengeId, "solution-missing-title"));
   }
 
-  const { supabase, challenge } = await requireOwnedChallenge(challengeId);
+  const { supabase, userId, challenge } = await requireOwnedChallenge(challengeId);
 
   if (!challenge) {
     redirect(`/${locale}/login?error=auth-required&next=/${locale}/app`);
@@ -537,6 +565,14 @@ export async function saveSolution(formData: FormData) {
   if (result.error) {
     redirect(workspaceErrorUrl(locale, challengeId, "solution-save-failed"));
   }
+
+  await logChallengeActivity(
+    supabase,
+    userId,
+    challengeId,
+    "solution_updated",
+    "Solution updated.",
+  );
 
   revalidatePath(`/${locale}/app/challenges/${challengeId}`);
   redirect(workspaceStatusUrl(locale, challengeId, "solution-saved"));
@@ -585,7 +621,7 @@ export async function saveTask(formData: FormData) {
     redirect(workspaceErrorUrl(locale, challengeId, "task-missing-title"));
   }
 
-  const { supabase, challenge } = await requireOwnedChallenge(challengeId);
+  const { supabase, userId, challenge } = await requireOwnedChallenge(challengeId);
 
   if (!challenge) {
     redirect(`/${locale}/login?error=auth-required&next=/${locale}/app`);
@@ -617,6 +653,14 @@ export async function saveTask(formData: FormData) {
   if (result.error) {
     redirect(workspaceErrorUrl(locale, challengeId, "task-save-failed"));
   }
+
+  await logChallengeActivity(
+    supabase,
+    userId,
+    challengeId,
+    "task_updated",
+    "Task updated.",
+  );
 
   revalidatePath(`/${locale}/app/challenges/${challengeId}`);
   redirect(workspaceStatusUrl(locale, challengeId, "task-saved"));
@@ -1048,4 +1092,141 @@ export async function unlinkChallengeFromGroup(formData: FormData) {
 
   revalidatePath(`/${locale}/app/groups/${groupId}`);
   redirect(`/${locale}/app/groups/${groupId}?status=group-challenge-unlinked`);
+}
+
+export async function sendGroupMessage(formData: FormData) {
+  const locale = getLocale(formData);
+  const groupId = getGroupId(formData);
+  const body = truncate(firstString(formData.get("body")), maxMessageLength);
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/groups`);
+  }
+
+  if (!groupId || !body) {
+    redirect(`/${locale}/app/groups/${groupId}?error=message-send-failed`);
+  }
+
+  const { error } = await supabase.from("messages").insert({
+    sender_id: user.id,
+    group_id: groupId,
+    body,
+  });
+
+  if (error) {
+    redirect(`/${locale}/app/groups/${groupId}?error=message-send-failed`);
+  }
+
+  revalidatePath(`/${locale}/app/groups/${groupId}`);
+  redirect(`/${locale}/app/groups/${groupId}?status=message-sent`);
+}
+
+export async function sendChallengeMessage(formData: FormData) {
+  const locale = getLocale(formData);
+  const challengeId = getChallengeId(formData);
+  const body = truncate(firstString(formData.get("body")), maxMessageLength);
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app`);
+  }
+
+  if (!challengeId || !body) {
+    redirect(workspaceErrorUrl(locale, challengeId, "message-send-failed"));
+  }
+
+  const { error } = await supabase.from("messages").insert({
+    sender_id: user.id,
+    challenge_id: challengeId,
+    body,
+  });
+
+  if (error) {
+    redirect(workspaceErrorUrl(locale, challengeId, "message-send-failed"));
+  }
+
+  revalidatePath(`/${locale}/app/challenges/${challengeId}`);
+  redirect(workspaceStatusUrl(locale, challengeId, "message-sent"));
+}
+
+export async function softDeleteMessage(formData: FormData) {
+  const locale = getLocale(formData);
+  const messageId = getMessageId(formData);
+  const groupId = getGroupId(formData);
+  const challengeId = getChallengeId(formData);
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app`);
+  }
+
+  const destination = groupId
+    ? `/${locale}/app/groups/${groupId}`
+    : `/${locale}/app/challenges/${challengeId}`;
+
+  if (!messageId || (!groupId && !challengeId)) {
+    redirect(`${destination}?error=message-delete-failed`);
+  }
+
+  const { error } = await supabase
+    .from("messages")
+    .update({ is_deleted: true })
+    .eq("id", messageId);
+
+  if (error) {
+    redirect(`${destination}?error=message-delete-failed`);
+  }
+
+  revalidatePath(destination);
+  redirect(`${destination}?status=message-deleted`);
+}
+
+export async function markNotificationRead(formData: FormData) {
+  const locale = getLocale(formData);
+  const notificationId = firstString(formData.get("notificationId"));
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/notifications`);
+  }
+
+  if (!notificationId) {
+    redirect(`/${locale}/app/notifications?error=notification-read-failed`);
+  }
+
+  const { error } = await supabase
+    .from("notifications")
+    .update({ read_at: new Date().toISOString() })
+    .eq("id", notificationId)
+    .eq("user_id", user.id);
+
+  if (error) {
+    redirect(`/${locale}/app/notifications?error=notification-read-failed`);
+  }
+
+  revalidatePath(`/${locale}/app/notifications`);
+  redirect(`/${locale}/app/notifications?status=notification-read`);
+}
+
+export async function markAllNotificationsRead(formData: FormData) {
+  const locale = getLocale(formData);
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/notifications`);
+  }
+
+  const { error } = await supabase
+    .from("notifications")
+    .update({ read_at: new Date().toISOString() })
+    .eq("user_id", user.id)
+    .is("read_at", null);
+
+  if (error) {
+    redirect(`/${locale}/app/notifications?error=notification-read-failed`);
+  }
+
+  revalidatePath(`/${locale}/app/notifications`);
+  redirect(`/${locale}/app/notifications?status=all-notifications-read`);
 }

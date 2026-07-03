@@ -81,7 +81,7 @@ Do not print `.env.local` values.
 
 ## Current Deployment Scope
 
-Current app includes localized public pages, a guest localStorage workspace, Supabase helpers, local migrations, Supabase Auth UI/actions, protected dashboard, guest import, profile settings, cloud challenge creation, saved challenge workspace, friends, groups, invitations, roles, and explicit group challenge links. It does not include messaging, notifications, admin, payments, email sending, AI, or scheduled jobs.
+Current app includes localized public pages, a guest localStorage workspace, Supabase helpers, local migrations, Supabase Auth UI/actions, protected dashboard, guest import, profile settings, cloud challenge creation, saved challenge workspace, friends, groups, invitations, roles, explicit group challenge links, group/challenge messages, private notifications, and basic activity events. It does not include admin, payments, email sending, AI, scheduled jobs, or realtime subscriptions.
 
 ## Production Checklist
 
@@ -94,5 +94,6 @@ Current app includes localized public pages, a guest localStorage workspace, Sup
 - Supabase RLS policies are tested before any private data ships.
 - Dashboard challenge reads/writes and guest import are tested against Supabase RLS.
 - Friend/group RLS, group invitation flows, group challenge access, and the 100-member limit are tested against Supabase.
+- Message RLS, notification privacy, activity visibility, and message soft-delete are tested against Supabase.
 - Auth redirect URLs match production domain before real auth launches.
 - Support contact remains `support@noproblemo.tech` unless intentionally changed.

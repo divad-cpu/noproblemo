@@ -9,6 +9,8 @@ import {
   linkChallengeToGroup,
   removeGroupMember,
   respondGroupInvitation,
+  sendGroupMessage,
+  softDeleteMessage,
   unlinkChallengeFromGroup,
   updateGroup,
   updateGroupMemberRole,
@@ -22,6 +24,8 @@ type GroupDetailPageProps = {
 type ProfileResult =
   Database["public"]["Functions"]["search_profiles"]["Returns"][number];
 type Member = Database["public"]["Tables"]["group_members"]["Row"];
+type Message = Database["public"]["Tables"]["messages"]["Row"];
+type ActivityEvent = Database["public"]["Tables"]["activity_events"]["Row"];
 
 const roles: GroupRole[] = ["owner", "admin", "member", "viewer"];
 const inviteRoles: Exclude<GroupRole, "owner">[] = ["admin", "member", "viewer"];
@@ -56,6 +60,16 @@ function profileName(profile: ProfileResult | null, fallback: string) {
   return profile?.display_name || fallback;
 }
 
+function formatDateTime(value: string, locale: Locale) {
+  return new Intl.DateTimeFormat(locale, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(value));
+}
+
 export default async function GroupDetailPage({
   params,
   searchParams,
@@ -85,6 +99,8 @@ export default async function GroupDetailPage({
     { data: groupChallenges },
     { data: ownChallenges },
     { data: inviteResults },
+    { data: messages },
+    { data: activityEvents },
   ] = await Promise.all([
     supabase.from("groups").select("*").eq("id", id).maybeSingle(),
     supabase
@@ -112,6 +128,18 @@ export default async function GroupDetailPage({
     inviteSearch
       ? supabase.rpc("search_profiles", { search_term: inviteSearch })
       : Promise.resolve({ data: [] as ProfileResult[] }),
+    supabase
+      .from("messages")
+      .select("*")
+      .eq("group_id", id)
+      .order("created_at", { ascending: false })
+      .limit(20),
+    supabase
+      .from("activity_events")
+      .select("*")
+      .eq("group_id", id)
+      .order("created_at", { ascending: false })
+      .limit(8),
   ]);
 
   if (!group) {
@@ -128,6 +156,12 @@ export default async function GroupDetailPage({
   const isOwner = myMember.role === "owner";
   const profiles = await getProfileMap(supabase, [
     ...safeMembers.map((member) => member.user_id),
+    ...(messages ?? []).flatMap((message) =>
+      message.sender_id ? [message.sender_id] : [],
+    ),
+    ...(activityEvents ?? []).flatMap((event) =>
+      event.actor_id ? [event.actor_id] : [],
+    ),
     ...(invitations ?? []).flatMap((invitation) => [
       invitation.invitee_id,
       invitation.inviter_id,
@@ -143,6 +177,8 @@ export default async function GroupDetailPage({
   const linkableChallenges = (ownChallenges ?? []).filter(
     (challenge) => !linkedChallengeIds.includes(challenge.id),
   );
+  const safeMessages = (messages ?? []) as Message[];
+  const safeActivityEvents = (activityEvents ?? []) as ActivityEvent[];
 
   return (
     <div className="grid gap-6">
@@ -204,6 +240,89 @@ export default async function GroupDetailPage({
           </form>
         </section>
       ) : null}
+
+      <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+        <h2 className="text-2xl font-semibold text-[#22211e]">
+          {t("messages.title")}
+        </h2>
+        <p className="mt-2 text-sm leading-6 text-[#55544f]">
+          {t("messages.body")}
+        </p>
+        {myMember.role !== "viewer" ? (
+          <form action={sendGroupMessage} className="mt-5 grid gap-3">
+            <input type="hidden" name="locale" value={locale} />
+            <input type="hidden" name="groupId" value={group.id} />
+            <textarea
+              name="body"
+              required
+              maxLength={2000}
+              rows={3}
+              placeholder={t("messages.placeholder")}
+              className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
+            />
+            <button className="inline-flex min-h-11 items-center justify-center rounded-md bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]">
+              {t("messages.send")}
+            </button>
+          </form>
+        ) : (
+          <p className="mt-4 rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4 text-sm leading-6 text-[#55544f]">
+            {t("messages.viewerReadOnly")}
+          </p>
+        )}
+        <div className="mt-5 grid gap-3">
+          {safeMessages.length > 0 ? (
+            safeMessages.map((message) => (
+              <MessageRow
+                key={message.id}
+                message={message}
+                locale={locale}
+                groupId={group.id}
+                author={profileName(
+                  message.sender_id
+                    ? profiles.get(message.sender_id) ?? null
+                    : null,
+                  t("messages.unknownSender"),
+                )}
+                t={t}
+                canDelete={
+                  message.sender_id === user.id || ["owner", "admin"].includes(myMember.role)
+                }
+              />
+            ))
+          ) : (
+            <p className="text-sm leading-6 text-[#55544f]">
+              {t("messages.empty")}
+            </p>
+          )}
+        </div>
+      </section>
+
+      <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+        <h2 className="text-2xl font-semibold text-[#22211e]">
+          {t("activity.title")}
+        </h2>
+        <div className="mt-5 grid gap-3">
+          {safeActivityEvents.length > 0 ? (
+            safeActivityEvents.map((event) => (
+              <div
+                key={event.id}
+                className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4"
+              >
+                <p className="font-semibold text-[#22211e]">
+                  {t(`activity.types.${event.type}`)}
+                </p>
+                <p className="mt-1 text-sm text-[#706f68]">
+                  {formatDateTime(event.created_at, locale)}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p className="text-sm leading-6 text-[#55544f]">
+              {t("activity.empty")}
+            </p>
+          )}
+        </div>
+      </section>
 
       <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
         <h2 className="text-2xl font-semibold text-[#22211e]">
@@ -402,6 +521,48 @@ export default async function GroupDetailPage({
         ) : null}
       </section>
     </div>
+  );
+}
+
+function MessageRow({
+  message,
+  locale,
+  groupId,
+  author,
+  t,
+  canDelete,
+}: {
+  message: Message;
+  locale: Locale;
+  groupId: string;
+  author: string;
+  t: Awaited<ReturnType<typeof getTranslations>>;
+  canDelete: boolean;
+}) {
+  return (
+    <article className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <p className="font-semibold text-[#22211e]">{author}</p>
+          <p className="text-sm text-[#706f68]">
+            {formatDateTime(message.created_at, locale)}
+          </p>
+        </div>
+        {canDelete && !message.is_deleted ? (
+          <form action={softDeleteMessage}>
+            <input type="hidden" name="locale" value={locale} />
+            <input type="hidden" name="groupId" value={groupId} />
+            <input type="hidden" name="messageId" value={message.id} />
+            <button className="text-sm font-semibold text-[#7a2f1d] underline-offset-4 hover:underline">
+              {t("messages.delete")}
+            </button>
+          </form>
+        ) : null}
+      </div>
+      <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-[#373632]">
+        {message.is_deleted ? t("messages.deleted") : message.body}
+      </p>
+    </article>
   );
 }
 

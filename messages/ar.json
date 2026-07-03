@@ -226,7 +226,8 @@
       "dashboard": "Dashboard",
       "settings": "Settings",
       "friends": "Friends",
-      "groups": "Groups"
+      "groups": "Groups",
+      "notifications": "Notifications"
     },
     "eyebrow": "Protected area",
     "title": "Authentication is ready.",
@@ -302,7 +303,25 @@
       "friendRequests": "Incoming friend requests",
       "groupInvitations": "Group invitations",
       "groups": "Groups",
-      "noGroups": "No groups yet."
+      "noGroups": "No groups yet.",
+      "notifications": "Unread notifications"
+    },
+    "activity": {
+      "title": "Recent activity",
+      "empty": "No recent activity yet.",
+      "types": {
+        "challenge_created": "Challenge created",
+        "challenge_updated": "Challenge updated",
+        "challenge_linked_to_group": "Challenge linked to group",
+        "group_created": "Group created",
+        "group_updated": "Group updated",
+        "group_member_joined": "Group member joined",
+        "group_member_removed": "Group member removed",
+        "group_message_created": "Group message created",
+        "challenge_message_created": "Challenge message created",
+        "task_updated": "Task updated",
+        "solution_updated": "Solution updated"
+      }
     }
   },
   "CreateChallenge": {
@@ -503,7 +522,9 @@
       "solution-saved": "Solution was saved.",
       "solution-deleted": "Solution was deleted.",
       "task-saved": "Task was saved.",
-      "task-deleted": "Task was deleted."
+      "task-deleted": "Task was deleted.",
+      "message-sent": "Message sent.",
+      "message-deleted": "Message removed."
     },
     "errorMessages": {
       "details-missing-title": "Add a title before saving challenge details.",
@@ -515,7 +536,9 @@
       "solution-delete-failed": "Solution could not be deleted.",
       "task-missing-title": "Add a task title before saving.",
       "task-save-failed": "Task could not be saved.",
-      "task-delete-failed": "Task could not be deleted."
+      "task-delete-failed": "Task could not be deleted.",
+      "message-send-failed": "Message could not be sent.",
+      "message-delete-failed": "Message could not be removed."
     },
     "export": {
       "title": "Markdown export",
@@ -542,6 +565,34 @@
       "position": "Position",
       "yes": "Yes",
       "no": "No"
+    },
+    "messages": {
+      "title": "Discussion",
+      "body": "Keep a simple challenge discussion with people who can access this challenge.",
+      "placeholder": "Write a short message.",
+      "send": "Send message",
+      "empty": "No messages yet.",
+      "delete": "Remove",
+      "deleted": "This message was removed.",
+      "unknownSender": "Unknown sender",
+      "viewerReadOnly": "You can read this discussion, but your current role cannot send messages."
+    },
+    "activity": {
+      "title": "Activity",
+      "empty": "No activity yet.",
+      "types": {
+        "challenge_created": "Challenge created",
+        "challenge_updated": "Challenge updated",
+        "challenge_linked_to_group": "Challenge linked to group",
+        "group_created": "Group created",
+        "group_updated": "Group updated",
+        "group_member_joined": "Group member joined",
+        "group_member_removed": "Group member removed",
+        "group_message_created": "Group message created",
+        "challenge_message_created": "Challenge message created",
+        "task_updated": "Task updated",
+        "solution_updated": "Solution updated"
+      }
     }
   },
   "Friends": {
@@ -684,7 +735,9 @@
       "group-member-removed": "Member removed.",
       "group-role-updated": "Member role updated.",
       "group-challenge-linked": "Challenge linked to group.",
-      "group-challenge-unlinked": "Challenge unlinked from group."
+      "group-challenge-unlinked": "Challenge unlinked from group.",
+      "message-sent": "Message sent.",
+      "message-deleted": "Message removed."
     },
     "errors": {
       "group-save-failed": "Group could not be saved.",
@@ -692,7 +745,68 @@
       "group-member-remove-failed": "Member could not be removed.",
       "group-role-update-failed": "Member role could not be updated.",
       "group-challenge-link-failed": "Challenge could not be linked.",
-      "group-challenge-unlink-failed": "Challenge could not be unlinked."
+      "group-challenge-unlink-failed": "Challenge could not be unlinked.",
+      "message-send-failed": "Message could not be sent.",
+      "message-delete-failed": "Message could not be removed."
+    },
+    "messages": {
+      "title": "Group messages",
+      "body": "Share short updates with accepted group members.",
+      "placeholder": "Write a short group message.",
+      "send": "Send message",
+      "empty": "No group messages yet.",
+      "delete": "Remove",
+      "deleted": "This message was removed.",
+      "unknownSender": "Unknown sender",
+      "viewerReadOnly": "Viewers can read group messages but cannot send messages."
+    },
+    "activity": {
+      "title": "Group activity",
+      "empty": "No group activity yet.",
+      "types": {
+        "challenge_created": "Challenge created",
+        "challenge_updated": "Challenge updated",
+        "challenge_linked_to_group": "Challenge linked to group",
+        "group_created": "Group created",
+        "group_updated": "Group updated",
+        "group_member_joined": "Group member joined",
+        "group_member_removed": "Group member removed",
+        "group_message_created": "Group message created",
+        "challenge_message_created": "Challenge message created",
+        "task_updated": "Task updated",
+        "solution_updated": "Solution updated"
+      }
+    }
+  },
+  "Notifications": {
+    "eyebrow": "Notifications",
+    "title": "Notifications",
+    "body": "Private updates for your account, groups, and challenges.",
+    "unread": "Unread",
+    "read": "Read",
+    "emptyUnread": "No unread notifications.",
+    "emptyRead": "No read notifications yet.",
+    "markRead": "Mark as read",
+    "markAllRead": "Mark all as read",
+    "openGroup": "Open group",
+    "openChallenge": "Open challenge",
+    "status": {
+      "notification-read": "Notification marked as read.",
+      "all-notifications-read": "All notifications marked as read."
+    },
+    "errors": {
+      "notification-read-failed": "Notification could not be updated."
+    },
+    "types": {
+      "friend_request": "Friend request",
+      "friend_request_accepted": "Friend request accepted",
+      "group_invitation": "Group invitation",
+      "group_invitation_accepted": "Group invitation accepted",
+      "group_invitation_declined": "Group invitation declined",
+      "group_message": "Group message",
+      "challenge_message": "Challenge message",
+      "challenge_updated": "Challenge updated",
+      "group_updated": "Group updated"
     }
   }
 }

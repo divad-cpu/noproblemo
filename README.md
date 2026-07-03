@@ -1,21 +1,20 @@
 # NoProblemo
 
-NoProblemo is a Next.js App Router project prepared for incremental product development. Phase 8 adds the friends and groups foundation.
+NoProblemo is a Next.js App Router project prepared for incremental product development. Phase 9 adds messaging, notifications, and activity.
 
 ## Current Phase
 
-Phase 8 is complete when friend requests, friendships, groups, group invitations, roles, group challenge links, documentation, linting, type checking, and production build all pass.
+Phase 9 is complete when group messages, challenge messages, private notifications, activity events, documentation, linting, type checking, and production build all pass.
 
-Not included in Phase 8:
+Not included in Phase 9:
 
-- Messaging
-- Notifications
 - Admin
 - Payments
 - AI features
 - Resend email
 - Vercel Cron
 - Real collaboration
+- Advanced realtime collaboration
 
 ## Stack
 
@@ -63,6 +62,7 @@ Arabic (`ar`) and Urdu (`ur`) render with `dir="rtl"`. All other supported local
 - `/[locale]/app/groups` protected groups list
 - `/[locale]/app/groups/new` protected group creation
 - `/[locale]/app/groups/[id]` protected group detail, invitations, members, and linked challenges
+- `/[locale]/app/notifications` protected private notifications page
 - `/[locale]/app/settings` protected profile/settings page
 
 ## Guest Mode
@@ -94,6 +94,12 @@ Logged-in users can send friend requests, accept or decline incoming requests, c
 Logged-in users can create private groups, invite users, accept or decline group invitations, manage basic roles, and link selected owned challenges to a group. Group challenge access is explicit through `group_challenges` and protected by Supabase RLS. The 100-member group limit is enforced in the Phase 8 migration.
 
 The limited profile search RPC returns only `id`, `display_name`, and `avatar_url`; it does not expose emails or `auth.users`.
+
+## Messaging, Notifications And Activity
+
+Logged-in group members can read group messages. Group owners, admins, and members can send group messages; viewers are read-only. Logged-in challenge owners and allowed group collaborators can read and send challenge discussion messages according to RLS.
+
+Notifications are private to the recipient and appear under `/[locale]/app/notifications`. Activity events are visible only to users who can access the related group or challenge. Phase 9 uses server-rendered refresh after message actions; Supabase Realtime remains a future enhancement.
 
 ## Local Setup
 

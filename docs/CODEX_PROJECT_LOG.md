@@ -120,3 +120,22 @@ Phase 8 friends and groups:
 - Updated all eleven message catalogs with Phase 8 UI keys.
 - Did not implement messaging, notifications, activity feed, admin, payments, AI, email automation, Resend, Vercel Cron, public sharing, voting, comments, or realtime collaboration.
 - Validation passed: `npm run lint`, `npm run typecheck`, and `npm run build`.
+
+Phase 9 messaging, notifications and activity:
+
+- Inspected required handoff docs, package scripts, App Router routes, Supabase helpers/types, Phase 8 migration constraints, message catalogs, and installed Next.js server action/form/data security docs.
+- Added `supabase/migrations/20260703220000_phase9_messaging_notifications_activity.sql`.
+- Added `messages`, `notifications`, and `activity_events`.
+- Added helper functions for challenge read/participation checks.
+- Added database-triggered notifications for friend requests, group invitations, and messages.
+- Added database-triggered activity for groups, group members, group challenge links, and messages.
+- Added RLS policies for group messages, challenge messages, private notifications, and authorized activity visibility.
+- Updated manual database types for Phase 9 tables.
+- Added protected `/[locale]/app/notifications` page.
+- Added group messages and activity to `/[locale]/app/groups/[id]`.
+- Added challenge discussion messages and activity to `/[locale]/app/challenges/[id]`.
+- Added server actions for sending messages, soft-deleting messages, and marking notifications read.
+- Updated protected navigation and dashboard previews for notifications and recent activity.
+- Updated all eleven message catalogs with Phase 9 UI keys.
+- Did not implement admin, payments, AI, email automation, Resend, Vercel Cron, public sharing, voting, comments, attachments, read receipts, typing indicators, reactions, threads, calendar integration, PDF export, or realtime subscriptions.
+- Validation passed: `npm run lint`, `npm run typecheck`, and `npm run build`.
