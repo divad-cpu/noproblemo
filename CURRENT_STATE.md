@@ -14,8 +14,9 @@ NoProblemo has completed:
 - Phase 4: Supabase foundation
 - Phase 5: authentication
 - Phase 6: dashboard and guest import
+- Phase 7: challenge workspace
 
-Phase 7 Challenge workspace is next. Friends, groups, messaging, notifications, admin, payments, AI, email automation, Resend, and Vercel Cron remain future phases.
+Phase 8 Friends and groups is next. Messaging, notifications, admin, payments, AI, email automation, Resend, and Vercel Cron remain future phases.
 
 ## Already Implemented
 
@@ -34,10 +35,16 @@ Phase 7 Challenge workspace is next. Friends, groups, messaging, notifications, 
 - Logout route at `/[locale]/auth/logout`
 - Logged-in dashboard at `/[locale]/app`
 - Minimal cloud challenge creation at `/[locale]/app/challenges/new`
-- Saved challenge continuation placeholder at `/[locale]/app/challenges/[id]`
+- Saved challenge workspace at `/[locale]/app/challenges/[id]`
 - Profile/settings page at `/[locale]/app/settings`
 - Guest draft import from localStorage to Supabase challenges and challenge sections
 - Profile display name and preferred locale updates
+- Seven-step saved challenge workflow
+- Editable challenge details and status
+- Editable challenge sections
+- Possible solution create/edit/delete with pros, cons, risk, effort, impact, resources, and priority
+- Task/action create/edit/delete with completion, responsible person, deadline, and position
+- Markdown copy/download export for saved challenges
 - Google and Apple OAuth start actions prepared through Supabase Auth
 - Shared language switcher and footer
 - Guest localStorage draft persistence under `noproblemo.guestWorkspace.v1`
@@ -55,7 +62,7 @@ Phase 7 Challenge workspace is next. Friends, groups, messaging, notifications, 
 
 ## Partially Implemented
 
-- Problem-solving workflow exists as guest browser-local form fields, imported challenge sections, and planned full workspace tables. Full editable saved workspace is not implemented yet.
+- Problem-solving workflow exists as guest browser-local form fields and as an editable saved workspace for authenticated challenge owners.
 - Google and Apple login buttons are present, but they require Supabase provider setup and external provider configuration before they work in production.
 - Supabase schema exists as a local migration but has not been verified against the live Supabase project in this task.
 - Supabase helpers are used by auth actions, callback/logout handlers, auth-aware landing links, and the protected app layout.
@@ -64,11 +71,10 @@ Phase 7 Challenge workspace is next. Friends, groups, messaging, notifications, 
 
 ## Not Yet Implemented
 
-- Full saved challenge workspace
 - Friends/invites
 - Groups
 - Simple messaging
-- Admin/settings
+- Admin panel
 - Real-time collaboration
 - AI features
 - Payments
@@ -91,7 +97,8 @@ Phase 7 Challenge workspace is next. Friends, groups, messaging, notifications, 
 - `app/[locale]/app/actions.ts`: server actions for challenge creation, guest import, and profile updates.
 - `app/[locale]/app/_components/guest-import-card.tsx`: client-side localStorage detection and import UI.
 - `app/[locale]/app/challenges/new/page.tsx`: minimal protected create challenge page.
-- `app/[locale]/app/challenges/[id]/page.tsx`: minimal protected saved challenge continuation placeholder.
+- `app/[locale]/app/challenges/[id]/page.tsx`: protected saved challenge workspace.
+- `app/[locale]/app/_components/challenge-markdown-export.tsx`: client-side Markdown copy/download export.
 - `app/[locale]/app/settings/page.tsx`: protected profile/settings page.
 - `app/[locale]/_components/auth-status.tsx`: auth-aware landing links.
 - `i18n/routing.ts`: supported locales and RTL logic.
@@ -108,9 +115,8 @@ Phase 7 Challenge workspace is next. Friends, groups, messaging, notifications, 
 
 ## Known Issues
 
-- Full Phase 7 saved challenge workspace is not implemented yet.
 - Phase 4 migration needs to be applied and tested in Supabase.
-- RLS policies and profile trigger need verification with authenticated users.
+- RLS policies, profile trigger, and workspace writes need verification with authenticated users.
 - Google and Apple OAuth require provider configuration in Supabase, Google Cloud, and Apple Developer.
 - Guest drafts are browser-local and can be lost if localStorage is cleared.
 - Non-English translations need human review.
@@ -119,7 +125,7 @@ Phase 7 Challenge workspace is next. Friends, groups, messaging, notifications, 
 
 ## Current Risks
 
-- Future agents might mistake the minimal challenge detail page for the full workspace; it is only a Phase 6 continuation placeholder.
+- Future agents must not add friends/groups/messaging before Phase 8 is explicitly scoped.
 - Future agents might use service role keys in frontend code; do not do this.
 - RLS policies are written but still need live/local Supabase verification.
 - User-generated problem content may be sensitive; privacy must be designed into auth and dashboard phases.
@@ -127,20 +133,19 @@ Phase 7 Challenge workspace is next. Friends, groups, messaging, notifications, 
 
 ## Next Recommended Phase
 
-Phase 7: Challenge workspace.
+Phase 8: Friends and groups.
 
 Recommended scope:
 
-- Seven-step problem-solving workflow
-- Editable saved challenge sections
-- Possible solutions
-- Pros and cons
-- Risk, effort, and impact
-- Tasks/actions
-- Final recommendation
-- Markdown export
+- Friend requests
+- Accept/decline flow
+- Groups
+- Group invitations
+- Group roles
+- 100-member group limit
+- Group challenge access
 
-Do not implement friends, groups, messaging, notifications, or admin in Phase 7 unless explicitly scoped.
+Do not implement messaging, notifications, or admin in Phase 8 unless explicitly scoped.
 
 ## Validation Commands
 
@@ -169,3 +174,9 @@ Validation for Phase 6:
 - `npm run lint`: passed on 2026-07-03.
 - `npm run typecheck`: passed on 2026-07-03.
 - `npm run build`: passed on 2026-07-03 after rerunning with escalation for the known Turbopack sandbox port-bind issue.
+
+Validation for Phase 7:
+
+- `npm run lint`: passed on 2026-07-03.
+- `npm run typecheck`: passed on 2026-07-03.
+- `npm run build`: passed on 2026-07-03.

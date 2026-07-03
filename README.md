@@ -1,14 +1,17 @@
 # NoProblemo
 
-NoProblemo is a Next.js App Router project prepared for incremental product development. Phase 6 adds the first protected dashboard, guest import, profile settings, and minimal cloud challenge creation.
+NoProblemo is a Next.js App Router project prepared for incremental product development. Phase 7 adds the protected saved challenge workspace.
 
 ## Current Phase
 
-Phase 6 is complete when the protected dashboard, guest import, profile settings, minimal challenge creation, documentation, linting, type checking, and production build all pass. The full challenge workspace remains intentionally deferred.
+Phase 7 is complete when the protected challenge workspace, section editing, solution editing, task editing, Markdown export, documentation, linting, type checking, and production build all pass.
 
-Not included in Phase 6:
+Not included in Phase 7:
 
-- Full seven-step challenge workspace
+- Friends and groups
+- Messaging
+- Notifications
+- Admin
 - Payments
 - AI features
 - Resend email
@@ -56,7 +59,7 @@ Arabic (`ar`) and Urdu (`ur`) render with `dir="rtl"`. All other supported local
 - `/[locale]/auth/logout` logout handler
 - `/[locale]/app` protected dashboard
 - `/[locale]/app/challenges/new` minimal protected challenge creation
-- `/[locale]/app/challenges/[id]` protected challenge continuation placeholder
+- `/[locale]/app/challenges/[id]` protected saved challenge workspace
 - `/[locale]/app/settings` protected profile/settings page
 
 ## Guest Mode
@@ -73,9 +76,11 @@ Email login/signup uses Supabase Auth. Google and Apple login buttons are prepar
 
 The Phase 4 database trigger is expected to create `profiles` rows after signup, but it still needs verification after the migration is applied to the real Supabase project.
 
-## Dashboard And Settings
+## Dashboard, Workspace And Settings
 
-The dashboard lists the authenticated user's saved challenges through Supabase RLS, shows empty/error states, and provides a minimal create challenge action. The challenge detail page is only a continuation placeholder until Phase 7.
+The dashboard lists the authenticated user's saved challenges through Supabase RLS, shows empty/error states, and provides a minimal create challenge action.
+
+The saved challenge workspace supports the seven-step problem-solving workflow, editable challenge sections, possible solutions, pros/cons, risk/effort/impact scoring, tasks/actions, final recommendation, summary, and Markdown copy/download export.
 
 Profile settings can update `display_name` and `preferred_locale`. The preferred locale is saved to `profiles.preferred_locale`; current route language still follows the URL until routing preference sync is added later.
 

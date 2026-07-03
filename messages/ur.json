@@ -357,5 +357,183 @@
     "errors": {
       "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies."
     }
+  },
+  "Workspace": {
+    "back": "Back to dashboard",
+    "eyebrow": "Challenge workspace",
+    "noDescription": "No short description yet.",
+    "updated": "Updated",
+    "sectionsTitle": "Problem-solving sections",
+    "sectionsBody": "Save the structured notes for this challenge. Missing rows are created safely when you save.",
+    "fields": {
+      "title": "Title",
+      "shortDescription": "Short description",
+      "status": "Status",
+      "none": "Not scored"
+    },
+    "statuses": {
+      "draft": "Draft",
+      "active": "Active",
+      "completed": "Completed",
+      "archived": "Archived"
+    },
+    "details": {
+      "title": "Challenge details",
+      "body": "Keep the basic challenge information current before working through the steps."
+    },
+    "workflow": {
+      "title": "Seven-step workflow",
+      "body": "Move through the steps at your own pace. Save sections, solutions, tasks, and conclusions as the work becomes clearer.",
+      "steps": {
+        "define": {
+          "title": "Define the problem",
+          "body": "Write the problem clearly and keep it narrow enough to solve."
+        },
+        "understand": {
+          "title": "Understand the situation",
+          "body": "Capture context, affected people, why it matters, and possible causes."
+        },
+        "brainstorm": {
+          "title": "Brainstorm possible solutions",
+          "body": "Add candidate solutions without judging them too early."
+        },
+        "evaluate": {
+          "title": "Evaluate pros and cons",
+          "body": "Compare benefits, downsides, risk, effort, and impact."
+        },
+        "choose": {
+          "title": "Choose the best solution",
+          "body": "Write the final recommendation or decision."
+        },
+        "action": {
+          "title": "Create an action plan",
+          "body": "Turn the recommendation into practical tasks."
+        },
+        "review": {
+          "title": "Review, learn, and improve",
+          "body": "Summarize the outcome and what should be improved next time."
+        }
+      }
+    },
+    "sections": {
+      "problem_title": {
+        "title": "Problem title",
+        "help": "State the problem in one clear sentence or short paragraph."
+      },
+      "short_description": {
+        "title": "Short description",
+        "help": "Add a concise explanation of what is happening."
+      },
+      "background_context": {
+        "title": "Background/context",
+        "help": "Describe the situation, history, constraints, and relevant facts."
+      },
+      "who_is_affected": {
+        "title": "Who is affected",
+        "help": "List people, teams, customers, users, or groups affected by the problem."
+      },
+      "why_it_matters": {
+        "title": "Why it matters",
+        "help": "Explain impact, urgency, risks, costs, or opportunities."
+      },
+      "possible_causes": {
+        "title": "Possible causes",
+        "help": "Capture likely causes, contributing factors, or assumptions to test."
+      },
+      "final_recommendation": {
+        "title": "Final recommendation",
+        "help": "Write the chosen solution and why it is the best option now."
+      },
+      "summary": {
+        "title": "Summary/review",
+        "help": "Summarize the conclusion, lessons learned, and next review point."
+      }
+    },
+    "solutions": {
+      "title": "Possible solutions",
+      "body": "Create, compare, rank, and refine candidate solutions. Scores are simple 1 to 5 values.",
+      "newTitle": "Add a possible solution",
+      "fields": {
+        "title": "Solution title",
+        "description": "Description",
+        "pros": "Pros",
+        "cons": "Cons",
+        "risk": "Risk",
+        "effort": "Effort",
+        "impact": "Impact",
+        "resourcesNeeded": "Resources needed",
+        "priority": "Priority/ranking"
+      }
+    },
+    "tasks": {
+      "title": "Tasks/actions",
+      "body": "Create practical next actions. Responsible person is plain text for now; no user assignment or notifications are included.",
+      "newTitle": "Add a task/action",
+      "fields": {
+        "title": "Task title",
+        "description": "Description",
+        "responsiblePerson": "Responsible person",
+        "deadline": "Deadline",
+        "completed": "Completed",
+        "position": "Position"
+      }
+    },
+    "actions": {
+      "saveDetails": "Save details",
+      "saveSections": "Save sections",
+      "saveSolution": "Save solution",
+      "addSolution": "Add solution",
+      "deleteSolution": "Delete solution",
+      "saveTask": "Save task",
+      "addTask": "Add task",
+      "deleteTask": "Delete task"
+    },
+    "statusMessages": {
+      "created": "Draft challenge was created.",
+      "details-saved": "Challenge details were saved.",
+      "sections-saved": "Challenge sections were saved.",
+      "solution-saved": "Solution was saved.",
+      "solution-deleted": "Solution was deleted.",
+      "task-saved": "Task was saved.",
+      "task-deleted": "Task was deleted."
+    },
+    "errorMessages": {
+      "details-missing-title": "Add a title before saving challenge details.",
+      "details-save-failed": "Challenge details could not be saved.",
+      "sections-save-failed": "Challenge sections could not be saved.",
+      "solution-missing-title": "Add a solution title before saving.",
+      "solution-invalid-score": "Use score values from 1 to 5.",
+      "solution-save-failed": "Solution could not be saved.",
+      "solution-delete-failed": "Solution could not be deleted.",
+      "task-missing-title": "Add a task title before saving.",
+      "task-save-failed": "Task could not be saved.",
+      "task-delete-failed": "Task could not be deleted."
+    },
+    "export": {
+      "title": "Markdown export",
+      "body": "Copy or download a readable Markdown summary of this challenge. PDF export remains a future feature.",
+      "copy": "Copy Markdown",
+      "download": "Download .md",
+      "copySuccess": "Markdown copied.",
+      "copyFallback": "Copy failed. You can use the download option instead.",
+      "downloadSuccess": "Markdown file prepared.",
+      "shortDescription": "Short description",
+      "status": "Status",
+      "solutions": "Possible solutions",
+      "tasks": "Tasks/actions",
+      "pros": "Pros",
+      "cons": "Cons",
+      "risk": "Risk",
+      "effort": "Effort",
+      "impact": "Impact",
+      "resourcesNeeded": "Resources needed",
+      "priority": "Priority/ranking",
+      "responsiblePerson": "Responsible person",
+      "deadline": "Deadline",
+      "completed": "Completed",
+      "position": "Position",
+      "yes": "Yes",
+      "no": "No"
+    }
   }
 }

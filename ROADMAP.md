@@ -95,34 +95,55 @@ Needs verification:
 - Verify guest import against a running Supabase project.
 - Verify profile trigger and profile update behavior after signup.
 
+### Phase 7: Challenge Workspace
+
+Status: implemented.
+
+- Protected saved challenge workspace
+- Seven-step problem-solving workflow
+- Editable challenge details and status
+- Editable challenge sections
+- Possible solution create/edit/delete
+- Pros, cons, risk, effort, impact, resources, and priority fields
+- Task/action create/edit/delete
+- Completed state, responsible person, deadline, and position fields
+- Final recommendation and summary sections
+- Markdown copy/download export
+
+Needs verification:
+
+- Apply and test the Phase 4 migration.
+- Verify workspace reads/writes with Supabase RLS.
+- Verify section create/update behavior with real Supabase data.
+- Verify solution/task CRUD against a running Supabase project.
+
 ## Current Phase
 
-Phase 6 dashboard and guest import has been implemented. Challenge workspace is next.
+Phase 7 challenge workspace has been implemented. Friends and groups are next.
 
 ## Next Recommended Phase
 
-### Phase 7: Challenge Workspace
+### Phase 8: Friends And Groups
 
 Recommended scope:
 
-- Seven-step problem-solving workflow
-- Editable challenge sections
-- Possible solutions
-- Pros and cons
-- Risk/effort/impact
-- Tasks/actions
-- Final recommendation
-- Markdown export
+- Friend requests
+- Accept/decline
+- Groups
+- Group invitations
+- Group roles
+- 100-member group limit
+- Group challenge access
 
 ## MVP Path
 
 1. Landing page: implemented.
 2. Authentication: implemented.
 3. Dashboard: implemented.
-4. Create and save a challenge: minimal create/list/import implemented; full workspace planned.
-5. Basic challenge workspace: guest-only implemented; saved workspace planned for Phase 7.
-6. Friends/invites: planned.
-7. Groups: planned.
+4. Create and save a challenge: implemented.
+5. Basic challenge workspace: implemented.
+6. Friends/invites: planned for Phase 8.
+7. Groups: planned for Phase 8.
 8. Simple messaging: planned.
 9. Basic admin/settings: planned.
 10. Deployment: Vercel works; hardening remains ongoing.

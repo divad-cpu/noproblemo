@@ -2,7 +2,7 @@
 
 ## Current Security Posture
 
-Phase 6 adds a protected dashboard, minimal cloud challenge creation, guest draft import, saved challenge continuation placeholder, and profile/settings updates on top of the Phase 5 auth foundation.
+Phase 7 adds the protected saved challenge workspace on top of the Phase 6 dashboard and Phase 5 auth foundation.
 
 Guest challenge drafts remain in browser localStorage until an authenticated user explicitly imports them from the dashboard.
 
@@ -51,8 +51,8 @@ These policies still need to be applied and tested in Supabase.
 - Messaging policies
 - Admin policies
 - Organization account policies
-- Full saved challenge workspace authorization checks
-- Server actions for editing full challenge sections, solutions, and tasks
+- Group challenge access policies
+- Messaging policies
 
 ## User Ownership Rules
 
@@ -73,6 +73,19 @@ Phase 6 dashboard operations use `lib/supabase/server.ts`, the public Supabase a
 - The client marks an imported local draft with `importedChallengeId` to avoid repeated imports from the same browser draft.
 - Duplicate prevention is browser-local in Phase 6 because no import fingerprint column exists in the Phase 4 schema.
 - Profile updates validate the preferred locale against the supported locale list and update only basic profile fields.
+
+## Challenge Workspace Security
+
+Phase 7 workspace operations use `lib/supabase/server.ts`, the public Supabase anon key, and request cookies. No service-role key is used.
+
+- The workspace page fetches `challenges` by `id` and `owner_id = auth.uid()`.
+- Missing or inaccessible challenges render a not-found state without revealing whether another user's challenge exists.
+- Every workspace server action re-checks the authenticated user and challenge ownership before writing.
+- Challenge details update only title, short description, and allowed status values.
+- Section saves use the existing `challenge_sections` table and create missing rows without deleting existing content unexpectedly.
+- Solution writes validate 1-to-5 risk, effort, and impact scores.
+- Task writes keep responsible person as plain text and do not assign real users.
+- Markdown export runs in the browser from already-authorized page data and does not call privileged APIs.
 
 ## Group Access Rules
 

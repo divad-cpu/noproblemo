@@ -25,10 +25,11 @@
 - `app/[locale]/auth/logout/route.ts`: logout handler.
 - `app/[locale]/app/layout.tsx`: protected app route boundary with server-side session check and app navigation.
 - `app/[locale]/app/page.tsx`: logged-in dashboard with profile summary, saved challenge lists, guest import prompt, and empty/error states.
-- `app/[locale]/app/actions.ts`: server actions for creating draft challenges, importing guest drafts, and updating profile settings.
+- `app/[locale]/app/actions.ts`: server actions for creating draft challenges, importing guest drafts, updating profile settings, editing workspace sections, managing solutions, and managing tasks.
 - `app/[locale]/app/_components/guest-import-card.tsx`: client component that detects the existing guest localStorage draft and submits it for server-side import.
+- `app/[locale]/app/_components/challenge-markdown-export.tsx`: client component for Markdown copy/download export.
 - `app/[locale]/app/challenges/new/page.tsx`: minimal protected cloud challenge creation page.
-- `app/[locale]/app/challenges/[id]/page.tsx`: minimal protected saved challenge continuation page; full workspace remains Phase 7.
+- `app/[locale]/app/challenges/[id]/page.tsx`: protected saved challenge workspace with sections, solutions, tasks, and Markdown export.
 - `app/[locale]/app/settings/page.tsx`: protected profile/settings page for display name and preferred locale.
 - `app/[locale]/_components/auth-status.tsx`: auth-aware landing links.
 - `app/[locale]/_components/language-switcher.tsx`: locale switcher.
@@ -56,7 +57,7 @@ No shared top-level `components/` directory currently exists. Add it only when s
 - `/[locale]/auth/logout` logout route handler.
 - `/[locale]/app` protected dashboard.
 - `/[locale]/app/challenges/new` minimal protected create challenge page.
-- `/[locale]/app/challenges/[id]` minimal protected saved challenge continuation page.
+- `/[locale]/app/challenges/[id]` protected saved challenge workspace.
 - `/[locale]/app/settings` protected profile/settings page.
 
 Supported locales are `en`, `zh-CN`, `hi`, `es`, `ar`, `fr`, `bn`, `pt-BR`, `id`, `ur`, and `nb`. Arabic and Urdu use `dir="rtl"`.
@@ -100,7 +101,7 @@ Implemented in Phase 5:
 
 Google and Apple OAuth flows are prepared through Supabase Auth provider starts, but they require external provider configuration before production use.
 
-Dashboard and guest import were added in Phase 6. Full challenge workspace remains Phase 7.
+Dashboard and guest import were added in Phase 6. The saved challenge workspace was added in Phase 7.
 
 ## Data Flow
 
@@ -115,11 +116,16 @@ Current data flow:
 - Guest import creates a private draft `challenges` row and related `challenge_sections` rows through the authenticated Supabase session.
 - Minimal create challenge creates a private draft `challenges` row.
 - Profile settings update `profiles.display_name` and `profiles.preferred_locale`.
+- Workspace saves challenge title, short description, and status to `challenges`.
+- Workspace saves structured text to `challenge_sections`, creating missing section rows when needed.
+- Workspace creates, edits, and deletes possible solutions in `challenge_solutions`.
+- Workspace creates, edits, completes, and deletes tasks/actions in `challenge_tasks`.
+- Markdown export is generated client-side from server-fetched challenge data.
 
 Planned data flow:
 
-- Phase 7: editable saved challenge workspace using the Phase 4 challenge tables through Supabase RLS.
-- Later: friends, groups, invites, and messaging policies.
+- Phase 8: friends, groups, invites, roles, and group challenge access.
+- Later: messaging policies.
 
 ## Deployment Direction
 

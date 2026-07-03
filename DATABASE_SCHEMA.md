@@ -190,11 +190,27 @@ Guest import maps the existing localStorage draft key `noproblemo.guestWorkspace
 
 The imported challenge title is derived from the first line of `problem`, with a fallback title. Duplicate prevention is marked in the browser localStorage draft with `importedChallengeId`; a database-level import fingerprint is not implemented.
 
+## Phase 7 Workspace Notes
+
+No new schema migration was added in Phase 7.
+
+The saved challenge workspace uses existing tables:
+
+- `challenges` for title, short description, and status.
+- `challenge_sections` for problem definition, context, affected people, importance, causes, final recommendation, and summary.
+- `challenge_solutions` for possible solutions, pros, cons, risk, effort, impact, resources needed, and priority/ranking.
+- `challenge_tasks` for tasks/actions, responsible person, deadline, completed state, and position.
+
+Because `challenge_sections` has no unique constraint on `(challenge_id, section_key)`, Phase 7 saves sections by selecting existing rows, updating the first matching row for each section key, and inserting missing section rows. It does not delete extra duplicate rows automatically.
+
+Markdown export is generated from the same authorized workspace data and does not require a new table.
+
 ## Needs Verification
 
 - Apply migration in local Supabase and/or linked Supabase project.
 - Test profile trigger after signup.
 - Test every RLS policy with authenticated users.
 - Test Phase 6 dashboard reads, create challenge, profile update, and guest import against a running Supabase project.
+- Test Phase 7 workspace section saves, solution CRUD, task CRUD, status updates, and Markdown export against a running Supabase project.
 - Confirm whether the challenge section list is sufficient for the MVP saved workspace.
 - Confirm whether organization accounts need schema support before MVP launch.

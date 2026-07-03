@@ -31,10 +31,12 @@ Implemented:
 - Supabase auth callback and logout routes.
 - Protected dashboard at `/[locale]/app`.
 - Minimal challenge creation at `/[locale]/app/challenges/new`.
-- Minimal saved challenge continuation page at `/[locale]/app/challenges/[id]`.
+- Saved challenge workspace at `/[locale]/app/challenges/[id]`.
 - Profile/settings page at `/[locale]/app/settings`.
 - Guest import from `noproblemo.guestWorkspace.v1` to Supabase `challenges` and `challenge_sections`.
 - Display name and preferred locale profile settings.
+- Seven-step problem-solving workflow.
+- Editable challenge sections, solutions, tasks, final recommendation, summary, and Markdown export.
 - Google and Apple OAuth provider start actions prepared through Supabase Auth.
 - Supabase migration for profiles and core challenge tables.
 - Owner-only RLS policies for Phase 4 tables.
@@ -43,9 +45,8 @@ Implemented:
 
 Not implemented:
 
-- Full saved challenge workspace.
 - Friends, invites, groups, messaging.
-- Admin/settings.
+- Admin panel.
 - AI, payments, email sending, cron.
 
 ## Route Map
@@ -60,7 +61,7 @@ Not implemented:
 - `/[locale]/auth/logout`: logout handler.
 - `/[locale]/app`: protected dashboard.
 - `/[locale]/app/challenges/new`: minimal protected challenge creation.
-- `/[locale]/app/challenges/[id]`: protected continuation placeholder; full workspace is not implemented.
+- `/[locale]/app/challenges/[id]`: protected saved challenge workspace.
 - `/[locale]/app/settings`: protected profile/settings.
 
 ## Data Model Map
@@ -73,6 +74,10 @@ Current:
 - Typed helpers: `lib/supabase/`.
 - Dashboard reads/writes use the authenticated Supabase session and Phase 4 tables.
 - Guest import maps `problem`, `context`, `outcome`, `options`, and `nextStep` into `challenge_sections`.
+- Workspace saves challenge details to `challenges`.
+- Workspace saves section text to `challenge_sections`.
+- Workspace saves possible solutions to `challenge_solutions`.
+- Workspace saves tasks/actions to `challenge_tasks`.
 
 Implemented Phase 4 tables:
 
@@ -107,8 +112,8 @@ Current:
 
 Planned:
 
-- Phase 7 full challenge workspace.
-- Later group/friend/message policies.
+- Phase 8 friends, groups, invites, roles, and group challenge access.
+- Later messaging policies.
 
 Rules:
 
@@ -124,10 +129,10 @@ See `SECURITY.md` before implementing auth, database writes, or messaging.
 1. Landing page: implemented.
 2. Authentication: implemented.
 3. Dashboard: implemented.
-4. Create and save a challenge: minimal create/list/import implemented; full workspace planned.
-5. Basic challenge workspace: guest-only implemented; saved workspace planned for Phase 7.
-6. Friends/invites: planned.
-7. Groups: planned.
+4. Create and save a challenge: implemented.
+5. Basic challenge workspace: implemented.
+6. Friends/invites: planned for Phase 8.
+7. Groups: planned for Phase 8.
 8. Simple messaging: planned.
 9. Basic admin/settings: planned.
 10. Deployment: Vercel works; security hardening ongoing.
