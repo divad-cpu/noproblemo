@@ -13,7 +13,20 @@ Scope:
 - Package scripts for lint, typecheck, and build
 - Validation commands
 
-## Phase 2: Product Definition and First Feature
+## Phase 2: Internationalization Foundation
+
+Status: implemented in this repository.
+
+Scope:
+
+- `next-intl` installed and configured.
+- Locale-prefixed routes for supported languages.
+- Message catalogs for supported locales.
+- Simple language switcher.
+- RTL handling for Arabic and Urdu.
+- Guest-mode principle preserved without building the workspace.
+
+## Phase 3: Guest Workspace Foundation
 
 Status: deferred.
 
@@ -32,7 +45,6 @@ Deferred until explicitly requested:
 - Social login
 - Payments
 - Email
-- Internationalization
 - AI features
 - Scheduled jobs
 - Production monitoring and alerts

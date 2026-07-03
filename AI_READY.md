@@ -6,7 +6,7 @@ This file makes the project easier for AI coding agents to continue safely.
 
 ## Current Scope
 
-Phase 1 foundation only. Do not implement product features until the user explicitly requests the next phase.
+Phase 2 internationalization foundation is complete. Do not implement product features until the user explicitly requests the next phase.
 
 ## Read First
 
@@ -22,7 +22,7 @@ Phase 1 foundation only. Do not implement product features until the user explic
 - Never read or print `.env.local` values.
 - Never commit real secrets.
 - Keep `.env.local.example` and `.env.example` placeholders only.
-- Do not add authentication, payments, email, AI, cron, database migrations, or internationalization in Phase 1.
+- Do not add authentication, payments, email, AI, cron, database migrations, or the full guest workspace without explicit scope.
 - Validate with lint, typecheck, and build after changes.
 
 ## Current Validation Commands

@@ -1,0 +1,41 @@
+{
+  "Metadata": {
+    "title": "NoProblemo",
+    "description": "NoProblemo প্রকল্পের জন্য একটি সহজ ও নির্ভরযোগ্য ভিত্তি।"
+  },
+  "Home": {
+    "eyebrow": "পর্যায় ২ আন্তর্জাতিকীকরণ",
+    "title": "NoProblemo এখন আরও ভাষাকে স্বাগত জানাতে প্রস্তুত।",
+    "description": "এই ডিপ্লয়মেন্ট ইচ্ছাকৃতভাবে এখনও ন্যূনতম। পণ্য ফিচার শুরু হওয়ার আগে এটি এখন লোকেল রাউটিং, অনুবাদিত ইন্টারফেস টেক্সট, নিরাপদ ভাষা পরিবর্তন এবং ডান-থেকে-বাম লেআউট হ্যান্ডলিং যাচাই করে।",
+    "cards": {
+      "stack": {
+        "label": "স্ট্যাক",
+        "value": "Next.js, TypeScript, Tailwind CSS"
+      },
+      "backend": {
+        "label": "ব্যাকএন্ড",
+        "value": "Supabase কনফিগার করা হয়েছে, মাইগ্রেশন স্থগিত"
+      },
+      "scope": {
+        "label": "পরিসর",
+        "value": "গেস্ট-মোড নীতি বজায় আছে; ওয়ার্কস্পেস এখনও তৈরি হয়নি"
+      }
+    }
+  },
+  "LanguageSwitcher": {
+    "label": "ভাষা",
+    "locales": {
+      "en": "English",
+      "zh-CN": "简体中文",
+      "hi": "हिन्दी",
+      "es": "Español",
+      "ar": "العربية",
+      "fr": "Français",
+      "bn": "বাংলা",
+      "pt-BR": "Português do Brasil",
+      "id": "Bahasa Indonesia",
+      "ur": "اردو",
+      "nb": "Norsk bokmål"
+    }
+  }
+}

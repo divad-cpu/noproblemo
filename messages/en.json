@@ -1,0 +1,41 @@
+{
+  "Metadata": {
+    "title": "NoProblemo",
+    "description": "A simple, reliable foundation for the NoProblemo project."
+  },
+  "Home": {
+    "eyebrow": "Phase 2 internationalization",
+    "title": "NoProblemo is ready to welcome more languages.",
+    "description": "This deployment remains intentionally minimal. It now verifies locale routing, translated interface text, safe language switching, and right-to-left layout handling before product features begin.",
+    "cards": {
+      "stack": {
+        "label": "Stack",
+        "value": "Next.js, TypeScript, Tailwind CSS"
+      },
+      "backend": {
+        "label": "Backend",
+        "value": "Supabase configured, migrations deferred"
+      },
+      "scope": {
+        "label": "Scope",
+        "value": "Guest-mode principle preserved; workspace not built yet"
+      }
+    }
+  },
+  "LanguageSwitcher": {
+    "label": "Language",
+    "locales": {
+      "en": "English",
+      "zh-CN": "简体中文",
+      "hi": "हिन्दी",
+      "es": "Español",
+      "ar": "العربية",
+      "fr": "Français",
+      "bn": "বাংলা",
+      "pt-BR": "Português do Brasil",
+      "id": "Bahasa Indonesia",
+      "ur": "اردو",
+      "nb": "Norsk bokmål"
+    }
+  }
+}

@@ -4,9 +4,9 @@
 
 NoProblemo should feel calm, practical, and easy to understand. The interface should be minimal without feeling unfinished.
 
-## Phase 1 UI
+## Phase 2 UI
 
-The Phase 1 UI is a static foundation page that communicates project status. It does not include login, dashboards, forms, payments, AI controls, or settings.
+The Phase 2 UI is a localized static foundation page that communicates project status. It includes a simple language switcher, but it does not include login, dashboards, forms, payments, AI controls, or settings.
 
 ## Principles
 
@@ -15,6 +15,8 @@ The Phase 1 UI is a static foundation page that communicates project status. It 
 - Neutral colors with restrained contrast.
 - Avoid decorative complexity until the product direction requires it.
 - Avoid explaining implementation details inside the product UI.
+- Keep translated strings concise so all supported locales fit on mobile.
+- Respect RTL layout direction for Arabic and Urdu.
 
 ## Accessibility Baseline
 

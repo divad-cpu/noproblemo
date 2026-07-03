@@ -1,0 +1,41 @@
+{
+  "Metadata": {
+    "title": "NoProblemo",
+    "description": "أساس بسيط وموثوق لمشروع NoProblemo."
+  },
+  "Home": {
+    "eyebrow": "المرحلة 2 التدويل",
+    "title": "NoProblemo جاهز لاستقبال مزيد من اللغات.",
+    "description": "يبقى هذا النشر بسيطا عن قصد. وهو يتحقق الآن من توجيه اللغات، ونصوص الواجهة المترجمة، والتبديل الآمن للغة، ودعم التخطيط من اليمين إلى اليسار قبل بدء ميزات المنتج.",
+    "cards": {
+      "stack": {
+        "label": "الحزمة التقنية",
+        "value": "Next.js و TypeScript و Tailwind CSS"
+      },
+      "backend": {
+        "label": "الخلفية",
+        "value": "تم إعداد Supabase، وتم تأجيل الترحيلات"
+      },
+      "scope": {
+        "label": "النطاق",
+        "value": "تم الحفاظ على مبدأ وضع الضيف؛ لم يتم بناء مساحة العمل بعد"
+      }
+    }
+  },
+  "LanguageSwitcher": {
+    "label": "اللغة",
+    "locales": {
+      "en": "English",
+      "zh-CN": "简体中文",
+      "hi": "हिन्दी",
+      "es": "Español",
+      "ar": "العربية",
+      "fr": "Français",
+      "bn": "বাংলা",
+      "pt-BR": "Português do Brasil",
+      "id": "Bahasa Indonesia",
+      "ur": "اردو",
+      "nb": "Norsk bokmål"
+    }
+  }
+}

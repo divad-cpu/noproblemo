@@ -2,7 +2,7 @@
 
 Continue the NoProblemo project from the current repository state.
 
-Current scope is Phase 1 foundation only unless the user explicitly requests a later phase.
+Current scope is Phase 3 only if the user explicitly requests it: guest workspace foundation. Phase 2 internationalization foundation is complete.
 
 Before editing:
 
@@ -16,10 +16,20 @@ Current foundation:
 - Next.js 16 App Router
 - TypeScript
 - Tailwind CSS 4
+- `next-intl` locale routing
+- Supported locales: `en`, `zh-CN`, `hi`, `es`, `ar`, `fr`, `bn`, `pt-BR`, `id`, `ur`, `nb`
+- RTL handling for `ar` and `ur`
 - Supabase folder present, migrations deferred
 - Vercel deployment configured externally
 - Safe env templates: `.env.example` and `.env.local.example`
 - Documentation baseline in root files and `docs/`
+
+Phase 3 direction, only when explicitly requested:
+
+- Preserve guest-mode first.
+- Build a minimal guest workspace foundation without login.
+- Keep user-generated content separate from UI translations.
+- Do not add database migrations unless Phase 3 explicitly includes them.
 
 Do not implement without explicit approval:
 
@@ -32,7 +42,6 @@ Do not implement without explicit approval:
 - AI features
 - Resend email
 - Vercel Cron
-- `next-intl`
 
 After changes, run:
 

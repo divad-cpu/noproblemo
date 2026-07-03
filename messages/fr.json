@@ -1,0 +1,41 @@
+{
+  "Metadata": {
+    "title": "NoProblemo",
+    "description": "Une base simple et fiable pour le projet NoProblemo."
+  },
+  "Home": {
+    "eyebrow": "Phase 2 internationalisation",
+    "title": "NoProblemo est prêt à accueillir plus de langues.",
+    "description": "Ce déploiement reste volontairement minimal. Il vérifie maintenant le routage par langue, les textes d'interface traduits, le changement de langue sûr et la prise en charge des mises en page de droite à gauche avant le début des fonctionnalités produit.",
+    "cards": {
+      "stack": {
+        "label": "Stack",
+        "value": "Next.js, TypeScript, Tailwind CSS"
+      },
+      "backend": {
+        "label": "Backend",
+        "value": "Supabase configuré, migrations différées"
+      },
+      "scope": {
+        "label": "Portée",
+        "value": "Principe du mode invité préservé ; l'espace de travail n'est pas encore construit"
+      }
+    }
+  },
+  "LanguageSwitcher": {
+    "label": "Langue",
+    "locales": {
+      "en": "English",
+      "zh-CN": "简体中文",
+      "hi": "हिन्दी",
+      "es": "Español",
+      "ar": "العربية",
+      "fr": "Français",
+      "bn": "বাংলা",
+      "pt-BR": "Português do Brasil",
+      "id": "Bahasa Indonesia",
+      "ur": "اردو",
+      "nb": "Norsk bokmål"
+    }
+  }
+}

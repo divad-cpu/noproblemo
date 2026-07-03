@@ -8,12 +8,12 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Current Scope
 
-The project is in Phase 1: foundation only. Do not implement feature phases unless the user explicitly changes scope.
+The project has completed Phase 2: internationalization foundation. Do not implement later feature phases unless the user explicitly changes scope.
 
 ## Hard Boundaries
 
 - Do not read, print, commit, or expose `.env.local` values.
-- Do not add authentication, login screens, Supabase migrations, social login, payments, AI features, Resend, Vercel Cron, or `next-intl` during Phase 1.
+- Do not add authentication, login screens, Supabase migrations, social login, payments, AI features, Resend, Vercel Cron, or the full guest workspace without explicit scope.
 - Do not change unrelated files.
 - Keep the app minimal, clean, mobile-friendly, and desktop-friendly.
 

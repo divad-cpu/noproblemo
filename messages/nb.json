@@ -1,0 +1,41 @@
+{
+  "Metadata": {
+    "title": "NoProblemo",
+    "description": "Et enkelt og pålitelig fundament for NoProblemo-prosjektet."
+  },
+  "Home": {
+    "eyebrow": "Fase 2 internasjonalisering",
+    "title": "NoProblemo er klart for flere språk.",
+    "description": "Denne utrullingen er fortsatt bevisst minimal. Den verifiserer nå språkbasert ruting, oversatt grensesnitttekst, trygg språkbytte og håndtering av høyre-til-venstre-oppsett før produktfunksjoner bygges.",
+    "cards": {
+      "stack": {
+        "label": "Teknologi",
+        "value": "Next.js, TypeScript, Tailwind CSS"
+      },
+      "backend": {
+        "label": "Backend",
+        "value": "Supabase er konfigurert, migreringer er utsatt"
+      },
+      "scope": {
+        "label": "Omfang",
+        "value": "Gjestemodus-prinsippet er bevart; arbeidsområdet er ikke bygget ennå"
+      }
+    }
+  },
+  "LanguageSwitcher": {
+    "label": "Språk",
+    "locales": {
+      "en": "English",
+      "zh-CN": "简体中文",
+      "hi": "हिन्दी",
+      "es": "Español",
+      "ar": "العربية",
+      "fr": "Français",
+      "bn": "বাংলা",
+      "pt-BR": "Português do Brasil",
+      "id": "Bahasa Indonesia",
+      "ur": "اردو",
+      "nb": "Norsk bokmål"
+    }
+  }
+}
