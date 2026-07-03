@@ -2,59 +2,69 @@
 
 ## Current Implementation Status
 
-No application database schema is implemented yet.
+Phase 4 Supabase foundation is implemented locally in migration:
 
-Current Supabase files:
+- `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`
 
-- `supabase/config.toml`
-- `supabase/seed.sql`
+The migration has not been verified against the live Supabase project in this task. It should be applied and tested in Supabase before any production data depends on it.
 
-There is no `supabase/migrations/` directory, no app-side Supabase client, and no authenticated database reads or writes. Any table list below is planned and must be verified before migration work.
-
-## Intended Tables
+## Implemented Tables
 
 ### `profiles`
 
-Purpose: public-safe user profile linked to Supabase Auth.
+Linked one-to-one to `auth.users`.
 
-Likely fields:
+Fields:
 
-- `id uuid primary key references auth.users(id)`
+- `id uuid primary key references auth.users(id) on delete cascade`
 - `display_name text`
 - `avatar_url text`
-- `created_at timestamptz`
-- `updated_at timestamptz`
+- `preferred_locale text default 'en'`
+- `role text default 'user'`
+- `support_contact_seen boolean default false`
+- `created_at timestamptz default now()`
+- `updated_at timestamptz default now()`
+
+Constraints:
+
+- `preferred_locale` allows only `en`, `zh-CN`, `hi`, `es`, `ar`, `fr`, `bn`, `pt-BR`, `id`, `ur`, `nb`.
+- `role` allows only `user` and `admin`.
 
 ### `challenges`
 
-Purpose: saved problem-solving challenge.
+Saved challenge root record.
 
-Likely fields:
+Fields:
 
-- `id uuid primary key`
-- `owner_id uuid references profiles(id)`
-- `title text`
+- `id uuid primary key default gen_random_uuid()`
+- `owner_id uuid references auth.users(id) on delete cascade`
+- `title text not null`
 - `short_description text`
-- `visibility text` with values such as `private`, `group`, possibly `public` later
-- `status text`
-- `created_at timestamptz`
-- `updated_at timestamptz`
+- `status text default 'draft'`
+- `visibility text default 'private'`
+- `created_at timestamptz default now()`
+- `updated_at timestamptz default now()`
+
+Constraints:
+
+- `status` allows `draft`, `active`, `completed`, `archived`.
+- `visibility` allows `private`, `group`.
 
 ### `challenge_sections`
 
-Purpose: structured problem-solving content.
+Structured challenge content.
 
-Likely fields:
+Fields:
 
-- `id uuid primary key`
-- `challenge_id uuid references challenges(id)`
-- `section_key text`
+- `id uuid primary key default gen_random_uuid()`
+- `challenge_id uuid references challenges(id) on delete cascade`
+- `section_key text not null`
 - `content text`
-- `position integer`
-- `updated_by uuid references profiles(id)`
-- `updated_at timestamptz`
+- `position integer default 0`
+- `created_at timestamptz default now()`
+- `updated_at timestamptz default now()`
 
-Expected section keys:
+Implemented section keys:
 
 - `problem_title`
 - `short_description`
@@ -62,153 +72,104 @@ Expected section keys:
 - `who_is_affected`
 - `why_it_matters`
 - `possible_causes`
-- `possible_solutions`
-- `pros_cons`
-- `priority_ranking`
-- `tasks_actions`
 - `final_recommendation`
-- `summary_export`
+- `summary`
 
 ### `challenge_solutions`
 
-Purpose: candidate solutions with pros, cons, and ranking.
+Candidate solutions for a challenge.
 
-Likely fields:
+Fields:
 
-- `id uuid primary key`
-- `challenge_id uuid references challenges(id)`
-- `title text`
+- `id uuid primary key default gen_random_uuid()`
+- `challenge_id uuid references challenges(id) on delete cascade`
+- `title text not null`
 - `description text`
 - `pros text`
 - `cons text`
-- `score numeric`
-- `rank integer`
-- `created_by uuid references profiles(id)`
+- `risk integer`
+- `effort integer`
+- `impact integer`
+- `resources_needed text`
+- `priority integer`
+- `created_at timestamptz default now()`
+- `updated_at timestamptz default now()`
 
-### `tasks`
+Constraints:
 
-Purpose: action items connected to a challenge.
+- `risk`, `effort`, and `impact` must be null or between 1 and 5.
 
-Likely fields:
+### `challenge_tasks`
 
-- `id uuid primary key`
-- `challenge_id uuid references challenges(id)`
-- `assigned_to uuid references profiles(id)`
-- `title text`
+Action items for a challenge.
+
+Fields:
+
+- `id uuid primary key default gen_random_uuid()`
+- `challenge_id uuid references challenges(id) on delete cascade`
+- `title text not null`
 - `description text`
-- `status text`
-- `due_at timestamptz`
-- `created_at timestamptz`
+- `responsible_person text`
+- `deadline date`
+- `completed boolean default false`
+- `position integer default 0`
+- `created_at timestamptz default now()`
+- `updated_at timestamptz default now()`
 
-### `friendships`
+## Implemented Functions And Triggers
 
-Purpose: direct user relationship for inviting/collaborating.
+- `public.set_updated_at()` updates `updated_at` before row updates.
+- `profiles_set_updated_at`
+- `challenges_set_updated_at`
+- `challenge_sections_set_updated_at`
+- `challenge_solutions_set_updated_at`
+- `challenge_tasks_set_updated_at`
+- `public.handle_new_user_profile()` creates a basic profile after a new `auth.users` row is inserted.
+- `auth_users_create_profile` trigger on `auth.users`.
 
-Likely fields:
+## Implemented RLS Policies
 
-- `id uuid primary key`
-- `requester_id uuid references profiles(id)`
-- `recipient_id uuid references profiles(id)`
-- `status text` with values such as `pending`, `accepted`, `declined`, `blocked`
-- `created_at timestamptz`
-- `responded_at timestamptz`
+RLS is enabled on:
 
-### `groups`
+- `profiles`
+- `challenges`
+- `challenge_sections`
+- `challenge_solutions`
+- `challenge_tasks`
 
-Purpose: user-created collaboration group.
+Policies:
 
-Likely fields:
+- Users can select their own profile.
+- Users can insert their own profile with `role = 'user'`.
+- Users can update their own profile.
+- Authenticated users are granted update only for profile fields `display_name`, `avatar_url`, `preferred_locale`, and `support_contact_seen`; `role` is not granted for normal profile updates.
+- Users can create challenges only where `owner_id = auth.uid()`.
+- Users can select, update, and delete only their own challenges.
+- Users can select, insert, update, and delete sections only when they own the parent challenge.
+- Users can select, insert, update, and delete solutions only when they own the parent challenge.
+- Users can select, insert, update, and delete tasks only when they own the parent challenge.
 
-- `id uuid primary key`
-- `owner_id uuid references profiles(id)`
-- `name text`
-- `description text`
-- `created_at timestamptz`
+## Planned Tables Not Implemented Yet
 
-### `group_memberships`
+- `friendships`
+- `groups`
+- `group_memberships`
+- `group_invites`
+- `challenge_collaborators`
+- `messages`
+- Organization/account tables
+- Audit/history tables
 
-Purpose: accepted group members and roles.
+Group and collaboration access policies are intentionally not implemented in Phase 4. They must be designed when friends, groups, invites, and messaging are scoped.
 
-Likely fields:
+## TypeScript Types
 
-- `id uuid primary key`
-- `group_id uuid references groups(id)`
-- `user_id uuid references profiles(id)`
-- `role text` with values such as `owner`, `admin`, `member`
-- `created_at timestamptz`
+Manual database types were added in `lib/supabase/types.ts`. They should be regenerated from Supabase once the project has a stable live schema and generation workflow.
 
-### `group_invites`
+## Needs Verification
 
-Purpose: accept/decline invitations to groups.
-
-Likely fields:
-
-- `id uuid primary key`
-- `group_id uuid references groups(id)`
-- `inviter_id uuid references profiles(id)`
-- `invitee_id uuid references profiles(id)`
-- `status text` with values such as `pending`, `accepted`, `declined`, `expired`
-- `created_at timestamptz`
-- `responded_at timestamptz`
-
-### `challenge_collaborators`
-
-Purpose: grants access to a challenge for a user or group.
-
-Likely fields:
-
-- `id uuid primary key`
-- `challenge_id uuid references challenges(id)`
-- `user_id uuid references profiles(id) null`
-- `group_id uuid references groups(id) null`
-- `role text` with values such as `viewer`, `editor`, `owner`
-- `created_at timestamptz`
-
-### `messages`
-
-Purpose: simple internal messages related to users, groups, or challenges.
-
-Likely fields:
-
-- `id uuid primary key`
-- `sender_id uuid references profiles(id)`
-- `recipient_id uuid references profiles(id) null`
-- `group_id uuid references groups(id) null`
-- `challenge_id uuid references challenges(id) null`
-- `body text`
-- `created_at timestamptz`
-- `read_at timestamptz`
-
-## Relationships
-
-- A profile maps one-to-one to an auth user.
-- A user owns many challenges.
-- A challenge has many sections, solutions, tasks, collaborators, and possibly messages.
-- A group has many memberships and invites.
-- A user can access a group only through accepted membership.
-- A user can access a challenge only as owner, explicit collaborator, or accepted member of a group that has challenge access.
-- Messages are visible only to sender and valid recipient context.
-
-## Row-Level Security Thinking
-
-Every application table should have RLS enabled.
-
-Expected policies:
-
-- Users can read and update their own profile.
-- Challenge owners can read, update, and delete their challenges.
-- Challenge collaborators can read or update according to their role.
-- Group members can read group records and membership records for groups they belong to.
-- Group invites are visible to inviter, invitee, and group admins.
-- Invites require explicit accept/decline; membership should not be created silently.
-- Private messages are visible only to sender and recipient, or members of the relevant group/challenge if group messaging is implemented.
-- Service role keys must never be used in browser code.
-
-## Unknown Or Needs Verification
-
-- Exact auth provider strategy.
-- Whether organizations need separate tables in MVP.
-- Whether messages are direct-only, group-only, challenge-only, or all three.
-- Whether challenge sections should be separate rows or a JSON document.
-- Whether solution scoring is MVP or future.
-- Exact audit/history requirements.
+- Apply migration in local Supabase and/or linked Supabase project.
+- Test profile trigger after signup in Phase 5.
+- Test every RLS policy with authenticated users.
+- Confirm whether the challenge section list is sufficient for the MVP saved workspace.
+- Confirm whether organization accounts need schema support before MVP launch.

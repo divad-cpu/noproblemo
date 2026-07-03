@@ -18,7 +18,8 @@ This file helps future AI/Codex sessions continue NoProblemo without rebuilding,
 - Use TypeScript.
 - Use Tailwind CSS.
 - Use `next-intl` and locale-prefixed routes.
-- Use Supabase for future authentication, database, and row-level security.
+- Use Supabase for authentication, database, and row-level security.
+- Use the Phase 4 migration and RLS foundation as the starting point for future saved data work.
 - Deploy on Vercel.
 - Use Domeneshop mainly for domain and DNS.
 - Keep UI minimalistic, calm, professional, and responsive.
@@ -31,6 +32,7 @@ This file helps future AI/Codex sessions continue NoProblemo without rebuilding,
 - RTL handling for `ar` and `ur`.
 - Guest localStorage key unless a migration plan is included.
 - Current route structure unless a phase explicitly changes it.
+- Phase 4 database schema/RLS without a migration plan.
 - Security guardrails around `.env.local`, Supabase service role keys, and private data.
 - Minimal visual direction.
 

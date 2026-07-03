@@ -1,17 +1,20 @@
 # Next Codex Prompt
 
-Continue the NoProblemo project from the current repository state.
+You are continuing the NoProblemo project.
 
-Current scope is Phase 4 only if the user explicitly requests it: Supabase foundation. Phase 3 public landing page and guest mode are complete.
-
-Before editing:
+Before changing anything:
 
 1. Read `AGENTS.md`.
 2. Read `CURRENT_STATE.md`.
 3. Read `docs/CODEX_PROJECT_MAP.md`.
-4. Read the relevant installed Next.js docs in `node_modules/next/dist/docs/`.
-5. Inspect `git status --short`.
-6. Do not read or print `.env.local` values.
+4. Read `docs/PHASE_HANDOFF_TEMPLATE.md`.
+5. Read the relevant installed Next.js guide in `node_modules/next/dist/docs/`.
+6. Inspect `git status --short`.
+7. Do not read or print `.env.local` values.
+8. Do not print Supabase `.temp` file contents.
+
+Task:
+Implement Phase 5 only: Authentication.
 
 Current foundation:
 
@@ -24,27 +27,42 @@ Current foundation:
 - Public routes: `/[locale]`, `/[locale]/solve`, `/[locale]/support`
 - Placeholder routes: `/[locale]/login`, `/[locale]/signup`
 - Guest workspace stores drafts in localStorage only
-- Supabase folder present, migrations deferred
-- Safe env templates: `.env.example` and `.env.local.example`
+- Supabase migration exists for profiles and core challenge tables
+- Supabase RLS foundation exists and needs verification
+- Supabase helpers exist in `lib/supabase/`
 
-Phase 4 direction, only when explicitly requested:
+Phase 5 should include:
 
-- Build Supabase foundation deliberately.
-- Define schema before migrations.
-- Add migrations only if Phase 4 explicitly includes them.
-- Preserve guest mode and do not send guest drafts to Supabase unless explicitly requested.
-- Keep user-generated content separate from UI translations.
+- Email login
+- Signup
+- Logout
+- Protected app layout
+- Profile creation after signup if the Phase 4 database trigger is not sufficient after testing
+- Google login prepared
+- Apple login prepared
+- Auth documentation
 
-Do not implement without explicit approval:
+Phase 5 should not include unless explicitly required as a minimal placeholder:
 
-- Real authentication
-- Google login
-- Apple login
+- Full dashboard
+- Guest import after login
+- Friends
+- Groups
+- Messaging
+- Notifications
+- Admin panel
 - Payments
 - AI features
-- Resend email
+- Resend
 - Vercel Cron
-- Real collaboration or messaging
+
+Security requirements:
+
+- Use Supabase Auth.
+- Do not use `SUPABASE_SERVICE_ROLE_KEY` in frontend code.
+- Do not fake authorization with frontend-only checks.
+- Keep user-generated content separate from UI translations.
+- Preserve guest mode and do not send guest drafts to Supabase unless explicitly scoped.
 
 After changes, run:
 
@@ -54,4 +72,11 @@ npm run typecheck
 npm run build
 ```
 
-Update `docs/CODEX_PROJECT_LOG.md` and `docs/CHANGELOG.md` with a concise entry.
+Update:
+
+- `CURRENT_STATE.md`
+- `SECURITY.md`
+- `ARCHITECTURE.md` if auth architecture changes
+- `docs/CODEX_PROJECT_MAP.md`
+- `docs/CODEX_PROJECT_LOG.md`
+- `docs/CHANGELOG.md`

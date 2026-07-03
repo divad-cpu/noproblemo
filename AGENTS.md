@@ -34,7 +34,7 @@ Every Codex session must read these files before changing code:
 - Never read, print, commit, or expose `.env.local` values.
 - Never commit real secrets, Supabase service role keys, OAuth secrets, payment keys, email keys, AI keys, or Vercel tokens.
 - Protect authentication, Supabase row-level security policies, environment variables, private messages, group data, and challenge content.
-- Do not add real authentication, Supabase migrations, cloud saving, groups, invites, messaging, payments, AI, Resend, or Vercel Cron unless explicitly scoped.
+- Do not add real authentication, additional Supabase migrations, cloud saving, groups, invites, messaging, payments, AI, Resend, or Vercel Cron unless explicitly scoped.
 - Guest work currently stays in local browser storage only and must not be sent to Supabase unless a future phase explicitly requests it.
 
 ## Validation

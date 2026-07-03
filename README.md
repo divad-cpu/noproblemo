@@ -1,16 +1,17 @@
 # NoProblemo
 
-NoProblemo is a Next.js App Router project prepared for incremental product development. Phase 3 adds the public landing page, support page, and a local-only guest problem-solving workspace.
+NoProblemo is a Next.js App Router project prepared for incremental product development. Phase 4 adds the Supabase database/RLS foundation needed before authentication and cloud saving.
 
 ## Current Phase
 
-Phase 3 is complete when public routes, guest mode, locale routing, linting, type checking, and production build all pass. Cloud persistence and authentication remain intentionally deferred.
+Phase 4 is complete when the Supabase migration, helper scaffolding, documentation, linting, type checking, and production build all pass. Authentication UI and cloud-saving UI remain intentionally deferred.
 
-Not included in Phase 3:
+Not included in Phase 4:
 
 - Real authentication
-- Supabase database migrations
 - Google or Apple login
+- Dashboard
+- Guest import after login
 - Payments
 - AI features
 - Resend email
@@ -25,7 +26,7 @@ Not included in Phase 3:
 - TypeScript
 - Tailwind CSS 4
 - `next-intl`
-- Supabase project folder for future backend work
+- Supabase database/RLS foundation
 - Vercel deployment
 
 ## Internationalization

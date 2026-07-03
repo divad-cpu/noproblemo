@@ -36,29 +36,58 @@ Status: implemented.
 - Markdown copy/export
 - Login prompt for save/collaboration actions
 
+### Phase 4: Supabase Foundation
+
+Status: implemented locally.
+
+- Supabase migration for profiles and core challenge tables
+- Updated-at triggers
+- Profile creation trigger after `auth.users` insert
+- Owner-only RLS policies
+- Browser/server Supabase helper scaffolding
+- Manual database types
+
+Needs verification:
+
+- Apply migration to local/linked Supabase.
+- Test RLS with authenticated users.
+- Confirm profile trigger during Phase 5 signup.
+
 ## Current Phase
 
-Documentation and project orientation map. This task does not add product features.
+Phase 4 Supabase foundation has been implemented locally. Authentication is next.
 
 ## Next Recommended Phase
 
-### Phase 4: Supabase Foundation
+### Phase 5: Authentication
 
 Recommended scope:
 
-- Finalize initial database schema.
-- Create first Supabase migrations.
-- Add RLS policies from the start.
-- Add typed Supabase client/server helpers if needed.
-- Keep guest workspace local-only unless explicit import/save flow is scoped.
-- Do not build full auth UI unless Phase 4 explicitly includes it.
+- Email login
+- Signup
+- Logout
+- Protected app layout
+- Profile creation verification
+- Google login prepared
+- Apple login prepared
+- Auth documentation
+
+### Phase 6: Dashboard And Guest Import
+
+Deferred scope:
+
+- Authenticated dashboard
+- Saved challenge list
+- Create saved challenge
+- Optional guest draft import after login
+- Initial cloud challenge workspace
 
 ## MVP Path
 
 1. Landing page: implemented.
-2. Authentication: planned.
-3. Dashboard: planned.
-4. Create and save a challenge: planned.
+2. Authentication: planned for Phase 5.
+3. Dashboard: planned for Phase 6.
+4. Create and save a challenge: database foundation implemented; UI planned.
 5. Basic challenge workspace: guest-only implemented; saved workspace planned.
 6. Friends/invites: planned.
 7. Groups: planned.

@@ -40,3 +40,14 @@
 - Updated core project documentation for durable Codex handoff.
 - Clarified implemented versus planned product areas.
 - Confirmed lint, typecheck, and production build pass.
+
+## 2026-07-03 Phase 4
+
+- Added Supabase packages for browser/server helper scaffolding.
+- Added Phase 4 Supabase migration for profiles and core challenge tables.
+- Added updated-at triggers and profile creation trigger.
+- Added owner-only RLS policies for profiles, challenges, sections, solutions, and tasks.
+- Added manual database types and minimal Supabase helpers.
+- Updated environment examples for Supabase and support variables.
+- Updated documentation for Phase 5 authentication handoff.
+- Confirmed lint, typecheck, and production build pass.

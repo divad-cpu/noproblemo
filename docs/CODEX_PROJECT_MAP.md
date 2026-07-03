@@ -11,7 +11,7 @@ NoProblemo is a minimalistic, secure, modern web application for structured prob
 - TypeScript
 - Tailwind CSS 4
 - `next-intl`
-- Supabase planned for auth/database/RLS
+- Supabase Auth/Postgres/RLS foundation
 - Vercel deployment
 - Domeneshop planned for domain/DNS
 
@@ -28,13 +28,17 @@ Implemented:
 - Login prompt for unavailable guest save/collaboration actions.
 - Support page.
 - Placeholder login/signup pages.
+- Supabase migration for profiles and core challenge tables.
+- Owner-only RLS policies for Phase 4 tables.
+- Supabase client/server helper scaffolding.
+- Manual database types.
 
 Not implemented:
 
-- Real authentication.
+- Real authentication UI/actions.
 - Dashboard.
-- Supabase migrations or app data access.
-- Cloud saved challenges.
+- Guest import after login.
+- Cloud saved challenge UI.
 - Friends, invites, groups, messaging.
 - Admin/settings.
 - AI, payments, email sending, cron.
@@ -54,15 +58,19 @@ Current:
 
 - UI strings: `messages/*.json`.
 - Guest draft: browser localStorage key `noproblemo.guestWorkspace.v1`.
-- Supabase: config exists, no application tables.
+- Supabase migration: `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`.
+- Typed helpers: `lib/supabase/`.
 
-Planned data concepts:
+Implemented Phase 4 tables:
 
 - `profiles`
 - `challenges`
 - `challenge_sections`
 - `challenge_solutions`
-- `tasks`
+- `challenge_tasks`
+
+Planned data concepts:
+
 - `friendships`
 - `groups`
 - `group_memberships`
@@ -70,33 +78,39 @@ Planned data concepts:
 - `challenge_collaborators`
 - `messages`
 
-See `DATABASE_SCHEMA.md` before any migration work.
+See `DATABASE_SCHEMA.md` before any future migration work.
 
 ## Security Model Map
 
 Current:
 
-- No private cloud data exists.
 - Guest data is local-only.
-- No real auth exists.
+- No real auth UI exists.
+- Phase 4 migration enables RLS for `profiles`, `challenges`, `challenge_sections`, `challenge_solutions`, and `challenge_tasks`.
+- Phase 4 RLS is owner-only and must still be verified in Supabase.
+- No service-role helper exists.
 
 Planned:
 
-- Supabase Auth.
-- RLS on every application table.
-- Users can access only owned challenges or challenges shared through accepted memberships/collaborator grants.
-- Group invites require accept/decline.
-- Private messages and challenge content are not public.
+- Phase 5 Supabase Auth UI/actions.
+- Phase 6 dashboard and saved challenge UI.
+- Later group/friend/message policies.
+
+Rules:
+
+- Users can access only owned challenges in the Phase 4 schema.
+- Group invites must require accept/decline when implemented.
+- Private messages and challenge content must not be public.
 - Service role key never reaches browser code.
 
-See `SECURITY.md` before implementing auth, database, or messaging.
+See `SECURITY.md` before implementing auth, database writes, or messaging.
 
 ## MVP Map
 
 1. Landing page: implemented.
-2. Authentication: planned.
-3. Dashboard: planned.
-4. Create and save a challenge: planned.
+2. Authentication: planned for Phase 5.
+3. Dashboard: planned for Phase 6.
+4. Create and save a challenge: database foundation implemented; UI planned.
 5. Basic challenge workspace: guest-only implemented; saved workspace planned.
 6. Friends/invites: planned.
 7. Groups: planned.

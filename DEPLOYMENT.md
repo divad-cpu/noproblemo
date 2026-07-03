@@ -19,11 +19,14 @@
 Safe placeholders exist in `.env.example` and `.env.local.example`:
 
 ```bash
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+NEXT_PUBLIC_SUPPORT_EMAIL=support@noproblemo.tech
 ```
 
-Future server-only values, such as service role keys, must never be exposed to the browser and must never be committed.
+`SUPABASE_SERVICE_ROLE_KEY` is server-only. It must never be exposed to the browser and must never be committed.
 
 ## Domeneshop DNS Direction
 
@@ -54,7 +57,7 @@ Do not print `.env.local` values.
 
 ## Current Deployment Scope
 
-Current app includes localized public pages and a guest localStorage workspace. It does not connect to Supabase at runtime and does not include real login, saved cloud projects, payments, email sending, AI, or scheduled jobs.
+Current app includes localized public pages, a guest localStorage workspace, Supabase helpers, and a local migration. The UI does not connect to Supabase at runtime yet and does not include real login, saved cloud projects, payments, email sending, AI, or scheduled jobs.
 
 ## Production Checklist
 

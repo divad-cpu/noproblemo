@@ -11,8 +11,9 @@ NoProblemo has completed:
 - Phase 1: project foundation
 - Phase 2: internationalization foundation
 - Phase 3: public landing page and guest mode
+- Phase 4: Supabase foundation
 
-The current task is documentation/project orientation only. Phase 4 Supabase foundation is not implemented.
+Phase 5 Authentication is next. Dashboard and guest import belong to Phase 6. Friends, groups, messaging, notifications, admin, payments, AI, email automation, Resend, and Vercel Cron remain future phases.
 
 ## Already Implemented
 
@@ -32,25 +33,34 @@ The current task is documentation/project orientation only. Phase 4 Supabase fou
 - Markdown copy/export for guest drafts
 - Login prompt for save/collaboration actions
 - Supabase CLI folder with config and seed file
+- Supabase migration `20260703190000_phase4_supabase_foundation.sql`
+- Tables in migration: `profiles`, `challenges`, `challenge_sections`, `challenge_solutions`, `challenge_tasks`
+- Updated-at trigger function and triggers
+- Auth user profile creation trigger
+- Owner-only RLS policies for Phase 4 tables
+- Supabase browser/server helper scaffolding in `lib/supabase/`
+- Manual database types in `lib/supabase/types.ts`
 - Documentation baseline and project map
 
 ## Partially Implemented
 
-- Problem-solving workflow exists only as guest browser-local form fields.
+- Problem-solving workflow exists as guest browser-local form fields and as planned database tables, but no UI writes to Supabase yet.
 - Login/signup routes exist only as placeholders.
-- Supabase exists only as project configuration, not as app data access.
+- Supabase schema exists as a local migration but has not been verified against the live Supabase project in this task.
+- Supabase helpers exist but are not used by app routes yet.
 - Deployment works on Vercel, but production hardening is ongoing.
 - Translations currently include complete UI keys, but non-English content quality should be reviewed by fluent speakers before launch.
 
 ## Not Yet Implemented
 
-- Real authentication
-- Supabase migrations
-- Supabase app client/server helpers
-- Database tables
-- Row-level security policies
+- Real authentication UI/actions
+- Auth callback routes
+- Google OAuth UI
+- Apple OAuth UI
+- Protected app layout
 - Dashboard
-- Saved cloud challenges
+- Guest import after login
+- Saved cloud challenge UI
 - Friends/invites
 - Groups
 - Simple messaging
@@ -72,14 +82,20 @@ The current task is documentation/project orientation only. Phase 4 Supabase fou
 - `i18n/routing.ts`: supported locales and RTL logic.
 - `messages/*.json`: UI messages.
 - `proxy.ts`: locale middleware.
+- `lib/supabase/client.ts`: browser Supabase anon client helper.
+- `lib/supabase/server.ts`: server Supabase cookie-aware helper scaffold.
+- `lib/supabase/types.ts`: manual Phase 4 database types.
 - `supabase/config.toml`: Supabase CLI config.
 - `supabase/seed.sql`: empty seed file.
+- `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`: Phase 4 schema and RLS migration.
 - `docs/CODEX_PROJECT_MAP.md`: central durable project map.
 - `docs/PHASE_HANDOFF_TEMPLATE.md`: reusable future prompt template.
 
 ## Known Issues
 
-- No real auth or cloud saving exists yet.
+- No real auth or cloud saving UI exists yet.
+- Phase 4 migration needs to be applied and tested in Supabase.
+- RLS policies need verification with authenticated users.
 - Guest drafts are browser-local and can be lost if localStorage is cleared.
 - Non-English translations need human review.
 - Supabase `.temp` files exist from linking/local CLI state; do not print their contents.
@@ -88,15 +104,27 @@ The current task is documentation/project orientation only. Phase 4 Supabase fou
 ## Current Risks
 
 - Future agents might mistake placeholder auth routes for real authentication.
-- Future agents might bypass RLS if database work starts too quickly.
-- User-generated problem content may be sensitive; privacy must be designed into auth and database phases.
+- Future agents might use service role keys in frontend code; do not do this.
+- RLS policies are written but still need live/local Supabase verification.
+- User-generated problem content may be sensitive; privacy must be designed into auth and dashboard phases.
 - Feature expansion could overload the minimal UI if not kept incremental.
 
 ## Next Recommended Phase
 
-Phase 4: Supabase foundation.
+Phase 5: Authentication.
 
-Recommended first step: finalize the schema and RLS model in `DATABASE_SCHEMA.md` and `SECURITY.md`, then create migrations only if explicitly requested.
+Recommended scope:
+
+- Email login
+- Signup
+- Logout
+- Protected app layout
+- Profile creation verification after signup
+- Prepare Google login
+- Prepare Apple login
+- Auth documentation
+
+Do not implement full dashboard or guest import in Phase 5 unless explicitly required as minimal placeholders.
 
 ## Validation Commands
 
@@ -108,7 +136,7 @@ npm run typecheck
 npm run build
 ```
 
-Validation for this documentation map task:
+Validation for Phase 4:
 
 - `npm run lint`: passed on 2026-07-03.
 - `npm run typecheck`: passed on 2026-07-03.

@@ -45,3 +45,17 @@ Documentation and project orientation map:
 - Updated core docs to distinguish implemented Phase 1-3 work from planned auth, Supabase, dashboard, groups, invites, messaging, and admin/settings.
 - Did not implement Phase 4 or change application features.
 - Validation passed: `npm run lint`, `npm run typecheck`, and `npm run build`.
+
+Phase 4 Supabase foundation:
+
+- Inspected required handoff docs, package scripts, App Router routes, env templates, Supabase folder, schema/security docs, and installed Next.js docs.
+- Installed `@supabase/supabase-js` and `@supabase/ssr`.
+- Added `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`.
+- Added `profiles`, `challenges`, `challenge_sections`, `challenge_solutions`, and `challenge_tasks` schema.
+- Added updated-at trigger function and triggers.
+- Added auth user profile creation trigger.
+- Enabled RLS and added owner-only policies for Phase 4 tables.
+- Added Supabase browser/server helper scaffolding and manual database types under `lib/supabase/`.
+- Updated env examples with site URL, support email, public Supabase keys, and server-only service role placeholder.
+- Did not implement authentication UI, dashboard, guest import, groups, friends, messages, admin, email, cron, payments, or AI.
+- Validation passed: `npm run lint`, `npm run typecheck`, and `npm run build`.
