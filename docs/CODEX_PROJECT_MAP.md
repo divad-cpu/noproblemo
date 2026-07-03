@@ -29,7 +29,12 @@ Implemented:
 - Support page.
 - Email login/signup pages.
 - Supabase auth callback and logout routes.
-- Minimal protected `/[locale]/app` placeholder route.
+- Protected dashboard at `/[locale]/app`.
+- Minimal challenge creation at `/[locale]/app/challenges/new`.
+- Minimal saved challenge continuation page at `/[locale]/app/challenges/[id]`.
+- Profile/settings page at `/[locale]/app/settings`.
+- Guest import from `noproblemo.guestWorkspace.v1` to Supabase `challenges` and `challenge_sections`.
+- Display name and preferred locale profile settings.
 - Google and Apple OAuth provider start actions prepared through Supabase Auth.
 - Supabase migration for profiles and core challenge tables.
 - Owner-only RLS policies for Phase 4 tables.
@@ -38,9 +43,7 @@ Implemented:
 
 Not implemented:
 
-- Dashboard.
-- Guest import after login.
-- Cloud saved challenge UI.
+- Full saved challenge workspace.
 - Friends, invites, groups, messaging.
 - Admin/settings.
 - AI, payments, email sending, cron.
@@ -55,7 +58,10 @@ Not implemented:
 - `/[locale]/signup`: email signup and OAuth start.
 - `/[locale]/auth/callback`: Supabase auth callback.
 - `/[locale]/auth/logout`: logout handler.
-- `/[locale]/app`: protected placeholder route; full dashboard is not implemented.
+- `/[locale]/app`: protected dashboard.
+- `/[locale]/app/challenges/new`: minimal protected challenge creation.
+- `/[locale]/app/challenges/[id]`: protected continuation placeholder; full workspace is not implemented.
+- `/[locale]/app/settings`: protected profile/settings.
 
 ## Data Model Map
 
@@ -65,6 +71,8 @@ Current:
 - Guest draft: browser localStorage key `noproblemo.guestWorkspace.v1`.
 - Supabase migration: `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`.
 - Typed helpers: `lib/supabase/`.
+- Dashboard reads/writes use the authenticated Supabase session and Phase 4 tables.
+- Guest import maps `problem`, `context`, `outcome`, `options`, and `nextStep` into `challenge_sections`.
 
 Implemented Phase 4 tables:
 
@@ -92,13 +100,14 @@ Current:
 - Guest data is local-only.
 - Supabase Auth email UI/actions exist.
 - Google and Apple OAuth starts exist, but require provider setup before production use.
+- Dashboard, minimal create, profile update, and guest import use server-side session checks and RLS.
 - Phase 4 migration enables RLS for `profiles`, `challenges`, `challenge_sections`, `challenge_solutions`, and `challenge_tasks`.
 - Phase 4 RLS is owner-only and must still be verified in Supabase.
 - No service-role helper exists.
 
 Planned:
 
-- Phase 6 dashboard, guest import, and saved challenge UI.
+- Phase 7 full challenge workspace.
 - Later group/friend/message policies.
 
 Rules:
@@ -114,9 +123,9 @@ See `SECURITY.md` before implementing auth, database writes, or messaging.
 
 1. Landing page: implemented.
 2. Authentication: implemented.
-3. Dashboard: planned for Phase 6.
-4. Create and save a challenge: database foundation implemented; UI planned.
-5. Basic challenge workspace: guest-only implemented; saved workspace planned.
+3. Dashboard: implemented.
+4. Create and save a challenge: minimal create/list/import implemented; full workspace planned.
+5. Basic challenge workspace: guest-only implemented; saved workspace planned for Phase 7.
 6. Friends/invites: planned.
 7. Groups: planned.
 8. Simple messaging: planned.

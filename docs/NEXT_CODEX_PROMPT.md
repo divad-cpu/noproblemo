@@ -14,7 +14,7 @@ Before changing anything:
 8. Do not print Supabase `.temp` file contents.
 
 Task:
-Implement Phase 6 only: Dashboard and guest import.
+Implement Phase 7 only: Challenge workspace.
 
 Current foundation:
 
@@ -22,27 +22,27 @@ Current foundation:
 - TypeScript
 - Tailwind CSS 4
 - `next-intl` locale routing
-- Supported locales: `en`, `zh-CN`, `hi`, `es`, `ar`, `fr`, `bn`, `pt-BR`, `id`, `ur`, `nb`
-- RTL handling for `ar` and `ur`
-- Public routes: `/[locale]`, `/[locale]/solve`, `/[locale]/support`
-- Auth routes: `/[locale]/login`, `/[locale]/signup`, `/[locale]/auth/callback`, `/[locale]/auth/logout`
-- Minimal protected placeholder route: `/[locale]/app`
-- Guest workspace stores drafts in localStorage only
-- Supabase migration exists for profiles and core challenge tables
-- Supabase RLS foundation exists and needs verification
-- Email login/signup is implemented through Supabase Auth
-- Google and Apple OAuth starts are prepared but require provider configuration
+- Supabase Auth
+- Supabase Phase 4 schema/RLS migration
+- Email login/signup
+- Protected dashboard at `/[locale]/app`
+- Minimal cloud challenge creation
+- Minimal saved challenge continuation placeholder
+- Guest import from `noproblemo.guestWorkspace.v1`
+- Profile/settings with display name and preferred locale saving
 
-Phase 6 should include:
+Phase 7 should include:
 
-- Logged-in dashboard
-- Profile/settings page
-- Save/import guest challenge after login
-- Continue previous saved work
-- Language preference saving
-- Basic saved challenge list and create flow if needed for dashboard usefulness
+- Seven-step problem-solving workflow for saved challenges
+- Editable challenge sections
+- Possible solutions
+- Pros/cons
+- Risk/effort/impact
+- Tasks/actions
+- Final recommendation
+- Markdown export
 
-Phase 6 should not include:
+Phase 7 should not include:
 
 - Friends
 - Groups
@@ -59,8 +59,8 @@ Security requirements:
 - Use Supabase Auth sessions server-side for protected routes.
 - Use RLS as the real authorization boundary for saved challenge data.
 - Do not use `SUPABASE_SERVICE_ROLE_KEY` in frontend/client code.
-- Do not send guest localStorage data to Supabase without explicit user action.
 - Validate all server action inputs.
+- Do not fetch or expose another user's challenge data.
 - Keep user-generated content separate from UI translations.
 
 Documentation updates:

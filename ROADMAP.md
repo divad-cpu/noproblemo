@@ -74,29 +74,53 @@ Needs configuration/verification:
 - Configure Google provider in Google Cloud and Supabase.
 - Configure Apple provider in Apple Developer and Supabase.
 
+### Phase 6: Dashboard And Guest Import
+
+Status: implemented.
+
+- Protected dashboard at `/[locale]/app`
+- Authenticated challenge list and empty/error states
+- Guest draft detection from `noproblemo.guestWorkspace.v1`
+- Guest import to `challenges` and `challenge_sections`
+- Minimal cloud challenge creation
+- Minimal saved challenge continuation placeholder
+- Profile/settings page
+- Display name update
+- Preferred locale saving to `profiles.preferred_locale`
+
+Needs verification:
+
+- Apply and test the Phase 4 migration.
+- Verify dashboard reads/writes with Supabase RLS.
+- Verify guest import against a running Supabase project.
+- Verify profile trigger and profile update behavior after signup.
+
 ## Current Phase
 
-Phase 5 authentication has been implemented. Dashboard and guest import are next.
+Phase 6 dashboard and guest import has been implemented. Challenge workspace is next.
 
 ## Next Recommended Phase
 
-### Phase 6: Dashboard And Guest Import
+### Phase 7: Challenge Workspace
 
 Recommended scope:
 
-- Authenticated dashboard
-- Saved challenge list
-- Create saved challenge
-- Optional guest draft import after login
-- Initial cloud challenge workspace
+- Seven-step problem-solving workflow
+- Editable challenge sections
+- Possible solutions
+- Pros and cons
+- Risk/effort/impact
+- Tasks/actions
+- Final recommendation
+- Markdown export
 
 ## MVP Path
 
 1. Landing page: implemented.
 2. Authentication: implemented.
-3. Dashboard: planned for Phase 6.
-4. Create and save a challenge: database foundation implemented; UI planned.
-5. Basic challenge workspace: guest-only implemented; saved workspace planned.
+3. Dashboard: implemented.
+4. Create and save a challenge: minimal create/list/import implemented; full workspace planned.
+5. Basic challenge workspace: guest-only implemented; saved workspace planned for Phase 7.
 6. Friends/invites: planned.
 7. Groups: planned.
 8. Simple messaging: planned.

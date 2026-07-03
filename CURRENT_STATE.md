@@ -13,8 +13,9 @@ NoProblemo has completed:
 - Phase 3: public landing page and guest mode
 - Phase 4: Supabase foundation
 - Phase 5: authentication
+- Phase 6: dashboard and guest import
 
-Phase 6 Dashboard and guest import is next. Friends, groups, messaging, notifications, admin, payments, AI, email automation, Resend, and Vercel Cron remain future phases.
+Phase 7 Challenge workspace is next. Friends, groups, messaging, notifications, admin, payments, AI, email automation, Resend, and Vercel Cron remain future phases.
 
 ## Already Implemented
 
@@ -31,7 +32,12 @@ Phase 6 Dashboard and guest import is next. Friends, groups, messaging, notifica
 - Email login and signup routes at `/[locale]/login` and `/[locale]/signup`
 - Supabase auth callback route at `/[locale]/auth/callback`
 - Logout route at `/[locale]/auth/logout`
-- Minimal protected placeholder route at `/[locale]/app`
+- Logged-in dashboard at `/[locale]/app`
+- Minimal cloud challenge creation at `/[locale]/app/challenges/new`
+- Saved challenge continuation placeholder at `/[locale]/app/challenges/[id]`
+- Profile/settings page at `/[locale]/app/settings`
+- Guest draft import from localStorage to Supabase challenges and challenge sections
+- Profile display name and preferred locale updates
 - Google and Apple OAuth start actions prepared through Supabase Auth
 - Shared language switcher and footer
 - Guest localStorage draft persistence under `noproblemo.guestWorkspace.v1`
@@ -49,7 +55,7 @@ Phase 6 Dashboard and guest import is next. Friends, groups, messaging, notifica
 
 ## Partially Implemented
 
-- Problem-solving workflow exists as guest browser-local form fields and as planned database tables, but no UI writes to Supabase yet.
+- Problem-solving workflow exists as guest browser-local form fields, imported challenge sections, and planned full workspace tables. Full editable saved workspace is not implemented yet.
 - Google and Apple login buttons are present, but they require Supabase provider setup and external provider configuration before they work in production.
 - Supabase schema exists as a local migration but has not been verified against the live Supabase project in this task.
 - Supabase helpers are used by auth actions, callback/logout handlers, auth-aware landing links, and the protected app layout.
@@ -58,9 +64,7 @@ Phase 6 Dashboard and guest import is next. Friends, groups, messaging, notifica
 
 ## Not Yet Implemented
 
-- Dashboard
-- Guest import after login
-- Saved cloud challenge UI
+- Full saved challenge workspace
 - Friends/invites
 - Groups
 - Simple messaging
@@ -82,8 +86,13 @@ Phase 6 Dashboard and guest import is next. Friends, groups, messaging, notifica
 - `app/[locale]/auth/actions.ts`: Supabase Auth server actions.
 - `app/[locale]/auth/callback/route.ts`: Supabase auth callback handler.
 - `app/[locale]/auth/logout/route.ts`: logout handler.
-- `app/[locale]/app/layout.tsx`: protected app layout with server-side auth check.
-- `app/[locale]/app/page.tsx`: minimal protected placeholder; dashboard remains Phase 6.
+- `app/[locale]/app/layout.tsx`: protected app layout with server-side auth check and app navigation.
+- `app/[locale]/app/page.tsx`: logged-in dashboard with challenge lists and guest import prompt.
+- `app/[locale]/app/actions.ts`: server actions for challenge creation, guest import, and profile updates.
+- `app/[locale]/app/_components/guest-import-card.tsx`: client-side localStorage detection and import UI.
+- `app/[locale]/app/challenges/new/page.tsx`: minimal protected create challenge page.
+- `app/[locale]/app/challenges/[id]/page.tsx`: minimal protected saved challenge continuation placeholder.
+- `app/[locale]/app/settings/page.tsx`: protected profile/settings page.
 - `app/[locale]/_components/auth-status.tsx`: auth-aware landing links.
 - `i18n/routing.ts`: supported locales and RTL logic.
 - `messages/*.json`: UI messages.
@@ -99,7 +108,7 @@ Phase 6 Dashboard and guest import is next. Friends, groups, messaging, notifica
 
 ## Known Issues
 
-- No dashboard, guest import, saved cloud challenge UI, or cloud-saving workflow exists yet.
+- Full Phase 7 saved challenge workspace is not implemented yet.
 - Phase 4 migration needs to be applied and tested in Supabase.
 - RLS policies and profile trigger need verification with authenticated users.
 - Google and Apple OAuth require provider configuration in Supabase, Google Cloud, and Apple Developer.
@@ -110,7 +119,7 @@ Phase 6 Dashboard and guest import is next. Friends, groups, messaging, notifica
 
 ## Current Risks
 
-- Future agents might mistake the protected `/[locale]/app` placeholder for a dashboard; it is not the Phase 6 dashboard.
+- Future agents might mistake the minimal challenge detail page for the full workspace; it is only a Phase 6 continuation placeholder.
 - Future agents might use service role keys in frontend code; do not do this.
 - RLS policies are written but still need live/local Supabase verification.
 - User-generated problem content may be sensitive; privacy must be designed into auth and dashboard phases.
@@ -118,17 +127,20 @@ Phase 6 Dashboard and guest import is next. Friends, groups, messaging, notifica
 
 ## Next Recommended Phase
 
-Phase 6: Dashboard and guest import.
+Phase 7: Challenge workspace.
 
 Recommended scope:
 
-- Logged-in dashboard
-- Profile/settings page
-- Save/import guest challenge after login
-- Continue previous saved work
-- Language preference saving
+- Seven-step problem-solving workflow
+- Editable saved challenge sections
+- Possible solutions
+- Pros and cons
+- Risk, effort, and impact
+- Tasks/actions
+- Final recommendation
+- Markdown export
 
-Do not implement friends, groups, messaging, notifications, or admin in Phase 6 unless explicitly scoped.
+Do not implement friends, groups, messaging, notifications, or admin in Phase 7 unless explicitly scoped.
 
 ## Validation Commands
 
@@ -147,6 +159,12 @@ Validation for Phase 4:
 - `npm run build`: passed on 2026-07-03 after rerunning with escalation for the known Turbopack sandbox port-bind issue.
 
 Validation for Phase 5:
+
+- `npm run lint`: passed on 2026-07-03.
+- `npm run typecheck`: passed on 2026-07-03.
+- `npm run build`: passed on 2026-07-03 after rerunning with escalation for the known Turbopack sandbox port-bind issue.
+
+Validation for Phase 6:
 
 - `npm run lint`: passed on 2026-07-03.
 - `npm run typecheck`: passed on 2026-07-03.

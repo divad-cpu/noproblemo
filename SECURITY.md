@@ -2,9 +2,9 @@
 
 ## Current Security Posture
 
-Phase 5 adds Supabase Auth email login/signup, callback handling, logout, OAuth provider starts, and a minimal protected route. Cloud-saving UI is not implemented yet.
+Phase 6 adds a protected dashboard, minimal cloud challenge creation, guest draft import, saved challenge continuation placeholder, and profile/settings updates on top of the Phase 5 auth foundation.
 
-Guest challenge drafts still remain in browser localStorage only. Existing app routes do not write guest data to Supabase.
+Guest challenge drafts remain in browser localStorage until an authenticated user explicitly imports them from the dashboard.
 
 ## Authentication Security
 
@@ -51,15 +51,28 @@ These policies still need to be applied and tested in Supabase.
 - Messaging policies
 - Admin policies
 - Organization account policies
-- Dashboard authorization checks beyond the minimal protected placeholder
-- Server actions or route handlers for challenge database writes
+- Full saved challenge workspace authorization checks
+- Server actions for editing full challenge sections, solutions, and tasks
 
 ## User Ownership Rules
 
 - A user can manage their own profile.
 - A user can create challenges they own.
 - A user can access only their own challenge records in the Phase 4 schema.
-- Guest localStorage data has no server-side owner until a future explicit save/import flow is implemented.
+- Guest localStorage data has no server-side owner until an authenticated user imports it.
+- Imported guest work is created with `owner_id = auth.uid()` through the authenticated Supabase session.
+
+## Dashboard And Guest Import Security
+
+Phase 6 dashboard operations use `lib/supabase/server.ts`, the public Supabase anon key, and request cookies. No service-role key is used.
+
+- Dashboard challenge reads filter by the authenticated user's id and are still constrained by RLS.
+- Challenge creation sets `owner_id` from the authenticated Supabase user, not from client-provided input.
+- Guest import accepts only the existing localStorage draft shape from `noproblemo.guestWorkspace.v1`.
+- Guest import creates a private draft challenge and related `challenge_sections`.
+- The client marks an imported local draft with `importedChallengeId` to avoid repeated imports from the same browser draft.
+- Duplicate prevention is browser-local in Phase 6 because no import fingerprint column exists in the Phase 4 schema.
+- Profile updates validate the preferred locale against the supported locale list and update only basic profile fields.
 
 ## Group Access Rules
 
@@ -137,7 +150,7 @@ Users may write personal, workplace, public-sector, or organizational problems. 
 - Avoid logging sensitive challenge content.
 - Provide clear export and deletion paths in future account phases.
 - Do not automatically translate user-generated content.
-- Do not send guest drafts to Supabase without explicit user action in a future scoped phase.
+- Do not send guest drafts to Supabase without explicit authenticated user action.
 
 ## Validation Requirements
 

@@ -23,8 +23,13 @@
 - `app/[locale]/auth/actions.ts`: Supabase Auth server actions for email and provider login.
 - `app/[locale]/auth/callback/route.ts`: Supabase callback handler for email confirmation, magic link, and OAuth session exchange.
 - `app/[locale]/auth/logout/route.ts`: logout handler.
-- `app/[locale]/app/layout.tsx`: protected app route boundary with server-side session check.
-- `app/[locale]/app/page.tsx`: minimal protected placeholder; dashboard remains planned for Phase 6.
+- `app/[locale]/app/layout.tsx`: protected app route boundary with server-side session check and app navigation.
+- `app/[locale]/app/page.tsx`: logged-in dashboard with profile summary, saved challenge lists, guest import prompt, and empty/error states.
+- `app/[locale]/app/actions.ts`: server actions for creating draft challenges, importing guest drafts, and updating profile settings.
+- `app/[locale]/app/_components/guest-import-card.tsx`: client component that detects the existing guest localStorage draft and submits it for server-side import.
+- `app/[locale]/app/challenges/new/page.tsx`: minimal protected cloud challenge creation page.
+- `app/[locale]/app/challenges/[id]/page.tsx`: minimal protected saved challenge continuation page; full workspace remains Phase 7.
+- `app/[locale]/app/settings/page.tsx`: protected profile/settings page for display name and preferred locale.
 - `app/[locale]/_components/auth-status.tsx`: auth-aware landing links.
 - `app/[locale]/_components/language-switcher.tsx`: locale switcher.
 - `app/[locale]/_components/site-footer.tsx`: shared footer with support email.
@@ -49,7 +54,10 @@ No shared top-level `components/` directory currently exists. Add it only when s
 - `/[locale]/signup` email signup and OAuth start.
 - `/[locale]/auth/callback` Supabase auth callback route handler.
 - `/[locale]/auth/logout` logout route handler.
-- `/[locale]/app` protected placeholder route, not the full dashboard.
+- `/[locale]/app` protected dashboard.
+- `/[locale]/app/challenges/new` minimal protected create challenge page.
+- `/[locale]/app/challenges/[id]` minimal protected saved challenge continuation page.
+- `/[locale]/app/settings` protected profile/settings page.
 
 Supported locales are `en`, `zh-CN`, `hi`, `es`, `ar`, `fr`, `bn`, `pt-BR`, `id`, `ur`, and `nb`. Arabic and Urdu use `dir="rtl"`.
 
@@ -92,7 +100,7 @@ Implemented in Phase 5:
 
 Google and Apple OAuth flows are prepared through Supabase Auth provider starts, but they require external provider configuration before production use.
 
-Dashboard and guest import remain Phase 6.
+Dashboard and guest import were added in Phase 6. Full challenge workspace remains Phase 7.
 
 ## Data Flow
 
@@ -100,14 +108,17 @@ Current data flow:
 
 - UI messages load from `messages/*.json`.
 - Guest workspace state is stored in browser localStorage under `noproblemo.guestWorkspace.v1`.
-- Guest data is not sent to Supabase.
+- Guest data is not sent to Supabase unless an authenticated user explicitly imports it from the dashboard.
 - Supabase helpers are used by auth actions, callback/logout route handlers, auth-aware landing links, and protected route checks.
 - Auth server actions validate basic form shape and then call Supabase Auth.
-- No dashboard database queries or challenge cloud-saving writes exist yet.
+- Dashboard reads the authenticated user's `profiles` and `challenges` rows through the normal Supabase session.
+- Guest import creates a private draft `challenges` row and related `challenge_sections` rows through the authenticated Supabase session.
+- Minimal create challenge creates a private draft `challenges` row.
+- Profile settings update `profiles.display_name` and `profiles.preferred_locale`.
 
 Planned data flow:
 
-- Phase 6: authenticated dashboard, profile/settings, guest import, and saved challenge reads/writes through Supabase RLS.
+- Phase 7: editable saved challenge workspace using the Phase 4 challenge tables through Supabase RLS.
 - Later: friends, groups, invites, and messaging policies.
 
 ## Deployment Direction

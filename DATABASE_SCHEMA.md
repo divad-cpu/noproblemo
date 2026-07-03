@@ -170,10 +170,31 @@ Manual database types were added in `lib/supabase/types.ts`. They should be rege
 
 Phase 5 uses the Phase 4 `auth_users_create_profile` trigger for profile creation after signup. No new schema migration was added in Phase 5. The trigger still needs to be verified after the Phase 4 migration is applied to Supabase.
 
+## Phase 6 Dashboard And Import Notes
+
+No new schema migration was added in Phase 6.
+
+Phase 6 uses existing tables:
+
+- `profiles` for `display_name` and `preferred_locale` settings.
+- `challenges` for dashboard lists, minimal draft creation, and imported guest drafts.
+- `challenge_sections` for imported guest draft content.
+
+Guest import maps the existing localStorage draft key `noproblemo.guestWorkspace.v1` as follows:
+
+- `problem` -> `challenge_sections.section_key = 'problem_title'`
+- `context` -> `challenge_sections.section_key = 'background_context'`
+- `outcome` -> `challenge_sections.section_key = 'final_recommendation'`
+- `options` -> `challenge_sections.section_key = 'possible_causes'`
+- `nextStep` -> `challenge_sections.section_key = 'summary'`
+
+The imported challenge title is derived from the first line of `problem`, with a fallback title. Duplicate prevention is marked in the browser localStorage draft with `importedChallengeId`; a database-level import fingerprint is not implemented.
+
 ## Needs Verification
 
 - Apply migration in local Supabase and/or linked Supabase project.
 - Test profile trigger after signup.
 - Test every RLS policy with authenticated users.
+- Test Phase 6 dashboard reads, create challenge, profile update, and guest import against a running Supabase project.
 - Confirm whether the challenge section list is sufficient for the MVP saved workspace.
 - Confirm whether organization accounts need schema support before MVP launch.

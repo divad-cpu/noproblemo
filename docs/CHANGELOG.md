@@ -62,3 +62,17 @@
 - Updated all locale message catalogs with auth UI keys.
 - Updated documentation for Phase 6 dashboard and guest import handoff.
 - Confirmed lint, typecheck, and production build pass.
+
+## 2026-07-03 Phase 6
+
+- Added protected dashboard at `/[locale]/app`.
+- Added authenticated Supabase challenge lists with active/latest sections.
+- Added guest draft detection for `noproblemo.guestWorkspace.v1`.
+- Added guest import to `challenges` and `challenge_sections`.
+- Added browser-local imported draft marking with `importedChallengeId`.
+- Added minimal protected challenge creation route.
+- Added minimal protected saved challenge continuation route.
+- Added protected profile/settings page with display name and preferred locale saving.
+- Updated all locale message catalogs with Phase 6 UI keys.
+- Updated documentation for Phase 7 challenge workspace handoff.
+- Confirmed lint, typecheck, and production build pass.

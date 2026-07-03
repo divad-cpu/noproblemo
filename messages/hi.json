@@ -222,7 +222,9 @@
     "nav": {
       "home": "Back to home",
       "signedIn": "Signed in",
-      "logout": "Log out"
+      "logout": "Log out",
+      "dashboard": "Dashboard",
+      "settings": "Settings"
     },
     "eyebrow": "Protected area",
     "title": "Authentication is ready.",
@@ -232,5 +234,128 @@
       "support": "Contact support"
     },
     "phaseNote": "No dashboard data is saved or imported in Phase 5."
+  },
+  "Dashboard": {
+    "eyebrow": "Dashboard",
+    "title": "Welcome back.",
+    "titleWithName": "Welcome back, {name}.",
+    "body": "Manage saved challenges, import guest work from this device, and continue where you left off.",
+    "actions": {
+      "newChallenge": "New challenge",
+      "settings": "Profile settings"
+    },
+    "summary": {
+      "total": "Saved challenges",
+      "active": "Active drafts",
+      "future": "Collaboration"
+    },
+    "futureNote": "Friends, groups, and messages are planned for later phases.",
+    "guestImport": {
+      "eyebrow": "Guest work found",
+      "title": "You have unsaved guest work on this device.",
+      "body": "Import it to your account to continue later. The import creates a private draft challenge owned by your logged-in user.",
+      "importedTitle": "Guest work imported.",
+      "importedBody": "This device has already imported the current guest draft. You can continue from the saved challenge.",
+      "fallbackTitle": "Imported guest challenge",
+      "importAction": "Import guest work",
+      "importing": "Importing...",
+      "continueImported": "Continue imported challenge",
+      "reviewGuest": "Review guest draft",
+      "messages": {
+        "success": "Guest work was imported to your account.",
+        "alreadyImported": "This guest draft was already imported from this device.",
+        "missingDraft": "No guest draft was sent for import.",
+        "invalidDraft": "The guest draft could not be read.",
+        "emptyDraft": "The guest draft is empty.",
+        "authRequired": "Log in before importing guest work.",
+        "createFailed": "The saved challenge could not be created.",
+        "sectionsFailed": "The challenge was created, but its sections could not be imported."
+      }
+    },
+    "challenge": {
+      "status": "Status",
+      "updated": "Updated",
+      "continue": "Continue",
+      "noDescription": "No short description yet."
+    },
+    "active": {
+      "title": "My active challenges",
+      "body": "Draft and active saved challenges linked to your account."
+    },
+    "recent": {
+      "title": "Latest saved challenges",
+      "body": "Recent cloud challenges available through your authenticated session.",
+      "empty": "No saved cloud challenges yet."
+    },
+    "empty": {
+      "title": "No saved challenges yet.",
+      "body": "Create a cloud draft or import guest work from this device when you are ready.",
+      "action": "Create first challenge"
+    },
+    "errors": {
+      "listTitle": "Challenges could not be loaded.",
+      "listBody": "Check Supabase configuration, migration status, and RLS policies."
+    }
+  },
+  "CreateChallenge": {
+    "back": "Back to dashboard",
+    "eyebrow": "New cloud draft",
+    "title": "Create a saved challenge.",
+    "body": "Start with a title and short description. The full structured workspace begins in Phase 7.",
+    "fields": {
+      "title": "Title",
+      "titlePlaceholder": "What problem are you solving?",
+      "shortDescription": "Short description",
+      "shortDescriptionPlaceholder": "Add a short context note, optional"
+    },
+    "submit": "Create draft challenge",
+    "errors": {
+      "missing-title": "Add a title before creating the challenge.",
+      "create-failed": "The challenge could not be created. Check Supabase setup and RLS policies."
+    }
+  },
+  "ChallengeDetail": {
+    "back": "Back to dashboard",
+    "created": "Draft challenge was created.",
+    "eyebrow": "Saved challenge",
+    "status": "Status",
+    "noDescription": "No short description yet.",
+    "phaseSevenTitle": "Workspace starts in Phase 7.",
+    "phaseSevenBody": "This page lets you continue to a saved challenge and review imported sections. Editing the full structured workflow belongs to the next phase.",
+    "sections": {
+      "title": "Imported sections",
+      "empty": "No content yet.",
+      "none": "No sections have been saved for this challenge yet.",
+      "keys": {
+        "problem_title": "Problem title",
+        "short_description": "Short description",
+        "background_context": "Background/context",
+        "who_is_affected": "Who is affected",
+        "why_it_matters": "Why it matters",
+        "possible_causes": "Possible causes or options",
+        "final_recommendation": "Outcome or recommendation",
+        "summary": "Summary or next step"
+      }
+    }
+  },
+  "Settings": {
+    "back": "Back to dashboard",
+    "eyebrow": "Profile settings",
+    "title": "Manage your basic profile.",
+    "body": "Update your display name and preferred language. Advanced account management is planned for later phases.",
+    "account": "Account email",
+    "fields": {
+      "displayName": "Display name",
+      "displayNamePlaceholder": "Your name",
+      "preferredLocale": "Preferred language"
+    },
+    "localeNote": "Preferred language is saved to your profile. The current route language still follows the URL until routing preference sync is added later.",
+    "submit": "Save profile",
+    "status": {
+      "saved": "Profile settings were saved."
+    },
+    "errors": {
+      "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies."
+    }
   }
 }

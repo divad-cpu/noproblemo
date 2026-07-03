@@ -72,3 +72,18 @@ Phase 5 authentication:
 - Updated all eleven message catalogs with auth UI keys.
 - Did not implement dashboard, guest import, cloud challenge saving, groups, friends, messages, admin, email, cron, payments, or AI.
 - Validation passed: `npm run lint`, `npm run typecheck`, and `npm run build`.
+
+Phase 6 dashboard and guest import:
+
+- Inspected required handoff docs, package scripts, App Router routes, guest localStorage implementation, Supabase helpers/types, migration files, message catalogs, and installed Next.js server action/data fetching docs.
+- Replaced the protected `/[locale]/app` placeholder with a logged-in dashboard.
+- Added authenticated challenge reads from Supabase with active/latest lists, empty states, and error states.
+- Added guest draft detection for `noproblemo.guestWorkspace.v1`.
+- Added guest import from localStorage to Supabase `challenges` and `challenge_sections`.
+- Added browser-local duplicate prevention by marking imported drafts with `importedChallengeId`.
+- Added minimal protected challenge creation at `/[locale]/app/challenges/new`.
+- Added minimal protected saved challenge continuation at `/[locale]/app/challenges/[id]`.
+- Added protected profile/settings at `/[locale]/app/settings` for display name and preferred locale.
+- Updated all eleven message catalogs with Phase 6 UI keys.
+- Did not implement full challenge workspace, friends, groups, messaging, notifications, admin, payments, AI, email automation, Resend, or Vercel Cron.
+- Validation passed: `npm run lint`, `npm run typecheck`, and `npm run build`.

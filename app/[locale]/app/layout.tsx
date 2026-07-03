@@ -43,6 +43,18 @@ export default async function ProtectedAppLayout({
             {t("nav.home")}
           </Link>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Link
+              href="/app"
+              className="text-sm font-semibold text-[#373632] underline-offset-4 hover:underline"
+            >
+              {t("nav.dashboard")}
+            </Link>
+            <Link
+              href="/app/settings"
+              className="text-sm font-semibold text-[#373632] underline-offset-4 hover:underline"
+            >
+              {t("nav.settings")}
+            </Link>
             <span className="text-sm text-[#706f68]">{t("nav.signedIn")}</span>
             <form action={`/${locale}/auth/logout`} method="post">
               <button

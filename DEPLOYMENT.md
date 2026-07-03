@@ -81,7 +81,7 @@ Do not print `.env.local` values.
 
 ## Current Deployment Scope
 
-Current app includes localized public pages, a guest localStorage workspace, Supabase helpers, a local migration, and Supabase Auth UI/actions. It does not include dashboard, guest import, saved cloud projects, payments, email sending, AI, or scheduled jobs.
+Current app includes localized public pages, a guest localStorage workspace, Supabase helpers, a local migration, Supabase Auth UI/actions, protected dashboard, guest import, profile settings, and minimal cloud challenge creation. It does not include the full challenge workspace, friends, groups, messaging, payments, email sending, AI, or scheduled jobs.
 
 ## Production Checklist
 
@@ -92,5 +92,6 @@ Current app includes localized public pages, a guest localStorage workspace, Sup
 - `npm run build` passes.
 - Vercel env vars are configured.
 - Supabase RLS policies are tested before any private data ships.
+- Dashboard challenge reads/writes and guest import are tested against Supabase RLS.
 - Auth redirect URLs match production domain before real auth launches.
 - Support contact remains `support@noproblemo.tech` unless intentionally changed.

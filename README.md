@@ -1,20 +1,18 @@
 # NoProblemo
 
-NoProblemo is a Next.js App Router project prepared for incremental product development. Phase 5 adds Supabase authentication foundation before dashboard, guest import, and cloud saving.
+NoProblemo is a Next.js App Router project prepared for incremental product development. Phase 6 adds the first protected dashboard, guest import, profile settings, and minimal cloud challenge creation.
 
 ## Current Phase
 
-Phase 5 is complete when email auth, OAuth provider starts, logout, a protected route boundary, documentation, linting, type checking, and production build all pass. Dashboard, guest import, and cloud-saving UI remain intentionally deferred.
+Phase 6 is complete when the protected dashboard, guest import, profile settings, minimal challenge creation, documentation, linting, type checking, and production build all pass. The full challenge workspace remains intentionally deferred.
 
-Not included in Phase 5:
+Not included in Phase 6:
 
-- Dashboard
-- Guest import after login
+- Full seven-step challenge workspace
 - Payments
 - AI features
 - Resend email
 - Vercel Cron
-- Cloud project saving
 - Real collaboration
 
 ## Stack
@@ -56,19 +54,30 @@ Arabic (`ar`) and Urdu (`ur`) render with `dir="rtl"`. All other supported local
 - `/[locale]/signup` email signup and Google/Apple OAuth start route
 - `/[locale]/auth/callback` Supabase auth callback
 - `/[locale]/auth/logout` logout handler
-- `/[locale]/app` protected placeholder route, not the full dashboard
+- `/[locale]/app` protected dashboard
+- `/[locale]/app/challenges/new` minimal protected challenge creation
+- `/[locale]/app/challenges/[id]` protected challenge continuation placeholder
+- `/[locale]/app/settings` protected profile/settings page
 
 ## Guest Mode
 
-Guest users can start a problem-solving session without login. Drafts are stored in local browser storage under `noproblemo.guestWorkspace.v1` and are not sent to Supabase. Guests can copy or export a Markdown summary.
+Guest users can start a problem-solving session without login. Drafts are stored in local browser storage under `noproblemo.guestWorkspace.v1`. Guests can copy or export a Markdown summary.
 
 Actions that require cloud saving or collaboration show a login prompt instead of performing the action.
+
+Logged-in users can import the current guest draft from the dashboard. Import creates a private draft challenge and related challenge sections through the authenticated Supabase session, then marks the local draft with `importedChallengeId` to avoid repeated imports from the same browser draft.
 
 ## Authentication
 
 Email login/signup uses Supabase Auth. Google and Apple login buttons are prepared through Supabase OAuth, but they require provider configuration in Supabase, Google Cloud, and Apple Developer before production use.
 
 The Phase 4 database trigger is expected to create `profiles` rows after signup, but it still needs verification after the migration is applied to the real Supabase project.
+
+## Dashboard And Settings
+
+The dashboard lists the authenticated user's saved challenges through Supabase RLS, shows empty/error states, and provides a minimal create challenge action. The challenge detail page is only a continuation placeholder until Phase 7.
+
+Profile settings can update `display_name` and `preferred_locale`. The preferred locale is saved to `profiles.preferred_locale`; current route language still follows the URL until routing preference sync is added later.
 
 ## Local Setup
 
