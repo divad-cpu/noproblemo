@@ -1,8 +1,8 @@
 # Security
 
-## Phase 1 Security Posture
+## Phase 3 Security Posture
 
-Phase 1 focuses on preventing accidental secret exposure and avoiding premature integrations.
+Phase 3 focuses on preventing accidental secret exposure, keeping guest work local, and avoiding premature cloud integrations.
 
 ## Environment Variables
 
@@ -33,6 +33,15 @@ The following items are intentionally deferred until the matching feature exists
 - AI safety controls
 - Email abuse controls
 - Cron and job authorization
+
+## Guest Data
+
+- Guest workspace data is stored in local browser storage only.
+- Guest data is not sent to Supabase.
+- Guest data is not synchronized across devices.
+- Users can copy or export their own Markdown summary.
+- Do not automatically translate user-generated content.
+- Do not store sensitive personal data, passwords, private keys, or payment information in guest drafts.
 
 ## Validation
 

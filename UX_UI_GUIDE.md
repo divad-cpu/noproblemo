@@ -4,9 +4,9 @@
 
 NoProblemo should feel calm, practical, and easy to understand. The interface should be minimal without feeling unfinished.
 
-## Phase 2 UI
+## Phase 3 UI
 
-The Phase 2 UI is a localized static foundation page that communicates project status. It includes a simple language switcher, but it does not include login, dashboards, forms, payments, AI controls, or settings.
+The Phase 3 UI includes a calm public landing page, support page, placeholder auth pages, and a guest problem-solving workspace. It does not include dashboards, real auth forms, payments, AI controls, admin, or settings.
 
 ## Principles
 
@@ -17,6 +17,8 @@ The Phase 2 UI is a localized static foundation page that communicates project s
 - Avoid explaining implementation details inside the product UI.
 - Keep translated strings concise so all supported locales fit on mobile.
 - Respect RTL layout direction for Arabic and Urdu.
+- Use calm login prompts for save or collaboration actions that are unavailable to guests.
+- Keep guest workflow forms practical and sparse.
 
 ## Accessibility Baseline
 
@@ -27,4 +29,4 @@ The Phase 2 UI is a localized static foundation page that communicates project s
 
 ## Future UI Work
 
-When feature work starts, document common components, form patterns, loading states, empty states, and error states here.
+Future UI work should document authenticated dashboard patterns, cloud project states, collaboration states, and auth form states when those phases begin.

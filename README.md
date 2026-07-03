@@ -1,21 +1,22 @@
 # NoProblemo
 
-NoProblemo is a Next.js App Router project prepared for incremental product development. Phase 2 establishes internationalization foundation only: locale routing, message files, translated UI text, and RTL handling.
+NoProblemo is a Next.js App Router project prepared for incremental product development. Phase 3 adds the public landing page, support page, and a local-only guest problem-solving workspace.
 
 ## Current Phase
 
-Phase 2 is complete when the repository has locale-prefixed routes and validates with linting, type checking, and production build. Feature work is intentionally deferred.
+Phase 3 is complete when public routes, guest mode, locale routing, linting, type checking, and production build all pass. Cloud persistence and authentication remain intentionally deferred.
 
-Not included in Phase 2:
+Not included in Phase 3:
 
-- Authentication or login UI
+- Real authentication
 - Supabase database migrations
 - Google or Apple login
 - Payments
 - AI features
 - Resend email
 - Vercel Cron
-- Full guest workspace
+- Cloud project saving
+- Real collaboration
 
 ## Stack
 
@@ -46,6 +47,20 @@ Supported locales:
 Routes are locale-prefixed, for example `/en`, `/nb`, `/es`, `/fr`, `/ar`, and `/ur`. The root route `/` redirects to a locale using `next-intl` middleware detection with `en` as the fallback.
 
 Arabic (`ar`) and Urdu (`ur`) render with `dir="rtl"`. All other supported locales render with `dir="ltr"`.
+
+## Public Routes
+
+- `/[locale]` public landing page
+- `/[locale]/solve` guest problem-solving workspace
+- `/[locale]/support` support/contact page
+- `/[locale]/login` placeholder login route
+- `/[locale]/signup` placeholder account route
+
+## Guest Mode
+
+Guest users can start a problem-solving session without login. Drafts are stored in local browser storage under `noproblemo.guestWorkspace.v1` and are not sent to Supabase. Guests can copy or export a Markdown summary.
+
+Actions that require cloud saving or collaboration show a login prompt instead of performing the action.
 
 ## Local Setup
 

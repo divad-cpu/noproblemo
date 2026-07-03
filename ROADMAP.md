@@ -28,14 +28,29 @@ Scope:
 
 ## Phase 3: Guest Workspace Foundation
 
+Status: implemented in this repository.
+
+Scope:
+
+- Public landing page
+- Support/contact page
+- Guest problem-solving workspace
+- Local browser storage for guest drafts
+- Markdown copy/export
+- Login prompts for save and collaboration actions
+- Placeholder login and signup routes
+
+## Phase 4: Supabase Foundation
+
 Status: deferred.
 
 Possible scope:
 
-- Confirm first user workflow
-- Define data model
-- Add Supabase migrations if needed
-- Add first real route and UI flow
+- Define database schema
+- Add Supabase migrations
+- Add row-level security design
+- Prepare cloud project saving
+- Keep auth and collaboration scoped to explicit phase requirements
 
 ## Later Phases
 

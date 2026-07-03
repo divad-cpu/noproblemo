@@ -1,26 +1,152 @@
 {
   "Metadata": {
     "title": "NoProblemo",
-    "description": "A simple, reliable foundation for the NoProblemo project."
+    "description": "A calm place to shape problems before you solve them."
   },
   "Home": {
-    "eyebrow": "Phase 2 internationalization",
-    "title": "NoProblemo is ready to welcome more languages.",
-    "description": "This deployment remains intentionally minimal. It now verifies locale routing, translated interface text, safe language switching, and right-to-left layout handling before product features begin.",
-    "cards": {
-      "stack": {
-        "label": "Stack",
-        "value": "Next.js, TypeScript, Tailwind CSS"
+    "eyebrow": "Guest mode is open",
+    "title": "Turn a messy challenge into a clearer next step.",
+    "description": "NoProblemo helps you write down the problem, compare options, and leave with a simple action plan. Start as a guest now; create an account later when you want cloud saving or collaboration.",
+    "primaryCta": "Start solving now as guest",
+    "signupCta": "Create account",
+    "loginCta": "Log in",
+    "what": {
+      "title": "What NoProblemo is",
+      "body": "A lightweight problem-solving workspace for people who want structure before decisions. It keeps the first step quiet, practical, and focused."
+    },
+    "guest": {
+      "title": "Start as guest",
+      "body": "Use the workflow without login. Your temporary draft stays in this browser only and can be copied or exported as Markdown."
+    },
+    "account": {
+      "title": "Account when needed",
+      "body": "Login and account creation are placeholders for now. Later, accounts will unlock saving, groups, and collaboration."
+    },
+    "workflow": {
+      "eyebrow": "Workflow preview",
+      "title": "A simple path through the problem",
+      "steps": {
+        "capture": {
+          "title": "Capture the challenge",
+          "body": "Write the problem in plain language and add the context that matters."
+        },
+        "shape": {
+          "title": "Shape possible answers",
+          "body": "List options, tradeoffs, and the outcome you want to reach."
+        },
+        "choose": {
+          "title": "Choose a next step",
+          "body": "End with one practical action you can take without needing a full project setup."
+        }
+      }
+    },
+    "collaboration": {
+      "title": "Collaboration comes after clarity",
+      "body": "Guest mode is private to this browser. Groups, invites, messages, members, and shared projects will require login in a later phase.",
+      "note": "This keeps the public experience useful without exposing private project data or creating unfinished collaboration flows."
+    },
+    "benefits": {
+      "guest": {
+        "title": "No account required to start",
+        "body": "Begin with the problem itself instead of an onboarding flow."
       },
-      "backend": {
-        "label": "Backend",
-        "value": "Supabase configured, migrations deferred"
+      "structured": {
+        "title": "Structured but lightweight",
+        "body": "The workflow gives enough shape to move without turning into a heavy project manager."
       },
-      "scope": {
-        "label": "Scope",
-        "value": "Guest-mode principle preserved; workspace not built yet"
+      "private": {
+        "title": "Local by default",
+        "body": "Guest work stays in browser storage and is not sent to Supabase."
       }
     }
+  },
+  "Solve": {
+    "eyebrow": "Guest workspace",
+    "title": "Start a problem-solving session without login.",
+    "body": "Use this temporary workspace to clarify a challenge. Guest work is stored only in this browser and can be copied or exported before you leave.",
+    "backHome": "Back to landing page",
+    "supportHint": "Need help?",
+    "workspace": {
+      "title": "Problem-solving workflow",
+      "localNotice": "Your guest draft is saved in local browser storage. It is not sent to Supabase.",
+      "summaryTitle": "Guest challenge summary",
+      "emptyValue": "Not filled in yet.",
+      "fields": {
+        "problem": {
+          "label": "What problem are you solving?",
+          "placeholder": "Describe the challenge in one or two plain sentences."
+        },
+        "context": {
+          "label": "What context matters?",
+          "placeholder": "Add constraints, people involved, deadlines, or background."
+        },
+        "outcome": {
+          "label": "What would a good outcome look like?",
+          "placeholder": "Describe the result you want."
+        },
+        "options": {
+          "label": "What options are on the table?",
+          "placeholder": "List possible approaches, tradeoffs, or open questions."
+        },
+        "nextStep": {
+          "label": "What is the next practical step?",
+          "placeholder": "Choose one action you can take next."
+        }
+      },
+      "copyMarkdown": "Copy Markdown summary",
+      "exportMarkdown": "Export Markdown",
+      "save": "Save",
+      "copySuccess": "Markdown summary copied.",
+      "copyFallback": "Copy failed. You can select the summary and copy it manually.",
+      "guestLimits": {
+        "title": "Guest mode limits",
+        "body": "These actions need an account because they would save or share data beyond this browser."
+      },
+      "blockedActions": {
+        "save": "Save cloud project",
+        "collaborate": "Collaborate",
+        "invite": "Invite friends",
+        "createGroup": "Create group",
+        "sendMessage": "Send message",
+        "continueLater": "Continue later",
+        "addMember": "Add member"
+      }
+    }
+  },
+  "LoginPrompt": {
+    "title": "Login required for saving and collaboration",
+    "body": "You can use NoProblemo without an account, but login is required to save your work and collaborate with others.",
+    "continueWithoutSaving": "Continue without saving",
+    "loginAndSave": "Log in and save this challenge",
+    "signupAndSave": "Create account and save this challenge"
+  },
+  "Support": {
+    "eyebrow": "Support",
+    "title": "Contact NoProblemo support",
+    "body": "For help, feedback, or questions about this early version, contact support by email.",
+    "emailLabel": "Support email",
+    "helpText": "Do not send passwords, private keys, payment details, or sensitive personal information.",
+    "backHome": "Back to landing page"
+  },
+  "AuthPlaceholder": {
+    "continueGuest": "Continue as guest",
+    "createAccount": "Create account",
+    "logIn": "Log in",
+    "login": {
+      "eyebrow": "Future login",
+      "title": "Login is not built yet.",
+      "body": "Authentication is planned for a later phase. For now, continue as guest and keep work in this browser."
+    },
+    "signup": {
+      "eyebrow": "Future account",
+      "title": "Account creation is not built yet.",
+      "body": "Accounts will later support cloud saving and collaboration. For now, guest mode keeps your draft local."
+    }
+  },
+  "Footer": {
+    "brand": "NoProblemo",
+    "tagline": "Guest-first problem solving.",
+    "supportLink": "Support"
   },
   "LanguageSwitcher": {
     "label": "Language",
