@@ -20,7 +20,7 @@ NoProblemo has completed:
 - Phase 10: admin/settings and local project logs
 - Phase 11: polish, security review and deployment preparation
 
-Production verification and launch readiness is next. Payments, AI, email automation, Resend, and Vercel Cron remain future phases.
+Production verification preparation is complete. Controlled Supabase/Vercel production verification is next. Payments, AI, email automation, Resend, and Vercel Cron remain future phases.
 
 ## Already Implemented
 
@@ -68,6 +68,7 @@ Production verification and launch readiness is next. Payments, AI, email automa
 - Phase 11 mobile/tablet navigation polish, dashboard grid polish, long-text wrapping, visible keyboard focus, dialog semantics, and safer query feedback handling
 - Phase 11 i18n key parity and RTL configuration checks
 - Phase 11 security/deployment documentation review
+- Production verification preparation docs for Supabase, Vercel, Domeneshop DNS, Auth providers, RLS, multi-user manual testing, and launch readiness
 - Notification/activity triggers for friend requests, group invitations, group/member events, group challenge links, and messages
 - Phase 10 local migration for admin helper functions, admin audit log, admin-only RPCs, profile role hardening, and admin profile read policy
 - Google and Apple OAuth start actions prepared through Supabase Auth
@@ -149,6 +150,10 @@ Production verification and launch readiness is next. Payments, AI, email automa
 - `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`: Phase 4 schema and RLS migration.
 - `docs/CODEX_PROJECT_MAP.md`: central durable project map.
 - `docs/PHASE_HANDOFF_TEMPLATE.md`: reusable future prompt template.
+- `docs/PRODUCTION_VERIFICATION.md`: production verification checklist.
+- `docs/SUPABASE_VERIFICATION.md`: Supabase manual verification checklist.
+- `docs/MANUAL_TEST_PLAN.md`: multi-user app manual test plan.
+- `docs/LAUNCH_READINESS_REPORT.md`: launch readiness status and blocker report.
 
 ## Known Issues
 
@@ -160,6 +165,7 @@ Production verification and launch readiness is next. Payments, AI, email automa
 - Admin role checks, admin RPCs, admin audit log RLS, and profile role hardening need verification with authenticated admin and non-admin users.
 - Supabase CLI is not installed in this environment, so Supabase CLI lint/list checks were not run.
 - Production Vercel environment variables, Supabase Auth redirect URLs, Domeneshop DNS, and support mailbox/alias setup still need manual verification.
+- Production verification preparation did not change real Supabase, Vercel, Domeneshop, DNS, or support mailbox settings.
 - `npm audit` reports moderate PostCSS advisories through Next.js 16.2.10's dependency tree. The suggested `npm audit fix --force` would install `next@9.3.3`, a breaking downgrade, so it was not applied.
 - Google and Apple OAuth require provider configuration in Supabase, Google Cloud, and Apple Developer.
 - Guest drafts are browser-local and can be lost if localStorage is cleared.
@@ -177,7 +183,7 @@ Production verification and launch readiness is next. Payments, AI, email automa
 
 ## Next Recommended Phase
 
-Production verification and launch readiness.
+Controlled Supabase/Vercel production verification.
 
 Recommended scope:
 
@@ -187,6 +193,7 @@ Recommended scope:
 - Configure Vercel environment variables and custom domain.
 - Configure Domeneshop DNS and the support mailbox or alias.
 - Manually test all core app flows on mobile, desktop, and all supported locales.
+- Record results in `docs/LAUNCH_READINESS_REPORT.md` and `CURRENT_STATE.md`.
 
 Do not add unrelated product features during production verification.
 
@@ -243,6 +250,13 @@ Validation for Phase 10:
 - `npm run build`: passed on 2026-07-04.
 
 Validation for Phase 11:
+
+- `npm run lint`: passed on 2026-07-04.
+- `npm run typecheck`: passed on 2026-07-04.
+- `npm run build`: passed on 2026-07-04.
+- `npm audit`: completed on 2026-07-04 and reported 2 moderate advisories via Next.js bundled PostCSS; no automatic fix was applied because the suggested force fix is a breaking Next downgrade.
+
+Validation for production verification preparation:
 
 - `npm run lint`: passed on 2026-07-04.
 - `npm run typecheck`: passed on 2026-07-04.

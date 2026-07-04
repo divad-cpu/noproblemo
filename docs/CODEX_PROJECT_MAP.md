@@ -58,6 +58,13 @@ Not implemented:
 
 - AI, payments, email sending, cron.
 
+## Verification Documents
+
+- `docs/PRODUCTION_VERIFICATION.md`: production verification checklist for Supabase, Vercel, Domeneshop, Auth providers, environment variables, support email, launch blockers, and post-launch monitoring.
+- `docs/SUPABASE_VERIFICATION.md`: manual Supabase migration, RLS, trigger, RPC, group access, message/notification/activity, and admin verification checklist.
+- `docs/MANUAL_TEST_PLAN.md`: three-user app test plan for guest mode, auth, dashboard, workspace, friends/groups, messages, notifications, activity, admin, locales, RTL, accessibility, and responsive layouts.
+- `docs/LAUNCH_READINESS_REPORT.md`: current launch readiness status, implemented/not implemented scope, blockers, recommendations, and verification evidence target.
+
 ## Route Map
 
 - `/`: redirected by `proxy.ts` to a locale route.
@@ -158,7 +165,7 @@ Current:
 
 Planned:
 
-- Production verification and launch readiness.
+- Controlled Supabase/Vercel production verification with explicit approval before remote changes.
 - Later admin actions beyond the read-only MVP.
 
 Rules:
@@ -181,7 +188,7 @@ See `SECURITY.md` before implementing auth, database writes, or messaging.
 7. Groups: implemented locally.
 8. Simple messaging: implemented locally.
 9. Basic admin/settings: implemented locally.
-10. Deployment: Vercel works; security hardening ongoing.
+10. Deployment: Vercel direction documented; controlled production verification remains required.
 
 ## Future Feature Map
 
@@ -211,6 +218,7 @@ See `SECURITY.md` before implementing auth, database writes, or messaging.
 - Keep planned features marked as planned until code exists.
 - Update `CURRENT_STATE.md` after each phase.
 - Run validation and report changed files.
+- During production verification, ask before applying remote migrations, changing Vercel settings, or changing DNS.
 
 ## Recommended Prompt Pattern
 

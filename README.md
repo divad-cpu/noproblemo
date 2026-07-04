@@ -4,7 +4,7 @@ NoProblemo is a minimal, secure, multilingual problem-solving workspace for turn
 
 ## Current Phase
 
-Phase 11 is complete. The next step is production verification and launch readiness against real Supabase and Vercel projects.
+Phase 11 is complete. Production verification preparation is documented. The next step is controlled Supabase/Vercel production verification, with explicit approval required before applying remote migrations or changing production services.
 
 Not included in the current MVP:
 
@@ -45,6 +45,7 @@ Still requiring real Supabase/Vercel verification:
 - Supabase Auth email/OAuth provider configuration and redirect URLs.
 - Vercel environment variables, custom domain, and Domeneshop DNS.
 - Production manual testing across mobile, desktop, all 11 locales, and Arabic/Urdu RTL.
+- Support mailbox or alias setup for `support@noproblemo.tech`.
 
 ## Internationalization
 
@@ -213,6 +214,13 @@ Do not build public admin signup or self-service admin promotion.
 
 Use GitHub plus Vercel for the app and Supabase for Auth/Postgres/RLS. Configure `noproblemo.tech` as a Vercel custom domain, point DNS from Domeneshop according to Vercel's current instructions, and configure `support@noproblemo.tech` as a mailbox or alias outside the app.
 
+Use these verification documents before public launch:
+
+- `docs/PRODUCTION_VERIFICATION.md`
+- `docs/SUPABASE_VERIFICATION.md`
+- `docs/MANUAL_TEST_PLAN.md`
+- `docs/LAUNCH_READINESS_REPORT.md`
+
 Production readiness requires manual verification of guest mode, login/signup/logout, dashboard, challenge saving, guest import, friends/groups, group challenge access, messages, notifications, admin access, all 11 languages, Arabic/Urdu RTL, mobile, and desktop.
 
 ## Security Warnings
@@ -247,6 +255,10 @@ Production readiness requires manual verification of guest mode, login/signup/lo
 - `AI_READY.md`
 - `docs/CODEX_PROJECT_MAP.md`
 - `docs/PHASE_HANDOFF_TEMPLATE.md`
+- `docs/PRODUCTION_VERIFICATION.md`
+- `docs/SUPABASE_VERIFICATION.md`
+- `docs/MANUAL_TEST_PLAN.md`
+- `docs/LAUNCH_READINESS_REPORT.md`
 - `docs/CODEX_PROJECT_LOG.md`
 - `docs/NEXT_CODEX_PROMPT.md`
 - `docs/CHANGELOG.md`

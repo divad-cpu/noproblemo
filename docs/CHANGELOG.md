@@ -10,6 +10,7 @@
 - Added admin navigation visibility for profiles with `role = 'admin'`.
 - Added local project-log documentation updates and a Phase 11 copy/paste handoff prompt.
 - Added Phase 11 production verification and launch-readiness handoff documentation.
+- Added production verification, Supabase verification, manual test plan, and launch readiness report documents.
 - Added accessible dialog semantics for the guest login prompt.
 - Added accessible labels for dense group/workspace management controls.
 
@@ -20,6 +21,7 @@
 - Updated project documentation to mark Phase 10 complete, Phase 11 complete, and production verification next.
 - Polished protected navigation wrapping, dashboard/admin grid balance, long-text wrapping, and keyboard focus visibility.
 - Updated README and deployment documentation for practical Supabase/Vercel/Domeneshop launch preparation.
+- Updated handoff documentation to require controlled approval before remote Supabase, Vercel, Auth provider, or DNS changes.
 
 ### Fixed
 
@@ -36,6 +38,7 @@
 - Reviewed MVP security boundaries, migration/RLS intent, i18n key parity, and RTL configuration for Phase 11.
 - Documented that live Supabase RLS/RPC verification remains required.
 - Documented `npm audit` moderate PostCSS advisories through Next.js and did not apply the breaking force fix.
+- Documented production launch blockers and manual verification requirements without changing production services.
 
 ## 2026-07-03
 

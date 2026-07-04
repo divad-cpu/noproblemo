@@ -171,3 +171,18 @@ Phase 11 polish, security review and deployment preparation:
 - Validation results: `npm run lint`, `npm run typecheck`, and `npm run build` passed on 2026-07-04. `npm audit` completed with 2 moderate advisories through Next.js bundled PostCSS; the suggested force fix would install `next@9.3.3`, so no automatic fix was applied.
 - Next recommended step: production verification and launch readiness.
 - Explicitly not added: payments, AI, email automation, Resend, Vercel Cron, `CRON_SECRET`, public challenge sharing, organization accounts, voting, comments, attachments, read receipts, typing indicators, reactions, advanced chat threads, calendar integration, PDF export, complex realtime collaboration, enterprise analytics, moderation system, support ticket system, billing, or a large UI redesign.
+
+Production verification preparation:
+
+- Phase completed: production verification and launch readiness preparation.
+- Features added: no product features; added verification/checklist documentation for controlled Supabase, Vercel, Domeneshop, Auth provider, RLS, multi-user manual testing, and launch readiness work.
+- Files created: `docs/PRODUCTION_VERIFICATION.md`, `docs/SUPABASE_VERIFICATION.md`, `docs/MANUAL_TEST_PLAN.md`, and `docs/LAUNCH_READINESS_REPORT.md`.
+- Files changed: `README.md`, `DEPLOYMENT.md`, `CURRENT_STATE.md`, `docs/CODEX_PROJECT_MAP.md`, `docs/NEXT_CODEX_PROMPT.md`, `docs/CODEX_PROJECT_LOG.md`, and `docs/CHANGELOG.md`.
+- Database/schema changes: none.
+- Security/RLS changes: none; documented required manual verification for migrations, profile self-promotion protection, challenge/group/message/notification/activity RLS, and admin RPCs.
+- UI/UX changes: none.
+- Bugs fixed: none.
+- Known problems: real Supabase migrations/RLS/RPCs, Supabase Auth redirects, Google/Apple OAuth, Vercel env vars, `noproblemo.tech` DNS, support mailbox/alias, native translation QA, and production browser/device testing remain unverified.
+- Validation results: `npm run lint`, `npm run typecheck`, and `npm run build` passed on 2026-07-04. `npm audit` completed with 2 moderate advisories through Next.js bundled PostCSS; the suggested force fix would install `next@9.3.3`, so no automatic fix was applied.
+- Next recommended step: controlled Supabase/Vercel production verification with explicit approval before remote migrations, Vercel changes, DNS changes, or provider changes.
+- Explicitly not added: payments, AI, email automation, Resend, Vercel Cron, `CRON_SECRET`, public challenge sharing, organization accounts, voting, comments, attachments, read receipts, typing indicators, reactions, advanced chat threads, calendar integration, PDF export, complex realtime collaboration, enterprise analytics, support tickets, billing, or a large UI redesign.

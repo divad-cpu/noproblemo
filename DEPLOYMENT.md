@@ -111,6 +111,10 @@ Current app includes localized public pages, a guest localStorage workspace, Sup
 
 ## Production Checklist
 
+- Complete `docs/PRODUCTION_VERIFICATION.md`.
+- Complete `docs/SUPABASE_VERIFICATION.md`.
+- Complete `docs/MANUAL_TEST_PLAN.md`.
+- Update `docs/LAUNCH_READINESS_REPORT.md` with verification evidence.
 - Git status reviewed.
 - No `.env.local` or secret values in diff.
 - `npm run lint` passes.
@@ -146,3 +150,7 @@ Project logs remain local repository documentation. Do not add Resend, Vercel Cr
 - No live Supabase project was modified.
 - No production Vercel settings or DNS records were changed.
 - Manual production verification remains required before launch.
+
+## Controlled Verification Rule
+
+Production verification is the next step, but it is not automatic deployment permission. Apply remote Supabase migrations, change Vercel settings, change Domeneshop DNS records, or configure production auth providers only after explicit project-owner approval.
