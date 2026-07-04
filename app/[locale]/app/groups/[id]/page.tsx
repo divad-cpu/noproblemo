@@ -27,6 +27,30 @@ type Member = Database["public"]["Tables"]["group_members"]["Row"];
 type Message = Database["public"]["Tables"]["messages"]["Row"];
 type ActivityEvent = Database["public"]["Tables"]["activity_events"]["Row"];
 
+const statusKeys = [
+  "group-created",
+  "group-saved",
+  "group-invite-sent",
+  "group-invitation-canceled",
+  "group-member-removed",
+  "group-role-updated",
+  "group-challenge-linked",
+  "group-challenge-unlinked",
+  "message-sent",
+  "message-deleted",
+] as const;
+
+const errorKeys = [
+  "group-save-failed",
+  "group-invite-failed",
+  "group-member-remove-failed",
+  "group-role-update-failed",
+  "group-challenge-link-failed",
+  "group-challenge-unlink-failed",
+  "message-send-failed",
+  "message-delete-failed",
+] as const;
+
 const roles: GroupRole[] = ["owner", "admin", "member", "viewer"];
 const inviteRoles: Exclude<GroupRole, "owner">[] = ["admin", "member", "viewer"];
 
@@ -37,6 +61,13 @@ function getQueryValue(
   const value = searchParams[key];
 
   return Array.isArray(value) ? value[0] : value;
+}
+
+function isKnownKey<T extends readonly string[]>(
+  value: string | undefined,
+  keys: T,
+): value is T[number] {
+  return !!value && keys.includes(value);
 }
 
 async function getProfileMap(
@@ -192,10 +223,10 @@ export default async function GroupDetailPage({
         <p className="mt-6 text-sm font-medium uppercase tracking-[0.18em] text-[#706f68]">
           {t("eyebrow")}
         </p>
-        <h1 className="mt-3 text-4xl font-semibold text-[#22211e]">
+        <h1 className="mt-3 break-words text-4xl font-semibold text-[#22211e]">
           {group.name}
         </h1>
-        <p className="mt-4 max-w-3xl leading-7 text-[#55544f]">
+        <p className="mt-4 max-w-3xl break-words leading-7 text-[#55544f]">
           {group.description || t("noDescription")}
         </p>
         <p className="mt-3 text-sm text-[#706f68]">
@@ -203,12 +234,12 @@ export default async function GroupDetailPage({
         </p>
       </section>
 
-      {status ? (
+      {isKnownKey(status, statusKeys) ? (
         <p className="rounded-md border border-[#cbd8c5] bg-[#f6fbf4] p-4 text-sm leading-6 text-[#2f5f2d]">
           {t(`status.${status}`)}
         </p>
       ) : null}
-      {error ? (
+      {isKnownKey(error, errorKeys) ? (
         <p className="rounded-md border border-[#e3b8ad] bg-[#fff7f4] p-4 text-sm leading-6 text-[#7a2f1d]">
           {t(`errors.${error}`)}
         </p>
@@ -226,12 +257,14 @@ export default async function GroupDetailPage({
               name="name"
               required
               defaultValue={group.name}
+              aria-label={t("settings.name")}
               className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616]"
             />
             <textarea
               name="description"
               rows={3}
               defaultValue={group.description ?? ""}
+              aria-label={t("settings.description")}
               className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616]"
             />
             <button className="inline-flex min-h-11 items-center justify-center rounded-md bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]">
@@ -257,6 +290,7 @@ export default async function GroupDetailPage({
               required
               maxLength={2000}
               rows={3}
+              aria-label={t("messages.placeholder")}
               placeholder={t("messages.placeholder")}
               className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
             />
@@ -357,6 +391,7 @@ export default async function GroupDetailPage({
             <input
               name="inviteSearch"
               defaultValue={inviteSearch}
+              aria-label={t("invite.searchPlaceholder")}
               placeholder={t("invite.searchPlaceholder")}
               className="min-h-12 flex-1 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616]"
             />
@@ -378,15 +413,16 @@ export default async function GroupDetailPage({
                       <input type="hidden" name="locale" value={locale} />
                       <input type="hidden" name="groupId" value={group.id} />
                       <input type="hidden" name="inviteeId" value={profile.id} />
-                      <div>
-                        <p className="font-semibold text-[#22211e]">
+                      <div className="min-w-0">
+                        <p className="break-words font-semibold text-[#22211e]">
                           {profile.display_name || t("unnamed")}
                         </p>
-                        <p className="text-xs text-[#706f68]">{profile.id}</p>
+                        <p className="break-all text-xs text-[#706f68]">{profile.id}</p>
                       </div>
                       <select
                         name="role"
                         defaultValue="member"
+                        aria-label={t("role")}
                         className="min-h-10 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-sm"
                       >
                         {inviteRoles.map((role) => (
@@ -418,8 +454,8 @@ export default async function GroupDetailPage({
                   key={invitation.id}
                   className="flex flex-col gap-3 rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
-                    <p className="font-semibold text-[#22211e]">
+                  <div className="min-w-0">
+                    <p className="break-words font-semibold text-[#22211e]">
                       {profileName(
                         profiles.get(invitation.invitee_id) ?? null,
                         invitation.invitee_id,
@@ -466,7 +502,7 @@ export default async function GroupDetailPage({
                 >
                   <Link
                     href={`/app/challenges/${challenge.id}`}
-                    className="font-semibold text-[#22211e] underline-offset-4 hover:underline"
+                    className="break-words font-semibold text-[#22211e] underline-offset-4 hover:underline"
                   >
                     {challenge.title}
                   </Link>
@@ -499,6 +535,7 @@ export default async function GroupDetailPage({
             <input type="hidden" name="groupId" value={group.id} />
             <select
               name="challengeId"
+              aria-label={t("challenges.title")}
               className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616]"
             >
               {linkableChallenges.length > 0 ? (
@@ -542,8 +579,8 @@ function MessageRow({
   return (
     <article className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-        <div>
-          <p className="font-semibold text-[#22211e]">{author}</p>
+        <div className="min-w-0">
+          <p className="break-words font-semibold text-[#22211e]">{author}</p>
           <p className="text-sm text-[#706f68]">
             {formatDateTime(message.created_at, locale)}
           </p>
@@ -559,7 +596,7 @@ function MessageRow({
           </form>
         ) : null}
       </div>
-      <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-[#373632]">
+      <p className="mt-3 whitespace-pre-wrap break-words text-sm leading-6 text-[#373632]">
         {message.is_deleted ? t("messages.deleted") : message.body}
       </p>
     </article>
@@ -587,8 +624,8 @@ function MemberRow({
 }) {
   return (
     <div className="grid gap-3 rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4 lg:grid-cols-[1fr_auto_auto] lg:items-center">
-      <div>
-        <p className="font-semibold text-[#22211e]">{name}</p>
+      <div className="min-w-0">
+        <p className="break-words font-semibold text-[#22211e]">{name}</p>
         <p className="text-sm text-[#706f68]">
           {t("role")}: {t(`roles.${member.role}`)}
         </p>
@@ -601,6 +638,7 @@ function MemberRow({
           <select
             name="role"
             defaultValue={member.role}
+            aria-label={t("role")}
             className="min-h-10 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-sm"
           >
             {roles.map((role) => (

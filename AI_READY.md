@@ -52,6 +52,8 @@ Use `docs/PHASE_HANDOFF_TEMPLATE.md`. A good prompt should name exactly one phas
 - Search with `rg` before adding new concepts.
 - Prefer extending existing docs instead of creating overlapping docs.
 - Keep planned features marked as planned until code exists.
+- After Phase 11, default next work is production verification and launch readiness, not a new feature build.
+- Treat Supabase live verification, Vercel env setup, OAuth redirect setup, DNS, and manual MVP flow testing as the next operational focus.
 
 ## Validation
 

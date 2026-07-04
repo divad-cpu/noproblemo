@@ -9,16 +9,22 @@
 - Added Phase 10 Supabase migration for admin helpers, admin audit-log storage, admin-only overview RPCs, and profile role hardening.
 - Added admin navigation visibility for profiles with `role = 'admin'`.
 - Added local project-log documentation updates and a Phase 11 copy/paste handoff prompt.
+- Added Phase 11 production verification and launch-readiness handoff documentation.
+- Added accessible dialog semantics for the guest login prompt.
+- Added accessible labels for dense group/workspace management controls.
 
 ### Changed
 
 - Changed profile settings updates so normal profile edits no longer update `profiles.role`.
 - Updated all locale message catalogs with admin UI keys.
-- Updated project documentation to mark Phase 10 complete and Phase 11 next.
+- Updated project documentation to mark Phase 10 complete, Phase 11 complete, and production verification next.
+- Polished protected navigation wrapping, dashboard/admin grid balance, long-text wrapping, and keyboard focus visibility.
+- Updated README and deployment documentation for practical Supabase/Vercel/Domeneshop launch preparation.
 
 ### Fixed
 
 - Fixed the profile settings self-demotion/self-promotion risk from using an upsert that touched `role` during normal profile edits.
+- Guarded status/error query feedback on protected pages so unknown query values do not cause missing translation lookups.
 
 ### Security
 
@@ -27,6 +33,9 @@
 - Added a trigger that blocks authenticated users from changing their own `profiles.role`.
 - Added admin-only RPCs that return aggregate counts and limited metadata without emails, `auth.users`, message bodies, or private challenge content.
 - Confirmed no Resend, email automation, Vercel Cron, `CRON_SECRET`, or frontend service-role usage was added.
+- Reviewed MVP security boundaries, migration/RLS intent, i18n key parity, and RTL configuration for Phase 11.
+- Documented that live Supabase RLS/RPC verification remains required.
+- Documented `npm audit` moderate PostCSS advisories through Next.js and did not apply the breaking force fix.
 
 ## 2026-07-03
 

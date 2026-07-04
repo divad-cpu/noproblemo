@@ -18,8 +18,9 @@ NoProblemo has completed:
 - Phase 8: friends and groups
 - Phase 9: messaging, notifications and activity
 - Phase 10: admin/settings and local project logs
+- Phase 11: polish, security review and deployment preparation
 
-Phase 11 Polish, security review and deployment preparation is next. Payments, AI, email automation, Resend, and Vercel Cron remain future phases.
+Production verification and launch readiness is next. Payments, AI, email automation, Resend, and Vercel Cron remain future phases.
 
 ## Already Implemented
 
@@ -64,6 +65,9 @@ Phase 11 Polish, security review and deployment preparation is next. Payments, A
 - Basic admin overview with aggregate counts, limited profile metadata, recent activity metadata, and recent audit-log entries
 - Admin role protection based on `profiles.role = 'admin'`
 - Admin navigation link shown only to admin profiles
+- Phase 11 mobile/tablet navigation polish, dashboard grid polish, long-text wrapping, visible keyboard focus, dialog semantics, and safer query feedback handling
+- Phase 11 i18n key parity and RTL configuration checks
+- Phase 11 security/deployment documentation review
 - Notification/activity triggers for friend requests, group invitations, group/member events, group challenge links, and messages
 - Phase 10 local migration for admin helper functions, admin audit log, admin-only RPCs, profile role hardening, and admin profile read policy
 - Google and Apple OAuth start actions prepared through Supabase Auth
@@ -89,6 +93,7 @@ Phase 11 Polish, security review and deployment preparation is next. Payments, A
 - Supabase Realtime is documented as future work; Phase 9 uses server-rendered refresh/revalidation after message actions.
 - Admin user management is read-only in Phase 10. Role changing, moderation, and system setting mutations remain future work.
 - Admin audit logging storage exists in `admin_audit_log`; Phase 10 has no sensitive admin mutations to log yet.
+- Phase 11 reviewed migrations and documented required manual Supabase/Vercel production checks, but did not perform live Supabase verification.
 - Google and Apple login buttons are present, but they require Supabase provider setup and external provider configuration before they work in production.
 - Supabase schema exists as local migrations but has not been verified against the live Supabase project in this task.
 - Supabase helpers are used by auth actions, callback/logout handlers, auth-aware landing links, and the protected app layout.
@@ -153,6 +158,9 @@ Phase 11 Polish, security review and deployment preparation is next. Payments, A
 - Phase 10 migration needs to be applied and tested in Supabase.
 - RLS policies, profile trigger, workspace writes, friend/group writes, group challenge access, message writes, notification privacy, and activity visibility need verification with authenticated users.
 - Admin role checks, admin RPCs, admin audit log RLS, and profile role hardening need verification with authenticated admin and non-admin users.
+- Supabase CLI is not installed in this environment, so Supabase CLI lint/list checks were not run.
+- Production Vercel environment variables, Supabase Auth redirect URLs, Domeneshop DNS, and support mailbox/alias setup still need manual verification.
+- `npm audit` reports moderate PostCSS advisories through Next.js 16.2.10's dependency tree. The suggested `npm audit fix --force` would install `next@9.3.3`, a breaking downgrade, so it was not applied.
 - Google and Apple OAuth require provider configuration in Supabase, Google Cloud, and Apple Developer.
 - Guest drafts are browser-local and can be lost if localStorage is cleared.
 - Non-English translations need human review.
@@ -169,16 +177,18 @@ Phase 11 Polish, security review and deployment preparation is next. Payments, A
 
 ## Next Recommended Phase
 
-Phase 11: Polish, security review and deployment preparation.
+Production verification and launch readiness.
 
 Recommended scope:
 
-- Mobile and desktop polish
-- Accessibility, translation, and RTL checks
-- RLS review and deployment documentation
-- Final README and validation
+- Apply migrations to a real Supabase project only with explicit approval.
+- Verify RLS with multiple test users.
+- Configure Supabase Auth redirect URLs and OAuth providers.
+- Configure Vercel environment variables and custom domain.
+- Configure Domeneshop DNS and the support mailbox or alias.
+- Manually test all core app flows on mobile, desktop, and all supported locales.
 
-Do not implement large new product features, email automation, Resend, or Vercel Cron in Phase 11.
+Do not add unrelated product features during production verification.
 
 ## Validation Commands
 
@@ -231,3 +241,10 @@ Validation for Phase 10:
 - `npm run lint`: passed on 2026-07-04.
 - `npm run typecheck`: passed on 2026-07-04.
 - `npm run build`: passed on 2026-07-04.
+
+Validation for Phase 11:
+
+- `npm run lint`: passed on 2026-07-04.
+- `npm run typecheck`: passed on 2026-07-04.
+- `npm run build`: passed on 2026-07-04.
+- `npm audit`: completed on 2026-07-04 and reported 2 moderate advisories via Next.js bundled PostCSS; no automatic fix was applied because the suggested force fix is a breaking Next downgrade.

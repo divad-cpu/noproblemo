@@ -701,7 +701,9 @@
     },
     "settings": {
       "title": "Group settings",
-      "save": "Save group"
+      "save": "Save group",
+      "name": "समूह का नाम",
+      "description": "समूह विवरण"
     },
     "members": {
       "title": "Members",

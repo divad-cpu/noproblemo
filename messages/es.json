@@ -701,7 +701,9 @@
     },
     "settings": {
       "title": "Group settings",
-      "save": "Save group"
+      "save": "Save group",
+      "name": "Nombre del grupo",
+      "description": "Descripción del grupo"
     },
     "members": {
       "title": "Members",

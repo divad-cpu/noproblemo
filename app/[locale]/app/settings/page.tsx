@@ -82,7 +82,7 @@ export default async function SettingsPage({
 
       <div className="mt-8 rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4">
         <p className="text-sm font-semibold text-[#373632]">{t("account")}</p>
-        <p className="mt-1 text-sm text-[#706f68]">{user.email}</p>
+        <p className="mt-1 break-all text-sm text-[#706f68]">{user.email}</p>
       </div>
 
       <form action={updateProfile} className="mt-8 grid gap-5">

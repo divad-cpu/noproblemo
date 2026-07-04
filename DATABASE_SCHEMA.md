@@ -533,6 +533,12 @@ where id = '<trusted-user-uuid>';
 
 The local Codex project log system remains repository-local in `docs/CODEX_PROJECT_LOG.md`, `docs/NEXT_CODEX_PROMPT.md`, and `docs/CHANGELOG.md`. It does not use email automation, Resend, Vercel Cron, or `CRON_SECRET`.
 
+## Phase 11 Schema Review Notes
+
+Phase 11 did not add a database migration or change schema. The migration review confirmed that the local SQL files contain RLS enablement for private tables, helper functions with explicit `search_path` where security definer is used, group member limit protection, explicit group challenge access policies, recipient-only notification policies, scoped message policies, admin-only RPC checks, and profile role self-promotion hardening.
+
+Supabase CLI is not installed in this environment, so `supabase db lint` and migration-list checks were not run. Live Supabase verification remains required.
+
 ## Needs Verification
 
 - Apply migration in local Supabase and/or linked Supabase project.
@@ -555,5 +561,6 @@ The local Codex project log system remains repository-local in `docs/CODEX_PROJE
 - Test admin RPC authorization and returned fields.
 - Test `admin_audit_log` RLS with admin and non-admin users.
 - Test that normal users cannot self-promote by changing `profiles.role`.
+- Run Supabase CLI lint/list checks in an environment with the Supabase CLI installed, if available and safe.
 - Confirm whether the challenge section list is sufficient for the MVP saved workspace.
 - Confirm whether organization accounts need schema support before MVP launch.

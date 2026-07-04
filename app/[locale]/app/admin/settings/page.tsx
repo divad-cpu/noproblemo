@@ -72,7 +72,7 @@ export default async function AdminSettingsPage({
       <p className="mt-6 text-sm font-medium uppercase tracking-[0.18em] text-[#706f68]">
         {t("eyebrow")}
       </p>
-      <h1 className="mt-3 text-4xl font-semibold text-[#22211e]">
+      <h1 className="mt-3 break-words text-4xl font-semibold text-[#22211e]">
         {t("title")}
       </h1>
       <p className="mt-4 max-w-3xl leading-7 text-[#55544f]">{t("body")}</p>
@@ -109,7 +109,7 @@ export default async function AdminSettingsPage({
           {envNames.map((name) => (
             <code
               key={name}
-              className="rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-sm text-[#373632]"
+              className="break-all rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-sm text-[#373632]"
             >
               {name}
             </code>

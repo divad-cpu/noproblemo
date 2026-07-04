@@ -134,6 +134,8 @@ Implemented in Phase 10:
 
 The migrations still need to be applied and verified in Supabase.
 
+Phase 11 did not add schema or major product architecture. It added focused responsive, accessibility, robustness, deployment, and security documentation polish.
+
 ## Authentication Flow
 
 Implemented in Phase 5:
@@ -182,7 +184,7 @@ Current data flow:
 
 Planned data flow:
 
-- Phase 11: polish, security review, and deployment preparation.
+- Production verification against real Supabase and Vercel projects.
 - Later: admin actions beyond read-only MVP and optional realtime messaging.
 
 ## Deployment Direction

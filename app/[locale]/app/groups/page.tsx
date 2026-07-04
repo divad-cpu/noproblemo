@@ -13,6 +13,14 @@ type GroupsPageProps = {
 
 type Group = Database["public"]["Tables"]["groups"]["Row"];
 
+const statusKeys = [
+  "group-invitation-accepted",
+  "group-invitation-declined",
+  "group-invitation-canceled",
+] as const;
+
+const errorKeys = ["group-invitation-response-failed"] as const;
+
 function getQueryValue(
   searchParams: Record<string, string | string[] | undefined>,
   key: string,
@@ -20,6 +28,13 @@ function getQueryValue(
   const value = searchParams[key];
 
   return Array.isArray(value) ? value[0] : value;
+}
+
+function isKnownKey<T extends readonly string[]>(
+  value: string | undefined,
+  keys: T,
+): value is T[number] {
+  return !!value && keys.includes(value);
 }
 
 export default async function GroupsPage({ params, searchParams }: GroupsPageProps) {
@@ -82,12 +97,12 @@ export default async function GroupsPage({ params, searchParams }: GroupsPagePro
         </div>
       </section>
 
-      {status ? (
+      {isKnownKey(status, statusKeys) ? (
         <p className="rounded-md border border-[#cbd8c5] bg-[#f6fbf4] p-4 text-sm leading-6 text-[#2f5f2d]">
           {t(`status.${status}`)}
         </p>
       ) : null}
-      {error ? (
+      {isKnownKey(error, errorKeys) ? (
         <p className="rounded-md border border-[#e3b8ad] bg-[#fff7f4] p-4 text-sm leading-6 text-[#7a2f1d]">
           {t(`errors.${error}`)}
         </p>
@@ -104,7 +119,7 @@ export default async function GroupsPage({ params, searchParams }: GroupsPagePro
                 key={invitation.id}
                 className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4"
               >
-                <p className="font-semibold text-[#22211e]">
+                <p className="break-words font-semibold text-[#22211e]">
                   {groupMap.get(invitation.group_id)?.name ?? t("unnamed")}
                 </p>
                 <p className="mt-1 text-sm text-[#706f68]">
@@ -144,7 +159,7 @@ export default async function GroupsPage({ params, searchParams }: GroupsPagePro
                 href={`/app/groups/${membership.group_id}`}
                 className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4 hover:border-[#8b897f]"
               >
-                <span className="block font-semibold text-[#22211e]">
+                <span className="block break-words font-semibold text-[#22211e]">
                   {groupMap.get(membership.group_id)?.name ?? t("unnamed")}
                 </span>
                 <span className="mt-1 block text-sm text-[#706f68]">

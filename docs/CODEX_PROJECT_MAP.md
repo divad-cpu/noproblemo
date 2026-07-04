@@ -46,6 +46,7 @@ Implemented:
 - Protected admin settings checklist.
 - Admin role protection using `profiles.role = 'admin'`.
 - Admin audit-log storage and admin-only overview RPCs.
+- Phase 11 responsive/accessibility/security/deployment polish.
 - Google and Apple OAuth provider start actions prepared through Supabase Auth.
 - Supabase migration for profiles and core challenge tables.
 - Phase 8 migration for friends, groups, profile search, group challenge links, and group-aware RLS.
@@ -157,7 +158,7 @@ Current:
 
 Planned:
 
-- Phase 11 polish, security review, and deployment preparation.
+- Production verification and launch readiness.
 - Later admin actions beyond the read-only MVP.
 
 Rules:

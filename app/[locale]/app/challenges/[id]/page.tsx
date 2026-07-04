@@ -34,6 +34,33 @@ type ActivityEvent = Database["public"]["Tables"]["activity_events"]["Row"];
 type ProfileResult =
   Database["public"]["Functions"]["search_profiles"]["Returns"][number];
 
+const statusKeys = [
+  "created",
+  "details-saved",
+  "sections-saved",
+  "solution-saved",
+  "solution-deleted",
+  "task-saved",
+  "task-deleted",
+  "message-sent",
+  "message-deleted",
+] as const;
+
+const errorKeys = [
+  "details-missing-title",
+  "details-save-failed",
+  "sections-save-failed",
+  "solution-missing-title",
+  "solution-invalid-score",
+  "solution-save-failed",
+  "solution-delete-failed",
+  "task-missing-title",
+  "task-save-failed",
+  "task-delete-failed",
+  "message-send-failed",
+  "message-delete-failed",
+] as const;
+
 const sectionKeys: ChallengeSectionKey[] = [
   "problem_title",
   "short_description",
@@ -80,6 +107,13 @@ function getQueryValue(
   const value = searchParams[key];
 
   return Array.isArray(value) ? value[0] : value;
+}
+
+function isKnownKey<T extends readonly string[]>(
+  value: string | undefined,
+  keys: T,
+): value is T[number] {
+  return !!value && keys.includes(value);
 }
 
 function formatDate(value: string, locale: Locale) {
@@ -186,7 +220,7 @@ function SaveMessage({
   error?: string;
   t: Awaited<ReturnType<typeof getTranslations>>;
 }) {
-  if (status) {
+  if (isKnownKey(status, statusKeys)) {
     return (
       <p className="rounded-md border border-[#cbd8c5] bg-[#f6fbf4] p-4 text-sm leading-6 text-[#2f5f2d]">
         {t(`statusMessages.${status}`)}
@@ -194,7 +228,7 @@ function SaveMessage({
     );
   }
 
-  if (error) {
+  if (isKnownKey(error, errorKeys)) {
     return (
       <p className="rounded-md border border-[#e3b8ad] bg-[#fff7f4] p-4 text-sm leading-6 text-[#7a2f1d]">
         {t(`errorMessages.${error}`)}
@@ -343,11 +377,11 @@ export default async function ChallengePage({
           {t("eyebrow")}
         </p>
         <div className="mt-3 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-          <div>
-            <h1 className="text-4xl font-semibold leading-tight text-[#22211e]">
+          <div className="min-w-0">
+            <h1 className="break-words text-4xl font-semibold leading-tight text-[#22211e]">
               {challenge.title}
             </h1>
-            <p className="mt-4 max-w-3xl leading-7 text-[#55544f]">
+            <p className="mt-4 max-w-3xl break-words leading-7 text-[#55544f]">
               {challenge.short_description || t("noDescription")}
             </p>
             <p className="mt-3 text-sm text-[#706f68]">
@@ -636,12 +670,14 @@ export default async function ChallengePage({
                 <input
                   name="title"
                   required
+                  aria-label={t("solutions.fields.title")}
                   placeholder={t("solutions.fields.title")}
                   className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
                 <input
                   name="priority"
                   type="number"
+                  aria-label={t("solutions.fields.priority")}
                   placeholder={t("solutions.fields.priority")}
                   className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
@@ -649,6 +685,7 @@ export default async function ChallengePage({
               <textarea
                 name="description"
                 rows={3}
+                aria-label={t("solutions.fields.description")}
                 placeholder={t("solutions.fields.description")}
                 className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
               />
@@ -656,12 +693,14 @@ export default async function ChallengePage({
                 <textarea
                   name="pros"
                   rows={3}
+                  aria-label={t("solutions.fields.pros")}
                   placeholder={t("solutions.fields.pros")}
                   className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
                 <textarea
                   name="cons"
                   rows={3}
+                  aria-label={t("solutions.fields.cons")}
                   placeholder={t("solutions.fields.cons")}
                   className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
@@ -684,6 +723,7 @@ export default async function ChallengePage({
               <textarea
                 name="resourcesNeeded"
                 rows={2}
+                aria-label={t("solutions.fields.resourcesNeeded")}
                 placeholder={t("solutions.fields.resourcesNeeded")}
                 className="min-h-20 resize-y rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
               />
@@ -799,12 +839,14 @@ export default async function ChallengePage({
                 <input
                   name="title"
                   required
+                  aria-label={t("tasks.fields.title")}
                   placeholder={t("tasks.fields.title")}
                   className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
                 <input
                   name="position"
                   type="number"
+                  aria-label={t("tasks.fields.position")}
                   placeholder={t("tasks.fields.position")}
                   className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
@@ -812,18 +854,21 @@ export default async function ChallengePage({
               <textarea
                 name="description"
                 rows={3}
+                aria-label={t("tasks.fields.description")}
                 placeholder={t("tasks.fields.description")}
                 className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
               />
               <div className="grid gap-4 md:grid-cols-2">
                 <input
                   name="responsiblePerson"
+                  aria-label={t("tasks.fields.responsiblePerson")}
                   placeholder={t("tasks.fields.responsiblePerson")}
                   className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
                 <input
                   name="deadline"
                   type="date"
+                  aria-label={t("tasks.fields.deadline")}
                   className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
               </div>
@@ -862,6 +907,7 @@ export default async function ChallengePage({
               required
               maxLength={2000}
               rows={3}
+              aria-label={t("messages.placeholder")}
               placeholder={t("messages.placeholder")}
               className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
             />
@@ -948,8 +994,8 @@ function ChallengeMessageRow({
   return (
     <article className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-        <div>
-          <p className="font-semibold text-[#22211e]">{author}</p>
+        <div className="min-w-0">
+          <p className="break-words font-semibold text-[#22211e]">{author}</p>
           <p className="text-sm text-[#706f68]">
             {formatDateTime(message.created_at, locale)}
           </p>
@@ -965,7 +1011,7 @@ function ChallengeMessageRow({
           </form>
         ) : null}
       </div>
-      <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-[#373632]">
+      <p className="mt-3 whitespace-pre-wrap break-words text-sm leading-6 text-[#373632]">
         {message.is_deleted ? t("messages.deleted") : message.body}
       </p>
     </article>

@@ -18,6 +18,21 @@ type FriendRequest = Database["public"]["Tables"]["friend_requests"]["Row"];
 type ProfileResult =
   Database["public"]["Functions"]["search_profiles"]["Returns"][number];
 
+const statusKeys = [
+  "friend-request-sent",
+  "friend-accepted",
+  "friend-declined",
+  "friend-canceled",
+  "friend-removed",
+] as const;
+
+const errorKeys = [
+  "friend-invalid-user",
+  "friend-request-failed",
+  "friend-response-failed",
+  "friend-remove-failed",
+] as const;
+
 function getQueryValue(
   searchParams: Record<string, string | string[] | undefined>,
   key: string,
@@ -25,6 +40,13 @@ function getQueryValue(
   const value = searchParams[key];
 
   return Array.isArray(value) ? value[0] : value;
+}
+
+function isKnownKey<T extends readonly string[]>(
+  value: string | undefined,
+  keys: T,
+): value is T[number] {
+  return !!value && keys.includes(value);
 }
 
 async function getProfileMap(
@@ -119,12 +141,12 @@ export default async function FriendsPage({
         <p className="mt-4 max-w-3xl leading-7 text-[#55544f]">{t("body")}</p>
       </section>
 
-      {status ? (
+      {isKnownKey(status, statusKeys) ? (
         <p className="rounded-md border border-[#cbd8c5] bg-[#f6fbf4] p-4 text-sm leading-6 text-[#2f5f2d]">
           {t(`status.${status}`)}
         </p>
       ) : null}
-      {error ? (
+      {isKnownKey(error, errorKeys) ? (
         <p className="rounded-md border border-[#e3b8ad] bg-[#fff7f4] p-4 text-sm leading-6 text-[#7a2f1d]">
           {t(`errors.${error}`)}
         </p>
@@ -161,11 +183,11 @@ export default async function FriendsPage({
                   >
                     <input type="hidden" name="locale" value={locale} />
                     <input type="hidden" name="receiverId" value={profile.id} />
-                    <div>
-                      <p className="font-semibold text-[#22211e]">
+                    <div className="min-w-0">
+                      <p className="break-words font-semibold text-[#22211e]">
                         {profile.display_name || t("search.unnamed")}
                       </p>
-                      <p className="text-xs text-[#706f68]">{profile.id}</p>
+                      <p className="break-all text-xs text-[#706f68]">{profile.id}</p>
                     </div>
                     <button className="inline-flex min-h-10 items-center justify-center rounded-md bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]">
                       {t("search.send")}
@@ -249,11 +271,11 @@ export default async function FriendsPage({
                 >
                   <input type="hidden" name="locale" value={locale} />
                   <input type="hidden" name="friendshipId" value={friendship.id} />
-                  <div>
-                    <p className="font-semibold text-[#22211e]">
+                  <div className="min-w-0">
+                    <p className="break-words font-semibold text-[#22211e]">
                       {profileName(profiles.get(friendId) ?? null, friendId)}
                     </p>
-                    <p className="text-xs text-[#706f68]">{friendId}</p>
+                    <p className="break-all text-xs text-[#706f68]">{friendId}</p>
                   </div>
                   <button className="text-sm font-semibold text-[#7a2f1d] underline-offset-4 hover:underline">
                     {t("friends.remove")}
@@ -287,8 +309,8 @@ function RequestCard({
 }) {
   return (
     <div className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4">
-      <p className="font-semibold text-[#22211e]">{name}</p>
-      <p className="text-xs text-[#706f68]">{request.id}</p>
+      <p className="break-words font-semibold text-[#22211e]">{name}</p>
+      <p className="break-all text-xs text-[#706f68]">{request.id}</p>
       <div className="mt-3 flex flex-col gap-2 sm:flex-row">
         {mode === "incoming" ? (
           <>

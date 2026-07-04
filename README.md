@@ -1,12 +1,12 @@
 # NoProblemo
 
-NoProblemo is a Next.js App Router project prepared for incremental product development. Phase 10 adds the MVP admin/settings foundation and completes the local Codex project log system.
+NoProblemo is a minimal, secure, multilingual problem-solving workspace for turning messy challenges into clearer decisions, action plans, and group discussions. It is built as a Next.js App Router MVP with Supabase Auth/Postgres/RLS.
 
 ## Current Phase
 
-Phase 10 is complete. Phase 11 is polish, security review, and deployment preparation.
+Phase 11 is complete. The next step is production verification and launch readiness against real Supabase and Vercel projects.
 
-Not included in Phase 10:
+Not included in the current MVP:
 
 - Payments
 - AI features
@@ -24,6 +24,27 @@ Not included in Phase 10:
 - `next-intl`
 - Supabase Auth and database/RLS foundation
 - Vercel deployment
+
+## MVP State
+
+Implemented locally:
+
+- Public landing, support, login, signup, and guest solve routes.
+- Guest workspace stored only in browser localStorage.
+- Supabase email auth and prepared Google/Apple OAuth starts.
+- Protected dashboard, profile settings, saved challenge creation, saved challenge workspace, and guest import.
+- Friends, groups, group invitations, group roles, and explicit group challenge links.
+- Group messages, challenge discussion messages, private notifications, and scoped activity events.
+- Protected read-only admin overview and admin settings checklist.
+- Local Codex project logs in repository docs.
+
+Still requiring real Supabase/Vercel verification:
+
+- Applying all migrations to a real Supabase project.
+- RLS behavior with multiple authenticated users.
+- Supabase Auth email/OAuth provider configuration and redirect URLs.
+- Vercel environment variables, custom domain, and Domeneshop DNS.
+- Production manual testing across mobile, desktop, all 11 locales, and Arabic/Urdu RTL.
 
 ## Internationalization
 
@@ -134,6 +155,18 @@ cp .env.local.example .env.local
 
 Do not commit `.env.local` or any real secret values.
 
+Required local variables are listed in `.env.local.example`. Use real values only in local `.env.local` and Vercel project settings:
+
+```bash
+NEXT_PUBLIC_SITE_URL=
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+NEXT_PUBLIC_SUPPORT_EMAIL=support@noproblemo.tech
+```
+
+`SUPABASE_SERVICE_ROLE_KEY` is a server-only placeholder for future trusted operations. It is not used by the frontend and must never be exposed to the browser.
+
 Run the development server:
 
 ```bash
@@ -150,7 +183,56 @@ Run these before merging changes:
 npm run lint
 npm run typecheck
 npm run build
+npm audit
 ```
+
+Do not run broad automatic `npm audit fix` changes without reviewing dependency impact.
+
+## Supabase Migration Notes
+
+Local migrations live in `supabase/migrations/`:
+
+- Phase 4: profiles and core challenge tables.
+- Phase 8: friends, groups, invitations, group links, and group-aware RLS.
+- Phase 9: messages, notifications, activity events, and related triggers.
+- Phase 10: admin helpers, admin audit log, admin-only RPCs, and profile role hardening.
+
+Before production, apply migrations to a real Supabase project only through an approved deployment workflow, then test RLS with separate normal and admin users.
+
+The first admin must be assigned manually by a trusted project owner in Supabase SQL:
+
+```sql
+update public.profiles
+set role = 'admin'
+where id = '<trusted-user-uuid>';
+```
+
+Do not build public admin signup or self-service admin promotion.
+
+## Deployment Direction
+
+Use GitHub plus Vercel for the app and Supabase for Auth/Postgres/RLS. Configure `noproblemo.tech` as a Vercel custom domain, point DNS from Domeneshop according to Vercel's current instructions, and configure `support@noproblemo.tech` as a mailbox or alias outside the app.
+
+Production readiness requires manual verification of guest mode, login/signup/logout, dashboard, challenge saving, guest import, friends/groups, group challenge access, messages, notifications, admin access, all 11 languages, Arabic/Urdu RTL, mobile, and desktop.
+
+## Security Warnings
+
+- Do not read, print, commit, or expose `.env.local`.
+- Do not expose `SUPABASE_SERVICE_ROLE_KEY` in frontend/client code.
+- Do not query `auth.users` from frontend code.
+- Keep private challenge/message/group/notification/activity access behind Supabase Auth and RLS.
+- Guest drafts remain browser-local unless explicitly imported by a logged-in user.
+- Message bodies render as plain React text, not raw HTML.
+- Non-English translations are simple and need native review before launch.
+
+## Known Limitations
+
+- Supabase migrations/RLS/RPC behavior still need live verification.
+- Google and Apple OAuth require provider setup.
+- Realtime subscriptions are not implemented.
+- Admin user management is read-only.
+- Group-linked viewer read-only UX is still mostly enforced by RLS/server failures rather than hiding every edit control.
+- Guest drafts can be lost if browser storage is cleared.
 
 ## Project Documents
 

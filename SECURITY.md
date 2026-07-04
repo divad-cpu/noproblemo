@@ -2,7 +2,7 @@
 
 ## Current Security Posture
 
-Phase 10 adds a protected admin/settings foundation and admin audit-log storage on top of the Phase 9 messaging, notification, and activity foundation.
+Phase 11 completed an MVP polish, security, i18n/RTL, and deployment-readiness review on top of the Phase 10 admin/settings foundation.
 
 Guest challenge drafts remain in browser localStorage until an authenticated user explicitly imports them from the dashboard.
 
@@ -147,6 +147,35 @@ Do not build public admin signup, admin requests, or self-service role promotion
 - Moderation actions
 - Organization account policies
 
+## Phase 11 Security Review Notes
+
+Reviewed locally in Phase 11:
+
+- `SUPABASE_SERVICE_ROLE_KEY` is not used in `app/` or `lib/`; the only app reference is an admin checklist variable name.
+- `.env.example` and `.env.local.example` contain placeholders only.
+- `.env.local` was not read or printed.
+- `support@noproblemo.tech` remains the public support address.
+- `da.jernaes@gmail.com` was not found in public app files.
+- Protected app routes and admin routes continue to check authenticated Supabase users server-side.
+- Admin routes continue to check `profiles.role = 'admin'` server-side.
+- Profile settings do not update `profiles.role`.
+- Guest mode remains browser-local unless imported by a logged-in user.
+- Message bodies render as plain React text and no dangerous HTML rendering was introduced.
+- Profile search continues to expose only `id`, `display_name`, and `avatar_url`.
+- Group challenge access remains tied to explicit `group_challenges` links.
+- Friendships alone do not grant challenge access.
+- Notifications remain recipient-scoped in the documented RLS model.
+- Activity remains group/challenge-scoped in the documented RLS model.
+
+Not verified in this environment:
+
+- Live Supabase RLS behavior with multiple authenticated users.
+- Supabase RPC behavior against a real project.
+- Supabase Auth provider and redirect behavior in production.
+- Vercel production environment and domain configuration.
+
+Supabase CLI is not installed in this environment, so CLI database lint/list checks were not run.
+
 ## User Ownership Rules
 
 - A user can manage their own profile.
@@ -280,8 +309,9 @@ Users may write personal, workplace, public-sector, or organizational problems. 
 
 - No secrets in git diff.
 - Vercel environment variables configured with least privilege.
-- Supabase migration applied.
+- Supabase migrations applied in order.
 - RLS policies tested with authenticated users.
+- Admin RPCs and profile role hardening tested with admin and non-admin users.
 - Message RLS, notification privacy, and activity visibility tested with authenticated users.
 - Admin route protection, admin RPC authorization, audit-log RLS, and profile role hardening tested with admin and non-admin users.
 - Supabase anon key is the only browser key.

@@ -44,11 +44,11 @@ function ChallengeCard({
   return (
     <article className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <div>
-          <h3 className="text-xl font-semibold text-[#22211e]">
+        <div className="min-w-0">
+          <h3 className="break-words text-xl font-semibold text-[#22211e]">
             {challenge.title}
           </h3>
-          <p className="mt-2 text-sm leading-6 text-[#55544f]">
+          <p className="mt-2 break-words text-sm leading-6 text-[#55544f]">
             {challenge.short_description || labels.noDescription}
           </p>
         </div>
@@ -156,7 +156,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
         </p>
         <div className="mt-3 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <h1 className="max-w-3xl text-4xl font-semibold leading-tight text-[#22211e]">
+            <h1 className="max-w-3xl break-words text-4xl font-semibold leading-tight text-[#22211e]">
               {displayName
                 ? t("titleWithName", { name: displayName })
                 : t("title")}
@@ -184,7 +184,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
 
       <GuestImportCard locale={locale} />
 
-      <section className="grid gap-4 md:grid-cols-4">
+      <section className="grid gap-4 md:grid-cols-3">
         <div className="rounded-lg border border-[#dad8d0] bg-white p-5">
           <p className="text-sm font-medium text-[#706f68]">
             {t("summary.total")}
@@ -211,7 +211,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
         </div>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-3">
+      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <Link
           href="/app/friends"
           className="rounded-lg border border-[#dad8d0] bg-white p-5 hover:border-[#8b897f]"
@@ -241,7 +241,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
           <p className="text-sm font-medium text-[#706f68]">
             {t("social.groups")}
           </p>
-          <p className="mt-2 text-sm leading-6 text-[#55544f]">
+          <p className="mt-2 break-words text-sm leading-6 text-[#55544f]">
             {groupMemberships && groupMemberships.length > 0
               ? groupMemberships
                   .map((membership) => groupMap.get(membership.group_id)?.name)
@@ -324,7 +324,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
                   href={`/app/challenges/${challenge.id}`}
                   className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4 hover:border-[#8b897f]"
                 >
-                  <span className="block font-semibold text-[#22211e]">
+                  <span className="block break-words font-semibold text-[#22211e]">
                     {challenge.title}
                   </span>
                   <span className="mt-1 block text-sm text-[#706f68]">

@@ -195,8 +195,16 @@ export function GuestWorkspace() {
 
       {isPromptOpen ? (
         <div className="fixed inset-0 z-50 flex items-end bg-black/25 p-4 sm:items-center sm:justify-center">
-          <div className="w-full max-w-lg rounded-lg border border-[#dad8d0] bg-white p-5 shadow-xl sm:p-6">
-            <h2 className="text-2xl font-semibold text-[#22211e]">
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="guest-login-prompt-title"
+            className="w-full max-w-lg rounded-lg border border-[#dad8d0] bg-white p-5 shadow-xl sm:p-6"
+          >
+            <h2
+              id="guest-login-prompt-title"
+              className="text-2xl font-semibold text-[#22211e]"
+            >
               {prompt("title")}
             </h2>
             <p className="mt-3 leading-7 text-[#55544f]">{prompt("body")}</p>

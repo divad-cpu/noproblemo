@@ -113,8 +113,8 @@ export default async function AdminPage({ params }: AdminPageProps) {
           {t("eyebrow")}
         </p>
         <div className="mt-3 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <h1 className="max-w-3xl text-4xl font-semibold leading-tight text-[#22211e]">
+          <div className="min-w-0">
+            <h1 className="max-w-3xl break-words text-4xl font-semibold leading-tight text-[#22211e]">
               {t("title")}
             </h1>
             <p className="mt-4 max-w-3xl leading-7 text-[#55544f]">
@@ -163,6 +163,7 @@ export default async function AdminPage({ params }: AdminPageProps) {
         </p>
         <div className="mt-5 overflow-x-auto">
           <table className="w-full min-w-[720px] border-collapse text-start text-sm">
+            <caption className="sr-only">{t("profiles.title")}</caption>
             <thead>
               <tr className="border-b border-[#e5e2da] text-[#706f68]">
                 <th className="py-3 pe-4 font-semibold">{t("profiles.id")}</th>
@@ -182,10 +183,10 @@ export default async function AdminPage({ params }: AdminPageProps) {
               {profiles.length > 0 ? (
                 profiles.map((profile) => (
                   <tr key={profile.id} className="border-b border-[#f0eee8]">
-                    <td className="py-3 pe-4 font-mono text-xs text-[#55544f]">
+                    <td className="break-all py-3 pe-4 font-mono text-xs text-[#55544f]">
                       {profile.id}
                     </td>
-                    <td className="py-3 pe-4 text-[#22211e]">
+                    <td className="break-words py-3 pe-4 text-[#22211e]">
                       {profile.display_name || t("profiles.noDisplayName")}
                     </td>
                     <td className="py-3 pe-4 text-[#55544f]">
@@ -224,7 +225,7 @@ export default async function AdminPage({ params }: AdminPageProps) {
                   <p className="font-semibold text-[#22211e]">
                     {t(activityLabelKey(event.type))}
                   </p>
-                  <p className="mt-1 text-sm text-[#706f68]">
+                  <p className="mt-1 break-words text-sm text-[#706f68]">
                     {event.actor_display_name || event.actor_id || t("activity.noActor")}
                   </p>
                   <p className="mt-1 text-sm text-[#706f68]">
@@ -254,8 +255,8 @@ export default async function AdminPage({ params }: AdminPageProps) {
                   key={entry.id}
                   className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4"
                 >
-                  <p className="font-semibold text-[#22211e]">{entry.action}</p>
-                  <p className="mt-1 text-sm text-[#706f68]">
+                  <p className="break-words font-semibold text-[#22211e]">{entry.action}</p>
+                  <p className="mt-1 break-words text-sm text-[#706f68]">
                     {entry.target_table || t("audit.noTarget")}
                   </p>
                   <p className="mt-1 text-sm text-[#706f68]">

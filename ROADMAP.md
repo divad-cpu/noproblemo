@@ -181,24 +181,45 @@ Needs verification:
 - Verify admin RPC and `admin_audit_log` RLS behavior.
 - Verify normal users cannot update their own `profiles.role`.
 
+### Phase 11: Polish, Security Review And Deployment Preparation
+
+Status: implemented locally.
+
+- Mobile/tablet protected navigation polish
+- Dashboard/admin layout balance and long-text wrapping
+- Visible keyboard focus styles
+- Accessible dialog semantics for the guest login prompt
+- Accessible labels for dense group/workspace management controls
+- Safer handling for unknown status/error query parameters
+- i18n message-key parity check across all 11 locales
+- RTL configuration check for Arabic and Urdu
+- Focused security and Supabase/RLS migration review
+- Deployment and README readiness updates
+
+Needs verification:
+
+- Native review of non-English translations.
+- Manual browser QA on mobile, tablet, desktop, Arabic, and Urdu.
+- Real Supabase migration/RLS/RPC tests with multiple users.
+- Real Vercel, Supabase Auth, OAuth, DNS, and support mailbox setup.
+
 ## Current Phase
 
-Phase 10 admin/settings and local project logs has been implemented locally. Polish, security review and deployment preparation is next.
+Phase 11 polish, security review and deployment preparation has been implemented locally. Production verification and launch readiness is next.
 
 ## Next Recommended Phase
 
-### Phase 11: Polish, Security Review And Deployment Preparation
+### Production Verification And Launch Readiness
 
 Recommended scope:
 
-- Mobile polish
-- Desktop polish
-- Accessibility checks
-- Translation and RTL checks
-- RLS review
-- Deployment documentation
-- Final README
-- Final validation
+- Apply Supabase migrations to a real project only with explicit approval.
+- Verify RLS/RPC behavior with multiple test users.
+- Configure Supabase Auth redirect URLs and OAuth providers.
+- Configure Vercel environment variables and `noproblemo.tech`.
+- Configure Domeneshop DNS and `support@noproblemo.tech` outside the app.
+- Manually test all MVP flows on mobile, desktop, and supported locales.
+- Do not add unrelated product features.
 
 ## MVP Path
 
