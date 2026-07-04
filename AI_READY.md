@@ -20,6 +20,8 @@ This file helps future AI/Codex sessions continue NoProblemo without rebuilding,
 - Use `next-intl` and locale-prefixed routes.
 - Use Supabase for authentication, database, and row-level security.
 - Use the Phase 4 migration and RLS foundation as the starting point for future saved data work.
+- Use `profiles.role = 'admin'` as the admin role source.
+- Keep Codex project logs local in repository docs.
 - Deploy on Vercel.
 - Use Domeneshop mainly for domain and DNS.
 - Keep UI minimalistic, calm, professional, and responsive.
@@ -34,6 +36,8 @@ This file helps future AI/Codex sessions continue NoProblemo without rebuilding,
 - Current route structure unless a phase explicitly changes it.
 - Phase 4 database schema/RLS without a migration plan.
 - Security guardrails around `.env.local`, Supabase service role keys, and private data.
+- Admin role protection and profile role self-promotion hardening.
+- Local project-log approach; do not replace it with email automation, Resend, Vercel Cron, or `CRON_SECRET`.
 - Minimal visual direction.
 
 ## How To Prepare Future Phase Prompts

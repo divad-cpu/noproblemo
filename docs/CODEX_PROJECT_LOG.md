@@ -139,3 +139,20 @@ Phase 9 messaging, notifications and activity:
 - Updated all eleven message catalogs with Phase 9 UI keys.
 - Did not implement admin, payments, AI, email automation, Resend, Vercel Cron, public sharing, voting, comments, attachments, read receipts, typing indicators, reactions, threads, calendar integration, PDF export, or realtime subscriptions.
 - Validation passed: `npm run lint`, `npm run typecheck`, and `npm run build`.
+
+## 2026-07-04
+
+Phase 10 admin/settings and local project logs:
+
+- Phase completed: Phase 10 Admin/settings and local project logs.
+- Features added: protected admin overview at `/[locale]/app/admin`, protected admin settings checklist at `/[locale]/app/admin/settings`, admin navigation visibility, aggregate admin counts, limited admin profile list, recent activity metadata, recent audit-log metadata, and local project-log handoff updates.
+- Files created: `app/[locale]/app/admin/page.tsx`, `app/[locale]/app/admin/settings/page.tsx`, and `supabase/migrations/20260704090000_phase10_admin_settings_logs.sql`.
+- Files changed: `app/[locale]/app/actions.ts`, `app/[locale]/app/layout.tsx`, `lib/supabase/types.ts`, all `messages/*.json`, core documentation, project map, project log, changelog, and next Codex prompt.
+- Database/schema changes: added `public.is_admin(user_id)`, `admin_audit_log`, admin-only RPCs for overview counts/profile list/recent activity/recent audit log, profile role self-change trigger, and an admin profile read policy.
+- Security/RLS changes: admin routes check the authenticated user and `profiles.role` server-side; admin RPCs check `public.is_admin(auth.uid())`; `admin_audit_log` is readable only by admins and has no authenticated write grant; normal profile updates no longer touch `profiles.role`; authenticated self role changes are blocked by trigger.
+- UI/UX changes: added minimal, calm, responsive admin overview and admin settings checklist pages; admin link appears only for admin profiles; no message bodies, emails, `auth.users`, or private challenge content are shown in the admin overview.
+- Bugs fixed: removed the normal profile settings upsert pattern that wrote `role: "user"` and could conflict with role protections or affect existing admin profiles.
+- Known problems: Phase 4, Phase 8, Phase 9, and Phase 10 migrations still need to be applied and tested against a real Supabase project; admin role-changing and moderation actions remain future work; non-English admin copy is intentionally simple and should receive native review before launch.
+- Validation results: `npm run lint`, `npm run typecheck`, and `npm run build` passed on 2026-07-04.
+- Next recommended step: Phase 11 Polish, security review and deployment preparation.
+- Explicitly not added: email automation, Resend, Vercel Cron, `CRON_SECRET`, payments, AI, billing, public admin signup, organization accounts, support tickets, moderation system, realtime collaboration, comments, voting, attachments, PDF export, or calendar integration.

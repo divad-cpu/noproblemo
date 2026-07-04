@@ -227,7 +227,8 @@
       "settings": "Settings",
       "friends": "Friends",
       "groups": "Groups",
-      "notifications": "Notifications"
+      "notifications": "Notifications",
+      "admin": "Admin"
     },
     "eyebrow": "Protected area",
     "title": "Authentication is ready.",
@@ -807,6 +808,103 @@
       "challenge_message": "Challenge message",
       "challenge_updated": "Challenge updated",
       "group_updated": "Group updated"
+    }
+  },
+  "Admin": {
+    "eyebrow": "Admin",
+    "title": "Resumen de administración",
+    "body": "A protected operational view with aggregate counts and limited metadata only.",
+    "actions": {
+      "settings": "Admin settings"
+    },
+    "verification": {
+      "title": "Live Supabase verification needed",
+      "body": "Phase 10 adds local migrations and RLS/RPC rules. Apply and test them against the real Supabase project before relying on production admin data.",
+      "error": "Some admin data could not be loaded. Check that the Phase 10 migration is applied."
+    },
+    "metrics": {
+      "profiles": "Profiles",
+      "challenges": "Challenges",
+      "groups": "Groups",
+      "messages": "Messages",
+      "notifications": "Notifications"
+    },
+    "profiles": {
+      "title": "Profiles",
+      "body": "Limited profile metadata for admin review. Emails and auth.users data are not shown.",
+      "id": "Profile id",
+      "displayName": "Display name",
+      "locale": "Locale",
+      "role": "Role",
+      "created": "Created",
+      "noDisplayName": "No display name",
+      "empty": "No profiles available."
+    },
+    "activity": {
+      "title": "Recent activity",
+      "noActor": "No actor",
+      "empty": "No activity available.",
+      "types": {
+        "challenge_created": "Challenge created",
+        "challenge_updated": "Challenge updated",
+        "challenge_linked_to_group": "Challenge linked to group",
+        "group_created": "Group created",
+        "group_updated": "Group updated",
+        "group_member_joined": "Group member joined",
+        "group_member_removed": "Group member removed",
+        "group_message_created": "Group message created",
+        "challenge_message_created": "Challenge message created",
+        "task_updated": "Task updated",
+        "solution_updated": "Solution updated",
+        "unknown": "Activity event"
+      }
+    },
+    "audit": {
+      "title": "Admin audit log",
+      "body": "Sensitive admin mutations should be logged here when those actions are added.",
+      "noTarget": "No target",
+      "empty": "No admin audit entries yet."
+    }
+  },
+  "AdminSettings": {
+    "back": "Back to admin",
+    "eyebrow": "Admin settings",
+    "title": "Lista de preparación de administración",
+    "body": "A local status view for deployment, Supabase verification, and support setup.",
+    "checklists": {
+      "appStatus": {
+        "title": "App status",
+        "adminProtected": "Admin routes are protected by profiles.role.",
+        "dashboard": "Dashboard and protected app routes remain available.",
+        "guestMode": "Guest mode remains local browser storage only.",
+        "messages": "Messages, notifications, and activity remain protected by RLS."
+      },
+      "supabase": {
+        "title": "Supabase",
+        "phase10Migration": "Apply the Phase 10 migration in Supabase.",
+        "rls": "Review RLS policies with real authenticated users.",
+        "firstAdmin": "Assign the first admin manually in Supabase SQL.",
+        "liveVerification": "Verify admin RPC behavior before production use."
+      },
+      "deployment": {
+        "title": "Deployment",
+        "envTemplates": "Use templates only; do not expose real secret values.",
+        "supportEmail": "Public support email is support@noproblemo.tech.",
+        "noAutomation": "Email automation, Resend, and Vercel Cron are intentionally not used.",
+        "validation": "Run lint, typecheck, and build before deployment."
+      }
+    },
+    "environment": {
+      "title": "Environment variables",
+      "body": "This checklist shows variable names only, never real values."
+    },
+    "support": {
+      "title": "Support",
+      "body": "Use this public address for MVP support and feedback."
+    },
+    "boundaries": {
+      "title": "Phase boundaries",
+      "body": "Phase 10 does not add payments, AI, email automation, Resend, Vercel Cron, billing, or support tickets."
     }
   }
 }

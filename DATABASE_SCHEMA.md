@@ -7,6 +7,7 @@ Phase 4 Supabase foundation is implemented locally in migration:
 - `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`
 - `supabase/migrations/20260703210000_phase8_friends_groups.sql`
 - `supabase/migrations/20260703220000_phase9_messaging_notifications_activity.sql`
+- `supabase/migrations/20260704090000_phase10_admin_settings_logs.sql`
 
 The migrations have not been verified against the live Supabase project in this task. They should be applied and tested in Supabase before any production data depends on them.
 
@@ -305,6 +306,25 @@ Implemented types:
 - `task_updated`
 - `solution_updated`
 
+### `admin_audit_log`
+
+Admin audit-log storage for future sensitive admin mutations.
+
+Fields:
+
+- `id uuid primary key default gen_random_uuid()`
+- `actor_id uuid references auth.users(id) on delete set null`
+- `action text not null`
+- `target_table text`
+- `target_id uuid`
+- `metadata jsonb default '{}'::jsonb`
+- `created_at timestamptz default now()`
+
+Constraints:
+
+- `metadata` must be a JSON object.
+- Audit metadata must not store secrets, full message bodies, or unnecessary private challenge content.
+
 ## Implemented Functions And Triggers
 
 - `public.set_updated_at()` updates `updated_at` before row updates.
@@ -332,6 +352,13 @@ Implemented types:
 - Notification triggers are attached to friend requests and group invitations.
 - Activity triggers are attached to groups, group members, group challenge links, and messages.
 - Message triggers create group/challenge activity and private notifications for other authorized participants.
+- `public.is_admin(user_id)` checks `profiles.role = 'admin'`.
+- `public.prevent_profile_role_self_change()` blocks authenticated self-changes to `profiles.role`.
+- `profiles_prevent_role_self_change` trigger on `profiles`.
+- `public.admin_overview_counts()` returns admin-only aggregate counts for profiles, challenges, groups, messages, and notifications.
+- `public.admin_list_profiles(limit)` returns admin-only limited profile metadata without email addresses.
+- `public.admin_recent_activity(limit)` returns admin-only recent activity metadata without message bodies or challenge content.
+- `public.admin_recent_audit_log(limit)` returns admin-only audit-log metadata.
 
 ## Implemented RLS Policies
 
@@ -351,6 +378,7 @@ RLS is enabled on:
 - `messages`
 - `notifications`
 - `activity_events`
+- `admin_audit_log`
 
 Policies:
 
@@ -383,13 +411,16 @@ Policies:
 - Notifications are selectable only by their recipient.
 - Notification updates are limited to the recipient's `read_at` state.
 - Activity events are selectable only by authorized group members or challenge readers.
+- Admin profiles can select all profiles through the Phase 10 admin read policy.
+- `admin_audit_log` is selectable only by admins.
+- No authenticated insert/update/delete grant is provided for `admin_audit_log`.
+- Admin RPCs check `public.is_admin(auth.uid())` before returning data.
 
 ## Planned Tables Not Implemented Yet
 
 - Organization/account tables
-- Audit/history tables
 
-Admin, organization, and audit/history policies are not implemented yet.
+Admin role-changing, moderation, organization, and broader history policies are not implemented yet.
 
 ## TypeScript Types
 
@@ -476,6 +507,32 @@ Notification creation is mostly database-triggered for cross-user events, so cli
 
 Realtime subscriptions are not implemented in Phase 9. Message sends use normal server action redirects and route revalidation.
 
+## Phase 10 Admin And Project Log Notes
+
+Phase 10 adds a fourth migration for admin helper functions, admin-only RPCs, audit-log storage, and profile role hardening.
+
+The app currently supports:
+
+- protected admin overview at `/[locale]/app/admin`
+- protected admin readiness/settings checklist at `/[locale]/app/admin/settings`
+- admin navigation link visible only to admin profiles
+- aggregate counts for profiles, challenges, groups, messages, and notifications
+- limited profile metadata list: profile id, display name, preferred locale, role, and created date
+- recent activity metadata without private message bodies or challenge content
+- recent admin audit-log metadata
+
+Admin user management is read-only in Phase 10. Role changes are future work and should be audited if implemented.
+
+The first admin should be assigned manually by a trusted project owner in Supabase SQL:
+
+```sql
+update public.profiles
+set role = 'admin'
+where id = '<trusted-user-uuid>';
+```
+
+The local Codex project log system remains repository-local in `docs/CODEX_PROJECT_LOG.md`, `docs/NEXT_CODEX_PROMPT.md`, and `docs/CHANGELOG.md`. It does not use email automation, Resend, Vercel Cron, or `CRON_SECRET`.
+
 ## Needs Verification
 
 - Apply migration in local Supabase and/or linked Supabase project.
@@ -493,5 +550,10 @@ Realtime subscriptions are not implemented in Phase 9. Message sends use normal 
 - Test message soft-delete permissions.
 - Test notification privacy and read-state updates.
 - Test activity event visibility for group/challenge users and outside users.
+- Apply and test the Phase 10 migration.
+- Test admin route protection with admin, non-admin, and logged-out users.
+- Test admin RPC authorization and returned fields.
+- Test `admin_audit_log` RLS with admin and non-admin users.
+- Test that normal users cannot self-promote by changing `profiles.role`.
 - Confirm whether the challenge section list is sufficient for the MVP saved workspace.
 - Confirm whether organization accounts need schema support before MVP launch.

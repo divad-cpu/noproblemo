@@ -2,7 +2,7 @@
 
 ## Current Security Posture
 
-Phase 9 adds protected group messages, challenge messages, private notifications, and activity events on top of the Phase 8 friends/groups foundation.
+Phase 10 adds a protected admin/settings foundation and admin audit-log storage on top of the Phase 9 messaging, notification, and activity foundation.
 
 Guest challenge drafts remain in browser localStorage until an authenticated user explicitly imports them from the dashboard.
 
@@ -83,11 +83,6 @@ Profile discovery uses the authenticated `search_profiles(search_term)` RPC and 
 
 Known MVP limitation: viewer read-only behavior is enforced by RLS and server-side write failures. The workspace UI may still render some edit controls for viewers until role-aware read-only rendering is added.
 
-## Not Implemented Yet
-
-- Admin policies
-- Organization account policies
-
 ## Phase 9 Messaging, Notifications And Activity Security
 
 Migration:
@@ -116,6 +111,42 @@ Current access model:
 
 Realtime subscriptions are not implemented in Phase 9. Message actions use server action redirects and route revalidation.
 
+## Phase 10 Admin Security
+
+Migration:
+
+- `supabase/migrations/20260704090000_phase10_admin_settings_logs.sql`
+
+Current access model:
+
+- Admin role source is `profiles.role = 'admin'`.
+- Admin routes check the authenticated Supabase user and the profile role server-side before rendering.
+- The protected app navigation shows the Admin link only to admin profiles, but route protection does not rely on hidden navigation.
+- Non-admin users attempting `/[locale]/app/admin` or `/[locale]/app/admin/settings` receive a not-found response without admin data.
+- `public.is_admin(user_id)` is a database helper used by admin policies/RPCs.
+- `admin_overview_counts`, `admin_list_profiles`, `admin_recent_activity`, and `admin_recent_audit_log` are security-definer RPCs that raise an authorization error for non-admin users.
+- The admin overview exposes aggregate counts, limited profile metadata, recent activity metadata, and audit-log metadata only.
+- The admin overview does not expose `auth.users`, email addresses, message bodies, or private challenge content.
+- `admin_audit_log` is readable only by admins through RLS.
+- Authenticated users do not have table insert/update/delete grants on `admin_audit_log`; future trusted admin mutations should write audit entries without storing secrets or unnecessary private content.
+- A Phase 10 trigger prevents authenticated users from changing their own `profiles.role`, and normal profile settings update only `display_name` and `preferred_locale`.
+
+First admin assignment must be manual and trusted, for example in the Supabase SQL editor:
+
+```sql
+update public.profiles
+set role = 'admin'
+where id = '<trusted-user-uuid>';
+```
+
+Do not build public admin signup, admin requests, or self-service role promotion.
+
+## Not Implemented Yet
+
+- Admin role-changing actions
+- Moderation actions
+- Organization account policies
+
 ## User Ownership Rules
 
 - A user can manage their own profile.
@@ -137,6 +168,7 @@ Phase 6 dashboard operations use `lib/supabase/server.ts`, the public Supabase a
 - The client marks an imported local draft with `importedChallengeId` to avoid repeated imports from the same browser draft.
 - Duplicate prevention is browser-local in Phase 6 because no import fingerprint column exists in the Phase 4 schema.
 - Profile updates validate the preferred locale against the supported locale list and update only basic profile fields.
+- Profile updates do not update `profiles.role`; missing profiles may be inserted only with `role = 'user'`.
 
 ## Challenge Workspace Security
 
@@ -251,6 +283,7 @@ Users may write personal, workplace, public-sector, or organizational problems. 
 - Supabase migration applied.
 - RLS policies tested with authenticated users.
 - Message RLS, notification privacy, and activity visibility tested with authenticated users.
+- Admin route protection, admin RPC authorization, audit-log RLS, and profile role hardening tested with admin and non-admin users.
 - Supabase anon key is the only browser key.
 - Service role key unavailable to client bundles.
 - Auth redirect URLs verified.

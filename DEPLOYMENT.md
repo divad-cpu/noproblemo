@@ -39,6 +39,24 @@ Phase 5 uses Supabase Auth. Before relying on production login:
 - Keep `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` configured in Vercel.
 - Do not expose `SUPABASE_SERVICE_ROLE_KEY` to client code.
 
+## Admin Setup
+
+Before relying on production admin pages:
+
+- Apply and verify the Phase 10 Supabase migration.
+- Assign the first admin manually in the Supabase SQL editor by a trusted project owner:
+
+```sql
+update public.profiles
+set role = 'admin'
+where id = '<trusted-user-uuid>';
+```
+
+- Confirm non-admin users receive no admin data from `/[locale]/app/admin`.
+- Confirm admin RPCs return only aggregate counts and limited metadata.
+- Confirm `admin_audit_log` is readable only by admins.
+- Do not create public admin signup, admin-request, or self-promotion flows.
+
 Google login preparation requires:
 
 - Google Cloud OAuth app credentials.
@@ -81,7 +99,7 @@ Do not print `.env.local` values.
 
 ## Current Deployment Scope
 
-Current app includes localized public pages, a guest localStorage workspace, Supabase helpers, local migrations, Supabase Auth UI/actions, protected dashboard, guest import, profile settings, cloud challenge creation, saved challenge workspace, friends, groups, invitations, roles, explicit group challenge links, group/challenge messages, private notifications, and basic activity events. It does not include admin, payments, email sending, AI, scheduled jobs, or realtime subscriptions.
+Current app includes localized public pages, a guest localStorage workspace, Supabase helpers, local migrations, Supabase Auth UI/actions, protected dashboard, guest import, profile settings, cloud challenge creation, saved challenge workspace, friends, groups, invitations, roles, explicit group challenge links, group/challenge messages, private notifications, basic activity events, and a read-only protected admin/settings foundation. It does not include payments, email sending, AI, scheduled jobs, or realtime subscriptions.
 
 ## Production Checklist
 
@@ -95,5 +113,8 @@ Current app includes localized public pages, a guest localStorage workspace, Sup
 - Dashboard challenge reads/writes and guest import are tested against Supabase RLS.
 - Friend/group RLS, group invitation flows, group challenge access, and the 100-member limit are tested against Supabase.
 - Message RLS, notification privacy, activity visibility, and message soft-delete are tested against Supabase.
+- Admin route protection, admin RPCs, audit-log RLS, and profile role self-promotion prevention are tested against Supabase.
 - Auth redirect URLs match production domain before real auth launches.
 - Support contact remains `support@noproblemo.tech` unless intentionally changed.
+
+Project logs remain local repository documentation. Do not add Resend, Vercel Cron, CRON_SECRET, or email automation for Codex project logs.

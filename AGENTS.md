@@ -27,6 +27,8 @@ Every Codex session must read these files before changing code:
 - Use clear file names and readable code.
 - Avoid changing unrelated files.
 - Update `CURRENT_STATE.md` after each completed phase or major task.
+- Keep project logs local in repository documentation such as `docs/CODEX_PROJECT_LOG.md`, `docs/CHANGELOG.md`, and `docs/NEXT_CODEX_PROMPT.md`.
+- Do not add email automation, Resend, Vercel Cron, `CRON_SECRET`, or weekly email reporting for project logs.
 - Show changed files and validation results after each task.
 
 ## Security Boundaries

@@ -380,15 +380,32 @@ export async function updateProfile(formData: FormData) {
     redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/settings`);
   }
 
-  const { error } = await supabase.from("profiles").upsert({
-    id: user.id,
+  const profileUpdate = {
     display_name: displayName || null,
     preferred_locale: preferredLocale,
-    role: "user",
-  });
+  };
+
+  const { data: updatedProfile, error } = await supabase
+    .from("profiles")
+    .update(profileUpdate)
+    .eq("id", user.id)
+    .select("id")
+    .maybeSingle();
 
   if (error) {
     redirect(`/${locale}/app/settings?error=profile-update-failed`);
+  }
+
+  if (!updatedProfile) {
+    const { error: insertError } = await supabase.from("profiles").insert({
+      id: user.id,
+      ...profileUpdate,
+      role: "user",
+    });
+
+    if (insertError) {
+      redirect(`/${locale}/app/settings?error=profile-update-failed`);
+    }
   }
 
   revalidatePath(`/${locale}/app`);

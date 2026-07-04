@@ -42,6 +42,10 @@ Implemented:
 - Group messages and challenge discussion messages.
 - Private notifications page.
 - Basic group/challenge activity lists.
+- Protected admin overview.
+- Protected admin settings checklist.
+- Admin role protection using `profiles.role = 'admin'`.
+- Admin audit-log storage and admin-only overview RPCs.
 - Google and Apple OAuth provider start actions prepared through Supabase Auth.
 - Supabase migration for profiles and core challenge tables.
 - Phase 8 migration for friends, groups, profile search, group challenge links, and group-aware RLS.
@@ -51,7 +55,6 @@ Implemented:
 
 Not implemented:
 
-- Admin panel.
 - AI, payments, email sending, cron.
 
 ## Route Map
@@ -72,6 +75,8 @@ Not implemented:
 - `/[locale]/app/groups/new`: protected group creation.
 - `/[locale]/app/groups/[id]`: protected group detail, member management, invitations, and linked challenges.
 - `/[locale]/app/notifications`: protected private notifications.
+- `/[locale]/app/admin`: protected admin overview.
+- `/[locale]/app/admin/settings`: protected admin readiness/settings checklist.
 - `/[locale]/app/settings`: protected profile/settings.
 
 ## Data Model Map
@@ -98,6 +103,8 @@ Current:
 - Group and challenge messages use `messages`.
 - Private user notifications use `notifications`.
 - Basic group/challenge activity uses `activity_events`.
+- Admin audit metadata uses `admin_audit_log`.
+- Admin overview data uses admin-only RPCs for aggregate counts and limited metadata.
 
 Implemented Phase 4 tables:
 
@@ -115,10 +122,11 @@ Implemented Phase 4 tables:
 - `messages`
 - `notifications`
 - `activity_events`
+- `admin_audit_log`
 
 Planned data concepts:
 
-- Admin/settings records if Phase 10 needs more than existing `profiles.role`
+- Organization/account records if later phases require them
 
 See `DATABASE_SCHEMA.md` before any future migration work.
 
@@ -140,13 +148,17 @@ Current:
 - Challenge messages are visible only to users with challenge read access.
 - Notifications are visible only to recipients.
 - Activity events are visible only through group/challenge access.
+- Admin pages require authenticated users with `profiles.role = 'admin'`.
+- Admin RPCs use `public.is_admin(auth.uid())`.
+- `admin_audit_log` is readable only by admins and has no authenticated write grant.
+- Normal users cannot self-promote through profile settings or authenticated self role updates.
 - RLS migrations must still be verified in Supabase.
 - No service-role helper exists.
 
 Planned:
 
-- Phase 10 admin/settings and local project logs.
-- Later admin policies beyond the MVP.
+- Phase 11 polish, security review, and deployment preparation.
+- Later admin actions beyond the read-only MVP.
 
 Rules:
 
@@ -167,7 +179,7 @@ See `SECURITY.md` before implementing auth, database writes, or messaging.
 6. Friends/invites: implemented locally.
 7. Groups: implemented locally.
 8. Simple messaging: implemented locally.
-9. Basic admin/settings: planned for Phase 10.
+9. Basic admin/settings: implemented locally.
 10. Deployment: Vercel works; security hardening ongoing.
 
 ## Future Feature Map

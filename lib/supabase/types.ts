@@ -542,9 +542,92 @@ export type Database = {
         };
         Relationships: [];
       };
+      admin_audit_log: {
+        Row: {
+          id: string;
+          actor_id: string | null;
+          action: string;
+          target_table: string | null;
+          target_id: string | null;
+          metadata: Json;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          actor_id?: string | null;
+          action: string;
+          target_table?: string | null;
+          target_id?: string | null;
+          metadata?: Json;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          actor_id?: string | null;
+          action?: string;
+          target_table?: string | null;
+          target_id?: string | null;
+          metadata?: Json;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: {
+      admin_list_profiles: {
+        Args: {
+          profile_limit?: number;
+        };
+        Returns: Array<{
+          id: string;
+          display_name: string | null;
+          preferred_locale: Locale;
+          role: ProfileRole;
+          created_at: string;
+        }>;
+      };
+      admin_overview_counts: {
+        Args: Record<PropertyKey, never>;
+        Returns: Array<{
+          metric: string;
+          value: number;
+        }>;
+      };
+      admin_recent_activity: {
+        Args: {
+          activity_limit?: number;
+        };
+        Returns: Array<{
+          id: string;
+          actor_id: string | null;
+          actor_display_name: string | null;
+          group_id: string | null;
+          challenge_id: string | null;
+          type: ActivityType;
+          created_at: string;
+        }>;
+      };
+      admin_recent_audit_log: {
+        Args: {
+          audit_limit?: number;
+        };
+        Returns: Array<{
+          id: string;
+          actor_id: string | null;
+          action: string;
+          target_table: string | null;
+          target_id: string | null;
+          metadata: Json;
+          created_at: string;
+        }>;
+      };
+      is_admin: {
+        Args: {
+          target_user_id: string;
+        };
+        Returns: boolean;
+      };
       search_profiles: {
         Args: {
           search_term: string;

@@ -35,6 +35,8 @@
 - `app/[locale]/app/groups/new/page.tsx`: protected group creation page.
 - `app/[locale]/app/groups/[id]/page.tsx`: protected group detail page with members, invitations, roles, linked challenges, group messages, and group activity.
 - `app/[locale]/app/notifications/page.tsx`: protected private notifications page.
+- `app/[locale]/app/admin/page.tsx`: protected admin overview with aggregate counts, limited profile metadata, recent activity metadata, and audit-log entries.
+- `app/[locale]/app/admin/settings/page.tsx`: protected admin readiness/settings checklist.
 - `app/[locale]/app/settings/page.tsx`: protected profile/settings page for display name and preferred locale.
 - `app/[locale]/_components/auth-status.tsx`: auth-aware landing links.
 - `app/[locale]/_components/language-switcher.tsx`: locale switcher.
@@ -68,6 +70,8 @@ No shared top-level `components/` directory currently exists. Add it only when s
 - `/[locale]/app/groups/new` protected group creation.
 - `/[locale]/app/groups/[id]` protected group detail and challenge linking.
 - `/[locale]/app/notifications` protected private notifications.
+- `/[locale]/app/admin` protected admin overview.
+- `/[locale]/app/admin/settings` protected admin readiness/settings checklist.
 - `/[locale]/app/settings` protected profile/settings page.
 
 Supported locales are `en`, `zh-CN`, `hi`, `es`, `ar`, `fr`, `bn`, `pt-BR`, `id`, `ur`, and `nb`. Arabic and Urdu use `dir="rtl"`.
@@ -119,6 +123,15 @@ Implemented in Phase 9:
 - database-triggered notifications and activity events
 - RLS policies for group messages, challenge messages, private notifications, and activity visibility
 
+Implemented in Phase 10:
+
+- `supabase/migrations/20260704090000_phase10_admin_settings_logs.sql`
+- `admin_audit_log`
+- `public.is_admin(user_id)` helper based on `profiles.role = 'admin'`
+- profile role self-change trigger hardening
+- admin-only aggregate/profile/activity/audit RPCs
+- admin-only audit-log read policy
+
 The migrations still need to be applied and verified in Supabase.
 
 ## Authentication Flow
@@ -163,11 +176,14 @@ Current data flow:
 - Notifications are read from `notifications` and can be marked read only by the recipient.
 - Activity lists read from `activity_events` through RLS on the dashboard, group detail, and challenge workspace.
 - Notification/activity side effects are mostly database-triggered by friend requests, group invitations, group membership, group links, and message creation.
+- Admin pages check the authenticated user and `profiles.role` server-side before rendering.
+- Admin overview data is read through admin-only RPCs that expose aggregate counts and limited metadata, not raw private content.
+- Admin settings displays operational checklists and environment variable names only, never real values.
 
 Planned data flow:
 
-- Phase 10: admin/settings and local project logs.
-- Later: admin policies beyond MVP and optional realtime messaging.
+- Phase 11: polish, security review, and deployment preparation.
+- Later: admin actions beyond read-only MVP and optional realtime messaging.
 
 ## Deployment Direction
 

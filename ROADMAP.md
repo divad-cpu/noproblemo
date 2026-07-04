@@ -160,20 +160,45 @@ Needs verification:
 - Verify notifications are visible only to recipients.
 - Verify activity events are visible only to authorized group/challenge users.
 
+### Phase 10: Admin/Settings And Local Project Logs
+
+Status: implemented locally.
+
+- Protected admin overview at `/[locale]/app/admin`
+- Protected admin settings checklist at `/[locale]/app/admin/settings`
+- Admin role protection based on `profiles.role = 'admin'`
+- Admin navigation link visible only to admin profiles
+- Admin-only RPCs for aggregate counts, limited profile metadata, recent activity metadata, and recent audit-log entries
+- `admin_audit_log` table with admin-only read policy
+- Profile role self-promotion hardening
+- Local project log, changelog, and Phase 11 handoff prompt updates
+- No email automation, Resend, Vercel Cron, payments, or AI
+
+Needs verification:
+
+- Apply and test the Phase 10 migration.
+- Verify admin and non-admin route behavior.
+- Verify admin RPC and `admin_audit_log` RLS behavior.
+- Verify normal users cannot update their own `profiles.role`.
+
 ## Current Phase
 
-Phase 9 messaging, notifications and activity has been implemented locally. Admin/settings and local project logs are next.
+Phase 10 admin/settings and local project logs has been implemented locally. Polish, security review and deployment preparation is next.
 
 ## Next Recommended Phase
 
-### Phase 10: Admin/Settings And Local Project Logs
+### Phase 11: Polish, Security Review And Deployment Preparation
 
 Recommended scope:
 
-- Basic admin/settings area
-- Admin role protection
-- Activity/admin overview if simple
-- Complete local Codex project log documentation
+- Mobile polish
+- Desktop polish
+- Accessibility checks
+- Translation and RTL checks
+- RLS review
+- Deployment documentation
+- Final README
+- Final validation
 
 ## MVP Path
 
@@ -185,7 +210,7 @@ Recommended scope:
 6. Friends/invites: implemented locally.
 7. Groups: implemented locally.
 8. Simple messaging: implemented locally.
-9. Basic admin/settings: planned for Phase 10.
+9. Basic admin/settings: implemented locally.
 10. Deployment: Vercel works; hardening remains ongoing.
 
 ## Future Expansion Path

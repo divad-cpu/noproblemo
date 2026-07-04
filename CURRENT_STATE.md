@@ -1,6 +1,6 @@
 # Current State
 
-Last updated: 2026-07-03
+Last updated: 2026-07-04
 
 Future Codex sessions must read this file first, then `docs/CODEX_PROJECT_MAP.md`, before changing files.
 
@@ -17,8 +17,9 @@ NoProblemo has completed:
 - Phase 7: challenge workspace
 - Phase 8: friends and groups
 - Phase 9: messaging, notifications and activity
+- Phase 10: admin/settings and local project logs
 
-Phase 10 Admin/settings and local project logs is next. Payments, AI, email automation, Resend, and Vercel Cron remain future phases.
+Phase 11 Polish, security review and deployment preparation is next. Payments, AI, email automation, Resend, and Vercel Cron remain future phases.
 
 ## Already Implemented
 
@@ -57,8 +58,14 @@ Phase 10 Admin/settings and local project logs is next. Payments, AI, email auto
 - Group messages on `/[locale]/app/groups/[id]`
 - Challenge discussion messages on `/[locale]/app/challenges/[id]`
 - Protected notifications page at `/[locale]/app/notifications`
+- Protected admin overview at `/[locale]/app/admin`
+- Protected admin settings checklist at `/[locale]/app/admin/settings`
 - Basic activity lists on dashboard, group detail, and challenge workspace
+- Basic admin overview with aggregate counts, limited profile metadata, recent activity metadata, and recent audit-log entries
+- Admin role protection based on `profiles.role = 'admin'`
+- Admin navigation link shown only to admin profiles
 - Notification/activity triggers for friend requests, group invitations, group/member events, group challenge links, and messages
+- Phase 10 local migration for admin helper functions, admin audit log, admin-only RPCs, profile role hardening, and admin profile read policy
 - Google and Apple OAuth start actions prepared through Supabase Auth
 - Shared language switcher and footer
 - Guest localStorage draft persistence under `noproblemo.guestWorkspace.v1`
@@ -80,6 +87,8 @@ Phase 10 Admin/settings and local project logs is next. Payments, AI, email auto
 - Group-linked challenge read/edit access is represented in RLS. The workspace now reads challenges through RLS, but viewer read-only UX is still mostly enforced by server/RLS failures rather than fully hiding every edit control.
 - Group challenge linking currently links a user's own challenges to a group. Linking challenges owned by another group member remains future refinement.
 - Supabase Realtime is documented as future work; Phase 9 uses server-rendered refresh/revalidation after message actions.
+- Admin user management is read-only in Phase 10. Role changing, moderation, and system setting mutations remain future work.
+- Admin audit logging storage exists in `admin_audit_log`; Phase 10 has no sensitive admin mutations to log yet.
 - Google and Apple login buttons are present, but they require Supabase provider setup and external provider configuration before they work in production.
 - Supabase schema exists as local migrations but has not been verified against the live Supabase project in this task.
 - Supabase helpers are used by auth actions, callback/logout handlers, auth-aware landing links, and the protected app layout.
@@ -88,7 +97,6 @@ Phase 10 Admin/settings and local project logs is next. Payments, AI, email auto
 
 ## Not Yet Implemented
 
-- Admin panel
 - Real-time collaboration
 - AI features
 - Payments
@@ -114,6 +122,8 @@ Phase 10 Admin/settings and local project logs is next. Payments, AI, email auto
 - `app/[locale]/app/groups/new/page.tsx`: protected group creation page.
 - `app/[locale]/app/groups/[id]/page.tsx`: protected group detail, member, invitation, and linked challenge page.
 - `app/[locale]/app/notifications/page.tsx`: protected private notifications page.
+- `app/[locale]/app/admin/page.tsx`: protected admin overview.
+- `app/[locale]/app/admin/settings/page.tsx`: protected admin readiness/settings checklist.
 - `app/[locale]/app/_components/guest-import-card.tsx`: client-side localStorage detection and import UI.
 - `app/[locale]/app/challenges/new/page.tsx`: minimal protected create challenge page.
 - `app/[locale]/app/challenges/[id]/page.tsx`: protected saved challenge workspace.
@@ -128,6 +138,7 @@ Phase 10 Admin/settings and local project logs is next. Payments, AI, email auto
 - `lib/supabase/types.ts`: manual Phase 4 database types.
 - `supabase/migrations/20260703210000_phase8_friends_groups.sql`: Phase 8 friends, groups, group challenge access, helper functions, and RLS migration.
 - `supabase/migrations/20260703220000_phase9_messaging_notifications_activity.sql`: Phase 9 messages, notifications, activity events, triggers, and RLS migration.
+- `supabase/migrations/20260704090000_phase10_admin_settings_logs.sql`: Phase 10 admin helpers, audit log, admin RPCs, and profile role hardening migration.
 - `supabase/config.toml`: Supabase CLI config.
 - `supabase/seed.sql`: empty seed file.
 - `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`: Phase 4 schema and RLS migration.
@@ -139,7 +150,9 @@ Phase 10 Admin/settings and local project logs is next. Payments, AI, email auto
 - Phase 4 migration needs to be applied and tested in Supabase.
 - Phase 8 migration needs to be applied and tested in Supabase.
 - Phase 9 migration needs to be applied and tested in Supabase.
+- Phase 10 migration needs to be applied and tested in Supabase.
 - RLS policies, profile trigger, workspace writes, friend/group writes, group challenge access, message writes, notification privacy, and activity visibility need verification with authenticated users.
+- Admin role checks, admin RPCs, admin audit log RLS, and profile role hardening need verification with authenticated admin and non-admin users.
 - Google and Apple OAuth require provider configuration in Supabase, Google Cloud, and Apple Developer.
 - Guest drafts are browser-local and can be lost if localStorage is cleared.
 - Non-English translations need human review.
@@ -148,7 +161,7 @@ Phase 10 Admin/settings and local project logs is next. Payments, AI, email auto
 
 ## Current Risks
 
-- Future agents must not add admin, payments, AI, email automation, Resend, or Vercel Cron before explicitly scoped.
+- Future agents must not add payments, AI, email automation, Resend, or Vercel Cron before explicitly scoped.
 - Future agents might use service role keys in frontend code; do not do this.
 - RLS policies are written but still need live/local Supabase verification.
 - User-generated problem content may be sensitive; privacy must be designed into auth and dashboard phases.
@@ -156,16 +169,16 @@ Phase 10 Admin/settings and local project logs is next. Payments, AI, email auto
 
 ## Next Recommended Phase
 
-Phase 10: Admin/settings and local project logs.
+Phase 11: Polish, security review and deployment preparation.
 
 Recommended scope:
 
-- Basic admin/settings area
-- Admin role protection
-- Activity/admin overview if simple
-- Complete local Codex project log documentation
+- Mobile and desktop polish
+- Accessibility, translation, and RTL checks
+- RLS review and deployment documentation
+- Final README and validation
 
-Do not implement email automation, Resend, or Vercel Cron in Phase 10.
+Do not implement large new product features, email automation, Resend, or Vercel Cron in Phase 11.
 
 ## Validation Commands
 
@@ -212,3 +225,9 @@ Validation for Phase 9:
 - `npm run lint`: passed on 2026-07-03.
 - `npm run typecheck`: passed on 2026-07-03.
 - `npm run build`: passed on 2026-07-03.
+
+Validation for Phase 10:
+
+- `npm run lint`: passed on 2026-07-04.
+- `npm run typecheck`: passed on 2026-07-04.
+- `npm run build`: passed on 2026-07-04.

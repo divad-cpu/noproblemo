@@ -1,19 +1,18 @@
 # NoProblemo
 
-NoProblemo is a Next.js App Router project prepared for incremental product development. Phase 9 adds messaging, notifications, and activity.
+NoProblemo is a Next.js App Router project prepared for incremental product development. Phase 10 adds the MVP admin/settings foundation and completes the local Codex project log system.
 
 ## Current Phase
 
-Phase 9 is complete when group messages, challenge messages, private notifications, activity events, documentation, linting, type checking, and production build all pass.
+Phase 10 is complete. Phase 11 is polish, security review, and deployment preparation.
 
-Not included in Phase 9:
+Not included in Phase 10:
 
-- Admin
 - Payments
 - AI features
 - Resend email
 - Vercel Cron
-- Real collaboration
+- Email automation
 - Advanced realtime collaboration
 
 ## Stack
@@ -63,6 +62,8 @@ Arabic (`ar`) and Urdu (`ur`) render with `dir="rtl"`. All other supported local
 - `/[locale]/app/groups/new` protected group creation
 - `/[locale]/app/groups/[id]` protected group detail, invitations, members, and linked challenges
 - `/[locale]/app/notifications` protected private notifications page
+- `/[locale]/app/admin` protected admin overview
+- `/[locale]/app/admin/settings` protected admin readiness/settings checklist
 - `/[locale]/app/settings` protected profile/settings page
 
 ## Guest Mode
@@ -100,6 +101,22 @@ The limited profile search RPC returns only `id`, `display_name`, and `avatar_ur
 Logged-in group members can read group messages. Group owners, admins, and members can send group messages; viewers are read-only. Logged-in challenge owners and allowed group collaborators can read and send challenge discussion messages according to RLS.
 
 Notifications are private to the recipient and appear under `/[locale]/app/notifications`. Activity events are visible only to users who can access the related group or challenge. Phase 9 uses server-rendered refresh after message actions; Supabase Realtime remains a future enhancement.
+
+## Admin
+
+Admins are identified by `profiles.role = 'admin'`. Admin routes check the authenticated Supabase session and the database profile role server-side before rendering. Non-admin users receive a not-found response and do not receive admin data.
+
+The Phase 10 admin overview shows aggregate counts, limited profile metadata, recent activity metadata, and recent admin audit-log entries. It does not query `auth.users`, expose emails, or show private message bodies or challenge content.
+
+The first admin should be assigned manually in the Supabase SQL editor by a trusted project owner, for example:
+
+```sql
+update public.profiles
+set role = 'admin'
+where id = '<trusted-user-uuid>';
+```
+
+Do not build a public admin signup flow. Normal users cannot self-promote through the app.
 
 ## Local Setup
 
@@ -151,6 +168,8 @@ npm run build
 - `docs/CODEX_PROJECT_LOG.md`
 - `docs/NEXT_CODEX_PROMPT.md`
 - `docs/CHANGELOG.md`
+
+Project logs are local repository documents only. No email automation, Resend integration, Vercel Cron job, or weekly email reporting is used for project logs.
 
 ## Repository Hygiene
 

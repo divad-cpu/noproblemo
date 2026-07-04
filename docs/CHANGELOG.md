@@ -1,5 +1,33 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Added protected admin overview at `/[locale]/app/admin`.
+- Added protected admin settings checklist at `/[locale]/app/admin/settings`.
+- Added Phase 10 Supabase migration for admin helpers, admin audit-log storage, admin-only overview RPCs, and profile role hardening.
+- Added admin navigation visibility for profiles with `role = 'admin'`.
+- Added local project-log documentation updates and a Phase 11 copy/paste handoff prompt.
+
+### Changed
+
+- Changed profile settings updates so normal profile edits no longer update `profiles.role`.
+- Updated all locale message catalogs with admin UI keys.
+- Updated project documentation to mark Phase 10 complete and Phase 11 next.
+
+### Fixed
+
+- Fixed the profile settings self-demotion/self-promotion risk from using an upsert that touched `role` during normal profile edits.
+
+### Security
+
+- Added `public.is_admin(user_id)` for database-backed admin checks.
+- Added admin-only RLS for `admin_audit_log`.
+- Added a trigger that blocks authenticated users from changing their own `profiles.role`.
+- Added admin-only RPCs that return aggregate counts and limited metadata without emails, `auth.users`, message bodies, or private challenge content.
+- Confirmed no Resend, email automation, Vercel Cron, `CRON_SECRET`, or frontend service-role usage was added.
+
 ## 2026-07-03
 
 - Established Phase 1 project foundation documentation.
