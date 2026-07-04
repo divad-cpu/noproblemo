@@ -4,6 +4,9 @@
 
 ### Added
 
+- Added forgot-password and reset-password routes using Supabase Auth reset links.
+- Added logged-in password change to protected settings.
+- Added account-created, email-confirmed, password-reset, and password-updated UI states.
 - Added protected admin overview at `/[locale]/app/admin`.
 - Added protected admin settings checklist at `/[locale]/app/admin/settings`.
 - Added Phase 10 Supabase migration for admin helpers, admin audit-log storage, admin-only overview RPCs, and profile role hardening.
@@ -16,6 +19,9 @@
 
 ### Changed
 
+- Changed auth callback handling to attach Supabase session cookies to the final redirect response and add localized success status redirects.
+- Changed the language switcher to preserve the current route when switching locales where practical.
+- Changed preferred-locale profile save to reopen settings in the selected locale.
 - Changed profile settings updates so normal profile edits no longer update `profiles.role`.
 - Updated all locale message catalogs with admin UI keys.
 - Updated project documentation to mark Phase 10 complete, Phase 11 complete, and production verification next.
@@ -30,6 +36,8 @@
 
 ### Security
 
+- Added password update/reset flows through Supabase Auth without service-role usage or password storage in database tables.
+- Documented required locale-specific Supabase Auth callback URLs for email confirmation, OAuth, and password recovery.
 - Added `public.is_admin(user_id)` for database-backed admin checks.
 - Added admin-only RLS for `admin_audit_log`.
 - Added a trigger that blocks authenticated users from changing their own `profiles.role`.

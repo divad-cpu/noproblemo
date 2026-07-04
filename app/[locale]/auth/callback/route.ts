@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createRouteHandlerSupabaseClient } from "@/lib/supabase/server";
 import { defaultLocale, routing, type Locale } from "@/i18n/routing";
 
 type CallbackContext = {
@@ -28,12 +28,25 @@ function getSafeNextPath(value: string | null, locale: Locale) {
   return fallback;
 }
 
+function getSuccessUrl(request: NextRequest, nextPath: string, source: string | null) {
+  const url = new URL(nextPath, request.url);
+
+  if (source === "recovery") {
+    url.searchParams.set("status", "recovery-ready");
+  } else if (source !== "oauth") {
+    url.searchParams.set("status", "email-confirmed");
+  }
+
+  return url;
+}
+
 export async function GET(request: NextRequest, context: CallbackContext) {
   const { locale: rawLocale } = await context.params;
   const locale = getSafeLocale(rawLocale);
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
   const nextPath = getSafeNextPath(requestUrl.searchParams.get("next"), locale);
+  const source = requestUrl.searchParams.get("source");
 
   if (!code) {
     return NextResponse.redirect(
@@ -41,7 +54,8 @@ export async function GET(request: NextRequest, context: CallbackContext) {
     );
   }
 
-  const supabase = await createServerSupabaseClient();
+  const response = NextResponse.redirect(getSuccessUrl(request, nextPath, source));
+  const supabase = createRouteHandlerSupabaseClient(request, response);
   const { error } = await supabase.auth.exchangeCodeForSession(code);
 
   if (error) {
@@ -50,5 +64,5 @@ export async function GET(request: NextRequest, context: CallbackContext) {
     );
   }
 
-  return NextResponse.redirect(new URL(nextPath, request.url));
+  return response;
 }

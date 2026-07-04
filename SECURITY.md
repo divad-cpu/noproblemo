@@ -13,8 +13,11 @@ Implemented in Phase 5:
 - Email signup and login use Supabase Auth.
 - No custom password storage exists in app code.
 - Auth callbacks and redirects are locale-aware.
+- Auth callback code exchange writes Supabase session cookies onto the final route-handler redirect response.
 - `/[locale]/app` checks Supabase session state server-side before rendering.
 - Logout is handled by a route handler that signs out through Supabase.
+- Logged-in users can change passwords through Supabase Auth `updateUser({ password })`; password values are not stored in profile tables.
+- Password reset requests use Supabase Auth reset links and locale-specific callback URLs.
 - Google and Apple OAuth start actions are prepared, but provider configuration is still required.
 - Profile creation relies on the Phase 4 database trigger and still needs verification after the migration is applied.
 
@@ -198,6 +201,7 @@ Phase 6 dashboard operations use `lib/supabase/server.ts`, the public Supabase a
 - Duplicate prevention is browser-local in Phase 6 because no import fingerprint column exists in the Phase 4 schema.
 - Profile updates validate the preferred locale against the supported locale list and update only basic profile fields.
 - Profile updates do not update `profiles.role`; missing profiles may be inserted only with `role = 'user'`.
+- Password updates use the authenticated Supabase session only and do not use a service-role key.
 
 ## Challenge Workspace Security
 

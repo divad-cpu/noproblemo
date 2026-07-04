@@ -186,3 +186,17 @@ Production verification preparation:
 - Validation results: `npm run lint`, `npm run typecheck`, and `npm run build` passed on 2026-07-04. `npm audit` completed with 2 moderate advisories through Next.js bundled PostCSS; the suggested force fix would install `next@9.3.3`, so no automatic fix was applied.
 - Next recommended step: controlled Supabase/Vercel production verification with explicit approval before remote migrations, Vercel changes, DNS changes, or provider changes.
 - Explicitly not added: payments, AI, email automation, Resend, Vercel Cron, `CRON_SECRET`, public challenge sharing, organization accounts, voting, comments, attachments, read receipts, typing indicators, reactions, advanced chat threads, calendar integration, PDF export, complex realtime collaboration, enterprise analytics, support tickets, billing, or a large UI redesign.
+
+Auth/settings verification fix:
+
+- Phase completed: focused auth/settings verification fix.
+- Features added: no large product features; added robust email confirmation callback status handling, forgot-password and reset-password pages, logged-in password change in settings, and route-preserving language switching.
+- Files created: `app/[locale]/forgot-password/page.tsx` and `app/[locale]/reset-password/page.tsx`.
+- Files changed: auth actions/callback, settings, dashboard, login, protected layout, language switcher, Supabase server helper, all message catalogs, deployment/verification docs, security/current-state docs, changelog, and project log.
+- Database/schema changes: none.
+- Security/RLS changes: none; password changes and password resets use Supabase Auth with the authenticated anon-key session and do not store password values in application tables.
+- UI/UX changes: signup check-email copy is clearer, dashboard shows email-confirmed/account-created success, login shows callback/reset states, settings includes password change and visible route-language switching.
+- Bugs fixed: callback exchanges auth codes with a route-handler client that writes cookies to the final redirect response, then redirects to a safe localized internal path with status.
+- Known problems: Supabase Auth redirect allow-list still must include locale-specific `/[locale]/auth/callback` URLs for local and production before email confirmation/password recovery can be relied on.
+- Validation results: `npm run lint`, `npm run typecheck`, and `npm run build` passed on 2026-07-04.
+- Next recommended step: manually test email confirmation, login, password change, forgot-password/reset-password, preferred-locale redirect, and route language switching locally and then in controlled production verification.

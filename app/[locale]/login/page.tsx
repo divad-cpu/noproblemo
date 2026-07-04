@@ -43,10 +43,11 @@ const errorKeys = [
   "oauth-provider",
   "oauth-start",
   "callback",
+  "reset-link-invalid",
   "auth-required",
 ] as const;
 
-const statusKeys = ["signed-out"] as const;
+const statusKeys = ["signed-out", "password-updated"] as const;
 
 function isKnownKey<T extends readonly string[]>(
   value: string | undefined,
@@ -121,6 +122,12 @@ export default async function LoginPage({
                 placeholder={t("fields.passwordPlaceholder")}
               />
             </label>
+            <Link
+              href="/forgot-password"
+              className="w-fit text-sm font-semibold text-[#373632] underline-offset-4 hover:underline"
+            >
+              {t("login.forgotPassword")}
+            </Link>
             <button
               type="submit"
               className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"

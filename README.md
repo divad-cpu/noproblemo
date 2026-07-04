@@ -74,6 +74,8 @@ Arabic (`ar`) and Urdu (`ur`) render with `dir="rtl"`. All other supported local
 - `/[locale]/support` support/contact page
 - `/[locale]/login` email login and Google/Apple OAuth start route
 - `/[locale]/signup` email signup and Google/Apple OAuth start route
+- `/[locale]/forgot-password` password reset request route
+- `/[locale]/reset-password` password reset completion route
 - `/[locale]/auth/callback` Supabase auth callback
 - `/[locale]/auth/logout` logout handler
 - `/[locale]/app` protected dashboard
@@ -100,6 +102,8 @@ Logged-in users can import the current guest draft from the dashboard. Import cr
 
 Email login/signup uses Supabase Auth. Google and Apple login buttons are prepared through Supabase OAuth, but they require provider configuration in Supabase, Google Cloud, and Apple Developer before production use.
 
+Email confirmation, OAuth, and password recovery links use locale-specific `/[locale]/auth/callback` routes. Password recovery then opens `/[locale]/reset-password` after the callback exchanges the code for a session.
+
 The Phase 4 database trigger is expected to create `profiles` rows after signup, but it still needs verification after the migration is applied to the real Supabase project.
 
 ## Dashboard, Workspace And Settings
@@ -108,7 +112,7 @@ The dashboard lists the authenticated user's saved challenges through Supabase R
 
 The saved challenge workspace supports the seven-step problem-solving workflow, editable challenge sections, possible solutions, pros/cons, risk/effort/impact scoring, tasks/actions, final recommendation, summary, and Markdown copy/download export.
 
-Profile settings can update `display_name` and `preferred_locale`. The preferred locale is saved to `profiles.preferred_locale`; current route language still follows the URL until routing preference sync is added later.
+Profile settings can update `display_name` and `preferred_locale`. The preferred locale is saved to `profiles.preferred_locale`, then the settings page reopens in the selected locale. Logged-in users can also change their password through Supabase Auth.
 
 ## Friends And Groups
 

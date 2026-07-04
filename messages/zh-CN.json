@@ -175,14 +175,18 @@
       "emailPlaceholder": "you@example.com",
       "password": "Password",
       "passwordPlaceholder": "Your password",
-      "newPasswordPlaceholder": "At least 8 characters"
+      "newPasswordPlaceholder": "At least 8 characters",
+      "newPassword": "新密码",
+      "confirmPassword": "确认密码",
+      "confirmPasswordPlaceholder": "再次输入新密码"
     },
     "login": {
       "eyebrow": "Account access",
       "title": "Log in to save your work.",
       "body": "Guest mode stays available. Log in when you want cloud saving and future collaboration features.",
       "submit": "Log in",
-      "createAccount": "Create account"
+      "createAccount": "Create account",
+      "forgotPassword": "忘记密码？"
     },
     "signup": {
       "eyebrow": "Create account",
@@ -198,8 +202,11 @@
       "note": "Google and Apple require provider configuration in Supabase before they work in production."
     },
     "status": {
-      "check-email": "Check your email to confirm the account, then return to NoProblemo.",
-      "signed-out": "You have been logged out."
+      "check-email": "账户已创建。请检查邮箱确认账户，然后返回 NoProblemo。",
+      "signed-out": "You have been logged out.",
+      "password-updated": "密码已更新。请使用新密码登录。",
+      "reset-email-sent": "如果该邮箱有账户，重置链接已发送。",
+      "recovery-ready": "重置链接已确认。请选择新密码。"
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -208,8 +215,27 @@
       "signup-failed": "The account could not be created. Check the email address or try again.",
       "oauth-provider": "That login provider is not available.",
       "oauth-start": "The provider login could not start. Check Supabase provider setup.",
-      "callback": "The login callback could not be completed. Try logging in again.",
-      "auth-required": "Log in to access saved work. Guest mode remains available without an account."
+      "callback": "确认链接无法完成。它可能无效或已过期。请尝试登录或请求新链接。",
+      "auth-required": "Log in to access saved work. Guest mode remains available without an account.",
+      "missing-email": "请输入邮箱地址以请求重置链接。",
+      "reset-request-failed": "无法发送重置邮件。请检查地址或重试。",
+      "password-mismatch": "两次密码不一致。",
+      "password-update-failed": "无法更新密码。请请求新的重置链接。",
+      "reset-link-invalid": "重置链接无效或已过期。请请求新的重置链接。"
+    },
+    "forgot": {
+      "eyebrow": "密码帮助",
+      "title": "重置密码。",
+      "body": "输入账户邮箱。如果账户存在，我们会发送安全的重置链接。",
+      "submit": "发送重置链接",
+      "backToLogin": "返回登录"
+    },
+    "reset": {
+      "eyebrow": "新密码",
+      "title": "选择新密码。",
+      "body": "使用邮件中的重置链接，然后为账户设置新密码。",
+      "submit": "保存新密码",
+      "requestNewLink": "请求新的重置链接"
     }
   },
   "AuthStatus": {
@@ -323,6 +349,10 @@
         "task_updated": "Task updated",
         "solution_updated": "Solution updated"
       }
+    },
+    "status": {
+      "account-created": "账户已创建。现在可以保存和管理你的工作。",
+      "email-confirmed": "邮箱已确认。你的账户已准备好。"
     }
   },
   "CreateChallenge": {
@@ -375,15 +405,34 @@
     "fields": {
       "displayName": "Display name",
       "displayNamePlaceholder": "Your name",
-      "preferredLocale": "Preferred language"
+      "preferredLocale": "Preferred language",
+      "newPassword": "新密码",
+      "newPasswordPlaceholder": "至少 8 个字符",
+      "confirmPassword": "确认密码",
+      "confirmPasswordPlaceholder": "再次输入新密码"
     },
-    "localeNote": "Preferred language is saved to your profile. The current route language still follows the URL until routing preference sync is added later.",
+    "localeNote": "首选语言会保存到你的资料。保存后，此设置页会用所选语言打开。",
     "submit": "Save profile",
     "status": {
-      "saved": "Profile settings were saved."
+      "saved": "Profile settings were saved.",
+      "profile-saved": "资料设置已保存。",
+      "password-saved": "密码已更新。"
     },
     "errors": {
-      "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies."
+      "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies.",
+      "profile-update-failed": "无法保存资料设置。请检查 Supabase 设置和 RLS 策略。",
+      "password-weak": "请使用至少 8 个字符的密码。",
+      "password-mismatch": "两次密码不一致。",
+      "password-update-failed": "无法更新密码。请重试。"
+    },
+    "routeLanguage": {
+      "title": "页面语言",
+      "body": "切换此页面的显示语言。用户编写的内容不会改变。"
+    },
+    "password": {
+      "title": "更改密码",
+      "body": "为此账户设置新密码。密码只发送到 Supabase Auth，不存储在资料表中。",
+      "submit": "更新密码"
     }
   },
   "Workspace": {

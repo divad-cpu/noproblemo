@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { defaultLocale, routing, type Locale } from "@/i18n/routing";
+import { LanguageSwitcher } from "../_components/language-switcher";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 type ProtectedAppLayoutProps = {
@@ -97,6 +98,7 @@ export default async function ProtectedAppLayout({
               </button>
             </form>
           </div>
+          <LanguageSwitcher locale={locale} />
         </nav>
         {children}
       </div>

@@ -42,10 +42,22 @@ function getSafeNextPath(value: FormDataEntryValue | null, locale: Locale) {
   return `${localePrefix}/app`;
 }
 
-function authUrl(locale: Locale, path: "login" | "signup", params: URLSearchParams) {
+function authUrl(
+  locale: Locale,
+  path: "login" | "signup" | "forgot-password" | "reset-password",
+  params: URLSearchParams,
+) {
   const query = params.toString();
 
   return `/${locale}/${path}${query ? `?${query}` : ""}`;
+}
+
+function withStatus(path: string, status: string) {
+  const [pathname, query = ""] = path.split("?");
+  const params = new URLSearchParams(query);
+  params.set("status", status);
+
+  return `${pathname}?${params.toString()}`;
 }
 
 export async function loginWithEmail(formData: FormData) {
@@ -103,7 +115,7 @@ export async function signUpWithEmail(formData: FormData) {
   }
 
   const supabase = await createServerSupabaseClient();
-  const emailRedirectTo = `${getSiteUrl()}/${locale}/auth/callback?next=${encodeURIComponent(nextPath)}`;
+  const emailRedirectTo = `${getSiteUrl()}/${locale}/auth/callback?next=${encodeURIComponent(nextPath)}&source=email`;
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -125,7 +137,7 @@ export async function signUpWithEmail(formData: FormData) {
   }
 
   if (data.session) {
-    redirect(nextPath);
+    redirect(withStatus(nextPath, "account-created"));
   }
 
   const params = new URLSearchParams({
@@ -149,7 +161,7 @@ export async function signInWithOAuth(formData: FormData) {
   }
 
   const supabase = await createServerSupabaseClient();
-  const redirectTo = `${getSiteUrl()}/${locale}/auth/callback?next=${encodeURIComponent(nextPath)}`;
+  const redirectTo = `${getSiteUrl()}/${locale}/auth/callback?next=${encodeURIComponent(nextPath)}&source=oauth`;
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
@@ -166,4 +178,106 @@ export async function signInWithOAuth(formData: FormData) {
   }
 
   redirect(data.url);
+}
+
+export async function requestPasswordReset(formData: FormData) {
+  const locale = getLocale(formData);
+  const email = firstString(formData.get("email"));
+
+  if (!email) {
+    redirect(
+      authUrl(
+        locale,
+        "forgot-password",
+        new URLSearchParams({ error: "missing-email" }),
+      ),
+    );
+  }
+
+  const supabase = await createServerSupabaseClient();
+  const nextPath = `/${locale}/reset-password`;
+  const redirectTo = `${getSiteUrl()}/${locale}/auth/callback?next=${encodeURIComponent(nextPath)}&source=recovery`;
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo,
+  });
+
+  if (error) {
+    redirect(
+      authUrl(
+        locale,
+        "forgot-password",
+        new URLSearchParams({ error: "reset-request-failed" }),
+      ),
+    );
+  }
+
+  redirect(
+    authUrl(
+      locale,
+      "forgot-password",
+      new URLSearchParams({ status: "reset-email-sent" }),
+    ),
+  );
+}
+
+export async function resetPassword(formData: FormData) {
+  const locale = getLocale(formData);
+  const password = firstString(formData.get("password"));
+  const confirmPassword = firstString(formData.get("confirmPassword"));
+
+  if (password.length < 8) {
+    redirect(
+      authUrl(
+        locale,
+        "reset-password",
+        new URLSearchParams({ error: "weak-password" }),
+      ),
+    );
+  }
+
+  if (password !== confirmPassword) {
+    redirect(
+      authUrl(
+        locale,
+        "reset-password",
+        new URLSearchParams({ error: "password-mismatch" }),
+      ),
+    );
+  }
+
+  const supabase = await createServerSupabaseClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect(
+      authUrl(
+        locale,
+        "reset-password",
+        new URLSearchParams({ error: "reset-link-invalid" }),
+      ),
+    );
+  }
+
+  const { error } = await supabase.auth.updateUser({ password });
+
+  if (error) {
+    redirect(
+      authUrl(
+        locale,
+        "reset-password",
+        new URLSearchParams({ error: "password-update-failed" }),
+      ),
+    );
+  }
+
+  await supabase.auth.signOut();
+  redirect(
+    authUrl(
+      locale,
+      "login",
+      new URLSearchParams({ status: "password-updated" }),
+    ),
+  );
 }

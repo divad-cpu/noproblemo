@@ -142,6 +142,42 @@ Current app includes localized public pages, a guest localStorage workspace, Sup
 - Mobile and desktop layouts are smoke-tested.
 - Support contact remains `support@noproblemo.tech` unless intentionally changed.
 
+## Required Supabase Redirect URLs
+
+Supabase Auth must allow locale-specific callback URLs. Email confirmation, OAuth, and password recovery all enter the app through `/[locale]/auth/callback`; password recovery then redirects internally to `/[locale]/reset-password`.
+
+Local development:
+
+- `http://localhost:3000/**`
+- `http://localhost:3000/en/auth/callback`
+- `http://localhost:3000/zh-CN/auth/callback`
+- `http://localhost:3000/hi/auth/callback`
+- `http://localhost:3000/es/auth/callback`
+- `http://localhost:3000/ar/auth/callback`
+- `http://localhost:3000/fr/auth/callback`
+- `http://localhost:3000/bn/auth/callback`
+- `http://localhost:3000/pt-BR/auth/callback`
+- `http://localhost:3000/id/auth/callback`
+- `http://localhost:3000/ur/auth/callback`
+- `http://localhost:3000/nb/auth/callback`
+
+Production:
+
+- `https://noproblemo.tech/**`
+- `https://noproblemo.tech/en/auth/callback`
+- `https://noproblemo.tech/zh-CN/auth/callback`
+- `https://noproblemo.tech/hi/auth/callback`
+- `https://noproblemo.tech/es/auth/callback`
+- `https://noproblemo.tech/ar/auth/callback`
+- `https://noproblemo.tech/fr/auth/callback`
+- `https://noproblemo.tech/bn/auth/callback`
+- `https://noproblemo.tech/pt-BR/auth/callback`
+- `https://noproblemo.tech/id/auth/callback`
+- `https://noproblemo.tech/ur/auth/callback`
+- `https://noproblemo.tech/nb/auth/callback`
+
+If Vercel preview auth is needed, add the specific preview redirect pattern approved for the Vercel team/account. Do not use broad production wildcards beyond the intended domain.
+
 Project logs remain local repository documentation. Do not add Resend, Vercel Cron, CRON_SECRET, or email automation for Codex project logs.
 
 ## Current Phase 11 Review Notes

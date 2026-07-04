@@ -8,6 +8,7 @@ import { GuestImportCard } from "./_components/guest-import-card";
 
 type DashboardPageProps = {
   params: Promise<{ locale: Locale }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
@@ -25,6 +26,24 @@ function formatDate(value: string, locale: Locale) {
 
 function getDisplayName(profile: Profile | null, email?: string) {
   return profile?.display_name || email || "";
+}
+
+function getQueryValue(
+  searchParams: Record<string, string | string[] | undefined>,
+  key: string,
+) {
+  const value = searchParams[key];
+
+  return Array.isArray(value) ? value[0] : value;
+}
+
+const statusKeys = ["account-created", "email-confirmed"] as const;
+
+function isKnownKey<T extends readonly string[]>(
+  value: string | undefined,
+  keys: T,
+): value is T[number] {
+  return !!value && keys.includes(value);
 }
 
 function ChallengeCard({
@@ -71,10 +90,15 @@ function ChallengeCard({
   );
 }
 
-export default async function DashboardPage({ params }: DashboardPageProps) {
+export default async function DashboardPage({
+  params,
+  searchParams,
+}: DashboardPageProps) {
   const { locale } = await params;
+  const query = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "Dashboard" });
+  const status = getQueryValue(query, "status");
   const supabase = await createServerSupabaseClient();
   const {
     data: { user },
@@ -181,6 +205,12 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
           </div>
         </div>
       </section>
+
+      {isKnownKey(status, statusKeys) ? (
+        <p className="rounded-md border border-[#cbd8c5] bg-[#f6fbf4] p-4 text-sm leading-6 text-[#2f5f2d]">
+          {t(`status.${status}`)}
+        </p>
+      ) : null}
 
       <GuestImportCard locale={locale} />
 

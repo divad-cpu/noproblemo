@@ -3,8 +3,9 @@ import { redirect } from "next/navigation";
 import type { Locale } from "@/i18n/routing";
 import { routing } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
+import { LanguageSwitcher } from "../../_components/language-switcher";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { updateProfile } from "../actions";
+import { updatePassword, updateProfile } from "../actions";
 
 type SettingsPageProps = {
   params: Promise<{ locale: Locale }>;
@@ -18,6 +19,21 @@ function getQueryValue(
   const value = searchParams[key];
 
   return Array.isArray(value) ? value[0] : value;
+}
+
+const statusKeys = ["profile-saved", "password-saved"] as const;
+const errorKeys = [
+  "profile-update-failed",
+  "password-weak",
+  "password-mismatch",
+  "password-update-failed",
+] as const;
+
+function isKnownKey<T extends readonly string[]>(
+  value: string | undefined,
+  keys: T,
+): value is T[number] {
+  return !!value && keys.includes(value);
 }
 
 export default async function SettingsPage({
@@ -68,15 +84,15 @@ export default async function SettingsPage({
       </h1>
       <p className="mt-4 leading-7 text-[#55544f]">{t("body")}</p>
 
-      {status === "profile-saved" ? (
+      {isKnownKey(status, statusKeys) ? (
         <p className="mt-6 rounded-md border border-[#cbd8c5] bg-[#f6fbf4] p-4 text-sm leading-6 text-[#2f5f2d]">
-          {t("status.saved")}
+          {t(`status.${status}`)}
         </p>
       ) : null}
 
-      {error === "profile-update-failed" ? (
+      {isKnownKey(error, errorKeys) ? (
         <p className="mt-6 rounded-md border border-[#e3b8ad] bg-[#fff7f4] p-4 text-sm leading-6 text-[#7a2f1d]">
-          {t("errors.updateFailed")}
+          {t(`errors.${error}`)}
         </p>
       ) : null}
 
@@ -84,6 +100,18 @@ export default async function SettingsPage({
         <p className="text-sm font-semibold text-[#373632]">{t("account")}</p>
         <p className="mt-1 break-all text-sm text-[#706f68]">{user.email}</p>
       </div>
+
+      <section className="mt-8 rounded-lg border border-[#e5e2da] bg-[#fbfaf7] p-5">
+        <h2 className="text-xl font-semibold text-[#22211e]">
+          {t("routeLanguage.title")}
+        </h2>
+        <p className="mt-2 text-sm leading-6 text-[#706f68]">
+          {t("routeLanguage.body")}
+        </p>
+        <div className="mt-4">
+          <LanguageSwitcher locale={locale} />
+        </div>
+      </section>
 
       <form action={updateProfile} className="mt-8 grid gap-5">
         <input type="hidden" name="locale" value={locale} />
@@ -122,6 +150,52 @@ export default async function SettingsPage({
           className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
         >
           {t("submit")}
+        </button>
+      </form>
+
+      <form action={updatePassword} className="mt-10 grid gap-5 border-t border-[#e5e2da] pt-8">
+        <input type="hidden" name="locale" value={locale} />
+        <div>
+          <h2 className="text-xl font-semibold text-[#22211e]">
+            {t("password.title")}
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-[#706f68]">
+            {t("password.body")}
+          </p>
+        </div>
+        <label className="grid gap-2">
+          <span className="text-sm font-semibold text-[#373632]">
+            {t("fields.newPassword")}
+          </span>
+          <input
+            name="password"
+            type="password"
+            autoComplete="new-password"
+            required
+            minLength={8}
+            className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
+            placeholder={t("fields.newPasswordPlaceholder")}
+          />
+        </label>
+        <label className="grid gap-2">
+          <span className="text-sm font-semibold text-[#373632]">
+            {t("fields.confirmPassword")}
+          </span>
+          <input
+            name="confirmPassword"
+            type="password"
+            autoComplete="new-password"
+            required
+            minLength={8}
+            className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
+            placeholder={t("fields.confirmPasswordPlaceholder")}
+          />
+        </label>
+        <button
+          type="submit"
+          className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
+        >
+          {t("password.submit")}
         </button>
       </form>
     </section>

@@ -410,7 +410,36 @@ export async function updateProfile(formData: FormData) {
 
   revalidatePath(`/${locale}/app`);
   revalidatePath(`/${locale}/app/settings`);
-  redirect(`/${locale}/app/settings?status=profile-saved`);
+  revalidatePath(`/${preferredLocale}/app/settings`);
+  redirect(`/${preferredLocale}/app/settings?status=profile-saved`);
+}
+
+export async function updatePassword(formData: FormData) {
+  const locale = getLocale(formData);
+  const password = firstString(formData.get("password"));
+  const confirmPassword = firstString(formData.get("confirmPassword"));
+
+  if (password.length < 8) {
+    redirect(`/${locale}/app/settings?error=password-weak`);
+  }
+
+  if (password !== confirmPassword) {
+    redirect(`/${locale}/app/settings?error=password-mismatch`);
+  }
+
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/settings`);
+  }
+
+  const { error } = await supabase.auth.updateUser({ password });
+
+  if (error) {
+    redirect(`/${locale}/app/settings?error=password-update-failed`);
+  }
+
+  redirect(`/${locale}/app/settings?status=password-saved`);
 }
 
 export async function updateChallengeDetails(formData: FormData) {

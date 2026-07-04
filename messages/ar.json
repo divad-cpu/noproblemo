@@ -175,14 +175,18 @@
       "emailPlaceholder": "you@example.com",
       "password": "Password",
       "passwordPlaceholder": "Your password",
-      "newPasswordPlaceholder": "At least 8 characters"
+      "newPasswordPlaceholder": "At least 8 characters",
+      "newPassword": "كلمة مرور جديدة",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "confirmPasswordPlaceholder": "أعد كتابة كلمة المرور الجديدة"
     },
     "login": {
       "eyebrow": "Account access",
       "title": "Log in to save your work.",
       "body": "Guest mode stays available. Log in when you want cloud saving and future collaboration features.",
       "submit": "Log in",
-      "createAccount": "Create account"
+      "createAccount": "Create account",
+      "forgotPassword": "هل نسيت كلمة المرور؟"
     },
     "signup": {
       "eyebrow": "Create account",
@@ -198,8 +202,11 @@
       "note": "Google and Apple require provider configuration in Supabase before they work in production."
     },
     "status": {
-      "check-email": "Check your email to confirm the account, then return to NoProblemo.",
-      "signed-out": "You have been logged out."
+      "check-email": "تم إنشاء الحساب. تحقق من بريدك لتأكيد الحساب ثم عد إلى NoProblemo.",
+      "signed-out": "You have been logged out.",
+      "password-updated": "تم تحديث كلمة المرور. سجّل الدخول بكلمة المرور الجديدة.",
+      "reset-email-sent": "إذا كان لهذا البريد حساب، فقد تم إرسال رابط إعادة التعيين.",
+      "recovery-ready": "تم تأكيد رابط إعادة التعيين. اختر كلمة مرور جديدة."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -208,8 +215,27 @@
       "signup-failed": "The account could not be created. Check the email address or try again.",
       "oauth-provider": "That login provider is not available.",
       "oauth-start": "The provider login could not start. Check Supabase provider setup.",
-      "callback": "The login callback could not be completed. Try logging in again.",
-      "auth-required": "Log in to access saved work. Guest mode remains available without an account."
+      "callback": "تعذر إكمال رابط التأكيد. قد يكون غير صالح أو منتهي الصلاحية. حاول تسجيل الدخول أو اطلب رابطا جديدا.",
+      "auth-required": "Log in to access saved work. Guest mode remains available without an account.",
+      "missing-email": "أدخل بريدك لطلب رابط إعادة التعيين.",
+      "reset-request-failed": "تعذر إرسال بريد إعادة التعيين. تحقق من العنوان أو حاول مرة أخرى.",
+      "password-mismatch": "كلمتا المرور غير متطابقتين.",
+      "password-update-failed": "تعذر تحديث كلمة المرور. اطلب رابطا جديدا.",
+      "reset-link-invalid": "رابط إعادة التعيين غير صالح أو منتهي الصلاحية. اطلب رابطا جديدا."
+    },
+    "forgot": {
+      "eyebrow": "مساعدة كلمة المرور",
+      "title": "إعادة تعيين كلمة المرور.",
+      "body": "أدخل بريد حسابك. إذا كان الحساب موجودا، سنرسل رابط إعادة تعيين آمن.",
+      "submit": "إرسال رابط إعادة التعيين",
+      "backToLogin": "العودة إلى تسجيل الدخول"
+    },
+    "reset": {
+      "eyebrow": "كلمة مرور جديدة",
+      "title": "اختر كلمة مرور جديدة.",
+      "body": "استخدم رابط إعادة التعيين من بريدك ثم عيّن كلمة مرور جديدة.",
+      "submit": "حفظ كلمة المرور الجديدة",
+      "requestNewLink": "طلب رابط جديد"
     }
   },
   "AuthStatus": {
@@ -323,6 +349,10 @@
         "task_updated": "Task updated",
         "solution_updated": "Solution updated"
       }
+    },
+    "status": {
+      "account-created": "تم إنشاء الحساب. يمكنك الآن حفظ عملك وإدارته.",
+      "email-confirmed": "تم تأكيد البريد. حسابك جاهز."
     }
   },
   "CreateChallenge": {
@@ -375,15 +405,34 @@
     "fields": {
       "displayName": "Display name",
       "displayNamePlaceholder": "Your name",
-      "preferredLocale": "Preferred language"
+      "preferredLocale": "Preferred language",
+      "newPassword": "كلمة مرور جديدة",
+      "newPasswordPlaceholder": "8 أحرف على الأقل",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "confirmPasswordPlaceholder": "أعد كتابة كلمة المرور الجديدة"
     },
-    "localeNote": "Preferred language is saved to your profile. The current route language still follows the URL until routing preference sync is added later.",
+    "localeNote": "تُحفظ اللغة المفضلة في ملفك الشخصي. بعد الحفظ، تفتح صفحة الإعدادات باللغة المختارة.",
     "submit": "Save profile",
     "status": {
-      "saved": "Profile settings were saved."
+      "saved": "Profile settings were saved.",
+      "profile-saved": "تم حفظ إعدادات الملف الشخصي.",
+      "password-saved": "تم تحديث كلمة المرور."
     },
     "errors": {
-      "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies."
+      "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies.",
+      "profile-update-failed": "تعذر حفظ إعدادات الملف الشخصي. تحقق من إعداد Supabase وسياسات RLS.",
+      "password-weak": "استخدم كلمة مرور من 8 أحرف على الأقل.",
+      "password-mismatch": "كلمتا المرور غير متطابقتين.",
+      "password-update-failed": "تعذر تحديث كلمة المرور. حاول مرة أخرى."
+    },
+    "routeLanguage": {
+      "title": "لغة الصفحة",
+      "body": "غيّر لغة واجهة هذه الصفحة. المحتوى الذي يكتبه المستخدم لا يتغير."
+    },
+    "password": {
+      "title": "تغيير كلمة المرور",
+      "body": "عيّن كلمة مرور جديدة لهذا الحساب. تُرسل كلمات المرور فقط إلى Supabase Auth ولا تُخزن في جداول الملف الشخصي.",
+      "submit": "تحديث كلمة المرور"
     }
   },
   "Workspace": {

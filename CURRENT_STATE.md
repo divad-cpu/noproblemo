@@ -36,11 +36,13 @@ Production verification preparation is complete. Controlled Supabase/Vercel prod
 - Support/contact page at `/[locale]/support`
 - Email login and signup routes at `/[locale]/login` and `/[locale]/signup`
 - Supabase auth callback route at `/[locale]/auth/callback`
+- Forgot-password and reset-password routes at `/[locale]/forgot-password` and `/[locale]/reset-password`
 - Logout route at `/[locale]/auth/logout`
 - Logged-in dashboard at `/[locale]/app`
 - Minimal cloud challenge creation at `/[locale]/app/challenges/new`
 - Saved challenge workspace at `/[locale]/app/challenges/[id]`
 - Profile/settings page at `/[locale]/app/settings`
+- Logged-in password change from the protected settings page
 - Guest draft import from localStorage to Supabase challenges and challenge sections
 - Profile display name and preferred locale updates
 - Seven-step saved challenge workflow
@@ -72,6 +74,7 @@ Production verification preparation is complete. Controlled Supabase/Vercel prod
 - Notification/activity triggers for friend requests, group invitations, group/member events, group challenge links, and messages
 - Phase 10 local migration for admin helper functions, admin audit log, admin-only RPCs, profile role hardening, and admin profile read policy
 - Google and Apple OAuth start actions prepared through Supabase Auth
+- Auth callback handling writes session cookies on the final redirect response and shows localized success/error states for email confirmation and recovery flows
 - Shared language switcher and footer
 - Guest localStorage draft persistence under `noproblemo.guestWorkspace.v1`
 - Markdown copy/export for guest drafts
@@ -117,6 +120,8 @@ Production verification preparation is complete. Controlled Supabase/Vercel prod
 - `app/[locale]/support/page.tsx`: support page.
 - `app/[locale]/login/page.tsx`: email login form and OAuth provider start buttons.
 - `app/[locale]/signup/page.tsx`: email signup form and OAuth provider start buttons.
+- `app/[locale]/forgot-password/page.tsx`: public password reset request page.
+- `app/[locale]/reset-password/page.tsx`: password reset completion page after callback recovery session exchange.
 - `app/[locale]/auth/actions.ts`: Supabase Auth server actions.
 - `app/[locale]/auth/callback/route.ts`: Supabase auth callback handler.
 - `app/[locale]/auth/logout/route.ts`: logout handler.
@@ -168,6 +173,7 @@ Production verification preparation is complete. Controlled Supabase/Vercel prod
 - Production verification preparation did not change real Supabase, Vercel, Domeneshop, DNS, or support mailbox settings.
 - `npm audit` reports moderate PostCSS advisories through Next.js 16.2.10's dependency tree. The suggested `npm audit fix --force` would install `next@9.3.3`, a breaking downgrade, so it was not applied.
 - Google and Apple OAuth require provider configuration in Supabase, Google Cloud, and Apple Developer.
+- Supabase Auth redirect URLs must include locale-specific `/[locale]/auth/callback` routes for email confirmation, OAuth, and password recovery.
 - Guest drafts are browser-local and can be lost if localStorage is cleared.
 - Non-English translations need human review.
 - Supabase `.temp` files exist from linking/local CLI state; do not print their contents.
@@ -262,3 +268,9 @@ Validation for production verification preparation:
 - `npm run typecheck`: passed on 2026-07-04.
 - `npm run build`: passed on 2026-07-04.
 - `npm audit`: completed on 2026-07-04 and reported 2 moderate advisories via Next.js bundled PostCSS; no automatic fix was applied because the suggested force fix is a breaking Next downgrade.
+
+Validation for auth/settings verification fix:
+
+- `npm run lint`: passed on 2026-07-04.
+- `npm run typecheck`: passed on 2026-07-04.
+- `npm run build`: passed on 2026-07-04.

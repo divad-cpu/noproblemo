@@ -175,14 +175,18 @@
       "emailPlaceholder": "you@example.com",
       "password": "Password",
       "passwordPlaceholder": "Your password",
-      "newPasswordPlaceholder": "At least 8 characters"
+      "newPasswordPlaceholder": "At least 8 characters",
+      "newPassword": "Nueva contraseña",
+      "confirmPassword": "Confirmar contraseña",
+      "confirmPasswordPlaceholder": "Repite la nueva contraseña"
     },
     "login": {
       "eyebrow": "Account access",
       "title": "Log in to save your work.",
       "body": "Guest mode stays available. Log in when you want cloud saving and future collaboration features.",
       "submit": "Log in",
-      "createAccount": "Create account"
+      "createAccount": "Create account",
+      "forgotPassword": "¿Olvidaste tu contraseña?"
     },
     "signup": {
       "eyebrow": "Create account",
@@ -198,8 +202,11 @@
       "note": "Google and Apple require provider configuration in Supabase before they work in production."
     },
     "status": {
-      "check-email": "Check your email to confirm the account, then return to NoProblemo.",
-      "signed-out": "You have been logged out."
+      "check-email": "Cuenta creada. Revisa tu correo para confirmarla y vuelve a NoProblemo.",
+      "signed-out": "You have been logged out.",
+      "password-updated": "Contraseña actualizada. Inicia sesión con tu nueva contraseña.",
+      "reset-email-sent": "Si ese correo tiene una cuenta, se envió un enlace de restablecimiento.",
+      "recovery-ready": "Enlace confirmado. Elige una nueva contraseña."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -208,8 +215,27 @@
       "signup-failed": "The account could not be created. Check the email address or try again.",
       "oauth-provider": "That login provider is not available.",
       "oauth-start": "The provider login could not start. Check Supabase provider setup.",
-      "callback": "The login callback could not be completed. Try logging in again.",
-      "auth-required": "Log in to access saved work. Guest mode remains available without an account."
+      "callback": "No se pudo completar el enlace de confirmación. Puede ser inválido o haber caducado. Intenta iniciar sesión o solicita otro enlace.",
+      "auth-required": "Log in to access saved work. Guest mode remains available without an account.",
+      "missing-email": "Escribe tu correo para solicitar un enlace.",
+      "reset-request-failed": "No se pudo enviar el correo. Revisa la dirección o inténtalo de nuevo.",
+      "password-mismatch": "Las contraseñas no coinciden.",
+      "password-update-failed": "No se pudo actualizar la contraseña. Solicita otro enlace.",
+      "reset-link-invalid": "El enlace es inválido o caducó. Solicita otro enlace."
+    },
+    "forgot": {
+      "eyebrow": "Ayuda de contraseña",
+      "title": "Restablece tu contraseña.",
+      "body": "Escribe el correo de tu cuenta y enviaremos un enlace seguro si la cuenta existe.",
+      "submit": "Enviar enlace",
+      "backToLogin": "Volver a iniciar sesión"
+    },
+    "reset": {
+      "eyebrow": "Nueva contraseña",
+      "title": "Elige una nueva contraseña.",
+      "body": "Usa el enlace de tu correo y luego define una nueva contraseña.",
+      "submit": "Guardar nueva contraseña",
+      "requestNewLink": "Solicitar otro enlace"
     }
   },
   "AuthStatus": {
@@ -323,6 +349,10 @@
         "task_updated": "Task updated",
         "solution_updated": "Solution updated"
       }
+    },
+    "status": {
+      "account-created": "Cuenta creada. Ya puedes guardar y gestionar tu trabajo.",
+      "email-confirmed": "Correo confirmado. Tu cuenta está lista."
     }
   },
   "CreateChallenge": {
@@ -375,15 +405,34 @@
     "fields": {
       "displayName": "Display name",
       "displayNamePlaceholder": "Your name",
-      "preferredLocale": "Preferred language"
+      "preferredLocale": "Preferred language",
+      "newPassword": "Nueva contraseña",
+      "newPasswordPlaceholder": "Al menos 8 caracteres",
+      "confirmPassword": "Confirmar contraseña",
+      "confirmPasswordPlaceholder": "Repite la nueva contraseña"
     },
-    "localeNote": "Preferred language is saved to your profile. The current route language still follows the URL until routing preference sync is added later.",
+    "localeNote": "El idioma preferido se guarda en tu perfil. Después de guardar, esta página se abre en el idioma elegido.",
     "submit": "Save profile",
     "status": {
-      "saved": "Profile settings were saved."
+      "saved": "Profile settings were saved.",
+      "profile-saved": "La configuración del perfil se guardó.",
+      "password-saved": "La contraseña se actualizó."
     },
     "errors": {
-      "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies."
+      "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies.",
+      "profile-update-failed": "No se pudo guardar el perfil. Revisa Supabase y las políticas RLS.",
+      "password-weak": "Usa una contraseña de al menos 8 caracteres.",
+      "password-mismatch": "Las contraseñas no coinciden.",
+      "password-update-failed": "No se pudo actualizar la contraseña. Inténtalo de nuevo."
+    },
+    "routeLanguage": {
+      "title": "Idioma de la ruta",
+      "body": "Cambia el idioma visible de esta página. El contenido escrito por usuarios no cambia."
+    },
+    "password": {
+      "title": "Cambiar contraseña",
+      "body": "Define una nueva contraseña para esta cuenta. Las contraseñas solo se envían a Supabase Auth y no se guardan en tablas de perfil.",
+      "submit": "Actualizar contraseña"
     }
   },
   "Workspace": {

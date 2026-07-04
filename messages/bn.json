@@ -175,14 +175,18 @@
       "emailPlaceholder": "you@example.com",
       "password": "Password",
       "passwordPlaceholder": "Your password",
-      "newPasswordPlaceholder": "At least 8 characters"
+      "newPasswordPlaceholder": "At least 8 characters",
+      "newPassword": "নতুন পাসওয়ার্ড",
+      "confirmPassword": "পাসওয়ার্ড নিশ্চিত করুন",
+      "confirmPasswordPlaceholder": "নতুন পাসওয়ার্ড আবার লিখুন"
     },
     "login": {
       "eyebrow": "Account access",
       "title": "Log in to save your work.",
       "body": "Guest mode stays available. Log in when you want cloud saving and future collaboration features.",
       "submit": "Log in",
-      "createAccount": "Create account"
+      "createAccount": "Create account",
+      "forgotPassword": "পাসওয়ার্ড ভুলে গেছেন?"
     },
     "signup": {
       "eyebrow": "Create account",
@@ -198,8 +202,11 @@
       "note": "Google and Apple require provider configuration in Supabase before they work in production."
     },
     "status": {
-      "check-email": "Check your email to confirm the account, then return to NoProblemo.",
-      "signed-out": "You have been logged out."
+      "check-email": "অ্যাকাউন্ট তৈরি হয়েছে। অ্যাকাউন্ট নিশ্চিত করতে ইমেল দেখুন, তারপর NoProblemo-তে ফিরুন।",
+      "signed-out": "You have been logged out.",
+      "password-updated": "পাসওয়ার্ড আপডেট হয়েছে। নতুন পাসওয়ার্ড দিয়ে লগইন করুন।",
+      "reset-email-sent": "এই ইমেলের অ্যাকাউন্ট থাকলে রিসেট লিংক পাঠানো হয়েছে।",
+      "recovery-ready": "রিসেট লিংক নিশ্চিত হয়েছে। নতুন পাসওয়ার্ড বেছে নিন।"
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -208,8 +215,27 @@
       "signup-failed": "The account could not be created. Check the email address or try again.",
       "oauth-provider": "That login provider is not available.",
       "oauth-start": "The provider login could not start. Check Supabase provider setup.",
-      "callback": "The login callback could not be completed. Try logging in again.",
-      "auth-required": "Log in to access saved work. Guest mode remains available without an account."
+      "callback": "নিশ্চিতকরণ লিংক সম্পন্ন করা যায়নি। এটি অবৈধ বা মেয়াদোত্তীর্ণ হতে পারে। লগইন করুন বা নতুন লিংক চান।",
+      "auth-required": "Log in to access saved work. Guest mode remains available without an account.",
+      "missing-email": "রিসেট লিংকের জন্য আপনার ইমেল লিখুন।",
+      "reset-request-failed": "রিসেট ইমেল পাঠানো যায়নি। ঠিকানা পরীক্ষা করুন বা আবার চেষ্টা করুন।",
+      "password-mismatch": "পাসওয়ার্ড মিলছে না।",
+      "password-update-failed": "পাসওয়ার্ড আপডেট করা যায়নি। নতুন রিসেট লিংক চান।",
+      "reset-link-invalid": "রিসেট লিংক অবৈধ বা মেয়াদোত্তীর্ণ। নতুন রিসেট লিংক চান।"
+    },
+    "forgot": {
+      "eyebrow": "পাসওয়ার্ড সহায়তা",
+      "title": "আপনার পাসওয়ার্ড রিসেট করুন।",
+      "body": "আপনার অ্যাকাউন্ট ইমেল লিখুন। অ্যাকাউন্ট থাকলে আমরা নিরাপদ রিসেট লিংক পাঠাব।",
+      "submit": "রিসেট লিংক পাঠান",
+      "backToLogin": "লগইনে ফিরে যান"
+    },
+    "reset": {
+      "eyebrow": "নতুন পাসওয়ার্ড",
+      "title": "নতুন পাসওয়ার্ড বেছে নিন।",
+      "body": "ইমেলের রিসেট লিংক ব্যবহার করে নতুন পাসওয়ার্ড সেট করুন।",
+      "submit": "নতুন পাসওয়ার্ড সংরক্ষণ করুন",
+      "requestNewLink": "নতুন রিসেট লিংক চান"
     }
   },
   "AuthStatus": {
@@ -323,6 +349,10 @@
         "task_updated": "Task updated",
         "solution_updated": "Solution updated"
       }
+    },
+    "status": {
+      "account-created": "অ্যাকাউন্ট তৈরি হয়েছে। এখন আপনি কাজ সংরক্ষণ ও পরিচালনা করতে পারেন।",
+      "email-confirmed": "ইমেল নিশ্চিত হয়েছে। আপনার অ্যাকাউন্ট প্রস্তুত।"
     }
   },
   "CreateChallenge": {
@@ -375,15 +405,34 @@
     "fields": {
       "displayName": "Display name",
       "displayNamePlaceholder": "Your name",
-      "preferredLocale": "Preferred language"
+      "preferredLocale": "Preferred language",
+      "newPassword": "নতুন পাসওয়ার্ড",
+      "newPasswordPlaceholder": "কমপক্ষে ৮ অক্ষর",
+      "confirmPassword": "পাসওয়ার্ড নিশ্চিত করুন",
+      "confirmPasswordPlaceholder": "নতুন পাসওয়ার্ড আবার লিখুন"
     },
-    "localeNote": "Preferred language is saved to your profile. The current route language still follows the URL until routing preference sync is added later.",
+    "localeNote": "পছন্দের ভাষা আপনার প্রোফাইলে সংরক্ষিত হয়। সংরক্ষণের পরে এই সেটিংস পেজ নির্বাচিত ভাষায় খুলবে।",
     "submit": "Save profile",
     "status": {
-      "saved": "Profile settings were saved."
+      "saved": "Profile settings were saved.",
+      "profile-saved": "প্রোফাইল সেটিংস সংরক্ষিত হয়েছে।",
+      "password-saved": "পাসওয়ার্ড আপডেট হয়েছে।"
     },
     "errors": {
-      "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies."
+      "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies.",
+      "profile-update-failed": "প্রোফাইল সেটিংস সংরক্ষণ করা যায়নি। Supabase সেটআপ এবং RLS নীতি পরীক্ষা করুন।",
+      "password-weak": "কমপক্ষে ৮ অক্ষরের পাসওয়ার্ড ব্যবহার করুন।",
+      "password-mismatch": "পাসওয়ার্ড মিলছে না।",
+      "password-update-failed": "পাসওয়ার্ড আপডেট করা যায়নি। আবার চেষ্টা করুন।"
+    },
+    "routeLanguage": {
+      "title": "পেজের ভাষা",
+      "body": "এই পেজের দৃশ্যমান ভাষা বদলান। ব্যবহারকারীর লেখা কনটেন্ট বদলাবে না।"
+    },
+    "password": {
+      "title": "পাসওয়ার্ড পরিবর্তন",
+      "body": "এই অ্যাকাউন্টের জন্য নতুন পাসওয়ার্ড সেট করুন। পাসওয়ার্ড শুধু Supabase Auth-এ পাঠানো হয় এবং প্রোফাইল টেবিলে সংরক্ষিত হয় না।",
+      "submit": "পাসওয়ার্ড আপডেট করুন"
     }
   },
   "Workspace": {

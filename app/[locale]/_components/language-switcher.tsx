@@ -1,16 +1,16 @@
-import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+"use client";
+
+import { useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 
 type LanguageSwitcherProps = {
   locale: Locale;
 };
 
-export async function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
-  const t = await getTranslations({
-    locale,
-    namespace: "LanguageSwitcher",
-  });
+export function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
+  const t = useTranslations("LanguageSwitcher");
+  const pathname = usePathname();
 
   return (
     <nav aria-label={t("label")} className="flex shrink-0 flex-col gap-2">
@@ -22,7 +22,7 @@ export async function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
           return (
             <Link
               key={option}
-              href="/"
+              href={pathname}
               locale={option}
               aria-current={isCurrent ? "page" : undefined}
               className={`rounded-md border px-3 py-2 text-sm font-medium transition-colors ${

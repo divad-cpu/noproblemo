@@ -73,6 +73,8 @@ Not implemented:
 - `/[locale]/support`: support/contact.
 - `/[locale]/login`: email login and OAuth start.
 - `/[locale]/signup`: email signup and OAuth start.
+- `/[locale]/forgot-password`: password reset request.
+- `/[locale]/reset-password`: password reset completion after callback recovery session exchange.
 - `/[locale]/auth/callback`: Supabase auth callback.
 - `/[locale]/auth/logout`: logout handler.
 - `/[locale]/app`: protected dashboard.
@@ -145,6 +147,8 @@ Current:
 - Guest data is local-only.
 - Supabase Auth email UI/actions exist.
 - Google and Apple OAuth starts exist, but require provider setup before production use.
+- Email confirmation, OAuth, and password recovery use locale-specific `/[locale]/auth/callback` routes.
+- Password changes and reset completions use Supabase Auth and do not store password values in application tables.
 - Dashboard, minimal create, profile update, and guest import use server-side session checks and RLS.
 - Phase 4 migration enables RLS for `profiles`, `challenges`, `challenge_sections`, `challenge_solutions`, and `challenge_tasks`.
 - Phase 8 migration enables RLS for friends/groups tables and extends challenge RLS for explicitly linked group challenges.
