@@ -326,7 +326,13 @@
       "status": "Status",
       "updated": "Updated",
       "continue": "Continue",
-      "noDescription": "No short description yet."
+      "noDescription": "No short description yet.",
+      "statuses": {
+        "draft": "Borrador",
+        "active": "Activo",
+        "completed": "Completado",
+        "archived": "Archivado"
+      }
     },
     "active": {
       "title": "My active challenges",
@@ -902,6 +908,17 @@
       "challenge_message": "Challenge message",
       "challenge_updated": "Challenge updated",
       "group_updated": "Group updated"
+    },
+    "bodies": {
+      "friend_request": "Alguien te envió una solicitud de amistad.",
+      "friend_request_accepted": "Tu solicitud de amistad fue aceptada.",
+      "group_invitation": "Te invitaron a un grupo.",
+      "group_invitation_accepted": "Se aceptó una invitación de grupo.",
+      "group_invitation_declined": "Se rechazó una invitación de grupo.",
+      "group_message": "Un grupo tiene un mensaje nuevo.",
+      "challenge_message": "Un desafío tiene un mensaje nuevo.",
+      "challenge_updated": "Se actualizó un desafío.",
+      "group_updated": "Se actualizó un grupo."
     }
   },
   "Admin": {
@@ -933,6 +950,10 @@
       "created": "Created",
       "noDisplayName": "No display name",
       "empty": "No profiles available."
+    },
+    "roles": {
+      "user": "Usuario",
+      "admin": "Administrador"
     },
     "activity": {
       "title": "Recent activity",

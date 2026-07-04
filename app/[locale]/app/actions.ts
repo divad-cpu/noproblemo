@@ -140,8 +140,13 @@ function valueToString(value: unknown) {
 }
 
 function titleFromDraft(draft: GuestDraft, fallback: string) {
-  const problem = valueToString(draft.problem);
-  const firstLine = problem.split("\n").find(Boolean)?.trim();
+  const titleSource =
+    valueToString(draft.problem) ||
+    valueToString(draft.context) ||
+    valueToString(draft.outcome) ||
+    valueToString(draft.options) ||
+    valueToString(draft.nextStep);
+  const firstLine = titleSource.split("\n").find(Boolean)?.trim();
 
   return truncate(firstLine || fallback, maxTitleLength);
 }
@@ -289,7 +294,7 @@ export async function importGuestDraft(
   formData: FormData,
 ): Promise<ImportGuestState> {
   const locale = getLocale(formData);
-  const fallbackTitle = firstString(formData.get("fallbackTitle")) || "Imported guest challenge";
+  const fallbackTitle = firstString(formData.get("fallbackTitle"));
   const rawDraft = firstString(formData.get("draft"));
 
   if (!rawDraft) {

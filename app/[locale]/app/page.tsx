@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-import type { Database } from "@/lib/supabase/types";
+import type { ChallengeStatus, Database } from "@/lib/supabase/types";
 import { GuestImportCard } from "./_components/guest-import-card";
 
 type DashboardPageProps = {
@@ -57,6 +57,7 @@ function ChallengeCard({
     updated: string;
     continue: string;
     noDescription: string;
+    statuses: Record<ChallengeStatus, string>;
   };
 }) {
   return (
@@ -71,7 +72,7 @@ function ChallengeCard({
           </p>
         </div>
         <span className="inline-flex w-fit rounded-md border border-[#e5e2da] bg-[#fbfaf7] px-3 py-1 text-sm font-semibold text-[#373632]">
-          {labels.status}: {challenge.status}
+          {labels.status}: {labels.statuses[challenge.status]}
         </span>
       </div>
       <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -157,6 +158,12 @@ export default async function DashboardPage({
     updated: t("challenge.updated"),
     continue: t("challenge.continue"),
     noDescription: t("challenge.noDescription"),
+    statuses: {
+      draft: t("challenge.statuses.draft"),
+      active: t("challenge.statuses.active"),
+      completed: t("challenge.statuses.completed"),
+      archived: t("challenge.statuses.archived"),
+    },
   };
 
   return (

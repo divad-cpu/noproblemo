@@ -152,17 +152,12 @@ function NotificationSection({
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-[#706f68]">
-                    {t(`types.${notification.type}`)}
-                  </p>
                   <h3 className="mt-1 break-words font-semibold text-[#22211e]">
-                    {notification.title}
+                    {t(`types.${notification.type}`)}
                   </h3>
-                  {notification.body ? (
-                    <p className="mt-2 break-words text-sm leading-6 text-[#55544f]">
-                      {notification.body}
-                    </p>
-                  ) : null}
+                  <p className="mt-2 break-words text-sm leading-6 text-[#55544f]">
+                    {t(`bodies.${notification.type}`)}
+                  </p>
                   <p className="mt-2 text-sm text-[#706f68]">
                     {formatDateTime(notification.created_at, locale)}
                   </p>

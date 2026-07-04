@@ -326,7 +326,13 @@
       "status": "Status",
       "updated": "Updated",
       "continue": "Continue",
-      "noDescription": "No short description yet."
+      "noDescription": "No short description yet.",
+      "statuses": {
+        "draft": "مسودہ",
+        "active": "فعال",
+        "completed": "مکمل",
+        "archived": "آرکائیو شدہ"
+      }
     },
     "active": {
       "title": "My active challenges",
@@ -902,6 +908,17 @@
       "challenge_message": "Challenge message",
       "challenge_updated": "Challenge updated",
       "group_updated": "Group updated"
+    },
+    "bodies": {
+      "friend_request": "کسی نے آپ کو دوستی کی درخواست بھیجی ہے۔",
+      "friend_request_accepted": "آپ کی دوستی کی درخواست قبول کر لی گئی۔",
+      "group_invitation": "آپ کو ایک گروپ میں مدعو کیا گیا ہے۔",
+      "group_invitation_accepted": "ایک گروپ دعوت قبول کر لی گئی۔",
+      "group_invitation_declined": "ایک گروپ دعوت مسترد کر دی گئی۔",
+      "group_message": "ایک گروپ میں نیا پیغام ہے۔",
+      "challenge_message": "ایک چیلنج میں نیا پیغام ہے۔",
+      "challenge_updated": "ایک چیلنج اپ ڈیٹ ہوا۔",
+      "group_updated": "ایک گروپ اپ ڈیٹ ہوا۔"
     }
   },
   "Admin": {
@@ -933,6 +950,10 @@
       "created": "Created",
       "noDisplayName": "No display name",
       "empty": "No profiles available."
+    },
+    "roles": {
+      "user": "صارف",
+      "admin": "ایڈمن"
     },
     "activity": {
       "title": "Recent activity",

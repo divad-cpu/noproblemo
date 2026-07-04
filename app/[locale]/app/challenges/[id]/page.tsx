@@ -169,19 +169,21 @@ function ExportData({
   solutions,
   tasks,
   sectionLabels,
+  statusLabel,
 }: {
   challenge: Challenge;
   sections: Section[];
   solutions: Solution[];
   tasks: Task[];
   sectionLabels: Record<ChallengeSectionKey, string>;
+  statusLabel: string;
 }) {
   return (
     <ChallengeMarkdownExport
       challenge={{
         title: challenge.title,
         shortDescription: challenge.short_description ?? "",
-        status: challenge.status,
+        status: statusLabel,
       }}
       sections={sectionKeys.map((sectionKey) => ({
         key: sectionKey,
@@ -889,6 +891,7 @@ export default async function ChallengePage({
         solutions={savedSolutions}
         tasks={savedTasks}
         sectionLabels={sectionLabels}
+        statusLabel={t(`statuses.${challenge.status}`)}
       />
 
       <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">

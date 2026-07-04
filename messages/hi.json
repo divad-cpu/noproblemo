@@ -326,7 +326,13 @@
       "status": "Status",
       "updated": "Updated",
       "continue": "Continue",
-      "noDescription": "No short description yet."
+      "noDescription": "No short description yet.",
+      "statuses": {
+        "draft": "मसौदा",
+        "active": "सक्रिय",
+        "completed": "पूरा",
+        "archived": "संग्रहीत"
+      }
     },
     "active": {
       "title": "My active challenges",
@@ -902,6 +908,17 @@
       "challenge_message": "Challenge message",
       "challenge_updated": "Challenge updated",
       "group_updated": "Group updated"
+    },
+    "bodies": {
+      "friend_request": "किसी ने आपको मित्र अनुरोध भेजा है।",
+      "friend_request_accepted": "आपका मित्र अनुरोध स्वीकार किया गया।",
+      "group_invitation": "आपको एक समूह में आमंत्रित किया गया।",
+      "group_invitation_accepted": "एक समूह आमंत्रण स्वीकार किया गया।",
+      "group_invitation_declined": "एक समूह आमंत्रण अस्वीकार किया गया।",
+      "group_message": "एक समूह में नया संदेश है।",
+      "challenge_message": "एक चुनौती में नया संदेश है।",
+      "challenge_updated": "एक चुनौती अपडेट की गई।",
+      "group_updated": "एक समूह अपडेट किया गया।"
     }
   },
   "Admin": {
@@ -933,6 +950,10 @@
       "created": "Created",
       "noDisplayName": "No display name",
       "empty": "No profiles available."
+    },
+    "roles": {
+      "user": "उपयोगकर्ता",
+      "admin": "एडमिन"
     },
     "activity": {
       "title": "Recent activity",

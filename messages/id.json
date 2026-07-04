@@ -326,7 +326,13 @@
       "status": "Status",
       "updated": "Updated",
       "continue": "Continue",
-      "noDescription": "No short description yet."
+      "noDescription": "No short description yet.",
+      "statuses": {
+        "draft": "Draf",
+        "active": "Aktif",
+        "completed": "Selesai",
+        "archived": "Diarsipkan"
+      }
     },
     "active": {
       "title": "My active challenges",
@@ -902,6 +908,17 @@
       "challenge_message": "Challenge message",
       "challenge_updated": "Challenge updated",
       "group_updated": "Group updated"
+    },
+    "bodies": {
+      "friend_request": "Seseorang mengirim permintaan pertemanan kepada Anda.",
+      "friend_request_accepted": "Permintaan pertemanan Anda diterima.",
+      "group_invitation": "Anda diundang ke grup.",
+      "group_invitation_accepted": "Undangan grup diterima.",
+      "group_invitation_declined": "Undangan grup ditolak.",
+      "group_message": "Sebuah grup memiliki pesan baru.",
+      "challenge_message": "Sebuah tantangan memiliki pesan baru.",
+      "challenge_updated": "Sebuah tantangan diperbarui.",
+      "group_updated": "Sebuah grup diperbarui."
     }
   },
   "Admin": {
@@ -933,6 +950,10 @@
       "created": "Created",
       "noDisplayName": "No display name",
       "empty": "No profiles available."
+    },
+    "roles": {
+      "user": "Pengguna",
+      "admin": "Admin"
     },
     "activity": {
       "title": "Recent activity",

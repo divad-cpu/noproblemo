@@ -50,6 +50,10 @@ function activityLabelKey(type: ActivityType) {
   return activityTypes.includes(type) ? `activity.types.${type}` : "activity.types.unknown";
 }
 
+function profileRoleLabelKey(role: string) {
+  return role === "admin" ? "roles.admin" : "roles.user";
+}
+
 async function requireAdmin(locale: Locale) {
   const supabase = await createServerSupabaseClient();
   const {
@@ -192,7 +196,9 @@ export default async function AdminPage({ params }: AdminPageProps) {
                     <td className="py-3 pe-4 text-[#55544f]">
                       {profile.preferred_locale}
                     </td>
-                    <td className="py-3 pe-4 text-[#55544f]">{profile.role}</td>
+                    <td className="py-3 pe-4 text-[#55544f]">
+                      {t(profileRoleLabelKey(profile.role))}
+                    </td>
                     <td className="py-3 pe-4 text-[#55544f]">
                       {formatDateTime(profile.created_at, locale)}
                     </td>

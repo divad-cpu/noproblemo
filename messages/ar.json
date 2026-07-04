@@ -326,7 +326,13 @@
       "status": "Status",
       "updated": "Updated",
       "continue": "Continue",
-      "noDescription": "No short description yet."
+      "noDescription": "No short description yet.",
+      "statuses": {
+        "draft": "مسودة",
+        "active": "نشط",
+        "completed": "مكتمل",
+        "archived": "مؤرشف"
+      }
     },
     "active": {
       "title": "My active challenges",
@@ -902,6 +908,17 @@
       "challenge_message": "Challenge message",
       "challenge_updated": "Challenge updated",
       "group_updated": "Group updated"
+    },
+    "bodies": {
+      "friend_request": "أرسل إليك شخص ما طلب صداقة.",
+      "friend_request_accepted": "تم قبول طلب الصداقة الخاص بك.",
+      "group_invitation": "تمت دعوتك إلى مجموعة.",
+      "group_invitation_accepted": "تم قبول دعوة مجموعة.",
+      "group_invitation_declined": "تم رفض دعوة مجموعة.",
+      "group_message": "هناك رسالة جديدة في إحدى المجموعات.",
+      "challenge_message": "هناك رسالة جديدة في أحد التحديات.",
+      "challenge_updated": "تم تحديث أحد التحديات.",
+      "group_updated": "تم تحديث إحدى المجموعات."
     }
   },
   "Admin": {
@@ -933,6 +950,10 @@
       "created": "Created",
       "noDisplayName": "No display name",
       "empty": "No profiles available."
+    },
+    "roles": {
+      "user": "مستخدم",
+      "admin": "مسؤول"
     },
     "activity": {
       "title": "Recent activity",

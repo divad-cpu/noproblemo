@@ -82,6 +82,7 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 - Password recovery links now target `/[locale]/reset-password` directly, where the browser Supabase client establishes the recovery session before updating the password.
 - Shared language switcher and footer
 - Compact select-based language switcher that preserves the current route while replacing the locale segment
+- Focused i18n cleanup for dashboard challenge statuses, workspace Markdown export status, admin profile roles, and notification titles/bodies so those visible system labels render through message keys instead of raw database values.
 - Guest localStorage draft persistence under `noproblemo.guestWorkspace.v1`
 - Markdown copy/export for guest drafts
 - Login prompt for save/collaboration actions

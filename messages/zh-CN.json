@@ -326,7 +326,13 @@
       "status": "Status",
       "updated": "Updated",
       "continue": "Continue",
-      "noDescription": "No short description yet."
+      "noDescription": "No short description yet.",
+      "statuses": {
+        "draft": "草稿",
+        "active": "进行中",
+        "completed": "已完成",
+        "archived": "已归档"
+      }
     },
     "active": {
       "title": "My active challenges",
@@ -902,6 +908,17 @@
       "challenge_message": "Challenge message",
       "challenge_updated": "Challenge updated",
       "group_updated": "Group updated"
+    },
+    "bodies": {
+      "friend_request": "有人向你发送了好友请求。",
+      "friend_request_accepted": "你的好友请求已被接受。",
+      "group_invitation": "你被邀请加入一个群组。",
+      "group_invitation_accepted": "一个群组邀请已被接受。",
+      "group_invitation_declined": "一个群组邀请已被拒绝。",
+      "group_message": "一个群组有新消息。",
+      "challenge_message": "一个挑战有新消息。",
+      "challenge_updated": "一个挑战已更新。",
+      "group_updated": "一个群组已更新。"
     }
   },
   "Admin": {
@@ -933,6 +950,10 @@
       "created": "Created",
       "noDisplayName": "No display name",
       "empty": "No profiles available."
+    },
+    "roles": {
+      "user": "用户",
+      "admin": "管理员"
     },
     "activity": {
       "title": "Recent activity",
