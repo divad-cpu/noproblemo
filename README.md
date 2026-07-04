@@ -102,13 +102,15 @@ Logged-in users can import the current guest draft from the dashboard. Import cr
 
 Email login/signup uses Supabase Auth. Google and Apple login buttons are prepared through Supabase OAuth, but they require provider configuration in Supabase, Google Cloud, and Apple Developer before production use.
 
-Email confirmation, OAuth, and password recovery links use locale-specific `/[locale]/auth/callback` routes. Password recovery then opens `/[locale]/reset-password` after the callback exchanges the code for a session.
+Email confirmation and OAuth use locale-specific `/[locale]/auth/callback` routes. If Supabase confirms an email but the server callback cannot exchange the PKCE code for a session, the login page shows a calm "email may already be confirmed" state instead of a false invalid-link error.
+
+Password recovery links should open `/[locale]/reset-password` directly. The reset page uses the browser Supabase client to establish the recovery session and then updates the password through Supabase Auth.
 
 The Phase 4 database trigger is expected to create `profiles` rows after signup, but it still needs verification after the migration is applied to the real Supabase project.
 
 ## Dashboard, Workspace And Settings
 
-The dashboard lists the authenticated user's saved challenges through Supabase RLS, shows empty/error states, and provides a minimal create challenge action.
+The dashboard lists the authenticated user's saved challenges through Supabase RLS, shows empty/error states, keeps pending friend/group/notification items separate, and provides minimal quick actions.
 
 The saved challenge workspace supports the seven-step problem-solving workflow, editable challenge sections, possible solutions, pros/cons, risk/effort/impact scoring, tasks/actions, final recommendation, summary, and Markdown copy/download export.
 

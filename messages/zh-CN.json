@@ -206,7 +206,9 @@
       "signed-out": "You have been logged out.",
       "password-updated": "密码已更新。请使用新密码登录。",
       "reset-email-sent": "如果该邮箱有账户，重置链接已发送。",
-      "recovery-ready": "重置链接已确认。请选择新密码。"
+      "recovery-ready": "重置链接已确认。请选择新密码。",
+      "email-confirmed-login-required": "你的邮箱可能已经确认。请登录继续。",
+      "recovery-checking": "正在检查你的重置链接..."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -221,7 +223,8 @@
       "reset-request-failed": "无法发送重置邮件。请检查地址或重试。",
       "password-mismatch": "两次密码不一致。",
       "password-update-failed": "无法更新密码。请请求新的重置链接。",
-      "reset-link-invalid": "重置链接无效或已过期。请请求新的重置链接。"
+      "reset-link-invalid": "重置链接无效或已过期。请请求新的重置链接。",
+      "recovery-callback": "无法打开重置链接。请重新请求重置链接后再试。"
     },
     "forgot": {
       "eyebrow": "密码帮助",
@@ -277,7 +280,8 @@
     "summary": {
       "total": "Saved challenges",
       "active": "Active drafts",
-      "future": "Collaboration"
+      "future": "Collaboration",
+      "pending": "待处理项目"
     },
     "futureNote": "Friends, groups, and messages are planned for later phases.",
     "guestImport": {
@@ -353,6 +357,9 @@
     "status": {
       "account-created": "账户已创建。现在可以保存和管理你的工作。",
       "email-confirmed": "邮箱已确认。你的账户已准备好。"
+    },
+    "pending": {
+      "title": "待处理请求"
     }
   },
   "CreateChallenge": {

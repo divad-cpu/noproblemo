@@ -14,10 +14,11 @@ Implemented in Phase 5:
 - No custom password storage exists in app code.
 - Auth callbacks and redirects are locale-aware.
 - Auth callback code exchange writes Supabase session cookies onto the final route-handler redirect response.
+- Email confirmation callback failures caused by PKCE/session exchange limits do not expose raw provider details and redirect to a login-required success state because Supabase may already have confirmed the account.
 - `/[locale]/app` checks Supabase session state server-side before rendering.
 - Logout is handled by a route handler that signs out through Supabase.
 - Logged-in users can change passwords through Supabase Auth `updateUser({ password })`; password values are not stored in profile tables.
-- Password reset requests use Supabase Auth reset links and locale-specific callback URLs.
+- Password reset requests use Supabase Auth reset links and locale-specific `/[locale]/reset-password` URLs; the browser client establishes the recovery session before calling `updateUser({ password })`.
 - Google and Apple OAuth start actions are prepared, but provider configuration is still required.
 - Profile creation relies on the Phase 4 database trigger and still needs verification after the migration is applied.
 

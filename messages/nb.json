@@ -206,7 +206,9 @@
       "signed-out": "You have been logged out.",
       "password-updated": "Passordet er oppdatert. Logg inn med det nye passordet.",
       "reset-email-sent": "Hvis e-posten har en konto, er en tilbakestillingslenke sendt.",
-      "recovery-ready": "Lenken er bekreftet. Velg et nytt passord."
+      "recovery-ready": "Lenken er bekreftet. Velg et nytt passord.",
+      "email-confirmed-login-required": "E-posten din kan allerede være bekreftet. Logg inn for å fortsette.",
+      "recovery-checking": "Sjekker tilbakestillingslenken..."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -221,7 +223,8 @@
       "reset-request-failed": "E-posten kunne ikke sendes. Sjekk adressen eller prøv igjen.",
       "password-mismatch": "Passordene er ikke like.",
       "password-update-failed": "Passordet kunne ikke oppdateres. Be om en ny lenke.",
-      "reset-link-invalid": "Lenken er ugyldig eller utløpt. Be om en ny lenke."
+      "reset-link-invalid": "Lenken er ugyldig eller utløpt. Be om en ny lenke.",
+      "recovery-callback": "Tilbakestillingslenken kunne ikke åpnes. Be om en ny lenke og prøv igjen."
     },
     "forgot": {
       "eyebrow": "Passordhjelp",
@@ -277,7 +280,8 @@
     "summary": {
       "total": "Saved challenges",
       "active": "Active drafts",
-      "future": "Collaboration"
+      "future": "Collaboration",
+      "pending": "Ventende saker"
     },
     "futureNote": "Friends, groups, and messages are planned for later phases.",
     "guestImport": {
@@ -353,6 +357,9 @@
     "status": {
       "account-created": "Kontoen er opprettet. Du kan nå lagre og administrere arbeidet ditt.",
       "email-confirmed": "E-posten er bekreftet. Kontoen din er klar."
+    },
+    "pending": {
+      "title": "Ventende forespørsler"
     }
   },
   "CreateChallenge": {

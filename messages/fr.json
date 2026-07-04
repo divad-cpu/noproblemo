@@ -206,7 +206,9 @@
       "signed-out": "You have been logged out.",
       "password-updated": "Mot de passe mis à jour. Connectez-vous avec le nouveau mot de passe.",
       "reset-email-sent": "Si cet e-mail correspond à un compte, un lien a été envoyé.",
-      "recovery-ready": "Lien confirmé. Choisissez un nouveau mot de passe."
+      "recovery-ready": "Lien confirmé. Choisissez un nouveau mot de passe.",
+      "email-confirmed-login-required": "Votre e-mail est peut-être déjà confirmé. Connectez-vous pour continuer.",
+      "recovery-checking": "Vérification de votre lien de réinitialisation..."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -221,7 +223,8 @@
       "reset-request-failed": "L’e-mail n’a pas pu être envoyé. Vérifiez l’adresse ou réessayez.",
       "password-mismatch": "Les mots de passe ne correspondent pas.",
       "password-update-failed": "Le mot de passe n’a pas pu être mis à jour. Demandez un nouveau lien.",
-      "reset-link-invalid": "Le lien est invalide ou expiré. Demandez un nouveau lien."
+      "reset-link-invalid": "Le lien est invalide ou expiré. Demandez un nouveau lien.",
+      "recovery-callback": "Le lien de réinitialisation n’a pas pu être ouvert. Demandez un nouveau lien et réessayez."
     },
     "forgot": {
       "eyebrow": "Aide mot de passe",
@@ -277,7 +280,8 @@
     "summary": {
       "total": "Saved challenges",
       "active": "Active drafts",
-      "future": "Collaboration"
+      "future": "Collaboration",
+      "pending": "Éléments en attente"
     },
     "futureNote": "Friends, groups, and messages are planned for later phases.",
     "guestImport": {
@@ -353,6 +357,9 @@
     "status": {
       "account-created": "Compte créé. Vous pouvez maintenant enregistrer et gérer votre travail.",
       "email-confirmed": "E-mail confirmé. Votre compte est prêt."
+    },
+    "pending": {
+      "title": "Demandes en attente"
     }
   },
   "CreateChallenge": {

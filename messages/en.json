@@ -206,7 +206,9 @@
       "signed-out": "You have been logged out.",
       "password-updated": "Password updated. Log in with your new password.",
       "reset-email-sent": "If that email has an account, a reset link has been sent.",
-      "recovery-ready": "Reset link confirmed. Choose a new password."
+      "recovery-ready": "Reset link confirmed. Choose a new password.",
+      "email-confirmed-login-required": "Your email may already be confirmed. Please log in to continue.",
+      "recovery-checking": "Checking your reset link..."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -221,7 +223,8 @@
       "reset-request-failed": "The reset email could not be sent. Check the address or try again.",
       "password-mismatch": "The passwords do not match.",
       "password-update-failed": "The password could not be updated. Try requesting a new reset link.",
-      "reset-link-invalid": "The reset link is invalid or expired. Request a new reset link."
+      "reset-link-invalid": "The reset link is invalid or expired. Request a new reset link.",
+      "recovery-callback": "The reset link could not be opened. Request a new reset link and try again."
     },
     "forgot": {
       "eyebrow": "Password help",
@@ -277,7 +280,8 @@
     "summary": {
       "total": "Saved challenges",
       "active": "Active drafts",
-      "future": "Collaboration"
+      "future": "Collaboration",
+      "pending": "Pending items"
     },
     "futureNote": "Friends, groups, and messages are planned for later phases.",
     "guestImport": {
@@ -353,6 +357,9 @@
     "status": {
       "account-created": "Account created. You can now save and manage your work.",
       "email-confirmed": "Email confirmed. Your account is ready."
+    },
+    "pending": {
+      "title": "Pending requests"
     }
   },
   "CreateChallenge": {

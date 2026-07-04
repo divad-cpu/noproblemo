@@ -144,7 +144,9 @@ Current app includes localized public pages, a guest localStorage workspace, Sup
 
 ## Required Supabase Redirect URLs
 
-Supabase Auth must allow locale-specific callback URLs. Email confirmation, OAuth, and password recovery all enter the app through `/[locale]/auth/callback`; password recovery then redirects internally to `/[locale]/reset-password`.
+Supabase Auth must allow locale-specific callback URLs. Email confirmation and OAuth enter the app through `/[locale]/auth/callback`. Password recovery links should redirect directly to `/[locale]/reset-password` so the browser client can establish the recovery session before updating the password.
+
+If an email confirmation callback cannot exchange the auth code for a session but the account was confirmed by Supabase, the app shows a calm login-required success state instead of saying the link is invalid. Password recovery callback failures still send the user to the reset page with instructions to request a new link.
 
 Local development:
 
@@ -160,6 +162,17 @@ Local development:
 - `http://localhost:3000/id/auth/callback`
 - `http://localhost:3000/ur/auth/callback`
 - `http://localhost:3000/nb/auth/callback`
+- `http://localhost:3000/en/reset-password`
+- `http://localhost:3000/zh-CN/reset-password`
+- `http://localhost:3000/hi/reset-password`
+- `http://localhost:3000/es/reset-password`
+- `http://localhost:3000/ar/reset-password`
+- `http://localhost:3000/fr/reset-password`
+- `http://localhost:3000/bn/reset-password`
+- `http://localhost:3000/pt-BR/reset-password`
+- `http://localhost:3000/id/reset-password`
+- `http://localhost:3000/ur/reset-password`
+- `http://localhost:3000/nb/reset-password`
 
 Production:
 
@@ -175,6 +188,17 @@ Production:
 - `https://noproblemo.tech/id/auth/callback`
 - `https://noproblemo.tech/ur/auth/callback`
 - `https://noproblemo.tech/nb/auth/callback`
+- `https://noproblemo.tech/en/reset-password`
+- `https://noproblemo.tech/zh-CN/reset-password`
+- `https://noproblemo.tech/hi/reset-password`
+- `https://noproblemo.tech/es/reset-password`
+- `https://noproblemo.tech/ar/reset-password`
+- `https://noproblemo.tech/fr/reset-password`
+- `https://noproblemo.tech/bn/reset-password`
+- `https://noproblemo.tech/pt-BR/reset-password`
+- `https://noproblemo.tech/id/reset-password`
+- `https://noproblemo.tech/ur/reset-password`
+- `https://noproblemo.tech/nb/reset-password`
 
 If Vercel preview auth is needed, add the specific preview redirect pattern approved for the Vercel team/account. Do not use broad production wildcards beyond the intended domain.
 

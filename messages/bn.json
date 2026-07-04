@@ -206,7 +206,9 @@
       "signed-out": "You have been logged out.",
       "password-updated": "পাসওয়ার্ড আপডেট হয়েছে। নতুন পাসওয়ার্ড দিয়ে লগইন করুন।",
       "reset-email-sent": "এই ইমেলের অ্যাকাউন্ট থাকলে রিসেট লিংক পাঠানো হয়েছে।",
-      "recovery-ready": "রিসেট লিংক নিশ্চিত হয়েছে। নতুন পাসওয়ার্ড বেছে নিন।"
+      "recovery-ready": "রিসেট লিংক নিশ্চিত হয়েছে। নতুন পাসওয়ার্ড বেছে নিন।",
+      "email-confirmed-login-required": "আপনার ইমেইল হয়তো ইতিমধ্যে নিশ্চিত হয়েছে। চালিয়ে যেতে লগ ইন করুন।",
+      "recovery-checking": "আপনার রিসেট লিংক পরীক্ষা করা হচ্ছে..."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -221,7 +223,8 @@
       "reset-request-failed": "রিসেট ইমেল পাঠানো যায়নি। ঠিকানা পরীক্ষা করুন বা আবার চেষ্টা করুন।",
       "password-mismatch": "পাসওয়ার্ড মিলছে না।",
       "password-update-failed": "পাসওয়ার্ড আপডেট করা যায়নি। নতুন রিসেট লিংক চান।",
-      "reset-link-invalid": "রিসেট লিংক অবৈধ বা মেয়াদোত্তীর্ণ। নতুন রিসেট লিংক চান।"
+      "reset-link-invalid": "রিসেট লিংক অবৈধ বা মেয়াদোত্তীর্ণ। নতুন রিসেট লিংক চান।",
+      "recovery-callback": "রিসেট লিংক খোলা যায়নি। নতুন রিসেট লিংক অনুরোধ করে আবার চেষ্টা করুন।"
     },
     "forgot": {
       "eyebrow": "পাসওয়ার্ড সহায়তা",
@@ -277,7 +280,8 @@
     "summary": {
       "total": "Saved challenges",
       "active": "Active drafts",
-      "future": "Collaboration"
+      "future": "Collaboration",
+      "pending": "অপেক্ষমাণ আইটেম"
     },
     "futureNote": "Friends, groups, and messages are planned for later phases.",
     "guestImport": {
@@ -353,6 +357,9 @@
     "status": {
       "account-created": "অ্যাকাউন্ট তৈরি হয়েছে। এখন আপনি কাজ সংরক্ষণ ও পরিচালনা করতে পারেন।",
       "email-confirmed": "ইমেল নিশ্চিত হয়েছে। আপনার অ্যাকাউন্ট প্রস্তুত।"
+    },
+    "pending": {
+      "title": "অপেক্ষমাণ অনুরোধ"
     }
   },
   "CreateChallenge": {

@@ -200,3 +200,17 @@ Auth/settings verification fix:
 - Known problems: Supabase Auth redirect allow-list still must include locale-specific `/[locale]/auth/callback` URLs for local and production before email confirmation/password recovery can be relied on.
 - Validation results: `npm run lint`, `npm run typecheck`, and `npm run build` passed on 2026-07-04.
 - Next recommended step: manually test email confirmation, login, password change, forgot-password/reset-password, preferred-locale redirect, and route language switching locally and then in controlled production verification.
+
+Auth callback, recovery, language, and dashboard follow-up:
+
+- Phase completed: focused verification fix, not a new product phase.
+- Features added: no large product features; improved email-confirmation fallback status, browser-client recovery-session handling on reset-password, route-preserving language switching, and a cleaner dashboard layout.
+- Files created: `app/[locale]/reset-password/_components/reset-password-form.tsx`.
+- Files changed: auth callback, auth actions, login, reset-password, language switcher, dashboard, all message catalogs, deployment/security/current-state/README/verification docs, changelog, and project log.
+- Database/schema changes: none.
+- Security/RLS changes: none; recovery uses Supabase Auth with the public anon client and does not log or store codes, tokens, sessions, cookies, or password values.
+- UI/UX changes: login distinguishes "email may already be confirmed" from real callback errors; reset-password explains recovery readiness and failed reset links; dashboard sections are less cluttered; language switcher shows the current route language and preserves the current path where practical.
+- Bugs fixed: email confirmation no longer presents a false invalid/expired-link message when the account may already be confirmed; password recovery no longer depends only on server-side PKCE callback exchange; language switching no longer depends on locale-aware link behavior that could keep users on the same locale.
+- Known problems: Supabase Auth redirect allow-list still must include all locale-specific callback and reset-password URLs; non-English copy is simple and needs native review before production.
+- Validation results: message JSON validity, message key parity, `npm run lint`, `npm run typecheck`, and `npm run build` passed on 2026-07-04.
+- Next recommended step: retest signup confirmation, login, forgot-password/reset-password, route language switching, settings preferred locale redirect, and dashboard on local dev with the configured Supabase project.

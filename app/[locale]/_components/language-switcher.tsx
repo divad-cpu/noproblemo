@@ -1,7 +1,6 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Link, usePathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 
 type LanguageSwitcherProps = {
@@ -10,7 +9,23 @@ type LanguageSwitcherProps = {
 
 export function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
   const t = useTranslations("LanguageSwitcher");
-  const pathname = usePathname();
+
+  function localeHref(targetLocale: Locale) {
+    const { pathname, search, hash } = window.location;
+    const segments = pathname.split("/");
+    const currentLocale = segments[1];
+
+    if (routing.locales.includes(currentLocale as Locale)) {
+      segments[1] = targetLocale;
+      return `${segments.join("/")}${search}${hash}`;
+    }
+
+    return `/${targetLocale}`;
+  }
+
+  function switchLocale(targetLocale: Locale) {
+    window.location.assign(localeHref(targetLocale));
+  }
 
   return (
     <nav aria-label={t("label")} className="flex shrink-0 flex-col gap-2">
@@ -20,10 +35,13 @@ export function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
           const isCurrent = option === locale;
 
           return (
-            <Link
+            <a
               key={option}
-              href={pathname}
-              locale={option}
+              href={`/${option}`}
+              onClick={(event) => {
+                event.preventDefault();
+                switchLocale(option);
+              }}
               aria-current={isCurrent ? "page" : undefined}
               className={`rounded-md border px-3 py-2 text-sm font-medium transition-colors ${
                 isCurrent
@@ -32,7 +50,7 @@ export function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
               }`}
             >
               {t(`locales.${option}`)}
-            </Link>
+            </a>
           );
         })}
       </div>

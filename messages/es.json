@@ -206,7 +206,9 @@
       "signed-out": "You have been logged out.",
       "password-updated": "Contraseña actualizada. Inicia sesión con tu nueva contraseña.",
       "reset-email-sent": "Si ese correo tiene una cuenta, se envió un enlace de restablecimiento.",
-      "recovery-ready": "Enlace confirmado. Elige una nueva contraseña."
+      "recovery-ready": "Enlace confirmado. Elige una nueva contraseña.",
+      "email-confirmed-login-required": "Tu correo puede estar ya confirmado. Inicia sesión para continuar.",
+      "recovery-checking": "Comprobando tu enlace de restablecimiento..."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -221,7 +223,8 @@
       "reset-request-failed": "No se pudo enviar el correo. Revisa la dirección o inténtalo de nuevo.",
       "password-mismatch": "Las contraseñas no coinciden.",
       "password-update-failed": "No se pudo actualizar la contraseña. Solicita otro enlace.",
-      "reset-link-invalid": "El enlace es inválido o caducó. Solicita otro enlace."
+      "reset-link-invalid": "El enlace es inválido o caducó. Solicita otro enlace.",
+      "recovery-callback": "No se pudo abrir el enlace de restablecimiento. Solicita uno nuevo e inténtalo de nuevo."
     },
     "forgot": {
       "eyebrow": "Ayuda de contraseña",
@@ -277,7 +280,8 @@
     "summary": {
       "total": "Saved challenges",
       "active": "Active drafts",
-      "future": "Collaboration"
+      "future": "Collaboration",
+      "pending": "Elementos pendientes"
     },
     "futureNote": "Friends, groups, and messages are planned for later phases.",
     "guestImport": {
@@ -353,6 +357,9 @@
     "status": {
       "account-created": "Cuenta creada. Ya puedes guardar y gestionar tu trabajo.",
       "email-confirmed": "Correo confirmado. Tu cuenta está lista."
+    },
+    "pending": {
+      "title": "Solicitudes pendientes"
     }
   },
   "CreateChallenge": {

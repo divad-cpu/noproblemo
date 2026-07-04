@@ -1,8 +1,8 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
-import { resetPassword } from "../auth/actions";
 import { SiteFooter } from "../_components/site-footer";
+import { ResetPasswordForm } from "./_components/reset-password-form";
 
 type ResetPasswordPageProps = {
   params: Promise<{ locale: Locale }>;
@@ -20,10 +20,8 @@ function getQueryValue(
 
 const statusKeys = ["recovery-ready"] as const;
 const errorKeys = [
-  "weak-password",
-  "password-mismatch",
-  "password-update-failed",
   "reset-link-invalid",
+  "recovery-callback",
 ] as const;
 
 function isKnownKey<T extends readonly string[]>(
@@ -69,43 +67,22 @@ export default async function ResetPasswordPage({
             </p>
           ) : null}
 
-          <form action={resetPassword} className="mt-8 grid gap-4">
-            <input type="hidden" name="locale" value={locale} />
-            <label className="grid gap-2">
-              <span className="text-sm font-semibold text-[#373632]">
-                {t("fields.newPassword")}
-              </span>
-              <input
-                name="password"
-                type="password"
-                autoComplete="new-password"
-                required
-                minLength={8}
-                className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
-                placeholder={t("fields.newPasswordPlaceholder")}
-              />
-            </label>
-            <label className="grid gap-2">
-              <span className="text-sm font-semibold text-[#373632]">
-                {t("fields.confirmPassword")}
-              </span>
-              <input
-                name="confirmPassword"
-                type="password"
-                autoComplete="new-password"
-                required
-                minLength={8}
-                className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
-                placeholder={t("fields.confirmPasswordPlaceholder")}
-              />
-            </label>
-            <button
-              type="submit"
-              className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
-            >
-              {t("reset.submit")}
-            </button>
-          </form>
+          <ResetPasswordForm
+            labels={{
+              newPassword: t("fields.newPassword"),
+              newPasswordPlaceholder: t("fields.newPasswordPlaceholder"),
+              confirmPassword: t("fields.confirmPassword"),
+              confirmPasswordPlaceholder: t("fields.confirmPasswordPlaceholder"),
+              submit: t("reset.submit"),
+              preparing: t("status.recovery-checking"),
+              ready: t("status.recovery-ready"),
+              success: t("status.password-updated"),
+              weakPassword: t("errors.weak-password"),
+              mismatch: t("errors.password-mismatch"),
+              updateFailed: t("errors.password-update-failed"),
+              linkInvalid: t("errors.reset-link-invalid"),
+            }}
+          />
 
           <Link
             href="/forgot-password"

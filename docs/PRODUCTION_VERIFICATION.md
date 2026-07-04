@@ -87,7 +87,8 @@ Do not use this document as permission to deploy, apply remote migrations, chang
 - Configure Supabase Site URL to the production site URL.
 - Add local redirect URLs for development.
 - Add production callback URLs for locale-aware auth callback routes.
-- Add the same callback URLs for password reset links because reset links exchange the code through `/[locale]/auth/callback` before opening `/[locale]/reset-password`.
+- Add locale-aware reset-password URLs because password recovery links should open `/[locale]/reset-password` directly and let the browser client establish the recovery session.
+- Confirm email confirmation shows either `email-confirmed` in the app or a login-required success state if Supabase confirmed the account but the server callback could not exchange the PKCE code.
 - Confirm login, signup, callback, and logout on production.
 - Confirm failed auth attempts return calm error states.
 - Confirm `NEXT_PUBLIC_SITE_URL` in Vercel matches the deployed domain.
@@ -106,6 +107,17 @@ Required local callback URLs:
 - `http://localhost:3000/id/auth/callback`
 - `http://localhost:3000/ur/auth/callback`
 - `http://localhost:3000/nb/auth/callback`
+- `http://localhost:3000/en/reset-password`
+- `http://localhost:3000/zh-CN/reset-password`
+- `http://localhost:3000/hi/reset-password`
+- `http://localhost:3000/es/reset-password`
+- `http://localhost:3000/ar/reset-password`
+- `http://localhost:3000/fr/reset-password`
+- `http://localhost:3000/bn/reset-password`
+- `http://localhost:3000/pt-BR/reset-password`
+- `http://localhost:3000/id/reset-password`
+- `http://localhost:3000/ur/reset-password`
+- `http://localhost:3000/nb/reset-password`
 
 Required production callback URLs:
 
@@ -121,6 +133,17 @@ Required production callback URLs:
 - `https://noproblemo.tech/id/auth/callback`
 - `https://noproblemo.tech/ur/auth/callback`
 - `https://noproblemo.tech/nb/auth/callback`
+- `https://noproblemo.tech/en/reset-password`
+- `https://noproblemo.tech/zh-CN/reset-password`
+- `https://noproblemo.tech/hi/reset-password`
+- `https://noproblemo.tech/es/reset-password`
+- `https://noproblemo.tech/ar/reset-password`
+- `https://noproblemo.tech/fr/reset-password`
+- `https://noproblemo.tech/bn/reset-password`
+- `https://noproblemo.tech/pt-BR/reset-password`
+- `https://noproblemo.tech/id/reset-password`
+- `https://noproblemo.tech/ur/reset-password`
+- `https://noproblemo.tech/nb/reset-password`
 
 ## Google OAuth Checklist
 

@@ -13,7 +13,6 @@ type DashboardPageProps = {
 
 type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
-type Group = Database["public"]["Tables"]["groups"]["Row"];
 type ActivityEvent = Database["public"]["Tables"]["activity_events"]["Row"];
 
 function formatDate(value: string, locale: Locale) {
@@ -114,7 +113,6 @@ export default async function DashboardPage({
     { count: incomingFriendRequests },
     { count: groupInvitations },
     { count: unreadNotifications },
-    { data: groupMemberships },
     { data: activityEvents },
   ] = await Promise.all([
     supabase.from("profiles").select("*").eq("id", user.id).maybeSingle(),
@@ -140,30 +138,19 @@ export default async function DashboardPage({
       .eq("user_id", user.id)
       .is("read_at", null),
     supabase
-      .from("group_members")
-      .select("id, role, group_id")
-      .eq("user_id", user.id)
-      .order("created_at", { ascending: false })
-      .limit(3),
-    supabase
       .from("activity_events")
       .select("*")
       .order("created_at", { ascending: false })
       .limit(5),
   ]);
-  const groupIds = (groupMemberships ?? []).map((membership) => membership.group_id);
-  const { data: dashboardGroups } =
-    groupIds.length > 0
-      ? await supabase.from("groups").select("*").in("id", groupIds)
-      : { data: [] as Group[] };
-  const groupMap = new Map((dashboardGroups ?? []).map((group) => [group.id, group]));
-
   const savedChallenges = challenges ?? [];
   const activeChallenges = savedChallenges.filter((challenge) =>
     ["draft", "active"].includes(challenge.status),
   );
   const latestChallenges = savedChallenges.slice(0, 5);
   const recentActivity = (activityEvents ?? []) as ActivityEvent[];
+  const pendingTotal =
+    (incomingFriendRequests ?? 0) + (groupInvitations ?? 0) + (unreadNotifications ?? 0);
   const displayName = getDisplayName(profile, user.email);
   const cardLabels = {
     status: t("challenge.status"),
@@ -178,7 +165,7 @@ export default async function DashboardPage({
         <p className="text-sm font-medium uppercase tracking-[0.18em] text-[#706f68]">
           {t("eyebrow")}
         </p>
-        <div className="mt-3 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+        <div className="mt-3 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <h1 className="max-w-3xl break-words text-4xl font-semibold leading-tight text-[#22211e]">
               {displayName
@@ -189,7 +176,7 @@ export default async function DashboardPage({
               {t("body")}
             </p>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
+          <div className="grid gap-3 sm:grid-cols-2 lg:min-w-80">
             <Link
               href="/app/challenges/new"
               className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
@@ -204,6 +191,26 @@ export default async function DashboardPage({
             </Link>
           </div>
         </div>
+        <div className="mt-6 grid gap-3 border-t border-[#e5e2da] pt-5 sm:grid-cols-3">
+          <div>
+            <p className="text-sm text-[#706f68]">{t("summary.total")}</p>
+            <p className="mt-1 text-2xl font-semibold text-[#22211e]">
+              {savedChallenges.length}
+            </p>
+          </div>
+          <div>
+            <p className="text-sm text-[#706f68]">{t("summary.active")}</p>
+            <p className="mt-1 text-2xl font-semibold text-[#22211e]">
+              {activeChallenges.length}
+            </p>
+          </div>
+          <div>
+            <p className="text-sm text-[#706f68]">{t("summary.pending")}</p>
+            <p className="mt-1 text-2xl font-semibold text-[#22211e]">
+              {pendingTotal}
+            </p>
+          </div>
+        </div>
       </section>
 
       {isKnownKey(status, statusKeys) ? (
@@ -214,85 +221,6 @@ export default async function DashboardPage({
 
       <GuestImportCard locale={locale} />
 
-      <section className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-lg border border-[#dad8d0] bg-white p-5">
-          <p className="text-sm font-medium text-[#706f68]">
-            {t("summary.total")}
-          </p>
-          <p className="mt-2 text-3xl font-semibold text-[#22211e]">
-            {savedChallenges.length}
-          </p>
-        </div>
-        <div className="rounded-lg border border-[#dad8d0] bg-white p-5">
-          <p className="text-sm font-medium text-[#706f68]">
-            {t("summary.active")}
-          </p>
-          <p className="mt-2 text-3xl font-semibold text-[#22211e]">
-            {activeChallenges.length}
-          </p>
-        </div>
-        <div className="rounded-lg border border-[#dad8d0] bg-white p-5">
-          <p className="text-sm font-medium text-[#706f68]">
-            {t("summary.future")}
-          </p>
-          <p className="mt-2 text-sm leading-6 text-[#55544f]">
-            {t("futureNote")}
-          </p>
-        </div>
-      </section>
-
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <Link
-          href="/app/friends"
-          className="rounded-lg border border-[#dad8d0] bg-white p-5 hover:border-[#8b897f]"
-        >
-          <p className="text-sm font-medium text-[#706f68]">
-            {t("social.friendRequests")}
-          </p>
-          <p className="mt-2 text-3xl font-semibold text-[#22211e]">
-            {incomingFriendRequests ?? 0}
-          </p>
-        </Link>
-        <Link
-          href="/app/groups"
-          className="rounded-lg border border-[#dad8d0] bg-white p-5 hover:border-[#8b897f]"
-        >
-          <p className="text-sm font-medium text-[#706f68]">
-            {t("social.groupInvitations")}
-          </p>
-          <p className="mt-2 text-3xl font-semibold text-[#22211e]">
-            {groupInvitations ?? 0}
-          </p>
-        </Link>
-        <Link
-          href="/app/groups"
-          className="rounded-lg border border-[#dad8d0] bg-white p-5 hover:border-[#8b897f]"
-        >
-          <p className="text-sm font-medium text-[#706f68]">
-            {t("social.groups")}
-          </p>
-          <p className="mt-2 break-words text-sm leading-6 text-[#55544f]">
-            {groupMemberships && groupMemberships.length > 0
-              ? groupMemberships
-                  .map((membership) => groupMap.get(membership.group_id)?.name)
-                  .filter(Boolean)
-                  .join(", ")
-              : t("social.noGroups")}
-          </p>
-        </Link>
-        <Link
-          href="/app/notifications"
-          className="rounded-lg border border-[#dad8d0] bg-white p-5 hover:border-[#8b897f]"
-        >
-          <p className="text-sm font-medium text-[#706f68]">
-            {t("social.notifications")}
-          </p>
-          <p className="mt-2 text-3xl font-semibold text-[#22211e]">
-            {unreadNotifications ?? 0}
-          </p>
-        </Link>
-      </section>
-
       {challengesError ? (
         <section className="rounded-lg border border-[#e3b8ad] bg-[#fff7f4] p-5 text-[#7a2f1d]">
           <h2 className="text-xl font-semibold">{t("errors.listTitle")}</h2>
@@ -300,7 +228,7 @@ export default async function DashboardPage({
         </section>
       ) : null}
 
-      <section className="grid gap-5 lg:grid-cols-[1fr_0.85fr]">
+      <section className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <div>
           <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -339,35 +267,75 @@ export default async function DashboardPage({
           </div>
         </div>
 
-        <aside className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
-          <h2 className="text-2xl font-semibold text-[#22211e]">
-            {t("recent.title")}
-          </h2>
-          <p className="mt-2 text-sm leading-6 text-[#706f68]">
-            {t("recent.body")}
-          </p>
-          <div className="mt-5 grid gap-3">
-            {latestChallenges.length > 0 ? (
-              latestChallenges.map((challenge) => (
-                <Link
-                  key={challenge.id}
-                  href={`/app/challenges/${challenge.id}`}
-                  className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4 hover:border-[#8b897f]"
-                >
-                  <span className="block break-words font-semibold text-[#22211e]">
-                    {challenge.title}
-                  </span>
-                  <span className="mt-1 block text-sm text-[#706f68]">
-                    {formatDate(challenge.updated_at, locale)}
-                  </span>
-                </Link>
-              ))
-            ) : (
-              <p className="text-sm leading-6 text-[#55544f]">
-                {t("recent.empty")}
-              </p>
-            )}
-          </div>
+        <aside className="grid gap-5">
+          <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+            <h2 className="text-xl font-semibold text-[#22211e]">
+              {t("pending.title")}
+            </h2>
+            <div className="mt-4 grid gap-2">
+              <Link
+                href="/app/friends"
+                className="flex items-center justify-between rounded-md border border-[#e5e2da] bg-[#fbfaf7] px-4 py-3 hover:border-[#8b897f]"
+              >
+                <span className="text-sm text-[#55544f]">
+                  {t("social.friendRequests")}
+                </span>
+                <span className="font-semibold text-[#22211e]">
+                  {incomingFriendRequests ?? 0}
+                </span>
+              </Link>
+              <Link
+                href="/app/groups"
+                className="flex items-center justify-between rounded-md border border-[#e5e2da] bg-[#fbfaf7] px-4 py-3 hover:border-[#8b897f]"
+              >
+                <span className="text-sm text-[#55544f]">
+                  {t("social.groupInvitations")}
+                </span>
+                <span className="font-semibold text-[#22211e]">
+                  {groupInvitations ?? 0}
+                </span>
+              </Link>
+              <Link
+                href="/app/notifications"
+                className="flex items-center justify-between rounded-md border border-[#e5e2da] bg-[#fbfaf7] px-4 py-3 hover:border-[#8b897f]"
+              >
+                <span className="text-sm text-[#55544f]">
+                  {t("social.notifications")}
+                </span>
+                <span className="font-semibold text-[#22211e]">
+                  {unreadNotifications ?? 0}
+                </span>
+              </Link>
+            </div>
+          </section>
+
+          <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+            <h2 className="text-xl font-semibold text-[#22211e]">
+              {t("recent.title")}
+            </h2>
+            <div className="mt-4 grid gap-2">
+              {latestChallenges.length > 0 ? (
+                latestChallenges.map((challenge) => (
+                  <Link
+                    key={challenge.id}
+                    href={`/app/challenges/${challenge.id}`}
+                    className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-3 hover:border-[#8b897f]"
+                  >
+                    <span className="block break-words text-sm font-semibold text-[#22211e]">
+                      {challenge.title}
+                    </span>
+                    <span className="mt-1 block text-xs text-[#706f68]">
+                      {formatDate(challenge.updated_at, locale)}
+                    </span>
+                  </Link>
+                ))
+              ) : (
+                <p className="text-sm leading-6 text-[#55544f]">
+                  {t("recent.empty")}
+                </p>
+              )}
+            </div>
+          </section>
         </aside>
       </section>
 
@@ -375,7 +343,7 @@ export default async function DashboardPage({
         <h2 className="text-2xl font-semibold text-[#22211e]">
           {t("activity.title")}
         </h2>
-        <div className="mt-5 grid gap-3">
+        <div className="mt-5 grid gap-3 md:grid-cols-2">
           {recentActivity.length > 0 ? (
             recentActivity.map((event) => (
               <div

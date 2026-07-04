@@ -16,10 +16,13 @@
 - Added production verification, Supabase verification, manual test plan, and launch readiness report documents.
 - Added accessible dialog semantics for the guest login prompt.
 - Added accessible labels for dense group/workspace management controls.
+- Added a browser-client password recovery completion form for Supabase reset links.
 
 ### Changed
 
 - Changed auth callback handling to attach Supabase session cookies to the final redirect response and add localized success status redirects.
+- Changed email-confirmation callback failures to show a login-required success state when Supabase may already have confirmed the account.
+- Changed password reset links to open `/[locale]/reset-password` directly instead of depending on server-side callback exchange.
 - Changed the language switcher to preserve the current route when switching locales where practical.
 - Changed preferred-locale profile save to reopen settings in the selected locale.
 - Changed profile settings updates so normal profile edits no longer update `profiles.role`.
@@ -33,6 +36,8 @@
 
 - Fixed the profile settings self-demotion/self-promotion risk from using an upsert that touched `role` during normal profile edits.
 - Guarded status/error query feedback on protected pages so unknown query values do not cause missing translation lookups.
+- Fixed password recovery links that could fail with the same generic callback error as email confirmation.
+- Cleaned up the dashboard into overview, active challenges, pending requests, latest challenges, and recent activity sections.
 
 ### Security
 

@@ -206,7 +206,9 @@
       "signed-out": "You have been logged out.",
       "password-updated": "Senha atualizada. Entre com sua nova senha.",
       "reset-email-sent": "Se esse e-mail tiver uma conta, um link de redefinição foi enviado.",
-      "recovery-ready": "Link confirmado. Escolha uma nova senha."
+      "recovery-ready": "Link confirmado. Escolha uma nova senha.",
+      "email-confirmed-login-required": "Seu email talvez já esteja confirmado. Entre para continuar.",
+      "recovery-checking": "Verificando seu link de redefinição..."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -221,7 +223,8 @@
       "reset-request-failed": "Não foi possível enviar o e-mail. Verifique o endereço ou tente novamente.",
       "password-mismatch": "As senhas não coincidem.",
       "password-update-failed": "Não foi possível atualizar a senha. Peça outro link.",
-      "reset-link-invalid": "O link é inválido ou expirou. Peça outro link."
+      "reset-link-invalid": "O link é inválido ou expirou. Peça outro link.",
+      "recovery-callback": "Não foi possível abrir o link de redefinição. Solicite um novo link e tente novamente."
     },
     "forgot": {
       "eyebrow": "Ajuda com senha",
@@ -277,7 +280,8 @@
     "summary": {
       "total": "Saved challenges",
       "active": "Active drafts",
-      "future": "Collaboration"
+      "future": "Collaboration",
+      "pending": "Itens pendentes"
     },
     "futureNote": "Friends, groups, and messages are planned for later phases.",
     "guestImport": {
@@ -353,6 +357,9 @@
     "status": {
       "account-created": "Conta criada. Agora você pode salvar e gerenciar seu trabalho.",
       "email-confirmed": "E-mail confirmado. Sua conta está pronta."
+    },
+    "pending": {
+      "title": "Solicitações pendentes"
     }
   },
   "CreateChallenge": {

@@ -47,7 +47,11 @@ const errorKeys = [
   "auth-required",
 ] as const;
 
-const statusKeys = ["signed-out", "password-updated"] as const;
+const statusKeys = [
+  "signed-out",
+  "password-updated",
+  "email-confirmed-login-required",
+] as const;
 
 function isKnownKey<T extends readonly string[]>(
   value: string | undefined,

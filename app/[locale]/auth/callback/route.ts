@@ -40,6 +40,21 @@ function getSuccessUrl(request: NextRequest, nextPath: string, source: string | 
   return url;
 }
 
+function getFailureUrl(request: NextRequest, locale: Locale, source: string | null) {
+  if (source === "email") {
+    return new URL(
+      `/${locale}/login?status=email-confirmed-login-required`,
+      request.url,
+    );
+  }
+
+  if (source === "recovery") {
+    return new URL(`/${locale}/reset-password?error=recovery-callback`, request.url);
+  }
+
+  return new URL(`/${locale}/login?error=callback`, request.url);
+}
+
 export async function GET(request: NextRequest, context: CallbackContext) {
   const { locale: rawLocale } = await context.params;
   const locale = getSafeLocale(rawLocale);
@@ -49,9 +64,7 @@ export async function GET(request: NextRequest, context: CallbackContext) {
   const source = requestUrl.searchParams.get("source");
 
   if (!code) {
-    return NextResponse.redirect(
-      new URL(`/${locale}/login?error=callback`, request.url),
-    );
+    return NextResponse.redirect(getFailureUrl(request, locale, source));
   }
 
   const response = NextResponse.redirect(getSuccessUrl(request, nextPath, source));
@@ -59,9 +72,11 @@ export async function GET(request: NextRequest, context: CallbackContext) {
   const { error } = await supabase.auth.exchangeCodeForSession(code);
 
   if (error) {
-    return NextResponse.redirect(
-      new URL(`/${locale}/login?error=callback`, request.url),
-    );
+    if (process.env.NODE_ENV === "development") {
+      console.warn("Auth callback exchange failed");
+    }
+
+    return NextResponse.redirect(getFailureUrl(request, locale, source));
   }
 
   return response;

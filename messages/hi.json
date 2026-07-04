@@ -206,7 +206,9 @@
       "signed-out": "You have been logged out.",
       "password-updated": "पासवर्ड अपडेट हो गया। नए पासवर्ड से लॉग इन करें।",
       "reset-email-sent": "यदि इस ईमेल का खाता है, तो रीसेट लिंक भेजा गया है।",
-      "recovery-ready": "रीसेट लिंक की पुष्टि हो गई। नया पासवर्ड चुनें।"
+      "recovery-ready": "रीसेट लिंक की पुष्टि हो गई। नया पासवर्ड चुनें।",
+      "email-confirmed-login-required": "आपका ईमेल पहले से पुष्टि हो सकता है। जारी रखने के लिए लॉग इन करें।",
+      "recovery-checking": "आपका रीसेट लिंक जांचा जा रहा है..."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -221,7 +223,8 @@
       "reset-request-failed": "रीसेट ईमेल नहीं भेजा जा सका। पता जांचें या फिर कोशिश करें।",
       "password-mismatch": "पासवर्ड मेल नहीं खाते।",
       "password-update-failed": "पासवर्ड अपडेट नहीं हो सका। नया रीसेट लिंक मांगें।",
-      "reset-link-invalid": "रीसेट लिंक अमान्य या समाप्त हो गया है। नया रीसेट लिंक मांगें।"
+      "reset-link-invalid": "रीसेट लिंक अमान्य या समाप्त हो गया है। नया रीसेट लिंक मांगें।",
+      "recovery-callback": "रीसेट लिंक खोला नहीं जा सका। नया रीसेट लिंक मांगें और फिर प्रयास करें।"
     },
     "forgot": {
       "eyebrow": "पासवर्ड सहायता",
@@ -277,7 +280,8 @@
     "summary": {
       "total": "Saved challenges",
       "active": "Active drafts",
-      "future": "Collaboration"
+      "future": "Collaboration",
+      "pending": "लंबित आइटम"
     },
     "futureNote": "Friends, groups, and messages are planned for later phases.",
     "guestImport": {
@@ -353,6 +357,9 @@
     "status": {
       "account-created": "खाता बन गया। अब आप अपना काम सहेज और प्रबंधित कर सकते हैं।",
       "email-confirmed": "ईमेल की पुष्टि हो गई। आपका खाता तैयार है।"
+    },
+    "pending": {
+      "title": "लंबित अनुरोध"
     }
   },
   "CreateChallenge": {

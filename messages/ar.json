@@ -206,7 +206,9 @@
       "signed-out": "You have been logged out.",
       "password-updated": "تم تحديث كلمة المرور. سجّل الدخول بكلمة المرور الجديدة.",
       "reset-email-sent": "إذا كان لهذا البريد حساب، فقد تم إرسال رابط إعادة التعيين.",
-      "recovery-ready": "تم تأكيد رابط إعادة التعيين. اختر كلمة مرور جديدة."
+      "recovery-ready": "تم تأكيد رابط إعادة التعيين. اختر كلمة مرور جديدة.",
+      "email-confirmed-login-required": "قد يكون بريدك الإلكتروني مؤكدا بالفعل. يرجى تسجيل الدخول للمتابعة.",
+      "recovery-checking": "جار التحقق من رابط إعادة التعيين..."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -221,7 +223,8 @@
       "reset-request-failed": "تعذر إرسال بريد إعادة التعيين. تحقق من العنوان أو حاول مرة أخرى.",
       "password-mismatch": "كلمتا المرور غير متطابقتين.",
       "password-update-failed": "تعذر تحديث كلمة المرور. اطلب رابطا جديدا.",
-      "reset-link-invalid": "رابط إعادة التعيين غير صالح أو منتهي الصلاحية. اطلب رابطا جديدا."
+      "reset-link-invalid": "رابط إعادة التعيين غير صالح أو منتهي الصلاحية. اطلب رابطا جديدا.",
+      "recovery-callback": "تعذر فتح رابط إعادة التعيين. اطلب رابطا جديدا وحاول مرة أخرى."
     },
     "forgot": {
       "eyebrow": "مساعدة كلمة المرور",
@@ -277,7 +280,8 @@
     "summary": {
       "total": "Saved challenges",
       "active": "Active drafts",
-      "future": "Collaboration"
+      "future": "Collaboration",
+      "pending": "عناصر معلقة"
     },
     "futureNote": "Friends, groups, and messages are planned for later phases.",
     "guestImport": {
@@ -353,6 +357,9 @@
     "status": {
       "account-created": "تم إنشاء الحساب. يمكنك الآن حفظ عملك وإدارته.",
       "email-confirmed": "تم تأكيد البريد. حسابك جاهز."
+    },
+    "pending": {
+      "title": "طلبات معلقة"
     }
   },
   "CreateChallenge": {

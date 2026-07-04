@@ -206,7 +206,9 @@
       "signed-out": "You have been logged out.",
       "password-updated": "Kata sandi diperbarui. Login dengan kata sandi baru.",
       "reset-email-sent": "Jika email itu memiliki akun, tautan reset telah dikirim.",
-      "recovery-ready": "Tautan reset dikonfirmasi. Pilih kata sandi baru."
+      "recovery-ready": "Tautan reset dikonfirmasi. Pilih kata sandi baru.",
+      "email-confirmed-login-required": "Email Anda mungkin sudah dikonfirmasi. Masuk untuk melanjutkan.",
+      "recovery-checking": "Memeriksa tautan reset Anda..."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -221,7 +223,8 @@
       "reset-request-failed": "Email reset tidak dapat dikirim. Periksa alamat atau coba lagi.",
       "password-mismatch": "Kata sandi tidak sama.",
       "password-update-failed": "Kata sandi tidak dapat diperbarui. Minta tautan reset baru.",
-      "reset-link-invalid": "Tautan reset tidak valid atau kedaluwarsa. Minta tautan baru."
+      "reset-link-invalid": "Tautan reset tidak valid atau kedaluwarsa. Minta tautan baru.",
+      "recovery-callback": "Tautan reset tidak dapat dibuka. Minta tautan reset baru lalu coba lagi."
     },
     "forgot": {
       "eyebrow": "Bantuan kata sandi",
@@ -277,7 +280,8 @@
     "summary": {
       "total": "Saved challenges",
       "active": "Active drafts",
-      "future": "Collaboration"
+      "future": "Collaboration",
+      "pending": "Item tertunda"
     },
     "futureNote": "Friends, groups, and messages are planned for later phases.",
     "guestImport": {
@@ -353,6 +357,9 @@
     "status": {
       "account-created": "Akun dibuat. Sekarang Anda dapat menyimpan dan mengelola pekerjaan.",
       "email-confirmed": "Email dikonfirmasi. Akun Anda siap."
+    },
+    "pending": {
+      "title": "Permintaan tertunda"
     }
   },
   "CreateChallenge": {

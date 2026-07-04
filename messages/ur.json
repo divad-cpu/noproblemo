@@ -206,7 +206,9 @@
       "signed-out": "You have been logged out.",
       "password-updated": "پاس ورڈ اپ ڈیٹ ہو گیا۔ نئے پاس ورڈ سے لاگ ان کریں۔",
       "reset-email-sent": "اگر اس ای میل کا اکاؤنٹ ہے تو ری سیٹ لنک بھیج دیا گیا ہے۔",
-      "recovery-ready": "ری سیٹ لنک کی تصدیق ہو گئی۔ نیا پاس ورڈ منتخب کریں۔"
+      "recovery-ready": "ری سیٹ لنک کی تصدیق ہو گئی۔ نیا پاس ورڈ منتخب کریں۔",
+      "email-confirmed-login-required": "آپ کا ای میل پہلے ہی تصدیق شدہ ہو سکتا ہے۔ جاری رکھنے کے لیے لاگ ان کریں۔",
+      "recovery-checking": "آپ کا ری سیٹ لنک چیک کیا جا رہا ہے..."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -221,7 +223,8 @@
       "reset-request-failed": "ری سیٹ ای میل نہیں بھیجی جا سکی۔ پتہ چیک کریں یا دوبارہ کوشش کریں۔",
       "password-mismatch": "پاس ورڈز ایک جیسے نہیں ہیں۔",
       "password-update-failed": "پاس ورڈ اپ ڈیٹ نہیں ہو سکا۔ نیا ری سیٹ لنک مانگیں۔",
-      "reset-link-invalid": "ری سیٹ لنک غلط یا ختم ہو چکا ہے۔ نیا لنک مانگیں۔"
+      "reset-link-invalid": "ری سیٹ لنک غلط یا ختم ہو چکا ہے۔ نیا لنک مانگیں۔",
+      "recovery-callback": "ری سیٹ لنک نہیں کھل سکا۔ نیا ری سیٹ لنک درخواست کریں اور دوبارہ کوشش کریں۔"
     },
     "forgot": {
       "eyebrow": "پاس ورڈ مدد",
@@ -277,7 +280,8 @@
     "summary": {
       "total": "Saved challenges",
       "active": "Active drafts",
-      "future": "Collaboration"
+      "future": "Collaboration",
+      "pending": "زیر التوا آئٹمز"
     },
     "futureNote": "Friends, groups, and messages are planned for later phases.",
     "guestImport": {
@@ -353,6 +357,9 @@
     "status": {
       "account-created": "اکاؤنٹ بن گیا۔ اب آپ اپنا کام محفوظ اور منظم کر سکتے ہیں۔",
       "email-confirmed": "ای میل کی تصدیق ہو گئی۔ آپ کا اکاؤنٹ تیار ہے۔"
+    },
+    "pending": {
+      "title": "زیر التوا درخواستیں"
     }
   },
   "CreateChallenge": {
