@@ -5,9 +5,10 @@ import { routing, type Locale } from "@/i18n/routing";
 
 type LanguageSwitcherProps = {
   locale: Locale;
+  compact?: boolean;
 };
 
-export function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
+export function LanguageSwitcher({ locale, compact = false }: LanguageSwitcherProps) {
   const t = useTranslations("LanguageSwitcher");
 
   function localeHref(targetLocale: Locale) {
@@ -27,33 +28,41 @@ export function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
     window.location.assign(localeHref(targetLocale));
   }
 
+  if (compact) {
+    return (
+      <label className="flex min-w-0 items-center gap-2">
+        <span className="sr-only">{t("label")}</span>
+        <select
+          value={locale}
+          aria-label={t("label")}
+          onChange={(event) => switchLocale(event.target.value as Locale)}
+          className="h-10 max-w-44 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-sm font-semibold text-[#22211e] outline-none hover:border-[#8b897f]"
+        >
+          {routing.locales.map((option) => (
+            <option key={option} value={option}>
+              {t(`locales.${option}`)}
+            </option>
+          ))}
+        </select>
+      </label>
+    );
+  }
+
   return (
     <nav aria-label={t("label")} className="flex shrink-0 flex-col gap-2">
       <p className="text-sm font-medium text-[#706f68]">{t("label")}</p>
-      <div className="flex max-w-full flex-wrap gap-2">
-        {routing.locales.map((option) => {
-          const isCurrent = option === locale;
-
-          return (
-            <a
-              key={option}
-              href={`/${option}`}
-              onClick={(event) => {
-                event.preventDefault();
-                switchLocale(option);
-              }}
-              aria-current={isCurrent ? "page" : undefined}
-              className={`rounded-md border px-3 py-2 text-sm font-medium transition-colors ${
-                isCurrent
-                  ? "border-[#22211e] bg-[#22211e] text-white"
-                  : "border-[#dad8d0] bg-white text-[#373632] hover:border-[#8b897f]"
-              }`}
-            >
-              {t(`locales.${option}`)}
-            </a>
-          );
-        })}
-      </div>
+      <select
+        value={locale}
+        aria-label={t("label")}
+        onChange={(event) => switchLocale(event.target.value as Locale)}
+        className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-sm font-semibold text-[#22211e] outline-none hover:border-[#8b897f]"
+      >
+        {routing.locales.map((option) => (
+          <option key={option} value={option}>
+            {t(`locales.${option}`)}
+          </option>
+        ))}
+      </select>
     </nav>
   );
 }

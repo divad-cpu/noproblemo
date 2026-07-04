@@ -45,6 +45,7 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 - Saved challenge workspace at `/[locale]/app/challenges/[id]`
 - Profile/settings page at `/[locale]/app/settings`
 - Logged-in password change from the protected settings page
+- Server-side account deletion from the protected settings page, guarded by explicit confirmation and a server-only Supabase admin helper
 - Guest draft import from localStorage to Supabase challenges and challenge sections
 - Profile display name and preferred locale updates
 - Seven-step saved challenge workflow
@@ -80,6 +81,7 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 - Email confirmation fallback now avoids false invalid-link errors when Supabase confirms the account but the callback session exchange fails; users are sent to login with a clear "email may already be confirmed" state.
 - Password recovery links now target `/[locale]/reset-password` directly, where the browser Supabase client establishes the recovery session before updating the password.
 - Shared language switcher and footer
+- Compact select-based language switcher that preserves the current route while replacing the locale segment
 - Guest localStorage draft persistence under `noproblemo.guestWorkspace.v1`
 - Markdown copy/export for guest drafts
 - Login prompt for save/collaboration actions
@@ -132,6 +134,7 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 - `app/[locale]/app/layout.tsx`: protected app layout with server-side auth check and app navigation.
 - `app/[locale]/app/page.tsx`: logged-in dashboard with challenge lists and guest import prompt.
 - `app/[locale]/app/actions.ts`: server actions for challenge creation, guest import, and profile updates.
+- `lib/supabase/admin.ts`: server-only Supabase admin helper for current-user account deletion.
 - `app/[locale]/app/friends/page.tsx`: protected friend request and friendship management page.
 - `app/[locale]/app/groups/page.tsx`: protected groups list and pending group invitations page.
 - `app/[locale]/app/groups/new/page.tsx`: protected group creation page.
@@ -177,6 +180,8 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 - Production verification preparation did not change real Supabase, Vercel, Domeneshop, DNS, or support mailbox settings.
 - `npm audit` reports moderate PostCSS advisories through Next.js 16.2.10's dependency tree. The suggested `npm audit fix --force` would install `next@9.3.3`, a breaking downgrade, so it was not applied.
 - Google and Apple OAuth require provider configuration in Supabase, Google Cloud, and Apple Developer.
+- Signup failures are classified into safe user-facing states, but live Supabase Auth provider configuration still needs manual verification.
+- Account deletion requires `SUPABASE_SERVICE_ROLE_KEY` to be configured server-side in the deployment environment.
 - Supabase Auth redirect URLs must include locale-specific `/[locale]/auth/callback` routes for email confirmation and OAuth.
 - Supabase Auth redirect URLs must also include locale-specific `/[locale]/reset-password` routes for password recovery.
 - Guest drafts are browser-local and can be lost if localStorage is cleared.
@@ -287,3 +292,12 @@ Validation for auth callback/recovery/language/dashboard follow-up:
 - `npm run lint`: passed on 2026-07-04.
 - `npm run typecheck`: passed on 2026-07-04.
 - `npm run build`: passed on 2026-07-04.
+
+Validation for MVP blocker fix:
+
+- Message JSON validity check: passed on 2026-07-04.
+- Message key parity check across all 11 locales: passed on 2026-07-04.
+- `npm run lint`: passed on 2026-07-04.
+- `npm run typecheck`: passed on 2026-07-04.
+- `npm run build`: passed on 2026-07-04.
+- `git diff --check`: passed on 2026-07-04.

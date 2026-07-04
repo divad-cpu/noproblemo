@@ -7,6 +7,14 @@ import { defaultLocale, routing, type Locale } from "@/i18n/routing";
 type OAuthProvider = "google" | "apple";
 
 const authProviders = ["google", "apple"] as const;
+const signupErrorMap = {
+  invalidEmail: "signup-invalid-email",
+  weakPassword: "signup-weak-password",
+  rateLimited: "signup-rate-limited",
+  existingOrPending: "signup-existing-or-pending",
+  providerDisabled: "signup-provider-disabled",
+  failed: "signup-failed",
+} as const;
 
 function firstString(value: FormDataEntryValue | null) {
   return typeof value === "string" ? value.trim() : "";
@@ -60,6 +68,53 @@ function withStatus(path: string, status: string) {
   return `${pathname}?${params.toString()}`;
 }
 
+function classifySignupError(error: { message?: string; code?: string; status?: number }) {
+  const message = (error.message ?? "").toLowerCase();
+  const code = (error.code ?? "").toLowerCase();
+
+  if (error.status === 429 || message.includes("rate") || code.includes("rate")) {
+    return signupErrorMap.rateLimited;
+  }
+
+  if (
+    message.includes("invalid email") ||
+    message.includes("email address is invalid") ||
+    code.includes("email")
+  ) {
+    return signupErrorMap.invalidEmail;
+  }
+
+  if (message.includes("password") || code.includes("password")) {
+    return signupErrorMap.weakPassword;
+  }
+
+  if (
+    message.includes("already registered") ||
+    message.includes("already exists") ||
+    message.includes("confirmed") ||
+    message.includes("pending")
+  ) {
+    return signupErrorMap.existingOrPending;
+  }
+
+  if (
+    message.includes("provider") ||
+    message.includes("signup") ||
+    message.includes("signups not allowed") ||
+    message.includes("disabled")
+  ) {
+    return signupErrorMap.providerDisabled;
+  }
+
+  return signupErrorMap.failed;
+}
+
+function warnSignupFailure(reason: string) {
+  if (process.env.NODE_ENV === "development") {
+    console.warn(`Signup failed: ${reason}`);
+  }
+}
+
 export async function loginWithEmail(formData: FormData) {
   const locale = getLocale(formData);
   const email = firstString(formData.get("email"));
@@ -108,7 +163,7 @@ export async function signUpWithEmail(formData: FormData) {
 
   if (password.length < 8) {
     const params = new URLSearchParams({
-      error: "weak-password",
+      error: signupErrorMap.weakPassword,
       next: nextPath,
     });
     redirect(authUrl(locale, "signup", params));
@@ -129,8 +184,18 @@ export async function signUpWithEmail(formData: FormData) {
   });
 
   if (error) {
+    const errorKey = classifySignupError(error);
+    warnSignupFailure(errorKey.replace(/^signup-/, "").replaceAll("-", " "));
     const params = new URLSearchParams({
-      error: "signup-failed",
+      error: errorKey,
+      next: nextPath,
+    });
+    redirect(authUrl(locale, "signup", params));
+  }
+
+  if (!data.session && data.user?.identities?.length === 0) {
+    const params = new URLSearchParams({
+      status: "signup-existing-or-pending",
       next: nextPath,
     });
     redirect(authUrl(locale, "signup", params));
@@ -141,10 +206,51 @@ export async function signUpWithEmail(formData: FormData) {
   }
 
   const params = new URLSearchParams({
-    status: "check-email",
+    status: "signup-check-email",
     next: nextPath,
   });
   redirect(authUrl(locale, "signup", params));
+}
+
+export async function resendSignupConfirmation(formData: FormData) {
+  const locale = getLocale(formData);
+  const email = firstString(formData.get("email"));
+  const nextPath = getSafeNextPath(formData.get("next"), locale);
+
+  if (!email) {
+    redirect(
+      authUrl(
+        locale,
+        "signup",
+        new URLSearchParams({ error: "signup-invalid-email", next: nextPath }),
+      ),
+    );
+  }
+
+  const supabase = await createServerSupabaseClient();
+  const emailRedirectTo = `${getSiteUrl()}/${locale}/auth/callback?next=${encodeURIComponent(nextPath)}&source=email`;
+  const { error } = await supabase.auth.resend({
+    type: "signup",
+    email,
+    options: {
+      emailRedirectTo,
+    },
+  });
+
+  if (error) {
+    warnSignupFailure("resend confirmation");
+  }
+
+  redirect(
+    authUrl(
+      locale,
+      "signup",
+      new URLSearchParams({
+        status: "signup-confirmation-resent",
+        next: nextPath,
+      }),
+    ),
+  );
 }
 
 export async function signInWithOAuth(formData: FormData) {

@@ -208,13 +208,17 @@
       "reset-email-sent": "如果该邮箱有账户，重置链接已发送。",
       "recovery-ready": "重置链接已确认。请选择新密码。",
       "email-confirmed-login-required": "你的邮箱可能已经确认。请登录继续。",
-      "recovery-checking": "正在检查你的重置链接..."
+      "recovery-checking": "正在检查你的重置链接...",
+      "signup-check-email": "账号已创建。登录前请检查邮箱并完成确认。",
+      "signup-existing-or-pending": "如果此邮箱已有账号或正在等待确认，请使用确认邮件或直接登录。",
+      "signup-confirmation-resent": "如果此邮箱可以接收确认链接，新的邮件已经发送。",
+      "account-deleted": "你的账号已删除。"
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
       "invalid-credentials": "The email or password did not match an account.",
       "weak-password": "Use a password with at least 8 characters.",
-      "signup-failed": "The account could not be created. Check the email address or try again.",
+      "signup-failed": "无法创建账号。请检查信息或重试。",
       "oauth-provider": "That login provider is not available.",
       "oauth-start": "The provider login could not start. Check Supabase provider setup.",
       "callback": "确认链接无法完成。它可能无效或已过期。请尝试登录或请求新链接。",
@@ -224,7 +228,11 @@
       "password-mismatch": "两次密码不一致。",
       "password-update-failed": "无法更新密码。请请求新的重置链接。",
       "reset-link-invalid": "重置链接无效或已过期。请请求新的重置链接。",
-      "recovery-callback": "无法打开重置链接。请重新请求重置链接后再试。"
+      "recovery-callback": "无法打开重置链接。请重新请求重置链接后再试。",
+      "signup-weak-password": "请使用至少 8 个字符的密码。",
+      "signup-rate-limited": "注册尝试过多。请稍后再试。",
+      "signup-invalid-email": "请输入有效的邮箱地址。",
+      "signup-provider-disabled": "邮箱注册尚不可用。请检查 Supabase Auth 提供方设置。"
     },
     "forgot": {
       "eyebrow": "密码帮助",
@@ -239,6 +247,11 @@
       "body": "使用邮件中的重置链接，然后为账户设置新密码。",
       "submit": "保存新密码",
       "requestNewLink": "请求新的重置链接"
+    },
+    "resend": {
+      "title": "需要新的确认邮件吗？",
+      "body": "输入邮箱。如果该账号可以接收确认链接，我们会发送新的邮件。",
+      "submit": "重新发送确认"
     }
   },
   "AuthStatus": {
@@ -257,7 +270,10 @@
       "friends": "Friends",
       "groups": "Groups",
       "notifications": "Notifications",
-      "admin": "管理"
+      "admin": "管理",
+      "primary": "主导航",
+      "challenges": "挑战",
+      "brand": "NoProblemo"
     },
     "eyebrow": "Protected area",
     "title": "Authentication is ready.",
@@ -360,6 +376,9 @@
     },
     "pending": {
       "title": "待处理请求"
+    },
+    "quick": {
+      "title": "快捷操作"
     }
   },
   "CreateChallenge": {
@@ -430,7 +449,10 @@
       "profile-update-failed": "无法保存资料设置。请检查 Supabase 设置和 RLS 策略。",
       "password-weak": "请使用至少 8 个字符的密码。",
       "password-mismatch": "两次密码不一致。",
-      "password-update-failed": "无法更新密码。请重试。"
+      "password-update-failed": "无法更新密码。请重试。",
+      "account-delete-confirmation": "继续前请确认删除账号。",
+      "account-delete-unavailable": "此服务器尚未配置账号删除。",
+      "account-delete-failed": "无法删除账号。请重试或联系支持。"
     },
     "routeLanguage": {
       "title": "页面语言",
@@ -440,6 +462,20 @@
       "title": "更改密码",
       "body": "为此账户设置新密码。密码只发送到 Supabase Auth，不存储在资料表中。",
       "submit": "更新密码"
+    },
+    "danger": {
+      "title": "危险区域",
+      "body": "只有在确定时才删除此账号。此操作是永久性的。",
+      "effects": {
+        "auth": "你的 Supabase Auth 用户将被移除。",
+        "data": "你的个人资料和拥有的数据会按数据库外键删除。",
+        "anonymized": "某些消息或活动可能会以无用户 ID 的方式保留历史记录。",
+        "irreversible": "此操作无法撤销。"
+      },
+      "confirmCheckbox": "我明白删除账号是永久性的。",
+      "confirmLabel": "输入 DELETE 以确认",
+      "confirmPlaceholder": "DELETE",
+      "submit": "删除账号"
     }
   },
   "Workspace": {

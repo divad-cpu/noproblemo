@@ -149,6 +149,7 @@ Current:
 - Google and Apple OAuth starts exist, but require provider setup before production use.
 - Email confirmation, OAuth, and password recovery use locale-specific `/[locale]/auth/callback` routes.
 - Password changes and reset completions use Supabase Auth and do not store password values in application tables.
+- Account deletion uses a server-only Supabase admin helper and deletes only the current authenticated user after explicit confirmation.
 - Dashboard, minimal create, profile update, and guest import use server-side session checks and RLS.
 - Phase 4 migration enables RLS for `profiles`, `challenges`, `challenge_sections`, `challenge_solutions`, and `challenge_tasks`.
 - Phase 8 migration enables RLS for friends/groups tables and extends challenge RLS for explicitly linked group challenges.
@@ -165,7 +166,7 @@ Current:
 - `admin_audit_log` is readable only by admins and has no authenticated write grant.
 - Normal users cannot self-promote through profile settings or authenticated self role updates.
 - RLS migrations must still be verified in Supabase.
-- No service-role helper exists.
+- `lib/supabase/admin.ts` is a server-only service-role helper used only for current-user account deletion. It must never be imported into Client Components.
 
 Planned:
 

@@ -208,13 +208,17 @@
       "reset-email-sent": "यदि इस ईमेल का खाता है, तो रीसेट लिंक भेजा गया है।",
       "recovery-ready": "रीसेट लिंक की पुष्टि हो गई। नया पासवर्ड चुनें।",
       "email-confirmed-login-required": "आपका ईमेल पहले से पुष्टि हो सकता है। जारी रखने के लिए लॉग इन करें।",
-      "recovery-checking": "आपका रीसेट लिंक जांचा जा रहा है..."
+      "recovery-checking": "आपका रीसेट लिंक जांचा जा रहा है...",
+      "signup-check-email": "खाता बन गया। लॉग इन करने से पहले ईमेल की पुष्टि करें।",
+      "signup-existing-or-pending": "अगर इस ईमेल का खाता है या पुष्टि लंबित है, तो पुष्टि ईमेल का उपयोग करें या लॉग इन करें।",
+      "signup-confirmation-resent": "अगर यह ईमेल पुष्टि लिंक प्राप्त कर सकता है, तो नया ईमेल भेज दिया गया है।",
+      "account-deleted": "आपका खाता हटा दिया गया है।"
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
       "invalid-credentials": "The email or password did not match an account.",
       "weak-password": "Use a password with at least 8 characters.",
-      "signup-failed": "The account could not be created. Check the email address or try again.",
+      "signup-failed": "खाता नहीं बनाया जा सका। विवरण जांचें या फिर कोशिश करें।",
       "oauth-provider": "That login provider is not available.",
       "oauth-start": "The provider login could not start. Check Supabase provider setup.",
       "callback": "पुष्टि लिंक पूरा नहीं हो सका। यह अमान्य या समाप्त हो सकता है। लॉग इन करें या नया लिंक मांगें।",
@@ -224,7 +228,11 @@
       "password-mismatch": "पासवर्ड मेल नहीं खाते।",
       "password-update-failed": "पासवर्ड अपडेट नहीं हो सका। नया रीसेट लिंक मांगें।",
       "reset-link-invalid": "रीसेट लिंक अमान्य या समाप्त हो गया है। नया रीसेट लिंक मांगें।",
-      "recovery-callback": "रीसेट लिंक खोला नहीं जा सका। नया रीसेट लिंक मांगें और फिर प्रयास करें।"
+      "recovery-callback": "रीसेट लिंक खोला नहीं जा सका। नया रीसेट लिंक मांगें और फिर प्रयास करें।",
+      "signup-weak-password": "कम से कम 8 अक्षरों वाला पासवर्ड उपयोग करें।",
+      "signup-rate-limited": "बहुत अधिक साइनअप प्रयास। थोड़ा इंतजार करें और फिर कोशिश करें।",
+      "signup-invalid-email": "मान्य ईमेल पता दर्ज करें।",
+      "signup-provider-disabled": "ईमेल साइनअप अभी उपलब्ध नहीं है। Supabase Auth सेटिंग जांचें।"
     },
     "forgot": {
       "eyebrow": "पासवर्ड सहायता",
@@ -239,6 +247,11 @@
       "body": "ईमेल वाले रीसेट लिंक का उपयोग करें, फिर नया पासवर्ड सेट करें।",
       "submit": "नया पासवर्ड सहेजें",
       "requestNewLink": "नया रीसेट लिंक मांगें"
+    },
+    "resend": {
+      "title": "नया पुष्टि ईमेल चाहिए?",
+      "body": "अपना ईमेल दर्ज करें। यदि खाता लिंक प्राप्त कर सकता है, तो हम नया ईमेल भेजेंगे।",
+      "submit": "पुष्टि फिर भेजें"
     }
   },
   "AuthStatus": {
@@ -257,7 +270,10 @@
       "friends": "Friends",
       "groups": "Groups",
       "notifications": "Notifications",
-      "admin": "एडमिन"
+      "admin": "एडमिन",
+      "primary": "मुख्य नेविगेशन",
+      "challenges": "चुनौतियां",
+      "brand": "NoProblemo"
     },
     "eyebrow": "Protected area",
     "title": "Authentication is ready.",
@@ -360,6 +376,9 @@
     },
     "pending": {
       "title": "लंबित अनुरोध"
+    },
+    "quick": {
+      "title": "त्वरित कार्य"
     }
   },
   "CreateChallenge": {
@@ -430,7 +449,10 @@
       "profile-update-failed": "प्रोफाइल सेटिंग्स सहेजी नहीं जा सकीं। Supabase सेटअप और RLS नीतियां जांचें।",
       "password-weak": "कम से कम 8 अक्षरों का पासवर्ड उपयोग करें।",
       "password-mismatch": "पासवर्ड मेल नहीं खाते।",
-      "password-update-failed": "पासवर्ड अपडेट नहीं हो सका। फिर कोशिश करें।"
+      "password-update-failed": "पासवर्ड अपडेट नहीं हो सका। फिर कोशिश करें।",
+      "account-delete-confirmation": "जारी रखने से पहले खाता हटाने की पुष्टि करें।",
+      "account-delete-unavailable": "इस सर्वर पर खाता हटाना कॉन्फिगर नहीं है।",
+      "account-delete-failed": "खाता हटाया नहीं जा सका। फिर कोशिश करें या सपोर्ट से संपर्क करें।"
     },
     "routeLanguage": {
       "title": "पेज भाषा",
@@ -440,6 +462,20 @@
       "title": "पासवर्ड बदलें",
       "body": "इस खाते के लिए नया पासवर्ड सेट करें। पासवर्ड केवल Supabase Auth को भेजे जाते हैं और प्रोफाइल तालिकाओं में सहेजे नहीं जाते।",
       "submit": "पासवर्ड अपडेट करें"
+    },
+    "danger": {
+      "title": "जोखिम क्षेत्र",
+      "body": "यह खाता तभी हटाएं जब आप निश्चित हों। यह कार्रवाई स्थायी है।",
+      "effects": {
+        "auth": "आपका Supabase Auth उपयोगकर्ता हटाया जाएगा।",
+        "data": "आपकी प्रोफाइल और स्वामित्व वाले रिकॉर्ड डेटाबेस नियमों के अनुसार हटेंगे।",
+        "anonymized": "कुछ संदेश या गतिविधि इतिहास बिना आपके यूजर ID के रह सकता है।",
+        "irreversible": "यह कार्रवाई वापस नहीं की जा सकती।"
+      },
+      "confirmCheckbox": "मैं समझता/समझती हूं कि खाता हटाना स्थायी है।",
+      "confirmLabel": "पुष्टि के लिए DELETE लिखें",
+      "confirmPlaceholder": "DELETE",
+      "submit": "खाता हटाएं"
     }
   },
   "Workspace": {

@@ -165,32 +165,14 @@ export default async function DashboardPage({
         <p className="text-sm font-medium uppercase tracking-[0.18em] text-[#706f68]">
           {t("eyebrow")}
         </p>
-        <div className="mt-3 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <h1 className="max-w-3xl break-words text-4xl font-semibold leading-tight text-[#22211e]">
-              {displayName
-                ? t("titleWithName", { name: displayName })
-                : t("title")}
-            </h1>
-            <p className="mt-4 max-w-3xl leading-7 text-[#55544f]">
-              {t("body")}
-            </p>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:min-w-80">
-            <Link
-              href="/app/challenges/new"
-              className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
-            >
-              {t("actions.newChallenge")}
-            </Link>
-            <Link
-              href="/app/settings"
-              className="inline-flex min-h-12 items-center justify-center rounded-md border border-[#dad8d0] bg-white px-5 py-3 font-semibold text-[#22211e] hover:border-[#8b897f]"
-            >
-              {t("actions.settings")}
-            </Link>
-          </div>
-        </div>
+        <h1 className="mt-3 max-w-3xl break-words text-3xl font-semibold leading-tight text-[#22211e] sm:text-4xl">
+          {displayName
+            ? t("titleWithName", { name: displayName })
+            : t("title")}
+        </h1>
+        <p className="mt-4 max-w-3xl leading-7 text-[#55544f]">
+          {t("body")}
+        </p>
         <div className="mt-6 grid gap-3 border-t border-[#e5e2da] pt-5 sm:grid-cols-3">
           <div>
             <p className="text-sm text-[#706f68]">{t("summary.total")}</p>
@@ -219,6 +201,26 @@ export default async function DashboardPage({
         </p>
       ) : null}
 
+      <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+        <h2 className="text-xl font-semibold text-[#22211e]">
+          {t("quick.title")}
+        </h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:max-w-xl">
+          <Link
+            href="/app/challenges/new"
+            className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
+          >
+            {t("actions.newChallenge")}
+          </Link>
+          <Link
+            href="/app/settings"
+            className="inline-flex min-h-12 items-center justify-center rounded-md border border-[#dad8d0] bg-white px-5 py-3 font-semibold text-[#22211e] hover:border-[#8b897f]"
+          >
+            {t("actions.settings")}
+          </Link>
+        </div>
+      </section>
+
       <GuestImportCard locale={locale} />
 
       {challengesError ? (
@@ -228,7 +230,7 @@ export default async function DashboardPage({
         </section>
       ) : null}
 
-      <section className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_22rem]">
+      <section id="active-challenges" className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <div>
           <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>

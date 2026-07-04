@@ -2,7 +2,11 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import { SiteFooter } from "../_components/site-footer";
-import { signInWithOAuth, signUpWithEmail } from "../auth/actions";
+import {
+  resendSignupConfirmation,
+  signInWithOAuth,
+  signUpWithEmail,
+} from "../auth/actions";
 
 type SignupPageProps = {
   params: Promise<{ locale: Locale }>;
@@ -39,13 +43,20 @@ function getNextPath(
 
 const errorKeys = [
   "missing-fields",
-  "weak-password",
+  "signup-weak-password",
+  "signup-rate-limited",
+  "signup-invalid-email",
+  "signup-provider-disabled",
   "signup-failed",
   "oauth-provider",
   "oauth-start",
 ] as const;
 
-const statusKeys = ["check-email"] as const;
+const statusKeys = [
+  "signup-check-email",
+  "signup-existing-or-pending",
+  "signup-confirmation-resent",
+] as const;
 
 function isKnownKey<T extends readonly string[]>(
   value: string | undefined,
@@ -140,6 +151,38 @@ export default async function SignupPage({
               {t("signup.submit")}
             </button>
           </form>
+
+          <div className="mt-8 grid gap-3 border-t border-[#e5e2da] pt-6">
+            <div>
+              <h2 className="text-base font-semibold text-[#22211e]">
+                {t("resend.title")}
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-[#706f68]">
+                {t("resend.body")}
+              </p>
+            </div>
+            <form action={resendSignupConfirmation} className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto]">
+              <input type="hidden" name="locale" value={locale} />
+              <input type="hidden" name="next" value={nextPath} />
+              <label className="grid gap-2">
+                <span className="sr-only">{t("fields.email")}</span>
+                <input
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
+                  placeholder={t("fields.emailPlaceholder")}
+                />
+              </label>
+              <button
+                type="submit"
+                className="inline-flex min-h-12 items-center justify-center rounded-md border border-[#dad8d0] bg-white px-5 py-3 font-semibold text-[#22211e] hover:border-[#8b897f]"
+              >
+                {t("resend.submit")}
+              </button>
+            </form>
+          </div>
 
           <div className="mt-8 grid gap-3 border-t border-[#e5e2da] pt-6">
             <p className="text-sm font-semibold text-[#373632]">

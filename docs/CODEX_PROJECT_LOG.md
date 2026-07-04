@@ -214,3 +214,17 @@ Auth callback, recovery, language, and dashboard follow-up:
 - Known problems: Supabase Auth redirect allow-list still must include all locale-specific callback and reset-password URLs; non-English copy is simple and needs native review before production.
 - Validation results: message JSON validity, message key parity, `npm run lint`, `npm run typecheck`, and `npm run build` passed on 2026-07-04.
 - Next recommended step: retest signup confirmation, login, forgot-password/reset-password, route language switching, settings preferred locale redirect, and dashboard on local dev with the configured Supabase project.
+
+MVP blocker fix for signup, header, dashboard, language, and account deletion:
+
+- Phase completed: focused MVP blocker fix, not a new product phase.
+- Features added: safe signup error classification, resend-confirmation form, compact select-based language switcher, protected app header cleanup, dashboard quick-action separation, and current-user account deletion from settings.
+- Files created: `lib/supabase/admin.ts`.
+- Files changed: auth actions, signup, login, protected layout, dashboard, settings, language switcher, all message catalogs, security/deployment/current-state/README/verification docs, project map, changelog, and project log.
+- Database/schema changes: none.
+- Security/RLS changes: no RLS changes; added a server-only Supabase admin helper using `SUPABASE_SERVICE_ROLE_KEY` only for deleting the current authenticated user. The delete action never accepts a client-provided user id.
+- UI/UX changes: protected header no longer expands all 11 languages; dashboard has clearer welcome, quick actions, active challenges, pending requests, latest challenges, and activity hierarchy; settings includes a guarded danger zone.
+- Bugs fixed: signup no longer collapses every provider outcome into one generic error; language switching uses a real select navigation control that replaces the locale segment and preserves path/search/hash where practical.
+- Known problems: account deletion requires server-side `SUPABASE_SERVICE_ROLE_KEY` in the local/deployment environment; deletion cascade/anonymization behavior must be tested with disposable users in Supabase.
+- Validation results: message JSON validity, message key parity, `npm run lint`, `npm run typecheck`, `npm run build`, and `git diff --check` passed on 2026-07-04.
+- Next recommended step: retest signup/resend, language switching, header layout, dashboard layout, and account deletion locally with disposable accounts before controlled production verification.

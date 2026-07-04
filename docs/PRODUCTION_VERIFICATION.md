@@ -53,6 +53,8 @@ Do not use this document as permission to deploy, apply remote migrations, chang
 - Confirm RLS is enabled on private tables.
 - Confirm helper functions and triggers exist.
 - Confirm the profile creation trigger works after signup.
+- Confirm signup failures show safe categories without exposing provider details.
+- Confirm resend confirmation does not reveal whether an email exists.
 - Confirm `profiles.role` supports only `user` and `admin`.
 - Confirm normal users cannot self-promote to admin.
 - Confirm admin RPCs reject non-admin users.
@@ -90,6 +92,7 @@ Do not use this document as permission to deploy, apply remote migrations, chang
 - Add locale-aware reset-password URLs because password recovery links should open `/[locale]/reset-password` directly and let the browser client establish the recovery session.
 - Confirm email confirmation shows either `email-confirmed` in the app or a login-required success state if Supabase confirmed the account but the server callback could not exchange the PKCE code.
 - Confirm login, signup, callback, and logout on production.
+- Confirm account deletion with a disposable user only after `SUPABASE_SERVICE_ROLE_KEY` is configured server-side.
 - Confirm failed auth attempts return calm error states.
 - Confirm `NEXT_PUBLIC_SITE_URL` in Vercel matches the deployed domain.
 
@@ -193,6 +196,7 @@ Rules:
 - Keep `SUPABASE_SERVICE_ROLE_KEY` server-only.
 - Do not add `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `WEEKLY_LOG_TO_EMAIL`, or `CRON_SECRET`.
 - Do not use service-role credentials in `app/` or `lib/` client-facing code.
+- Confirm `lib/supabase/admin.ts` is imported only from server code and is used only for current-user account deletion.
 
 ## Migration Application Checklist
 

@@ -208,13 +208,17 @@
       "reset-email-sent": "Jika email itu memiliki akun, tautan reset telah dikirim.",
       "recovery-ready": "Tautan reset dikonfirmasi. Pilih kata sandi baru.",
       "email-confirmed-login-required": "Email Anda mungkin sudah dikonfirmasi. Masuk untuk melanjutkan.",
-      "recovery-checking": "Memeriksa tautan reset Anda..."
+      "recovery-checking": "Memeriksa tautan reset Anda...",
+      "signup-check-email": "Akun dibuat. Periksa email untuk mengonfirmasinya sebelum masuk.",
+      "signup-existing-or-pending": "Jika email ini memiliki akun atau konfirmasi tertunda, gunakan email konfirmasi atau masuk.",
+      "signup-confirmation-resent": "Jika email ini dapat menerima tautan konfirmasi, email baru telah dikirim.",
+      "account-deleted": "Akun Anda telah dihapus."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
       "invalid-credentials": "The email or password did not match an account.",
       "weak-password": "Use a password with at least 8 characters.",
-      "signup-failed": "The account could not be created. Check the email address or try again.",
+      "signup-failed": "Akun tidak dapat dibuat. Periksa detail atau coba lagi.",
       "oauth-provider": "That login provider is not available.",
       "oauth-start": "The provider login could not start. Check Supabase provider setup.",
       "callback": "Tautan konfirmasi tidak dapat diselesaikan. Mungkin tidak valid atau kedaluwarsa. Coba login atau minta tautan baru.",
@@ -224,7 +228,11 @@
       "password-mismatch": "Kata sandi tidak sama.",
       "password-update-failed": "Kata sandi tidak dapat diperbarui. Minta tautan reset baru.",
       "reset-link-invalid": "Tautan reset tidak valid atau kedaluwarsa. Minta tautan baru.",
-      "recovery-callback": "Tautan reset tidak dapat dibuka. Minta tautan reset baru lalu coba lagi."
+      "recovery-callback": "Tautan reset tidak dapat dibuka. Minta tautan reset baru lalu coba lagi.",
+      "signup-weak-password": "Gunakan kata sandi minimal 8 karakter.",
+      "signup-rate-limited": "Terlalu banyak percobaan daftar. Tunggu sebentar lalu coba lagi.",
+      "signup-invalid-email": "Masukkan alamat email yang valid.",
+      "signup-provider-disabled": "Pendaftaran email belum tersedia. Periksa pengaturan Supabase Auth."
     },
     "forgot": {
       "eyebrow": "Bantuan kata sandi",
@@ -239,6 +247,11 @@
       "body": "Gunakan tautan reset dari email, lalu buat kata sandi baru.",
       "submit": "Simpan kata sandi baru",
       "requestNewLink": "Minta tautan baru"
+    },
+    "resend": {
+      "title": "Perlu email konfirmasi baru?",
+      "body": "Masukkan email Anda dan kami akan mengirim tautan konfirmasi jika akun dapat menerimanya.",
+      "submit": "Kirim ulang konfirmasi"
     }
   },
   "AuthStatus": {
@@ -257,7 +270,10 @@
       "friends": "Friends",
       "groups": "Groups",
       "notifications": "Notifications",
-      "admin": "Admin"
+      "admin": "Admin",
+      "primary": "Navigasi utama",
+      "challenges": "Tantangan",
+      "brand": "NoProblemo"
     },
     "eyebrow": "Protected area",
     "title": "Authentication is ready.",
@@ -360,6 +376,9 @@
     },
     "pending": {
       "title": "Permintaan tertunda"
+    },
+    "quick": {
+      "title": "Aksi cepat"
     }
   },
   "CreateChallenge": {
@@ -430,7 +449,10 @@
       "profile-update-failed": "Pengaturan profil tidak dapat disimpan. Periksa Supabase dan kebijakan RLS.",
       "password-weak": "Gunakan kata sandi minimal 8 karakter.",
       "password-mismatch": "Kata sandi tidak sama.",
-      "password-update-failed": "Kata sandi tidak dapat diperbarui. Coba lagi."
+      "password-update-failed": "Kata sandi tidak dapat diperbarui. Coba lagi.",
+      "account-delete-confirmation": "Konfirmasi penghapusan akun sebelum melanjutkan.",
+      "account-delete-unavailable": "Penghapusan akun belum dikonfigurasi di server ini.",
+      "account-delete-failed": "Akun tidak dapat dihapus. Coba lagi atau hubungi dukungan."
     },
     "routeLanguage": {
       "title": "Bahasa halaman",
@@ -440,6 +462,20 @@
       "title": "Ubah kata sandi",
       "body": "Tetapkan kata sandi baru untuk akun ini. Kata sandi hanya dikirim ke Supabase Auth dan tidak disimpan di tabel profil.",
       "submit": "Perbarui kata sandi"
+    },
+    "danger": {
+      "title": "Zona bahaya",
+      "body": "Hapus akun ini hanya jika Anda yakin. Tindakan ini permanen.",
+      "effects": {
+        "auth": "Pengguna Supabase Auth Anda akan dihapus.",
+        "data": "Profil dan data milik Anda dihapus sesuai foreign key database.",
+        "anonymized": "Beberapa pesan atau aktivitas mungkin tetap ada tanpa id pengguna Anda jika skema menyimpan riwayat.",
+        "irreversible": "Tindakan ini tidak dapat dibatalkan."
+      },
+      "confirmCheckbox": "Saya mengerti bahwa menghapus akun saya bersifat permanen.",
+      "confirmLabel": "Ketik DELETE untuk konfirmasi",
+      "confirmPlaceholder": "DELETE",
+      "submit": "Hapus akun"
     }
   },
   "Workspace": {

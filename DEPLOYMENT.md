@@ -42,6 +42,7 @@ Phase 5 uses Supabase Auth. Before relying on production login:
 - Ensure `NEXT_PUBLIC_SITE_URL` matches the deployed site URL in Vercel.
 - Keep `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` configured in Vercel.
 - Do not expose `SUPABASE_SERVICE_ROLE_KEY` to client code.
+- Configure `SUPABASE_SERVICE_ROLE_KEY` only as a server-side environment variable if account deletion is enabled.
 
 ## Admin Setup
 
@@ -130,6 +131,8 @@ Current app includes localized public pages, a guest localStorage workspace, Sup
 - First admin is assigned manually in trusted Supabase SQL.
 - Guest mode is tested without login and confirmed local-only.
 - Login, signup, auth callback, and logout are tested.
+- Signup error states and resend-confirmation behavior are tested without exposing whether an email exists.
+- Account deletion is tested with a disposable user and confirmed to remove only the current authenticated user.
 - Dashboard challenge reads/writes and guest import are tested against Supabase RLS.
 - Saved challenge workspace section, solution, task, export, and message flows are tested.
 - Friend/group RLS, group invitation flows, group challenge access, and the 100-member limit are tested against Supabase.

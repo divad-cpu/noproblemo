@@ -17,6 +17,8 @@
 - Added accessible dialog semantics for the guest login prompt.
 - Added accessible labels for dense group/workspace management controls.
 - Added a browser-client password recovery completion form for Supabase reset links.
+- Added safe signup error classification and resend-confirmation handling.
+- Added server-only current-user account deletion from settings.
 
 ### Changed
 
@@ -24,6 +26,7 @@
 - Changed email-confirmation callback failures to show a login-required success state when Supabase may already have confirmed the account.
 - Changed password reset links to open `/[locale]/reset-password` directly instead of depending on server-side callback exchange.
 - Changed the language switcher to preserve the current route when switching locales where practical.
+- Changed the protected app header to use compact navigation and a single language dropdown.
 - Changed preferred-locale profile save to reopen settings in the selected locale.
 - Changed profile settings updates so normal profile edits no longer update `profiles.role`.
 - Updated all locale message catalogs with admin UI keys.
@@ -38,10 +41,12 @@
 - Guarded status/error query feedback on protected pages so unknown query values do not cause missing translation lookups.
 - Fixed password recovery links that could fail with the same generic callback error as email confirmation.
 - Cleaned up the dashboard into overview, active challenges, pending requests, latest challenges, and recent activity sections.
+- Fixed the protected header language list clutter by replacing expanded locale links with a select control.
 
 ### Security
 
 - Added password update/reset flows through Supabase Auth without service-role usage or password storage in database tables.
+- Added server-only service-role usage for current-user account deletion; no service-role key is used in frontend/client code.
 - Documented required locale-specific Supabase Auth callback URLs for email confirmation, OAuth, and password recovery.
 - Added `public.is_admin(user_id)` for database-backed admin checks.
 - Added admin-only RLS for `admin_audit_log`.

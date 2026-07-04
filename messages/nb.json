@@ -208,13 +208,17 @@
       "reset-email-sent": "Hvis e-posten har en konto, er en tilbakestillingslenke sendt.",
       "recovery-ready": "Lenken er bekreftet. Velg et nytt passord.",
       "email-confirmed-login-required": "E-posten din kan allerede være bekreftet. Logg inn for å fortsette.",
-      "recovery-checking": "Sjekker tilbakestillingslenken..."
+      "recovery-checking": "Sjekker tilbakestillingslenken...",
+      "signup-check-email": "Kontoen er opprettet. Sjekk e-posten for å bekrefte før du logger inn.",
+      "signup-existing-or-pending": "Hvis denne e-posten har en konto eller venter på bekreftelse, bruk bekreftelses-e-posten eller logg inn.",
+      "signup-confirmation-resent": "Hvis denne e-posten kan motta en bekreftelseslenke, er en ny e-post sendt.",
+      "account-deleted": "Kontoen din er slettet."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
       "invalid-credentials": "The email or password did not match an account.",
       "weak-password": "Use a password with at least 8 characters.",
-      "signup-failed": "The account could not be created. Check the email address or try again.",
+      "signup-failed": "Kontoen kunne ikke opprettes. Sjekk detaljene eller prøv igjen.",
       "oauth-provider": "That login provider is not available.",
       "oauth-start": "The provider login could not start. Check Supabase provider setup.",
       "callback": "Bekreftelseslenken kunne ikke fullføres. Den kan være ugyldig eller utløpt. Prøv å logge inn eller be om en ny lenke.",
@@ -224,7 +228,11 @@
       "password-mismatch": "Passordene er ikke like.",
       "password-update-failed": "Passordet kunne ikke oppdateres. Be om en ny lenke.",
       "reset-link-invalid": "Lenken er ugyldig eller utløpt. Be om en ny lenke.",
-      "recovery-callback": "Tilbakestillingslenken kunne ikke åpnes. Be om en ny lenke og prøv igjen."
+      "recovery-callback": "Tilbakestillingslenken kunne ikke åpnes. Be om en ny lenke og prøv igjen.",
+      "signup-weak-password": "Bruk et passord med minst 8 tegn.",
+      "signup-rate-limited": "For mange registreringsforsøk. Vent litt og prøv igjen.",
+      "signup-invalid-email": "Skriv inn en gyldig e-postadresse.",
+      "signup-provider-disabled": "E-postregistrering er ikke tilgjengelig ennå. Sjekk Supabase Auth-innstillingene."
     },
     "forgot": {
       "eyebrow": "Passordhjelp",
@@ -239,6 +247,11 @@
       "body": "Bruk lenken fra e-posten, og sett et nytt passord for kontoen.",
       "submit": "Lagre nytt passord",
       "requestNewLink": "Be om ny lenke"
+    },
+    "resend": {
+      "title": "Trenger du en ny bekreftelses-e-post?",
+      "body": "Skriv inn e-posten din, så sender vi en bekreftelseslenke hvis kontoen kan motta en.",
+      "submit": "Send bekreftelse på nytt"
     }
   },
   "AuthStatus": {
@@ -257,7 +270,10 @@
       "friends": "Friends",
       "groups": "Groups",
       "notifications": "Notifications",
-      "admin": "Admin"
+      "admin": "Admin",
+      "primary": "Hovednavigasjon",
+      "challenges": "Utfordringer",
+      "brand": "NoProblemo"
     },
     "eyebrow": "Protected area",
     "title": "Authentication is ready.",
@@ -360,6 +376,9 @@
     },
     "pending": {
       "title": "Ventende forespørsler"
+    },
+    "quick": {
+      "title": "Hurtighandlinger"
     }
   },
   "CreateChallenge": {
@@ -430,7 +449,10 @@
       "profile-update-failed": "Profilinnstillingene kunne ikke lagres. Sjekk Supabase-oppsett og RLS-regler.",
       "password-weak": "Bruk et passord med minst 8 tegn.",
       "password-mismatch": "Passordene er ikke like.",
-      "password-update-failed": "Passordet kunne ikke oppdateres. Prøv igjen."
+      "password-update-failed": "Passordet kunne ikke oppdateres. Prøv igjen.",
+      "account-delete-confirmation": "Bekreft sletting av konto før du fortsetter.",
+      "account-delete-unavailable": "Kontosletting er ikke konfigurert på denne serveren.",
+      "account-delete-failed": "Kontoen kunne ikke slettes. Prøv igjen eller kontakt support."
     },
     "routeLanguage": {
       "title": "Sidespråk",
@@ -440,6 +462,20 @@
       "title": "Endre passord",
       "body": "Sett et nytt passord for denne kontoen. Passord sendes bare til Supabase Auth og lagres ikke i profiltabeller.",
       "submit": "Oppdater passord"
+    },
+    "danger": {
+      "title": "Faresone",
+      "body": "Slett denne kontoen bare hvis du er sikker. Handlingen er permanent.",
+      "effects": {
+        "auth": "Supabase Auth-brukeren din blir fjernet.",
+        "data": "Profilen din og data du eier fjernes i henhold til databasekoblinger.",
+        "anonymized": "Noen meldinger eller aktivitet kan bli stående uten bruker-id der skjemaet bevarer historikk.",
+        "irreversible": "Denne handlingen kan ikke angres."
+      },
+      "confirmCheckbox": "Jeg forstår at sletting av kontoen min er permanent.",
+      "confirmLabel": "Skriv DELETE for å bekrefte",
+      "confirmPlaceholder": "DELETE",
+      "submit": "Slett konto"
     }
   },
   "Workspace": {

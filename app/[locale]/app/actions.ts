@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createAdminSupabaseClient } from "@/lib/supabase/admin";
 import { defaultLocale, routing, type Locale } from "@/i18n/routing";
 import type {
   ChallengeSectionKey,
@@ -440,6 +441,38 @@ export async function updatePassword(formData: FormData) {
   }
 
   redirect(`/${locale}/app/settings?status=password-saved`);
+}
+
+export async function deleteCurrentAccount(formData: FormData) {
+  const locale = getLocale(formData);
+  const confirmed = firstString(formData.get("deleteConfirmation")) === "DELETE";
+  const checked = formData.get("deleteConfirmed") === "on";
+
+  if (!confirmed || !checked) {
+    redirect(`/${locale}/app/settings?error=account-delete-confirmation`);
+  }
+
+  const { supabase, user } = await getAuthenticatedUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/settings`);
+  }
+
+  let adminSupabase: ReturnType<typeof createAdminSupabaseClient>;
+  try {
+    adminSupabase = createAdminSupabaseClient();
+  } catch {
+    redirect(`/${locale}/app/settings?error=account-delete-unavailable`);
+  }
+
+  const { error } = await adminSupabase.auth.admin.deleteUser(user.id);
+
+  if (error) {
+    redirect(`/${locale}/app/settings?error=account-delete-failed`);
+  }
+
+  await supabase.auth.signOut();
+  redirect(`/${locale}/login?status=account-deleted`);
 }
 
 export async function updateChallengeDetails(formData: FormData) {

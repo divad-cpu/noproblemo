@@ -208,13 +208,17 @@
       "reset-email-sent": "إذا كان لهذا البريد حساب، فقد تم إرسال رابط إعادة التعيين.",
       "recovery-ready": "تم تأكيد رابط إعادة التعيين. اختر كلمة مرور جديدة.",
       "email-confirmed-login-required": "قد يكون بريدك الإلكتروني مؤكدا بالفعل. يرجى تسجيل الدخول للمتابعة.",
-      "recovery-checking": "جار التحقق من رابط إعادة التعيين..."
+      "recovery-checking": "جار التحقق من رابط إعادة التعيين...",
+      "signup-check-email": "تم إنشاء الحساب. تحقق من بريدك الإلكتروني لتأكيده قبل تسجيل الدخول.",
+      "signup-existing-or-pending": "إذا كان لهذا البريد حساب أو تأكيد معلق، فاستخدم رسالة التأكيد أو سجل الدخول.",
+      "signup-confirmation-resent": "إذا كان هذا البريد يستطيع استلام رابط تأكيد، فقد تم إرسال رسالة جديدة.",
+      "account-deleted": "تم حذف حسابك."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
       "invalid-credentials": "The email or password did not match an account.",
       "weak-password": "Use a password with at least 8 characters.",
-      "signup-failed": "The account could not be created. Check the email address or try again.",
+      "signup-failed": "تعذر إنشاء الحساب. تحقق من التفاصيل أو حاول مرة أخرى.",
       "oauth-provider": "That login provider is not available.",
       "oauth-start": "The provider login could not start. Check Supabase provider setup.",
       "callback": "تعذر إكمال رابط التأكيد. قد يكون غير صالح أو منتهي الصلاحية. حاول تسجيل الدخول أو اطلب رابطا جديدا.",
@@ -224,7 +228,11 @@
       "password-mismatch": "كلمتا المرور غير متطابقتين.",
       "password-update-failed": "تعذر تحديث كلمة المرور. اطلب رابطا جديدا.",
       "reset-link-invalid": "رابط إعادة التعيين غير صالح أو منتهي الصلاحية. اطلب رابطا جديدا.",
-      "recovery-callback": "تعذر فتح رابط إعادة التعيين. اطلب رابطا جديدا وحاول مرة أخرى."
+      "recovery-callback": "تعذر فتح رابط إعادة التعيين. اطلب رابطا جديدا وحاول مرة أخرى.",
+      "signup-weak-password": "استخدم كلمة مرور من 8 أحرف على الأقل.",
+      "signup-rate-limited": "محاولات تسجيل كثيرة جدا. انتظر قليلا ثم حاول مرة أخرى.",
+      "signup-invalid-email": "أدخل عنوان بريد إلكتروني صالحا.",
+      "signup-provider-disabled": "التسجيل بالبريد الإلكتروني غير متاح بعد. تحقق من إعدادات Supabase Auth."
     },
     "forgot": {
       "eyebrow": "مساعدة كلمة المرور",
@@ -239,6 +247,11 @@
       "body": "استخدم رابط إعادة التعيين من بريدك ثم عيّن كلمة مرور جديدة.",
       "submit": "حفظ كلمة المرور الجديدة",
       "requestNewLink": "طلب رابط جديد"
+    },
+    "resend": {
+      "title": "هل تحتاج رسالة تأكيد جديدة؟",
+      "body": "أدخل بريدك الإلكتروني وسنرسل رابط تأكيد إذا كان الحساب يستطيع استلامه.",
+      "submit": "إعادة إرسال التأكيد"
     }
   },
   "AuthStatus": {
@@ -257,7 +270,10 @@
       "friends": "Friends",
       "groups": "Groups",
       "notifications": "Notifications",
-      "admin": "الإدارة"
+      "admin": "الإدارة",
+      "primary": "التنقل الرئيسي",
+      "challenges": "التحديات",
+      "brand": "NoProblemo"
     },
     "eyebrow": "Protected area",
     "title": "Authentication is ready.",
@@ -360,6 +376,9 @@
     },
     "pending": {
       "title": "طلبات معلقة"
+    },
+    "quick": {
+      "title": "إجراءات سريعة"
     }
   },
   "CreateChallenge": {
@@ -430,7 +449,10 @@
       "profile-update-failed": "تعذر حفظ إعدادات الملف الشخصي. تحقق من إعداد Supabase وسياسات RLS.",
       "password-weak": "استخدم كلمة مرور من 8 أحرف على الأقل.",
       "password-mismatch": "كلمتا المرور غير متطابقتين.",
-      "password-update-failed": "تعذر تحديث كلمة المرور. حاول مرة أخرى."
+      "password-update-failed": "تعذر تحديث كلمة المرور. حاول مرة أخرى.",
+      "account-delete-confirmation": "أكد حذف الحساب قبل المتابعة.",
+      "account-delete-unavailable": "حذف الحساب غير مهيأ على هذا الخادم.",
+      "account-delete-failed": "تعذر حذف الحساب. حاول مرة أخرى أو تواصل مع الدعم."
     },
     "routeLanguage": {
       "title": "لغة الصفحة",
@@ -440,6 +462,20 @@
       "title": "تغيير كلمة المرور",
       "body": "عيّن كلمة مرور جديدة لهذا الحساب. تُرسل كلمات المرور فقط إلى Supabase Auth ولا تُخزن في جداول الملف الشخصي.",
       "submit": "تحديث كلمة المرور"
+    },
+    "danger": {
+      "title": "منطقة الخطر",
+      "body": "احذف هذا الحساب فقط إذا كنت متأكدا. هذا الإجراء دائم.",
+      "effects": {
+        "auth": "سيتم حذف مستخدم Supabase Auth الخاص بك.",
+        "data": "سيتم حذف ملفك الشخصي والسجلات التي تملكها وفق مفاتيح قاعدة البيانات.",
+        "anonymized": "قد تبقى بعض الرسائل أو النشاط بدون معرف المستخدم إذا كان المخطط يحتفظ بالسجل.",
+        "irreversible": "لا يمكن التراجع عن هذا الإجراء."
+      },
+      "confirmCheckbox": "أفهم أن حذف حسابي دائم.",
+      "confirmLabel": "اكتب DELETE للتأكيد",
+      "confirmPlaceholder": "DELETE",
+      "submit": "حذف الحساب"
     }
   },
   "Workspace": {

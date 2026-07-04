@@ -208,13 +208,17 @@
       "reset-email-sent": "If that email has an account, a reset link has been sent.",
       "recovery-ready": "Reset link confirmed. Choose a new password.",
       "email-confirmed-login-required": "Your email may already be confirmed. Please log in to continue.",
-      "recovery-checking": "Checking your reset link..."
+      "recovery-checking": "Checking your reset link...",
+      "signup-check-email": "Account created. Check your email to confirm it before logging in.",
+      "signup-existing-or-pending": "If this email has an account or pending confirmation, use the confirmation email or log in.",
+      "signup-confirmation-resent": "If this email can receive a confirmation link, a new email has been sent.",
+      "account-deleted": "Your account has been deleted."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
       "invalid-credentials": "The email or password did not match an account.",
       "weak-password": "Use a password with at least 8 characters.",
-      "signup-failed": "The account could not be created. Check the email address or try again.",
+      "signup-failed": "The account could not be created. Check the details or try again.",
       "oauth-provider": "That login provider is not available.",
       "oauth-start": "The provider login could not start. Check Supabase provider setup.",
       "callback": "The confirmation link could not be completed. It may be invalid or expired. Try logging in or request a new link.",
@@ -224,7 +228,11 @@
       "password-mismatch": "The passwords do not match.",
       "password-update-failed": "The password could not be updated. Try requesting a new reset link.",
       "reset-link-invalid": "The reset link is invalid or expired. Request a new reset link.",
-      "recovery-callback": "The reset link could not be opened. Request a new reset link and try again."
+      "recovery-callback": "The reset link could not be opened. Request a new reset link and try again.",
+      "signup-weak-password": "Use a password with at least 8 characters.",
+      "signup-rate-limited": "Too many signup attempts. Wait a little and try again.",
+      "signup-invalid-email": "Enter a valid email address.",
+      "signup-provider-disabled": "Email signup is not available yet. Check Supabase Auth provider settings."
     },
     "forgot": {
       "eyebrow": "Password help",
@@ -239,6 +247,11 @@
       "body": "Use the reset link from your email, then set a new password for your account.",
       "submit": "Save new password",
       "requestNewLink": "Request a new reset link"
+    },
+    "resend": {
+      "title": "Need a new confirmation email?",
+      "body": "Enter your email and we will send a confirmation link if the account can receive one.",
+      "submit": "Resend confirmation"
     }
   },
   "AuthStatus": {
@@ -257,7 +270,10 @@
       "friends": "Friends",
       "groups": "Groups",
       "notifications": "Notifications",
-      "admin": "Admin"
+      "admin": "Admin",
+      "primary": "Primary navigation",
+      "challenges": "Challenges",
+      "brand": "NoProblemo"
     },
     "eyebrow": "Protected area",
     "title": "Authentication is ready.",
@@ -360,6 +376,9 @@
     },
     "pending": {
       "title": "Pending requests"
+    },
+    "quick": {
+      "title": "Quick actions"
     }
   },
   "CreateChallenge": {
@@ -430,7 +449,10 @@
       "profile-update-failed": "Profile settings could not be saved. Check Supabase setup and RLS policies.",
       "password-weak": "Use a password with at least 8 characters.",
       "password-mismatch": "The passwords do not match.",
-      "password-update-failed": "Password could not be updated. Try again."
+      "password-update-failed": "Password could not be updated. Try again.",
+      "account-delete-confirmation": "Confirm account deletion before continuing.",
+      "account-delete-unavailable": "Account deletion is not configured on this server.",
+      "account-delete-failed": "The account could not be deleted. Try again or contact support."
     },
     "routeLanguage": {
       "title": "Route language",
@@ -440,6 +462,20 @@
       "title": "Change password",
       "body": "Set a new password for this account. Passwords are sent only to Supabase Auth and are not stored in profile tables.",
       "submit": "Update password"
+    },
+    "danger": {
+      "title": "Danger zone",
+      "body": "Delete this account only if you are sure. This action is permanent.",
+      "effects": {
+        "auth": "Your Supabase Auth user will be removed.",
+        "data": "Your profile and owned records are removed according to database foreign keys.",
+        "anonymized": "Some messages or activity may remain without your user id where the schema keeps history.",
+        "irreversible": "This action cannot be undone."
+      },
+      "confirmCheckbox": "I understand that deleting my account is permanent.",
+      "confirmLabel": "Type DELETE to confirm",
+      "confirmPlaceholder": "DELETE",
+      "submit": "Delete account"
     }
   },
   "Workspace": {

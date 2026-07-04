@@ -11,6 +11,7 @@ Guest challenge drafts remain in browser localStorage until an authenticated use
 Implemented in Phase 5:
 
 - Email signup and login use Supabase Auth.
+- Signup failures are mapped to safe user-facing categories and development-only warnings without logging email addresses, passwords, tokens, sessions, cookies, or environment values.
 - No custom password storage exists in app code.
 - Auth callbacks and redirects are locale-aware.
 - Auth callback code exchange writes Supabase session cookies onto the final route-handler redirect response.
@@ -18,6 +19,7 @@ Implemented in Phase 5:
 - `/[locale]/app` checks Supabase session state server-side before rendering.
 - Logout is handled by a route handler that signs out through Supabase.
 - Logged-in users can change passwords through Supabase Auth `updateUser({ password })`; password values are not stored in profile tables.
+- Logged-in users can delete their own account from settings after explicit confirmation. The server action derives the user id from the authenticated session and never accepts a user id from the client.
 - Password reset requests use Supabase Auth reset links and locale-specific `/[locale]/reset-password` URLs; the browser client establishes the recovery session before calling `updateUser({ password })`.
 - Google and Apple OAuth start actions are prepared, but provider configuration is still required.
 - Profile creation relies on the Phase 4 database trigger and still needs verification after the migration is applied.
@@ -155,7 +157,7 @@ Do not build public admin signup, admin requests, or self-service role promotion
 
 Reviewed locally in Phase 11:
 
-- `SUPABASE_SERVICE_ROLE_KEY` is not used in `app/` or `lib/`; the only app reference is an admin checklist variable name.
+- `SUPABASE_SERVICE_ROLE_KEY` is used only in the server-only `lib/supabase/admin.ts` helper for current-user account deletion; the app reference outside server actions is an admin checklist variable name.
 - `.env.example` and `.env.local.example` contain placeholders only.
 - `.env.local` was not read or printed.
 - `support@noproblemo.tech` remains the public support address.
@@ -203,6 +205,7 @@ Phase 6 dashboard operations use `lib/supabase/server.ts`, the public Supabase a
 - Profile updates validate the preferred locale against the supported locale list and update only basic profile fields.
 - Profile updates do not update `profiles.role`; missing profiles may be inserted only with `role = 'user'`.
 - Password updates use the authenticated Supabase session only and do not use a service-role key.
+- Account deletion uses `lib/supabase/admin.ts`, which imports `server-only` and uses `SUPABASE_SERVICE_ROLE_KEY` only on the server to call Supabase Auth admin delete for the current authenticated user.
 
 ## Challenge Workspace Security
 
@@ -271,7 +274,7 @@ Rules:
 
 - `lib/supabase/client.ts` uses only public Supabase URL and anon key.
 - `lib/supabase/server.ts` uses the public URL and anon key with request cookies for server-side auth actions and route checks.
-- No service-role helper was added in Phase 4.
+- `lib/supabase/admin.ts` is server-only and exists only for current-user account deletion. It must never be imported by Client Components or exposed to browser bundles.
 
 ## OAuth Provider Configuration
 

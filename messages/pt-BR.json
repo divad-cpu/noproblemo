@@ -208,13 +208,17 @@
       "reset-email-sent": "Se esse e-mail tiver uma conta, um link de redefinição foi enviado.",
       "recovery-ready": "Link confirmado. Escolha uma nova senha.",
       "email-confirmed-login-required": "Seu email talvez já esteja confirmado. Entre para continuar.",
-      "recovery-checking": "Verificando seu link de redefinição..."
+      "recovery-checking": "Verificando seu link de redefinição...",
+      "signup-check-email": "Conta criada. Confira seu email para confirmar antes de entrar.",
+      "signup-existing-or-pending": "Se este email tem uma conta ou confirmação pendente, use o email de confirmação ou entre.",
+      "signup-confirmation-resent": "Se este email puder receber um link de confirmação, uma nova mensagem foi enviada.",
+      "account-deleted": "Sua conta foi excluída."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
       "invalid-credentials": "The email or password did not match an account.",
       "weak-password": "Use a password with at least 8 characters.",
-      "signup-failed": "The account could not be created. Check the email address or try again.",
+      "signup-failed": "A conta não pôde ser criada. Verifique os dados ou tente novamente.",
       "oauth-provider": "That login provider is not available.",
       "oauth-start": "The provider login could not start. Check Supabase provider setup.",
       "callback": "Não foi possível concluir o link de confirmação. Ele pode ser inválido ou ter expirado. Tente entrar ou peça outro link.",
@@ -224,7 +228,11 @@
       "password-mismatch": "As senhas não coincidem.",
       "password-update-failed": "Não foi possível atualizar a senha. Peça outro link.",
       "reset-link-invalid": "O link é inválido ou expirou. Peça outro link.",
-      "recovery-callback": "Não foi possível abrir o link de redefinição. Solicite um novo link e tente novamente."
+      "recovery-callback": "Não foi possível abrir o link de redefinição. Solicite um novo link e tente novamente.",
+      "signup-weak-password": "Use uma senha com pelo menos 8 caracteres.",
+      "signup-rate-limited": "Muitas tentativas de cadastro. Aguarde um pouco e tente novamente.",
+      "signup-invalid-email": "Digite um endereço de email válido.",
+      "signup-provider-disabled": "Cadastro por email ainda não está disponível. Verifique as configurações do Supabase Auth."
     },
     "forgot": {
       "eyebrow": "Ajuda com senha",
@@ -239,6 +247,11 @@
       "body": "Use o link do e-mail e defina uma nova senha para a conta.",
       "submit": "Salvar nova senha",
       "requestNewLink": "Pedir novo link"
+    },
+    "resend": {
+      "title": "Precisa de um novo email de confirmação?",
+      "body": "Digite seu email e enviaremos um link de confirmação se a conta puder recebê-lo.",
+      "submit": "Reenviar confirmação"
     }
   },
   "AuthStatus": {
@@ -257,7 +270,10 @@
       "friends": "Friends",
       "groups": "Groups",
       "notifications": "Notifications",
-      "admin": "Admin"
+      "admin": "Admin",
+      "primary": "Navegação principal",
+      "challenges": "Desafios",
+      "brand": "NoProblemo"
     },
     "eyebrow": "Protected area",
     "title": "Authentication is ready.",
@@ -360,6 +376,9 @@
     },
     "pending": {
       "title": "Solicitações pendentes"
+    },
+    "quick": {
+      "title": "Ações rápidas"
     }
   },
   "CreateChallenge": {
@@ -430,7 +449,10 @@
       "profile-update-failed": "Não foi possível salvar o perfil. Verifique o Supabase e as políticas RLS.",
       "password-weak": "Use uma senha com pelo menos 8 caracteres.",
       "password-mismatch": "As senhas não coincidem.",
-      "password-update-failed": "Não foi possível atualizar a senha. Tente novamente."
+      "password-update-failed": "Não foi possível atualizar a senha. Tente novamente.",
+      "account-delete-confirmation": "Confirme a exclusão da conta antes de continuar.",
+      "account-delete-unavailable": "A exclusão de conta não está configurada neste servidor.",
+      "account-delete-failed": "A conta não pôde ser excluída. Tente novamente ou fale com o suporte."
     },
     "routeLanguage": {
       "title": "Idioma da página",
@@ -440,6 +462,20 @@
       "title": "Alterar senha",
       "body": "Defina uma nova senha para esta conta. Senhas são enviadas apenas ao Supabase Auth e não ficam em tabelas de perfil.",
       "submit": "Atualizar senha"
+    },
+    "danger": {
+      "title": "Zona de perigo",
+      "body": "Exclua esta conta somente se tiver certeza. Esta ação é permanente.",
+      "effects": {
+        "auth": "Seu usuário do Supabase Auth será removido.",
+        "data": "Seu perfil e dados próprios são removidos conforme as chaves estrangeiras do banco.",
+        "anonymized": "Algumas mensagens ou atividades podem permanecer sem seu id de usuário quando o esquema preserva histórico.",
+        "irreversible": "Esta ação não pode ser desfeita."
+      },
+      "confirmCheckbox": "Entendo que excluir minha conta é permanente.",
+      "confirmLabel": "Digite DELETE para confirmar",
+      "confirmPlaceholder": "DELETE",
+      "submit": "Excluir conta"
     }
   },
   "Workspace": {

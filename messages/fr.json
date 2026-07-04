@@ -208,13 +208,17 @@
       "reset-email-sent": "Si cet e-mail correspond à un compte, un lien a été envoyé.",
       "recovery-ready": "Lien confirmé. Choisissez un nouveau mot de passe.",
       "email-confirmed-login-required": "Votre e-mail est peut-être déjà confirmé. Connectez-vous pour continuer.",
-      "recovery-checking": "Vérification de votre lien de réinitialisation..."
+      "recovery-checking": "Vérification de votre lien de réinitialisation...",
+      "signup-check-email": "Compte créé. Vérifiez votre e-mail pour le confirmer avant de vous connecter.",
+      "signup-existing-or-pending": "Si cet e-mail a déjà un compte ou une confirmation en attente, utilisez l’e-mail de confirmation ou connectez-vous.",
+      "signup-confirmation-resent": "Si cet e-mail peut recevoir un lien de confirmation, un nouvel e-mail a été envoyé.",
+      "account-deleted": "Votre compte a été supprimé."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
       "invalid-credentials": "The email or password did not match an account.",
       "weak-password": "Use a password with at least 8 characters.",
-      "signup-failed": "The account could not be created. Check the email address or try again.",
+      "signup-failed": "Le compte n’a pas pu être créé. Vérifiez les informations ou réessayez.",
       "oauth-provider": "That login provider is not available.",
       "oauth-start": "The provider login could not start. Check Supabase provider setup.",
       "callback": "Le lien de confirmation n’a pas pu être traité. Il est peut-être invalide ou expiré. Connectez-vous ou demandez un nouveau lien.",
@@ -224,7 +228,11 @@
       "password-mismatch": "Les mots de passe ne correspondent pas.",
       "password-update-failed": "Le mot de passe n’a pas pu être mis à jour. Demandez un nouveau lien.",
       "reset-link-invalid": "Le lien est invalide ou expiré. Demandez un nouveau lien.",
-      "recovery-callback": "Le lien de réinitialisation n’a pas pu être ouvert. Demandez un nouveau lien et réessayez."
+      "recovery-callback": "Le lien de réinitialisation n’a pas pu être ouvert. Demandez un nouveau lien et réessayez.",
+      "signup-weak-password": "Utilisez un mot de passe d’au moins 8 caractères.",
+      "signup-rate-limited": "Trop de tentatives d’inscription. Attendez un peu puis réessayez.",
+      "signup-invalid-email": "Saisissez une adresse e-mail valide.",
+      "signup-provider-disabled": "L’inscription par e-mail n’est pas encore disponible. Vérifiez les paramètres Supabase Auth."
     },
     "forgot": {
       "eyebrow": "Aide mot de passe",
@@ -239,6 +247,11 @@
       "body": "Utilisez le lien reçu par e-mail, puis définissez un nouveau mot de passe.",
       "submit": "Enregistrer le nouveau mot de passe",
       "requestNewLink": "Demander un nouveau lien"
+    },
+    "resend": {
+      "title": "Besoin d’un nouvel e-mail de confirmation ?",
+      "body": "Saisissez votre e-mail et nous enverrons un lien de confirmation si le compte peut le recevoir.",
+      "submit": "Renvoyer la confirmation"
     }
   },
   "AuthStatus": {
@@ -257,7 +270,10 @@
       "friends": "Friends",
       "groups": "Groups",
       "notifications": "Notifications",
-      "admin": "Admin"
+      "admin": "Admin",
+      "primary": "Navigation principale",
+      "challenges": "Défis",
+      "brand": "NoProblemo"
     },
     "eyebrow": "Protected area",
     "title": "Authentication is ready.",
@@ -360,6 +376,9 @@
     },
     "pending": {
       "title": "Demandes en attente"
+    },
+    "quick": {
+      "title": "Actions rapides"
     }
   },
   "CreateChallenge": {
@@ -430,7 +449,10 @@
       "profile-update-failed": "Les paramètres du profil n’ont pas pu être enregistrés. Vérifiez Supabase et les politiques RLS.",
       "password-weak": "Utilisez un mot de passe d’au moins 8 caractères.",
       "password-mismatch": "Les mots de passe ne correspondent pas.",
-      "password-update-failed": "Le mot de passe n’a pas pu être mis à jour. Réessayez."
+      "password-update-failed": "Le mot de passe n’a pas pu être mis à jour. Réessayez.",
+      "account-delete-confirmation": "Confirmez la suppression du compte avant de continuer.",
+      "account-delete-unavailable": "La suppression de compte n’est pas configurée sur ce serveur.",
+      "account-delete-failed": "Le compte n’a pas pu être supprimé. Réessayez ou contactez le support."
     },
     "routeLanguage": {
       "title": "Langue de la page",
@@ -440,6 +462,20 @@
       "title": "Changer le mot de passe",
       "body": "Définissez un nouveau mot de passe pour ce compte. Les mots de passe sont envoyés seulement à Supabase Auth et ne sont pas stockés dans les tables de profil.",
       "submit": "Mettre à jour le mot de passe"
+    },
+    "danger": {
+      "title": "Zone dangereuse",
+      "body": "Supprimez ce compte seulement si vous êtes sûr. Cette action est permanente.",
+      "effects": {
+        "auth": "Votre utilisateur Supabase Auth sera supprimé.",
+        "data": "Votre profil et vos données propriétaires sont supprimés selon les clés étrangères de la base.",
+        "anonymized": "Certains messages ou activités peuvent rester sans votre identifiant utilisateur si le schéma conserve l’historique.",
+        "irreversible": "Cette action ne peut pas être annulée."
+      },
+      "confirmCheckbox": "Je comprends que supprimer mon compte est permanent.",
+      "confirmLabel": "Tapez DELETE pour confirmer",
+      "confirmPlaceholder": "DELETE",
+      "submit": "Supprimer le compte"
     }
   },
   "Workspace": {

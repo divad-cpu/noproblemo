@@ -208,13 +208,17 @@
       "reset-email-sent": "اگر اس ای میل کا اکاؤنٹ ہے تو ری سیٹ لنک بھیج دیا گیا ہے۔",
       "recovery-ready": "ری سیٹ لنک کی تصدیق ہو گئی۔ نیا پاس ورڈ منتخب کریں۔",
       "email-confirmed-login-required": "آپ کا ای میل پہلے ہی تصدیق شدہ ہو سکتا ہے۔ جاری رکھنے کے لیے لاگ ان کریں۔",
-      "recovery-checking": "آپ کا ری سیٹ لنک چیک کیا جا رہا ہے..."
+      "recovery-checking": "آپ کا ری سیٹ لنک چیک کیا جا رہا ہے...",
+      "signup-check-email": "اکاؤنٹ بن گیا۔ لاگ ان سے پہلے اپنا ای میل تصدیق کریں۔",
+      "signup-existing-or-pending": "اگر اس ای میل کا اکاؤنٹ یا زیر التوا تصدیق ہے تو تصدیقی ای میل استعمال کریں یا لاگ ان کریں۔",
+      "signup-confirmation-resent": "اگر یہ ای میل تصدیقی لنک وصول کر سکتا ہے تو نیا ای میل بھیج دیا گیا ہے۔",
+      "account-deleted": "آپ کا اکاؤنٹ حذف کر دیا گیا ہے۔"
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
       "invalid-credentials": "The email or password did not match an account.",
       "weak-password": "Use a password with at least 8 characters.",
-      "signup-failed": "The account could not be created. Check the email address or try again.",
+      "signup-failed": "اکاؤنٹ نہیں بن سکا۔ تفصیلات چیک کریں یا دوبارہ کوشش کریں۔",
       "oauth-provider": "That login provider is not available.",
       "oauth-start": "The provider login could not start. Check Supabase provider setup.",
       "callback": "تصدیقی لنک مکمل نہیں ہو سکا۔ یہ غلط یا ختم ہو چکا ہو سکتا ہے۔ لاگ ان کریں یا نیا لنک مانگیں۔",
@@ -224,7 +228,11 @@
       "password-mismatch": "پاس ورڈز ایک جیسے نہیں ہیں۔",
       "password-update-failed": "پاس ورڈ اپ ڈیٹ نہیں ہو سکا۔ نیا ری سیٹ لنک مانگیں۔",
       "reset-link-invalid": "ری سیٹ لنک غلط یا ختم ہو چکا ہے۔ نیا لنک مانگیں۔",
-      "recovery-callback": "ری سیٹ لنک نہیں کھل سکا۔ نیا ری سیٹ لنک درخواست کریں اور دوبارہ کوشش کریں۔"
+      "recovery-callback": "ری سیٹ لنک نہیں کھل سکا۔ نیا ری سیٹ لنک درخواست کریں اور دوبارہ کوشش کریں۔",
+      "signup-weak-password": "کم از کم 8 حروف کا پاس ورڈ استعمال کریں۔",
+      "signup-rate-limited": "سائن اپ کی بہت زیادہ کوششیں۔ تھوڑا انتظار کریں اور دوبارہ کوشش کریں۔",
+      "signup-invalid-email": "درست ای میل پتہ درج کریں۔",
+      "signup-provider-disabled": "ای میل سائن اپ ابھی دستیاب نہیں۔ Supabase Auth سیٹنگز چیک کریں۔"
     },
     "forgot": {
       "eyebrow": "پاس ورڈ مدد",
@@ -239,6 +247,11 @@
       "body": "ای میل کے ری سیٹ لنک کو استعمال کریں، پھر نیا پاس ورڈ سیٹ کریں۔",
       "submit": "نیا پاس ورڈ محفوظ کریں",
       "requestNewLink": "نیا ری سیٹ لنک مانگیں"
+    },
+    "resend": {
+      "title": "نیا تصدیقی ای میل چاہیے؟",
+      "body": "اپنا ای میل درج کریں، اگر اکاؤنٹ لنک وصول کر سکتا ہے تو ہم نیا ای میل بھیجیں گے۔",
+      "submit": "تصدیق دوبارہ بھیجیں"
     }
   },
   "AuthStatus": {
@@ -257,7 +270,10 @@
       "friends": "Friends",
       "groups": "Groups",
       "notifications": "Notifications",
-      "admin": "ایڈمن"
+      "admin": "ایڈمن",
+      "primary": "مرکزی نیویگیشن",
+      "challenges": "چیلنجز",
+      "brand": "NoProblemo"
     },
     "eyebrow": "Protected area",
     "title": "Authentication is ready.",
@@ -360,6 +376,9 @@
     },
     "pending": {
       "title": "زیر التوا درخواستیں"
+    },
+    "quick": {
+      "title": "فوری اقدامات"
     }
   },
   "CreateChallenge": {
@@ -430,7 +449,10 @@
       "profile-update-failed": "پروفائل سیٹنگز محفوظ نہیں ہو سکیں۔ Supabase سیٹ اپ اور RLS پالیسیاں چیک کریں۔",
       "password-weak": "کم از کم 8 حروف کا پاس ورڈ استعمال کریں۔",
       "password-mismatch": "پاس ورڈز ایک جیسے نہیں ہیں۔",
-      "password-update-failed": "پاس ورڈ اپ ڈیٹ نہیں ہو سکا۔ دوبارہ کوشش کریں۔"
+      "password-update-failed": "پاس ورڈ اپ ڈیٹ نہیں ہو سکا۔ دوبارہ کوشش کریں۔",
+      "account-delete-confirmation": "جاری رکھنے سے پہلے اکاؤنٹ حذف کرنے کی تصدیق کریں۔",
+      "account-delete-unavailable": "اس سرور پر اکاؤنٹ حذف کرنا ترتیب نہیں دیا گیا۔",
+      "account-delete-failed": "اکاؤنٹ حذف نہیں ہو سکا۔ دوبارہ کوشش کریں یا سپورٹ سے رابطہ کریں۔"
     },
     "routeLanguage": {
       "title": "صفحہ کی زبان",
@@ -440,6 +462,20 @@
       "title": "پاس ورڈ تبدیل کریں",
       "body": "اس اکاؤنٹ کے لیے نیا پاس ورڈ سیٹ کریں۔ پاس ورڈ صرف Supabase Auth کو بھیجے جاتے ہیں اور پروفائل ٹیبلز میں محفوظ نہیں ہوتے۔",
       "submit": "پاس ورڈ اپ ڈیٹ کریں"
+    },
+    "danger": {
+      "title": "خطرہ زون",
+      "body": "یہ اکاؤنٹ صرف یقین ہونے پر حذف کریں۔ یہ عمل مستقل ہے۔",
+      "effects": {
+        "auth": "آپ کا Supabase Auth صارف ہٹا دیا جائے گا۔",
+        "data": "آپ کا پروفائل اور آپ کے ریکارڈز ڈیٹابیس foreign keys کے مطابق حذف ہوں گے۔",
+        "anonymized": "کچھ پیغامات یا سرگرمی تاریخ کے لیے آپ کے user id کے بغیر رہ سکتے ہیں۔",
+        "irreversible": "یہ عمل واپس نہیں ہو سکتا۔"
+      },
+      "confirmCheckbox": "میں سمجھتا/سمجھتی ہوں کہ میرا اکاؤنٹ حذف کرنا مستقل ہے۔",
+      "confirmLabel": "تصدیق کے لیے DELETE لکھیں",
+      "confirmPlaceholder": "DELETE",
+      "submit": "اکاؤنٹ حذف کریں"
     }
   },
   "Workspace": {

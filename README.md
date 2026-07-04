@@ -100,7 +100,7 @@ Logged-in users can import the current guest draft from the dashboard. Import cr
 
 ## Authentication
 
-Email login/signup uses Supabase Auth. Google and Apple login buttons are prepared through Supabase OAuth, but they require provider configuration in Supabase, Google Cloud, and Apple Developer before production use.
+Email login/signup uses Supabase Auth. Signup failures are mapped to safe categories such as invalid email, weak password, rate limit, pending confirmation, provider configuration, or generic failure without exposing raw provider details. Google and Apple login buttons are prepared through Supabase OAuth, but they require provider configuration in Supabase, Google Cloud, and Apple Developer before production use.
 
 Email confirmation and OAuth use locale-specific `/[locale]/auth/callback` routes. If Supabase confirms an email but the server callback cannot exchange the PKCE code for a session, the login page shows a calm "email may already be confirmed" state instead of a false invalid-link error.
 
@@ -115,6 +115,8 @@ The dashboard lists the authenticated user's saved challenges through Supabase R
 The saved challenge workspace supports the seven-step problem-solving workflow, editable challenge sections, possible solutions, pros/cons, risk/effort/impact scoring, tasks/actions, final recommendation, summary, and Markdown copy/download export.
 
 Profile settings can update `display_name` and `preferred_locale`. The preferred locale is saved to `profiles.preferred_locale`, then the settings page reopens in the selected locale. Logged-in users can also change their password through Supabase Auth.
+
+Settings also include account deletion. The delete action requires a checkbox plus typing `DELETE`, verifies the current authenticated user server-side, and uses a server-only Supabase admin helper with `SUPABASE_SERVICE_ROLE_KEY`. The key must be configured only in the server environment and never exposed to the browser.
 
 ## Friends And Groups
 
@@ -172,7 +174,7 @@ SUPABASE_SERVICE_ROLE_KEY=
 NEXT_PUBLIC_SUPPORT_EMAIL=support@noproblemo.tech
 ```
 
-`SUPABASE_SERVICE_ROLE_KEY` is a server-only placeholder for future trusted operations. It is not used by the frontend and must never be exposed to the browser.
+`SUPABASE_SERVICE_ROLE_KEY` is server-only and is used by `lib/supabase/admin.ts` for current-user account deletion. It is not used by the frontend and must never be exposed to the browser.
 
 Run the development server:
 
@@ -234,6 +236,7 @@ Production readiness requires manual verification of guest mode, login/signup/lo
 - Do not read, print, commit, or expose `.env.local`.
 - Do not expose `SUPABASE_SERVICE_ROLE_KEY` in frontend/client code.
 - Do not query `auth.users` from frontend code.
+- Keep `SUPABASE_SERVICE_ROLE_KEY` server-only. It is used only by `lib/supabase/admin.ts` for current-user account deletion.
 - Keep private challenge/message/group/notification/activity access behind Supabase Auth and RLS.
 - Guest drafts remain browser-local unless explicitly imported by a logged-in user.
 - Message bodies render as plain React text, not raw HTML.
