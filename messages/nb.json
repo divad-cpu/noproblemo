@@ -4,26 +4,26 @@
     "description": "Et rolig sted å forme problemer før du løser dem."
   },
   "Home": {
-    "eyebrow": "Guest mode is open",
+    "eyebrow": "Gjestemodus er åpen",
     "title": "Gjør en rotete utfordring om til et tydeligere neste steg.",
     "description": "NoProblemo hjelper deg å skrive ned problemet, sammenligne alternativer og ende med en enkel handlingsplan. Start som gjest nå, og opprett konto senere når du vil lagre i skyen eller samarbeide.",
-    "primaryCta": "Start solving now as guest",
+    "primaryCta": "Start problemløsing som gjest",
     "signupCta": "Opprett konto",
     "loginCta": "Logg inn",
     "what": {
-      "title": "What NoProblemo is",
+      "title": "Hva NoProblemo er",
       "body": "Et lett arbeidsområde for problemløsning for deg som vil ha struktur før beslutninger. Det holder første steg rolig, praktisk og fokusert."
     },
     "guest": {
-      "title": "Start as guest",
+      "title": "Start som gjest",
       "body": "Bruk arbeidsflyten uten innlogging. Det midlertidige utkastet blir bare i denne nettleseren og kan kopieres eller eksporteres som Markdown."
     },
     "account": {
-      "title": "Account when needed",
+      "title": "Konto når du trenger det",
       "body": "Innlogging og kontoer lar deg lagre arbeid, importere gjesteutkast og bruke samarbeidsfunksjoner etter hvert."
     },
     "workflow": {
-      "eyebrow": "Workflow preview",
+      "eyebrow": "Forhåndsvisning av arbeidsflyt",
       "title": "En enkel vei gjennom problemet",
       "steps": {
         "capture": {
@@ -31,17 +31,17 @@
           "body": "Skriv problemet med vanlig språk og legg til konteksten som betyr noe."
         },
         "shape": {
-          "title": "Shape possible answers",
+          "title": "Form mulige svar",
           "body": "List alternativer, avveininger og resultatet du vil oppnå."
         },
         "choose": {
-          "title": "Choose a next step",
+          "title": "Velg neste steg",
           "body": "Avslutt med én praktisk handling du kan ta uten å starte et stort prosjekt."
         }
       }
     },
     "collaboration": {
-      "title": "Collaboration comes after clarity",
+      "title": "Samarbeid kommer etter klarhet",
       "body": "Gjestemodus er privat for denne nettleseren. Grupper, invitasjoner, meldinger, medlemmer og delte prosjekter krever innlogging.",
       "note": "Dette gjør den offentlige opplevelsen nyttig uten å eksponere private prosjektdata eller vise uferdige samarbeidsflyter."
     },
@@ -51,11 +51,11 @@
         "body": "Begynn med selve problemet i stedet for en registreringsflyt."
       },
       "structured": {
-        "title": "Structured but lightweight",
+        "title": "Strukturert, men lett",
         "body": "Arbeidsflyten gir nok form til å komme videre uten å bli et tungt prosjektverktøy."
       },
       "private": {
-        "title": "Local by default",
+        "title": "Lokalt som standard",
         "body": "Gjestearbeid blir i nettleserens lagring og sendes ikke til Supabase."
       }
     }
@@ -77,55 +77,55 @@
     }
   },
   "Solve": {
-    "eyebrow": "Guest workspace",
-    "title": "Start a problem-solving session without login.",
-    "body": "Bruk dette midlertidige arbeidsområdet til å gjøre en utfordring tydeligere. Gjestearbeid lagres bare i denne nettleseren og kan kopieres eller eksporteres før du går videre.",
+    "eyebrow": "Gjesteområde",
+    "title": "Start en problemløsingsøkt uten innlogging.",
+    "body": "Bruk dette midlertidige arbeidsområdet til å avklare en utfordring. Gjestearbeid lagres bare i denne nettleseren og kan kopieres eller eksporteres før du går videre.",
     "backHome": "Tilbake til forsiden",
-    "supportHint": "Need help?",
+    "supportHint": "Trenger du hjelp?",
     "workspace": {
-      "title": "Problem-solving workflow",
-      "localNotice": "Gjestutkastet ditt lagres i lokal nettleserlagring. Det sendes ikke til Supabase.",
+      "title": "Arbeidsflyt for problemløsing",
+      "localNotice": "Gjestekladden lagres i lokal nettleserlagring. Den sendes ikke til Supabase.",
       "summaryTitle": "Sammendrag av gjesteutfordring",
-      "emptyValue": "Not filled in yet.",
+      "emptyValue": "Ikke fylt ut ennå.",
       "fields": {
         "problem": {
-          "label": "Hvilket problem løser du?",
-          "placeholder": "Beskriv utfordringen med én eller to enkle setninger."
+          "label": "Hvilket problem skal du løse?",
+          "placeholder": "Beskriv utfordringen i en eller to enkle setninger."
         },
         "context": {
-          "label": "What context matters?",
-          "placeholder": "Add constraints, people involved, deadlines, or background."
+          "label": "Hvilken kontekst er viktig?",
+          "placeholder": "Legg til begrensninger, involverte personer, frister eller bakgrunn."
         },
         "outcome": {
-          "label": "What would a good outcome look like?",
+          "label": "Hvordan ser et godt resultat ut?",
           "placeholder": "Beskriv resultatet du ønsker."
         },
         "options": {
           "label": "Hvilke alternativer finnes?",
-          "placeholder": "List possible approaches, tradeoffs, or open questions."
+          "placeholder": "List mulige tilnærminger, avveininger eller åpne spørsmål."
         },
         "nextStep": {
           "label": "Hva er neste praktiske steg?",
           "placeholder": "Velg én handling du kan ta videre."
         }
       },
-      "copyMarkdown": "Copy Markdown summary",
-      "exportMarkdown": "Export Markdown",
+      "copyMarkdown": "Kopier Markdown-sammendrag",
+      "exportMarkdown": "Eksporter Markdown",
       "save": "Lagre",
-      "copySuccess": "Markdown summary copied.",
-      "copyFallback": "Kopiering mislyktes. Du kan merke sammendraget og kopiere det manuelt.",
+      "copySuccess": "Markdown-sammendraget er kopiert.",
+      "copyFallback": "Kopiering mislyktes. Du kan markere sammendraget og kopiere det manuelt.",
       "guestLimits": {
-        "title": "Guest mode limits",
+        "title": "Begrensninger i gjestemodus",
         "body": "Disse handlingene krever konto fordi de lagrer eller deler data utenfor denne nettleseren."
       },
       "blockedActions": {
         "save": "Lagre skyprosjekt",
-        "collaborate": "Collaborate",
-        "invite": "Invite friends",
+        "collaborate": "Samarbeid",
+        "invite": "Inviter venner",
         "createGroup": "Opprett gruppe",
         "sendMessage": "Send melding",
         "continueLater": "Fortsett senere",
-        "addMember": "Add member"
+        "addMember": "Legg til medlem"
       }
     }
   },
@@ -138,10 +138,10 @@
   },
   "Support": {
     "eyebrow": "Støtte",
-    "title": "Contact NoProblemo support",
-    "body": "For help, feedback, or questions about this early version, contact support by email.",
+    "title": "Kontakt NoProblemo-støtte",
+    "body": "Kontakt støtte på e-post for hjelp, tilbakemeldinger eller spørsmål om denne tidlige versjonen.",
     "emailLabel": "E-post for støtte",
-    "helpText": "Do not send passwords, private keys, payment details, or sensitive personal information.",
+    "helpText": "Ikke send passord, private nøkler, betalingsdetaljer eller sensitiv personlig informasjon.",
     "backHome": "Tilbake til forsiden"
   },
   "AuthPlaceholder": {
@@ -149,19 +149,19 @@
     "createAccount": "Opprett konto",
     "logIn": "Logg inn",
     "login": {
-      "eyebrow": "Future login",
+      "eyebrow": "Fremtidig innlogging",
       "title": "Innlogging er ikke bygget ennå.",
       "body": "Autentisering er planlagt for en senere fase. Foreløpig kan du fortsette som gjest og beholde arbeidet i denne nettleseren."
     },
     "signup": {
       "eyebrow": "Fremtidig konto",
-      "title": "Account creation is not built yet.",
+      "title": "Kontooppretting er ikke bygget ennå.",
       "body": "Kontoer vil senere støtte skylagring og samarbeid. Foreløpig holder gjestemodus utkastet lokalt."
     }
   },
   "Footer": {
     "brand": "NoProblemo",
-    "tagline": "Guest-first problem solving.",
+    "tagline": "Problemløsing med gjestemodus først.",
     "supportLink": "Støtte"
   },
   "Auth": {
@@ -169,19 +169,19 @@
       "continueGuest": "Fortsett som gjest"
     },
     "fields": {
-      "displayName": "Display name",
+      "displayName": "Visningsnavn",
       "displayNamePlaceholder": "Navnet ditt, valgfritt",
       "email": "E-post",
       "emailPlaceholder": "du@eksempel.no",
       "password": "Passord",
       "passwordPlaceholder": "Passordet ditt",
-      "newPasswordPlaceholder": "At least 8 characters",
+      "newPasswordPlaceholder": "Minst 8 tegn",
       "newPassword": "Nytt passord",
       "confirmPassword": "Bekreft passord",
       "confirmPasswordPlaceholder": "Gjenta det nye passordet"
     },
     "login": {
-      "eyebrow": "Account access",
+      "eyebrow": "Kontotilgang",
       "title": "Logg inn for å lagre arbeidet ditt.",
       "body": "Gjestemodus er fortsatt tilgjengelig. Logg inn når du vil lagre i skyen og bruke fremtidige samarbeidsfunksjoner.",
       "submit": "Logg inn",
@@ -207,19 +207,20 @@
       "password-updated": "Passordet er oppdatert. Logg inn med det nye passordet.",
       "reset-email-sent": "Hvis e-posten har en konto, er en tilbakestillingslenke sendt.",
       "recovery-ready": "Lenken er bekreftet. Velg et nytt passord.",
-      "email-confirmed-login-required": "E-posten din kan allerede være bekreftet. Logg inn for å fortsette.",
+      "email-confirmed-login-required": "E-posten kan allerede være bekreftet. Logg inn for å fortsette.",
       "recovery-checking": "Sjekker tilbakestillingslenken...",
       "signup-check-email": "Kontoen er opprettet. Sjekk e-posten for å bekrefte før du logger inn.",
       "signup-existing-or-pending": "Hvis denne e-posten har en konto eller venter på bekreftelse, bruk bekreftelses-e-posten eller logg inn.",
       "signup-confirmation-resent": "Hvis denne e-posten kan motta en bekreftelseslenke, er en ny e-post sendt.",
-      "account-deleted": "Kontoen din er slettet."
+      "account-deleted": "Kontoen din er slettet.",
+      "password-reset-success": "Passordet er oppdatert. Logg inn med det nye passordet."
     },
     "errors": {
       "missing-fields": "Fyll inn både e-post og passord for å fortsette.",
       "invalid-credentials": "E-post eller passord samsvarte ikke med en konto.",
       "weak-password": "Bruk et passord med minst 8 tegn.",
       "signup-failed": "Kontoen kunne ikke opprettes. Sjekk detaljene eller prøv igjen.",
-      "oauth-provider": "That login provider is not available.",
+      "oauth-provider": "Denne innloggingsleverandøren er ikke tilgjengelig.",
       "oauth-start": "Leverandørinnlogging kunne ikke starte. Kontroller Supabase-oppsettet.",
       "callback": "Bekreftelseslenken kunne ikke fullføres. Den kan være ugyldig eller utløpt. Prøv å logge inn eller be om en ny lenke.",
       "auth-required": "Logg inn for å åpne lagret arbeid. Gjestemodus er fortsatt tilgjengelig uten konto.",
@@ -227,26 +228,34 @@
       "reset-request-failed": "E-posten kunne ikke sendes. Sjekk adressen eller prøv igjen.",
       "password-mismatch": "Passordene er ikke like.",
       "password-update-failed": "Passordet kunne ikke oppdateres. Be om en ny lenke.",
-      "reset-link-invalid": "Lenken er ugyldig eller utløpt. Be om en ny lenke.",
+      "reset-link-invalid": "Tilbakestillingslenken kunne ikke åpnes. Be om en ny lenke.",
       "recovery-callback": "Tilbakestillingslenken kunne ikke åpnes. Be om en ny lenke og prøv igjen.",
       "signup-weak-password": "Bruk et passord med minst 8 tegn.",
       "signup-rate-limited": "For mange registreringsforsøk. Vent litt og prøv igjen.",
       "signup-invalid-email": "Skriv inn en gyldig e-postadresse.",
-      "signup-provider-disabled": "E-postregistrering er ikke tilgjengelig ennå. Sjekk Supabase Auth-innstillingene."
+      "signup-provider-disabled": "E-postregistrering er ikke tilgjengelig ennå. Sjekk Supabase Auth-innstillingene.",
+      "reset-rate-limited": "For mange forespørsler. Be om en ny lenke senere.",
+      "reset-provider-or-smtp": "Tilbakestillings-e-posten kunne ikke sendes akkurat nå. Prøv senere eller kontakt støtte.",
+      "reset-invalid-email": "Skriv inn en gyldig e-postadresse.",
+      "reset-redirect-not-allowed": "Oppsettet for tilbakestillingslenken er ufullstendig. Kontakt støtte.",
+      "reset-email-failed": "E-posten kunne ikke sendes. Sjekk adressen eller prøv igjen senere."
     },
     "forgot": {
       "eyebrow": "Passordhjelp",
       "title": "Tilbakestill passordet ditt.",
       "body": "Skriv inn e-posten til kontoen. Hvis kontoen finnes, sender vi en sikker lenke.",
       "submit": "Send tilbakestillingslenke",
-      "backToLogin": "Tilbake til innlogging"
+      "backToLogin": "Tilbake til innlogging",
+      "submitting": "Sender tilbakestillingslenke...",
+      "help": "Hvis e-posten ikke kommer, sjekk søppelpost eller be om en ny lenke senere. For lokal testing bør du bruke en ny lenke og åpne den i samme nettleser/profil der du ba om den."
     },
     "reset": {
       "eyebrow": "Nytt passord",
       "title": "Velg et nytt passord.",
       "body": "Bruk lenken fra e-posten, og sett et nytt passord for kontoen.",
       "submit": "Lagre nytt passord",
-      "requestNewLink": "Be om ny lenke"
+      "requestNewLink": "Be om ny lenke",
+      "recoveryHelp": "Be om en ny tilbakestillingslenke. Ved lokal testing bør du åpne den i samme nettleser/profil der du ba om den. Lenker laget før siste reset-fiks kan feile."
     },
     "resend": {
       "title": "Trenger du en ny bekreftelses-e-post?",
@@ -257,63 +266,63 @@
   "AuthStatus": {
     "login": "Logg inn",
     "signup": "Opprett konto",
-    "openApp": "Open app",
+    "openApp": "Åpne appen",
     "logout": "Logg ut"
   },
   "ProtectedApp": {
     "nav": {
       "home": "Tilbake til forsiden",
-      "signedIn": "Signed in",
+      "signedIn": "Innlogget",
       "logout": "Logg ut",
       "dashboard": "Dashbord",
       "settings": "Innstillinger",
-      "friends": "Friends",
-      "groups": "Groups",
-      "notifications": "Notifications",
-      "admin": "Admin",
+      "friends": "Venner",
+      "groups": "Grupper",
+      "notifications": "Varsler",
+      "admin": "Administrator",
       "primary": "Hovednavigasjon",
       "challenges": "Utfordringer",
       "brand": "NoProblemo"
     },
-    "eyebrow": "Protected area",
-    "title": "Authentication is ready.",
+    "eyebrow": "Beskyttet område",
+    "title": "Autentisering er klar.",
     "body": "Denne beskyttede plassholderen verifiserer øktflyten. Fullt dashbord, lagrede utfordringer og gjesteimport starter i fase 6.",
     "actions": {
       "solve": "Fortsett gjestearbeidsområdet",
-      "support": "Contact support"
+      "support": "Kontakt support"
     },
     "phaseNote": "Ingen dashborddata lagres eller importeres i fase 5."
   },
   "Dashboard": {
     "eyebrow": "Dashbord",
-    "title": "Welcome back.",
-    "titleWithName": "Welcome back, {name}.",
-    "body": "Administrer lagrede utfordringer, importer gjestearbeid fra denne enheten og fortsett der du slapp.",
+    "title": "Dashbord",
+    "titleWithName": "Velkommen tilbake, {name}.",
+    "body": "Fortsett med lagrede utfordringer, kladder, samarbeid og varsler.",
     "actions": {
       "newChallenge": "Ny utfordring",
       "settings": "Profilinnstillinger"
     },
     "summary": {
-      "total": "Saved challenges",
-      "active": "Active drafts",
-      "future": "Collaboration",
-      "pending": "Ventende saker"
+      "total": "Lagrede utfordringer",
+      "active": "Aktive kladder",
+      "future": "Samarbeid",
+      "pending": "Ventende oppgaver"
     },
     "futureNote": "Venner, grupper og meldinger er planlagt for senere faser.",
     "guestImport": {
-      "eyebrow": "Guest work found",
+      "eyebrow": "Gjestearbeid funnet",
       "title": "Du har ulagret gjestearbeid på denne enheten.",
       "body": "Importer det til kontoen din for å fortsette senere. Importen oppretter et privat utkast som eies av den innloggede brukeren.",
-      "importedTitle": "Guest work imported.",
+      "importedTitle": "Gjestearbeid er importert.",
       "importedBody": "Denne enheten har allerede importert gjeldende gjesteutkast. Du kan fortsette fra den lagrede utfordringen.",
       "fallbackTitle": "Importert gjesteutfordring",
-      "importAction": "Import guest work",
-      "importing": "Importing...",
+      "importAction": "Importer gjestearbeid",
+      "importing": "Importerer...",
       "continueImported": "Fortsett importert utfordring",
-      "reviewGuest": "Review guest draft",
+      "reviewGuest": "Se gjennom gjesteutkast",
       "messages": {
         "success": "Gjestearbeid ble importert til kontoen din.",
-        "alreadyImported": "This guest draft was already imported from this device.",
+        "alreadyImported": "Dette gjesteutkastet er allerede importert fra denne enheten.",
         "missingDraft": "Ingen gjesteutkast ble sendt til import.",
         "invalidDraft": "Gjesteutkastet kunne ikke leses.",
         "emptyDraft": "Gjesteutkastet er tomt.",
@@ -335,11 +344,11 @@
       }
     },
     "active": {
-      "title": "My active challenges",
+      "title": "Mine aktive utfordringer",
       "body": "Utkast og aktive lagrede utfordringer knyttet til kontoen din."
     },
     "recent": {
-      "title": "Latest saved challenges",
+      "title": "Sist lagrede utfordringer",
       "body": "Nylige skyutfordringer tilgjengelige gjennom den autentiserte økten din.",
       "empty": "Ingen lagrede skyutfordringer ennå."
     },
@@ -349,18 +358,18 @@
       "action": "Opprett første utfordring"
     },
     "errors": {
-      "listTitle": "Challenges could not be loaded.",
+      "listTitle": "Utfordringer kunne ikke lastes.",
       "listBody": "Kontroller Supabase-konfigurasjon, migreringsstatus og RLS-regler."
     },
     "social": {
       "friendRequests": "Innkommende venneforespørsler",
       "groupInvitations": "Gruppeinvitasjoner",
-      "groups": "Groups",
+      "groups": "Grupper",
       "noGroups": "Ingen grupper ennå.",
-      "notifications": "Unread notifications"
+      "notifications": "Uleste varsler"
     },
     "activity": {
-      "title": "Recent activity",
+      "title": "Nylig aktivitet",
       "empty": "Ingen nylig aktivitet ennå.",
       "types": {
         "challenge_created": "Utfordring opprettet",
@@ -372,8 +381,8 @@
         "group_member_removed": "Gruppemedlem fjernet",
         "group_message_created": "Gruppemelding opprettet",
         "challenge_message_created": "Utfordringsmelding opprettet",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "task_updated": "Oppgave oppdatert",
+        "solution_updated": "Løsning oppdatert"
       }
     },
     "status": {
@@ -395,8 +404,8 @@
     "fields": {
       "title": "Tittel",
       "titlePlaceholder": "Hvilket problem løser du?",
-      "shortDescription": "Short description",
-      "shortDescriptionPlaceholder": "Add a short context note, optional"
+      "shortDescription": "Kort beskrivelse",
+      "shortDescriptionPlaceholder": "Legg til et kort kontekstnotat, valgfritt"
     },
     "submit": "Opprett utkast",
     "errors": {
@@ -410,21 +419,21 @@
     "eyebrow": "Lagret utfordring",
     "status": "Status",
     "noDescription": "Ingen kort beskrivelse ennå.",
-    "phaseSevenTitle": "Workspace starts in Phase 7.",
+    "phaseSevenTitle": "Arbeidsområdet starter i fase 7.",
     "phaseSevenBody": "Denne siden lar deg fortsette med en lagret utfordring og se importerte seksjoner. Redigering av hele den strukturerte arbeidsflyten hører til neste fase.",
     "sections": {
-      "title": "Imported sections",
+      "title": "Importerte seksjoner",
       "empty": "Ingen innhold ennå.",
       "none": "Ingen seksjoner er lagret for denne utfordringen ennå.",
       "keys": {
-        "problem_title": "Problem title",
-        "short_description": "Short description",
-        "background_context": "Background/context",
-        "who_is_affected": "Who is affected",
-        "why_it_matters": "Why it matters",
-        "possible_causes": "Possible causes or options",
-        "final_recommendation": "Outcome or recommendation",
-        "summary": "Summary or next step"
+        "problem_title": "Problemets tittel",
+        "short_description": "Kort beskrivelse",
+        "background_context": "Bakgrunn/kontekst",
+        "who_is_affected": "Hvem påvirkes",
+        "why_it_matters": "Hvorfor det er viktig",
+        "possible_causes": "Mulige årsaker eller alternativer",
+        "final_recommendation": "Resultat eller anbefaling",
+        "summary": "Sammendrag eller neste steg"
       }
     }
   },
@@ -433,11 +442,11 @@
     "eyebrow": "Profilinnstillinger",
     "title": "Administrer den grunnleggende profilen din.",
     "body": "Oppdater visningsnavn og foretrukket språk. Avansert kontoadministrasjon er planlagt for senere faser.",
-    "account": "Account email",
+    "account": "Konto-e-post",
     "fields": {
-      "displayName": "Display name",
+      "displayName": "Visningsnavn",
       "displayNamePlaceholder": "Navnet ditt",
-      "preferredLocale": "Preferred language",
+      "preferredLocale": "Foretrukket språk",
       "newPassword": "Nytt passord",
       "newPasswordPlaceholder": "Minst 8 tegn",
       "confirmPassword": "Bekreft passord",
@@ -489,26 +498,26 @@
     "eyebrow": "Arbeidsområde for utfordring",
     "noDescription": "Ingen kort beskrivelse ennå.",
     "updated": "Oppdatert",
-    "sectionsTitle": "Problem-solving sections",
+    "sectionsTitle": "Problemløsingsseksjoner",
     "sectionsBody": "Lagre de strukturerte notatene for denne utfordringen. Manglende rader opprettes trygt når du lagrer.",
     "fields": {
       "title": "Tittel",
-      "shortDescription": "Short description",
+      "shortDescription": "Kort beskrivelse",
       "status": "Status",
-      "none": "Not scored"
+      "none": "Ikke vurdert"
     },
     "statuses": {
-      "draft": "Draft",
-      "active": "Active",
-      "completed": "Completed",
-      "archived": "Archived"
+      "draft": "Utkast",
+      "active": "Aktiv",
+      "completed": "Fullført",
+      "archived": "Arkivert"
     },
     "details": {
       "title": "Detaljer om utfordringen",
       "body": "Hold grunninformasjonen oppdatert før du går gjennom stegene."
     },
     "workflow": {
-      "title": "Seven-step workflow",
+      "title": "Sjustegs arbeidsflyt",
       "body": "Gå gjennom stegene i ditt eget tempo. Lagre seksjoner, løsninger, oppgaver og konklusjoner etter hvert som arbeidet blir tydeligere.",
       "steps": {
         "define": {
@@ -520,8 +529,8 @@
           "body": "Fang kontekst, berørte personer, hvorfor det betyr noe, og mulige årsaker."
         },
         "brainstorm": {
-          "title": "Brainstorm possible solutions",
-          "body": "Add candidate solutions without judging them too early."
+          "title": "Utforsk mulige løsninger",
+          "body": "Legg til løsningsforslag uten å vurdere dem for tidlig."
         },
         "evaluate": {
           "title": "Vurder fordeler og ulemper",
@@ -543,141 +552,141 @@
     },
     "sections": {
       "problem_title": {
-        "title": "Problem title",
+        "title": "Problemets tittel",
         "help": "Formuler problemet i én tydelig setning eller et kort avsnitt."
       },
       "short_description": {
-        "title": "Short description",
-        "help": "Add a concise explanation of what is happening."
+        "title": "Kort beskrivelse",
+        "help": "Legg til en kort forklaring av hva som skjer."
       },
       "background_context": {
-        "title": "Background/context",
+        "title": "Bakgrunn/kontekst",
         "help": "Beskriv situasjonen, historikken, begrensningene og relevante fakta."
       },
       "who_is_affected": {
-        "title": "Who is affected",
+        "title": "Hvem påvirkes",
         "help": "List personer, team, kunder, brukere eller grupper som påvirkes av problemet."
       },
       "why_it_matters": {
-        "title": "Why it matters",
-        "help": "Explain impact, urgency, risks, costs, or opportunities."
+        "title": "Hvorfor det er viktig",
+        "help": "Forklar påvirkning, hast, risiko, kostnader eller muligheter."
       },
       "possible_causes": {
-        "title": "Possible causes",
-        "help": "Capture likely causes, contributing factors, or assumptions to test."
+        "title": "Mulige årsaker",
+        "help": "Fang opp sannsynlige årsaker, medvirkende faktorer eller antakelser som bør testes."
       },
       "final_recommendation": {
-        "title": "Final recommendation",
+        "title": "Endelig anbefaling",
         "help": "Skriv valgt løsning og hvorfor den er best nå."
       },
       "summary": {
-        "title": "Summary/review",
+        "title": "Sammendrag/gjennomgang",
         "help": "Oppsummer konklusjonen, læringen og neste tidspunkt for gjennomgang."
       }
     },
     "solutions": {
-      "title": "Possible solutions",
+      "title": "Mulige løsninger",
       "body": "Opprett, sammenlign, ranger og forbedre mulige løsninger. Poeng er enkle verdier fra 1 til 5.",
-      "newTitle": "Add a possible solution",
+      "newTitle": "Legg til en mulig løsning",
       "fields": {
-        "title": "Solution title",
+        "title": "Løsningstittel",
         "description": "Beskrivelse",
-        "pros": "Pros",
-        "cons": "Cons",
-        "risk": "Risk",
-        "effort": "Effort",
-        "impact": "Impact",
-        "resourcesNeeded": "Resources needed",
-        "priority": "Priority/ranking"
+        "pros": "Fordeler",
+        "cons": "Ulemper",
+        "risk": "Risiko",
+        "effort": "Innsats",
+        "impact": "Effekt",
+        "resourcesNeeded": "Nødvendige ressurser",
+        "priority": "Prioritet/rangering"
       }
     },
     "tasks": {
-      "title": "Tasks/actions",
+      "title": "Oppgaver/handlinger",
       "body": "Opprett praktiske neste handlinger. Ansvarlig person er ren tekst foreløpig; ingen brukertildeling eller varsler er inkludert.",
-      "newTitle": "Add a task/action",
+      "newTitle": "Legg til en oppgave/handling",
       "fields": {
-        "title": "Task title",
+        "title": "Oppgavetittel",
         "description": "Beskrivelse",
-        "responsiblePerson": "Responsible person",
-        "deadline": "Deadline",
-        "completed": "Completed",
-        "position": "Position"
+        "responsiblePerson": "Ansvarlig person",
+        "deadline": "Frist",
+        "completed": "Fullført",
+        "position": "Plassering"
       }
     },
     "actions": {
       "saveDetails": "Lagre detaljer",
       "saveSections": "Lagre seksjoner",
       "saveSolution": "Lagre løsning",
-      "addSolution": "Add solution",
-      "deleteSolution": "Delete solution",
+      "addSolution": "Legg til løsning",
+      "deleteSolution": "Slett løsning",
       "saveTask": "Lagre oppgave",
-      "addTask": "Add task",
-      "deleteTask": "Delete task"
+      "addTask": "Legg til oppgave",
+      "deleteTask": "Slett oppgave"
     },
     "statusMessages": {
       "created": "Utkastet ble opprettet.",
       "details-saved": "Detaljene ble lagret.",
       "sections-saved": "Seksjonene ble lagret.",
-      "solution-saved": "Solution was saved.",
-      "solution-deleted": "Solution was deleted.",
-      "task-saved": "Task was saved.",
-      "task-deleted": "Task was deleted.",
-      "message-sent": "Message sent.",
-      "message-deleted": "Message removed."
+      "solution-saved": "Løsningen ble lagret.",
+      "solution-deleted": "Løsningen ble slettet.",
+      "task-saved": "Oppgaven ble lagret.",
+      "task-deleted": "Oppgaven ble slettet.",
+      "message-sent": "Melding sendt.",
+      "message-deleted": "Melding fjernet."
     },
     "errorMessages": {
       "details-missing-title": "Legg til en tittel før du lagrer detaljer.",
       "details-save-failed": "Detaljene kunne ikke lagres.",
       "sections-save-failed": "Seksjonene kunne ikke lagres.",
-      "solution-missing-title": "Add a solution title before saving.",
-      "solution-invalid-score": "Use score values from 1 to 5.",
-      "solution-save-failed": "Solution could not be saved.",
-      "solution-delete-failed": "Solution could not be deleted.",
-      "task-missing-title": "Add a task title before saving.",
-      "task-save-failed": "Task could not be saved.",
-      "task-delete-failed": "Task could not be deleted.",
-      "message-send-failed": "Message could not be sent.",
-      "message-delete-failed": "Message could not be removed."
+      "solution-missing-title": "Legg til en løsningstittel før du lagrer.",
+      "solution-invalid-score": "Bruk poengverdier fra 1 til 5.",
+      "solution-save-failed": "Løsningen kunne ikke lagres.",
+      "solution-delete-failed": "Løsningen kunne ikke slettes.",
+      "task-missing-title": "Legg til en oppgavetittel før du lagrer.",
+      "task-save-failed": "Oppgaven kunne ikke lagres.",
+      "task-delete-failed": "Oppgaven kunne ikke slettes.",
+      "message-send-failed": "Meldingen kunne ikke sendes.",
+      "message-delete-failed": "Meldingen kunne ikke fjernes."
     },
     "export": {
-      "title": "Markdown export",
+      "title": "Markdown-eksport",
       "body": "Kopier eller last ned et lesbart Markdown-sammendrag av denne utfordringen. PDF-eksport er en fremtidig funksjon.",
-      "copy": "Copy Markdown",
-      "download": "Download .md",
-      "copySuccess": "Markdown copied.",
+      "copy": "Kopier Markdown",
+      "download": "Last ned .md",
+      "copySuccess": "Markdown kopiert.",
       "copyFallback": "Kopiering mislyktes. Du kan bruke nedlastingsvalget i stedet.",
-      "downloadSuccess": "Markdown file prepared.",
-      "shortDescription": "Short description",
+      "downloadSuccess": "Markdown-fil klargjort.",
+      "shortDescription": "Kort beskrivelse",
       "status": "Status",
-      "solutions": "Possible solutions",
-      "tasks": "Tasks/actions",
-      "pros": "Pros",
-      "cons": "Cons",
-      "risk": "Risk",
-      "effort": "Effort",
-      "impact": "Impact",
-      "resourcesNeeded": "Resources needed",
-      "priority": "Priority/ranking",
-      "responsiblePerson": "Responsible person",
-      "deadline": "Deadline",
-      "completed": "Completed",
-      "position": "Position",
-      "yes": "Yes",
-      "no": "No"
+      "solutions": "Mulige løsninger",
+      "tasks": "Oppgaver/handlinger",
+      "pros": "Fordeler",
+      "cons": "Ulemper",
+      "risk": "Risiko",
+      "effort": "Innsats",
+      "impact": "Effekt",
+      "resourcesNeeded": "Nødvendige ressurser",
+      "priority": "Prioritet/rangering",
+      "responsiblePerson": "Ansvarlig person",
+      "deadline": "Frist",
+      "completed": "Fullført",
+      "position": "Plassering",
+      "yes": "Ja",
+      "no": "Nei"
     },
     "messages": {
-      "title": "Discussion",
+      "title": "Diskusjon",
       "body": "Hold en enkel diskusjon om utfordringen med personer som har tilgang til den.",
       "placeholder": "Skriv en kort melding.",
       "send": "Send melding",
       "empty": "Ingen meldinger ennå.",
-      "delete": "Remove",
+      "delete": "Fjern",
       "deleted": "Denne meldingen ble fjernet.",
-      "unknownSender": "Unknown sender",
+      "unknownSender": "Ukjent avsender",
       "viewerReadOnly": "Du kan lese denne diskusjonen, men rollen din kan ikke sende meldinger."
     },
     "activity": {
-      "title": "Activity",
+      "title": "Aktivitet",
       "empty": "Ingen aktivitet ennå.",
       "types": {
         "challenge_created": "Utfordring opprettet",
@@ -689,37 +698,37 @@
         "group_member_removed": "Gruppemedlem fjernet",
         "group_message_created": "Gruppemelding opprettet",
         "challenge_message_created": "Utfordringsmelding opprettet",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "task_updated": "Oppgave oppdatert",
+        "solution_updated": "Løsning oppdatert"
       }
     }
   },
   "Friends": {
-    "eyebrow": "Friends",
+    "eyebrow": "Venner",
     "title": "Venner og forespørsler",
     "body": "Send forespørsler med visningsnavn eller eksakt profil-ID. Vennskap gir ikke tilgang til private utfordringer.",
     "search": {
       "title": "Finn en profil",
       "body": "Søk er begrenset til visningsnavn eller eksakt profil-ID og viser ikke e-postadresser.",
       "placeholder": "Visningsnavn eller profil-ID",
-      "submit": "Search",
+      "submit": "Søk",
       "send": "Send forespørsel",
       "empty": "Ingen profiler funnet.",
       "unnamed": "Profil uten navn"
     },
     "incoming": {
-      "title": "Incoming requests",
+      "title": "Innkommende forespørsler",
       "empty": "Ingen innkommende forespørsler.",
-      "accept": "Accept",
-      "decline": "Decline"
+      "accept": "Godta",
+      "decline": "Avslå"
     },
     "outgoing": {
-      "title": "Outgoing requests",
+      "title": "Utgående forespørsler",
       "empty": "Ingen utgående forespørsler.",
       "cancel": "Avbryt forespørsel"
     },
     "friends": {
-      "title": "Current friends",
+      "title": "Nåværende venner",
       "empty": "Ingen venner ennå.",
       "remove": "Fjern venn"
     },
@@ -734,30 +743,30 @@
       "friend-invalid-user": "Velg en annen bruker før du sender forespørsel.",
       "friend-request-failed": "Venneforespørselen kunne ikke sendes. Den kan allerede være ventende.",
       "friend-response-failed": "Venneforespørselen kunne ikke oppdateres.",
-      "friend-remove-failed": "Friendship could not be removed."
+      "friend-remove-failed": "Vennskapet kunne ikke fjernes."
     }
   },
   "Groups": {
-    "eyebrow": "Groups",
-    "title": "Groups",
+    "eyebrow": "Grupper",
+    "title": "Grupper",
     "body": "Opprett private grupper, inviter medlemmer og koble valgte utfordringer for samarbeid.",
     "create": "Opprett gruppe",
     "unnamed": "Gruppe uten navn",
-    "role": "Role",
+    "role": "Rolle",
     "roles": {
-      "owner": "Owner",
-      "admin": "Admin",
-      "member": "Member",
-      "viewer": "Viewer"
+      "owner": "Eier",
+      "admin": "Administrator",
+      "member": "Medlem",
+      "viewer": "Seer"
     },
     "invitations": {
-      "title": "Pending invitations",
+      "title": "Ventende invitasjoner",
       "empty": "Ingen ventende gruppeinvitasjoner.",
-      "accepted": "Accept",
-      "declined": "Decline"
+      "accepted": "Godta",
+      "declined": "Avslå"
     },
     "mine": {
-      "title": "My groups",
+      "title": "Mine grupper",
       "empty": "Du er ikke medlem av noen grupper ennå."
     },
     "status": {
@@ -789,13 +798,13 @@
     "eyebrow": "Gruppe",
     "noDescription": "Ingen gruppebeskrivelse ennå.",
     "yourRole": "Din rolle",
-    "role": "Role",
+    "role": "Rolle",
     "unnamed": "Profil uten navn",
     "roles": {
-      "owner": "Owner",
-      "admin": "Admin",
-      "member": "Member",
-      "viewer": "Viewer"
+      "owner": "Eier",
+      "admin": "Administrator",
+      "member": "Medlem",
+      "viewer": "Seer"
     },
     "settings": {
       "title": "Gruppeinnstillinger",
@@ -804,51 +813,51 @@
       "description": "Gruppebeskrivelse"
     },
     "members": {
-      "title": "Members",
-      "limit": "Groups are limited to 100 members.",
-      "updateRole": "Update role",
-      "remove": "Remove member"
+      "title": "Medlemmer",
+      "limit": "Grupper er begrenset til 100 medlemmer.",
+      "updateRole": "Oppdater rolle",
+      "remove": "Fjern medlem"
     },
     "invite": {
-      "title": "Invite user",
+      "title": "Inviter bruker",
       "searchPlaceholder": "Visningsnavn eller profil-ID",
-      "search": "Search",
-      "send": "Invite",
+      "search": "Søk",
+      "send": "Inviter",
       "empty": "Ingen profiler funnet."
     },
     "invitations": {
-      "title": "Pending invitations",
+      "title": "Ventende invitasjoner",
       "empty": "Ingen ventende invitasjoner.",
-      "cancel": "Cancel invite"
+      "cancel": "Avbryt invitasjon"
     },
     "challenges": {
-      "title": "Linked challenges",
+      "title": "Koblede utfordringer",
       "empty": "Ingen utfordringer er koblet til denne gruppen ennå.",
       "noneToLink": "Ingen egne utfordringer tilgjengelige for kobling.",
       "link": "Koble utfordring",
-      "unlink": "Unlink"
+      "unlink": "Koble fra"
     },
     "status": {
       "group-created": "Gruppe opprettet.",
       "group-saved": "Gruppe lagret.",
       "group-invite-sent": "Gruppeinvitasjon sendt.",
       "group-invitation-canceled": "Gruppeinvitasjon avbrutt.",
-      "group-member-removed": "Member removed.",
-      "group-role-updated": "Member role updated.",
+      "group-member-removed": "Medlem fjernet.",
+      "group-role-updated": "Medlemsrolle oppdatert.",
       "group-challenge-linked": "Utfordring koblet til gruppe.",
       "group-challenge-unlinked": "Utfordring fjernet fra gruppe.",
-      "message-sent": "Message sent.",
-      "message-deleted": "Message removed."
+      "message-sent": "Melding sendt.",
+      "message-deleted": "Melding fjernet."
     },
     "errors": {
       "group-save-failed": "Gruppen kunne ikke lagres.",
       "group-invite-failed": "Gruppeinvitasjonen kunne ikke sendes.",
-      "group-member-remove-failed": "Member could not be removed.",
-      "group-role-update-failed": "Member role could not be updated.",
+      "group-member-remove-failed": "Medlemmet kunne ikke fjernes.",
+      "group-role-update-failed": "Medlemsrollen kunne ikke oppdateres.",
       "group-challenge-link-failed": "Utfordringen kunne ikke kobles.",
       "group-challenge-unlink-failed": "Utfordringen kunne ikke kobles fra.",
-      "message-send-failed": "Message could not be sent.",
-      "message-delete-failed": "Message could not be removed."
+      "message-send-failed": "Meldingen kunne ikke sendes.",
+      "message-delete-failed": "Meldingen kunne ikke fjernes."
     },
     "messages": {
       "title": "Gruppemeldinger",
@@ -856,9 +865,9 @@
       "placeholder": "Skriv en kort gruppemelding.",
       "send": "Send melding",
       "empty": "Ingen gruppemeldinger ennå.",
-      "delete": "Remove",
+      "delete": "Fjern",
       "deleted": "Denne meldingen ble fjernet.",
-      "unknownSender": "Unknown sender",
+      "unknownSender": "Ukjent avsender",
       "viewerReadOnly": "Seere kan lese gruppemeldinger, men kan ikke sende meldinger."
     },
     "activity": {
@@ -874,29 +883,29 @@
         "group_member_removed": "Gruppemedlem fjernet",
         "group_message_created": "Gruppemelding opprettet",
         "challenge_message_created": "Utfordringsmelding opprettet",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "task_updated": "Oppgave oppdatert",
+        "solution_updated": "Løsning oppdatert"
       }
     }
   },
   "Notifications": {
-    "eyebrow": "Notifications",
-    "title": "Notifications",
+    "eyebrow": "Varsler",
+    "title": "Varsler",
     "body": "Private oppdateringer for kontoen, gruppene og utfordringene dine.",
-    "unread": "Unread",
-    "read": "Read",
+    "unread": "Uleste",
+    "read": "Leste",
     "emptyUnread": "Ingen uleste varsler.",
     "emptyRead": "Ingen leste varsler ennå.",
-    "markRead": "Mark as read",
-    "markAllRead": "Mark all as read",
+    "markRead": "Merk som lest",
+    "markAllRead": "Merk alle som lest",
     "openGroup": "Åpne gruppe",
     "openChallenge": "Åpne utfordring",
     "status": {
-      "notification-read": "Notification marked as read.",
-      "all-notifications-read": "All notifications marked as read."
+      "notification-read": "Varsel merket som lest.",
+      "all-notifications-read": "Alle varsler er merket som lest."
     },
     "errors": {
-      "notification-read-failed": "Notification could not be updated."
+      "notification-read-failed": "Varslet kunne ikke oppdateres."
     },
     "types": {
       "friend_request": "Venneforespørsel",
@@ -922,32 +931,32 @@
     }
   },
   "Admin": {
-    "eyebrow": "Admin",
+    "eyebrow": "Administrator",
     "title": "Adminoversikt",
     "body": "En beskyttet driftsvisning med bare aggregerte tellinger og begrensede metadata.",
     "actions": {
       "settings": "Admininnstillinger"
     },
     "verification": {
-      "title": "Live Supabase verification needed",
+      "title": "Live Supabase-verifisering kreves",
       "body": "Fase 10 legger til lokale migreringer og RLS/RPC-regler. Bruk og test dem mot det virkelige Supabase-prosjektet før du stoler på produksjonsdata.",
       "error": "Noen admindata kunne ikke lastes. Kontroller at fase 10-migreringen er brukt."
     },
     "metrics": {
-      "profiles": "Profiles",
-      "challenges": "Challenges",
-      "groups": "Groups",
-      "messages": "Messages",
-      "notifications": "Notifications"
+      "profiles": "Profiler",
+      "challenges": "Utfordringer",
+      "groups": "Grupper",
+      "messages": "Meldinger",
+      "notifications": "Varsler"
     },
     "profiles": {
-      "title": "Profiles",
+      "title": "Profiler",
       "body": "Begrensede profildata for admin-gjennomgang. E-post og auth.users-data vises ikke.",
       "id": "Profil-ID",
-      "displayName": "Display name",
-      "locale": "Locale",
-      "role": "Role",
-      "created": "Created",
+      "displayName": "Visningsnavn",
+      "locale": "Språk",
+      "role": "Rolle",
+      "created": "Opprettet",
       "noDisplayName": "Ingen visningsnavn",
       "empty": "Ingen profiler tilgjengelig."
     },
@@ -956,7 +965,7 @@
       "admin": "Administrator"
     },
     "activity": {
-      "title": "Recent activity",
+      "title": "Nylig aktivitet",
       "noActor": "Ingen aktør",
       "empty": "Ingen aktivitet tilgjengelig.",
       "types": {
@@ -969,14 +978,14 @@
         "group_member_removed": "Gruppemedlem fjernet",
         "group_message_created": "Gruppemelding opprettet",
         "challenge_message_created": "Utfordringsmelding opprettet",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated",
-        "unknown": "Activity event"
+        "task_updated": "Oppgave oppdatert",
+        "solution_updated": "Løsning oppdatert",
+        "unknown": "Aktivitetshendelse"
       }
     },
     "audit": {
       "title": "Adminrevisjonslogg",
-      "body": "Sensitive admin mutations should be logged here when those actions are added.",
+      "body": "Sensitive adminendringer bør logges her når disse handlingene legges til.",
       "noTarget": "Ingen mål",
       "empty": "Ingen adminrevisjonsoppføringer ennå."
     }
@@ -988,10 +997,10 @@
     "body": "En lokal statusvisning for utrulling, Supabase-verifisering og støtteoppsett.",
     "checklists": {
       "appStatus": {
-        "title": "App status",
+        "title": "Appstatus",
         "adminProtected": "Adminruter beskyttes av profiles.role.",
         "dashboard": "Dashbord og beskyttede appruter er fortsatt tilgjengelige.",
-        "guestMode": "Guest mode remains local browser storage only.",
+        "guestMode": "Gjestemodus bruker fortsatt bare lokal nettleserlagring.",
         "messages": "Meldinger, varsler og aktivitet er fortsatt beskyttet av RLS."
       },
       "supabase": {
@@ -999,27 +1008,31 @@
         "phase10Migration": "Bruk fase 10-migreringen i Supabase.",
         "rls": "Gå gjennom RLS-regler med ekte autentiserte brukere.",
         "firstAdmin": "Tildel første admin manuelt i Supabase SQL.",
-        "liveVerification": "Verify admin RPC behavior before production use."
+        "liveVerification": "Verifiser admin-RPC-er før produksjonsbruk."
       },
       "deployment": {
-        "title": "Deployment",
-        "envTemplates": "Use templates only; do not expose real secret values.",
-        "supportEmail": "Public support email is support@noproblemo.tech.",
+        "title": "Utrulling",
+        "envTemplates": "Bruk bare maler; ikke eksponer ekte hemmelige verdier.",
+        "supportEmail": "Offentlig støtteadresse er support@noproblemo.tech.",
         "noAutomation": "E-postautomatisering, Resend og Vercel Cron brukes med vilje ikke.",
         "validation": "Kjør lint, typecheck og build før utrulling."
       }
     },
     "environment": {
-      "title": "Environment variables",
-      "body": "This checklist shows variable names only, never real values."
+      "title": "Miljøvariabler",
+      "body": "Denne sjekklisten viser bare variabelnavn, aldri ekte verdier."
     },
     "support": {
       "title": "Støtte",
       "body": "Bruk denne offentlige adressen for MVP-støtte og tilbakemeldinger."
     },
     "boundaries": {
-      "title": "Phase boundaries",
-      "body": "Phase 10 does not add payments, AI, email automation, Resend, Vercel Cron, billing, or support tickets."
+      "title": "Fasegrenser",
+      "body": "Fase 10 legger ikke til betalinger, AI, e-postautomatisering, Resend, Vercel Cron, fakturering eller støttesaker."
     }
+  },
+  "PasswordField": {
+    "show": "Vis",
+    "hide": "Skjul"
   }
 }

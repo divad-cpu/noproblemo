@@ -1,8 +1,8 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
-import { requestPasswordReset } from "../auth/actions";
 import { SiteFooter } from "../_components/site-footer";
+import { ForgotPasswordForm } from "./_components/forgot-password-form";
 
 type ForgotPasswordPageProps = {
   params: Promise<{ locale: Locale }>;
@@ -19,7 +19,14 @@ function getQueryValue(
 }
 
 const statusKeys = ["reset-email-sent"] as const;
-const errorKeys = ["missing-email", "reset-request-failed"] as const;
+const errorKeys = [
+  "missing-email",
+  "reset-rate-limited",
+  "reset-provider-or-smtp",
+  "reset-invalid-email",
+  "reset-redirect-not-allowed",
+  "reset-email-failed",
+] as const;
 
 function isKnownKey<T extends readonly string[]>(
   value: string | undefined,
@@ -64,28 +71,23 @@ export default async function ForgotPasswordPage({
             </p>
           ) : null}
 
-          <form action={requestPasswordReset} className="mt-8 grid gap-4">
-            <input type="hidden" name="locale" value={locale} />
-            <label className="grid gap-2">
-              <span className="text-sm font-semibold text-[#373632]">
-                {t("fields.email")}
-              </span>
-              <input
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
-                placeholder={t("fields.emailPlaceholder")}
-              />
-            </label>
-            <button
-              type="submit"
-              className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
-            >
-              {t("forgot.submit")}
-            </button>
-          </form>
+          <ForgotPasswordForm
+            locale={locale}
+            labels={{
+              email: t("fields.email"),
+              emailPlaceholder: t("fields.emailPlaceholder"),
+              submit: t("forgot.submit"),
+              submitting: t("forgot.submitting"),
+              success: t("status.reset-email-sent"),
+              help: t("forgot.help"),
+              missingEmail: t("errors.missing-email"),
+              rateLimited: t("errors.reset-rate-limited"),
+              providerOrSmtp: t("errors.reset-provider-or-smtp"),
+              invalidEmail: t("errors.reset-invalid-email"),
+              redirectNotAllowed: t("errors.reset-redirect-not-allowed"),
+              failed: t("errors.reset-email-failed"),
+            }}
+          />
 
           <Link
             href="/login"

@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
+import { PasswordField } from "../_components/password-field";
 import { SiteFooter } from "../_components/site-footer";
 import {
   resendSignupConfirmation,
@@ -74,6 +75,7 @@ export default async function SignupPage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "Auth" });
+  const passwordT = await getTranslations({ locale, namespace: "PasswordField" });
   const nextPath = getNextPath(query, locale);
   const error = getQueryValue(query, "error");
   const status = getQueryValue(query, "status");
@@ -130,20 +132,18 @@ export default async function SignupPage({
                 placeholder={t("fields.emailPlaceholder")}
               />
             </label>
-            <label className="grid gap-2">
-              <span className="text-sm font-semibold text-[#373632]">
-                {t("fields.password")}
-              </span>
-              <input
-                name="password"
-                type="password"
-                autoComplete="new-password"
-                required
-                minLength={8}
-                className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
-                placeholder={t("fields.newPasswordPlaceholder")}
-              />
-            </label>
+            <PasswordField
+              name="password"
+              label={t("fields.password")}
+              autoComplete="new-password"
+              required
+              minLength={8}
+              placeholder={t("fields.newPasswordPlaceholder")}
+              buttonLabels={{
+                show: passwordT("show"),
+                hide: passwordT("hide"),
+              }}
+            />
             <button
               type="submit"
               className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"

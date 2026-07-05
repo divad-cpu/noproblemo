@@ -1,6 +1,6 @@
 # Current State
 
-Last updated: 2026-07-04
+Last updated: 2026-07-05
 
 Future Codex sessions must read this file first, then `docs/CODEX_PROJECT_MAP.md`, before changing files.
 
@@ -79,7 +79,9 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 - Google and Apple OAuth start actions prepared through Supabase Auth
 - Auth callback handling writes session cookies on the final redirect response and shows localized success/error states for email confirmation and recovery flows
 - Email confirmation fallback now avoids false invalid-link errors when Supabase confirms the account but the callback session exchange fails; users are sent to login with a clear "email may already be confirmed" state.
-- Password recovery links now target `/[locale]/reset-password` directly, where the browser Supabase client establishes the recovery session before updating the password.
+- Password recovery links now target `/[locale]/reset-password` directly. Forgot/reset password use an isolated browser-only Supabase recovery client so password recovery can establish a browser session before updating the password.
+- Forgot-password submit now keeps a stable form reference across async Supabase work, so a successful reset-email request can clear the form without a client crash.
+- Password reset failure UI now keeps the generic invalid/expired-link message and adds a localized same-browser/profile hint for Supabase PKCE recovery links.
 - Shared language switcher and footer
 - Compact select-based language switcher that preserves the current route while replacing the locale segment
 - Focused i18n cleanup for dashboard challenge statuses, workspace Markdown export status, admin profile roles, and notification titles/bodies so those visible system labels render through message keys instead of raw database values.
@@ -185,6 +187,8 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 - Account deletion requires `SUPABASE_SERVICE_ROLE_KEY` to be configured server-side in the deployment environment.
 - Supabase Auth redirect URLs must include locale-specific `/[locale]/auth/callback` routes for email confirmation and OAuth.
 - Supabase Auth redirect URLs must also include locale-specific `/[locale]/reset-password` routes for password recovery.
+- Password reset recovery is isolated from the main SSR Supabase client because the SSR/cookie-oriented client was not reliably preserving the PKCE verifier for local recovery links and produced `verifier-missing-or-expired`.
+- Reset links requested before the isolated browser recovery fix may need to be resent.
 - Guest drafts are browser-local and can be lost if localStorage is cleared.
 - Non-English translations need human review.
 - Supabase `.temp` files exist from linking/local CLI state; do not print their contents.
@@ -302,3 +306,33 @@ Validation for MVP blocker fix:
 - `npm run typecheck`: passed on 2026-07-04.
 - `npm run build`: passed on 2026-07-04.
 - `git diff --check`: passed on 2026-07-04.
+
+Hard i18n/reset-password MVP blocker follow-up:
+
+- Locale routing remains `app/[locale]/...` with `next-intl`; route locale selects the message catalog.
+- Hard i18n audit moved visible auth/password-reset controls to translations and tightened Norwegian Bokmål copy across landing, guest workspace, dashboard, protected navigation, settings, collaboration pages, notifications, and admin surfaces.
+- All 11 locale message files keep matching keys. Non-English copy is intentionally simple and still needs native review before public launch.
+- Forgot-password now requests Supabase recovery links from the browser client so PKCE verifier state remains in the same browser that opens `/[locale]/reset-password?code=...&source=recovery`.
+- Reset-password exchanges recovery codes in the browser, shows a checking state before invalid-link errors, enables the form only after exchange/session readiness, updates the password through Supabase Auth, signs out, and redirects to localized login success.
+- Password fields on login, signup, reset-password, and settings password change now include accessible show/hide controls.
+- Account deletion remains server-only, derives the current user from the authenticated session, requires explicit confirmation, and uses `lib/supabase/admin.ts` with `server-only`.
+- No remote Supabase migrations, Vercel changes, DNS changes, deployments, or env changes were made.
+
+Validation for hard i18n/reset-password MVP blocker follow-up:
+
+- Message JSON validity check: passed on 2026-07-04.
+- Message key parity check across all 11 locales: passed on 2026-07-04.
+- Hardcoded screenshot string check in `app/`: passed on 2026-07-04.
+- `npm run lint`: passed on 2026-07-04.
+- `npm run typecheck`: passed on 2026-07-04.
+- `npm run build`: passed on 2026-07-04.
+- `git diff --check`: passed on 2026-07-04.
+
+Final auth diagnostics and locale cleanup follow-up:
+
+- Forgot-password reset requests are confirmed to use the browser Supabase client. The reset redirect is exactly `/<locale>/reset-password` on the current origin and does not include the user's email in the URL.
+- Password reset request failures now map to privacy-safe categories: rate limit, provider/SMTP, invalid email format, redirect URL not allowed, and generic send failure. Development warnings log only those labels.
+- If reset email sending still fails after this code path, likely remaining causes are Supabase-side: SMTP/provider configuration, Auth rate limits, redirect URL allow-list, Site URL mismatch, or Supabase Auth email template/provider errors.
+- Non-English locale files received a machine-quality cleanup pass to remove obvious English fallback values. Native review is still required before public launch.
+- Reset links requested before the latest reset-password fixes may need to be resent.
+- No remote Supabase Auth settings, remote migrations, Vercel settings, DNS, deployments, or env values were changed.

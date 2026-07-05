@@ -228,3 +228,48 @@ MVP blocker fix for signup, header, dashboard, language, and account deletion:
 - Known problems: account deletion requires server-side `SUPABASE_SERVICE_ROLE_KEY` in the local/deployment environment; deletion cascade/anonymization behavior must be tested with disposable users in Supabase.
 - Validation results: message JSON validity, message key parity, `npm run lint`, `npm run typecheck`, `npm run build`, and `git diff --check` passed on 2026-07-04.
 - Next recommended step: retest signup/resend, language switching, header layout, dashboard layout, and account deletion locally with disposable accounts before controlled production verification.
+
+Hard i18n audit, reset-password fix, and auth/account verification:
+
+- Phase completed: focused MVP blocker follow-up, not a new product phase.
+- Features added: no large product areas; added shared translated password visibility controls and browser-side Supabase password-reset request handling.
+- Files created: `app/[locale]/_components/password-field.tsx` and `app/[locale]/forgot-password/_components/forgot-password-form.tsx`.
+- Files changed: login, signup, forgot-password, reset-password, settings password fields, all message catalogs, security/deployment/current-state/README/verification docs, changelog, and project log.
+- Database/schema changes: none.
+- Security/RLS changes: none; recovery uses the public browser Supabase client and does not log or store recovery codes, tokens, sessions, cookies, or passwords. Account deletion remains current-user-only through the server-only admin helper.
+- UI/UX changes: Norwegian Bokmål landing, guest workspace, dashboard, protected navigation, settings, collaboration, notification, and admin copy was tightened; password fields now expose accessible show/hide controls.
+- Bugs fixed: reset links requested from the app now preserve browser PKCE verifier state; reset-password no longer shows invalid/expired before exchange failure; successful password reset redirects to localized login success.
+- Known problems: recovery links requested before this fix may still fail; all non-English translations still need native review before launch.
+- Validation results: message JSON validity, message key parity, hardcoded screenshot-string search in `app/`, `npm run lint`, `npm run typecheck`, `npm run build`, and `git diff --check` passed on 2026-07-04.
+- Explicitly not added: deployments, remote migrations, Vercel settings, DNS changes, payments, AI, email automation, Resend, Vercel Cron, or new product areas.
+
+Final auth diagnostics and full locale translation cleanup:
+
+- Phase completed: focused MVP blocker follow-up before Vercel.
+- Features added: no large product areas; added privacy-safe password-reset request diagnostics and user-facing reset email failure categories.
+- Files changed: forgot-password form/page, auth reset fallback action, all message catalogs, security/deployment/current-state/README/verification docs, changelog, and project log.
+- Auth changes: browser reset request now uses exactly `window.location.origin/<locale>/reset-password`; no email is added to redirect URLs; development warnings log only generic failure labels.
+- i18n changes: non-English message files received a broad machine-quality cleanup pass for exact English fallbacks and the requested obvious English fallback phrase list.
+- Known problems: reset email sending can still fail because of Supabase-side SMTP/provider setup, rate limits, redirect allow-list, Site URL, or Auth template/provider errors; native translation review remains required.
+- Explicitly not changed: remote Supabase Auth settings, remote migrations, Vercel settings, DNS, deployments, or environment values.
+
+Forgot-password crash and reset-link clarity follow-up:
+
+- Phase completed: focused bugfix, not a new product phase.
+- Features added: no product areas; added clearer localized reset-link recovery help.
+- Files changed: forgot-password form, reset-password form/page, all message catalogs, security/deployment/current-state/README/verification docs, changelog, and project log.
+- Bugs fixed: forgot-password success no longer crashes by reading `event.currentTarget` after async Supabase work; the form now captures the form element before awaits.
+- Recovery behavior: reset-password still uses the browser Supabase client, keeps fields disabled until recovery is ready, and now explains that PKCE reset links should be opened in the same browser/profile used to request them.
+- Known problems: links opened in another browser/profile can still fail by design because the Supabase PKCE verifier is browser-local; old reset links may need to be resent.
+- Explicitly not changed: remote Supabase Auth settings, remote migrations, Vercel settings, DNS, deployments, or environment values.
+
+Isolated browser password recovery follow-up:
+
+- Phase completed: focused auth bugfix, not a new product phase.
+- Files created: `lib/supabase/recovery-client.ts`.
+- Files changed: forgot-password form, reset-password form, all message catalogs, security/deployment/current-state/README/verification docs, changelog, and project log.
+- Root cause: same-browser recovery links still failed with `verifier-missing-or-expired`, indicating the main SSR/cookie-oriented Supabase browser client was not reliably preserving or reading the password recovery PKCE verifier locally.
+- Fix: forgot/reset password now use a dedicated browser-only Supabase recovery client with implicit recovery handling. Hash tokens stay in the browser URL fragment, the reset page clears them after session setup, password update uses Supabase Auth, then the app signs out and redirects to localized login success.
+- Security: no service-role key is used for reset and reset passwords are never stored in app database tables.
+- Known problems: reset links created before this fix may fail; request a fresh reset link for testing.
+- Explicitly not changed: email confirmation flow, remote Supabase Auth settings, remote migrations, Vercel settings, DNS, deployments, or environment values.

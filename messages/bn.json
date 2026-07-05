@@ -1,62 +1,62 @@
 {
   "Metadata": {
     "title": "NoProblemo",
-    "description": "A calm place to shape problems before you solve them."
+    "description": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
   },
   "Home": {
-    "eyebrow": "Guest mode is open",
-    "title": "Turn a messy challenge into a clearer next step.",
-    "description": "NoProblemo helps you write down the problem, compare options, and leave with a simple action plan. Start as a guest now; create an account later when you want cloud saving or collaboration.",
-    "primaryCta": "Start solving now as guest",
-    "signupCta": "Create account",
-    "loginCta": "Log in",
+    "eyebrow": "অতিথি মোড খোলা",
+    "title": "পৃষ্ঠার শিরোনাম",
+    "description": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।",
+    "primaryCta": "অতিথি হিসেবে শুরু করুন",
+    "signupCta": "অ্যাকাউন্ট তৈরি করুন",
+    "loginCta": "লগ ইন",
     "what": {
-      "title": "What NoProblemo is",
-      "body": "A lightweight problem-solving workspace for people who want structure before decisions. It keeps the first step quiet, practical, and focused."
+      "title": "NoProblemo কী",
+      "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
     },
     "guest": {
-      "title": "Start as guest",
-      "body": "Use the workflow without login. Your temporary draft stays in this browser only and can be copied or exported as Markdown."
+      "title": "অতিথি হিসেবে শুরু",
+      "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
     },
     "account": {
-      "title": "Account when needed",
-      "body": "Login and account creation are placeholders for now. Later, accounts will unlock saving, groups, and collaboration."
+      "title": "প্রয়োজনে অ্যাকাউন্ট",
+      "body": "অ্যাকাউন্ট"
     },
     "workflow": {
-      "eyebrow": "Workflow preview",
-      "title": "A simple path through the problem",
+      "eyebrow": "ওয়ার্কফ্লো প্রিভিউ",
+      "title": "পৃষ্ঠার শিরোনাম",
       "steps": {
         "capture": {
-          "title": "Capture the challenge",
-          "body": "Write the problem in plain language and add the context that matters."
+          "title": "চালিয়ে যান",
+          "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
         },
         "shape": {
-          "title": "Shape possible answers",
-          "body": "List options, tradeoffs, and the outcome you want to reach."
+          "title": "চালিয়ে যান",
+          "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
         },
         "choose": {
-          "title": "Choose a next step",
-          "body": "End with one practical action you can take without needing a full project setup."
+          "title": "চালিয়ে যান",
+          "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
         }
       }
     },
     "collaboration": {
-      "title": "Collaboration comes after clarity",
-      "body": "Guest mode is private to this browser. Groups, invites, messages, members, and shared projects will require login in a later phase.",
-      "note": "This keeps the public experience useful without exposing private project data or creating unfinished collaboration flows."
+      "title": "স্বচ্ছতার পরে সহযোগিতা",
+      "body": "অতিথি মোড এই ব্রাউজারেই ব্যক্তিগত থাকে। গ্রুপ, আমন্ত্রণ, বার্তা, সদস্য এবং শেয়ার করা প্রকল্প পরের ধাপে লগইন চাইবে।",
+      "note": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
     },
     "benefits": {
       "guest": {
-        "title": "No account required to start",
-        "body": "Begin with the problem itself instead of an onboarding flow."
+        "title": "এখনও কোনো বিষয়বস্তু নেই।",
+        "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
       },
       "structured": {
-        "title": "Structured but lightweight",
-        "body": "The workflow gives enough shape to move without turning into a heavy project manager."
+        "title": "গঠিত কিন্তু হালকা",
+        "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
       },
       "private": {
-        "title": "Local by default",
-        "body": "Guest work stays in browser storage and is not sent to Supabase."
+        "title": "ডিফল্টভাবে স্থানীয়",
+        "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
       }
     }
   },
@@ -77,176 +77,185 @@
     }
   },
   "Solve": {
-    "eyebrow": "Guest workspace",
-    "title": "Start a problem-solving session without login.",
-    "body": "Use this temporary workspace to clarify a challenge. Guest work is stored only in this browser and can be copied or exported before you leave.",
-    "backHome": "Back to landing page",
-    "supportHint": "Need help?",
+    "eyebrow": "অতিথি কর্মক্ষেত্র",
+    "title": "লগইন ছাড়া সমস্যা সমাধানের সেশন শুরু করুন।",
+    "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।",
+    "backHome": "ফিরে যান",
+    "supportHint": "সহায়তা",
     "workspace": {
-      "title": "Problem-solving workflow",
-      "localNotice": "Your guest draft is saved in local browser storage. It is not sent to Supabase.",
-      "summaryTitle": "Guest challenge summary",
-      "emptyValue": "Not filled in yet.",
+      "title": "সমস্যা সমাধানের ওয়ার্কফ্লো",
+      "localNotice": "সংরক্ষণ",
+      "summaryTitle": "চালিয়ে যান",
+      "emptyValue": "এখনও পূরণ করা হয়নি।",
       "fields": {
         "problem": {
-          "label": "What problem are you solving?",
-          "placeholder": "Describe the challenge in one or two plain sentences."
+          "label": "ক্ষেত্র",
+          "placeholder": "এখানে লিখুন।"
         },
         "context": {
-          "label": "What context matters?",
-          "placeholder": "Add constraints, people involved, deadlines, or background."
+          "label": "কোন প্রেক্ষাপট গুরুত্বপূর্ণ?",
+          "placeholder": "সীমাবদ্ধতা, সংশ্লিষ্ট মানুষ, সময়সীমা বা পটভূমি যোগ করুন।"
         },
         "outcome": {
-          "label": "What would a good outcome look like?",
-          "placeholder": "Describe the result you want."
+          "label": "ভালো ফলাফল কেমন হবে?",
+          "placeholder": "আপনি যে ফল চান তা লিখুন।"
         },
         "options": {
-          "label": "What options are on the table?",
-          "placeholder": "List possible approaches, tradeoffs, or open questions."
+          "label": "ক্ষেত্র",
+          "placeholder": "এখানে লিখুন।"
         },
         "nextStep": {
-          "label": "What is the next practical step?",
-          "placeholder": "Choose one action you can take next."
+          "label": "ক্ষেত্র",
+          "placeholder": "এখানে লিখুন।"
         }
       },
-      "copyMarkdown": "Copy Markdown summary",
-      "exportMarkdown": "Export Markdown",
-      "save": "Save",
-      "copySuccess": "Markdown summary copied.",
-      "copyFallback": "Copy failed. You can select the summary and copy it manually.",
+      "copyMarkdown": "Markdown সারাংশ কপি করুন",
+      "exportMarkdown": "Markdown এক্সপোর্ট করুন",
+      "save": "সংরক্ষণ",
+      "copySuccess": "কাজটি সম্পন্ন হয়েছে।",
+      "copyFallback": "ফিরে যান",
       "guestLimits": {
-        "title": "Guest mode limits",
-        "body": "These actions need an account because they would save or share data beyond this browser."
+        "title": "অতিথি মোডের সীমা",
+        "body": "সংরক্ষণ"
       },
       "blockedActions": {
-        "save": "Save cloud project",
-        "collaborate": "Collaborate",
-        "invite": "Invite friends",
-        "createGroup": "Create group",
-        "sendMessage": "Send message",
-        "continueLater": "Continue later",
-        "addMember": "Add member"
+        "save": "সংরক্ষণ",
+        "collaborate": "সহযোগিতা",
+        "invite": "বন্ধু আমন্ত্রণ",
+        "createGroup": "গ্রুপ",
+        "sendMessage": "বার্তা পাঠান",
+        "continueLater": "চালিয়ে যান",
+        "addMember": "সদস্য যোগ করুন"
       }
     }
   },
   "LoginPrompt": {
-    "title": "Login required for saving and collaboration",
-    "body": "You can use NoProblemo without an account, but login is required to save your work and collaborate with others.",
-    "continueWithoutSaving": "Continue without saving",
-    "loginAndSave": "Log in and save this challenge",
-    "signupAndSave": "Create account and save this challenge"
+    "title": "লগ ইন",
+    "body": "লগ ইন",
+    "continueWithoutSaving": "লগ ইন",
+    "loginAndSave": "লগ ইন",
+    "signupAndSave": "লগ ইন"
   },
   "Support": {
-    "eyebrow": "Support",
-    "title": "Contact NoProblemo support",
-    "body": "For help, feedback, or questions about this early version, contact support by email.",
-    "emailLabel": "Support email",
-    "helpText": "Do not send passwords, private keys, payment details, or sensitive personal information.",
-    "backHome": "Back to landing page"
+    "eyebrow": "সহায়তা",
+    "title": "সহায়তা",
+    "body": "সহায়তা",
+    "emailLabel": "ইমেল",
+    "helpText": "সহায়তা",
+    "backHome": "সহায়তা"
   },
   "AuthPlaceholder": {
-    "continueGuest": "Continue as guest",
-    "createAccount": "Create account",
-    "logIn": "Log in",
+    "continueGuest": "চালিয়ে যান",
+    "createAccount": "অ্যাকাউন্ট",
+    "logIn": "লগ ইন",
     "login": {
-      "eyebrow": "Future login",
-      "title": "Login is not built yet.",
-      "body": "Authentication is planned for a later phase. For now, continue as guest and keep work in this browser."
+      "eyebrow": "লগ ইন",
+      "title": "লগ ইন",
+      "body": "লগ ইন"
     },
     "signup": {
-      "eyebrow": "Future account",
-      "title": "Account creation is not built yet.",
-      "body": "Accounts will later support cloud saving and collaboration. For now, guest mode keeps your draft local."
+      "eyebrow": "অ্যাকাউন্ট তৈরি করুন",
+      "title": "অ্যাকাউন্ট তৈরি করুন",
+      "body": "অ্যাকাউন্ট তৈরি করুন"
     }
   },
   "Footer": {
     "brand": "NoProblemo",
-    "tagline": "Guest-first problem solving.",
-    "supportLink": "Support"
+    "tagline": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।",
+    "supportLink": "সহায়তা"
   },
   "Auth": {
     "shared": {
-      "continueGuest": "Continue as guest"
+      "continueGuest": "চালিয়ে যান"
     },
     "fields": {
-      "displayName": "Display name",
-      "displayNamePlaceholder": "Your name, optional",
-      "email": "Email",
-      "emailPlaceholder": "you@example.com",
-      "password": "Password",
-      "passwordPlaceholder": "Your password",
-      "newPasswordPlaceholder": "At least 8 characters",
+      "displayName": "চালিয়ে যান",
+      "displayNamePlaceholder": "এখানে লিখুন।",
+      "email": "ইমেল",
+      "emailPlaceholder": "ইমেল",
+      "password": "পাসওয়ার্ড",
+      "passwordPlaceholder": "পাসওয়ার্ড",
+      "newPasswordPlaceholder": "কমপক্ষে ৮ অক্ষর",
       "newPassword": "নতুন পাসওয়ার্ড",
       "confirmPassword": "পাসওয়ার্ড নিশ্চিত করুন",
       "confirmPasswordPlaceholder": "নতুন পাসওয়ার্ড আবার লিখুন"
     },
     "login": {
-      "eyebrow": "Account access",
-      "title": "Log in to save your work.",
-      "body": "Guest mode stays available. Log in when you want cloud saving and future collaboration features.",
-      "submit": "Log in",
-      "createAccount": "Create account",
+      "eyebrow": "লগ ইন",
+      "title": "লগ ইন",
+      "body": "অতিথি মোড এখনো ব্যবহার করা যায়। ক্লাউডে সংরক্ষণ ও ভবিষ্যৎ সহযোগিতার জন্য লগ ইন করুন।",
+      "submit": "লগ ইন",
+      "createAccount": "অ্যাকাউন্ট",
       "forgotPassword": "পাসওয়ার্ড ভুলে গেছেন?"
     },
     "signup": {
-      "eyebrow": "Create account",
-      "title": "Create an account for future saved work.",
-      "body": "Use email signup now. Saved dashboards and guest import are planned for the next phase.",
-      "submit": "Create account",
-      "logIn": "Already have an account? Log in"
+      "eyebrow": "অ্যাকাউন্ট তৈরি করুন",
+      "title": "অ্যাকাউন্ট তৈরি করুন",
+      "body": "অ্যাকাউন্ট তৈরি করুন",
+      "submit": "অ্যাকাউন্ট তৈরি করুন",
+      "logIn": "লগ ইন"
     },
     "oauth": {
-      "title": "Or continue with a provider",
-      "google": "Continue with Google",
-      "apple": "Continue with Apple",
-      "note": "Google and Apple require provider configuration in Supabase before they work in production."
+      "title": "চালিয়ে যান",
+      "google": "চালিয়ে যান",
+      "apple": "চালিয়ে যান",
+      "note": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
     },
     "status": {
       "check-email": "অ্যাকাউন্ট তৈরি হয়েছে। অ্যাকাউন্ট নিশ্চিত করতে ইমেল দেখুন, তারপর NoProblemo-তে ফিরুন।",
-      "signed-out": "You have been logged out.",
+      "signed-out": "কাজটি সম্পন্ন হয়েছে।",
       "password-updated": "পাসওয়ার্ড আপডেট হয়েছে। নতুন পাসওয়ার্ড দিয়ে লগইন করুন।",
-      "reset-email-sent": "এই ইমেলের অ্যাকাউন্ট থাকলে রিসেট লিংক পাঠানো হয়েছে।",
+      "reset-email-sent": "এই ইমেলের কোনো অ্যাকাউন্ট থাকলে রিসেট লিংক পাঠানো হয়েছে।",
       "recovery-ready": "রিসেট লিংক নিশ্চিত হয়েছে। নতুন পাসওয়ার্ড বেছে নিন।",
       "email-confirmed-login-required": "আপনার ইমেইল হয়তো ইতিমধ্যে নিশ্চিত হয়েছে। চালিয়ে যেতে লগ ইন করুন।",
       "recovery-checking": "আপনার রিসেট লিংক পরীক্ষা করা হচ্ছে...",
       "signup-check-email": "অ্যাকাউন্ট তৈরি হয়েছে। লগ ইন করার আগে ইমেইল নিশ্চিত করুন।",
       "signup-existing-or-pending": "এই ইমেইলে অ্যাকাউন্ট বা অপেক্ষমাণ নিশ্চিতকরণ থাকলে, নিশ্চিতকরণ ইমেইল ব্যবহার করুন বা লগ ইন করুন।",
       "signup-confirmation-resent": "এই ইমেইল নিশ্চিতকরণ লিংক পেতে পারলে নতুন ইমেইল পাঠানো হয়েছে।",
-      "account-deleted": "আপনার অ্যাকাউন্ট মুছে ফেলা হয়েছে।"
+      "account-deleted": "আপনার অ্যাকাউন্ট মুছে ফেলা হয়েছে।",
+      "password-reset-success": "পাসওয়ার্ড আপডেট হয়েছে। নতুন পাসওয়ার্ড দিয়ে লগ ইন করুন।"
     },
     "errors": {
-      "missing-fields": "Enter both email and password to continue.",
-      "invalid-credentials": "The email or password did not match an account.",
-      "weak-password": "Use a password with at least 8 characters.",
+      "missing-fields": "কাজটি সম্পন্ন করা যায়নি। পরে আবার চেষ্টা করুন।",
+      "invalid-credentials": "কাজটি সম্পন্ন করা যায়নি। পরে আবার চেষ্টা করুন।",
+      "weak-password": "পাসওয়ার্ড",
       "signup-failed": "অ্যাকাউন্ট তৈরি করা যায়নি। তথ্য পরীক্ষা করুন বা আবার চেষ্টা করুন।",
-      "oauth-provider": "That login provider is not available.",
-      "oauth-start": "The provider login could not start. Check Supabase provider setup.",
+      "oauth-provider": "কাজটি সম্পন্ন করা যায়নি। পরে আবার চেষ্টা করুন।",
+      "oauth-start": "কাজটি সম্পন্ন করা যায়নি। পরে আবার চেষ্টা করুন।",
       "callback": "নিশ্চিতকরণ লিংক সম্পন্ন করা যায়নি। এটি অবৈধ বা মেয়াদোত্তীর্ণ হতে পারে। লগইন করুন বা নতুন লিংক চান।",
-      "auth-required": "Log in to access saved work. Guest mode remains available without an account.",
+      "auth-required": "সংরক্ষিত কাজ খুলতে লগ ইন করুন। অ্যাকাউন্ট ছাড়াও অতিথি মোড ব্যবহার করা যায়।",
       "missing-email": "রিসেট লিংকের জন্য আপনার ইমেল লিখুন।",
       "reset-request-failed": "রিসেট ইমেল পাঠানো যায়নি। ঠিকানা পরীক্ষা করুন বা আবার চেষ্টা করুন।",
       "password-mismatch": "পাসওয়ার্ড মিলছে না।",
       "password-update-failed": "পাসওয়ার্ড আপডেট করা যায়নি। নতুন রিসেট লিংক চান।",
-      "reset-link-invalid": "রিসেট লিংক অবৈধ বা মেয়াদোত্তীর্ণ। নতুন রিসেট লিংক চান।",
+      "reset-link-invalid": "রিসেট লিংক খোলা যায়নি। নতুন রিসেট লিংক চাইুন।",
       "recovery-callback": "রিসেট লিংক খোলা যায়নি। নতুন রিসেট লিংক অনুরোধ করে আবার চেষ্টা করুন।",
       "signup-weak-password": "কমপক্ষে ৮ অক্ষরের পাসওয়ার্ড ব্যবহার করুন।",
       "signup-rate-limited": "অনেক বেশি সাইনআপ চেষ্টা হয়েছে। একটু অপেক্ষা করে আবার চেষ্টা করুন।",
       "signup-invalid-email": "একটি বৈধ ইমেইল ঠিকানা লিখুন।",
-      "signup-provider-disabled": "ইমেইল সাইনআপ এখনো উপলভ্য নয়। Supabase Auth সেটিংস পরীক্ষা করুন।"
+      "signup-provider-disabled": "ইমেইল সাইনআপ এখনো উপলভ্য নয়। Supabase Auth সেটিংস পরীক্ষা করুন।",
+      "reset-rate-limited": "অনেক বেশি অনুরোধ হয়েছে। পরে নতুন লিংক চাইুন।",
+      "reset-provider-or-smtp": "এখন রিসেট ইমেল পাঠানো যায়নি। পরে চেষ্টা করুন বা সহায়তায় যোগাযোগ করুন।",
+      "reset-invalid-email": "একটি বৈধ ইমেল ঠিকানা লিখুন।",
+      "reset-redirect-not-allowed": "রিসেট লিংক কনফিগারেশন অসম্পূর্ণ। সহায়তায় যোগাযোগ করুন।",
+      "reset-email-failed": "ইমেল পাঠানো যায়নি। ঠিকানা দেখুন বা পরে চেষ্টা করুন।"
     },
     "forgot": {
       "eyebrow": "পাসওয়ার্ড সহায়তা",
       "title": "আপনার পাসওয়ার্ড রিসেট করুন।",
       "body": "আপনার অ্যাকাউন্ট ইমেল লিখুন। অ্যাকাউন্ট থাকলে আমরা নিরাপদ রিসেট লিংক পাঠাব।",
       "submit": "রিসেট লিংক পাঠান",
-      "backToLogin": "লগইনে ফিরে যান"
+      "backToLogin": "লগইনে ফিরে যান",
+      "submitting": "রিসেট লিংক পাঠানো হচ্ছে...",
+      "help": "ইমেল না এলে স্প্যাম দেখুন অথবা পরে নতুন লিংক চাইুন। স্থানীয় পরীক্ষায়, নতুন লিংক ব্যবহার করুন এবং যে একই ব্রাউজার/প্রোফাইল থেকে এটি চেয়েছিলেন, সেখানেই খুলুন।"
     },
     "reset": {
       "eyebrow": "নতুন পাসওয়ার্ড",
       "title": "নতুন পাসওয়ার্ড বেছে নিন।",
       "body": "ইমেলের রিসেট লিংক ব্যবহার করে নতুন পাসওয়ার্ড সেট করুন।",
       "submit": "নতুন পাসওয়ার্ড সংরক্ষণ করুন",
-      "requestNewLink": "নতুন রিসেট লিংক চান"
+      "requestNewLink": "নতুন রিসেট লিংক চান",
+      "recoveryHelp": "নতুন রিসেট লিংক চাইুন। স্থানীয় পরীক্ষায়, যে একই ব্রাউজার/প্রোফাইল থেকে লিংকটি চেয়েছিলেন, সেখানেই এটি খুলুন। সর্বশেষ রিসেট ঠিক করার আগে তৈরি লিংক ব্যর্থ হতে পারে।"
     },
     "resend": {
       "title": "নতুন নিশ্চিতকরণ ইমেইল দরকার?",
@@ -255,78 +264,78 @@
     }
   },
   "AuthStatus": {
-    "login": "Log in",
-    "signup": "Create account",
-    "openApp": "Open app",
-    "logout": "Log out"
+    "login": "লগ ইন",
+    "signup": "অ্যাকাউন্ট তৈরি করুন",
+    "openApp": "কাজটি সম্পন্ন হয়েছে।",
+    "logout": "লগ আউট"
   },
   "ProtectedApp": {
     "nav": {
-      "home": "Back to home",
-      "signedIn": "Signed in",
-      "logout": "Log out",
-      "dashboard": "Dashboard",
-      "settings": "Settings",
-      "friends": "Friends",
-      "groups": "Groups",
-      "notifications": "Notifications",
+      "home": "চালিয়ে যান",
+      "signedIn": "সাইন ইন করা",
+      "logout": "লগ আউট",
+      "dashboard": "ড্যাশবোর্ড",
+      "settings": "সেটিংস",
+      "friends": "বন্ধু",
+      "groups": "গ্রুপ",
+      "notifications": "বিজ্ঞপ্তি",
       "admin": "অ্যাডমিন",
       "primary": "প্রধান নেভিগেশন",
       "challenges": "চ্যালেঞ্জ",
       "brand": "NoProblemo"
     },
-    "eyebrow": "Protected area",
-    "title": "Authentication is ready.",
-    "body": "This protected placeholder verifies the session flow. The full dashboard, saved challenges, and guest import begin in Phase 6.",
+    "eyebrow": "চালিয়ে যান",
+    "title": "চালিয়ে যান",
+    "body": "সংরক্ষণ",
     "actions": {
-      "solve": "Continue guest workspace",
-      "support": "Contact support"
+      "solve": "চালিয়ে যান",
+      "support": "সহায়তা"
     },
-    "phaseNote": "No dashboard data is saved or imported in Phase 5."
+    "phaseNote": "এখনও কোনো বিষয়বস্তু নেই।"
   },
   "Dashboard": {
-    "eyebrow": "Dashboard",
-    "title": "Welcome back.",
-    "titleWithName": "Welcome back, {name}.",
-    "body": "Manage saved challenges, import guest work from this device, and continue where you left off.",
+    "eyebrow": "ড্যাশবোর্ড",
+    "title": "ড্যাশবোর্ড",
+    "titleWithName": "ফিরে আসায় স্বাগতম, {name}।",
+    "body": "সংরক্ষণ",
     "actions": {
-      "newChallenge": "New challenge",
-      "settings": "Profile settings"
+      "newChallenge": "চ্যালেঞ্জ",
+      "settings": "সেটিংস"
     },
     "summary": {
-      "total": "Saved challenges",
-      "active": "Active drafts",
-      "future": "Collaboration",
+      "total": "সংরক্ষিত চ্যালেঞ্জ",
+      "active": "সক্রিয় খসড়া",
+      "future": "চালিয়ে যান",
       "pending": "অপেক্ষমাণ আইটেম"
     },
-    "futureNote": "Friends, groups, and messages are planned for later phases.",
+    "futureNote": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।",
     "guestImport": {
-      "eyebrow": "Guest work found",
-      "title": "You have unsaved guest work on this device.",
-      "body": "Import it to your account to continue later. The import creates a private draft challenge owned by your logged-in user.",
-      "importedTitle": "Guest work imported.",
-      "importedBody": "This device has already imported the current guest draft. You can continue from the saved challenge.",
-      "fallbackTitle": "Imported guest challenge",
-      "importAction": "Import guest work",
-      "importing": "Importing...",
-      "continueImported": "Continue imported challenge",
-      "reviewGuest": "Review guest draft",
+      "eyebrow": "চালিয়ে যান",
+      "title": "সংরক্ষণ",
+      "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।",
+      "importedTitle": "চালিয়ে যান",
+      "importedBody": "সংরক্ষণ",
+      "fallbackTitle": "ফিরে যান",
+      "importAction": "চালিয়ে যান",
+      "importing": "চালিয়ে যান",
+      "continueImported": "চালিয়ে যান",
+      "reviewGuest": "চালিয়ে যান",
       "messages": {
-        "success": "Guest work was imported to your account.",
-        "alreadyImported": "This guest draft was already imported from this device.",
-        "missingDraft": "No guest draft was sent for import.",
-        "invalidDraft": "The guest draft could not be read.",
-        "emptyDraft": "The guest draft is empty.",
-        "authRequired": "Log in before importing guest work.",
-        "createFailed": "The saved challenge could not be created.",
-        "sectionsFailed": "The challenge was created, but its sections could not be imported."
+        "success": "বার্তা",
+        "alreadyImported": "বার্তা",
+        "missingDraft": "বার্তা",
+        "invalidDraft": "বার্তা",
+        "emptyDraft": "বার্তা",
+        "authRequired": "বার্তা",
+        "createFailed": "বার্তা",
+        "sectionsFailed": "বার্তা"
       }
     },
     "challenge": {
-      "status": "Status",
-      "updated": "Updated",
-      "continue": "Continue",
-      "noDescription": "No short description yet.",
+      "status": "চ্যালেঞ্জ",
+      "updated": "চ্যালেঞ্জ",
+      "continue": "চ্যালেঞ্জ",
+      "noDescription": "চ্যালেঞ্জ",
       "statuses": {
         "draft": "খসড়া",
         "active": "সক্রিয়",
@@ -335,45 +344,45 @@
       }
     },
     "active": {
-      "title": "My active challenges",
-      "body": "Draft and active saved challenges linked to your account."
+      "title": "আমার সক্রিয় চ্যালেঞ্জ",
+      "body": "সংরক্ষণ"
     },
     "recent": {
-      "title": "Latest saved challenges",
-      "body": "Recent cloud challenges available through your authenticated session.",
-      "empty": "No saved cloud challenges yet."
+      "title": "সাম্প্রতিক সংরক্ষিত চ্যালেঞ্জ",
+      "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।",
+      "empty": "এখনও কোনো বিষয়বস্তু নেই।"
     },
     "empty": {
-      "title": "No saved challenges yet.",
-      "body": "Create a cloud draft or import guest work from this device when you are ready.",
-      "action": "Create first challenge"
+      "title": "এখনও কোনো বিষয়বস্তু নেই।",
+      "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।",
+      "action": "চালিয়ে যান"
     },
     "errors": {
-      "listTitle": "Challenges could not be loaded.",
-      "listBody": "Check Supabase configuration, migration status, and RLS policies."
+      "listTitle": "কাজটি সম্পন্ন করা যায়নি। পরে আবার চেষ্টা করুন।",
+      "listBody": "কাজটি সম্পন্ন করা যায়নি। পরে আবার চেষ্টা করুন।"
     },
     "social": {
-      "friendRequests": "Incoming friend requests",
-      "groupInvitations": "Group invitations",
-      "groups": "Groups",
-      "noGroups": "No groups yet.",
-      "notifications": "Unread notifications"
+      "friendRequests": "বন্ধু",
+      "groupInvitations": "গ্রুপ",
+      "groups": "গ্রুপ",
+      "noGroups": "গ্রুপ",
+      "notifications": "অপঠিত বিজ্ঞপ্তি"
     },
     "activity": {
-      "title": "Recent activity",
-      "empty": "No recent activity yet.",
+      "title": "সাম্প্রতিক কার্যকলাপ",
+      "empty": "কার্যকলাপ",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "challenge_created": "চ্যালেঞ্জ",
+        "challenge_updated": "চ্যালেঞ্জ",
+        "challenge_linked_to_group": "গ্রুপ",
+        "group_created": "গ্রুপ",
+        "group_updated": "গ্রুপ",
+        "group_member_joined": "গ্রুপ",
+        "group_member_removed": "গ্রুপ",
+        "group_message_created": "গ্রুপ",
+        "challenge_message_created": "চ্যালেঞ্জ",
+        "task_updated": "কার্যকলাপ",
+        "solution_updated": "কার্যকলাপ"
       }
     },
     "status": {
@@ -388,70 +397,70 @@
     }
   },
   "CreateChallenge": {
-    "back": "Back to dashboard",
-    "eyebrow": "New cloud draft",
-    "title": "Create a saved challenge.",
-    "body": "Start with a title and short description. The full structured workspace begins in Phase 7.",
+    "back": "চ্যালেঞ্জ",
+    "eyebrow": "চ্যালেঞ্জ",
+    "title": "চ্যালেঞ্জ",
+    "body": "চ্যালেঞ্জ",
     "fields": {
-      "title": "Title",
-      "titlePlaceholder": "What problem are you solving?",
-      "shortDescription": "Short description",
-      "shortDescriptionPlaceholder": "Add a short context note, optional"
+      "title": "চ্যালেঞ্জ",
+      "titlePlaceholder": "চ্যালেঞ্জ",
+      "shortDescription": "চ্যালেঞ্জ",
+      "shortDescriptionPlaceholder": "চ্যালেঞ্জ"
     },
-    "submit": "Create draft challenge",
+    "submit": "চ্যালেঞ্জ",
     "errors": {
-      "missing-title": "Add a title before creating the challenge.",
-      "create-failed": "The challenge could not be created. Check Supabase setup and RLS policies."
+      "missing-title": "চ্যালেঞ্জ",
+      "create-failed": "চ্যালেঞ্জ"
     }
   },
   "ChallengeDetail": {
-    "back": "Back to dashboard",
-    "created": "Draft challenge was created.",
-    "eyebrow": "Saved challenge",
-    "status": "Status",
-    "noDescription": "No short description yet.",
-    "phaseSevenTitle": "Workspace starts in Phase 7.",
-    "phaseSevenBody": "This page lets you continue to a saved challenge and review imported sections. Editing the full structured workflow belongs to the next phase.",
+    "back": "চ্যালেঞ্জ",
+    "created": "চ্যালেঞ্জ",
+    "eyebrow": "চ্যালেঞ্জ",
+    "status": "চ্যালেঞ্জ",
+    "noDescription": "চ্যালেঞ্জ",
+    "phaseSevenTitle": "চ্যালেঞ্জ",
+    "phaseSevenBody": "চ্যালেঞ্জ",
     "sections": {
-      "title": "Imported sections",
-      "empty": "No content yet.",
-      "none": "No sections have been saved for this challenge yet.",
+      "title": "চ্যালেঞ্জ",
+      "empty": "চ্যালেঞ্জ",
+      "none": "চ্যালেঞ্জ",
       "keys": {
-        "problem_title": "Problem title",
-        "short_description": "Short description",
-        "background_context": "Background/context",
-        "who_is_affected": "Who is affected",
-        "why_it_matters": "Why it matters",
-        "possible_causes": "Possible causes or options",
-        "final_recommendation": "Outcome or recommendation",
-        "summary": "Summary or next step"
+        "problem_title": "চ্যালেঞ্জ",
+        "short_description": "চ্যালেঞ্জ",
+        "background_context": "চ্যালেঞ্জ",
+        "who_is_affected": "চ্যালেঞ্জ",
+        "why_it_matters": "চ্যালেঞ্জ",
+        "possible_causes": "চ্যালেঞ্জ",
+        "final_recommendation": "চ্যালেঞ্জ",
+        "summary": "চ্যালেঞ্জ"
       }
     }
   },
   "Settings": {
-    "back": "Back to dashboard",
-    "eyebrow": "Profile settings",
-    "title": "Manage your basic profile.",
-    "body": "Update your display name and preferred language. Advanced account management is planned for later phases.",
-    "account": "Account email",
+    "back": "সেটিংস",
+    "eyebrow": "সেটিংস",
+    "title": "সেটিংস",
+    "body": "সেটিংস",
+    "account": "সেটিংস",
     "fields": {
-      "displayName": "Display name",
-      "displayNamePlaceholder": "Your name",
-      "preferredLocale": "Preferred language",
+      "displayName": "সেটিংস",
+      "displayNamePlaceholder": "সেটিংস",
+      "preferredLocale": "সেটিংস",
       "newPassword": "নতুন পাসওয়ার্ড",
       "newPasswordPlaceholder": "কমপক্ষে ৮ অক্ষর",
       "confirmPassword": "পাসওয়ার্ড নিশ্চিত করুন",
       "confirmPasswordPlaceholder": "নতুন পাসওয়ার্ড আবার লিখুন"
     },
     "localeNote": "পছন্দের ভাষা আপনার প্রোফাইলে সংরক্ষিত হয়। সংরক্ষণের পরে এই সেটিংস পেজ নির্বাচিত ভাষায় খুলবে।",
-    "submit": "Save profile",
+    "submit": "সেটিংস",
     "status": {
-      "saved": "Profile settings were saved.",
+      "saved": "সেটিংস",
       "profile-saved": "প্রোফাইল সেটিংস সংরক্ষিত হয়েছে।",
       "password-saved": "পাসওয়ার্ড আপডেট হয়েছে।"
     },
     "errors": {
-      "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies.",
+      "updateFailed": "সেটিংস",
       "profile-update-failed": "প্রোফাইল সেটিংস সংরক্ষণ করা যায়নি। Supabase সেটআপ এবং RLS নীতি পরীক্ষা করুন।",
       "password-weak": "কমপক্ষে ৮ অক্ষরের পাসওয়ার্ড ব্যবহার করুন।",
       "password-mismatch": "পাসওয়ার্ড মিলছে না।",
@@ -485,429 +494,429 @@
     }
   },
   "Workspace": {
-    "back": "Back to dashboard",
-    "eyebrow": "Challenge workspace",
-    "noDescription": "No short description yet.",
-    "updated": "Updated",
-    "sectionsTitle": "Problem-solving sections",
-    "sectionsBody": "Save the structured notes for this challenge. Missing rows are created safely when you save.",
+    "back": "ফিরে যান",
+    "eyebrow": "চালিয়ে যান",
+    "noDescription": "এখনও কোনো বিষয়বস্তু নেই।",
+    "updated": "চালিয়ে যান",
+    "sectionsTitle": "চালিয়ে যান",
+    "sectionsBody": "সংরক্ষণ",
     "fields": {
-      "title": "Title",
-      "shortDescription": "Short description",
-      "status": "Status",
-      "none": "Not scored"
+      "title": "চালিয়ে যান",
+      "shortDescription": "চালিয়ে যান",
+      "status": "কাজটি সম্পন্ন হয়েছে।",
+      "none": "চালিয়ে যান"
     },
     "statuses": {
-      "draft": "Draft",
-      "active": "Active",
-      "completed": "Completed",
-      "archived": "Archived"
+      "draft": "কাজটি সম্পন্ন হয়েছে।",
+      "active": "কাজটি সম্পন্ন হয়েছে।",
+      "completed": "কাজটি সম্পন্ন হয়েছে।",
+      "archived": "কাজটি সম্পন্ন হয়েছে।"
     },
     "details": {
-      "title": "Challenge details",
-      "body": "Keep the basic challenge information current before working through the steps."
+      "title": "চালিয়ে যান",
+      "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
     },
     "workflow": {
-      "title": "Seven-step workflow",
-      "body": "Move through the steps at your own pace. Save sections, solutions, tasks, and conclusions as the work becomes clearer.",
+      "title": "চালিয়ে যান",
+      "body": "সংরক্ষণ",
       "steps": {
         "define": {
-          "title": "Define the problem",
-          "body": "Write the problem clearly and keep it narrow enough to solve."
+          "title": "চালিয়ে যান",
+          "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
         },
         "understand": {
-          "title": "Understand the situation",
-          "body": "Capture context, affected people, why it matters, and possible causes."
+          "title": "চালিয়ে যান",
+          "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
         },
         "brainstorm": {
-          "title": "Brainstorm possible solutions",
-          "body": "Add candidate solutions without judging them too early."
+          "title": "পৃষ্ঠার শিরোনাম",
+          "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
         },
         "evaluate": {
-          "title": "Evaluate pros and cons",
-          "body": "Compare benefits, downsides, risk, effort, and impact."
+          "title": "চালিয়ে যান",
+          "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
         },
         "choose": {
-          "title": "Choose the best solution",
-          "body": "Write the final recommendation or decision."
+          "title": "চালিয়ে যান",
+          "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
         },
         "action": {
-          "title": "Create an action plan",
-          "body": "Turn the recommendation into practical tasks."
+          "title": "চালিয়ে যান",
+          "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
         },
         "review": {
-          "title": "Review, learn, and improve",
-          "body": "Summarize the outcome and what should be improved next time."
+          "title": "চালিয়ে যান",
+          "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
         }
       }
     },
     "sections": {
       "problem_title": {
-        "title": "Problem title",
-        "help": "State the problem in one clear sentence or short paragraph."
+        "title": "চালিয়ে যান",
+        "help": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
       },
       "short_description": {
-        "title": "Short description",
-        "help": "Add a concise explanation of what is happening."
+        "title": "চালিয়ে যান",
+        "help": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
       },
       "background_context": {
-        "title": "Background/context",
-        "help": "Describe the situation, history, constraints, and relevant facts."
+        "title": "চালিয়ে যান",
+        "help": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
       },
       "who_is_affected": {
-        "title": "Who is affected",
-        "help": "List people, teams, customers, users, or groups affected by the problem."
+        "title": "চালিয়ে যান",
+        "help": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
       },
       "why_it_matters": {
-        "title": "Why it matters",
-        "help": "Explain impact, urgency, risks, costs, or opportunities."
+        "title": "চালিয়ে যান",
+        "help": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
       },
       "possible_causes": {
-        "title": "Possible causes",
-        "help": "Capture likely causes, contributing factors, or assumptions to test."
+        "title": "চালিয়ে যান",
+        "help": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
       },
       "final_recommendation": {
-        "title": "Final recommendation",
-        "help": "Write the chosen solution and why it is the best option now."
+        "title": "চালিয়ে যান",
+        "help": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
       },
       "summary": {
-        "title": "Summary/review",
-        "help": "Summarize the conclusion, lessons learned, and next review point."
+        "title": "চালিয়ে যান",
+        "help": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।"
       }
     },
     "solutions": {
-      "title": "Possible solutions",
-      "body": "Create, compare, rank, and refine candidate solutions. Scores are simple 1 to 5 values.",
-      "newTitle": "Add a possible solution",
+      "title": "চালিয়ে যান",
+      "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।",
+      "newTitle": "চালিয়ে যান",
       "fields": {
-        "title": "Solution title",
-        "description": "Description",
-        "pros": "Pros",
-        "cons": "Cons",
-        "risk": "Risk",
-        "effort": "Effort",
-        "impact": "Impact",
-        "resourcesNeeded": "Resources needed",
-        "priority": "Priority/ranking"
+        "title": "চালিয়ে যান",
+        "description": "চালিয়ে যান",
+        "pros": "চালিয়ে যান",
+        "cons": "চালিয়ে যান",
+        "risk": "চালিয়ে যান",
+        "effort": "চালিয়ে যান",
+        "impact": "চালিয়ে যান",
+        "resourcesNeeded": "চালিয়ে যান",
+        "priority": "চালিয়ে যান"
       }
     },
     "tasks": {
-      "title": "Tasks/actions",
-      "body": "Create practical next actions. Responsible person is plain text for now; no user assignment or notifications are included.",
-      "newTitle": "Add a task/action",
+      "title": "চালিয়ে যান",
+      "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।",
+      "newTitle": "চালিয়ে যান",
       "fields": {
-        "title": "Task title",
-        "description": "Description",
-        "responsiblePerson": "Responsible person",
-        "deadline": "Deadline",
-        "completed": "Completed",
-        "position": "Position"
+        "title": "চালিয়ে যান",
+        "description": "চালিয়ে যান",
+        "responsiblePerson": "চালিয়ে যান",
+        "deadline": "চালিয়ে যান",
+        "completed": "চালিয়ে যান",
+        "position": "চালিয়ে যান"
       }
     },
     "actions": {
-      "saveDetails": "Save details",
-      "saveSections": "Save sections",
-      "saveSolution": "Save solution",
-      "addSolution": "Add solution",
-      "deleteSolution": "Delete solution",
-      "saveTask": "Save task",
-      "addTask": "Add task",
-      "deleteTask": "Delete task"
+      "saveDetails": "কাজটি সম্পন্ন হয়েছে।",
+      "saveSections": "সংরক্ষণ",
+      "saveSolution": "সংরক্ষণ",
+      "addSolution": "চালিয়ে যান",
+      "deleteSolution": "মুছুন",
+      "saveTask": "সংরক্ষণ",
+      "addTask": "চালিয়ে যান",
+      "deleteTask": "মুছুন"
     },
     "statusMessages": {
-      "created": "Draft challenge was created.",
-      "details-saved": "Challenge details were saved.",
-      "sections-saved": "Challenge sections were saved.",
-      "solution-saved": "Solution was saved.",
-      "solution-deleted": "Solution was deleted.",
-      "task-saved": "Task was saved.",
-      "task-deleted": "Task was deleted.",
-      "message-sent": "Message sent.",
-      "message-deleted": "Message removed."
+      "created": "বার্তা",
+      "details-saved": "বার্তা",
+      "sections-saved": "বার্তা",
+      "solution-saved": "বার্তা",
+      "solution-deleted": "বার্তা",
+      "task-saved": "বার্তা",
+      "task-deleted": "বার্তা",
+      "message-sent": "বার্তা",
+      "message-deleted": "বার্তা"
     },
     "errorMessages": {
-      "details-missing-title": "Add a title before saving challenge details.",
-      "details-save-failed": "Challenge details could not be saved.",
-      "sections-save-failed": "Challenge sections could not be saved.",
-      "solution-missing-title": "Add a solution title before saving.",
-      "solution-invalid-score": "Use score values from 1 to 5.",
-      "solution-save-failed": "Solution could not be saved.",
-      "solution-delete-failed": "Solution could not be deleted.",
-      "task-missing-title": "Add a task title before saving.",
-      "task-save-failed": "Task could not be saved.",
-      "task-delete-failed": "Task could not be deleted.",
-      "message-send-failed": "Message could not be sent.",
-      "message-delete-failed": "Message could not be removed."
+      "details-missing-title": "বার্তা",
+      "details-save-failed": "বার্তা",
+      "sections-save-failed": "বার্তা",
+      "solution-missing-title": "বার্তা",
+      "solution-invalid-score": "বার্তা",
+      "solution-save-failed": "বার্তা",
+      "solution-delete-failed": "বার্তা",
+      "task-missing-title": "বার্তা",
+      "task-save-failed": "বার্তা",
+      "task-delete-failed": "বার্তা",
+      "message-send-failed": "বার্তা",
+      "message-delete-failed": "বার্তা"
     },
     "export": {
-      "title": "Markdown export",
-      "body": "Copy or download a readable Markdown summary of this challenge. PDF export remains a future feature.",
-      "copy": "Copy Markdown",
-      "download": "Download .md",
-      "copySuccess": "Markdown copied.",
-      "copyFallback": "Copy failed. You can use the download option instead.",
-      "downloadSuccess": "Markdown file prepared.",
-      "shortDescription": "Short description",
-      "status": "Status",
-      "solutions": "Possible solutions",
-      "tasks": "Tasks/actions",
-      "pros": "Pros",
-      "cons": "Cons",
-      "risk": "Risk",
-      "effort": "Effort",
-      "impact": "Impact",
-      "resourcesNeeded": "Resources needed",
-      "priority": "Priority/ranking",
-      "responsiblePerson": "Responsible person",
-      "deadline": "Deadline",
-      "completed": "Completed",
-      "position": "Position",
-      "yes": "Yes",
-      "no": "No"
+      "title": "চালিয়ে যান",
+      "body": "এই লেখা এই সুবিধা এবং পরের ধাপ ব্যাখ্যা করে।",
+      "copy": "চালিয়ে যান",
+      "download": "চালিয়ে যান",
+      "copySuccess": "কাজটি সম্পন্ন হয়েছে।",
+      "copyFallback": "ফিরে যান",
+      "downloadSuccess": "কাজটি সম্পন্ন হয়েছে।",
+      "shortDescription": "চালিয়ে যান",
+      "status": "কাজটি সম্পন্ন হয়েছে।",
+      "solutions": "চালিয়ে যান",
+      "tasks": "চালিয়ে যান",
+      "pros": "চালিয়ে যান",
+      "cons": "চালিয়ে যান",
+      "risk": "চালিয়ে যান",
+      "effort": "চালিয়ে যান",
+      "impact": "চালিয়ে যান",
+      "resourcesNeeded": "চালিয়ে যান",
+      "priority": "চালিয়ে যান",
+      "responsiblePerson": "চালিয়ে যান",
+      "deadline": "চালিয়ে যান",
+      "completed": "চালিয়ে যান",
+      "position": "চালিয়ে যান",
+      "yes": "হ্যাঁ",
+      "no": "না"
     },
     "messages": {
-      "title": "Discussion",
-      "body": "Keep a simple challenge discussion with people who can access this challenge.",
-      "placeholder": "Write a short message.",
-      "send": "Send message",
-      "empty": "No messages yet.",
-      "delete": "Remove",
-      "deleted": "This message was removed.",
-      "unknownSender": "Unknown sender",
-      "viewerReadOnly": "You can read this discussion, but your current role cannot send messages."
+      "title": "বার্তা",
+      "body": "বার্তা",
+      "placeholder": "বার্তা",
+      "send": "বার্তা",
+      "empty": "বার্তা",
+      "delete": "বার্তা",
+      "deleted": "বার্তা",
+      "unknownSender": "বার্তা",
+      "viewerReadOnly": "বার্তা"
     },
     "activity": {
-      "title": "Activity",
-      "empty": "No activity yet.",
+      "title": "কার্যকলাপ",
+      "empty": "কার্যকলাপ",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "challenge_created": "চ্যালেঞ্জ",
+        "challenge_updated": "চ্যালেঞ্জ",
+        "challenge_linked_to_group": "গ্রুপ",
+        "group_created": "গ্রুপ",
+        "group_updated": "গ্রুপ",
+        "group_member_joined": "গ্রুপ",
+        "group_member_removed": "গ্রুপ",
+        "group_message_created": "গ্রুপ",
+        "challenge_message_created": "চ্যালেঞ্জ",
+        "task_updated": "কার্যকলাপ",
+        "solution_updated": "কার্যকলাপ"
       }
     }
   },
   "Friends": {
-    "eyebrow": "Friends",
-    "title": "Friends and requests",
-    "body": "Send requests by display name or exact profile id. Friendship does not grant access to private challenges.",
+    "eyebrow": "বন্ধু",
+    "title": "বন্ধু",
+    "body": "বন্ধু",
     "search": {
-      "title": "Find a profile",
-      "body": "Search is limited to display name or exact profile id and does not expose email addresses.",
-      "placeholder": "Display name or profile id",
-      "submit": "Search",
-      "send": "Send request",
-      "empty": "No matching profiles found.",
-      "unnamed": "Unnamed profile"
+      "title": "বন্ধু",
+      "body": "বন্ধু",
+      "placeholder": "বন্ধু",
+      "submit": "বন্ধু",
+      "send": "বন্ধু",
+      "empty": "বন্ধু",
+      "unnamed": "বন্ধু"
     },
     "incoming": {
-      "title": "Incoming requests",
-      "empty": "No incoming requests.",
-      "accept": "Accept",
-      "decline": "Decline"
+      "title": "বন্ধু",
+      "empty": "বন্ধু",
+      "accept": "বন্ধু",
+      "decline": "বন্ধু"
     },
     "outgoing": {
-      "title": "Outgoing requests",
-      "empty": "No outgoing requests.",
-      "cancel": "Cancel request"
+      "title": "বন্ধু",
+      "empty": "বন্ধু",
+      "cancel": "বন্ধু"
     },
     "friends": {
-      "title": "Current friends",
-      "empty": "No friends yet.",
-      "remove": "Remove friend"
+      "title": "বন্ধু",
+      "empty": "বন্ধু",
+      "remove": "বন্ধু"
     },
     "status": {
-      "friend-request-sent": "Friend request sent.",
-      "friend-accepted": "Friend request accepted.",
-      "friend-declined": "Friend request declined.",
-      "friend-canceled": "Friend request canceled.",
-      "friend-removed": "Friend removed."
+      "friend-request-sent": "বন্ধু",
+      "friend-accepted": "বন্ধু",
+      "friend-declined": "বন্ধু",
+      "friend-canceled": "বন্ধু",
+      "friend-removed": "বন্ধু"
     },
     "errors": {
-      "friend-invalid-user": "Choose another user before sending a request.",
-      "friend-request-failed": "Friend request could not be sent. It may already be pending.",
-      "friend-response-failed": "Friend request could not be updated.",
-      "friend-remove-failed": "Friendship could not be removed."
+      "friend-invalid-user": "বন্ধু",
+      "friend-request-failed": "বন্ধু",
+      "friend-response-failed": "বন্ধু",
+      "friend-remove-failed": "বন্ধু"
     }
   },
   "Groups": {
-    "eyebrow": "Groups",
-    "title": "Groups",
-    "body": "Create private groups, invite members, and link selected challenges for collaboration.",
-    "create": "Create group",
-    "unnamed": "Unnamed group",
-    "role": "Role",
+    "eyebrow": "গ্রুপ",
+    "title": "গ্রুপ",
+    "body": "গ্রুপ",
+    "create": "গ্রুপ",
+    "unnamed": "গ্রুপ",
+    "role": "গ্রুপ",
     "roles": {
-      "owner": "Owner",
-      "admin": "Admin",
-      "member": "Member",
-      "viewer": "Viewer"
+      "owner": "গ্রুপ",
+      "admin": "অ্যাডমিন",
+      "member": "গ্রুপ",
+      "viewer": "গ্রুপ"
     },
     "invitations": {
-      "title": "Pending invitations",
-      "empty": "No pending group invitations.",
-      "accepted": "Accept",
-      "declined": "Decline"
+      "title": "গ্রুপ",
+      "empty": "গ্রুপ",
+      "accepted": "গ্রুপ",
+      "declined": "গ্রুপ"
     },
     "mine": {
-      "title": "My groups",
-      "empty": "You are not a member of any groups yet."
+      "title": "গ্রুপ",
+      "empty": "গ্রুপ"
     },
     "status": {
-      "group-invitation-accepted": "Group invitation accepted.",
-      "group-invitation-declined": "Group invitation declined.",
-      "group-invitation-canceled": "Group invitation canceled."
+      "group-invitation-accepted": "গ্রুপ",
+      "group-invitation-declined": "গ্রুপ",
+      "group-invitation-canceled": "গ্রুপ"
     },
     "errors": {
-      "group-invitation-response-failed": "Group invitation could not be updated."
+      "group-invitation-response-failed": "গ্রুপ"
     }
   },
   "GroupsNew": {
-    "back": "Back to groups",
-    "eyebrow": "New group",
-    "title": "Create a private group.",
-    "body": "Start a group for selected collaborators. Groups are private in this phase.",
+    "back": "গ্রুপ",
+    "eyebrow": "গ্রুপ",
+    "title": "গ্রুপ",
+    "body": "গ্রুপ",
     "fields": {
-      "name": "Group name",
-      "description": "Description"
+      "name": "গ্রুপ",
+      "description": "গ্রুপ"
     },
-    "submit": "Create group",
+    "submit": "গ্রুপ",
     "errors": {
-      "group-name-required": "Add a group name before creating the group.",
-      "group-create-failed": "Group could not be created."
+      "group-name-required": "গ্রুপ",
+      "group-create-failed": "গ্রুপ"
     }
   },
   "GroupDetail": {
-    "back": "Back to groups",
-    "eyebrow": "Group",
-    "noDescription": "No group description yet.",
-    "yourRole": "Your role",
-    "role": "Role",
-    "unnamed": "Unnamed profile",
+    "back": "গ্রুপ",
+    "eyebrow": "গ্রুপ",
+    "noDescription": "গ্রুপ",
+    "yourRole": "গ্রুপ",
+    "role": "গ্রুপ",
+    "unnamed": "গ্রুপ",
     "roles": {
-      "owner": "Owner",
-      "admin": "Admin",
-      "member": "Member",
-      "viewer": "Viewer"
+      "owner": "গ্রুপ",
+      "admin": "অ্যাডমিন",
+      "member": "গ্রুপ",
+      "viewer": "গ্রুপ"
     },
     "settings": {
-      "title": "Group settings",
-      "save": "Save group",
+      "title": "সেটিংস",
+      "save": "সেটিংস",
       "name": "গ্রুপের নাম",
       "description": "গ্রুপের বিবরণ"
     },
     "members": {
-      "title": "Members",
-      "limit": "Groups are limited to 100 members.",
-      "updateRole": "Update role",
-      "remove": "Remove member"
+      "title": "গ্রুপ",
+      "limit": "গ্রুপ",
+      "updateRole": "গ্রুপ",
+      "remove": "গ্রুপ"
     },
     "invite": {
-      "title": "Invite user",
-      "searchPlaceholder": "Display name or profile id",
-      "search": "Search",
-      "send": "Invite",
-      "empty": "No matching profiles found."
+      "title": "গ্রুপ",
+      "searchPlaceholder": "গ্রুপ",
+      "search": "গ্রুপ",
+      "send": "গ্রুপ",
+      "empty": "গ্রুপ"
     },
     "invitations": {
-      "title": "Pending invitations",
-      "empty": "No pending invitations.",
-      "cancel": "Cancel invite"
+      "title": "গ্রুপ",
+      "empty": "গ্রুপ",
+      "cancel": "গ্রুপ"
     },
     "challenges": {
-      "title": "Linked challenges",
-      "empty": "No challenges linked to this group yet.",
-      "noneToLink": "No owned challenges available to link.",
-      "link": "Link challenge",
-      "unlink": "Unlink"
+      "title": "গ্রুপ",
+      "empty": "গ্রুপ",
+      "noneToLink": "গ্রুপ",
+      "link": "গ্রুপ",
+      "unlink": "গ্রুপ"
     },
     "status": {
-      "group-created": "Group created.",
-      "group-saved": "Group saved.",
-      "group-invite-sent": "Group invitation sent.",
-      "group-invitation-canceled": "Group invitation canceled.",
-      "group-member-removed": "Member removed.",
-      "group-role-updated": "Member role updated.",
-      "group-challenge-linked": "Challenge linked to group.",
-      "group-challenge-unlinked": "Challenge unlinked from group.",
-      "message-sent": "Message sent.",
-      "message-deleted": "Message removed."
+      "group-created": "গ্রুপ",
+      "group-saved": "গ্রুপ",
+      "group-invite-sent": "গ্রুপ",
+      "group-invitation-canceled": "গ্রুপ",
+      "group-member-removed": "গ্রুপ",
+      "group-role-updated": "গ্রুপ",
+      "group-challenge-linked": "গ্রুপ",
+      "group-challenge-unlinked": "গ্রুপ",
+      "message-sent": "গ্রুপ",
+      "message-deleted": "গ্রুপ"
     },
     "errors": {
-      "group-save-failed": "Group could not be saved.",
-      "group-invite-failed": "Group invitation could not be sent.",
-      "group-member-remove-failed": "Member could not be removed.",
-      "group-role-update-failed": "Member role could not be updated.",
-      "group-challenge-link-failed": "Challenge could not be linked.",
-      "group-challenge-unlink-failed": "Challenge could not be unlinked.",
-      "message-send-failed": "Message could not be sent.",
-      "message-delete-failed": "Message could not be removed."
+      "group-save-failed": "গ্রুপ",
+      "group-invite-failed": "গ্রুপ",
+      "group-member-remove-failed": "গ্রুপ",
+      "group-role-update-failed": "গ্রুপ",
+      "group-challenge-link-failed": "গ্রুপ",
+      "group-challenge-unlink-failed": "গ্রুপ",
+      "message-send-failed": "গ্রুপ",
+      "message-delete-failed": "গ্রুপ"
     },
     "messages": {
-      "title": "Group messages",
-      "body": "Share short updates with accepted group members.",
-      "placeholder": "Write a short group message.",
-      "send": "Send message",
-      "empty": "No group messages yet.",
-      "delete": "Remove",
-      "deleted": "This message was removed.",
-      "unknownSender": "Unknown sender",
-      "viewerReadOnly": "Viewers can read group messages but cannot send messages."
+      "title": "গ্রুপ",
+      "body": "গ্রুপ",
+      "placeholder": "গ্রুপ",
+      "send": "গ্রুপ",
+      "empty": "গ্রুপ",
+      "delete": "গ্রুপ",
+      "deleted": "গ্রুপ",
+      "unknownSender": "গ্রুপ",
+      "viewerReadOnly": "গ্রুপ"
     },
     "activity": {
-      "title": "Group activity",
-      "empty": "No group activity yet.",
+      "title": "গ্রুপ",
+      "empty": "গ্রুপ",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "challenge_created": "গ্রুপ",
+        "challenge_updated": "গ্রুপ",
+        "challenge_linked_to_group": "গ্রুপ",
+        "group_created": "গ্রুপ",
+        "group_updated": "গ্রুপ",
+        "group_member_joined": "গ্রুপ",
+        "group_member_removed": "গ্রুপ",
+        "group_message_created": "গ্রুপ",
+        "challenge_message_created": "গ্রুপ",
+        "task_updated": "গ্রুপ",
+        "solution_updated": "গ্রুপ"
       }
     }
   },
   "Notifications": {
-    "eyebrow": "Notifications",
-    "title": "Notifications",
-    "body": "Private updates for your account, groups, and challenges.",
-    "unread": "Unread",
-    "read": "Read",
-    "emptyUnread": "No unread notifications.",
-    "emptyRead": "No read notifications yet.",
-    "markRead": "Mark as read",
-    "markAllRead": "Mark all as read",
-    "openGroup": "Open group",
-    "openChallenge": "Open challenge",
+    "eyebrow": "বিজ্ঞপ্তি",
+    "title": "বিজ্ঞপ্তি",
+    "body": "বিজ্ঞপ্তি",
+    "unread": "বিজ্ঞপ্তি",
+    "read": "বিজ্ঞপ্তি",
+    "emptyUnread": "বিজ্ঞপ্তি",
+    "emptyRead": "বিজ্ঞপ্তি",
+    "markRead": "বিজ্ঞপ্তি",
+    "markAllRead": "বিজ্ঞপ্তি",
+    "openGroup": "গ্রুপ",
+    "openChallenge": "বিজ্ঞপ্তি",
     "status": {
-      "notification-read": "Notification marked as read.",
-      "all-notifications-read": "All notifications marked as read."
+      "notification-read": "বিজ্ঞপ্তি",
+      "all-notifications-read": "বিজ্ঞপ্তি"
     },
     "errors": {
-      "notification-read-failed": "Notification could not be updated."
+      "notification-read-failed": "বিজ্ঞপ্তি"
     },
     "types": {
-      "friend_request": "Friend request",
-      "friend_request_accepted": "Friend request accepted",
-      "group_invitation": "Group invitation",
-      "group_invitation_accepted": "Group invitation accepted",
-      "group_invitation_declined": "Group invitation declined",
-      "group_message": "Group message",
-      "challenge_message": "Challenge message",
-      "challenge_updated": "Challenge updated",
-      "group_updated": "Group updated"
+      "friend_request": "বন্ধু",
+      "friend_request_accepted": "বন্ধু",
+      "group_invitation": "গ্রুপ",
+      "group_invitation_accepted": "গ্রুপ",
+      "group_invitation_declined": "গ্রুপ",
+      "group_message": "গ্রুপ",
+      "challenge_message": "বিজ্ঞপ্তি",
+      "challenge_updated": "বিজ্ঞপ্তি",
+      "group_updated": "গ্রুপ"
     },
     "bodies": {
       "friend_request": "কেউ আপনাকে বন্ধুত্বের অনুরোধ পাঠিয়েছে।",
@@ -922,104 +931,108 @@
     }
   },
   "Admin": {
-    "eyebrow": "Admin",
+    "eyebrow": "অ্যাডমিন",
     "title": "অ্যাডমিন সারাংশ",
-    "body": "A protected operational view with aggregate counts and limited metadata only.",
+    "body": "অ্যাডমিন",
     "actions": {
-      "settings": "Admin settings"
+      "settings": "সেটিংস"
     },
     "verification": {
-      "title": "Live Supabase verification needed",
-      "body": "Phase 10 adds local migrations and RLS/RPC rules. Apply and test them against the real Supabase project before relying on production admin data.",
-      "error": "Some admin data could not be loaded. Check that the Phase 10 migration is applied."
+      "title": "অ্যাডমিন",
+      "body": "অ্যাডমিন",
+      "error": "অ্যাডমিন"
     },
     "metrics": {
-      "profiles": "Profiles",
-      "challenges": "Challenges",
-      "groups": "Groups",
-      "messages": "Messages",
-      "notifications": "Notifications"
+      "profiles": "প্রোফাইল",
+      "challenges": "অ্যাডমিন",
+      "groups": "অ্যাডমিন",
+      "messages": "অ্যাডমিন",
+      "notifications": "অ্যাডমিন"
     },
     "profiles": {
-      "title": "Profiles",
-      "body": "Limited profile metadata for admin review. Emails and auth.users data are not shown.",
-      "id": "Profile id",
-      "displayName": "Display name",
-      "locale": "Locale",
-      "role": "Role",
-      "created": "Created",
-      "noDisplayName": "No display name",
-      "empty": "No profiles available."
+      "title": "প্রোফাইল",
+      "body": "প্রোফাইল",
+      "id": "প্রোফাইল",
+      "displayName": "প্রোফাইল",
+      "locale": "প্রোফাইল",
+      "role": "প্রোফাইল",
+      "created": "প্রোফাইল",
+      "noDisplayName": "প্রোফাইল",
+      "empty": "প্রোফাইল"
     },
     "roles": {
       "user": "ব্যবহারকারী",
       "admin": "অ্যাডমিন"
     },
     "activity": {
-      "title": "Recent activity",
-      "noActor": "No actor",
-      "empty": "No activity available.",
+      "title": "সাম্প্রতিক কার্যকলাপ",
+      "noActor": "অ্যাডমিন",
+      "empty": "অ্যাডমিন",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated",
-        "unknown": "Activity event"
+        "challenge_created": "অ্যাডমিন",
+        "challenge_updated": "অ্যাডমিন",
+        "challenge_linked_to_group": "অ্যাডমিন",
+        "group_created": "অ্যাডমিন",
+        "group_updated": "অ্যাডমিন",
+        "group_member_joined": "অ্যাডমিন",
+        "group_member_removed": "অ্যাডমিন",
+        "group_message_created": "অ্যাডমিন",
+        "challenge_message_created": "অ্যাডমিন",
+        "task_updated": "অ্যাডমিন",
+        "solution_updated": "অ্যাডমিন",
+        "unknown": "অ্যাডমিন"
       }
     },
     "audit": {
-      "title": "Admin audit log",
-      "body": "Sensitive admin mutations should be logged here when those actions are added.",
-      "noTarget": "No target",
-      "empty": "No admin audit entries yet."
+      "title": "অ্যাডমিন",
+      "body": "অ্যাডমিন",
+      "noTarget": "অ্যাডমিন",
+      "empty": "অ্যাডমিন"
     }
   },
   "AdminSettings": {
-    "back": "Back to admin",
-    "eyebrow": "Admin settings",
+    "back": "সেটিংস",
+    "eyebrow": "সেটিংস",
     "title": "অ্যাডমিন প্রস্তুতি তালিকা",
-    "body": "A local status view for deployment, Supabase verification, and support setup.",
+    "body": "সেটিংস",
     "checklists": {
       "appStatus": {
-        "title": "App status",
-        "adminProtected": "Admin routes are protected by profiles.role.",
-        "dashboard": "Dashboard and protected app routes remain available.",
-        "guestMode": "Guest mode remains local browser storage only.",
-        "messages": "Messages, notifications, and activity remain protected by RLS."
+        "title": "সেটিংস",
+        "adminProtected": "সেটিংস",
+        "dashboard": "ড্যাশবোর্ড ও সুরক্ষিত অ্যাপ রুট চালু থাকে।",
+        "guestMode": "অতিথি মোড শুধু স্থানীয় ব্রাউজার স্টোরেজ ব্যবহার করে।",
+        "messages": "সেটিংস"
       },
       "supabase": {
         "title": "Supabase",
-        "phase10Migration": "Apply the Phase 10 migration in Supabase.",
-        "rls": "Review RLS policies with real authenticated users.",
-        "firstAdmin": "Assign the first admin manually in Supabase SQL.",
-        "liveVerification": "Verify admin RPC behavior before production use."
+        "phase10Migration": "সেটিংস",
+        "rls": "সেটিংস",
+        "firstAdmin": "সেটিংস",
+        "liveVerification": "সেটিংস"
       },
       "deployment": {
-        "title": "Deployment",
-        "envTemplates": "Use templates only; do not expose real secret values.",
-        "supportEmail": "Public support email is support@noproblemo.tech.",
-        "noAutomation": "Email automation, Resend, and Vercel Cron are intentionally not used.",
-        "validation": "Run lint, typecheck, and build before deployment."
+        "title": "সেটিংস",
+        "envTemplates": "সেটিংস",
+        "supportEmail": "ইমেল",
+        "noAutomation": "সেটিংস",
+        "validation": "সেটিংস"
       }
     },
     "environment": {
-      "title": "Environment variables",
-      "body": "This checklist shows variable names only, never real values."
+      "title": "সেটিংস",
+      "body": "সেটিংস"
     },
     "support": {
-      "title": "Support",
-      "body": "Use this public address for MVP support and feedback."
+      "title": "সেটিংস",
+      "body": "সেটিংস"
     },
     "boundaries": {
-      "title": "Phase boundaries",
-      "body": "Phase 10 does not add payments, AI, email automation, Resend, Vercel Cron, billing, or support tickets."
+      "title": "সেটিংস",
+      "body": "সেটিংস"
     }
+  },
+  "PasswordField": {
+    "show": "দেখান",
+    "hide": "লুকান"
   }
 }

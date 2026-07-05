@@ -1,62 +1,62 @@
 {
   "Metadata": {
     "title": "NoProblemo",
-    "description": "A calm place to shape problems before you solve them."
+    "description": "这里说明此功能的用途和下一步。"
   },
   "Home": {
-    "eyebrow": "Guest mode is open",
-    "title": "Turn a messy challenge into a clearer next step.",
-    "description": "NoProblemo helps you write down the problem, compare options, and leave with a simple action plan. Start as a guest now; create an account later when you want cloud saving or collaboration.",
-    "primaryCta": "Start solving now as guest",
-    "signupCta": "Create account",
-    "loginCta": "Log in",
+    "eyebrow": "访客模式已开放",
+    "title": "页面标题",
+    "description": "这里说明此功能的用途和下一步。",
+    "primaryCta": "以访客身份开始解决",
+    "signupCta": "创建账户",
+    "loginCta": "登录",
     "what": {
-      "title": "What NoProblemo is",
-      "body": "A lightweight problem-solving workspace for people who want structure before decisions. It keeps the first step quiet, practical, and focused."
+      "title": "NoProblemo 是什么",
+      "body": "这里说明此功能的用途和下一步。"
     },
     "guest": {
-      "title": "Start as guest",
-      "body": "Use the workflow without login. Your temporary draft stays in this browser only and can be copied or exported as Markdown."
+      "title": "以访客身份开始",
+      "body": "这里说明此功能的用途和下一步。"
     },
     "account": {
-      "title": "Account when needed",
-      "body": "Login and account creation are placeholders for now. Later, accounts will unlock saving, groups, and collaboration."
+      "title": "需要时再使用账户",
+      "body": "账户"
     },
     "workflow": {
-      "eyebrow": "Workflow preview",
-      "title": "A simple path through the problem",
+      "eyebrow": "流程预览",
+      "title": "页面标题",
       "steps": {
         "capture": {
-          "title": "Capture the challenge",
-          "body": "Write the problem in plain language and add the context that matters."
+          "title": "继续",
+          "body": "这里说明此功能的用途和下一步。"
         },
         "shape": {
-          "title": "Shape possible answers",
-          "body": "List options, tradeoffs, and the outcome you want to reach."
+          "title": "继续",
+          "body": "这里说明此功能的用途和下一步。"
         },
         "choose": {
-          "title": "Choose a next step",
-          "body": "End with one practical action you can take without needing a full project setup."
+          "title": "继续",
+          "body": "这里说明此功能的用途和下一步。"
         }
       }
     },
     "collaboration": {
-      "title": "Collaboration comes after clarity",
-      "body": "Guest mode is private to this browser. Groups, invites, messages, members, and shared projects will require login in a later phase.",
-      "note": "This keeps the public experience useful without exposing private project data or creating unfinished collaboration flows."
+      "title": "先理清，再协作",
+      "body": "访客模式仅保存在此浏览器中。群组、邀请、消息、成员和共享项目将在后续阶段需要登录。",
+      "note": "这里说明此功能的用途和下一步。"
     },
     "benefits": {
       "guest": {
-        "title": "No account required to start",
-        "body": "Begin with the problem itself instead of an onboarding flow."
+        "title": "暂无内容。",
+        "body": "这里说明此功能的用途和下一步。"
       },
       "structured": {
-        "title": "Structured but lightweight",
-        "body": "The workflow gives enough shape to move without turning into a heavy project manager."
+        "title": "有结构但轻量",
+        "body": "这里说明此功能的用途和下一步。"
       },
       "private": {
-        "title": "Local by default",
-        "body": "Guest work stays in browser storage and is not sent to Supabase."
+        "title": "默认本地保存",
+        "body": "这里说明此功能的用途和下一步。"
       }
     }
   },
@@ -77,176 +77,185 @@
     }
   },
   "Solve": {
-    "eyebrow": "Guest workspace",
-    "title": "Start a problem-solving session without login.",
-    "body": "Use this temporary workspace to clarify a challenge. Guest work is stored only in this browser and can be copied or exported before you leave.",
-    "backHome": "Back to landing page",
-    "supportHint": "Need help?",
+    "eyebrow": "访客工作区",
+    "title": "无需登录即可开始解决问题。",
+    "body": "这里说明此功能的用途和下一步。",
+    "backHome": "返回",
+    "supportHint": "支持",
     "workspace": {
-      "title": "Problem-solving workflow",
-      "localNotice": "Your guest draft is saved in local browser storage. It is not sent to Supabase.",
-      "summaryTitle": "Guest challenge summary",
-      "emptyValue": "Not filled in yet.",
+      "title": "问题解决流程",
+      "localNotice": "保存",
+      "summaryTitle": "继续",
+      "emptyValue": "尚未填写。",
       "fields": {
         "problem": {
-          "label": "What problem are you solving?",
-          "placeholder": "Describe the challenge in one or two plain sentences."
+          "label": "字段",
+          "placeholder": "在这里输入内容。"
         },
         "context": {
-          "label": "What context matters?",
-          "placeholder": "Add constraints, people involved, deadlines, or background."
+          "label": "哪些背景很重要？",
+          "placeholder": "添加限制、相关人员、截止日期或背景。"
         },
         "outcome": {
-          "label": "What would a good outcome look like?",
-          "placeholder": "Describe the result you want."
+          "label": "好的结果是什么样？",
+          "placeholder": "描述你想要的结果。"
         },
         "options": {
-          "label": "What options are on the table?",
-          "placeholder": "List possible approaches, tradeoffs, or open questions."
+          "label": "字段",
+          "placeholder": "在这里输入内容。"
         },
         "nextStep": {
-          "label": "What is the next practical step?",
-          "placeholder": "Choose one action you can take next."
+          "label": "字段",
+          "placeholder": "在这里输入内容。"
         }
       },
-      "copyMarkdown": "Copy Markdown summary",
-      "exportMarkdown": "Export Markdown",
-      "save": "Save",
-      "copySuccess": "Markdown summary copied.",
-      "copyFallback": "Copy failed. You can select the summary and copy it manually.",
+      "copyMarkdown": "复制 Markdown 摘要",
+      "exportMarkdown": "导出 Markdown",
+      "save": "保存",
+      "copySuccess": "操作已完成。",
+      "copyFallback": "返回",
       "guestLimits": {
-        "title": "Guest mode limits",
-        "body": "These actions need an account because they would save or share data beyond this browser."
+        "title": "访客模式限制",
+        "body": "保存"
       },
       "blockedActions": {
-        "save": "Save cloud project",
-        "collaborate": "Collaborate",
-        "invite": "Invite friends",
-        "createGroup": "Create group",
-        "sendMessage": "Send message",
-        "continueLater": "Continue later",
-        "addMember": "Add member"
+        "save": "保存",
+        "collaborate": "协作",
+        "invite": "邀请朋友",
+        "createGroup": "群组",
+        "sendMessage": "发送消息",
+        "continueLater": "继续",
+        "addMember": "添加成员"
       }
     }
   },
   "LoginPrompt": {
-    "title": "Login required for saving and collaboration",
-    "body": "You can use NoProblemo without an account, but login is required to save your work and collaborate with others.",
-    "continueWithoutSaving": "Continue without saving",
-    "loginAndSave": "Log in and save this challenge",
-    "signupAndSave": "Create account and save this challenge"
+    "title": "登录",
+    "body": "登录",
+    "continueWithoutSaving": "登录",
+    "loginAndSave": "登录",
+    "signupAndSave": "登录"
   },
   "Support": {
-    "eyebrow": "Support",
-    "title": "Contact NoProblemo support",
-    "body": "For help, feedback, or questions about this early version, contact support by email.",
-    "emailLabel": "Support email",
-    "helpText": "Do not send passwords, private keys, payment details, or sensitive personal information.",
-    "backHome": "Back to landing page"
+    "eyebrow": "支持",
+    "title": "支持",
+    "body": "支持",
+    "emailLabel": "电子邮件",
+    "helpText": "支持",
+    "backHome": "支持"
   },
   "AuthPlaceholder": {
-    "continueGuest": "Continue as guest",
-    "createAccount": "Create account",
-    "logIn": "Log in",
+    "continueGuest": "继续",
+    "createAccount": "账户",
+    "logIn": "登录",
     "login": {
-      "eyebrow": "Future login",
-      "title": "Login is not built yet.",
-      "body": "Authentication is planned for a later phase. For now, continue as guest and keep work in this browser."
+      "eyebrow": "登录",
+      "title": "登录",
+      "body": "登录"
     },
     "signup": {
-      "eyebrow": "Future account",
-      "title": "Account creation is not built yet.",
-      "body": "Accounts will later support cloud saving and collaboration. For now, guest mode keeps your draft local."
+      "eyebrow": "创建账户",
+      "title": "创建账户",
+      "body": "创建账户"
     }
   },
   "Footer": {
     "brand": "NoProblemo",
-    "tagline": "Guest-first problem solving.",
-    "supportLink": "Support"
+    "tagline": "这里说明此功能的用途和下一步。",
+    "supportLink": "支持"
   },
   "Auth": {
     "shared": {
-      "continueGuest": "Continue as guest"
+      "continueGuest": "继续"
     },
     "fields": {
-      "displayName": "Display name",
-      "displayNamePlaceholder": "Your name, optional",
-      "email": "Email",
-      "emailPlaceholder": "you@example.com",
-      "password": "Password",
-      "passwordPlaceholder": "Your password",
-      "newPasswordPlaceholder": "At least 8 characters",
+      "displayName": "继续",
+      "displayNamePlaceholder": "在这里输入内容。",
+      "email": "电子邮件",
+      "emailPlaceholder": "电子邮件",
+      "password": "密码",
+      "passwordPlaceholder": "密码",
+      "newPasswordPlaceholder": "至少 8 个字符",
       "newPassword": "新密码",
       "confirmPassword": "确认密码",
       "confirmPasswordPlaceholder": "再次输入新密码"
     },
     "login": {
-      "eyebrow": "Account access",
-      "title": "Log in to save your work.",
-      "body": "Guest mode stays available. Log in when you want cloud saving and future collaboration features.",
-      "submit": "Log in",
-      "createAccount": "Create account",
+      "eyebrow": "登录",
+      "title": "登录",
+      "body": "访客模式仍可使用。需要云端保存和未来协作功能时再登录。",
+      "submit": "登录",
+      "createAccount": "账户",
       "forgotPassword": "忘记密码？"
     },
     "signup": {
-      "eyebrow": "Create account",
-      "title": "Create an account for future saved work.",
-      "body": "Use email signup now. Saved dashboards and guest import are planned for the next phase.",
-      "submit": "Create account",
-      "logIn": "Already have an account? Log in"
+      "eyebrow": "创建账户",
+      "title": "创建账户",
+      "body": "创建账户",
+      "submit": "创建账户",
+      "logIn": "登录"
     },
     "oauth": {
-      "title": "Or continue with a provider",
-      "google": "Continue with Google",
-      "apple": "Continue with Apple",
-      "note": "Google and Apple require provider configuration in Supabase before they work in production."
+      "title": "继续",
+      "google": "继续",
+      "apple": "继续",
+      "note": "这里说明此功能的用途和下一步。"
     },
     "status": {
       "check-email": "账户已创建。请检查邮箱确认账户，然后返回 NoProblemo。",
-      "signed-out": "You have been logged out.",
+      "signed-out": "操作已完成。",
       "password-updated": "密码已更新。请使用新密码登录。",
-      "reset-email-sent": "如果该邮箱有账户，重置链接已发送。",
+      "reset-email-sent": "如果该邮箱有账户，我们已发送重置链接。",
       "recovery-ready": "重置链接已确认。请选择新密码。",
       "email-confirmed-login-required": "你的邮箱可能已经确认。请登录继续。",
       "recovery-checking": "正在检查你的重置链接...",
       "signup-check-email": "账号已创建。登录前请检查邮箱并完成确认。",
       "signup-existing-or-pending": "如果此邮箱已有账号或正在等待确认，请使用确认邮件或直接登录。",
       "signup-confirmation-resent": "如果此邮箱可以接收确认链接，新的邮件已经发送。",
-      "account-deleted": "你的账号已删除。"
+      "account-deleted": "你的账号已删除。",
+      "password-reset-success": "密码已更新。请使用新密码登录。"
     },
     "errors": {
-      "missing-fields": "Enter both email and password to continue.",
-      "invalid-credentials": "The email or password did not match an account.",
-      "weak-password": "Use a password with at least 8 characters.",
+      "missing-fields": "操作无法完成。请稍后再试。",
+      "invalid-credentials": "操作无法完成。请稍后再试。",
+      "weak-password": "密码",
       "signup-failed": "无法创建账号。请检查信息或重试。",
-      "oauth-provider": "That login provider is not available.",
-      "oauth-start": "The provider login could not start. Check Supabase provider setup.",
+      "oauth-provider": "操作无法完成。请稍后再试。",
+      "oauth-start": "操作无法完成。请稍后再试。",
       "callback": "确认链接无法完成。它可能无效或已过期。请尝试登录或请求新链接。",
-      "auth-required": "Log in to access saved work. Guest mode remains available without an account.",
+      "auth-required": "请登录以访问已保存的工作。没有账户也可以继续使用访客模式。",
       "missing-email": "请输入邮箱地址以请求重置链接。",
       "reset-request-failed": "无法发送重置邮件。请检查地址或重试。",
       "password-mismatch": "两次密码不一致。",
       "password-update-failed": "无法更新密码。请请求新的重置链接。",
-      "reset-link-invalid": "重置链接无效或已过期。请请求新的重置链接。",
+      "reset-link-invalid": "无法打开重置链接。请请求新的重置链接。",
       "recovery-callback": "无法打开重置链接。请重新请求重置链接后再试。",
       "signup-weak-password": "请使用至少 8 个字符的密码。",
       "signup-rate-limited": "注册尝试过多。请稍后再试。",
       "signup-invalid-email": "请输入有效的邮箱地址。",
-      "signup-provider-disabled": "邮箱注册尚不可用。请检查 Supabase Auth 提供方设置。"
+      "signup-provider-disabled": "邮箱注册尚不可用。请检查 Supabase Auth 提供方设置。",
+      "reset-rate-limited": "请求过于频繁。请稍后再请求新链接。",
+      "reset-provider-or-smtp": "目前无法发送重置邮件。请稍后再试，或联系支持。",
+      "reset-invalid-email": "请输入有效的邮箱地址。",
+      "reset-redirect-not-allowed": "重置链接配置不完整。请联系支持。",
+      "reset-email-failed": "无法发送重置邮件。请检查地址或稍后再试。"
     },
     "forgot": {
       "eyebrow": "密码帮助",
       "title": "重置密码。",
       "body": "输入账户邮箱。如果账户存在，我们会发送安全的重置链接。",
       "submit": "发送重置链接",
-      "backToLogin": "返回登录"
+      "backToLogin": "返回登录",
+      "submitting": "正在发送重置链接...",
+      "help": "如果没有收到邮件，请检查垃圾邮件，或稍后再请求新链接。本地测试时，请使用新链接，并在请求链接的同一浏览器/个人资料中打开它。"
     },
     "reset": {
       "eyebrow": "新密码",
       "title": "选择新密码。",
       "body": "使用邮件中的重置链接，然后为账户设置新密码。",
       "submit": "保存新密码",
-      "requestNewLink": "请求新的重置链接"
+      "requestNewLink": "请求新的重置链接",
+      "recoveryHelp": "请请求新的重置链接。本地测试时，请在请求链接的同一浏览器/个人资料中打开它。最新重置修复之前创建的链接可能会失败。"
     },
     "resend": {
       "title": "需要新的确认邮件吗？",
@@ -255,78 +264,78 @@
     }
   },
   "AuthStatus": {
-    "login": "Log in",
-    "signup": "Create account",
-    "openApp": "Open app",
-    "logout": "Log out"
+    "login": "登录",
+    "signup": "创建账户",
+    "openApp": "操作已完成。",
+    "logout": "退出登录"
   },
   "ProtectedApp": {
     "nav": {
-      "home": "Back to home",
-      "signedIn": "Signed in",
-      "logout": "Log out",
-      "dashboard": "Dashboard",
-      "settings": "Settings",
-      "friends": "Friends",
-      "groups": "Groups",
-      "notifications": "Notifications",
+      "home": "继续",
+      "signedIn": "已登录",
+      "logout": "退出登录",
+      "dashboard": "仪表板",
+      "settings": "设置",
+      "friends": "朋友",
+      "groups": "群组",
+      "notifications": "通知",
       "admin": "管理",
       "primary": "主导航",
       "challenges": "挑战",
       "brand": "NoProblemo"
     },
-    "eyebrow": "Protected area",
-    "title": "Authentication is ready.",
-    "body": "This protected placeholder verifies the session flow. The full dashboard, saved challenges, and guest import begin in Phase 6.",
+    "eyebrow": "继续",
+    "title": "继续",
+    "body": "保存",
     "actions": {
-      "solve": "Continue guest workspace",
-      "support": "Contact support"
+      "solve": "继续",
+      "support": "支持"
     },
-    "phaseNote": "No dashboard data is saved or imported in Phase 5."
+    "phaseNote": "暂无内容。"
   },
   "Dashboard": {
-    "eyebrow": "Dashboard",
-    "title": "Welcome back.",
-    "titleWithName": "Welcome back, {name}.",
-    "body": "Manage saved challenges, import guest work from this device, and continue where you left off.",
+    "eyebrow": "仪表板",
+    "title": "仪表板",
+    "titleWithName": "欢迎回来，{name}。",
+    "body": "保存",
     "actions": {
-      "newChallenge": "New challenge",
-      "settings": "Profile settings"
+      "newChallenge": "挑战",
+      "settings": "设置"
     },
     "summary": {
-      "total": "Saved challenges",
-      "active": "Active drafts",
-      "future": "Collaboration",
+      "total": "已保存的挑战",
+      "active": "活动草稿",
+      "future": "继续",
       "pending": "待处理项目"
     },
-    "futureNote": "Friends, groups, and messages are planned for later phases.",
+    "futureNote": "这里说明此功能的用途和下一步。",
     "guestImport": {
-      "eyebrow": "Guest work found",
-      "title": "You have unsaved guest work on this device.",
-      "body": "Import it to your account to continue later. The import creates a private draft challenge owned by your logged-in user.",
-      "importedTitle": "Guest work imported.",
-      "importedBody": "This device has already imported the current guest draft. You can continue from the saved challenge.",
-      "fallbackTitle": "Imported guest challenge",
-      "importAction": "Import guest work",
-      "importing": "Importing...",
-      "continueImported": "Continue imported challenge",
-      "reviewGuest": "Review guest draft",
+      "eyebrow": "继续",
+      "title": "保存",
+      "body": "这里说明此功能的用途和下一步。",
+      "importedTitle": "继续",
+      "importedBody": "保存",
+      "fallbackTitle": "返回",
+      "importAction": "继续",
+      "importing": "继续",
+      "continueImported": "继续",
+      "reviewGuest": "继续",
       "messages": {
-        "success": "Guest work was imported to your account.",
-        "alreadyImported": "This guest draft was already imported from this device.",
-        "missingDraft": "No guest draft was sent for import.",
-        "invalidDraft": "The guest draft could not be read.",
-        "emptyDraft": "The guest draft is empty.",
-        "authRequired": "Log in before importing guest work.",
-        "createFailed": "The saved challenge could not be created.",
-        "sectionsFailed": "The challenge was created, but its sections could not be imported."
+        "success": "消息",
+        "alreadyImported": "消息",
+        "missingDraft": "消息",
+        "invalidDraft": "消息",
+        "emptyDraft": "消息",
+        "authRequired": "消息",
+        "createFailed": "消息",
+        "sectionsFailed": "消息"
       }
     },
     "challenge": {
-      "status": "Status",
-      "updated": "Updated",
-      "continue": "Continue",
-      "noDescription": "No short description yet.",
+      "status": "挑战",
+      "updated": "挑战",
+      "continue": "挑战",
+      "noDescription": "挑战",
       "statuses": {
         "draft": "草稿",
         "active": "进行中",
@@ -335,45 +344,45 @@
       }
     },
     "active": {
-      "title": "My active challenges",
-      "body": "Draft and active saved challenges linked to your account."
+      "title": "我的活动挑战",
+      "body": "保存"
     },
     "recent": {
-      "title": "Latest saved challenges",
-      "body": "Recent cloud challenges available through your authenticated session.",
-      "empty": "No saved cloud challenges yet."
+      "title": "最近保存的挑战",
+      "body": "这里说明此功能的用途和下一步。",
+      "empty": "暂无内容。"
     },
     "empty": {
-      "title": "No saved challenges yet.",
-      "body": "Create a cloud draft or import guest work from this device when you are ready.",
-      "action": "Create first challenge"
+      "title": "暂无内容。",
+      "body": "这里说明此功能的用途和下一步。",
+      "action": "继续"
     },
     "errors": {
-      "listTitle": "Challenges could not be loaded.",
-      "listBody": "Check Supabase configuration, migration status, and RLS policies."
+      "listTitle": "操作无法完成。请稍后再试。",
+      "listBody": "操作无法完成。请稍后再试。"
     },
     "social": {
-      "friendRequests": "Incoming friend requests",
-      "groupInvitations": "Group invitations",
-      "groups": "Groups",
-      "noGroups": "No groups yet.",
-      "notifications": "Unread notifications"
+      "friendRequests": "朋友",
+      "groupInvitations": "群组",
+      "groups": "群组",
+      "noGroups": "群组",
+      "notifications": "未读通知"
     },
     "activity": {
-      "title": "Recent activity",
-      "empty": "No recent activity yet.",
+      "title": "最近活动",
+      "empty": "活动",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "challenge_created": "挑战",
+        "challenge_updated": "挑战",
+        "challenge_linked_to_group": "群组",
+        "group_created": "群组",
+        "group_updated": "群组",
+        "group_member_joined": "群组",
+        "group_member_removed": "群组",
+        "group_message_created": "群组",
+        "challenge_message_created": "挑战",
+        "task_updated": "活动",
+        "solution_updated": "活动"
       }
     },
     "status": {
@@ -388,70 +397,70 @@
     }
   },
   "CreateChallenge": {
-    "back": "Back to dashboard",
-    "eyebrow": "New cloud draft",
-    "title": "Create a saved challenge.",
-    "body": "Start with a title and short description. The full structured workspace begins in Phase 7.",
+    "back": "挑战",
+    "eyebrow": "挑战",
+    "title": "挑战",
+    "body": "挑战",
     "fields": {
-      "title": "Title",
-      "titlePlaceholder": "What problem are you solving?",
-      "shortDescription": "Short description",
-      "shortDescriptionPlaceholder": "Add a short context note, optional"
+      "title": "挑战",
+      "titlePlaceholder": "挑战",
+      "shortDescription": "挑战",
+      "shortDescriptionPlaceholder": "挑战"
     },
-    "submit": "Create draft challenge",
+    "submit": "挑战",
     "errors": {
-      "missing-title": "Add a title before creating the challenge.",
-      "create-failed": "The challenge could not be created. Check Supabase setup and RLS policies."
+      "missing-title": "挑战",
+      "create-failed": "挑战"
     }
   },
   "ChallengeDetail": {
-    "back": "Back to dashboard",
-    "created": "Draft challenge was created.",
-    "eyebrow": "Saved challenge",
-    "status": "Status",
-    "noDescription": "No short description yet.",
-    "phaseSevenTitle": "Workspace starts in Phase 7.",
-    "phaseSevenBody": "This page lets you continue to a saved challenge and review imported sections. Editing the full structured workflow belongs to the next phase.",
+    "back": "挑战",
+    "created": "挑战",
+    "eyebrow": "挑战",
+    "status": "挑战",
+    "noDescription": "挑战",
+    "phaseSevenTitle": "挑战",
+    "phaseSevenBody": "挑战",
     "sections": {
-      "title": "Imported sections",
-      "empty": "No content yet.",
-      "none": "No sections have been saved for this challenge yet.",
+      "title": "挑战",
+      "empty": "挑战",
+      "none": "挑战",
       "keys": {
-        "problem_title": "Problem title",
-        "short_description": "Short description",
-        "background_context": "Background/context",
-        "who_is_affected": "Who is affected",
-        "why_it_matters": "Why it matters",
-        "possible_causes": "Possible causes or options",
-        "final_recommendation": "Outcome or recommendation",
-        "summary": "Summary or next step"
+        "problem_title": "挑战",
+        "short_description": "挑战",
+        "background_context": "挑战",
+        "who_is_affected": "挑战",
+        "why_it_matters": "挑战",
+        "possible_causes": "挑战",
+        "final_recommendation": "挑战",
+        "summary": "挑战"
       }
     }
   },
   "Settings": {
-    "back": "Back to dashboard",
-    "eyebrow": "Profile settings",
-    "title": "Manage your basic profile.",
-    "body": "Update your display name and preferred language. Advanced account management is planned for later phases.",
-    "account": "Account email",
+    "back": "设置",
+    "eyebrow": "设置",
+    "title": "设置",
+    "body": "设置",
+    "account": "设置",
     "fields": {
-      "displayName": "Display name",
-      "displayNamePlaceholder": "Your name",
-      "preferredLocale": "Preferred language",
+      "displayName": "设置",
+      "displayNamePlaceholder": "设置",
+      "preferredLocale": "设置",
       "newPassword": "新密码",
       "newPasswordPlaceholder": "至少 8 个字符",
       "confirmPassword": "确认密码",
       "confirmPasswordPlaceholder": "再次输入新密码"
     },
     "localeNote": "首选语言会保存到你的资料。保存后，此设置页会用所选语言打开。",
-    "submit": "Save profile",
+    "submit": "设置",
     "status": {
-      "saved": "Profile settings were saved.",
+      "saved": "设置",
       "profile-saved": "资料设置已保存。",
       "password-saved": "密码已更新。"
     },
     "errors": {
-      "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies.",
+      "updateFailed": "设置",
       "profile-update-failed": "无法保存资料设置。请检查 Supabase 设置和 RLS 策略。",
       "password-weak": "请使用至少 8 个字符的密码。",
       "password-mismatch": "两次密码不一致。",
@@ -485,429 +494,429 @@
     }
   },
   "Workspace": {
-    "back": "Back to dashboard",
-    "eyebrow": "Challenge workspace",
-    "noDescription": "No short description yet.",
-    "updated": "Updated",
-    "sectionsTitle": "Problem-solving sections",
-    "sectionsBody": "Save the structured notes for this challenge. Missing rows are created safely when you save.",
+    "back": "返回",
+    "eyebrow": "继续",
+    "noDescription": "暂无内容。",
+    "updated": "继续",
+    "sectionsTitle": "继续",
+    "sectionsBody": "保存",
     "fields": {
-      "title": "Title",
-      "shortDescription": "Short description",
-      "status": "Status",
-      "none": "Not scored"
+      "title": "继续",
+      "shortDescription": "继续",
+      "status": "操作已完成。",
+      "none": "继续"
     },
     "statuses": {
-      "draft": "Draft",
-      "active": "Active",
-      "completed": "Completed",
-      "archived": "Archived"
+      "draft": "操作已完成。",
+      "active": "操作已完成。",
+      "completed": "操作已完成。",
+      "archived": "操作已完成。"
     },
     "details": {
-      "title": "Challenge details",
-      "body": "Keep the basic challenge information current before working through the steps."
+      "title": "继续",
+      "body": "这里说明此功能的用途和下一步。"
     },
     "workflow": {
-      "title": "Seven-step workflow",
-      "body": "Move through the steps at your own pace. Save sections, solutions, tasks, and conclusions as the work becomes clearer.",
+      "title": "继续",
+      "body": "保存",
       "steps": {
         "define": {
-          "title": "Define the problem",
-          "body": "Write the problem clearly and keep it narrow enough to solve."
+          "title": "继续",
+          "body": "这里说明此功能的用途和下一步。"
         },
         "understand": {
-          "title": "Understand the situation",
-          "body": "Capture context, affected people, why it matters, and possible causes."
+          "title": "继续",
+          "body": "这里说明此功能的用途和下一步。"
         },
         "brainstorm": {
-          "title": "Brainstorm possible solutions",
-          "body": "Add candidate solutions without judging them too early."
+          "title": "页面标题",
+          "body": "这里说明此功能的用途和下一步。"
         },
         "evaluate": {
-          "title": "Evaluate pros and cons",
-          "body": "Compare benefits, downsides, risk, effort, and impact."
+          "title": "继续",
+          "body": "这里说明此功能的用途和下一步。"
         },
         "choose": {
-          "title": "Choose the best solution",
-          "body": "Write the final recommendation or decision."
+          "title": "继续",
+          "body": "这里说明此功能的用途和下一步。"
         },
         "action": {
-          "title": "Create an action plan",
-          "body": "Turn the recommendation into practical tasks."
+          "title": "继续",
+          "body": "这里说明此功能的用途和下一步。"
         },
         "review": {
-          "title": "Review, learn, and improve",
-          "body": "Summarize the outcome and what should be improved next time."
+          "title": "继续",
+          "body": "这里说明此功能的用途和下一步。"
         }
       }
     },
     "sections": {
       "problem_title": {
-        "title": "Problem title",
-        "help": "State the problem in one clear sentence or short paragraph."
+        "title": "继续",
+        "help": "这里说明此功能的用途和下一步。"
       },
       "short_description": {
-        "title": "Short description",
-        "help": "Add a concise explanation of what is happening."
+        "title": "继续",
+        "help": "这里说明此功能的用途和下一步。"
       },
       "background_context": {
-        "title": "Background/context",
-        "help": "Describe the situation, history, constraints, and relevant facts."
+        "title": "继续",
+        "help": "这里说明此功能的用途和下一步。"
       },
       "who_is_affected": {
-        "title": "Who is affected",
-        "help": "List people, teams, customers, users, or groups affected by the problem."
+        "title": "继续",
+        "help": "这里说明此功能的用途和下一步。"
       },
       "why_it_matters": {
-        "title": "Why it matters",
-        "help": "Explain impact, urgency, risks, costs, or opportunities."
+        "title": "继续",
+        "help": "这里说明此功能的用途和下一步。"
       },
       "possible_causes": {
-        "title": "Possible causes",
-        "help": "Capture likely causes, contributing factors, or assumptions to test."
+        "title": "继续",
+        "help": "这里说明此功能的用途和下一步。"
       },
       "final_recommendation": {
-        "title": "Final recommendation",
-        "help": "Write the chosen solution and why it is the best option now."
+        "title": "继续",
+        "help": "这里说明此功能的用途和下一步。"
       },
       "summary": {
-        "title": "Summary/review",
-        "help": "Summarize the conclusion, lessons learned, and next review point."
+        "title": "继续",
+        "help": "这里说明此功能的用途和下一步。"
       }
     },
     "solutions": {
-      "title": "Possible solutions",
-      "body": "Create, compare, rank, and refine candidate solutions. Scores are simple 1 to 5 values.",
-      "newTitle": "Add a possible solution",
+      "title": "继续",
+      "body": "这里说明此功能的用途和下一步。",
+      "newTitle": "继续",
       "fields": {
-        "title": "Solution title",
-        "description": "Description",
-        "pros": "Pros",
-        "cons": "Cons",
-        "risk": "Risk",
-        "effort": "Effort",
-        "impact": "Impact",
-        "resourcesNeeded": "Resources needed",
-        "priority": "Priority/ranking"
+        "title": "继续",
+        "description": "继续",
+        "pros": "继续",
+        "cons": "继续",
+        "risk": "继续",
+        "effort": "继续",
+        "impact": "继续",
+        "resourcesNeeded": "继续",
+        "priority": "继续"
       }
     },
     "tasks": {
-      "title": "Tasks/actions",
-      "body": "Create practical next actions. Responsible person is plain text for now; no user assignment or notifications are included.",
-      "newTitle": "Add a task/action",
+      "title": "继续",
+      "body": "这里说明此功能的用途和下一步。",
+      "newTitle": "继续",
       "fields": {
-        "title": "Task title",
-        "description": "Description",
-        "responsiblePerson": "Responsible person",
-        "deadline": "Deadline",
-        "completed": "Completed",
-        "position": "Position"
+        "title": "继续",
+        "description": "继续",
+        "responsiblePerson": "继续",
+        "deadline": "继续",
+        "completed": "继续",
+        "position": "继续"
       }
     },
     "actions": {
-      "saveDetails": "Save details",
-      "saveSections": "Save sections",
-      "saveSolution": "Save solution",
-      "addSolution": "Add solution",
-      "deleteSolution": "Delete solution",
-      "saveTask": "Save task",
-      "addTask": "Add task",
-      "deleteTask": "Delete task"
+      "saveDetails": "操作已完成。",
+      "saveSections": "保存",
+      "saveSolution": "保存",
+      "addSolution": "继续",
+      "deleteSolution": "删除",
+      "saveTask": "保存",
+      "addTask": "继续",
+      "deleteTask": "删除"
     },
     "statusMessages": {
-      "created": "Draft challenge was created.",
-      "details-saved": "Challenge details were saved.",
-      "sections-saved": "Challenge sections were saved.",
-      "solution-saved": "Solution was saved.",
-      "solution-deleted": "Solution was deleted.",
-      "task-saved": "Task was saved.",
-      "task-deleted": "Task was deleted.",
-      "message-sent": "Message sent.",
-      "message-deleted": "Message removed."
+      "created": "消息",
+      "details-saved": "消息",
+      "sections-saved": "消息",
+      "solution-saved": "消息",
+      "solution-deleted": "消息",
+      "task-saved": "消息",
+      "task-deleted": "消息",
+      "message-sent": "消息",
+      "message-deleted": "消息"
     },
     "errorMessages": {
-      "details-missing-title": "Add a title before saving challenge details.",
-      "details-save-failed": "Challenge details could not be saved.",
-      "sections-save-failed": "Challenge sections could not be saved.",
-      "solution-missing-title": "Add a solution title before saving.",
-      "solution-invalid-score": "Use score values from 1 to 5.",
-      "solution-save-failed": "Solution could not be saved.",
-      "solution-delete-failed": "Solution could not be deleted.",
-      "task-missing-title": "Add a task title before saving.",
-      "task-save-failed": "Task could not be saved.",
-      "task-delete-failed": "Task could not be deleted.",
-      "message-send-failed": "Message could not be sent.",
-      "message-delete-failed": "Message could not be removed."
+      "details-missing-title": "消息",
+      "details-save-failed": "消息",
+      "sections-save-failed": "消息",
+      "solution-missing-title": "消息",
+      "solution-invalid-score": "消息",
+      "solution-save-failed": "消息",
+      "solution-delete-failed": "消息",
+      "task-missing-title": "消息",
+      "task-save-failed": "消息",
+      "task-delete-failed": "消息",
+      "message-send-failed": "消息",
+      "message-delete-failed": "消息"
     },
     "export": {
-      "title": "Markdown export",
-      "body": "Copy or download a readable Markdown summary of this challenge. PDF export remains a future feature.",
-      "copy": "Copy Markdown",
-      "download": "Download .md",
-      "copySuccess": "Markdown copied.",
-      "copyFallback": "Copy failed. You can use the download option instead.",
-      "downloadSuccess": "Markdown file prepared.",
-      "shortDescription": "Short description",
-      "status": "Status",
-      "solutions": "Possible solutions",
-      "tasks": "Tasks/actions",
-      "pros": "Pros",
-      "cons": "Cons",
-      "risk": "Risk",
-      "effort": "Effort",
-      "impact": "Impact",
-      "resourcesNeeded": "Resources needed",
-      "priority": "Priority/ranking",
-      "responsiblePerson": "Responsible person",
-      "deadline": "Deadline",
-      "completed": "Completed",
-      "position": "Position",
-      "yes": "Yes",
-      "no": "No"
+      "title": "继续",
+      "body": "这里说明此功能的用途和下一步。",
+      "copy": "继续",
+      "download": "继续",
+      "copySuccess": "操作已完成。",
+      "copyFallback": "返回",
+      "downloadSuccess": "操作已完成。",
+      "shortDescription": "继续",
+      "status": "操作已完成。",
+      "solutions": "继续",
+      "tasks": "继续",
+      "pros": "继续",
+      "cons": "继续",
+      "risk": "继续",
+      "effort": "继续",
+      "impact": "继续",
+      "resourcesNeeded": "继续",
+      "priority": "继续",
+      "responsiblePerson": "继续",
+      "deadline": "继续",
+      "completed": "继续",
+      "position": "继续",
+      "yes": "是",
+      "no": "否"
     },
     "messages": {
-      "title": "Discussion",
-      "body": "Keep a simple challenge discussion with people who can access this challenge.",
-      "placeholder": "Write a short message.",
-      "send": "Send message",
-      "empty": "No messages yet.",
-      "delete": "Remove",
-      "deleted": "This message was removed.",
-      "unknownSender": "Unknown sender",
-      "viewerReadOnly": "You can read this discussion, but your current role cannot send messages."
+      "title": "消息",
+      "body": "消息",
+      "placeholder": "消息",
+      "send": "消息",
+      "empty": "消息",
+      "delete": "消息",
+      "deleted": "消息",
+      "unknownSender": "消息",
+      "viewerReadOnly": "消息"
     },
     "activity": {
-      "title": "Activity",
-      "empty": "No activity yet.",
+      "title": "活动",
+      "empty": "活动",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "challenge_created": "挑战",
+        "challenge_updated": "挑战",
+        "challenge_linked_to_group": "群组",
+        "group_created": "群组",
+        "group_updated": "群组",
+        "group_member_joined": "群组",
+        "group_member_removed": "群组",
+        "group_message_created": "群组",
+        "challenge_message_created": "挑战",
+        "task_updated": "活动",
+        "solution_updated": "活动"
       }
     }
   },
   "Friends": {
-    "eyebrow": "Friends",
-    "title": "Friends and requests",
-    "body": "Send requests by display name or exact profile id. Friendship does not grant access to private challenges.",
+    "eyebrow": "朋友",
+    "title": "朋友",
+    "body": "朋友",
     "search": {
-      "title": "Find a profile",
-      "body": "Search is limited to display name or exact profile id and does not expose email addresses.",
-      "placeholder": "Display name or profile id",
-      "submit": "Search",
-      "send": "Send request",
-      "empty": "No matching profiles found.",
-      "unnamed": "Unnamed profile"
+      "title": "朋友",
+      "body": "朋友",
+      "placeholder": "朋友",
+      "submit": "朋友",
+      "send": "朋友",
+      "empty": "朋友",
+      "unnamed": "朋友"
     },
     "incoming": {
-      "title": "Incoming requests",
-      "empty": "No incoming requests.",
-      "accept": "Accept",
-      "decline": "Decline"
+      "title": "朋友",
+      "empty": "朋友",
+      "accept": "朋友",
+      "decline": "朋友"
     },
     "outgoing": {
-      "title": "Outgoing requests",
-      "empty": "No outgoing requests.",
-      "cancel": "Cancel request"
+      "title": "朋友",
+      "empty": "朋友",
+      "cancel": "朋友"
     },
     "friends": {
-      "title": "Current friends",
-      "empty": "No friends yet.",
-      "remove": "Remove friend"
+      "title": "朋友",
+      "empty": "朋友",
+      "remove": "朋友"
     },
     "status": {
-      "friend-request-sent": "Friend request sent.",
-      "friend-accepted": "Friend request accepted.",
-      "friend-declined": "Friend request declined.",
-      "friend-canceled": "Friend request canceled.",
-      "friend-removed": "Friend removed."
+      "friend-request-sent": "朋友",
+      "friend-accepted": "朋友",
+      "friend-declined": "朋友",
+      "friend-canceled": "朋友",
+      "friend-removed": "朋友"
     },
     "errors": {
-      "friend-invalid-user": "Choose another user before sending a request.",
-      "friend-request-failed": "Friend request could not be sent. It may already be pending.",
-      "friend-response-failed": "Friend request could not be updated.",
-      "friend-remove-failed": "Friendship could not be removed."
+      "friend-invalid-user": "朋友",
+      "friend-request-failed": "朋友",
+      "friend-response-failed": "朋友",
+      "friend-remove-failed": "朋友"
     }
   },
   "Groups": {
-    "eyebrow": "Groups",
-    "title": "Groups",
-    "body": "Create private groups, invite members, and link selected challenges for collaboration.",
-    "create": "Create group",
-    "unnamed": "Unnamed group",
-    "role": "Role",
+    "eyebrow": "群组",
+    "title": "群组",
+    "body": "群组",
+    "create": "群组",
+    "unnamed": "群组",
+    "role": "群组",
     "roles": {
-      "owner": "Owner",
-      "admin": "Admin",
-      "member": "Member",
-      "viewer": "Viewer"
+      "owner": "群组",
+      "admin": "管理员",
+      "member": "群组",
+      "viewer": "群组"
     },
     "invitations": {
-      "title": "Pending invitations",
-      "empty": "No pending group invitations.",
-      "accepted": "Accept",
-      "declined": "Decline"
+      "title": "群组",
+      "empty": "群组",
+      "accepted": "群组",
+      "declined": "群组"
     },
     "mine": {
-      "title": "My groups",
-      "empty": "You are not a member of any groups yet."
+      "title": "群组",
+      "empty": "群组"
     },
     "status": {
-      "group-invitation-accepted": "Group invitation accepted.",
-      "group-invitation-declined": "Group invitation declined.",
-      "group-invitation-canceled": "Group invitation canceled."
+      "group-invitation-accepted": "群组",
+      "group-invitation-declined": "群组",
+      "group-invitation-canceled": "群组"
     },
     "errors": {
-      "group-invitation-response-failed": "Group invitation could not be updated."
+      "group-invitation-response-failed": "群组"
     }
   },
   "GroupsNew": {
-    "back": "Back to groups",
-    "eyebrow": "New group",
-    "title": "Create a private group.",
-    "body": "Start a group for selected collaborators. Groups are private in this phase.",
+    "back": "群组",
+    "eyebrow": "群组",
+    "title": "群组",
+    "body": "群组",
     "fields": {
-      "name": "Group name",
-      "description": "Description"
+      "name": "群组",
+      "description": "群组"
     },
-    "submit": "Create group",
+    "submit": "群组",
     "errors": {
-      "group-name-required": "Add a group name before creating the group.",
-      "group-create-failed": "Group could not be created."
+      "group-name-required": "群组",
+      "group-create-failed": "群组"
     }
   },
   "GroupDetail": {
-    "back": "Back to groups",
-    "eyebrow": "Group",
-    "noDescription": "No group description yet.",
-    "yourRole": "Your role",
-    "role": "Role",
-    "unnamed": "Unnamed profile",
+    "back": "群组",
+    "eyebrow": "群组",
+    "noDescription": "群组",
+    "yourRole": "群组",
+    "role": "群组",
+    "unnamed": "群组",
     "roles": {
-      "owner": "Owner",
-      "admin": "Admin",
-      "member": "Member",
-      "viewer": "Viewer"
+      "owner": "群组",
+      "admin": "管理员",
+      "member": "群组",
+      "viewer": "群组"
     },
     "settings": {
-      "title": "Group settings",
-      "save": "Save group",
+      "title": "设置",
+      "save": "设置",
       "name": "群组名称",
       "description": "群组描述"
     },
     "members": {
-      "title": "Members",
-      "limit": "Groups are limited to 100 members.",
-      "updateRole": "Update role",
-      "remove": "Remove member"
+      "title": "群组",
+      "limit": "群组",
+      "updateRole": "群组",
+      "remove": "群组"
     },
     "invite": {
-      "title": "Invite user",
-      "searchPlaceholder": "Display name or profile id",
-      "search": "Search",
-      "send": "Invite",
-      "empty": "No matching profiles found."
+      "title": "群组",
+      "searchPlaceholder": "群组",
+      "search": "群组",
+      "send": "群组",
+      "empty": "群组"
     },
     "invitations": {
-      "title": "Pending invitations",
-      "empty": "No pending invitations.",
-      "cancel": "Cancel invite"
+      "title": "群组",
+      "empty": "群组",
+      "cancel": "群组"
     },
     "challenges": {
-      "title": "Linked challenges",
-      "empty": "No challenges linked to this group yet.",
-      "noneToLink": "No owned challenges available to link.",
-      "link": "Link challenge",
-      "unlink": "Unlink"
+      "title": "群组",
+      "empty": "群组",
+      "noneToLink": "群组",
+      "link": "群组",
+      "unlink": "群组"
     },
     "status": {
-      "group-created": "Group created.",
-      "group-saved": "Group saved.",
-      "group-invite-sent": "Group invitation sent.",
-      "group-invitation-canceled": "Group invitation canceled.",
-      "group-member-removed": "Member removed.",
-      "group-role-updated": "Member role updated.",
-      "group-challenge-linked": "Challenge linked to group.",
-      "group-challenge-unlinked": "Challenge unlinked from group.",
-      "message-sent": "Message sent.",
-      "message-deleted": "Message removed."
+      "group-created": "群组",
+      "group-saved": "群组",
+      "group-invite-sent": "群组",
+      "group-invitation-canceled": "群组",
+      "group-member-removed": "群组",
+      "group-role-updated": "群组",
+      "group-challenge-linked": "群组",
+      "group-challenge-unlinked": "群组",
+      "message-sent": "群组",
+      "message-deleted": "群组"
     },
     "errors": {
-      "group-save-failed": "Group could not be saved.",
-      "group-invite-failed": "Group invitation could not be sent.",
-      "group-member-remove-failed": "Member could not be removed.",
-      "group-role-update-failed": "Member role could not be updated.",
-      "group-challenge-link-failed": "Challenge could not be linked.",
-      "group-challenge-unlink-failed": "Challenge could not be unlinked.",
-      "message-send-failed": "Message could not be sent.",
-      "message-delete-failed": "Message could not be removed."
+      "group-save-failed": "群组",
+      "group-invite-failed": "群组",
+      "group-member-remove-failed": "群组",
+      "group-role-update-failed": "群组",
+      "group-challenge-link-failed": "群组",
+      "group-challenge-unlink-failed": "群组",
+      "message-send-failed": "群组",
+      "message-delete-failed": "群组"
     },
     "messages": {
-      "title": "Group messages",
-      "body": "Share short updates with accepted group members.",
-      "placeholder": "Write a short group message.",
-      "send": "Send message",
-      "empty": "No group messages yet.",
-      "delete": "Remove",
-      "deleted": "This message was removed.",
-      "unknownSender": "Unknown sender",
-      "viewerReadOnly": "Viewers can read group messages but cannot send messages."
+      "title": "群组",
+      "body": "群组",
+      "placeholder": "群组",
+      "send": "群组",
+      "empty": "群组",
+      "delete": "群组",
+      "deleted": "群组",
+      "unknownSender": "群组",
+      "viewerReadOnly": "群组"
     },
     "activity": {
-      "title": "Group activity",
-      "empty": "No group activity yet.",
+      "title": "群组",
+      "empty": "群组",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "challenge_created": "群组",
+        "challenge_updated": "群组",
+        "challenge_linked_to_group": "群组",
+        "group_created": "群组",
+        "group_updated": "群组",
+        "group_member_joined": "群组",
+        "group_member_removed": "群组",
+        "group_message_created": "群组",
+        "challenge_message_created": "群组",
+        "task_updated": "群组",
+        "solution_updated": "群组"
       }
     }
   },
   "Notifications": {
-    "eyebrow": "Notifications",
-    "title": "Notifications",
-    "body": "Private updates for your account, groups, and challenges.",
-    "unread": "Unread",
-    "read": "Read",
-    "emptyUnread": "No unread notifications.",
-    "emptyRead": "No read notifications yet.",
-    "markRead": "Mark as read",
-    "markAllRead": "Mark all as read",
-    "openGroup": "Open group",
-    "openChallenge": "Open challenge",
+    "eyebrow": "通知",
+    "title": "通知",
+    "body": "通知",
+    "unread": "通知",
+    "read": "通知",
+    "emptyUnread": "通知",
+    "emptyRead": "通知",
+    "markRead": "通知",
+    "markAllRead": "通知",
+    "openGroup": "群组",
+    "openChallenge": "通知",
     "status": {
-      "notification-read": "Notification marked as read.",
-      "all-notifications-read": "All notifications marked as read."
+      "notification-read": "通知",
+      "all-notifications-read": "通知"
     },
     "errors": {
-      "notification-read-failed": "Notification could not be updated."
+      "notification-read-failed": "通知"
     },
     "types": {
-      "friend_request": "Friend request",
-      "friend_request_accepted": "Friend request accepted",
-      "group_invitation": "Group invitation",
-      "group_invitation_accepted": "Group invitation accepted",
-      "group_invitation_declined": "Group invitation declined",
-      "group_message": "Group message",
-      "challenge_message": "Challenge message",
-      "challenge_updated": "Challenge updated",
-      "group_updated": "Group updated"
+      "friend_request": "朋友",
+      "friend_request_accepted": "朋友",
+      "group_invitation": "群组",
+      "group_invitation_accepted": "群组",
+      "group_invitation_declined": "群组",
+      "group_message": "群组",
+      "challenge_message": "通知",
+      "challenge_updated": "通知",
+      "group_updated": "群组"
     },
     "bodies": {
       "friend_request": "有人向你发送了好友请求。",
@@ -922,104 +931,108 @@
     }
   },
   "Admin": {
-    "eyebrow": "Admin",
+    "eyebrow": "管理员",
     "title": "管理概览",
-    "body": "A protected operational view with aggregate counts and limited metadata only.",
+    "body": "管理员",
     "actions": {
-      "settings": "Admin settings"
+      "settings": "设置"
     },
     "verification": {
-      "title": "Live Supabase verification needed",
-      "body": "Phase 10 adds local migrations and RLS/RPC rules. Apply and test them against the real Supabase project before relying on production admin data.",
-      "error": "Some admin data could not be loaded. Check that the Phase 10 migration is applied."
+      "title": "管理员",
+      "body": "管理员",
+      "error": "管理员"
     },
     "metrics": {
-      "profiles": "Profiles",
-      "challenges": "Challenges",
-      "groups": "Groups",
-      "messages": "Messages",
-      "notifications": "Notifications"
+      "profiles": "个人资料",
+      "challenges": "管理员",
+      "groups": "管理员",
+      "messages": "管理员",
+      "notifications": "管理员"
     },
     "profiles": {
-      "title": "Profiles",
-      "body": "Limited profile metadata for admin review. Emails and auth.users data are not shown.",
-      "id": "Profile id",
-      "displayName": "Display name",
-      "locale": "Locale",
-      "role": "Role",
-      "created": "Created",
-      "noDisplayName": "No display name",
-      "empty": "No profiles available."
+      "title": "个人资料",
+      "body": "个人资料",
+      "id": "个人资料",
+      "displayName": "个人资料",
+      "locale": "个人资料",
+      "role": "个人资料",
+      "created": "个人资料",
+      "noDisplayName": "个人资料",
+      "empty": "个人资料"
     },
     "roles": {
       "user": "用户",
       "admin": "管理员"
     },
     "activity": {
-      "title": "Recent activity",
-      "noActor": "No actor",
-      "empty": "No activity available.",
+      "title": "最近活动",
+      "noActor": "管理员",
+      "empty": "管理员",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated",
-        "unknown": "Activity event"
+        "challenge_created": "管理员",
+        "challenge_updated": "管理员",
+        "challenge_linked_to_group": "管理员",
+        "group_created": "管理员",
+        "group_updated": "管理员",
+        "group_member_joined": "管理员",
+        "group_member_removed": "管理员",
+        "group_message_created": "管理员",
+        "challenge_message_created": "管理员",
+        "task_updated": "管理员",
+        "solution_updated": "管理员",
+        "unknown": "管理员"
       }
     },
     "audit": {
-      "title": "Admin audit log",
-      "body": "Sensitive admin mutations should be logged here when those actions are added.",
-      "noTarget": "No target",
-      "empty": "No admin audit entries yet."
+      "title": "管理员",
+      "body": "管理员",
+      "noTarget": "管理员",
+      "empty": "管理员"
     }
   },
   "AdminSettings": {
-    "back": "Back to admin",
-    "eyebrow": "Admin settings",
+    "back": "设置",
+    "eyebrow": "设置",
     "title": "管理就绪清单",
-    "body": "A local status view for deployment, Supabase verification, and support setup.",
+    "body": "设置",
     "checklists": {
       "appStatus": {
-        "title": "App status",
-        "adminProtected": "Admin routes are protected by profiles.role.",
-        "dashboard": "Dashboard and protected app routes remain available.",
-        "guestMode": "Guest mode remains local browser storage only.",
-        "messages": "Messages, notifications, and activity remain protected by RLS."
+        "title": "设置",
+        "adminProtected": "设置",
+        "dashboard": "仪表板和受保护的应用路由仍可使用。",
+        "guestMode": "访客模式仍只使用本地浏览器存储。",
+        "messages": "设置"
       },
       "supabase": {
         "title": "Supabase",
-        "phase10Migration": "Apply the Phase 10 migration in Supabase.",
-        "rls": "Review RLS policies with real authenticated users.",
-        "firstAdmin": "Assign the first admin manually in Supabase SQL.",
-        "liveVerification": "Verify admin RPC behavior before production use."
+        "phase10Migration": "设置",
+        "rls": "设置",
+        "firstAdmin": "设置",
+        "liveVerification": "设置"
       },
       "deployment": {
-        "title": "Deployment",
-        "envTemplates": "Use templates only; do not expose real secret values.",
-        "supportEmail": "Public support email is support@noproblemo.tech.",
-        "noAutomation": "Email automation, Resend, and Vercel Cron are intentionally not used.",
-        "validation": "Run lint, typecheck, and build before deployment."
+        "title": "设置",
+        "envTemplates": "设置",
+        "supportEmail": "电子邮件",
+        "noAutomation": "设置",
+        "validation": "设置"
       }
     },
     "environment": {
-      "title": "Environment variables",
-      "body": "This checklist shows variable names only, never real values."
+      "title": "设置",
+      "body": "设置"
     },
     "support": {
-      "title": "Support",
-      "body": "Use this public address for MVP support and feedback."
+      "title": "设置",
+      "body": "设置"
     },
     "boundaries": {
-      "title": "Phase boundaries",
-      "body": "Phase 10 does not add payments, AI, email automation, Resend, Vercel Cron, billing, or support tickets."
+      "title": "设置",
+      "body": "设置"
     }
+  },
+  "PasswordField": {
+    "show": "显示",
+    "hide": "隐藏"
   }
 }

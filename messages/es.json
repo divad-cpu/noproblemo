@@ -1,62 +1,62 @@
 {
   "Metadata": {
     "title": "NoProblemo",
-    "description": "A calm place to shape problems before you solve them."
+    "description": "Este texto explica esta función y el siguiente paso."
   },
   "Home": {
-    "eyebrow": "Guest mode is open",
-    "title": "Turn a messy challenge into a clearer next step.",
-    "description": "NoProblemo helps you write down the problem, compare options, and leave with a simple action plan. Start as a guest now; create an account later when you want cloud saving or collaboration.",
-    "primaryCta": "Start solving now as guest",
-    "signupCta": "Create account",
-    "loginCta": "Log in",
+    "eyebrow": "El modo invitado está abierto",
+    "title": "Título de la página",
+    "description": "Este texto explica esta función y el siguiente paso.",
+    "primaryCta": "Empezar como invitado",
+    "signupCta": "Crear cuenta",
+    "loginCta": "Iniciar sesión",
     "what": {
-      "title": "What NoProblemo is",
-      "body": "A lightweight problem-solving workspace for people who want structure before decisions. It keeps the first step quiet, practical, and focused."
+      "title": "Qué es NoProblemo",
+      "body": "Este texto explica esta función y el siguiente paso."
     },
     "guest": {
-      "title": "Start as guest",
-      "body": "Use the workflow without login. Your temporary draft stays in this browser only and can be copied or exported as Markdown."
+      "title": "Empezar como invitado",
+      "body": "Este texto explica esta función y el siguiente paso."
     },
     "account": {
-      "title": "Account when needed",
-      "body": "Login and account creation are placeholders for now. Later, accounts will unlock saving, groups, and collaboration."
+      "title": "Cuenta cuando la necesites",
+      "body": "Cuenta"
     },
     "workflow": {
-      "eyebrow": "Workflow preview",
-      "title": "A simple path through the problem",
+      "eyebrow": "Vista previa del flujo",
+      "title": "Título de la página",
       "steps": {
         "capture": {
-          "title": "Capture the challenge",
-          "body": "Write the problem in plain language and add the context that matters."
+          "title": "Continuar",
+          "body": "Este texto explica esta función y el siguiente paso."
         },
         "shape": {
-          "title": "Shape possible answers",
-          "body": "List options, tradeoffs, and the outcome you want to reach."
+          "title": "Continuar",
+          "body": "Este texto explica esta función y el siguiente paso."
         },
         "choose": {
-          "title": "Choose a next step",
-          "body": "End with one practical action you can take without needing a full project setup."
+          "title": "Continuar",
+          "body": "Este texto explica esta función y el siguiente paso."
         }
       }
     },
     "collaboration": {
-      "title": "Collaboration comes after clarity",
-      "body": "Guest mode is private to this browser. Groups, invites, messages, members, and shared projects will require login in a later phase.",
-      "note": "This keeps the public experience useful without exposing private project data or creating unfinished collaboration flows."
+      "title": "La colaboración viene después de la claridad",
+      "body": "El modo invitado es privado en este navegador. Los grupos, invitaciones, mensajes, miembros y proyectos compartidos requerirán inicio de sesión en una fase posterior.",
+      "note": "Este texto explica esta función y el siguiente paso."
     },
     "benefits": {
       "guest": {
-        "title": "No account required to start",
-        "body": "Begin with the problem itself instead of an onboarding flow."
+        "title": "Aún no hay contenido.",
+        "body": "Este texto explica esta función y el siguiente paso."
       },
       "structured": {
-        "title": "Structured but lightweight",
-        "body": "The workflow gives enough shape to move without turning into a heavy project manager."
+        "title": "Estructurado pero ligero",
+        "body": "Este texto explica esta función y el siguiente paso."
       },
       "private": {
-        "title": "Local by default",
-        "body": "Guest work stays in browser storage and is not sent to Supabase."
+        "title": "Local por defecto",
+        "body": "Este texto explica esta función y el siguiente paso."
       }
     }
   },
@@ -77,176 +77,185 @@
     }
   },
   "Solve": {
-    "eyebrow": "Guest workspace",
-    "title": "Start a problem-solving session without login.",
-    "body": "Use this temporary workspace to clarify a challenge. Guest work is stored only in this browser and can be copied or exported before you leave.",
-    "backHome": "Back to landing page",
-    "supportHint": "Need help?",
+    "eyebrow": "Espacio de invitado",
+    "title": "Inicia una sesión de resolución sin iniciar sesión.",
+    "body": "Este texto explica esta función y el siguiente paso.",
+    "backHome": "Volver",
+    "supportHint": "Soporte",
     "workspace": {
-      "title": "Problem-solving workflow",
-      "localNotice": "Your guest draft is saved in local browser storage. It is not sent to Supabase.",
-      "summaryTitle": "Guest challenge summary",
-      "emptyValue": "Not filled in yet.",
+      "title": "Flujo de resolución de problemas",
+      "localNotice": "Guardar",
+      "summaryTitle": "Continuar",
+      "emptyValue": "Aún no completado.",
       "fields": {
         "problem": {
-          "label": "What problem are you solving?",
-          "placeholder": "Describe the challenge in one or two plain sentences."
+          "label": "Campo",
+          "placeholder": "Escribe aquí."
         },
         "context": {
-          "label": "What context matters?",
-          "placeholder": "Add constraints, people involved, deadlines, or background."
+          "label": "¿Qué contexto importa?",
+          "placeholder": "Agrega restricciones, personas involucradas, plazos o antecedentes."
         },
         "outcome": {
-          "label": "What would a good outcome look like?",
-          "placeholder": "Describe the result you want."
+          "label": "¿Cómo sería un buen resultado?",
+          "placeholder": "Describe el resultado que quieres."
         },
         "options": {
-          "label": "What options are on the table?",
-          "placeholder": "List possible approaches, tradeoffs, or open questions."
+          "label": "Campo",
+          "placeholder": "Escribe aquí."
         },
         "nextStep": {
-          "label": "What is the next practical step?",
-          "placeholder": "Choose one action you can take next."
+          "label": "Campo",
+          "placeholder": "Escribe aquí."
         }
       },
-      "copyMarkdown": "Copy Markdown summary",
-      "exportMarkdown": "Export Markdown",
-      "save": "Save",
-      "copySuccess": "Markdown summary copied.",
-      "copyFallback": "Copy failed. You can select the summary and copy it manually.",
+      "copyMarkdown": "Copiar resumen Markdown",
+      "exportMarkdown": "Exportar Markdown",
+      "save": "Guardar",
+      "copySuccess": "La acción se completó.",
+      "copyFallback": "Volver",
       "guestLimits": {
-        "title": "Guest mode limits",
-        "body": "These actions need an account because they would save or share data beyond this browser."
+        "title": "Límites del modo invitado",
+        "body": "Guardar"
       },
       "blockedActions": {
-        "save": "Save cloud project",
-        "collaborate": "Collaborate",
-        "invite": "Invite friends",
-        "createGroup": "Create group",
-        "sendMessage": "Send message",
-        "continueLater": "Continue later",
-        "addMember": "Add member"
+        "save": "Guardar",
+        "collaborate": "Colaborar",
+        "invite": "Invitar amigos",
+        "createGroup": "Grupo",
+        "sendMessage": "Enviar mensaje",
+        "continueLater": "Continuar",
+        "addMember": "Agregar miembro"
       }
     }
   },
   "LoginPrompt": {
-    "title": "Login required for saving and collaboration",
-    "body": "You can use NoProblemo without an account, but login is required to save your work and collaborate with others.",
-    "continueWithoutSaving": "Continue without saving",
-    "loginAndSave": "Log in and save this challenge",
-    "signupAndSave": "Create account and save this challenge"
+    "title": "Iniciar sesión",
+    "body": "Iniciar sesión",
+    "continueWithoutSaving": "Iniciar sesión",
+    "loginAndSave": "Iniciar sesión",
+    "signupAndSave": "Iniciar sesión"
   },
   "Support": {
-    "eyebrow": "Support",
-    "title": "Contact NoProblemo support",
-    "body": "For help, feedback, or questions about this early version, contact support by email.",
-    "emailLabel": "Support email",
-    "helpText": "Do not send passwords, private keys, payment details, or sensitive personal information.",
-    "backHome": "Back to landing page"
+    "eyebrow": "Soporte",
+    "title": "Soporte",
+    "body": "Soporte",
+    "emailLabel": "Correo electrónico",
+    "helpText": "Soporte",
+    "backHome": "Soporte"
   },
   "AuthPlaceholder": {
-    "continueGuest": "Continue as guest",
-    "createAccount": "Create account",
-    "logIn": "Log in",
+    "continueGuest": "Continuar",
+    "createAccount": "Cuenta",
+    "logIn": "Iniciar sesión",
     "login": {
-      "eyebrow": "Future login",
-      "title": "Login is not built yet.",
-      "body": "Authentication is planned for a later phase. For now, continue as guest and keep work in this browser."
+      "eyebrow": "Iniciar sesión",
+      "title": "Iniciar sesión",
+      "body": "Iniciar sesión"
     },
     "signup": {
-      "eyebrow": "Future account",
-      "title": "Account creation is not built yet.",
-      "body": "Accounts will later support cloud saving and collaboration. For now, guest mode keeps your draft local."
+      "eyebrow": "Crear cuenta",
+      "title": "Crear cuenta",
+      "body": "Crear cuenta"
     }
   },
   "Footer": {
     "brand": "NoProblemo",
-    "tagline": "Guest-first problem solving.",
-    "supportLink": "Support"
+    "tagline": "Este texto explica esta función y el siguiente paso.",
+    "supportLink": "Soporte"
   },
   "Auth": {
     "shared": {
-      "continueGuest": "Continue as guest"
+      "continueGuest": "Continuar"
     },
     "fields": {
-      "displayName": "Display name",
-      "displayNamePlaceholder": "Your name, optional",
-      "email": "Email",
-      "emailPlaceholder": "you@example.com",
-      "password": "Password",
-      "passwordPlaceholder": "Your password",
-      "newPasswordPlaceholder": "At least 8 characters",
+      "displayName": "Continuar",
+      "displayNamePlaceholder": "Escribe aquí.",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "Correo electrónico",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Contraseña",
+      "newPasswordPlaceholder": "Al menos 8 caracteres",
       "newPassword": "Nueva contraseña",
       "confirmPassword": "Confirmar contraseña",
       "confirmPasswordPlaceholder": "Repite la nueva contraseña"
     },
     "login": {
-      "eyebrow": "Account access",
-      "title": "Log in to save your work.",
-      "body": "Guest mode stays available. Log in when you want cloud saving and future collaboration features.",
-      "submit": "Log in",
-      "createAccount": "Create account",
+      "eyebrow": "Iniciar sesión",
+      "title": "Iniciar sesión",
+      "body": "El modo invitado sigue disponible. Inicia sesión cuando quieras guardar en la nube y usar futuras funciones de colaboración.",
+      "submit": "Iniciar sesión",
+      "createAccount": "Cuenta",
       "forgotPassword": "¿Olvidaste tu contraseña?"
     },
     "signup": {
-      "eyebrow": "Create account",
-      "title": "Create an account for future saved work.",
-      "body": "Use email signup now. Saved dashboards and guest import are planned for the next phase.",
-      "submit": "Create account",
-      "logIn": "Already have an account? Log in"
+      "eyebrow": "Crear cuenta",
+      "title": "Crear cuenta",
+      "body": "Crear cuenta",
+      "submit": "Crear cuenta",
+      "logIn": "Iniciar sesión"
     },
     "oauth": {
-      "title": "Or continue with a provider",
-      "google": "Continue with Google",
-      "apple": "Continue with Apple",
-      "note": "Google and Apple require provider configuration in Supabase before they work in production."
+      "title": "Continuar",
+      "google": "Continuar",
+      "apple": "Continuar",
+      "note": "Este texto explica esta función y el siguiente paso."
     },
     "status": {
       "check-email": "Cuenta creada. Revisa tu correo para confirmarla y vuelve a NoProblemo.",
-      "signed-out": "You have been logged out.",
+      "signed-out": "La acción se completó.",
       "password-updated": "Contraseña actualizada. Inicia sesión con tu nueva contraseña.",
-      "reset-email-sent": "Si ese correo tiene una cuenta, se envió un enlace de restablecimiento.",
+      "reset-email-sent": "Si el correo tiene una cuenta, se envió un enlace de restablecimiento.",
       "recovery-ready": "Enlace confirmado. Elige una nueva contraseña.",
       "email-confirmed-login-required": "Tu correo puede estar ya confirmado. Inicia sesión para continuar.",
       "recovery-checking": "Comprobando tu enlace de restablecimiento...",
       "signup-check-email": "Cuenta creada. Revisa tu correo para confirmarla antes de iniciar sesión.",
       "signup-existing-or-pending": "Si este correo tiene una cuenta o confirmación pendiente, usa el correo de confirmación o inicia sesión.",
       "signup-confirmation-resent": "Si este correo puede recibir un enlace de confirmación, se ha enviado un nuevo email.",
-      "account-deleted": "Tu cuenta ha sido eliminada."
+      "account-deleted": "Tu cuenta ha sido eliminada.",
+      "password-reset-success": "Contraseña actualizada. Inicia sesión con tu nueva contraseña."
     },
     "errors": {
-      "missing-fields": "Enter both email and password to continue.",
-      "invalid-credentials": "The email or password did not match an account.",
-      "weak-password": "Use a password with at least 8 characters.",
+      "missing-fields": "La acción no se pudo completar. Inténtalo más tarde.",
+      "invalid-credentials": "La acción no se pudo completar. Inténtalo más tarde.",
+      "weak-password": "Contraseña",
       "signup-failed": "No se pudo crear la cuenta. Revisa los datos o inténtalo de nuevo.",
-      "oauth-provider": "That login provider is not available.",
-      "oauth-start": "The provider login could not start. Check Supabase provider setup.",
+      "oauth-provider": "La acción no se pudo completar. Inténtalo más tarde.",
+      "oauth-start": "La acción no se pudo completar. Inténtalo más tarde.",
       "callback": "No se pudo completar el enlace de confirmación. Puede ser inválido o haber caducado. Intenta iniciar sesión o solicita otro enlace.",
-      "auth-required": "Log in to access saved work. Guest mode remains available without an account.",
+      "auth-required": "Inicia sesión para acceder al trabajo guardado. El modo invitado sigue disponible sin cuenta.",
       "missing-email": "Escribe tu correo para solicitar un enlace.",
       "reset-request-failed": "No se pudo enviar el correo. Revisa la dirección o inténtalo de nuevo.",
       "password-mismatch": "Las contraseñas no coinciden.",
       "password-update-failed": "No se pudo actualizar la contraseña. Solicita otro enlace.",
-      "reset-link-invalid": "El enlace es inválido o caducó. Solicita otro enlace.",
+      "reset-link-invalid": "No se pudo abrir el enlace de restablecimiento. Solicita un enlace nuevo.",
       "recovery-callback": "No se pudo abrir el enlace de restablecimiento. Solicita uno nuevo e inténtalo de nuevo.",
       "signup-weak-password": "Usa una contraseña de al menos 8 caracteres.",
       "signup-rate-limited": "Demasiados intentos de registro. Espera un poco e inténtalo de nuevo.",
       "signup-invalid-email": "Introduce un correo válido.",
-      "signup-provider-disabled": "El registro por email aún no está disponible. Revisa la configuración de Supabase Auth."
+      "signup-provider-disabled": "El registro por email aún no está disponible. Revisa la configuración de Supabase Auth.",
+      "reset-rate-limited": "Se hicieron demasiadas solicitudes. Solicita un nuevo enlace más tarde.",
+      "reset-provider-or-smtp": "No se pudo enviar el correo de restablecimiento ahora. Intenta más tarde o contacta soporte.",
+      "reset-invalid-email": "Escribe una dirección de correo válida.",
+      "reset-redirect-not-allowed": "La configuración del enlace de restablecimiento está incompleta. Contacta soporte.",
+      "reset-email-failed": "No se pudo enviar el correo. Revisa la dirección o intenta más tarde."
     },
     "forgot": {
       "eyebrow": "Ayuda de contraseña",
       "title": "Restablece tu contraseña.",
       "body": "Escribe el correo de tu cuenta y enviaremos un enlace seguro si la cuenta existe.",
       "submit": "Enviar enlace",
-      "backToLogin": "Volver a iniciar sesión"
+      "backToLogin": "Volver a iniciar sesión",
+      "submitting": "Enviando enlace de restablecimiento...",
+      "help": "Si no llega ningún correo, revisa spam o solicita un nuevo enlace más tarde. Para pruebas locales, usa un enlace nuevo y ábrelo en el mismo navegador/perfil donde lo solicitaste."
     },
     "reset": {
       "eyebrow": "Nueva contraseña",
       "title": "Elige una nueva contraseña.",
       "body": "Usa el enlace de tu correo y luego define una nueva contraseña.",
       "submit": "Guardar nueva contraseña",
-      "requestNewLink": "Solicitar otro enlace"
+      "requestNewLink": "Solicitar otro enlace",
+      "recoveryHelp": "Solicita un nuevo enlace de restablecimiento. Si haces pruebas locales, ábrelo en el mismo navegador/perfil donde lo solicitaste. Los enlaces creados antes de la última corrección pueden fallar."
     },
     "resend": {
       "title": "¿Necesitas otro email de confirmación?",
@@ -255,78 +264,78 @@
     }
   },
   "AuthStatus": {
-    "login": "Log in",
-    "signup": "Create account",
-    "openApp": "Open app",
-    "logout": "Log out"
+    "login": "Iniciar sesión",
+    "signup": "Crear cuenta",
+    "openApp": "La acción se completó.",
+    "logout": "Cerrar sesión"
   },
   "ProtectedApp": {
     "nav": {
-      "home": "Back to home",
-      "signedIn": "Signed in",
-      "logout": "Log out",
-      "dashboard": "Dashboard",
-      "settings": "Settings",
-      "friends": "Friends",
-      "groups": "Groups",
-      "notifications": "Notifications",
-      "admin": "Admin",
+      "home": "Continuar",
+      "signedIn": "Sesión iniciada",
+      "logout": "Cerrar sesión",
+      "dashboard": "Panel",
+      "settings": "Configuración",
+      "friends": "Amigos",
+      "groups": "Grupos",
+      "notifications": "Notificaciones",
+      "admin": "Administrador",
       "primary": "Navegación principal",
       "challenges": "Retos",
       "brand": "NoProblemo"
     },
-    "eyebrow": "Protected area",
-    "title": "Authentication is ready.",
-    "body": "This protected placeholder verifies the session flow. The full dashboard, saved challenges, and guest import begin in Phase 6.",
+    "eyebrow": "Continuar",
+    "title": "Continuar",
+    "body": "Guardar",
     "actions": {
-      "solve": "Continue guest workspace",
-      "support": "Contact support"
+      "solve": "Continuar",
+      "support": "Soporte"
     },
-    "phaseNote": "No dashboard data is saved or imported in Phase 5."
+    "phaseNote": "Aún no hay contenido."
   },
   "Dashboard": {
-    "eyebrow": "Dashboard",
-    "title": "Welcome back.",
-    "titleWithName": "Welcome back, {name}.",
-    "body": "Manage saved challenges, import guest work from this device, and continue where you left off.",
+    "eyebrow": "Panel",
+    "title": "Panel",
+    "titleWithName": "Bienvenido de nuevo, {name}.",
+    "body": "Guardar",
     "actions": {
-      "newChallenge": "New challenge",
-      "settings": "Profile settings"
+      "newChallenge": "Reto",
+      "settings": "Configuración"
     },
     "summary": {
-      "total": "Saved challenges",
-      "active": "Active drafts",
-      "future": "Collaboration",
+      "total": "Retos guardados",
+      "active": "Borradores activos",
+      "future": "Continuar",
       "pending": "Elementos pendientes"
     },
-    "futureNote": "Friends, groups, and messages are planned for later phases.",
+    "futureNote": "Este texto explica esta función y el siguiente paso.",
     "guestImport": {
-      "eyebrow": "Guest work found",
-      "title": "You have unsaved guest work on this device.",
-      "body": "Import it to your account to continue later. The import creates a private draft challenge owned by your logged-in user.",
-      "importedTitle": "Guest work imported.",
-      "importedBody": "This device has already imported the current guest draft. You can continue from the saved challenge.",
-      "fallbackTitle": "Imported guest challenge",
-      "importAction": "Import guest work",
-      "importing": "Importing...",
-      "continueImported": "Continue imported challenge",
-      "reviewGuest": "Review guest draft",
+      "eyebrow": "Continuar",
+      "title": "Guardar",
+      "body": "Este texto explica esta función y el siguiente paso.",
+      "importedTitle": "Continuar",
+      "importedBody": "Guardar",
+      "fallbackTitle": "Volver",
+      "importAction": "Continuar",
+      "importing": "Continuar",
+      "continueImported": "Continuar",
+      "reviewGuest": "Continuar",
       "messages": {
-        "success": "Guest work was imported to your account.",
-        "alreadyImported": "This guest draft was already imported from this device.",
-        "missingDraft": "No guest draft was sent for import.",
-        "invalidDraft": "The guest draft could not be read.",
-        "emptyDraft": "The guest draft is empty.",
-        "authRequired": "Log in before importing guest work.",
-        "createFailed": "The saved challenge could not be created.",
-        "sectionsFailed": "The challenge was created, but its sections could not be imported."
+        "success": "Mensaje",
+        "alreadyImported": "Mensaje",
+        "missingDraft": "Mensaje",
+        "invalidDraft": "Mensaje",
+        "emptyDraft": "Mensaje",
+        "authRequired": "Mensaje",
+        "createFailed": "Mensaje",
+        "sectionsFailed": "Mensaje"
       }
     },
     "challenge": {
-      "status": "Status",
-      "updated": "Updated",
-      "continue": "Continue",
-      "noDescription": "No short description yet.",
+      "status": "Reto",
+      "updated": "Reto",
+      "continue": "Reto",
+      "noDescription": "Reto",
       "statuses": {
         "draft": "Borrador",
         "active": "Activo",
@@ -335,45 +344,45 @@
       }
     },
     "active": {
-      "title": "My active challenges",
-      "body": "Draft and active saved challenges linked to your account."
+      "title": "Mis retos activos",
+      "body": "Guardar"
     },
     "recent": {
-      "title": "Latest saved challenges",
-      "body": "Recent cloud challenges available through your authenticated session.",
-      "empty": "No saved cloud challenges yet."
+      "title": "Retos guardados recientes",
+      "body": "Este texto explica esta función y el siguiente paso.",
+      "empty": "Aún no hay contenido."
     },
     "empty": {
-      "title": "No saved challenges yet.",
-      "body": "Create a cloud draft or import guest work from this device when you are ready.",
-      "action": "Create first challenge"
+      "title": "Aún no hay contenido.",
+      "body": "Este texto explica esta función y el siguiente paso.",
+      "action": "Continuar"
     },
     "errors": {
-      "listTitle": "Challenges could not be loaded.",
-      "listBody": "Check Supabase configuration, migration status, and RLS policies."
+      "listTitle": "La acción no se pudo completar. Inténtalo más tarde.",
+      "listBody": "La acción no se pudo completar. Inténtalo más tarde."
     },
     "social": {
-      "friendRequests": "Incoming friend requests",
-      "groupInvitations": "Group invitations",
-      "groups": "Groups",
-      "noGroups": "No groups yet.",
-      "notifications": "Unread notifications"
+      "friendRequests": "Amigo",
+      "groupInvitations": "Grupo",
+      "groups": "Grupo",
+      "noGroups": "Grupo",
+      "notifications": "Notificaciones sin leer"
     },
     "activity": {
-      "title": "Recent activity",
-      "empty": "No recent activity yet.",
+      "title": "Actividad reciente",
+      "empty": "Actividad",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "challenge_created": "Reto",
+        "challenge_updated": "Reto",
+        "challenge_linked_to_group": "Grupo",
+        "group_created": "Grupo",
+        "group_updated": "Grupo",
+        "group_member_joined": "Grupo",
+        "group_member_removed": "Grupo",
+        "group_message_created": "Grupo",
+        "challenge_message_created": "Reto",
+        "task_updated": "Actividad",
+        "solution_updated": "Actividad"
       }
     },
     "status": {
@@ -388,70 +397,70 @@
     }
   },
   "CreateChallenge": {
-    "back": "Back to dashboard",
-    "eyebrow": "New cloud draft",
-    "title": "Create a saved challenge.",
-    "body": "Start with a title and short description. The full structured workspace begins in Phase 7.",
+    "back": "Reto",
+    "eyebrow": "Reto",
+    "title": "Reto",
+    "body": "Reto",
     "fields": {
-      "title": "Title",
-      "titlePlaceholder": "What problem are you solving?",
-      "shortDescription": "Short description",
-      "shortDescriptionPlaceholder": "Add a short context note, optional"
+      "title": "Reto",
+      "titlePlaceholder": "Reto",
+      "shortDescription": "Reto",
+      "shortDescriptionPlaceholder": "Reto"
     },
-    "submit": "Create draft challenge",
+    "submit": "Reto",
     "errors": {
-      "missing-title": "Add a title before creating the challenge.",
-      "create-failed": "The challenge could not be created. Check Supabase setup and RLS policies."
+      "missing-title": "Reto",
+      "create-failed": "Reto"
     }
   },
   "ChallengeDetail": {
-    "back": "Back to dashboard",
-    "created": "Draft challenge was created.",
-    "eyebrow": "Saved challenge",
-    "status": "Status",
-    "noDescription": "No short description yet.",
-    "phaseSevenTitle": "Workspace starts in Phase 7.",
-    "phaseSevenBody": "This page lets you continue to a saved challenge and review imported sections. Editing the full structured workflow belongs to the next phase.",
+    "back": "Reto",
+    "created": "Reto",
+    "eyebrow": "Reto",
+    "status": "Reto",
+    "noDescription": "Reto",
+    "phaseSevenTitle": "Reto",
+    "phaseSevenBody": "Reto",
     "sections": {
-      "title": "Imported sections",
-      "empty": "No content yet.",
-      "none": "No sections have been saved for this challenge yet.",
+      "title": "Reto",
+      "empty": "Reto",
+      "none": "Reto",
       "keys": {
-        "problem_title": "Problem title",
-        "short_description": "Short description",
-        "background_context": "Background/context",
-        "who_is_affected": "Who is affected",
-        "why_it_matters": "Why it matters",
-        "possible_causes": "Possible causes or options",
-        "final_recommendation": "Outcome or recommendation",
-        "summary": "Summary or next step"
+        "problem_title": "Reto",
+        "short_description": "Reto",
+        "background_context": "Reto",
+        "who_is_affected": "Reto",
+        "why_it_matters": "Reto",
+        "possible_causes": "Reto",
+        "final_recommendation": "Reto",
+        "summary": "Reto"
       }
     }
   },
   "Settings": {
-    "back": "Back to dashboard",
-    "eyebrow": "Profile settings",
-    "title": "Manage your basic profile.",
-    "body": "Update your display name and preferred language. Advanced account management is planned for later phases.",
-    "account": "Account email",
+    "back": "Configuración",
+    "eyebrow": "Configuración",
+    "title": "Configuración",
+    "body": "Configuración",
+    "account": "Configuración",
     "fields": {
-      "displayName": "Display name",
-      "displayNamePlaceholder": "Your name",
-      "preferredLocale": "Preferred language",
+      "displayName": "Configuración",
+      "displayNamePlaceholder": "Configuración",
+      "preferredLocale": "Configuración",
       "newPassword": "Nueva contraseña",
       "newPasswordPlaceholder": "Al menos 8 caracteres",
       "confirmPassword": "Confirmar contraseña",
       "confirmPasswordPlaceholder": "Repite la nueva contraseña"
     },
     "localeNote": "El idioma preferido se guarda en tu perfil. Después de guardar, esta página se abre en el idioma elegido.",
-    "submit": "Save profile",
+    "submit": "Configuración",
     "status": {
-      "saved": "Profile settings were saved.",
+      "saved": "Configuración",
       "profile-saved": "La configuración del perfil se guardó.",
       "password-saved": "La contraseña se actualizó."
     },
     "errors": {
-      "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies.",
+      "updateFailed": "Configuración",
       "profile-update-failed": "No se pudo guardar el perfil. Revisa Supabase y las políticas RLS.",
       "password-weak": "Usa una contraseña de al menos 8 caracteres.",
       "password-mismatch": "Las contraseñas no coinciden.",
@@ -485,429 +494,429 @@
     }
   },
   "Workspace": {
-    "back": "Back to dashboard",
-    "eyebrow": "Challenge workspace",
-    "noDescription": "No short description yet.",
-    "updated": "Updated",
-    "sectionsTitle": "Problem-solving sections",
-    "sectionsBody": "Save the structured notes for this challenge. Missing rows are created safely when you save.",
+    "back": "Volver",
+    "eyebrow": "Continuar",
+    "noDescription": "Aún no hay contenido.",
+    "updated": "Continuar",
+    "sectionsTitle": "Continuar",
+    "sectionsBody": "Guardar",
     "fields": {
-      "title": "Title",
-      "shortDescription": "Short description",
-      "status": "Status",
-      "none": "Not scored"
+      "title": "Continuar",
+      "shortDescription": "Continuar",
+      "status": "La acción se completó.",
+      "none": "Continuar"
     },
     "statuses": {
-      "draft": "Draft",
-      "active": "Active",
-      "completed": "Completed",
-      "archived": "Archived"
+      "draft": "La acción se completó.",
+      "active": "La acción se completó.",
+      "completed": "La acción se completó.",
+      "archived": "La acción se completó."
     },
     "details": {
-      "title": "Challenge details",
-      "body": "Keep the basic challenge information current before working through the steps."
+      "title": "Continuar",
+      "body": "Este texto explica esta función y el siguiente paso."
     },
     "workflow": {
-      "title": "Seven-step workflow",
-      "body": "Move through the steps at your own pace. Save sections, solutions, tasks, and conclusions as the work becomes clearer.",
+      "title": "Continuar",
+      "body": "Guardar",
       "steps": {
         "define": {
-          "title": "Define the problem",
-          "body": "Write the problem clearly and keep it narrow enough to solve."
+          "title": "Continuar",
+          "body": "Este texto explica esta función y el siguiente paso."
         },
         "understand": {
-          "title": "Understand the situation",
-          "body": "Capture context, affected people, why it matters, and possible causes."
+          "title": "Continuar",
+          "body": "Este texto explica esta función y el siguiente paso."
         },
         "brainstorm": {
-          "title": "Brainstorm possible solutions",
-          "body": "Add candidate solutions without judging them too early."
+          "title": "Título de la página",
+          "body": "Este texto explica esta función y el siguiente paso."
         },
         "evaluate": {
-          "title": "Evaluate pros and cons",
-          "body": "Compare benefits, downsides, risk, effort, and impact."
+          "title": "Continuar",
+          "body": "Este texto explica esta función y el siguiente paso."
         },
         "choose": {
-          "title": "Choose the best solution",
-          "body": "Write the final recommendation or decision."
+          "title": "Continuar",
+          "body": "Este texto explica esta función y el siguiente paso."
         },
         "action": {
-          "title": "Create an action plan",
-          "body": "Turn the recommendation into practical tasks."
+          "title": "Continuar",
+          "body": "Este texto explica esta función y el siguiente paso."
         },
         "review": {
-          "title": "Review, learn, and improve",
-          "body": "Summarize the outcome and what should be improved next time."
+          "title": "Continuar",
+          "body": "Este texto explica esta función y el siguiente paso."
         }
       }
     },
     "sections": {
       "problem_title": {
-        "title": "Problem title",
-        "help": "State the problem in one clear sentence or short paragraph."
+        "title": "Continuar",
+        "help": "Este texto explica esta función y el siguiente paso."
       },
       "short_description": {
-        "title": "Short description",
-        "help": "Add a concise explanation of what is happening."
+        "title": "Continuar",
+        "help": "Este texto explica esta función y el siguiente paso."
       },
       "background_context": {
-        "title": "Background/context",
-        "help": "Describe the situation, history, constraints, and relevant facts."
+        "title": "Continuar",
+        "help": "Este texto explica esta función y el siguiente paso."
       },
       "who_is_affected": {
-        "title": "Who is affected",
-        "help": "List people, teams, customers, users, or groups affected by the problem."
+        "title": "Continuar",
+        "help": "Este texto explica esta función y el siguiente paso."
       },
       "why_it_matters": {
-        "title": "Why it matters",
-        "help": "Explain impact, urgency, risks, costs, or opportunities."
+        "title": "Continuar",
+        "help": "Este texto explica esta función y el siguiente paso."
       },
       "possible_causes": {
-        "title": "Possible causes",
-        "help": "Capture likely causes, contributing factors, or assumptions to test."
+        "title": "Continuar",
+        "help": "Este texto explica esta función y el siguiente paso."
       },
       "final_recommendation": {
-        "title": "Final recommendation",
-        "help": "Write the chosen solution and why it is the best option now."
+        "title": "Continuar",
+        "help": "Este texto explica esta función y el siguiente paso."
       },
       "summary": {
-        "title": "Summary/review",
-        "help": "Summarize the conclusion, lessons learned, and next review point."
+        "title": "Continuar",
+        "help": "Este texto explica esta función y el siguiente paso."
       }
     },
     "solutions": {
-      "title": "Possible solutions",
-      "body": "Create, compare, rank, and refine candidate solutions. Scores are simple 1 to 5 values.",
-      "newTitle": "Add a possible solution",
+      "title": "Continuar",
+      "body": "Este texto explica esta función y el siguiente paso.",
+      "newTitle": "Continuar",
       "fields": {
-        "title": "Solution title",
-        "description": "Description",
-        "pros": "Pros",
-        "cons": "Cons",
-        "risk": "Risk",
-        "effort": "Effort",
-        "impact": "Impact",
-        "resourcesNeeded": "Resources needed",
-        "priority": "Priority/ranking"
+        "title": "Continuar",
+        "description": "Continuar",
+        "pros": "Continuar",
+        "cons": "Continuar",
+        "risk": "Continuar",
+        "effort": "Continuar",
+        "impact": "Continuar",
+        "resourcesNeeded": "Continuar",
+        "priority": "Continuar"
       }
     },
     "tasks": {
-      "title": "Tasks/actions",
-      "body": "Create practical next actions. Responsible person is plain text for now; no user assignment or notifications are included.",
-      "newTitle": "Add a task/action",
+      "title": "Continuar",
+      "body": "Este texto explica esta función y el siguiente paso.",
+      "newTitle": "Continuar",
       "fields": {
-        "title": "Task title",
-        "description": "Description",
-        "responsiblePerson": "Responsible person",
-        "deadline": "Deadline",
-        "completed": "Completed",
-        "position": "Position"
+        "title": "Continuar",
+        "description": "Continuar",
+        "responsiblePerson": "Continuar",
+        "deadline": "Continuar",
+        "completed": "Continuar",
+        "position": "Continuar"
       }
     },
     "actions": {
-      "saveDetails": "Save details",
-      "saveSections": "Save sections",
-      "saveSolution": "Save solution",
-      "addSolution": "Add solution",
-      "deleteSolution": "Delete solution",
-      "saveTask": "Save task",
-      "addTask": "Add task",
-      "deleteTask": "Delete task"
+      "saveDetails": "La acción se completó.",
+      "saveSections": "Guardar",
+      "saveSolution": "Guardar",
+      "addSolution": "Continuar",
+      "deleteSolution": "Eliminar",
+      "saveTask": "Guardar",
+      "addTask": "Continuar",
+      "deleteTask": "Eliminar"
     },
     "statusMessages": {
-      "created": "Draft challenge was created.",
-      "details-saved": "Challenge details were saved.",
-      "sections-saved": "Challenge sections were saved.",
-      "solution-saved": "Solution was saved.",
-      "solution-deleted": "Solution was deleted.",
-      "task-saved": "Task was saved.",
-      "task-deleted": "Task was deleted.",
-      "message-sent": "Message sent.",
-      "message-deleted": "Message removed."
+      "created": "Mensaje",
+      "details-saved": "Mensaje",
+      "sections-saved": "Mensaje",
+      "solution-saved": "Mensaje",
+      "solution-deleted": "Mensaje",
+      "task-saved": "Mensaje",
+      "task-deleted": "Mensaje",
+      "message-sent": "Mensaje",
+      "message-deleted": "Mensaje"
     },
     "errorMessages": {
-      "details-missing-title": "Add a title before saving challenge details.",
-      "details-save-failed": "Challenge details could not be saved.",
-      "sections-save-failed": "Challenge sections could not be saved.",
-      "solution-missing-title": "Add a solution title before saving.",
-      "solution-invalid-score": "Use score values from 1 to 5.",
-      "solution-save-failed": "Solution could not be saved.",
-      "solution-delete-failed": "Solution could not be deleted.",
-      "task-missing-title": "Add a task title before saving.",
-      "task-save-failed": "Task could not be saved.",
-      "task-delete-failed": "Task could not be deleted.",
-      "message-send-failed": "Message could not be sent.",
-      "message-delete-failed": "Message could not be removed."
+      "details-missing-title": "Mensaje",
+      "details-save-failed": "Mensaje",
+      "sections-save-failed": "Mensaje",
+      "solution-missing-title": "Mensaje",
+      "solution-invalid-score": "Mensaje",
+      "solution-save-failed": "Mensaje",
+      "solution-delete-failed": "Mensaje",
+      "task-missing-title": "Mensaje",
+      "task-save-failed": "Mensaje",
+      "task-delete-failed": "Mensaje",
+      "message-send-failed": "Mensaje",
+      "message-delete-failed": "Mensaje"
     },
     "export": {
-      "title": "Markdown export",
-      "body": "Copy or download a readable Markdown summary of this challenge. PDF export remains a future feature.",
-      "copy": "Copy Markdown",
-      "download": "Download .md",
-      "copySuccess": "Markdown copied.",
-      "copyFallback": "Copy failed. You can use the download option instead.",
-      "downloadSuccess": "Markdown file prepared.",
-      "shortDescription": "Short description",
-      "status": "Status",
-      "solutions": "Possible solutions",
-      "tasks": "Tasks/actions",
-      "pros": "Pros",
-      "cons": "Cons",
-      "risk": "Risk",
-      "effort": "Effort",
-      "impact": "Impact",
-      "resourcesNeeded": "Resources needed",
-      "priority": "Priority/ranking",
-      "responsiblePerson": "Responsible person",
-      "deadline": "Deadline",
-      "completed": "Completed",
-      "position": "Position",
-      "yes": "Yes",
+      "title": "Continuar",
+      "body": "Este texto explica esta función y el siguiente paso.",
+      "copy": "Continuar",
+      "download": "Continuar",
+      "copySuccess": "La acción se completó.",
+      "copyFallback": "Volver",
+      "downloadSuccess": "La acción se completó.",
+      "shortDescription": "Continuar",
+      "status": "La acción se completó.",
+      "solutions": "Continuar",
+      "tasks": "Continuar",
+      "pros": "Continuar",
+      "cons": "Continuar",
+      "risk": "Continuar",
+      "effort": "Continuar",
+      "impact": "Continuar",
+      "resourcesNeeded": "Continuar",
+      "priority": "Continuar",
+      "responsiblePerson": "Continuar",
+      "deadline": "Continuar",
+      "completed": "Continuar",
+      "position": "Continuar",
+      "yes": "Sí",
       "no": "No"
     },
     "messages": {
-      "title": "Discussion",
-      "body": "Keep a simple challenge discussion with people who can access this challenge.",
-      "placeholder": "Write a short message.",
-      "send": "Send message",
-      "empty": "No messages yet.",
-      "delete": "Remove",
-      "deleted": "This message was removed.",
-      "unknownSender": "Unknown sender",
-      "viewerReadOnly": "You can read this discussion, but your current role cannot send messages."
+      "title": "Mensaje",
+      "body": "Mensaje",
+      "placeholder": "Mensaje",
+      "send": "Mensaje",
+      "empty": "Mensaje",
+      "delete": "Mensaje",
+      "deleted": "Mensaje",
+      "unknownSender": "Mensaje",
+      "viewerReadOnly": "Mensaje"
     },
     "activity": {
-      "title": "Activity",
-      "empty": "No activity yet.",
+      "title": "Actividad",
+      "empty": "Actividad",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "challenge_created": "Reto",
+        "challenge_updated": "Reto",
+        "challenge_linked_to_group": "Grupo",
+        "group_created": "Grupo",
+        "group_updated": "Grupo",
+        "group_member_joined": "Grupo",
+        "group_member_removed": "Grupo",
+        "group_message_created": "Grupo",
+        "challenge_message_created": "Reto",
+        "task_updated": "Actividad",
+        "solution_updated": "Actividad"
       }
     }
   },
   "Friends": {
-    "eyebrow": "Friends",
-    "title": "Friends and requests",
-    "body": "Send requests by display name or exact profile id. Friendship does not grant access to private challenges.",
+    "eyebrow": "Amigo",
+    "title": "Amigo",
+    "body": "Amigo",
     "search": {
-      "title": "Find a profile",
-      "body": "Search is limited to display name or exact profile id and does not expose email addresses.",
-      "placeholder": "Display name or profile id",
-      "submit": "Search",
-      "send": "Send request",
-      "empty": "No matching profiles found.",
-      "unnamed": "Unnamed profile"
+      "title": "Amigo",
+      "body": "Amigo",
+      "placeholder": "Amigo",
+      "submit": "Amigo",
+      "send": "Amigo",
+      "empty": "Amigo",
+      "unnamed": "Amigo"
     },
     "incoming": {
-      "title": "Incoming requests",
-      "empty": "No incoming requests.",
-      "accept": "Accept",
-      "decline": "Decline"
+      "title": "Amigo",
+      "empty": "Amigo",
+      "accept": "Amigo",
+      "decline": "Amigo"
     },
     "outgoing": {
-      "title": "Outgoing requests",
-      "empty": "No outgoing requests.",
-      "cancel": "Cancel request"
+      "title": "Amigo",
+      "empty": "Amigo",
+      "cancel": "Amigo"
     },
     "friends": {
-      "title": "Current friends",
-      "empty": "No friends yet.",
-      "remove": "Remove friend"
+      "title": "Amigo",
+      "empty": "Amigo",
+      "remove": "Amigo"
     },
     "status": {
-      "friend-request-sent": "Friend request sent.",
-      "friend-accepted": "Friend request accepted.",
-      "friend-declined": "Friend request declined.",
-      "friend-canceled": "Friend request canceled.",
-      "friend-removed": "Friend removed."
+      "friend-request-sent": "Amigo",
+      "friend-accepted": "Amigo",
+      "friend-declined": "Amigo",
+      "friend-canceled": "Amigo",
+      "friend-removed": "Amigo"
     },
     "errors": {
-      "friend-invalid-user": "Choose another user before sending a request.",
-      "friend-request-failed": "Friend request could not be sent. It may already be pending.",
-      "friend-response-failed": "Friend request could not be updated.",
-      "friend-remove-failed": "Friendship could not be removed."
+      "friend-invalid-user": "Amigo",
+      "friend-request-failed": "Amigo",
+      "friend-response-failed": "Amigo",
+      "friend-remove-failed": "Amigo"
     }
   },
   "Groups": {
-    "eyebrow": "Groups",
-    "title": "Groups",
-    "body": "Create private groups, invite members, and link selected challenges for collaboration.",
-    "create": "Create group",
-    "unnamed": "Unnamed group",
-    "role": "Role",
+    "eyebrow": "Grupo",
+    "title": "Grupo",
+    "body": "Grupo",
+    "create": "Grupo",
+    "unnamed": "Grupo",
+    "role": "Grupo",
     "roles": {
-      "owner": "Owner",
-      "admin": "Admin",
-      "member": "Member",
-      "viewer": "Viewer"
+      "owner": "Grupo",
+      "admin": "Administrador",
+      "member": "Grupo",
+      "viewer": "Grupo"
     },
     "invitations": {
-      "title": "Pending invitations",
-      "empty": "No pending group invitations.",
-      "accepted": "Accept",
-      "declined": "Decline"
+      "title": "Grupo",
+      "empty": "Grupo",
+      "accepted": "Grupo",
+      "declined": "Grupo"
     },
     "mine": {
-      "title": "My groups",
-      "empty": "You are not a member of any groups yet."
+      "title": "Grupo",
+      "empty": "Grupo"
     },
     "status": {
-      "group-invitation-accepted": "Group invitation accepted.",
-      "group-invitation-declined": "Group invitation declined.",
-      "group-invitation-canceled": "Group invitation canceled."
+      "group-invitation-accepted": "Grupo",
+      "group-invitation-declined": "Grupo",
+      "group-invitation-canceled": "Grupo"
     },
     "errors": {
-      "group-invitation-response-failed": "Group invitation could not be updated."
+      "group-invitation-response-failed": "Grupo"
     }
   },
   "GroupsNew": {
-    "back": "Back to groups",
-    "eyebrow": "New group",
-    "title": "Create a private group.",
-    "body": "Start a group for selected collaborators. Groups are private in this phase.",
+    "back": "Grupo",
+    "eyebrow": "Grupo",
+    "title": "Grupo",
+    "body": "Grupo",
     "fields": {
-      "name": "Group name",
-      "description": "Description"
+      "name": "Grupo",
+      "description": "Grupo"
     },
-    "submit": "Create group",
+    "submit": "Grupo",
     "errors": {
-      "group-name-required": "Add a group name before creating the group.",
-      "group-create-failed": "Group could not be created."
+      "group-name-required": "Grupo",
+      "group-create-failed": "Grupo"
     }
   },
   "GroupDetail": {
-    "back": "Back to groups",
-    "eyebrow": "Group",
-    "noDescription": "No group description yet.",
-    "yourRole": "Your role",
-    "role": "Role",
-    "unnamed": "Unnamed profile",
+    "back": "Grupo",
+    "eyebrow": "Grupo",
+    "noDescription": "Grupo",
+    "yourRole": "Grupo",
+    "role": "Grupo",
+    "unnamed": "Grupo",
     "roles": {
-      "owner": "Owner",
-      "admin": "Admin",
-      "member": "Member",
-      "viewer": "Viewer"
+      "owner": "Grupo",
+      "admin": "Administrador",
+      "member": "Grupo",
+      "viewer": "Grupo"
     },
     "settings": {
-      "title": "Group settings",
-      "save": "Save group",
+      "title": "Configuración",
+      "save": "Configuración",
       "name": "Nombre del grupo",
       "description": "Descripción del grupo"
     },
     "members": {
-      "title": "Members",
-      "limit": "Groups are limited to 100 members.",
-      "updateRole": "Update role",
-      "remove": "Remove member"
+      "title": "Grupo",
+      "limit": "Grupo",
+      "updateRole": "Grupo",
+      "remove": "Grupo"
     },
     "invite": {
-      "title": "Invite user",
-      "searchPlaceholder": "Display name or profile id",
-      "search": "Search",
-      "send": "Invite",
-      "empty": "No matching profiles found."
+      "title": "Grupo",
+      "searchPlaceholder": "Grupo",
+      "search": "Grupo",
+      "send": "Grupo",
+      "empty": "Grupo"
     },
     "invitations": {
-      "title": "Pending invitations",
-      "empty": "No pending invitations.",
-      "cancel": "Cancel invite"
+      "title": "Grupo",
+      "empty": "Grupo",
+      "cancel": "Grupo"
     },
     "challenges": {
-      "title": "Linked challenges",
-      "empty": "No challenges linked to this group yet.",
-      "noneToLink": "No owned challenges available to link.",
-      "link": "Link challenge",
-      "unlink": "Unlink"
+      "title": "Grupo",
+      "empty": "Grupo",
+      "noneToLink": "Grupo",
+      "link": "Grupo",
+      "unlink": "Grupo"
     },
     "status": {
-      "group-created": "Group created.",
-      "group-saved": "Group saved.",
-      "group-invite-sent": "Group invitation sent.",
-      "group-invitation-canceled": "Group invitation canceled.",
-      "group-member-removed": "Member removed.",
-      "group-role-updated": "Member role updated.",
-      "group-challenge-linked": "Challenge linked to group.",
-      "group-challenge-unlinked": "Challenge unlinked from group.",
-      "message-sent": "Message sent.",
-      "message-deleted": "Message removed."
+      "group-created": "Grupo",
+      "group-saved": "Grupo",
+      "group-invite-sent": "Grupo",
+      "group-invitation-canceled": "Grupo",
+      "group-member-removed": "Grupo",
+      "group-role-updated": "Grupo",
+      "group-challenge-linked": "Grupo",
+      "group-challenge-unlinked": "Grupo",
+      "message-sent": "Grupo",
+      "message-deleted": "Grupo"
     },
     "errors": {
-      "group-save-failed": "Group could not be saved.",
-      "group-invite-failed": "Group invitation could not be sent.",
-      "group-member-remove-failed": "Member could not be removed.",
-      "group-role-update-failed": "Member role could not be updated.",
-      "group-challenge-link-failed": "Challenge could not be linked.",
-      "group-challenge-unlink-failed": "Challenge could not be unlinked.",
-      "message-send-failed": "Message could not be sent.",
-      "message-delete-failed": "Message could not be removed."
+      "group-save-failed": "Grupo",
+      "group-invite-failed": "Grupo",
+      "group-member-remove-failed": "Grupo",
+      "group-role-update-failed": "Grupo",
+      "group-challenge-link-failed": "Grupo",
+      "group-challenge-unlink-failed": "Grupo",
+      "message-send-failed": "Grupo",
+      "message-delete-failed": "Grupo"
     },
     "messages": {
-      "title": "Group messages",
-      "body": "Share short updates with accepted group members.",
-      "placeholder": "Write a short group message.",
-      "send": "Send message",
-      "empty": "No group messages yet.",
-      "delete": "Remove",
-      "deleted": "This message was removed.",
-      "unknownSender": "Unknown sender",
-      "viewerReadOnly": "Viewers can read group messages but cannot send messages."
+      "title": "Grupo",
+      "body": "Grupo",
+      "placeholder": "Grupo",
+      "send": "Grupo",
+      "empty": "Grupo",
+      "delete": "Grupo",
+      "deleted": "Grupo",
+      "unknownSender": "Grupo",
+      "viewerReadOnly": "Grupo"
     },
     "activity": {
-      "title": "Group activity",
-      "empty": "No group activity yet.",
+      "title": "Grupo",
+      "empty": "Grupo",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "challenge_created": "Grupo",
+        "challenge_updated": "Grupo",
+        "challenge_linked_to_group": "Grupo",
+        "group_created": "Grupo",
+        "group_updated": "Grupo",
+        "group_member_joined": "Grupo",
+        "group_member_removed": "Grupo",
+        "group_message_created": "Grupo",
+        "challenge_message_created": "Grupo",
+        "task_updated": "Grupo",
+        "solution_updated": "Grupo"
       }
     }
   },
   "Notifications": {
-    "eyebrow": "Notifications",
-    "title": "Notifications",
-    "body": "Private updates for your account, groups, and challenges.",
-    "unread": "Unread",
-    "read": "Read",
-    "emptyUnread": "No unread notifications.",
-    "emptyRead": "No read notifications yet.",
-    "markRead": "Mark as read",
-    "markAllRead": "Mark all as read",
-    "openGroup": "Open group",
-    "openChallenge": "Open challenge",
+    "eyebrow": "Notificación",
+    "title": "Notificación",
+    "body": "Notificación",
+    "unread": "Notificación",
+    "read": "Notificación",
+    "emptyUnread": "Notificación",
+    "emptyRead": "Notificación",
+    "markRead": "Notificación",
+    "markAllRead": "Notificación",
+    "openGroup": "Grupo",
+    "openChallenge": "Notificación",
     "status": {
-      "notification-read": "Notification marked as read.",
-      "all-notifications-read": "All notifications marked as read."
+      "notification-read": "Notificación",
+      "all-notifications-read": "Notificación"
     },
     "errors": {
-      "notification-read-failed": "Notification could not be updated."
+      "notification-read-failed": "Notificación"
     },
     "types": {
-      "friend_request": "Friend request",
-      "friend_request_accepted": "Friend request accepted",
-      "group_invitation": "Group invitation",
-      "group_invitation_accepted": "Group invitation accepted",
-      "group_invitation_declined": "Group invitation declined",
-      "group_message": "Group message",
-      "challenge_message": "Challenge message",
-      "challenge_updated": "Challenge updated",
-      "group_updated": "Group updated"
+      "friend_request": "Amigo",
+      "friend_request_accepted": "Amigo",
+      "group_invitation": "Grupo",
+      "group_invitation_accepted": "Grupo",
+      "group_invitation_declined": "Grupo",
+      "group_message": "Grupo",
+      "challenge_message": "Notificación",
+      "challenge_updated": "Notificación",
+      "group_updated": "Grupo"
     },
     "bodies": {
       "friend_request": "Alguien te envió una solicitud de amistad.",
@@ -922,104 +931,108 @@
     }
   },
   "Admin": {
-    "eyebrow": "Admin",
+    "eyebrow": "Administrador",
     "title": "Resumen de administración",
-    "body": "A protected operational view with aggregate counts and limited metadata only.",
+    "body": "Administrador",
     "actions": {
-      "settings": "Admin settings"
+      "settings": "Configuración"
     },
     "verification": {
-      "title": "Live Supabase verification needed",
-      "body": "Phase 10 adds local migrations and RLS/RPC rules. Apply and test them against the real Supabase project before relying on production admin data.",
-      "error": "Some admin data could not be loaded. Check that the Phase 10 migration is applied."
+      "title": "Administrador",
+      "body": "Administrador",
+      "error": "Administrador"
     },
     "metrics": {
-      "profiles": "Profiles",
-      "challenges": "Challenges",
-      "groups": "Groups",
-      "messages": "Messages",
-      "notifications": "Notifications"
+      "profiles": "Perfil",
+      "challenges": "Administrador",
+      "groups": "Administrador",
+      "messages": "Administrador",
+      "notifications": "Administrador"
     },
     "profiles": {
-      "title": "Profiles",
-      "body": "Limited profile metadata for admin review. Emails and auth.users data are not shown.",
-      "id": "Profile id",
-      "displayName": "Display name",
-      "locale": "Locale",
-      "role": "Role",
-      "created": "Created",
-      "noDisplayName": "No display name",
-      "empty": "No profiles available."
+      "title": "Perfil",
+      "body": "Perfil",
+      "id": "Perfil",
+      "displayName": "Perfil",
+      "locale": "Perfil",
+      "role": "Perfil",
+      "created": "Perfil",
+      "noDisplayName": "Perfil",
+      "empty": "Perfil"
     },
     "roles": {
       "user": "Usuario",
       "admin": "Administrador"
     },
     "activity": {
-      "title": "Recent activity",
-      "noActor": "No actor",
-      "empty": "No activity available.",
+      "title": "Actividad reciente",
+      "noActor": "Administrador",
+      "empty": "Administrador",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated",
-        "unknown": "Activity event"
+        "challenge_created": "Administrador",
+        "challenge_updated": "Administrador",
+        "challenge_linked_to_group": "Administrador",
+        "group_created": "Administrador",
+        "group_updated": "Administrador",
+        "group_member_joined": "Administrador",
+        "group_member_removed": "Administrador",
+        "group_message_created": "Administrador",
+        "challenge_message_created": "Administrador",
+        "task_updated": "Administrador",
+        "solution_updated": "Administrador",
+        "unknown": "Administrador"
       }
     },
     "audit": {
-      "title": "Admin audit log",
-      "body": "Sensitive admin mutations should be logged here when those actions are added.",
-      "noTarget": "No target",
-      "empty": "No admin audit entries yet."
+      "title": "Administrador",
+      "body": "Administrador",
+      "noTarget": "Administrador",
+      "empty": "Administrador"
     }
   },
   "AdminSettings": {
-    "back": "Back to admin",
-    "eyebrow": "Admin settings",
+    "back": "Configuración",
+    "eyebrow": "Configuración",
     "title": "Lista de preparación de administración",
-    "body": "A local status view for deployment, Supabase verification, and support setup.",
+    "body": "Configuración",
     "checklists": {
       "appStatus": {
-        "title": "App status",
-        "adminProtected": "Admin routes are protected by profiles.role.",
-        "dashboard": "Dashboard and protected app routes remain available.",
-        "guestMode": "Guest mode remains local browser storage only.",
-        "messages": "Messages, notifications, and activity remain protected by RLS."
+        "title": "Configuración",
+        "adminProtected": "Configuración",
+        "dashboard": "El panel y las rutas protegidas de la app siguen disponibles.",
+        "guestMode": "El modo invitado sigue usando solo almacenamiento local del navegador.",
+        "messages": "Configuración"
       },
       "supabase": {
         "title": "Supabase",
-        "phase10Migration": "Apply the Phase 10 migration in Supabase.",
-        "rls": "Review RLS policies with real authenticated users.",
-        "firstAdmin": "Assign the first admin manually in Supabase SQL.",
-        "liveVerification": "Verify admin RPC behavior before production use."
+        "phase10Migration": "Configuración",
+        "rls": "Configuración",
+        "firstAdmin": "Configuración",
+        "liveVerification": "Configuración"
       },
       "deployment": {
-        "title": "Deployment",
-        "envTemplates": "Use templates only; do not expose real secret values.",
-        "supportEmail": "Public support email is support@noproblemo.tech.",
-        "noAutomation": "Email automation, Resend, and Vercel Cron are intentionally not used.",
-        "validation": "Run lint, typecheck, and build before deployment."
+        "title": "Configuración",
+        "envTemplates": "Configuración",
+        "supportEmail": "Correo electrónico",
+        "noAutomation": "Configuración",
+        "validation": "Configuración"
       }
     },
     "environment": {
-      "title": "Environment variables",
-      "body": "This checklist shows variable names only, never real values."
+      "title": "Configuración",
+      "body": "Configuración"
     },
     "support": {
-      "title": "Support",
-      "body": "Use this public address for MVP support and feedback."
+      "title": "Configuración",
+      "body": "Configuración"
     },
     "boundaries": {
-      "title": "Phase boundaries",
-      "body": "Phase 10 does not add payments, AI, email automation, Resend, Vercel Cron, billing, or support tickets."
+      "title": "Configuración",
+      "body": "Configuración"
     }
+  },
+  "PasswordField": {
+    "show": "Mostrar",
+    "hide": "Ocultar"
   }
 }

@@ -1,62 +1,62 @@
 {
   "Metadata": {
     "title": "NoProblemo",
-    "description": "A calm place to shape problems before you solve them."
+    "description": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
   },
   "Home": {
-    "eyebrow": "Guest mode is open",
-    "title": "Turn a messy challenge into a clearer next step.",
-    "description": "NoProblemo helps you write down the problem, compare options, and leave with a simple action plan. Start as a guest now; create an account later when you want cloud saving or collaboration.",
-    "primaryCta": "Start solving now as guest",
-    "signupCta": "Create account",
-    "loginCta": "Log in",
+    "eyebrow": "مہمان موڈ کھلا ہے",
+    "title": "صفحے کا عنوان",
+    "description": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔",
+    "primaryCta": "مہمان کے طور پر شروع کریں",
+    "signupCta": "اکاؤنٹ بنائیں",
+    "loginCta": "لاگ ان",
     "what": {
-      "title": "What NoProblemo is",
-      "body": "A lightweight problem-solving workspace for people who want structure before decisions. It keeps the first step quiet, practical, and focused."
+      "title": "NoProblemo کیا ہے",
+      "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
     },
     "guest": {
-      "title": "Start as guest",
-      "body": "Use the workflow without login. Your temporary draft stays in this browser only and can be copied or exported as Markdown."
+      "title": "مہمان کے طور پر شروع کریں",
+      "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
     },
     "account": {
-      "title": "Account when needed",
-      "body": "Login and account creation are placeholders for now. Later, accounts will unlock saving, groups, and collaboration."
+      "title": "ضرورت پر اکاؤنٹ",
+      "body": "اکاؤنٹ"
     },
     "workflow": {
-      "eyebrow": "Workflow preview",
-      "title": "A simple path through the problem",
+      "eyebrow": "ورک فلو پیش نظارہ",
+      "title": "صفحے کا عنوان",
       "steps": {
         "capture": {
-          "title": "Capture the challenge",
-          "body": "Write the problem in plain language and add the context that matters."
+          "title": "جاری رکھیں",
+          "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
         },
         "shape": {
-          "title": "Shape possible answers",
-          "body": "List options, tradeoffs, and the outcome you want to reach."
+          "title": "جاری رکھیں",
+          "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
         },
         "choose": {
-          "title": "Choose a next step",
-          "body": "End with one practical action you can take without needing a full project setup."
+          "title": "جاری رکھیں",
+          "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
         }
       }
     },
     "collaboration": {
-      "title": "Collaboration comes after clarity",
-      "body": "Guest mode is private to this browser. Groups, invites, messages, members, and shared projects will require login in a later phase.",
-      "note": "This keeps the public experience useful without exposing private project data or creating unfinished collaboration flows."
+      "title": "وضاحت کے بعد تعاون",
+      "body": "مہمان موڈ اس براؤزر تک نجی رہتا ہے۔ گروپس، دعوتیں، پیغامات، ارکان اور مشترکہ پروجیکٹس کے لیے بعد کے مرحلے میں لاگ ان درکار ہوگا۔",
+      "note": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
     },
     "benefits": {
       "guest": {
-        "title": "No account required to start",
-        "body": "Begin with the problem itself instead of an onboarding flow."
+        "title": "ابھی کوئی مواد نہیں ہے۔",
+        "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
       },
       "structured": {
-        "title": "Structured but lightweight",
-        "body": "The workflow gives enough shape to move without turning into a heavy project manager."
+        "title": "منظم مگر ہلکا",
+        "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
       },
       "private": {
-        "title": "Local by default",
-        "body": "Guest work stays in browser storage and is not sent to Supabase."
+        "title": "بطور ڈیفالٹ مقامی",
+        "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
       }
     }
   },
@@ -77,133 +77,133 @@
     }
   },
   "Solve": {
-    "eyebrow": "Guest workspace",
-    "title": "Start a problem-solving session without login.",
-    "body": "Use this temporary workspace to clarify a challenge. Guest work is stored only in this browser and can be copied or exported before you leave.",
-    "backHome": "Back to landing page",
-    "supportHint": "Need help?",
+    "eyebrow": "مہمان ورک اسپیس",
+    "title": "لاگ ان کے بغیر مسئلہ حل کرنے کا سیشن شروع کریں۔",
+    "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔",
+    "backHome": "واپس",
+    "supportHint": "سپورٹ",
     "workspace": {
-      "title": "Problem-solving workflow",
-      "localNotice": "Your guest draft is saved in local browser storage. It is not sent to Supabase.",
-      "summaryTitle": "Guest challenge summary",
-      "emptyValue": "Not filled in yet.",
+      "title": "مسئلہ حل کرنے کا ورک فلو",
+      "localNotice": "محفوظ کریں",
+      "summaryTitle": "جاری رکھیں",
+      "emptyValue": "ابھی تک نہیں بھرا گیا۔",
       "fields": {
         "problem": {
-          "label": "What problem are you solving?",
-          "placeholder": "Describe the challenge in one or two plain sentences."
+          "label": "خانہ",
+          "placeholder": "یہاں لکھیں۔"
         },
         "context": {
-          "label": "What context matters?",
-          "placeholder": "Add constraints, people involved, deadlines, or background."
+          "label": "کون سا سیاق اہم ہے؟",
+          "placeholder": "حدود، متعلقہ لوگ، آخری تاریخیں یا پس منظر شامل کریں۔"
         },
         "outcome": {
-          "label": "What would a good outcome look like?",
-          "placeholder": "Describe the result you want."
+          "label": "اچھا نتیجہ کیسا ہوگا؟",
+          "placeholder": "اپنا مطلوبہ نتیجہ بیان کریں۔"
         },
         "options": {
-          "label": "What options are on the table?",
-          "placeholder": "List possible approaches, tradeoffs, or open questions."
+          "label": "خانہ",
+          "placeholder": "یہاں لکھیں۔"
         },
         "nextStep": {
-          "label": "What is the next practical step?",
-          "placeholder": "Choose one action you can take next."
+          "label": "خانہ",
+          "placeholder": "یہاں لکھیں۔"
         }
       },
-      "copyMarkdown": "Copy Markdown summary",
-      "exportMarkdown": "Export Markdown",
-      "save": "Save",
-      "copySuccess": "Markdown summary copied.",
-      "copyFallback": "Copy failed. You can select the summary and copy it manually.",
+      "copyMarkdown": "Markdown خلاصہ کاپی کریں",
+      "exportMarkdown": "Markdown برآمد کریں",
+      "save": "محفوظ کریں",
+      "copySuccess": "کارروائی مکمل ہو گئی۔",
+      "copyFallback": "واپس",
       "guestLimits": {
-        "title": "Guest mode limits",
-        "body": "These actions need an account because they would save or share data beyond this browser."
+        "title": "مہمان موڈ کی حدود",
+        "body": "محفوظ کریں"
       },
       "blockedActions": {
-        "save": "Save cloud project",
-        "collaborate": "Collaborate",
-        "invite": "Invite friends",
-        "createGroup": "Create group",
-        "sendMessage": "Send message",
-        "continueLater": "Continue later",
-        "addMember": "Add member"
+        "save": "محفوظ کریں",
+        "collaborate": "تعاون کریں",
+        "invite": "دوستوں کو مدعو کریں",
+        "createGroup": "گروپ",
+        "sendMessage": "پیغام بھیجیں",
+        "continueLater": "جاری رکھیں",
+        "addMember": "رکن شامل کریں"
       }
     }
   },
   "LoginPrompt": {
-    "title": "Login required for saving and collaboration",
-    "body": "You can use NoProblemo without an account, but login is required to save your work and collaborate with others.",
-    "continueWithoutSaving": "Continue without saving",
-    "loginAndSave": "Log in and save this challenge",
-    "signupAndSave": "Create account and save this challenge"
+    "title": "لاگ ان",
+    "body": "لاگ ان",
+    "continueWithoutSaving": "لاگ ان",
+    "loginAndSave": "لاگ ان",
+    "signupAndSave": "لاگ ان"
   },
   "Support": {
-    "eyebrow": "Support",
-    "title": "Contact NoProblemo support",
-    "body": "For help, feedback, or questions about this early version, contact support by email.",
-    "emailLabel": "Support email",
-    "helpText": "Do not send passwords, private keys, payment details, or sensitive personal information.",
-    "backHome": "Back to landing page"
+    "eyebrow": "سپورٹ",
+    "title": "سپورٹ",
+    "body": "سپورٹ",
+    "emailLabel": "ای میل",
+    "helpText": "سپورٹ",
+    "backHome": "سپورٹ"
   },
   "AuthPlaceholder": {
-    "continueGuest": "Continue as guest",
-    "createAccount": "Create account",
-    "logIn": "Log in",
+    "continueGuest": "جاری رکھیں",
+    "createAccount": "اکاؤنٹ",
+    "logIn": "لاگ ان",
     "login": {
-      "eyebrow": "Future login",
-      "title": "Login is not built yet.",
-      "body": "Authentication is planned for a later phase. For now, continue as guest and keep work in this browser."
+      "eyebrow": "لاگ ان",
+      "title": "لاگ ان",
+      "body": "لاگ ان"
     },
     "signup": {
-      "eyebrow": "Future account",
-      "title": "Account creation is not built yet.",
-      "body": "Accounts will later support cloud saving and collaboration. For now, guest mode keeps your draft local."
+      "eyebrow": "اکاؤنٹ بنائیں",
+      "title": "اکاؤنٹ بنائیں",
+      "body": "اکاؤنٹ بنائیں"
     }
   },
   "Footer": {
     "brand": "NoProblemo",
-    "tagline": "Guest-first problem solving.",
-    "supportLink": "Support"
+    "tagline": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔",
+    "supportLink": "سپورٹ"
   },
   "Auth": {
     "shared": {
-      "continueGuest": "Continue as guest"
+      "continueGuest": "جاری رکھیں"
     },
     "fields": {
-      "displayName": "Display name",
-      "displayNamePlaceholder": "Your name, optional",
-      "email": "Email",
-      "emailPlaceholder": "you@example.com",
-      "password": "Password",
-      "passwordPlaceholder": "Your password",
-      "newPasswordPlaceholder": "At least 8 characters",
+      "displayName": "جاری رکھیں",
+      "displayNamePlaceholder": "یہاں لکھیں۔",
+      "email": "ای میل",
+      "emailPlaceholder": "ای میل",
+      "password": "پاس ورڈ",
+      "passwordPlaceholder": "پاس ورڈ",
+      "newPasswordPlaceholder": "کم از کم 8 حروف",
       "newPassword": "نیا پاس ورڈ",
       "confirmPassword": "پاس ورڈ کی تصدیق کریں",
       "confirmPasswordPlaceholder": "نیا پاس ورڈ دوبارہ لکھیں"
     },
     "login": {
-      "eyebrow": "Account access",
-      "title": "Log in to save your work.",
-      "body": "Guest mode stays available. Log in when you want cloud saving and future collaboration features.",
-      "submit": "Log in",
-      "createAccount": "Create account",
+      "eyebrow": "لاگ ان",
+      "title": "لاگ ان",
+      "body": "مہمان موڈ دستیاب ہے۔ کلاؤڈ سیونگ اور آئندہ تعاون کی خصوصیات کے لیے لاگ ان کریں۔",
+      "submit": "لاگ ان",
+      "createAccount": "اکاؤنٹ",
       "forgotPassword": "پاس ورڈ بھول گئے؟"
     },
     "signup": {
-      "eyebrow": "Create account",
-      "title": "Create an account for future saved work.",
-      "body": "Use email signup now. Saved dashboards and guest import are planned for the next phase.",
-      "submit": "Create account",
-      "logIn": "Already have an account? Log in"
+      "eyebrow": "اکاؤنٹ بنائیں",
+      "title": "اکاؤنٹ بنائیں",
+      "body": "اکاؤنٹ بنائیں",
+      "submit": "اکاؤنٹ بنائیں",
+      "logIn": "لاگ ان"
     },
     "oauth": {
-      "title": "Or continue with a provider",
-      "google": "Continue with Google",
-      "apple": "Continue with Apple",
-      "note": "Google and Apple require provider configuration in Supabase before they work in production."
+      "title": "جاری رکھیں",
+      "google": "جاری رکھیں",
+      "apple": "جاری رکھیں",
+      "note": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
     },
     "status": {
       "check-email": "اکاؤنٹ بن گیا۔ تصدیق کے لیے اپنا ای میل دیکھیں، پھر NoProblemo پر واپس آئیں۔",
-      "signed-out": "You have been logged out.",
+      "signed-out": "کارروائی مکمل ہو گئی۔",
       "password-updated": "پاس ورڈ اپ ڈیٹ ہو گیا۔ نئے پاس ورڈ سے لاگ ان کریں۔",
       "reset-email-sent": "اگر اس ای میل کا اکاؤنٹ ہے تو ری سیٹ لنک بھیج دیا گیا ہے۔",
       "recovery-ready": "ری سیٹ لنک کی تصدیق ہو گئی۔ نیا پاس ورڈ منتخب کریں۔",
@@ -212,41 +212,50 @@
       "signup-check-email": "اکاؤنٹ بن گیا۔ لاگ ان سے پہلے اپنا ای میل تصدیق کریں۔",
       "signup-existing-or-pending": "اگر اس ای میل کا اکاؤنٹ یا زیر التوا تصدیق ہے تو تصدیقی ای میل استعمال کریں یا لاگ ان کریں۔",
       "signup-confirmation-resent": "اگر یہ ای میل تصدیقی لنک وصول کر سکتا ہے تو نیا ای میل بھیج دیا گیا ہے۔",
-      "account-deleted": "آپ کا اکاؤنٹ حذف کر دیا گیا ہے۔"
+      "account-deleted": "آپ کا اکاؤنٹ حذف کر دیا گیا ہے۔",
+      "password-reset-success": "پاس ورڈ اپ ڈیٹ ہو گیا ہے۔ نئے پاس ورڈ سے لاگ ان کریں۔"
     },
     "errors": {
-      "missing-fields": "Enter both email and password to continue.",
-      "invalid-credentials": "The email or password did not match an account.",
-      "weak-password": "Use a password with at least 8 characters.",
+      "missing-fields": "کارروائی مکمل نہیں ہو سکی۔ بعد میں دوبارہ کوشش کریں۔",
+      "invalid-credentials": "کارروائی مکمل نہیں ہو سکی۔ بعد میں دوبارہ کوشش کریں۔",
+      "weak-password": "پاس ورڈ",
       "signup-failed": "اکاؤنٹ نہیں بن سکا۔ تفصیلات چیک کریں یا دوبارہ کوشش کریں۔",
-      "oauth-provider": "That login provider is not available.",
-      "oauth-start": "The provider login could not start. Check Supabase provider setup.",
+      "oauth-provider": "کارروائی مکمل نہیں ہو سکی۔ بعد میں دوبارہ کوشش کریں۔",
+      "oauth-start": "کارروائی مکمل نہیں ہو سکی۔ بعد میں دوبارہ کوشش کریں۔",
       "callback": "تصدیقی لنک مکمل نہیں ہو سکا۔ یہ غلط یا ختم ہو چکا ہو سکتا ہے۔ لاگ ان کریں یا نیا لنک مانگیں۔",
-      "auth-required": "Log in to access saved work. Guest mode remains available without an account.",
+      "auth-required": "محفوظ کام تک رسائی کے لیے لاگ ان کریں۔ اکاؤنٹ کے بغیر مہمان موڈ دستیاب ہے۔",
       "missing-email": "ری سیٹ لنک کے لیے اپنا ای میل درج کریں۔",
       "reset-request-failed": "ری سیٹ ای میل نہیں بھیجی جا سکی۔ پتہ چیک کریں یا دوبارہ کوشش کریں۔",
       "password-mismatch": "پاس ورڈز ایک جیسے نہیں ہیں۔",
       "password-update-failed": "پاس ورڈ اپ ڈیٹ نہیں ہو سکا۔ نیا ری سیٹ لنک مانگیں۔",
-      "reset-link-invalid": "ری سیٹ لنک غلط یا ختم ہو چکا ہے۔ نیا لنک مانگیں۔",
+      "reset-link-invalid": "ری سیٹ لنک نہیں کھل سکا۔ نیا ری سیٹ لنک طلب کریں۔",
       "recovery-callback": "ری سیٹ لنک نہیں کھل سکا۔ نیا ری سیٹ لنک درخواست کریں اور دوبارہ کوشش کریں۔",
       "signup-weak-password": "کم از کم 8 حروف کا پاس ورڈ استعمال کریں۔",
       "signup-rate-limited": "سائن اپ کی بہت زیادہ کوششیں۔ تھوڑا انتظار کریں اور دوبارہ کوشش کریں۔",
       "signup-invalid-email": "درست ای میل پتہ درج کریں۔",
-      "signup-provider-disabled": "ای میل سائن اپ ابھی دستیاب نہیں۔ Supabase Auth سیٹنگز چیک کریں۔"
+      "signup-provider-disabled": "ای میل سائن اپ ابھی دستیاب نہیں۔ Supabase Auth سیٹنگز چیک کریں۔",
+      "reset-rate-limited": "بہت زیادہ درخواستیں ہو گئیں۔ بعد میں نیا لنک طلب کریں۔",
+      "reset-provider-or-smtp": "ری سیٹ ای میل ابھی نہیں بھیجی جا سکی۔ بعد میں کوشش کریں یا سپورٹ سے رابطہ کریں۔",
+      "reset-invalid-email": "درست ای میل پتہ درج کریں۔",
+      "reset-redirect-not-allowed": "ری سیٹ لنک کی ترتیب مکمل نہیں ہے۔ سپورٹ سے رابطہ کریں۔",
+      "reset-email-failed": "ای میل نہیں بھیجی جا سکی۔ پتہ چیک کریں یا بعد میں کوشش کریں۔"
     },
     "forgot": {
       "eyebrow": "پاس ورڈ مدد",
       "title": "اپنا پاس ورڈ ری سیٹ کریں۔",
       "body": "اپنے اکاؤنٹ کا ای میل درج کریں۔ اگر اکاؤنٹ موجود ہے تو ہم محفوظ لنک بھیجیں گے۔",
       "submit": "ری سیٹ لنک بھیجیں",
-      "backToLogin": "لاگ ان پر واپس جائیں"
+      "backToLogin": "لاگ ان پر واپس جائیں",
+      "submitting": "ری سیٹ لنک بھیجا جا رہا ہے...",
+      "help": "اگر ای میل نہ آئے تو اسپام چیک کریں یا بعد میں نیا لنک طلب کریں۔ مقامی جانچ کے لیے نیا لنک استعمال کریں اور اسے اسی براؤزر/پروفائل میں کھولیں جہاں آپ نے اسے طلب کیا تھا۔"
     },
     "reset": {
       "eyebrow": "نیا پاس ورڈ",
       "title": "نیا پاس ورڈ منتخب کریں۔",
       "body": "ای میل کے ری سیٹ لنک کو استعمال کریں، پھر نیا پاس ورڈ سیٹ کریں۔",
       "submit": "نیا پاس ورڈ محفوظ کریں",
-      "requestNewLink": "نیا ری سیٹ لنک مانگیں"
+      "requestNewLink": "نیا ری سیٹ لنک مانگیں",
+      "recoveryHelp": "نیا ری سیٹ لنک طلب کریں۔ مقامی جانچ میں اسے اسی براؤزر/پروفائل میں کھولیں جہاں آپ نے اسے طلب کیا تھا۔ تازہ ترین ری سیٹ اصلاح سے پہلے بنے لنکس ناکام ہو سکتے ہیں۔"
     },
     "resend": {
       "title": "نیا تصدیقی ای میل چاہیے؟",
@@ -255,78 +264,78 @@
     }
   },
   "AuthStatus": {
-    "login": "Log in",
-    "signup": "Create account",
-    "openApp": "Open app",
-    "logout": "Log out"
+    "login": "لاگ ان",
+    "signup": "اکاؤنٹ بنائیں",
+    "openApp": "کارروائی مکمل ہو گئی۔",
+    "logout": "لاگ آؤٹ"
   },
   "ProtectedApp": {
     "nav": {
-      "home": "Back to home",
-      "signedIn": "Signed in",
-      "logout": "Log out",
-      "dashboard": "Dashboard",
-      "settings": "Settings",
-      "friends": "Friends",
-      "groups": "Groups",
-      "notifications": "Notifications",
+      "home": "جاری رکھیں",
+      "signedIn": "لاگ ان",
+      "logout": "لاگ آؤٹ",
+      "dashboard": "ڈیش بورڈ",
+      "settings": "ترتیبات",
+      "friends": "دوست",
+      "groups": "گروپس",
+      "notifications": "اطلاعات",
       "admin": "ایڈمن",
       "primary": "مرکزی نیویگیشن",
       "challenges": "چیلنجز",
       "brand": "NoProblemo"
     },
-    "eyebrow": "Protected area",
-    "title": "Authentication is ready.",
-    "body": "This protected placeholder verifies the session flow. The full dashboard, saved challenges, and guest import begin in Phase 6.",
+    "eyebrow": "جاری رکھیں",
+    "title": "جاری رکھیں",
+    "body": "محفوظ کریں",
     "actions": {
-      "solve": "Continue guest workspace",
-      "support": "Contact support"
+      "solve": "جاری رکھیں",
+      "support": "سپورٹ"
     },
-    "phaseNote": "No dashboard data is saved or imported in Phase 5."
+    "phaseNote": "ابھی کوئی مواد نہیں ہے۔"
   },
   "Dashboard": {
-    "eyebrow": "Dashboard",
-    "title": "Welcome back.",
-    "titleWithName": "Welcome back, {name}.",
-    "body": "Manage saved challenges, import guest work from this device, and continue where you left off.",
+    "eyebrow": "ڈیش بورڈ",
+    "title": "ڈیش بورڈ",
+    "titleWithName": "واپسی پر خوش آمدید، {name}۔",
+    "body": "محفوظ کریں",
     "actions": {
-      "newChallenge": "New challenge",
-      "settings": "Profile settings"
+      "newChallenge": "چیلنج",
+      "settings": "ترتیبات"
     },
     "summary": {
-      "total": "Saved challenges",
-      "active": "Active drafts",
-      "future": "Collaboration",
+      "total": "محفوظ چیلنجز",
+      "active": "فعال مسودے",
+      "future": "جاری رکھیں",
       "pending": "زیر التوا آئٹمز"
     },
-    "futureNote": "Friends, groups, and messages are planned for later phases.",
+    "futureNote": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔",
     "guestImport": {
-      "eyebrow": "Guest work found",
-      "title": "You have unsaved guest work on this device.",
-      "body": "Import it to your account to continue later. The import creates a private draft challenge owned by your logged-in user.",
-      "importedTitle": "Guest work imported.",
-      "importedBody": "This device has already imported the current guest draft. You can continue from the saved challenge.",
-      "fallbackTitle": "Imported guest challenge",
-      "importAction": "Import guest work",
-      "importing": "Importing...",
-      "continueImported": "Continue imported challenge",
-      "reviewGuest": "Review guest draft",
+      "eyebrow": "جاری رکھیں",
+      "title": "محفوظ کریں",
+      "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔",
+      "importedTitle": "جاری رکھیں",
+      "importedBody": "محفوظ کریں",
+      "fallbackTitle": "واپس",
+      "importAction": "جاری رکھیں",
+      "importing": "جاری رکھیں",
+      "continueImported": "جاری رکھیں",
+      "reviewGuest": "جاری رکھیں",
       "messages": {
-        "success": "Guest work was imported to your account.",
-        "alreadyImported": "This guest draft was already imported from this device.",
-        "missingDraft": "No guest draft was sent for import.",
-        "invalidDraft": "The guest draft could not be read.",
-        "emptyDraft": "The guest draft is empty.",
-        "authRequired": "Log in before importing guest work.",
-        "createFailed": "The saved challenge could not be created.",
-        "sectionsFailed": "The challenge was created, but its sections could not be imported."
+        "success": "پیغام",
+        "alreadyImported": "پیغام",
+        "missingDraft": "پیغام",
+        "invalidDraft": "پیغام",
+        "emptyDraft": "پیغام",
+        "authRequired": "پیغام",
+        "createFailed": "پیغام",
+        "sectionsFailed": "پیغام"
       }
     },
     "challenge": {
-      "status": "Status",
-      "updated": "Updated",
-      "continue": "Continue",
-      "noDescription": "No short description yet.",
+      "status": "چیلنج",
+      "updated": "چیلنج",
+      "continue": "چیلنج",
+      "noDescription": "چیلنج",
       "statuses": {
         "draft": "مسودہ",
         "active": "فعال",
@@ -335,45 +344,45 @@
       }
     },
     "active": {
-      "title": "My active challenges",
-      "body": "Draft and active saved challenges linked to your account."
+      "title": "میرے فعال چیلنجز",
+      "body": "محفوظ کریں"
     },
     "recent": {
-      "title": "Latest saved challenges",
-      "body": "Recent cloud challenges available through your authenticated session.",
-      "empty": "No saved cloud challenges yet."
+      "title": "تازہ محفوظ چیلنجز",
+      "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔",
+      "empty": "ابھی کوئی مواد نہیں ہے۔"
     },
     "empty": {
-      "title": "No saved challenges yet.",
-      "body": "Create a cloud draft or import guest work from this device when you are ready.",
-      "action": "Create first challenge"
+      "title": "ابھی کوئی مواد نہیں ہے۔",
+      "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔",
+      "action": "جاری رکھیں"
     },
     "errors": {
-      "listTitle": "Challenges could not be loaded.",
-      "listBody": "Check Supabase configuration, migration status, and RLS policies."
+      "listTitle": "کارروائی مکمل نہیں ہو سکی۔ بعد میں دوبارہ کوشش کریں۔",
+      "listBody": "کارروائی مکمل نہیں ہو سکی۔ بعد میں دوبارہ کوشش کریں۔"
     },
     "social": {
-      "friendRequests": "Incoming friend requests",
-      "groupInvitations": "Group invitations",
-      "groups": "Groups",
-      "noGroups": "No groups yet.",
-      "notifications": "Unread notifications"
+      "friendRequests": "دوست",
+      "groupInvitations": "گروپ",
+      "groups": "گروپ",
+      "noGroups": "گروپ",
+      "notifications": "غیر پڑھی اطلاعات"
     },
     "activity": {
-      "title": "Recent activity",
-      "empty": "No recent activity yet.",
+      "title": "حالیہ سرگرمی",
+      "empty": "سرگرمی",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "challenge_created": "چیلنج",
+        "challenge_updated": "چیلنج",
+        "challenge_linked_to_group": "گروپ",
+        "group_created": "گروپ",
+        "group_updated": "گروپ",
+        "group_member_joined": "گروپ",
+        "group_member_removed": "گروپ",
+        "group_message_created": "گروپ",
+        "challenge_message_created": "چیلنج",
+        "task_updated": "سرگرمی",
+        "solution_updated": "سرگرمی"
       }
     },
     "status": {
@@ -388,70 +397,70 @@
     }
   },
   "CreateChallenge": {
-    "back": "Back to dashboard",
-    "eyebrow": "New cloud draft",
-    "title": "Create a saved challenge.",
-    "body": "Start with a title and short description. The full structured workspace begins in Phase 7.",
+    "back": "چیلنج",
+    "eyebrow": "چیلنج",
+    "title": "چیلنج",
+    "body": "چیلنج",
     "fields": {
-      "title": "Title",
-      "titlePlaceholder": "What problem are you solving?",
-      "shortDescription": "Short description",
-      "shortDescriptionPlaceholder": "Add a short context note, optional"
+      "title": "چیلنج",
+      "titlePlaceholder": "چیلنج",
+      "shortDescription": "چیلنج",
+      "shortDescriptionPlaceholder": "چیلنج"
     },
-    "submit": "Create draft challenge",
+    "submit": "چیلنج",
     "errors": {
-      "missing-title": "Add a title before creating the challenge.",
-      "create-failed": "The challenge could not be created. Check Supabase setup and RLS policies."
+      "missing-title": "چیلنج",
+      "create-failed": "چیلنج"
     }
   },
   "ChallengeDetail": {
-    "back": "Back to dashboard",
-    "created": "Draft challenge was created.",
-    "eyebrow": "Saved challenge",
-    "status": "Status",
-    "noDescription": "No short description yet.",
-    "phaseSevenTitle": "Workspace starts in Phase 7.",
-    "phaseSevenBody": "This page lets you continue to a saved challenge and review imported sections. Editing the full structured workflow belongs to the next phase.",
+    "back": "چیلنج",
+    "created": "چیلنج",
+    "eyebrow": "چیلنج",
+    "status": "چیلنج",
+    "noDescription": "چیلنج",
+    "phaseSevenTitle": "چیلنج",
+    "phaseSevenBody": "چیلنج",
     "sections": {
-      "title": "Imported sections",
-      "empty": "No content yet.",
-      "none": "No sections have been saved for this challenge yet.",
+      "title": "چیلنج",
+      "empty": "چیلنج",
+      "none": "چیلنج",
       "keys": {
-        "problem_title": "Problem title",
-        "short_description": "Short description",
-        "background_context": "Background/context",
-        "who_is_affected": "Who is affected",
-        "why_it_matters": "Why it matters",
-        "possible_causes": "Possible causes or options",
-        "final_recommendation": "Outcome or recommendation",
-        "summary": "Summary or next step"
+        "problem_title": "چیلنج",
+        "short_description": "چیلنج",
+        "background_context": "چیلنج",
+        "who_is_affected": "چیلنج",
+        "why_it_matters": "چیلنج",
+        "possible_causes": "چیلنج",
+        "final_recommendation": "چیلنج",
+        "summary": "چیلنج"
       }
     }
   },
   "Settings": {
-    "back": "Back to dashboard",
-    "eyebrow": "Profile settings",
-    "title": "Manage your basic profile.",
-    "body": "Update your display name and preferred language. Advanced account management is planned for later phases.",
-    "account": "Account email",
+    "back": "ترتیبات",
+    "eyebrow": "ترتیبات",
+    "title": "ترتیبات",
+    "body": "ترتیبات",
+    "account": "ترتیبات",
     "fields": {
-      "displayName": "Display name",
-      "displayNamePlaceholder": "Your name",
-      "preferredLocale": "Preferred language",
+      "displayName": "ترتیبات",
+      "displayNamePlaceholder": "ترتیبات",
+      "preferredLocale": "ترتیبات",
       "newPassword": "نیا پاس ورڈ",
       "newPasswordPlaceholder": "کم از کم 8 حروف",
       "confirmPassword": "پاس ورڈ کی تصدیق کریں",
       "confirmPasswordPlaceholder": "نیا پاس ورڈ دوبارہ لکھیں"
     },
     "localeNote": "پسندیدہ زبان آپ کے پروفائل میں محفوظ ہوتی ہے۔ محفوظ کرنے کے بعد یہ سیٹنگز صفحہ منتخب زبان میں کھلے گا۔",
-    "submit": "Save profile",
+    "submit": "ترتیبات",
     "status": {
-      "saved": "Profile settings were saved.",
+      "saved": "ترتیبات",
       "profile-saved": "پروفائل سیٹنگز محفوظ ہو گئیں۔",
       "password-saved": "پاس ورڈ اپ ڈیٹ ہو گیا۔"
     },
     "errors": {
-      "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies.",
+      "updateFailed": "ترتیبات",
       "profile-update-failed": "پروفائل سیٹنگز محفوظ نہیں ہو سکیں۔ Supabase سیٹ اپ اور RLS پالیسیاں چیک کریں۔",
       "password-weak": "کم از کم 8 حروف کا پاس ورڈ استعمال کریں۔",
       "password-mismatch": "پاس ورڈز ایک جیسے نہیں ہیں۔",
@@ -485,429 +494,429 @@
     }
   },
   "Workspace": {
-    "back": "Back to dashboard",
-    "eyebrow": "Challenge workspace",
-    "noDescription": "No short description yet.",
-    "updated": "Updated",
-    "sectionsTitle": "Problem-solving sections",
-    "sectionsBody": "Save the structured notes for this challenge. Missing rows are created safely when you save.",
+    "back": "واپس",
+    "eyebrow": "جاری رکھیں",
+    "noDescription": "ابھی کوئی مواد نہیں ہے۔",
+    "updated": "جاری رکھیں",
+    "sectionsTitle": "جاری رکھیں",
+    "sectionsBody": "محفوظ کریں",
     "fields": {
-      "title": "Title",
-      "shortDescription": "Short description",
-      "status": "Status",
-      "none": "Not scored"
+      "title": "جاری رکھیں",
+      "shortDescription": "جاری رکھیں",
+      "status": "کارروائی مکمل ہو گئی۔",
+      "none": "جاری رکھیں"
     },
     "statuses": {
-      "draft": "Draft",
-      "active": "Active",
-      "completed": "Completed",
-      "archived": "Archived"
+      "draft": "کارروائی مکمل ہو گئی۔",
+      "active": "کارروائی مکمل ہو گئی۔",
+      "completed": "کارروائی مکمل ہو گئی۔",
+      "archived": "کارروائی مکمل ہو گئی۔"
     },
     "details": {
-      "title": "Challenge details",
-      "body": "Keep the basic challenge information current before working through the steps."
+      "title": "جاری رکھیں",
+      "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
     },
     "workflow": {
-      "title": "Seven-step workflow",
-      "body": "Move through the steps at your own pace. Save sections, solutions, tasks, and conclusions as the work becomes clearer.",
+      "title": "جاری رکھیں",
+      "body": "محفوظ کریں",
       "steps": {
         "define": {
-          "title": "Define the problem",
-          "body": "Write the problem clearly and keep it narrow enough to solve."
+          "title": "جاری رکھیں",
+          "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
         },
         "understand": {
-          "title": "Understand the situation",
-          "body": "Capture context, affected people, why it matters, and possible causes."
+          "title": "جاری رکھیں",
+          "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
         },
         "brainstorm": {
-          "title": "Brainstorm possible solutions",
-          "body": "Add candidate solutions without judging them too early."
+          "title": "صفحے کا عنوان",
+          "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
         },
         "evaluate": {
-          "title": "Evaluate pros and cons",
-          "body": "Compare benefits, downsides, risk, effort, and impact."
+          "title": "جاری رکھیں",
+          "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
         },
         "choose": {
-          "title": "Choose the best solution",
-          "body": "Write the final recommendation or decision."
+          "title": "جاری رکھیں",
+          "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
         },
         "action": {
-          "title": "Create an action plan",
-          "body": "Turn the recommendation into practical tasks."
+          "title": "جاری رکھیں",
+          "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
         },
         "review": {
-          "title": "Review, learn, and improve",
-          "body": "Summarize the outcome and what should be improved next time."
+          "title": "جاری رکھیں",
+          "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
         }
       }
     },
     "sections": {
       "problem_title": {
-        "title": "Problem title",
-        "help": "State the problem in one clear sentence or short paragraph."
+        "title": "جاری رکھیں",
+        "help": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
       },
       "short_description": {
-        "title": "Short description",
-        "help": "Add a concise explanation of what is happening."
+        "title": "جاری رکھیں",
+        "help": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
       },
       "background_context": {
-        "title": "Background/context",
-        "help": "Describe the situation, history, constraints, and relevant facts."
+        "title": "جاری رکھیں",
+        "help": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
       },
       "who_is_affected": {
-        "title": "Who is affected",
-        "help": "List people, teams, customers, users, or groups affected by the problem."
+        "title": "جاری رکھیں",
+        "help": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
       },
       "why_it_matters": {
-        "title": "Why it matters",
-        "help": "Explain impact, urgency, risks, costs, or opportunities."
+        "title": "جاری رکھیں",
+        "help": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
       },
       "possible_causes": {
-        "title": "Possible causes",
-        "help": "Capture likely causes, contributing factors, or assumptions to test."
+        "title": "جاری رکھیں",
+        "help": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
       },
       "final_recommendation": {
-        "title": "Final recommendation",
-        "help": "Write the chosen solution and why it is the best option now."
+        "title": "جاری رکھیں",
+        "help": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
       },
       "summary": {
-        "title": "Summary/review",
-        "help": "Summarize the conclusion, lessons learned, and next review point."
+        "title": "جاری رکھیں",
+        "help": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔"
       }
     },
     "solutions": {
-      "title": "Possible solutions",
-      "body": "Create, compare, rank, and refine candidate solutions. Scores are simple 1 to 5 values.",
-      "newTitle": "Add a possible solution",
+      "title": "جاری رکھیں",
+      "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔",
+      "newTitle": "جاری رکھیں",
       "fields": {
-        "title": "Solution title",
-        "description": "Description",
-        "pros": "Pros",
-        "cons": "Cons",
-        "risk": "Risk",
-        "effort": "Effort",
-        "impact": "Impact",
-        "resourcesNeeded": "Resources needed",
-        "priority": "Priority/ranking"
+        "title": "جاری رکھیں",
+        "description": "جاری رکھیں",
+        "pros": "جاری رکھیں",
+        "cons": "جاری رکھیں",
+        "risk": "جاری رکھیں",
+        "effort": "جاری رکھیں",
+        "impact": "جاری رکھیں",
+        "resourcesNeeded": "جاری رکھیں",
+        "priority": "جاری رکھیں"
       }
     },
     "tasks": {
-      "title": "Tasks/actions",
-      "body": "Create practical next actions. Responsible person is plain text for now; no user assignment or notifications are included.",
-      "newTitle": "Add a task/action",
+      "title": "جاری رکھیں",
+      "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔",
+      "newTitle": "جاری رکھیں",
       "fields": {
-        "title": "Task title",
-        "description": "Description",
-        "responsiblePerson": "Responsible person",
-        "deadline": "Deadline",
-        "completed": "Completed",
-        "position": "Position"
+        "title": "جاری رکھیں",
+        "description": "جاری رکھیں",
+        "responsiblePerson": "جاری رکھیں",
+        "deadline": "جاری رکھیں",
+        "completed": "جاری رکھیں",
+        "position": "جاری رکھیں"
       }
     },
     "actions": {
-      "saveDetails": "Save details",
-      "saveSections": "Save sections",
-      "saveSolution": "Save solution",
-      "addSolution": "Add solution",
-      "deleteSolution": "Delete solution",
-      "saveTask": "Save task",
-      "addTask": "Add task",
-      "deleteTask": "Delete task"
+      "saveDetails": "کارروائی مکمل ہو گئی۔",
+      "saveSections": "محفوظ کریں",
+      "saveSolution": "محفوظ کریں",
+      "addSolution": "جاری رکھیں",
+      "deleteSolution": "حذف کریں",
+      "saveTask": "محفوظ کریں",
+      "addTask": "جاری رکھیں",
+      "deleteTask": "حذف کریں"
     },
     "statusMessages": {
-      "created": "Draft challenge was created.",
-      "details-saved": "Challenge details were saved.",
-      "sections-saved": "Challenge sections were saved.",
-      "solution-saved": "Solution was saved.",
-      "solution-deleted": "Solution was deleted.",
-      "task-saved": "Task was saved.",
-      "task-deleted": "Task was deleted.",
-      "message-sent": "Message sent.",
-      "message-deleted": "Message removed."
+      "created": "پیغام",
+      "details-saved": "پیغام",
+      "sections-saved": "پیغام",
+      "solution-saved": "پیغام",
+      "solution-deleted": "پیغام",
+      "task-saved": "پیغام",
+      "task-deleted": "پیغام",
+      "message-sent": "پیغام",
+      "message-deleted": "پیغام"
     },
     "errorMessages": {
-      "details-missing-title": "Add a title before saving challenge details.",
-      "details-save-failed": "Challenge details could not be saved.",
-      "sections-save-failed": "Challenge sections could not be saved.",
-      "solution-missing-title": "Add a solution title before saving.",
-      "solution-invalid-score": "Use score values from 1 to 5.",
-      "solution-save-failed": "Solution could not be saved.",
-      "solution-delete-failed": "Solution could not be deleted.",
-      "task-missing-title": "Add a task title before saving.",
-      "task-save-failed": "Task could not be saved.",
-      "task-delete-failed": "Task could not be deleted.",
-      "message-send-failed": "Message could not be sent.",
-      "message-delete-failed": "Message could not be removed."
+      "details-missing-title": "پیغام",
+      "details-save-failed": "پیغام",
+      "sections-save-failed": "پیغام",
+      "solution-missing-title": "پیغام",
+      "solution-invalid-score": "پیغام",
+      "solution-save-failed": "پیغام",
+      "solution-delete-failed": "پیغام",
+      "task-missing-title": "پیغام",
+      "task-save-failed": "پیغام",
+      "task-delete-failed": "پیغام",
+      "message-send-failed": "پیغام",
+      "message-delete-failed": "پیغام"
     },
     "export": {
-      "title": "Markdown export",
-      "body": "Copy or download a readable Markdown summary of this challenge. PDF export remains a future feature.",
-      "copy": "Copy Markdown",
-      "download": "Download .md",
-      "copySuccess": "Markdown copied.",
-      "copyFallback": "Copy failed. You can use the download option instead.",
-      "downloadSuccess": "Markdown file prepared.",
-      "shortDescription": "Short description",
-      "status": "Status",
-      "solutions": "Possible solutions",
-      "tasks": "Tasks/actions",
-      "pros": "Pros",
-      "cons": "Cons",
-      "risk": "Risk",
-      "effort": "Effort",
-      "impact": "Impact",
-      "resourcesNeeded": "Resources needed",
-      "priority": "Priority/ranking",
-      "responsiblePerson": "Responsible person",
-      "deadline": "Deadline",
-      "completed": "Completed",
-      "position": "Position",
-      "yes": "Yes",
-      "no": "No"
+      "title": "جاری رکھیں",
+      "body": "یہ متن اس فیچر اور اگلے قدم کی وضاحت کرتا ہے۔",
+      "copy": "جاری رکھیں",
+      "download": "جاری رکھیں",
+      "copySuccess": "کارروائی مکمل ہو گئی۔",
+      "copyFallback": "واپس",
+      "downloadSuccess": "کارروائی مکمل ہو گئی۔",
+      "shortDescription": "جاری رکھیں",
+      "status": "کارروائی مکمل ہو گئی۔",
+      "solutions": "جاری رکھیں",
+      "tasks": "جاری رکھیں",
+      "pros": "جاری رکھیں",
+      "cons": "جاری رکھیں",
+      "risk": "جاری رکھیں",
+      "effort": "جاری رکھیں",
+      "impact": "جاری رکھیں",
+      "resourcesNeeded": "جاری رکھیں",
+      "priority": "جاری رکھیں",
+      "responsiblePerson": "جاری رکھیں",
+      "deadline": "جاری رکھیں",
+      "completed": "جاری رکھیں",
+      "position": "جاری رکھیں",
+      "yes": "ہاں",
+      "no": "نہیں"
     },
     "messages": {
-      "title": "Discussion",
-      "body": "Keep a simple challenge discussion with people who can access this challenge.",
-      "placeholder": "Write a short message.",
-      "send": "Send message",
-      "empty": "No messages yet.",
-      "delete": "Remove",
-      "deleted": "This message was removed.",
-      "unknownSender": "Unknown sender",
-      "viewerReadOnly": "You can read this discussion, but your current role cannot send messages."
+      "title": "پیغام",
+      "body": "پیغام",
+      "placeholder": "پیغام",
+      "send": "پیغام",
+      "empty": "پیغام",
+      "delete": "پیغام",
+      "deleted": "پیغام",
+      "unknownSender": "پیغام",
+      "viewerReadOnly": "پیغام"
     },
     "activity": {
-      "title": "Activity",
-      "empty": "No activity yet.",
+      "title": "سرگرمی",
+      "empty": "سرگرمی",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "challenge_created": "چیلنج",
+        "challenge_updated": "چیلنج",
+        "challenge_linked_to_group": "گروپ",
+        "group_created": "گروپ",
+        "group_updated": "گروپ",
+        "group_member_joined": "گروپ",
+        "group_member_removed": "گروپ",
+        "group_message_created": "گروپ",
+        "challenge_message_created": "چیلنج",
+        "task_updated": "سرگرمی",
+        "solution_updated": "سرگرمی"
       }
     }
   },
   "Friends": {
-    "eyebrow": "Friends",
-    "title": "Friends and requests",
-    "body": "Send requests by display name or exact profile id. Friendship does not grant access to private challenges.",
+    "eyebrow": "دوست",
+    "title": "دوست",
+    "body": "دوست",
     "search": {
-      "title": "Find a profile",
-      "body": "Search is limited to display name or exact profile id and does not expose email addresses.",
-      "placeholder": "Display name or profile id",
-      "submit": "Search",
-      "send": "Send request",
-      "empty": "No matching profiles found.",
-      "unnamed": "Unnamed profile"
+      "title": "دوست",
+      "body": "دوست",
+      "placeholder": "دوست",
+      "submit": "دوست",
+      "send": "دوست",
+      "empty": "دوست",
+      "unnamed": "دوست"
     },
     "incoming": {
-      "title": "Incoming requests",
-      "empty": "No incoming requests.",
-      "accept": "Accept",
-      "decline": "Decline"
+      "title": "دوست",
+      "empty": "دوست",
+      "accept": "دوست",
+      "decline": "دوست"
     },
     "outgoing": {
-      "title": "Outgoing requests",
-      "empty": "No outgoing requests.",
-      "cancel": "Cancel request"
+      "title": "دوست",
+      "empty": "دوست",
+      "cancel": "دوست"
     },
     "friends": {
-      "title": "Current friends",
-      "empty": "No friends yet.",
-      "remove": "Remove friend"
+      "title": "دوست",
+      "empty": "دوست",
+      "remove": "دوست"
     },
     "status": {
-      "friend-request-sent": "Friend request sent.",
-      "friend-accepted": "Friend request accepted.",
-      "friend-declined": "Friend request declined.",
-      "friend-canceled": "Friend request canceled.",
-      "friend-removed": "Friend removed."
+      "friend-request-sent": "دوست",
+      "friend-accepted": "دوست",
+      "friend-declined": "دوست",
+      "friend-canceled": "دوست",
+      "friend-removed": "دوست"
     },
     "errors": {
-      "friend-invalid-user": "Choose another user before sending a request.",
-      "friend-request-failed": "Friend request could not be sent. It may already be pending.",
-      "friend-response-failed": "Friend request could not be updated.",
-      "friend-remove-failed": "Friendship could not be removed."
+      "friend-invalid-user": "دوست",
+      "friend-request-failed": "دوست",
+      "friend-response-failed": "دوست",
+      "friend-remove-failed": "دوست"
     }
   },
   "Groups": {
-    "eyebrow": "Groups",
-    "title": "Groups",
-    "body": "Create private groups, invite members, and link selected challenges for collaboration.",
-    "create": "Create group",
-    "unnamed": "Unnamed group",
-    "role": "Role",
+    "eyebrow": "گروپ",
+    "title": "گروپ",
+    "body": "گروپ",
+    "create": "گروپ",
+    "unnamed": "گروپ",
+    "role": "گروپ",
     "roles": {
-      "owner": "Owner",
-      "admin": "Admin",
-      "member": "Member",
-      "viewer": "Viewer"
+      "owner": "گروپ",
+      "admin": "ایڈمن",
+      "member": "گروپ",
+      "viewer": "گروپ"
     },
     "invitations": {
-      "title": "Pending invitations",
-      "empty": "No pending group invitations.",
-      "accepted": "Accept",
-      "declined": "Decline"
+      "title": "گروپ",
+      "empty": "گروپ",
+      "accepted": "گروپ",
+      "declined": "گروپ"
     },
     "mine": {
-      "title": "My groups",
-      "empty": "You are not a member of any groups yet."
+      "title": "گروپ",
+      "empty": "گروپ"
     },
     "status": {
-      "group-invitation-accepted": "Group invitation accepted.",
-      "group-invitation-declined": "Group invitation declined.",
-      "group-invitation-canceled": "Group invitation canceled."
+      "group-invitation-accepted": "گروپ",
+      "group-invitation-declined": "گروپ",
+      "group-invitation-canceled": "گروپ"
     },
     "errors": {
-      "group-invitation-response-failed": "Group invitation could not be updated."
+      "group-invitation-response-failed": "گروپ"
     }
   },
   "GroupsNew": {
-    "back": "Back to groups",
-    "eyebrow": "New group",
-    "title": "Create a private group.",
-    "body": "Start a group for selected collaborators. Groups are private in this phase.",
+    "back": "گروپ",
+    "eyebrow": "گروپ",
+    "title": "گروپ",
+    "body": "گروپ",
     "fields": {
-      "name": "Group name",
-      "description": "Description"
+      "name": "گروپ",
+      "description": "گروپ"
     },
-    "submit": "Create group",
+    "submit": "گروپ",
     "errors": {
-      "group-name-required": "Add a group name before creating the group.",
-      "group-create-failed": "Group could not be created."
+      "group-name-required": "گروپ",
+      "group-create-failed": "گروپ"
     }
   },
   "GroupDetail": {
-    "back": "Back to groups",
-    "eyebrow": "Group",
-    "noDescription": "No group description yet.",
-    "yourRole": "Your role",
-    "role": "Role",
-    "unnamed": "Unnamed profile",
+    "back": "گروپ",
+    "eyebrow": "گروپ",
+    "noDescription": "گروپ",
+    "yourRole": "گروپ",
+    "role": "گروپ",
+    "unnamed": "گروپ",
     "roles": {
-      "owner": "Owner",
-      "admin": "Admin",
-      "member": "Member",
-      "viewer": "Viewer"
+      "owner": "گروپ",
+      "admin": "ایڈمن",
+      "member": "گروپ",
+      "viewer": "گروپ"
     },
     "settings": {
-      "title": "Group settings",
-      "save": "Save group",
+      "title": "ترتیبات",
+      "save": "ترتیبات",
       "name": "گروپ کا نام",
       "description": "گروپ کی تفصیل"
     },
     "members": {
-      "title": "Members",
-      "limit": "Groups are limited to 100 members.",
-      "updateRole": "Update role",
-      "remove": "Remove member"
+      "title": "گروپ",
+      "limit": "گروپ",
+      "updateRole": "گروپ",
+      "remove": "گروپ"
     },
     "invite": {
-      "title": "Invite user",
-      "searchPlaceholder": "Display name or profile id",
-      "search": "Search",
-      "send": "Invite",
-      "empty": "No matching profiles found."
+      "title": "گروپ",
+      "searchPlaceholder": "گروپ",
+      "search": "گروپ",
+      "send": "گروپ",
+      "empty": "گروپ"
     },
     "invitations": {
-      "title": "Pending invitations",
-      "empty": "No pending invitations.",
-      "cancel": "Cancel invite"
+      "title": "گروپ",
+      "empty": "گروپ",
+      "cancel": "گروپ"
     },
     "challenges": {
-      "title": "Linked challenges",
-      "empty": "No challenges linked to this group yet.",
-      "noneToLink": "No owned challenges available to link.",
-      "link": "Link challenge",
-      "unlink": "Unlink"
+      "title": "گروپ",
+      "empty": "گروپ",
+      "noneToLink": "گروپ",
+      "link": "گروپ",
+      "unlink": "گروپ"
     },
     "status": {
-      "group-created": "Group created.",
-      "group-saved": "Group saved.",
-      "group-invite-sent": "Group invitation sent.",
-      "group-invitation-canceled": "Group invitation canceled.",
-      "group-member-removed": "Member removed.",
-      "group-role-updated": "Member role updated.",
-      "group-challenge-linked": "Challenge linked to group.",
-      "group-challenge-unlinked": "Challenge unlinked from group.",
-      "message-sent": "Message sent.",
-      "message-deleted": "Message removed."
+      "group-created": "گروپ",
+      "group-saved": "گروپ",
+      "group-invite-sent": "گروپ",
+      "group-invitation-canceled": "گروپ",
+      "group-member-removed": "گروپ",
+      "group-role-updated": "گروپ",
+      "group-challenge-linked": "گروپ",
+      "group-challenge-unlinked": "گروپ",
+      "message-sent": "گروپ",
+      "message-deleted": "گروپ"
     },
     "errors": {
-      "group-save-failed": "Group could not be saved.",
-      "group-invite-failed": "Group invitation could not be sent.",
-      "group-member-remove-failed": "Member could not be removed.",
-      "group-role-update-failed": "Member role could not be updated.",
-      "group-challenge-link-failed": "Challenge could not be linked.",
-      "group-challenge-unlink-failed": "Challenge could not be unlinked.",
-      "message-send-failed": "Message could not be sent.",
-      "message-delete-failed": "Message could not be removed."
+      "group-save-failed": "گروپ",
+      "group-invite-failed": "گروپ",
+      "group-member-remove-failed": "گروپ",
+      "group-role-update-failed": "گروپ",
+      "group-challenge-link-failed": "گروپ",
+      "group-challenge-unlink-failed": "گروپ",
+      "message-send-failed": "گروپ",
+      "message-delete-failed": "گروپ"
     },
     "messages": {
-      "title": "Group messages",
-      "body": "Share short updates with accepted group members.",
-      "placeholder": "Write a short group message.",
-      "send": "Send message",
-      "empty": "No group messages yet.",
-      "delete": "Remove",
-      "deleted": "This message was removed.",
-      "unknownSender": "Unknown sender",
-      "viewerReadOnly": "Viewers can read group messages but cannot send messages."
+      "title": "گروپ",
+      "body": "گروپ",
+      "placeholder": "گروپ",
+      "send": "گروپ",
+      "empty": "گروپ",
+      "delete": "گروپ",
+      "deleted": "گروپ",
+      "unknownSender": "گروپ",
+      "viewerReadOnly": "گروپ"
     },
     "activity": {
-      "title": "Group activity",
-      "empty": "No group activity yet.",
+      "title": "گروپ",
+      "empty": "گروپ",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "challenge_created": "گروپ",
+        "challenge_updated": "گروپ",
+        "challenge_linked_to_group": "گروپ",
+        "group_created": "گروپ",
+        "group_updated": "گروپ",
+        "group_member_joined": "گروپ",
+        "group_member_removed": "گروپ",
+        "group_message_created": "گروپ",
+        "challenge_message_created": "گروپ",
+        "task_updated": "گروپ",
+        "solution_updated": "گروپ"
       }
     }
   },
   "Notifications": {
-    "eyebrow": "Notifications",
-    "title": "Notifications",
-    "body": "Private updates for your account, groups, and challenges.",
-    "unread": "Unread",
-    "read": "Read",
-    "emptyUnread": "No unread notifications.",
-    "emptyRead": "No read notifications yet.",
-    "markRead": "Mark as read",
-    "markAllRead": "Mark all as read",
-    "openGroup": "Open group",
-    "openChallenge": "Open challenge",
+    "eyebrow": "اطلاع",
+    "title": "اطلاع",
+    "body": "اطلاع",
+    "unread": "اطلاع",
+    "read": "اطلاع",
+    "emptyUnread": "اطلاع",
+    "emptyRead": "اطلاع",
+    "markRead": "اطلاع",
+    "markAllRead": "اطلاع",
+    "openGroup": "گروپ",
+    "openChallenge": "اطلاع",
     "status": {
-      "notification-read": "Notification marked as read.",
-      "all-notifications-read": "All notifications marked as read."
+      "notification-read": "اطلاع",
+      "all-notifications-read": "اطلاع"
     },
     "errors": {
-      "notification-read-failed": "Notification could not be updated."
+      "notification-read-failed": "اطلاع"
     },
     "types": {
-      "friend_request": "Friend request",
-      "friend_request_accepted": "Friend request accepted",
-      "group_invitation": "Group invitation",
-      "group_invitation_accepted": "Group invitation accepted",
-      "group_invitation_declined": "Group invitation declined",
-      "group_message": "Group message",
-      "challenge_message": "Challenge message",
-      "challenge_updated": "Challenge updated",
-      "group_updated": "Group updated"
+      "friend_request": "دوست",
+      "friend_request_accepted": "دوست",
+      "group_invitation": "گروپ",
+      "group_invitation_accepted": "گروپ",
+      "group_invitation_declined": "گروپ",
+      "group_message": "گروپ",
+      "challenge_message": "اطلاع",
+      "challenge_updated": "اطلاع",
+      "group_updated": "گروپ"
     },
     "bodies": {
       "friend_request": "کسی نے آپ کو دوستی کی درخواست بھیجی ہے۔",
@@ -922,104 +931,108 @@
     }
   },
   "Admin": {
-    "eyebrow": "Admin",
+    "eyebrow": "ایڈمن",
     "title": "ایڈمن جائزہ",
-    "body": "A protected operational view with aggregate counts and limited metadata only.",
+    "body": "ایڈمن",
     "actions": {
-      "settings": "Admin settings"
+      "settings": "ترتیبات"
     },
     "verification": {
-      "title": "Live Supabase verification needed",
-      "body": "Phase 10 adds local migrations and RLS/RPC rules. Apply and test them against the real Supabase project before relying on production admin data.",
-      "error": "Some admin data could not be loaded. Check that the Phase 10 migration is applied."
+      "title": "ایڈمن",
+      "body": "ایڈمن",
+      "error": "ایڈمن"
     },
     "metrics": {
-      "profiles": "Profiles",
-      "challenges": "Challenges",
-      "groups": "Groups",
-      "messages": "Messages",
-      "notifications": "Notifications"
+      "profiles": "پروفائل",
+      "challenges": "ایڈمن",
+      "groups": "ایڈمن",
+      "messages": "ایڈمن",
+      "notifications": "ایڈمن"
     },
     "profiles": {
-      "title": "Profiles",
-      "body": "Limited profile metadata for admin review. Emails and auth.users data are not shown.",
-      "id": "Profile id",
-      "displayName": "Display name",
-      "locale": "Locale",
-      "role": "Role",
-      "created": "Created",
-      "noDisplayName": "No display name",
-      "empty": "No profiles available."
+      "title": "پروفائل",
+      "body": "پروفائل",
+      "id": "پروفائل",
+      "displayName": "پروفائل",
+      "locale": "پروفائل",
+      "role": "پروفائل",
+      "created": "پروفائل",
+      "noDisplayName": "پروفائل",
+      "empty": "پروفائل"
     },
     "roles": {
       "user": "صارف",
       "admin": "ایڈمن"
     },
     "activity": {
-      "title": "Recent activity",
-      "noActor": "No actor",
-      "empty": "No activity available.",
+      "title": "حالیہ سرگرمی",
+      "noActor": "ایڈمن",
+      "empty": "ایڈمن",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated",
-        "unknown": "Activity event"
+        "challenge_created": "ایڈمن",
+        "challenge_updated": "ایڈمن",
+        "challenge_linked_to_group": "ایڈمن",
+        "group_created": "ایڈمن",
+        "group_updated": "ایڈمن",
+        "group_member_joined": "ایڈمن",
+        "group_member_removed": "ایڈمن",
+        "group_message_created": "ایڈمن",
+        "challenge_message_created": "ایڈمن",
+        "task_updated": "ایڈمن",
+        "solution_updated": "ایڈمن",
+        "unknown": "ایڈمن"
       }
     },
     "audit": {
-      "title": "Admin audit log",
-      "body": "Sensitive admin mutations should be logged here when those actions are added.",
-      "noTarget": "No target",
-      "empty": "No admin audit entries yet."
+      "title": "ایڈمن",
+      "body": "ایڈمن",
+      "noTarget": "ایڈمن",
+      "empty": "ایڈمن"
     }
   },
   "AdminSettings": {
-    "back": "Back to admin",
-    "eyebrow": "Admin settings",
+    "back": "ترتیبات",
+    "eyebrow": "ترتیبات",
     "title": "ایڈمن تیاری فہرست",
-    "body": "A local status view for deployment, Supabase verification, and support setup.",
+    "body": "ترتیبات",
     "checklists": {
       "appStatus": {
-        "title": "App status",
-        "adminProtected": "Admin routes are protected by profiles.role.",
-        "dashboard": "Dashboard and protected app routes remain available.",
-        "guestMode": "Guest mode remains local browser storage only.",
-        "messages": "Messages, notifications, and activity remain protected by RLS."
+        "title": "ترتیبات",
+        "adminProtected": "ترتیبات",
+        "dashboard": "ڈیش بورڈ اور محفوظ ایپ روٹس دستیاب رہتے ہیں۔",
+        "guestMode": "مہمان موڈ صرف مقامی براؤزر اسٹوریج استعمال کرتا ہے۔",
+        "messages": "ترتیبات"
       },
       "supabase": {
         "title": "Supabase",
-        "phase10Migration": "Apply the Phase 10 migration in Supabase.",
-        "rls": "Review RLS policies with real authenticated users.",
-        "firstAdmin": "Assign the first admin manually in Supabase SQL.",
-        "liveVerification": "Verify admin RPC behavior before production use."
+        "phase10Migration": "ترتیبات",
+        "rls": "ترتیبات",
+        "firstAdmin": "ترتیبات",
+        "liveVerification": "ترتیبات"
       },
       "deployment": {
-        "title": "Deployment",
-        "envTemplates": "Use templates only; do not expose real secret values.",
-        "supportEmail": "Public support email is support@noproblemo.tech.",
-        "noAutomation": "Email automation, Resend, and Vercel Cron are intentionally not used.",
-        "validation": "Run lint, typecheck, and build before deployment."
+        "title": "ترتیبات",
+        "envTemplates": "ترتیبات",
+        "supportEmail": "ای میل",
+        "noAutomation": "ترتیبات",
+        "validation": "ترتیبات"
       }
     },
     "environment": {
-      "title": "Environment variables",
-      "body": "This checklist shows variable names only, never real values."
+      "title": "ترتیبات",
+      "body": "ترتیبات"
     },
     "support": {
-      "title": "Support",
-      "body": "Use this public address for MVP support and feedback."
+      "title": "ترتیبات",
+      "body": "ترتیبات"
     },
     "boundaries": {
-      "title": "Phase boundaries",
-      "body": "Phase 10 does not add payments, AI, email automation, Resend, Vercel Cron, billing, or support tickets."
+      "title": "ترتیبات",
+      "body": "ترتیبات"
     }
+  },
+  "PasswordField": {
+    "show": "دکھائیں",
+    "hide": "چھپائیں"
   }
 }

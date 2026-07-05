@@ -4,6 +4,11 @@
 
 ### Added
 
+- Added privacy-safe forgot-password failure categories for reset rate limits, provider/SMTP issues, invalid email format, redirect URL configuration, and generic send failure.
+- Added localized same-browser/profile guidance for reset links that fail because Supabase PKCE verifier state is missing or expired.
+- Added an isolated browser-only Supabase recovery client for forgot-password and reset-password.
+- Added shared translated show/hide password controls for login, signup, reset-password, and settings password change.
+- Added browser-side Supabase password-reset request handling so PKCE recovery links can be exchanged by `/[locale]/reset-password`.
 - Added forgot-password and reset-password routes using Supabase Auth reset links.
 - Added logged-in password change to protected settings.
 - Added account-created, email-confirmed, password-reset, and password-updated UI states.
@@ -22,6 +27,13 @@
 
 ### Changed
 
+- Changed browser password-reset requests to use exactly `/<locale>/reset-password` on the current origin, without extra query parameters.
+- Changed password reset recovery to use a dedicated implicit browser recovery flow instead of the main SSR/cookie-oriented client.
+- Changed forgot-password help text to mention that local reset links should be opened in the same browser/profile where they were requested.
+- Cleaned non-English locale files with machine-quality translations for exact English fallback values.
+- Changed reset-password to show a checking state, enable fields only after recovery readiness, and redirect to localized login success after update.
+- Tightened Norwegian Bokmål UI copy across landing, guest workspace, dashboard, protected navigation, settings, collaboration, notifications, and admin surfaces.
+- Preserved matching message keys across all 11 locale catalogs and kept non-English copy ready for native review.
 - Changed auth callback handling to attach Supabase session cookies to the final redirect response and add localized success status redirects.
 - Changed email-confirmation callback failures to show a login-required success state when Supabase may already have confirmed the account.
 - Changed password reset links to open `/[locale]/reset-password` directly instead of depending on server-side callback exchange.
@@ -37,6 +49,10 @@
 
 ### Fixed
 
+- Fixed password reset links requested from the app by keeping Supabase PKCE recovery state in the browser client.
+- Fixed local password recovery links that still failed with `verifier-missing-or-expired` by isolating reset recovery from the main SSR Supabase client.
+- Fixed the forgot-password success crash by capturing the form element before async Supabase work and resetting that stable reference.
+- Fixed reset-password invalid/expired text appearing before the recovery exchange had actually failed.
 - Fixed the profile settings self-demotion/self-promotion risk from using an upsert that touched `role` during normal profile edits.
 - Guarded status/error query feedback on protected pages so unknown query values do not cause missing translation lookups.
 - Fixed password recovery links that could fail with the same generic callback error as email confirmation.
@@ -45,6 +61,11 @@
 
 ### Security
 
+- Added development-only reset request warnings that log only generic classification labels and never email addresses, auth codes, tokens, sessions, cookies, full URLs, or env values.
+- Added development-only reset exchange warnings that log only generic classification labels and never auth codes, tokens, sessions, cookies, URLs, emails, passwords, or environment values.
+- Documented that reset recovery uses no service-role key and never stores reset passwords in app database tables.
+- Documented that account deletion remains current-user-only through a server-only service-role helper and must be tested only with disposable accounts.
+- Confirmed no remote Supabase migrations, Vercel settings, DNS changes, deployments, or env changes were made for the hard i18n/reset follow-up.
 - Added password update/reset flows through Supabase Auth without service-role usage or password storage in database tables.
 - Added server-only service-role usage for current-user account deletion; no service-role key is used in frontend/client code.
 - Documented required locale-specific Supabase Auth callback URLs for email confirmation, OAuth, and password recovery.

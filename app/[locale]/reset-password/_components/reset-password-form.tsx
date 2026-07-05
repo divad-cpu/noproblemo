@@ -1,14 +1,19 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { createClientSupabaseClient } from "@/lib/supabase/client";
+import type { Locale } from "@/i18n/routing";
+import { createRecoverySupabaseClient } from "@/lib/supabase/recovery-client";
+import { PasswordField } from "../../_components/password-field";
 
 type ResetPasswordFormProps = {
+  locale: Locale;
   labels: {
     newPassword: string;
     newPasswordPlaceholder: string;
     confirmPassword: string;
     confirmPasswordPlaceholder: string;
+    showPassword: string;
+    hidePassword: string;
     submit: string;
     preparing: string;
     ready: string;
@@ -17,18 +22,71 @@ type ResetPasswordFormProps = {
     mismatch: string;
     updateFailed: string;
     linkInvalid: string;
+    recoveryHelp: string;
   };
 };
 
 type RecoveryState = "checking" | "ready" | "error" | "updated";
+type RecoveryFailureReason =
+  | "expired-link"
+  | "verifier-missing-or-expired"
+  | "unknown";
 
-export function ResetPasswordForm({ labels }: ResetPasswordFormProps) {
+function classifyRecoveryFailure(error?: {
+  code?: string;
+  message?: string;
+  status?: number;
+}): RecoveryFailureReason {
+  const code = (error?.code ?? "").toLowerCase();
+  const message = (error?.message ?? "").toLowerCase();
+
+  if (code.includes("expired") || message.includes("expired")) {
+    return "expired-link";
+  }
+
+  if (
+    code.includes("verifier") ||
+    code.includes("pkce") ||
+    code.includes("flow_state") ||
+    code.includes("invalid_grant") ||
+    message.includes("verifier") ||
+    message.includes("pkce") ||
+    message.includes("flow state") ||
+    message.includes("invalid grant") ||
+    message.includes("auth code")
+  ) {
+    return "verifier-missing-or-expired";
+  }
+
+  return "unknown";
+}
+
+function warnRecoveryFailure(reason: RecoveryFailureReason) {
+  if (process.env.NODE_ENV === "development") {
+    console.warn(`Password reset exchange failed: ${reason}`);
+  }
+}
+
+export function ResetPasswordForm({ locale, labels }: ResetPasswordFormProps) {
   const [recoveryState, setRecoveryState] = useState<RecoveryState>("checking");
   const [message, setMessage] = useState("");
-  const supabase = useMemo(() => createClientSupabaseClient(), []);
+  const supabase = useMemo(() => createRecoverySupabaseClient(), []);
 
   useEffect(() => {
     let active = true;
+
+    function markReady() {
+      if (!active) return;
+      setRecoveryState("ready");
+      setMessage(labels.ready);
+    }
+
+    function markFailed(reason: RecoveryFailureReason) {
+      if (!active) return;
+      warnRecoveryFailure(reason);
+      setRecoveryState("error");
+      setMessage(labels.linkInvalid);
+    }
 
     async function prepareRecoverySession() {
       const url = new URL(window.location.href);
@@ -41,13 +99,11 @@ export function ResetPasswordForm({ labels }: ResetPasswordFormProps) {
         const { error } = await supabase.auth.exchangeCodeForSession(code);
         if (!active) return;
         if (error) {
-          setRecoveryState("error");
-          setMessage(labels.linkInvalid);
+          markFailed(classifyRecoveryFailure(error));
           return;
         }
         window.history.replaceState(null, "", url.pathname);
-        setRecoveryState("ready");
-        setMessage(labels.ready);
+        markReady();
         return;
       }
 
@@ -58,13 +114,11 @@ export function ResetPasswordForm({ labels }: ResetPasswordFormProps) {
         });
         if (!active) return;
         if (error) {
-          setRecoveryState("error");
-          setMessage(labels.linkInvalid);
+          markFailed(classifyRecoveryFailure(error));
           return;
         }
         window.history.replaceState(null, "", url.pathname);
-        setRecoveryState("ready");
-        setMessage(labels.ready);
+        markReady();
         return;
       }
 
@@ -74,18 +128,25 @@ export function ResetPasswordForm({ labels }: ResetPasswordFormProps) {
       if (!active) return;
 
       if (session) {
-        setRecoveryState("ready");
-        setMessage(labels.ready);
+        markReady();
       } else {
-        setRecoveryState("error");
-        setMessage(labels.linkInvalid);
+        markFailed("verifier-missing-or-expired");
       }
     }
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "PASSWORD_RECOVERY" && session) {
+        markReady();
+      }
+    });
 
     prepareRecoverySession();
 
     return () => {
       active = false;
+      subscription.unsubscribe();
     };
   }, [labels.linkInvalid, labels.ready, supabase]);
 
@@ -116,6 +177,7 @@ export function ResetPasswordForm({ labels }: ResetPasswordFormProps) {
     await supabase.auth.signOut();
     setRecoveryState("updated");
     setMessage(labels.success);
+    window.location.assign(`/${locale}/login?status=password-reset-success`);
   }
 
   const isReady = recoveryState === "ready";
@@ -131,36 +193,37 @@ export function ResetPasswordForm({ labels }: ResetPasswordFormProps) {
       >
         {message || labels.preparing}
       </p>
-      <label className="grid gap-2">
-        <span className="text-sm font-semibold text-[#373632]">
-          {labels.newPassword}
-        </span>
-        <input
-          name="password"
-          type="password"
-          autoComplete="new-password"
-          required
-          minLength={8}
-          disabled={!isReady}
-          className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e] disabled:cursor-not-allowed disabled:bg-[#f1f0ec]"
-          placeholder={labels.newPasswordPlaceholder}
-        />
-      </label>
-      <label className="grid gap-2">
-        <span className="text-sm font-semibold text-[#373632]">
-          {labels.confirmPassword}
-        </span>
-        <input
-          name="confirmPassword"
-          type="password"
-          autoComplete="new-password"
-          required
-          minLength={8}
-          disabled={!isReady}
-          className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e] disabled:cursor-not-allowed disabled:bg-[#f1f0ec]"
-          placeholder={labels.confirmPasswordPlaceholder}
-        />
-      </label>
+      {recoveryState === "error" ? (
+        <p className="text-sm leading-6 text-[#706f68]">
+          {labels.recoveryHelp}
+        </p>
+      ) : null}
+      <PasswordField
+        name="password"
+        label={labels.newPassword}
+        autoComplete="new-password"
+        required
+        minLength={8}
+        disabled={!isReady}
+        placeholder={labels.newPasswordPlaceholder}
+        buttonLabels={{
+          show: labels.showPassword,
+          hide: labels.hidePassword,
+        }}
+      />
+      <PasswordField
+        name="confirmPassword"
+        label={labels.confirmPassword}
+        autoComplete="new-password"
+        required
+        minLength={8}
+        disabled={!isReady}
+        placeholder={labels.confirmPasswordPlaceholder}
+        buttonLabels={{
+          show: labels.showPassword,
+          hide: labels.hidePassword,
+        }}
+      />
       <button
         type="submit"
         disabled={!isReady}

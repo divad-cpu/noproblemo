@@ -276,6 +276,21 @@ Rules:
 - `lib/supabase/server.ts` uses the public URL and anon key with request cookies for server-side auth actions and route checks.
 - `lib/supabase/admin.ts` is server-only and exists only for current-user account deletion. It must never be imported by Client Components or exposed to browser bundles.
 
+## Password Recovery And Account Deletion
+
+- Password reset requests are initiated from an isolated browser-only Supabase recovery client using the public URL and anon key only.
+- `/[locale]/reset-password` supports both recovery `code` exchange and browser hash-token recovery. It does not log codes/tokens/sessions/cookies/passwords and only enables password update after recovery session readiness.
+- Reset links should be opened in the same browser/profile where the reset request was made. If a recovery exchange fails because the verifier/session is missing or expired, the UI shows a generic request-new-link message plus a same-browser/profile instruction.
+- The recovery client is intentionally separate from the main SSR Supabase client. Local password recovery was producing `verifier-missing-or-expired` with the SSR/cookie-oriented client, so reset now uses a browser-only implicit recovery flow where hash tokens stay in the browser URL fragment and are cleared after session setup.
+- Password reset request diagnostics must not log email addresses, codes, tokens, sessions, cookies, full URLs, or env values. Development logs may include only generic labels such as rate-limit, provider-or-smtp, redirect-url, invalid-email, or unknown.
+- Password reset exchange diagnostics must not log auth codes, tokens, sessions, cookies, URLs, passwords, or email addresses. Development logs may include only generic labels such as verifier-missing-or-expired, expired-link, or unknown.
+- If reset email sending fails, check Supabase Auth logs and provider/SMTP settings before changing app code.
+- Old recovery links requested before this browser-client flow may still fail; users should request a fresh reset link.
+- Password reset uses Supabase Auth `updateUser({ password })`; reset passwords are never stored in application database tables.
+- Login, signup, email confirmation, forgot-password, reset-password, settings password change, logout, and account deletion must be tested with disposable accounts before launch.
+- Account deletion must only delete the current authenticated user. The action must never accept arbitrary `user_id` values from the client.
+- `SUPABASE_SERVICE_ROLE_KEY` is only for server-only admin operations and must never appear in Client Components or browser bundles.
+
 ## OAuth Provider Configuration
 
 Google login requires:

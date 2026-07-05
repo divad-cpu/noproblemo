@@ -4,6 +4,7 @@ import type { Locale } from "@/i18n/routing";
 import { routing } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "../../_components/language-switcher";
+import { PasswordField } from "../../_components/password-field";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { deleteCurrentAccount, updatePassword, updateProfile } from "../actions";
 
@@ -48,6 +49,7 @@ export default async function SettingsPage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "Settings" });
+  const passwordT = await getTranslations({ locale, namespace: "PasswordField" });
   const localeNames = await getTranslations({
     locale,
     namespace: "LanguageSwitcher.locales",
@@ -167,34 +169,30 @@ export default async function SettingsPage({
             {t("password.body")}
           </p>
         </div>
-        <label className="grid gap-2">
-          <span className="text-sm font-semibold text-[#373632]">
-            {t("fields.newPassword")}
-          </span>
-          <input
-            name="password"
-            type="password"
-            autoComplete="new-password"
-            required
-            minLength={8}
-            className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
-            placeholder={t("fields.newPasswordPlaceholder")}
-          />
-        </label>
-        <label className="grid gap-2">
-          <span className="text-sm font-semibold text-[#373632]">
-            {t("fields.confirmPassword")}
-          </span>
-          <input
-            name="confirmPassword"
-            type="password"
-            autoComplete="new-password"
-            required
-            minLength={8}
-            className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
-            placeholder={t("fields.confirmPasswordPlaceholder")}
-          />
-        </label>
+        <PasswordField
+          name="password"
+          label={t("fields.newPassword")}
+          autoComplete="new-password"
+          required
+          minLength={8}
+          placeholder={t("fields.newPasswordPlaceholder")}
+          buttonLabels={{
+            show: passwordT("show"),
+            hide: passwordT("hide"),
+          }}
+        />
+        <PasswordField
+          name="confirmPassword"
+          label={t("fields.confirmPassword")}
+          autoComplete="new-password"
+          required
+          minLength={8}
+          placeholder={t("fields.confirmPasswordPlaceholder")}
+          buttonLabels={{
+            show: passwordT("show"),
+            hide: passwordT("hide"),
+          }}
+        />
         <button
           type="submit"
           className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"

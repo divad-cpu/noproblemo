@@ -212,7 +212,8 @@
       "signup-check-email": "Account created. Check your email to confirm it before logging in.",
       "signup-existing-or-pending": "If this email has an account or pending confirmation, use the confirmation email or log in.",
       "signup-confirmation-resent": "If this email can receive a confirmation link, a new email has been sent.",
-      "account-deleted": "Your account has been deleted."
+      "account-deleted": "Your account has been deleted.",
+      "password-reset-success": "Password updated. Log in with your new password."
     },
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
@@ -227,26 +228,34 @@
       "reset-request-failed": "The reset email could not be sent. Check the address or try again.",
       "password-mismatch": "The passwords do not match.",
       "password-update-failed": "The password could not be updated. Try requesting a new reset link.",
-      "reset-link-invalid": "The reset link is invalid or expired. Request a new reset link.",
+      "reset-link-invalid": "The reset link could not be opened. Request a new reset link.",
       "recovery-callback": "The reset link could not be opened. Request a new reset link and try again.",
       "signup-weak-password": "Use a password with at least 8 characters.",
       "signup-rate-limited": "Too many signup attempts. Wait a little and try again.",
       "signup-invalid-email": "Enter a valid email address.",
-      "signup-provider-disabled": "Email signup is not available yet. Check Supabase Auth provider settings."
+      "signup-provider-disabled": "Email signup is not available yet. Check Supabase Auth provider settings.",
+      "reset-rate-limited": "Too many reset requests. Request a new link later.",
+      "reset-provider-or-smtp": "The reset email could not be sent right now. Try again later or contact support.",
+      "reset-invalid-email": "Enter a valid email address.",
+      "reset-redirect-not-allowed": "The reset link configuration is incomplete. Contact support.",
+      "reset-email-failed": "The email could not be sent. Check the address or try again later."
     },
     "forgot": {
       "eyebrow": "Password help",
       "title": "Reset your password.",
       "body": "Enter your account email and we will send a secure reset link if the account exists.",
       "submit": "Send reset link",
-      "backToLogin": "Back to login"
+      "backToLogin": "Back to login",
+      "submitting": "Sending reset link...",
+      "help": "If no email arrives, check spam or request a new link later. For local testing, use a new link and open it in the same browser/profile where you requested it."
     },
     "reset": {
       "eyebrow": "New password",
       "title": "Choose a new password.",
       "body": "Use the reset link from your email, then set a new password for your account.",
       "submit": "Save new password",
-      "requestNewLink": "Request a new reset link"
+      "requestNewLink": "Request a new reset link",
+      "recoveryHelp": "Request a new reset link. If testing locally, open it in the same browser/profile where you requested it. Links created before the latest reset fix may fail."
     },
     "resend": {
       "title": "Need a new confirmation email?",
@@ -1021,5 +1030,9 @@
       "title": "Phase boundaries",
       "body": "Phase 10 does not add payments, AI, email automation, Resend, Vercel Cron, billing, or support tickets."
     }
+  },
+  "PasswordField": {
+    "show": "Show",
+    "hide": "Hide"
   }
 }

@@ -104,7 +104,9 @@ Email login/signup uses Supabase Auth. Signup failures are mapped to safe catego
 
 Email confirmation and OAuth use locale-specific `/[locale]/auth/callback` routes. If Supabase confirms an email but the server callback cannot exchange the PKCE code for a session, the login page shows a calm "email may already be confirmed" state instead of a false invalid-link error.
 
-Password recovery links should open `/[locale]/reset-password` directly. The reset page uses the browser Supabase client to establish the recovery session and then updates the password through Supabase Auth.
+Password recovery links should open `/[locale]/reset-password` directly. Forgot/reset password use an isolated browser-only Supabase recovery client to establish the recovery session and then update the password through Supabase Auth. This reset flow uses only the public Supabase URL and anon key, and it does not use the service-role key.
+
+For local password-reset testing, request a fresh reset email after the latest recovery fix and open the link in the same browser/profile that requested it. The isolated recovery flow can use browser URL hash tokens, which stay in the browser and are cleared after session setup. Old reset links may need to be resent after recovery-flow fixes.
 
 The Phase 4 database trigger is expected to create `profiles` rows after signup, but it still needs verification after the migration is applied to the real Supabase project.
 
@@ -241,6 +243,16 @@ Production readiness requires manual verification of guest mode, login/signup/lo
 - Guest drafts remain browser-local unless explicitly imported by a logged-in user.
 - Message bodies render as plain React text, not raw HTML.
 - Non-English translations are simple and need native review before launch.
+
+## Auth And i18n Notes
+
+- Locale-prefixed routes control visible UI language through `next-intl` message files.
+- The language switcher preserves the current route while replacing the locale segment.
+- Password reset is a browser-client Supabase recovery flow; old reset emails requested before the latest fixes may need a fresh reset link.
+- Reset email failures are mapped to safe categories. If sending still fails, check Supabase Auth logs, SMTP/provider configuration, rate limits, and redirect URL allow-list settings.
+- Required Supabase Auth redirects include local and production wildcard routes plus every locale-specific `/auth/callback` and `/reset-password` URL.
+- Account deletion is guarded by explicit confirmation, uses a server-only service-role helper, and must be tested only with disposable accounts.
+- Non-English translations are machine-quality and need native review before public launch.
 
 ## Known Limitations
 

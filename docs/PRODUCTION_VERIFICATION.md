@@ -1,6 +1,6 @@
 # Production Verification
 
-Last updated: 2026-07-04
+Last updated: 2026-07-05
 
 ## Purpose
 
@@ -89,7 +89,10 @@ Do not use this document as permission to deploy, apply remote migrations, chang
 - Configure Supabase Site URL to the production site URL.
 - Add local redirect URLs for development.
 - Add production callback URLs for locale-aware auth callback routes.
-- Add locale-aware reset-password URLs because password recovery links should open `/[locale]/reset-password` directly and let the browser client establish the recovery session.
+- Add locale-aware reset-password URLs because password recovery links should open `/[locale]/reset-password` directly and let the isolated browser recovery client establish the recovery session.
+- During local reset-password testing, request a fresh link after the isolated recovery fix and open it in the same browser/profile where the request was made.
+- Reset links requested before the isolated browser recovery fix may need to be resent.
+- The reset flow does not use `SUPABASE_SERVICE_ROLE_KEY` and does not store reset passwords in app database tables.
 - Confirm email confirmation shows either `email-confirmed` in the app or a login-required success state if Supabase confirmed the account but the server callback could not exchange the PKCE code.
 - Confirm login, signup, callback, and logout on production.
 - Confirm account deletion with a disposable user only after `SUPABASE_SERVICE_ROLE_KEY` is configured server-side.
@@ -287,6 +290,37 @@ Use `docs/MANUAL_TEST_PLAN.md` as the detailed script. At minimum, verify:
 - Confirm visible UI strings are translated.
 - Confirm user-generated content is not automatically translated.
 - Schedule native review for non-English copy before public launch.
+
+Hard i18n audit notes:
+
+- Verify `/nb`, `/nb/solve`, `/nb/login`, `/nb/signup`, `/nb/reset-password`, `/nb/app`, `/nb/app/settings`, `/nb/app/friends`, `/nb/app/groups`, `/nb/app/notifications`, and `/nb/app/admin` show normal UI in Norwegian Bokmål.
+- Verify `/en/...` shows English for the same routes.
+- Verify all other supported locale routes load without visible translation keys or missing messages.
+- Verify language switching preserves the current path, query string, and route context.
+
+## Password Reset Manual Test Plan
+
+- Request a new password reset link from the browser page for the target locale.
+- Confirm the redirect configured by the browser request is `/<locale>/reset-password`, without email query parameters.
+- Open the email link in the same browser profile.
+- Confirm `/[locale]/reset-password?code=...&source=recovery` first shows a checking state.
+- Confirm the password fields enable only after recovery exchange succeeds.
+- Confirm show/hide password controls work on both password fields.
+- Set a new password, confirm the app signs out, and confirm redirect to localized login success.
+- Confirm an expired or old link shows the invalid/expired message and offers a new link request.
+- Do not log or copy recovery codes, tokens, sessions, cookies, emails, or passwords into docs or issue trackers.
+- If the email is not sent, check Supabase Auth logs for rate limit, provider/SMTP, redirect URL, Site URL, or template errors. Keep troubleshooting notes free of email addresses and secrets.
+
+Required Supabase redirect URL coverage:
+
+- `http://localhost:3000/**`
+- `http://localhost:3000/<locale>/auth/callback`
+- `http://localhost:3000/<locale>/reset-password`
+- `https://noproblemo.tech/**`
+- `https://noproblemo.tech/<locale>/auth/callback`
+- `https://noproblemo.tech/<locale>/reset-password`
+
+Reset links requested before the latest reset-password fixes may need to be resent.
 
 ## Launch Blockers
 

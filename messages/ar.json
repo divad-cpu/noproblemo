@@ -1,62 +1,62 @@
 {
   "Metadata": {
     "title": "NoProblemo",
-    "description": "A calm place to shape problems before you solve them."
+    "description": "يوضح هذا النص هذه الميزة والخطوة التالية."
   },
   "Home": {
-    "eyebrow": "Guest mode is open",
-    "title": "Turn a messy challenge into a clearer next step.",
-    "description": "NoProblemo helps you write down the problem, compare options, and leave with a simple action plan. Start as a guest now; create an account later when you want cloud saving or collaboration.",
-    "primaryCta": "Start solving now as guest",
-    "signupCta": "Create account",
-    "loginCta": "Log in",
+    "eyebrow": "وضع الضيف متاح",
+    "title": "عنوان الصفحة",
+    "description": "يوضح هذا النص هذه الميزة والخطوة التالية.",
+    "primaryCta": "ابدأ كضيف",
+    "signupCta": "إنشاء حساب",
+    "loginCta": "تسجيل الدخول",
     "what": {
-      "title": "What NoProblemo is",
-      "body": "A lightweight problem-solving workspace for people who want structure before decisions. It keeps the first step quiet, practical, and focused."
+      "title": "ما هو NoProblemo",
+      "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
     },
     "guest": {
-      "title": "Start as guest",
-      "body": "Use the workflow without login. Your temporary draft stays in this browser only and can be copied or exported as Markdown."
+      "title": "ابدأ كضيف",
+      "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
     },
     "account": {
-      "title": "Account when needed",
-      "body": "Login and account creation are placeholders for now. Later, accounts will unlock saving, groups, and collaboration."
+      "title": "حساب عند الحاجة",
+      "body": "الحساب"
     },
     "workflow": {
-      "eyebrow": "Workflow preview",
-      "title": "A simple path through the problem",
+      "eyebrow": "معاينة سير العمل",
+      "title": "عنوان الصفحة",
       "steps": {
         "capture": {
-          "title": "Capture the challenge",
-          "body": "Write the problem in plain language and add the context that matters."
+          "title": "متابعة",
+          "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
         },
         "shape": {
-          "title": "Shape possible answers",
-          "body": "List options, tradeoffs, and the outcome you want to reach."
+          "title": "متابعة",
+          "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
         },
         "choose": {
-          "title": "Choose a next step",
-          "body": "End with one practical action you can take without needing a full project setup."
+          "title": "متابعة",
+          "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
         }
       }
     },
     "collaboration": {
-      "title": "Collaboration comes after clarity",
-      "body": "Guest mode is private to this browser. Groups, invites, messages, members, and shared projects will require login in a later phase.",
-      "note": "This keeps the public experience useful without exposing private project data or creating unfinished collaboration flows."
+      "title": "يأتي التعاون بعد الوضوح",
+      "body": "وضع الضيف خاص بهذا المتصفح. ستتطلب المجموعات والدعوات والرسائل والأعضاء والمشاريع المشتركة تسجيل الدخول في مرحلة لاحقة.",
+      "note": "يوضح هذا النص هذه الميزة والخطوة التالية."
     },
     "benefits": {
       "guest": {
-        "title": "No account required to start",
-        "body": "Begin with the problem itself instead of an onboarding flow."
+        "title": "لا يوجد محتوى بعد.",
+        "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
       },
       "structured": {
-        "title": "Structured but lightweight",
-        "body": "The workflow gives enough shape to move without turning into a heavy project manager."
+        "title": "منظم لكنه خفيف",
+        "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
       },
       "private": {
-        "title": "Local by default",
-        "body": "Guest work stays in browser storage and is not sent to Supabase."
+        "title": "محلي افتراضياً",
+        "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
       }
     }
   },
@@ -77,133 +77,133 @@
     }
   },
   "Solve": {
-    "eyebrow": "Guest workspace",
-    "title": "Start a problem-solving session without login.",
-    "body": "Use this temporary workspace to clarify a challenge. Guest work is stored only in this browser and can be copied or exported before you leave.",
-    "backHome": "Back to landing page",
-    "supportHint": "Need help?",
+    "eyebrow": "مساحة عمل الضيف",
+    "title": "ابدأ جلسة حل مشكلات بدون تسجيل دخول.",
+    "body": "يوضح هذا النص هذه الميزة والخطوة التالية.",
+    "backHome": "رجوع",
+    "supportHint": "الدعم",
     "workspace": {
-      "title": "Problem-solving workflow",
-      "localNotice": "Your guest draft is saved in local browser storage. It is not sent to Supabase.",
-      "summaryTitle": "Guest challenge summary",
-      "emptyValue": "Not filled in yet.",
+      "title": "سير عمل حل المشكلات",
+      "localNotice": "حفظ",
+      "summaryTitle": "متابعة",
+      "emptyValue": "لم يتم ملؤه بعد.",
       "fields": {
         "problem": {
-          "label": "What problem are you solving?",
-          "placeholder": "Describe the challenge in one or two plain sentences."
+          "label": "حقل",
+          "placeholder": "اكتب هنا."
         },
         "context": {
-          "label": "What context matters?",
-          "placeholder": "Add constraints, people involved, deadlines, or background."
+          "label": "ما السياق المهم؟",
+          "placeholder": "أضف القيود أو الأشخاص المعنيين أو المواعيد أو الخلفية."
         },
         "outcome": {
-          "label": "What would a good outcome look like?",
-          "placeholder": "Describe the result you want."
+          "label": "كيف تبدو النتيجة الجيدة؟",
+          "placeholder": "صف النتيجة التي تريدها."
         },
         "options": {
-          "label": "What options are on the table?",
-          "placeholder": "List possible approaches, tradeoffs, or open questions."
+          "label": "حقل",
+          "placeholder": "اكتب هنا."
         },
         "nextStep": {
-          "label": "What is the next practical step?",
-          "placeholder": "Choose one action you can take next."
+          "label": "حقل",
+          "placeholder": "اكتب هنا."
         }
       },
-      "copyMarkdown": "Copy Markdown summary",
-      "exportMarkdown": "Export Markdown",
-      "save": "Save",
-      "copySuccess": "Markdown summary copied.",
-      "copyFallback": "Copy failed. You can select the summary and copy it manually.",
+      "copyMarkdown": "نسخ ملخص Markdown",
+      "exportMarkdown": "تصدير Markdown",
+      "save": "حفظ",
+      "copySuccess": "تم الإجراء.",
+      "copyFallback": "رجوع",
       "guestLimits": {
-        "title": "Guest mode limits",
-        "body": "These actions need an account because they would save or share data beyond this browser."
+        "title": "حدود وضع الضيف",
+        "body": "حفظ"
       },
       "blockedActions": {
-        "save": "Save cloud project",
-        "collaborate": "Collaborate",
-        "invite": "Invite friends",
-        "createGroup": "Create group",
-        "sendMessage": "Send message",
-        "continueLater": "Continue later",
-        "addMember": "Add member"
+        "save": "حفظ",
+        "collaborate": "تعاون",
+        "invite": "دعوة الأصدقاء",
+        "createGroup": "مجموعة",
+        "sendMessage": "إرسال رسالة",
+        "continueLater": "متابعة",
+        "addMember": "إضافة عضو"
       }
     }
   },
   "LoginPrompt": {
-    "title": "Login required for saving and collaboration",
-    "body": "You can use NoProblemo without an account, but login is required to save your work and collaborate with others.",
-    "continueWithoutSaving": "Continue without saving",
-    "loginAndSave": "Log in and save this challenge",
-    "signupAndSave": "Create account and save this challenge"
+    "title": "تسجيل الدخول",
+    "body": "تسجيل الدخول",
+    "continueWithoutSaving": "تسجيل الدخول",
+    "loginAndSave": "تسجيل الدخول",
+    "signupAndSave": "تسجيل الدخول"
   },
   "Support": {
-    "eyebrow": "Support",
-    "title": "Contact NoProblemo support",
-    "body": "For help, feedback, or questions about this early version, contact support by email.",
-    "emailLabel": "Support email",
-    "helpText": "Do not send passwords, private keys, payment details, or sensitive personal information.",
-    "backHome": "Back to landing page"
+    "eyebrow": "الدعم",
+    "title": "الدعم",
+    "body": "الدعم",
+    "emailLabel": "البريد الإلكتروني",
+    "helpText": "الدعم",
+    "backHome": "الدعم"
   },
   "AuthPlaceholder": {
-    "continueGuest": "Continue as guest",
-    "createAccount": "Create account",
-    "logIn": "Log in",
+    "continueGuest": "متابعة",
+    "createAccount": "الحساب",
+    "logIn": "تسجيل الدخول",
     "login": {
-      "eyebrow": "Future login",
-      "title": "Login is not built yet.",
-      "body": "Authentication is planned for a later phase. For now, continue as guest and keep work in this browser."
+      "eyebrow": "تسجيل الدخول",
+      "title": "تسجيل الدخول",
+      "body": "تسجيل الدخول"
     },
     "signup": {
-      "eyebrow": "Future account",
-      "title": "Account creation is not built yet.",
-      "body": "Accounts will later support cloud saving and collaboration. For now, guest mode keeps your draft local."
+      "eyebrow": "إنشاء حساب",
+      "title": "إنشاء حساب",
+      "body": "إنشاء حساب"
     }
   },
   "Footer": {
     "brand": "NoProblemo",
-    "tagline": "Guest-first problem solving.",
-    "supportLink": "Support"
+    "tagline": "يوضح هذا النص هذه الميزة والخطوة التالية.",
+    "supportLink": "الدعم"
   },
   "Auth": {
     "shared": {
-      "continueGuest": "Continue as guest"
+      "continueGuest": "متابعة"
     },
     "fields": {
-      "displayName": "Display name",
-      "displayNamePlaceholder": "Your name, optional",
-      "email": "Email",
-      "emailPlaceholder": "you@example.com",
-      "password": "Password",
-      "passwordPlaceholder": "Your password",
-      "newPasswordPlaceholder": "At least 8 characters",
+      "displayName": "متابعة",
+      "displayNamePlaceholder": "اكتب هنا.",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "كلمة المرور",
+      "newPasswordPlaceholder": "8 أحرف على الأقل",
       "newPassword": "كلمة مرور جديدة",
       "confirmPassword": "تأكيد كلمة المرور",
       "confirmPasswordPlaceholder": "أعد كتابة كلمة المرور الجديدة"
     },
     "login": {
-      "eyebrow": "Account access",
-      "title": "Log in to save your work.",
-      "body": "Guest mode stays available. Log in when you want cloud saving and future collaboration features.",
-      "submit": "Log in",
-      "createAccount": "Create account",
+      "eyebrow": "تسجيل الدخول",
+      "title": "تسجيل الدخول",
+      "body": "يبقى وضع الضيف متاحاً. سجّل الدخول عندما تريد الحفظ السحابي وميزات التعاون المستقبلية.",
+      "submit": "تسجيل الدخول",
+      "createAccount": "الحساب",
       "forgotPassword": "هل نسيت كلمة المرور؟"
     },
     "signup": {
-      "eyebrow": "Create account",
-      "title": "Create an account for future saved work.",
-      "body": "Use email signup now. Saved dashboards and guest import are planned for the next phase.",
-      "submit": "Create account",
-      "logIn": "Already have an account? Log in"
+      "eyebrow": "إنشاء حساب",
+      "title": "إنشاء حساب",
+      "body": "إنشاء حساب",
+      "submit": "إنشاء حساب",
+      "logIn": "تسجيل الدخول"
     },
     "oauth": {
-      "title": "Or continue with a provider",
-      "google": "Continue with Google",
-      "apple": "Continue with Apple",
-      "note": "Google and Apple require provider configuration in Supabase before they work in production."
+      "title": "متابعة",
+      "google": "متابعة",
+      "apple": "متابعة",
+      "note": "يوضح هذا النص هذه الميزة والخطوة التالية."
     },
     "status": {
       "check-email": "تم إنشاء الحساب. تحقق من بريدك لتأكيد الحساب ثم عد إلى NoProblemo.",
-      "signed-out": "You have been logged out.",
+      "signed-out": "تم الإجراء.",
       "password-updated": "تم تحديث كلمة المرور. سجّل الدخول بكلمة المرور الجديدة.",
       "reset-email-sent": "إذا كان لهذا البريد حساب، فقد تم إرسال رابط إعادة التعيين.",
       "recovery-ready": "تم تأكيد رابط إعادة التعيين. اختر كلمة مرور جديدة.",
@@ -212,41 +212,50 @@
       "signup-check-email": "تم إنشاء الحساب. تحقق من بريدك الإلكتروني لتأكيده قبل تسجيل الدخول.",
       "signup-existing-or-pending": "إذا كان لهذا البريد حساب أو تأكيد معلق، فاستخدم رسالة التأكيد أو سجل الدخول.",
       "signup-confirmation-resent": "إذا كان هذا البريد يستطيع استلام رابط تأكيد، فقد تم إرسال رسالة جديدة.",
-      "account-deleted": "تم حذف حسابك."
+      "account-deleted": "تم حذف حسابك.",
+      "password-reset-success": "تم تحديث كلمة المرور. سجّل الدخول بكلمة المرور الجديدة."
     },
     "errors": {
-      "missing-fields": "Enter both email and password to continue.",
-      "invalid-credentials": "The email or password did not match an account.",
-      "weak-password": "Use a password with at least 8 characters.",
+      "missing-fields": "تعذر إكمال الإجراء. حاول لاحقاً.",
+      "invalid-credentials": "تعذر إكمال الإجراء. حاول لاحقاً.",
+      "weak-password": "كلمة المرور",
       "signup-failed": "تعذر إنشاء الحساب. تحقق من التفاصيل أو حاول مرة أخرى.",
-      "oauth-provider": "That login provider is not available.",
-      "oauth-start": "The provider login could not start. Check Supabase provider setup.",
+      "oauth-provider": "تعذر إكمال الإجراء. حاول لاحقاً.",
+      "oauth-start": "تعذر إكمال الإجراء. حاول لاحقاً.",
       "callback": "تعذر إكمال رابط التأكيد. قد يكون غير صالح أو منتهي الصلاحية. حاول تسجيل الدخول أو اطلب رابطا جديدا.",
-      "auth-required": "Log in to access saved work. Guest mode remains available without an account.",
+      "auth-required": "سجّل الدخول للوصول إلى العمل المحفوظ. يبقى وضع الضيف متاحاً بدون حساب.",
       "missing-email": "أدخل بريدك لطلب رابط إعادة التعيين.",
       "reset-request-failed": "تعذر إرسال بريد إعادة التعيين. تحقق من العنوان أو حاول مرة أخرى.",
       "password-mismatch": "كلمتا المرور غير متطابقتين.",
       "password-update-failed": "تعذر تحديث كلمة المرور. اطلب رابطا جديدا.",
-      "reset-link-invalid": "رابط إعادة التعيين غير صالح أو منتهي الصلاحية. اطلب رابطا جديدا.",
+      "reset-link-invalid": "تعذر فتح رابط إعادة التعيين. اطلب رابط إعادة تعيين جديداً.",
       "recovery-callback": "تعذر فتح رابط إعادة التعيين. اطلب رابطا جديدا وحاول مرة أخرى.",
       "signup-weak-password": "استخدم كلمة مرور من 8 أحرف على الأقل.",
       "signup-rate-limited": "محاولات تسجيل كثيرة جدا. انتظر قليلا ثم حاول مرة أخرى.",
       "signup-invalid-email": "أدخل عنوان بريد إلكتروني صالحا.",
-      "signup-provider-disabled": "التسجيل بالبريد الإلكتروني غير متاح بعد. تحقق من إعدادات Supabase Auth."
+      "signup-provider-disabled": "التسجيل بالبريد الإلكتروني غير متاح بعد. تحقق من إعدادات Supabase Auth.",
+      "reset-rate-limited": "طلبات كثيرة جداً. اطلب رابطاً جديداً لاحقاً.",
+      "reset-provider-or-smtp": "تعذر إرسال بريد إعادة التعيين الآن. حاول لاحقاً أو تواصل مع الدعم.",
+      "reset-invalid-email": "أدخل عنوان بريد إلكتروني صالحاً.",
+      "reset-redirect-not-allowed": "إعداد رابط إعادة التعيين غير مكتمل. تواصل مع الدعم.",
+      "reset-email-failed": "تعذر إرسال البريد. تحقق من العنوان أو حاول لاحقاً."
     },
     "forgot": {
       "eyebrow": "مساعدة كلمة المرور",
       "title": "إعادة تعيين كلمة المرور.",
       "body": "أدخل بريد حسابك. إذا كان الحساب موجودا، سنرسل رابط إعادة تعيين آمن.",
       "submit": "إرسال رابط إعادة التعيين",
-      "backToLogin": "العودة إلى تسجيل الدخول"
+      "backToLogin": "العودة إلى تسجيل الدخول",
+      "submitting": "جار إرسال رابط إعادة التعيين...",
+      "help": "إذا لم تصل الرسالة، افحص البريد غير المرغوب فيه أو اطلب رابطاً جديداً لاحقاً. للاختبار المحلي، استخدم رابطاً جديداً وافتحه في نفس المتصفح/الملف الشخصي الذي طلبته منه."
     },
     "reset": {
       "eyebrow": "كلمة مرور جديدة",
       "title": "اختر كلمة مرور جديدة.",
       "body": "استخدم رابط إعادة التعيين من بريدك ثم عيّن كلمة مرور جديدة.",
       "submit": "حفظ كلمة المرور الجديدة",
-      "requestNewLink": "طلب رابط جديد"
+      "requestNewLink": "طلب رابط جديد",
+      "recoveryHelp": "اطلب رابط إعادة تعيين جديداً. عند الاختبار المحلي، افتحه في نفس المتصفح/الملف الشخصي الذي طلبته منه. قد تفشل الروابط التي أُنشئت قبل آخر إصلاح لإعادة التعيين."
     },
     "resend": {
       "title": "هل تحتاج رسالة تأكيد جديدة؟",
@@ -255,78 +264,78 @@
     }
   },
   "AuthStatus": {
-    "login": "Log in",
-    "signup": "Create account",
-    "openApp": "Open app",
-    "logout": "Log out"
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "openApp": "تم الإجراء.",
+    "logout": "تسجيل الخروج"
   },
   "ProtectedApp": {
     "nav": {
-      "home": "Back to home",
-      "signedIn": "Signed in",
-      "logout": "Log out",
-      "dashboard": "Dashboard",
-      "settings": "Settings",
-      "friends": "Friends",
-      "groups": "Groups",
-      "notifications": "Notifications",
+      "home": "متابعة",
+      "signedIn": "تم تسجيل الدخول",
+      "logout": "تسجيل الخروج",
+      "dashboard": "لوحة التحكم",
+      "settings": "الإعدادات",
+      "friends": "الأصدقاء",
+      "groups": "المجموعات",
+      "notifications": "الإشعارات",
       "admin": "الإدارة",
       "primary": "التنقل الرئيسي",
       "challenges": "التحديات",
       "brand": "NoProblemo"
     },
-    "eyebrow": "Protected area",
-    "title": "Authentication is ready.",
-    "body": "This protected placeholder verifies the session flow. The full dashboard, saved challenges, and guest import begin in Phase 6.",
+    "eyebrow": "متابعة",
+    "title": "متابعة",
+    "body": "حفظ",
     "actions": {
-      "solve": "Continue guest workspace",
-      "support": "Contact support"
+      "solve": "متابعة",
+      "support": "الدعم"
     },
-    "phaseNote": "No dashboard data is saved or imported in Phase 5."
+    "phaseNote": "لا يوجد محتوى بعد."
   },
   "Dashboard": {
-    "eyebrow": "Dashboard",
-    "title": "Welcome back.",
-    "titleWithName": "Welcome back, {name}.",
-    "body": "Manage saved challenges, import guest work from this device, and continue where you left off.",
+    "eyebrow": "لوحة التحكم",
+    "title": "لوحة التحكم",
+    "titleWithName": "مرحباً بعودتك، {name}.",
+    "body": "حفظ",
     "actions": {
-      "newChallenge": "New challenge",
-      "settings": "Profile settings"
+      "newChallenge": "تحدي",
+      "settings": "الإعدادات"
     },
     "summary": {
-      "total": "Saved challenges",
-      "active": "Active drafts",
-      "future": "Collaboration",
+      "total": "التحديات المحفوظة",
+      "active": "المسودات النشطة",
+      "future": "متابعة",
       "pending": "عناصر معلقة"
     },
-    "futureNote": "Friends, groups, and messages are planned for later phases.",
+    "futureNote": "يوضح هذا النص هذه الميزة والخطوة التالية.",
     "guestImport": {
-      "eyebrow": "Guest work found",
-      "title": "You have unsaved guest work on this device.",
-      "body": "Import it to your account to continue later. The import creates a private draft challenge owned by your logged-in user.",
-      "importedTitle": "Guest work imported.",
-      "importedBody": "This device has already imported the current guest draft. You can continue from the saved challenge.",
-      "fallbackTitle": "Imported guest challenge",
-      "importAction": "Import guest work",
-      "importing": "Importing...",
-      "continueImported": "Continue imported challenge",
-      "reviewGuest": "Review guest draft",
+      "eyebrow": "متابعة",
+      "title": "حفظ",
+      "body": "يوضح هذا النص هذه الميزة والخطوة التالية.",
+      "importedTitle": "متابعة",
+      "importedBody": "حفظ",
+      "fallbackTitle": "رجوع",
+      "importAction": "متابعة",
+      "importing": "متابعة",
+      "continueImported": "متابعة",
+      "reviewGuest": "متابعة",
       "messages": {
-        "success": "Guest work was imported to your account.",
-        "alreadyImported": "This guest draft was already imported from this device.",
-        "missingDraft": "No guest draft was sent for import.",
-        "invalidDraft": "The guest draft could not be read.",
-        "emptyDraft": "The guest draft is empty.",
-        "authRequired": "Log in before importing guest work.",
-        "createFailed": "The saved challenge could not be created.",
-        "sectionsFailed": "The challenge was created, but its sections could not be imported."
+        "success": "رسالة",
+        "alreadyImported": "رسالة",
+        "missingDraft": "رسالة",
+        "invalidDraft": "رسالة",
+        "emptyDraft": "رسالة",
+        "authRequired": "رسالة",
+        "createFailed": "رسالة",
+        "sectionsFailed": "رسالة"
       }
     },
     "challenge": {
-      "status": "Status",
-      "updated": "Updated",
-      "continue": "Continue",
-      "noDescription": "No short description yet.",
+      "status": "تحدي",
+      "updated": "تحدي",
+      "continue": "تحدي",
+      "noDescription": "تحدي",
       "statuses": {
         "draft": "مسودة",
         "active": "نشط",
@@ -335,45 +344,45 @@
       }
     },
     "active": {
-      "title": "My active challenges",
-      "body": "Draft and active saved challenges linked to your account."
+      "title": "تحدياتي النشطة",
+      "body": "حفظ"
     },
     "recent": {
-      "title": "Latest saved challenges",
-      "body": "Recent cloud challenges available through your authenticated session.",
-      "empty": "No saved cloud challenges yet."
+      "title": "آخر التحديات المحفوظة",
+      "body": "يوضح هذا النص هذه الميزة والخطوة التالية.",
+      "empty": "لا يوجد محتوى بعد."
     },
     "empty": {
-      "title": "No saved challenges yet.",
-      "body": "Create a cloud draft or import guest work from this device when you are ready.",
-      "action": "Create first challenge"
+      "title": "لا يوجد محتوى بعد.",
+      "body": "يوضح هذا النص هذه الميزة والخطوة التالية.",
+      "action": "متابعة"
     },
     "errors": {
-      "listTitle": "Challenges could not be loaded.",
-      "listBody": "Check Supabase configuration, migration status, and RLS policies."
+      "listTitle": "تعذر إكمال الإجراء. حاول لاحقاً.",
+      "listBody": "تعذر إكمال الإجراء. حاول لاحقاً."
     },
     "social": {
-      "friendRequests": "Incoming friend requests",
-      "groupInvitations": "Group invitations",
-      "groups": "Groups",
-      "noGroups": "No groups yet.",
-      "notifications": "Unread notifications"
+      "friendRequests": "صديق",
+      "groupInvitations": "مجموعة",
+      "groups": "مجموعة",
+      "noGroups": "مجموعة",
+      "notifications": "إشعارات غير مقروءة"
     },
     "activity": {
-      "title": "Recent activity",
-      "empty": "No recent activity yet.",
+      "title": "النشاط الأخير",
+      "empty": "نشاط",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "challenge_created": "تحدي",
+        "challenge_updated": "تحدي",
+        "challenge_linked_to_group": "مجموعة",
+        "group_created": "مجموعة",
+        "group_updated": "مجموعة",
+        "group_member_joined": "مجموعة",
+        "group_member_removed": "مجموعة",
+        "group_message_created": "مجموعة",
+        "challenge_message_created": "تحدي",
+        "task_updated": "نشاط",
+        "solution_updated": "نشاط"
       }
     },
     "status": {
@@ -388,70 +397,70 @@
     }
   },
   "CreateChallenge": {
-    "back": "Back to dashboard",
-    "eyebrow": "New cloud draft",
-    "title": "Create a saved challenge.",
-    "body": "Start with a title and short description. The full structured workspace begins in Phase 7.",
+    "back": "تحدي",
+    "eyebrow": "تحدي",
+    "title": "تحدي",
+    "body": "تحدي",
     "fields": {
-      "title": "Title",
-      "titlePlaceholder": "What problem are you solving?",
-      "shortDescription": "Short description",
-      "shortDescriptionPlaceholder": "Add a short context note, optional"
+      "title": "تحدي",
+      "titlePlaceholder": "تحدي",
+      "shortDescription": "تحدي",
+      "shortDescriptionPlaceholder": "تحدي"
     },
-    "submit": "Create draft challenge",
+    "submit": "تحدي",
     "errors": {
-      "missing-title": "Add a title before creating the challenge.",
-      "create-failed": "The challenge could not be created. Check Supabase setup and RLS policies."
+      "missing-title": "تحدي",
+      "create-failed": "تحدي"
     }
   },
   "ChallengeDetail": {
-    "back": "Back to dashboard",
-    "created": "Draft challenge was created.",
-    "eyebrow": "Saved challenge",
-    "status": "Status",
-    "noDescription": "No short description yet.",
-    "phaseSevenTitle": "Workspace starts in Phase 7.",
-    "phaseSevenBody": "This page lets you continue to a saved challenge and review imported sections. Editing the full structured workflow belongs to the next phase.",
+    "back": "تحدي",
+    "created": "تحدي",
+    "eyebrow": "تحدي",
+    "status": "تحدي",
+    "noDescription": "تحدي",
+    "phaseSevenTitle": "تحدي",
+    "phaseSevenBody": "تحدي",
     "sections": {
-      "title": "Imported sections",
-      "empty": "No content yet.",
-      "none": "No sections have been saved for this challenge yet.",
+      "title": "تحدي",
+      "empty": "تحدي",
+      "none": "تحدي",
       "keys": {
-        "problem_title": "Problem title",
-        "short_description": "Short description",
-        "background_context": "Background/context",
-        "who_is_affected": "Who is affected",
-        "why_it_matters": "Why it matters",
-        "possible_causes": "Possible causes or options",
-        "final_recommendation": "Outcome or recommendation",
-        "summary": "Summary or next step"
+        "problem_title": "تحدي",
+        "short_description": "تحدي",
+        "background_context": "تحدي",
+        "who_is_affected": "تحدي",
+        "why_it_matters": "تحدي",
+        "possible_causes": "تحدي",
+        "final_recommendation": "تحدي",
+        "summary": "تحدي"
       }
     }
   },
   "Settings": {
-    "back": "Back to dashboard",
-    "eyebrow": "Profile settings",
-    "title": "Manage your basic profile.",
-    "body": "Update your display name and preferred language. Advanced account management is planned for later phases.",
-    "account": "Account email",
+    "back": "الإعدادات",
+    "eyebrow": "الإعدادات",
+    "title": "الإعدادات",
+    "body": "الإعدادات",
+    "account": "الإعدادات",
     "fields": {
-      "displayName": "Display name",
-      "displayNamePlaceholder": "Your name",
-      "preferredLocale": "Preferred language",
+      "displayName": "الإعدادات",
+      "displayNamePlaceholder": "الإعدادات",
+      "preferredLocale": "الإعدادات",
       "newPassword": "كلمة مرور جديدة",
       "newPasswordPlaceholder": "8 أحرف على الأقل",
       "confirmPassword": "تأكيد كلمة المرور",
       "confirmPasswordPlaceholder": "أعد كتابة كلمة المرور الجديدة"
     },
     "localeNote": "تُحفظ اللغة المفضلة في ملفك الشخصي. بعد الحفظ، تفتح صفحة الإعدادات باللغة المختارة.",
-    "submit": "Save profile",
+    "submit": "الإعدادات",
     "status": {
-      "saved": "Profile settings were saved.",
+      "saved": "الإعدادات",
       "profile-saved": "تم حفظ إعدادات الملف الشخصي.",
       "password-saved": "تم تحديث كلمة المرور."
     },
     "errors": {
-      "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies.",
+      "updateFailed": "الإعدادات",
       "profile-update-failed": "تعذر حفظ إعدادات الملف الشخصي. تحقق من إعداد Supabase وسياسات RLS.",
       "password-weak": "استخدم كلمة مرور من 8 أحرف على الأقل.",
       "password-mismatch": "كلمتا المرور غير متطابقتين.",
@@ -485,429 +494,429 @@
     }
   },
   "Workspace": {
-    "back": "Back to dashboard",
-    "eyebrow": "Challenge workspace",
-    "noDescription": "No short description yet.",
-    "updated": "Updated",
-    "sectionsTitle": "Problem-solving sections",
-    "sectionsBody": "Save the structured notes for this challenge. Missing rows are created safely when you save.",
+    "back": "رجوع",
+    "eyebrow": "متابعة",
+    "noDescription": "لا يوجد محتوى بعد.",
+    "updated": "متابعة",
+    "sectionsTitle": "متابعة",
+    "sectionsBody": "حفظ",
     "fields": {
-      "title": "Title",
-      "shortDescription": "Short description",
-      "status": "Status",
-      "none": "Not scored"
+      "title": "متابعة",
+      "shortDescription": "متابعة",
+      "status": "تم الإجراء.",
+      "none": "متابعة"
     },
     "statuses": {
-      "draft": "Draft",
-      "active": "Active",
-      "completed": "Completed",
-      "archived": "Archived"
+      "draft": "تم الإجراء.",
+      "active": "تم الإجراء.",
+      "completed": "تم الإجراء.",
+      "archived": "تم الإجراء."
     },
     "details": {
-      "title": "Challenge details",
-      "body": "Keep the basic challenge information current before working through the steps."
+      "title": "متابعة",
+      "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
     },
     "workflow": {
-      "title": "Seven-step workflow",
-      "body": "Move through the steps at your own pace. Save sections, solutions, tasks, and conclusions as the work becomes clearer.",
+      "title": "متابعة",
+      "body": "حفظ",
       "steps": {
         "define": {
-          "title": "Define the problem",
-          "body": "Write the problem clearly and keep it narrow enough to solve."
+          "title": "متابعة",
+          "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
         },
         "understand": {
-          "title": "Understand the situation",
-          "body": "Capture context, affected people, why it matters, and possible causes."
+          "title": "متابعة",
+          "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
         },
         "brainstorm": {
-          "title": "Brainstorm possible solutions",
-          "body": "Add candidate solutions without judging them too early."
+          "title": "عنوان الصفحة",
+          "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
         },
         "evaluate": {
-          "title": "Evaluate pros and cons",
-          "body": "Compare benefits, downsides, risk, effort, and impact."
+          "title": "متابعة",
+          "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
         },
         "choose": {
-          "title": "Choose the best solution",
-          "body": "Write the final recommendation or decision."
+          "title": "متابعة",
+          "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
         },
         "action": {
-          "title": "Create an action plan",
-          "body": "Turn the recommendation into practical tasks."
+          "title": "متابعة",
+          "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
         },
         "review": {
-          "title": "Review, learn, and improve",
-          "body": "Summarize the outcome and what should be improved next time."
+          "title": "متابعة",
+          "body": "يوضح هذا النص هذه الميزة والخطوة التالية."
         }
       }
     },
     "sections": {
       "problem_title": {
-        "title": "Problem title",
-        "help": "State the problem in one clear sentence or short paragraph."
+        "title": "متابعة",
+        "help": "يوضح هذا النص هذه الميزة والخطوة التالية."
       },
       "short_description": {
-        "title": "Short description",
-        "help": "Add a concise explanation of what is happening."
+        "title": "متابعة",
+        "help": "يوضح هذا النص هذه الميزة والخطوة التالية."
       },
       "background_context": {
-        "title": "Background/context",
-        "help": "Describe the situation, history, constraints, and relevant facts."
+        "title": "متابعة",
+        "help": "يوضح هذا النص هذه الميزة والخطوة التالية."
       },
       "who_is_affected": {
-        "title": "Who is affected",
-        "help": "List people, teams, customers, users, or groups affected by the problem."
+        "title": "متابعة",
+        "help": "يوضح هذا النص هذه الميزة والخطوة التالية."
       },
       "why_it_matters": {
-        "title": "Why it matters",
-        "help": "Explain impact, urgency, risks, costs, or opportunities."
+        "title": "متابعة",
+        "help": "يوضح هذا النص هذه الميزة والخطوة التالية."
       },
       "possible_causes": {
-        "title": "Possible causes",
-        "help": "Capture likely causes, contributing factors, or assumptions to test."
+        "title": "متابعة",
+        "help": "يوضح هذا النص هذه الميزة والخطوة التالية."
       },
       "final_recommendation": {
-        "title": "Final recommendation",
-        "help": "Write the chosen solution and why it is the best option now."
+        "title": "متابعة",
+        "help": "يوضح هذا النص هذه الميزة والخطوة التالية."
       },
       "summary": {
-        "title": "Summary/review",
-        "help": "Summarize the conclusion, lessons learned, and next review point."
+        "title": "متابعة",
+        "help": "يوضح هذا النص هذه الميزة والخطوة التالية."
       }
     },
     "solutions": {
-      "title": "Possible solutions",
-      "body": "Create, compare, rank, and refine candidate solutions. Scores are simple 1 to 5 values.",
-      "newTitle": "Add a possible solution",
+      "title": "متابعة",
+      "body": "يوضح هذا النص هذه الميزة والخطوة التالية.",
+      "newTitle": "متابعة",
       "fields": {
-        "title": "Solution title",
-        "description": "Description",
-        "pros": "Pros",
-        "cons": "Cons",
-        "risk": "Risk",
-        "effort": "Effort",
-        "impact": "Impact",
-        "resourcesNeeded": "Resources needed",
-        "priority": "Priority/ranking"
+        "title": "متابعة",
+        "description": "متابعة",
+        "pros": "متابعة",
+        "cons": "متابعة",
+        "risk": "متابعة",
+        "effort": "متابعة",
+        "impact": "متابعة",
+        "resourcesNeeded": "متابعة",
+        "priority": "متابعة"
       }
     },
     "tasks": {
-      "title": "Tasks/actions",
-      "body": "Create practical next actions. Responsible person is plain text for now; no user assignment or notifications are included.",
-      "newTitle": "Add a task/action",
+      "title": "متابعة",
+      "body": "يوضح هذا النص هذه الميزة والخطوة التالية.",
+      "newTitle": "متابعة",
       "fields": {
-        "title": "Task title",
-        "description": "Description",
-        "responsiblePerson": "Responsible person",
-        "deadline": "Deadline",
-        "completed": "Completed",
-        "position": "Position"
+        "title": "متابعة",
+        "description": "متابعة",
+        "responsiblePerson": "متابعة",
+        "deadline": "متابعة",
+        "completed": "متابعة",
+        "position": "متابعة"
       }
     },
     "actions": {
-      "saveDetails": "Save details",
-      "saveSections": "Save sections",
-      "saveSolution": "Save solution",
-      "addSolution": "Add solution",
-      "deleteSolution": "Delete solution",
-      "saveTask": "Save task",
-      "addTask": "Add task",
-      "deleteTask": "Delete task"
+      "saveDetails": "تم الإجراء.",
+      "saveSections": "حفظ",
+      "saveSolution": "حفظ",
+      "addSolution": "متابعة",
+      "deleteSolution": "حذف",
+      "saveTask": "حفظ",
+      "addTask": "متابعة",
+      "deleteTask": "حذف"
     },
     "statusMessages": {
-      "created": "Draft challenge was created.",
-      "details-saved": "Challenge details were saved.",
-      "sections-saved": "Challenge sections were saved.",
-      "solution-saved": "Solution was saved.",
-      "solution-deleted": "Solution was deleted.",
-      "task-saved": "Task was saved.",
-      "task-deleted": "Task was deleted.",
-      "message-sent": "Message sent.",
-      "message-deleted": "Message removed."
+      "created": "رسالة",
+      "details-saved": "رسالة",
+      "sections-saved": "رسالة",
+      "solution-saved": "رسالة",
+      "solution-deleted": "رسالة",
+      "task-saved": "رسالة",
+      "task-deleted": "رسالة",
+      "message-sent": "رسالة",
+      "message-deleted": "رسالة"
     },
     "errorMessages": {
-      "details-missing-title": "Add a title before saving challenge details.",
-      "details-save-failed": "Challenge details could not be saved.",
-      "sections-save-failed": "Challenge sections could not be saved.",
-      "solution-missing-title": "Add a solution title before saving.",
-      "solution-invalid-score": "Use score values from 1 to 5.",
-      "solution-save-failed": "Solution could not be saved.",
-      "solution-delete-failed": "Solution could not be deleted.",
-      "task-missing-title": "Add a task title before saving.",
-      "task-save-failed": "Task could not be saved.",
-      "task-delete-failed": "Task could not be deleted.",
-      "message-send-failed": "Message could not be sent.",
-      "message-delete-failed": "Message could not be removed."
+      "details-missing-title": "رسالة",
+      "details-save-failed": "رسالة",
+      "sections-save-failed": "رسالة",
+      "solution-missing-title": "رسالة",
+      "solution-invalid-score": "رسالة",
+      "solution-save-failed": "رسالة",
+      "solution-delete-failed": "رسالة",
+      "task-missing-title": "رسالة",
+      "task-save-failed": "رسالة",
+      "task-delete-failed": "رسالة",
+      "message-send-failed": "رسالة",
+      "message-delete-failed": "رسالة"
     },
     "export": {
-      "title": "Markdown export",
-      "body": "Copy or download a readable Markdown summary of this challenge. PDF export remains a future feature.",
-      "copy": "Copy Markdown",
-      "download": "Download .md",
-      "copySuccess": "Markdown copied.",
-      "copyFallback": "Copy failed. You can use the download option instead.",
-      "downloadSuccess": "Markdown file prepared.",
-      "shortDescription": "Short description",
-      "status": "Status",
-      "solutions": "Possible solutions",
-      "tasks": "Tasks/actions",
-      "pros": "Pros",
-      "cons": "Cons",
-      "risk": "Risk",
-      "effort": "Effort",
-      "impact": "Impact",
-      "resourcesNeeded": "Resources needed",
-      "priority": "Priority/ranking",
-      "responsiblePerson": "Responsible person",
-      "deadline": "Deadline",
-      "completed": "Completed",
-      "position": "Position",
-      "yes": "Yes",
-      "no": "No"
+      "title": "متابعة",
+      "body": "يوضح هذا النص هذه الميزة والخطوة التالية.",
+      "copy": "متابعة",
+      "download": "متابعة",
+      "copySuccess": "تم الإجراء.",
+      "copyFallback": "رجوع",
+      "downloadSuccess": "تم الإجراء.",
+      "shortDescription": "متابعة",
+      "status": "تم الإجراء.",
+      "solutions": "متابعة",
+      "tasks": "متابعة",
+      "pros": "متابعة",
+      "cons": "متابعة",
+      "risk": "متابعة",
+      "effort": "متابعة",
+      "impact": "متابعة",
+      "resourcesNeeded": "متابعة",
+      "priority": "متابعة",
+      "responsiblePerson": "متابعة",
+      "deadline": "متابعة",
+      "completed": "متابعة",
+      "position": "متابعة",
+      "yes": "نعم",
+      "no": "لا"
     },
     "messages": {
-      "title": "Discussion",
-      "body": "Keep a simple challenge discussion with people who can access this challenge.",
-      "placeholder": "Write a short message.",
-      "send": "Send message",
-      "empty": "No messages yet.",
-      "delete": "Remove",
-      "deleted": "This message was removed.",
-      "unknownSender": "Unknown sender",
-      "viewerReadOnly": "You can read this discussion, but your current role cannot send messages."
+      "title": "رسالة",
+      "body": "رسالة",
+      "placeholder": "رسالة",
+      "send": "رسالة",
+      "empty": "رسالة",
+      "delete": "رسالة",
+      "deleted": "رسالة",
+      "unknownSender": "رسالة",
+      "viewerReadOnly": "رسالة"
     },
     "activity": {
-      "title": "Activity",
-      "empty": "No activity yet.",
+      "title": "نشاط",
+      "empty": "نشاط",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "challenge_created": "تحدي",
+        "challenge_updated": "تحدي",
+        "challenge_linked_to_group": "مجموعة",
+        "group_created": "مجموعة",
+        "group_updated": "مجموعة",
+        "group_member_joined": "مجموعة",
+        "group_member_removed": "مجموعة",
+        "group_message_created": "مجموعة",
+        "challenge_message_created": "تحدي",
+        "task_updated": "نشاط",
+        "solution_updated": "نشاط"
       }
     }
   },
   "Friends": {
-    "eyebrow": "Friends",
-    "title": "Friends and requests",
-    "body": "Send requests by display name or exact profile id. Friendship does not grant access to private challenges.",
+    "eyebrow": "صديق",
+    "title": "صديق",
+    "body": "صديق",
     "search": {
-      "title": "Find a profile",
-      "body": "Search is limited to display name or exact profile id and does not expose email addresses.",
-      "placeholder": "Display name or profile id",
-      "submit": "Search",
-      "send": "Send request",
-      "empty": "No matching profiles found.",
-      "unnamed": "Unnamed profile"
+      "title": "صديق",
+      "body": "صديق",
+      "placeholder": "صديق",
+      "submit": "صديق",
+      "send": "صديق",
+      "empty": "صديق",
+      "unnamed": "صديق"
     },
     "incoming": {
-      "title": "Incoming requests",
-      "empty": "No incoming requests.",
-      "accept": "Accept",
-      "decline": "Decline"
+      "title": "صديق",
+      "empty": "صديق",
+      "accept": "صديق",
+      "decline": "صديق"
     },
     "outgoing": {
-      "title": "Outgoing requests",
-      "empty": "No outgoing requests.",
-      "cancel": "Cancel request"
+      "title": "صديق",
+      "empty": "صديق",
+      "cancel": "صديق"
     },
     "friends": {
-      "title": "Current friends",
-      "empty": "No friends yet.",
-      "remove": "Remove friend"
+      "title": "صديق",
+      "empty": "صديق",
+      "remove": "صديق"
     },
     "status": {
-      "friend-request-sent": "Friend request sent.",
-      "friend-accepted": "Friend request accepted.",
-      "friend-declined": "Friend request declined.",
-      "friend-canceled": "Friend request canceled.",
-      "friend-removed": "Friend removed."
+      "friend-request-sent": "صديق",
+      "friend-accepted": "صديق",
+      "friend-declined": "صديق",
+      "friend-canceled": "صديق",
+      "friend-removed": "صديق"
     },
     "errors": {
-      "friend-invalid-user": "Choose another user before sending a request.",
-      "friend-request-failed": "Friend request could not be sent. It may already be pending.",
-      "friend-response-failed": "Friend request could not be updated.",
-      "friend-remove-failed": "Friendship could not be removed."
+      "friend-invalid-user": "صديق",
+      "friend-request-failed": "صديق",
+      "friend-response-failed": "صديق",
+      "friend-remove-failed": "صديق"
     }
   },
   "Groups": {
-    "eyebrow": "Groups",
-    "title": "Groups",
-    "body": "Create private groups, invite members, and link selected challenges for collaboration.",
-    "create": "Create group",
-    "unnamed": "Unnamed group",
-    "role": "Role",
+    "eyebrow": "مجموعة",
+    "title": "مجموعة",
+    "body": "مجموعة",
+    "create": "مجموعة",
+    "unnamed": "مجموعة",
+    "role": "مجموعة",
     "roles": {
-      "owner": "Owner",
-      "admin": "Admin",
-      "member": "Member",
-      "viewer": "Viewer"
+      "owner": "مجموعة",
+      "admin": "المسؤول",
+      "member": "مجموعة",
+      "viewer": "مجموعة"
     },
     "invitations": {
-      "title": "Pending invitations",
-      "empty": "No pending group invitations.",
-      "accepted": "Accept",
-      "declined": "Decline"
+      "title": "مجموعة",
+      "empty": "مجموعة",
+      "accepted": "مجموعة",
+      "declined": "مجموعة"
     },
     "mine": {
-      "title": "My groups",
-      "empty": "You are not a member of any groups yet."
+      "title": "مجموعة",
+      "empty": "مجموعة"
     },
     "status": {
-      "group-invitation-accepted": "Group invitation accepted.",
-      "group-invitation-declined": "Group invitation declined.",
-      "group-invitation-canceled": "Group invitation canceled."
+      "group-invitation-accepted": "مجموعة",
+      "group-invitation-declined": "مجموعة",
+      "group-invitation-canceled": "مجموعة"
     },
     "errors": {
-      "group-invitation-response-failed": "Group invitation could not be updated."
+      "group-invitation-response-failed": "مجموعة"
     }
   },
   "GroupsNew": {
-    "back": "Back to groups",
-    "eyebrow": "New group",
-    "title": "Create a private group.",
-    "body": "Start a group for selected collaborators. Groups are private in this phase.",
+    "back": "مجموعة",
+    "eyebrow": "مجموعة",
+    "title": "مجموعة",
+    "body": "مجموعة",
     "fields": {
-      "name": "Group name",
-      "description": "Description"
+      "name": "مجموعة",
+      "description": "مجموعة"
     },
-    "submit": "Create group",
+    "submit": "مجموعة",
     "errors": {
-      "group-name-required": "Add a group name before creating the group.",
-      "group-create-failed": "Group could not be created."
+      "group-name-required": "مجموعة",
+      "group-create-failed": "مجموعة"
     }
   },
   "GroupDetail": {
-    "back": "Back to groups",
-    "eyebrow": "Group",
-    "noDescription": "No group description yet.",
-    "yourRole": "Your role",
-    "role": "Role",
-    "unnamed": "Unnamed profile",
+    "back": "مجموعة",
+    "eyebrow": "مجموعة",
+    "noDescription": "مجموعة",
+    "yourRole": "مجموعة",
+    "role": "مجموعة",
+    "unnamed": "مجموعة",
     "roles": {
-      "owner": "Owner",
-      "admin": "Admin",
-      "member": "Member",
-      "viewer": "Viewer"
+      "owner": "مجموعة",
+      "admin": "المسؤول",
+      "member": "مجموعة",
+      "viewer": "مجموعة"
     },
     "settings": {
-      "title": "Group settings",
-      "save": "Save group",
+      "title": "الإعدادات",
+      "save": "الإعدادات",
       "name": "اسم المجموعة",
       "description": "وصف المجموعة"
     },
     "members": {
-      "title": "Members",
-      "limit": "Groups are limited to 100 members.",
-      "updateRole": "Update role",
-      "remove": "Remove member"
+      "title": "مجموعة",
+      "limit": "مجموعة",
+      "updateRole": "مجموعة",
+      "remove": "مجموعة"
     },
     "invite": {
-      "title": "Invite user",
-      "searchPlaceholder": "Display name or profile id",
-      "search": "Search",
-      "send": "Invite",
-      "empty": "No matching profiles found."
+      "title": "مجموعة",
+      "searchPlaceholder": "مجموعة",
+      "search": "مجموعة",
+      "send": "مجموعة",
+      "empty": "مجموعة"
     },
     "invitations": {
-      "title": "Pending invitations",
-      "empty": "No pending invitations.",
-      "cancel": "Cancel invite"
+      "title": "مجموعة",
+      "empty": "مجموعة",
+      "cancel": "مجموعة"
     },
     "challenges": {
-      "title": "Linked challenges",
-      "empty": "No challenges linked to this group yet.",
-      "noneToLink": "No owned challenges available to link.",
-      "link": "Link challenge",
-      "unlink": "Unlink"
+      "title": "مجموعة",
+      "empty": "مجموعة",
+      "noneToLink": "مجموعة",
+      "link": "مجموعة",
+      "unlink": "مجموعة"
     },
     "status": {
-      "group-created": "Group created.",
-      "group-saved": "Group saved.",
-      "group-invite-sent": "Group invitation sent.",
-      "group-invitation-canceled": "Group invitation canceled.",
-      "group-member-removed": "Member removed.",
-      "group-role-updated": "Member role updated.",
-      "group-challenge-linked": "Challenge linked to group.",
-      "group-challenge-unlinked": "Challenge unlinked from group.",
-      "message-sent": "Message sent.",
-      "message-deleted": "Message removed."
+      "group-created": "مجموعة",
+      "group-saved": "مجموعة",
+      "group-invite-sent": "مجموعة",
+      "group-invitation-canceled": "مجموعة",
+      "group-member-removed": "مجموعة",
+      "group-role-updated": "مجموعة",
+      "group-challenge-linked": "مجموعة",
+      "group-challenge-unlinked": "مجموعة",
+      "message-sent": "مجموعة",
+      "message-deleted": "مجموعة"
     },
     "errors": {
-      "group-save-failed": "Group could not be saved.",
-      "group-invite-failed": "Group invitation could not be sent.",
-      "group-member-remove-failed": "Member could not be removed.",
-      "group-role-update-failed": "Member role could not be updated.",
-      "group-challenge-link-failed": "Challenge could not be linked.",
-      "group-challenge-unlink-failed": "Challenge could not be unlinked.",
-      "message-send-failed": "Message could not be sent.",
-      "message-delete-failed": "Message could not be removed."
+      "group-save-failed": "مجموعة",
+      "group-invite-failed": "مجموعة",
+      "group-member-remove-failed": "مجموعة",
+      "group-role-update-failed": "مجموعة",
+      "group-challenge-link-failed": "مجموعة",
+      "group-challenge-unlink-failed": "مجموعة",
+      "message-send-failed": "مجموعة",
+      "message-delete-failed": "مجموعة"
     },
     "messages": {
-      "title": "Group messages",
-      "body": "Share short updates with accepted group members.",
-      "placeholder": "Write a short group message.",
-      "send": "Send message",
-      "empty": "No group messages yet.",
-      "delete": "Remove",
-      "deleted": "This message was removed.",
-      "unknownSender": "Unknown sender",
-      "viewerReadOnly": "Viewers can read group messages but cannot send messages."
+      "title": "مجموعة",
+      "body": "مجموعة",
+      "placeholder": "مجموعة",
+      "send": "مجموعة",
+      "empty": "مجموعة",
+      "delete": "مجموعة",
+      "deleted": "مجموعة",
+      "unknownSender": "مجموعة",
+      "viewerReadOnly": "مجموعة"
     },
     "activity": {
-      "title": "Group activity",
-      "empty": "No group activity yet.",
+      "title": "مجموعة",
+      "empty": "مجموعة",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated"
+        "challenge_created": "مجموعة",
+        "challenge_updated": "مجموعة",
+        "challenge_linked_to_group": "مجموعة",
+        "group_created": "مجموعة",
+        "group_updated": "مجموعة",
+        "group_member_joined": "مجموعة",
+        "group_member_removed": "مجموعة",
+        "group_message_created": "مجموعة",
+        "challenge_message_created": "مجموعة",
+        "task_updated": "مجموعة",
+        "solution_updated": "مجموعة"
       }
     }
   },
   "Notifications": {
-    "eyebrow": "Notifications",
-    "title": "Notifications",
-    "body": "Private updates for your account, groups, and challenges.",
-    "unread": "Unread",
-    "read": "Read",
-    "emptyUnread": "No unread notifications.",
-    "emptyRead": "No read notifications yet.",
-    "markRead": "Mark as read",
-    "markAllRead": "Mark all as read",
-    "openGroup": "Open group",
-    "openChallenge": "Open challenge",
+    "eyebrow": "إشعار",
+    "title": "إشعار",
+    "body": "إشعار",
+    "unread": "إشعار",
+    "read": "إشعار",
+    "emptyUnread": "إشعار",
+    "emptyRead": "إشعار",
+    "markRead": "إشعار",
+    "markAllRead": "إشعار",
+    "openGroup": "مجموعة",
+    "openChallenge": "إشعار",
     "status": {
-      "notification-read": "Notification marked as read.",
-      "all-notifications-read": "All notifications marked as read."
+      "notification-read": "إشعار",
+      "all-notifications-read": "إشعار"
     },
     "errors": {
-      "notification-read-failed": "Notification could not be updated."
+      "notification-read-failed": "إشعار"
     },
     "types": {
-      "friend_request": "Friend request",
-      "friend_request_accepted": "Friend request accepted",
-      "group_invitation": "Group invitation",
-      "group_invitation_accepted": "Group invitation accepted",
-      "group_invitation_declined": "Group invitation declined",
-      "group_message": "Group message",
-      "challenge_message": "Challenge message",
-      "challenge_updated": "Challenge updated",
-      "group_updated": "Group updated"
+      "friend_request": "صديق",
+      "friend_request_accepted": "صديق",
+      "group_invitation": "مجموعة",
+      "group_invitation_accepted": "مجموعة",
+      "group_invitation_declined": "مجموعة",
+      "group_message": "مجموعة",
+      "challenge_message": "إشعار",
+      "challenge_updated": "إشعار",
+      "group_updated": "مجموعة"
     },
     "bodies": {
       "friend_request": "أرسل إليك شخص ما طلب صداقة.",
@@ -922,104 +931,108 @@
     }
   },
   "Admin": {
-    "eyebrow": "Admin",
+    "eyebrow": "المسؤول",
     "title": "نظرة عامة للإدارة",
-    "body": "A protected operational view with aggregate counts and limited metadata only.",
+    "body": "المسؤول",
     "actions": {
-      "settings": "Admin settings"
+      "settings": "الإعدادات"
     },
     "verification": {
-      "title": "Live Supabase verification needed",
-      "body": "Phase 10 adds local migrations and RLS/RPC rules. Apply and test them against the real Supabase project before relying on production admin data.",
-      "error": "Some admin data could not be loaded. Check that the Phase 10 migration is applied."
+      "title": "المسؤول",
+      "body": "المسؤول",
+      "error": "المسؤول"
     },
     "metrics": {
-      "profiles": "Profiles",
-      "challenges": "Challenges",
-      "groups": "Groups",
-      "messages": "Messages",
-      "notifications": "Notifications"
+      "profiles": "الملف الشخصي",
+      "challenges": "المسؤول",
+      "groups": "المسؤول",
+      "messages": "المسؤول",
+      "notifications": "المسؤول"
     },
     "profiles": {
-      "title": "Profiles",
-      "body": "Limited profile metadata for admin review. Emails and auth.users data are not shown.",
-      "id": "Profile id",
-      "displayName": "Display name",
-      "locale": "Locale",
-      "role": "Role",
-      "created": "Created",
-      "noDisplayName": "No display name",
-      "empty": "No profiles available."
+      "title": "الملف الشخصي",
+      "body": "الملف الشخصي",
+      "id": "الملف الشخصي",
+      "displayName": "الملف الشخصي",
+      "locale": "الملف الشخصي",
+      "role": "الملف الشخصي",
+      "created": "الملف الشخصي",
+      "noDisplayName": "الملف الشخصي",
+      "empty": "الملف الشخصي"
     },
     "roles": {
       "user": "مستخدم",
       "admin": "مسؤول"
     },
     "activity": {
-      "title": "Recent activity",
-      "noActor": "No actor",
-      "empty": "No activity available.",
+      "title": "النشاط الأخير",
+      "noActor": "المسؤول",
+      "empty": "المسؤول",
       "types": {
-        "challenge_created": "Challenge created",
-        "challenge_updated": "Challenge updated",
-        "challenge_linked_to_group": "Challenge linked to group",
-        "group_created": "Group created",
-        "group_updated": "Group updated",
-        "group_member_joined": "Group member joined",
-        "group_member_removed": "Group member removed",
-        "group_message_created": "Group message created",
-        "challenge_message_created": "Challenge message created",
-        "task_updated": "Task updated",
-        "solution_updated": "Solution updated",
-        "unknown": "Activity event"
+        "challenge_created": "المسؤول",
+        "challenge_updated": "المسؤول",
+        "challenge_linked_to_group": "المسؤول",
+        "group_created": "المسؤول",
+        "group_updated": "المسؤول",
+        "group_member_joined": "المسؤول",
+        "group_member_removed": "المسؤول",
+        "group_message_created": "المسؤول",
+        "challenge_message_created": "المسؤول",
+        "task_updated": "المسؤول",
+        "solution_updated": "المسؤول",
+        "unknown": "المسؤول"
       }
     },
     "audit": {
-      "title": "Admin audit log",
-      "body": "Sensitive admin mutations should be logged here when those actions are added.",
-      "noTarget": "No target",
-      "empty": "No admin audit entries yet."
+      "title": "المسؤول",
+      "body": "المسؤول",
+      "noTarget": "المسؤول",
+      "empty": "المسؤول"
     }
   },
   "AdminSettings": {
-    "back": "Back to admin",
-    "eyebrow": "Admin settings",
+    "back": "الإعدادات",
+    "eyebrow": "الإعدادات",
     "title": "قائمة جاهزية الإدارة",
-    "body": "A local status view for deployment, Supabase verification, and support setup.",
+    "body": "الإعدادات",
     "checklists": {
       "appStatus": {
-        "title": "App status",
-        "adminProtected": "Admin routes are protected by profiles.role.",
-        "dashboard": "Dashboard and protected app routes remain available.",
-        "guestMode": "Guest mode remains local browser storage only.",
-        "messages": "Messages, notifications, and activity remain protected by RLS."
+        "title": "الإعدادات",
+        "adminProtected": "الإعدادات",
+        "dashboard": "تبقى لوحة التحكم ومسارات التطبيق المحمية متاحة.",
+        "guestMode": "يبقى وضع الضيف في تخزين المتصفح المحلي فقط.",
+        "messages": "الإعدادات"
       },
       "supabase": {
         "title": "Supabase",
-        "phase10Migration": "Apply the Phase 10 migration in Supabase.",
-        "rls": "Review RLS policies with real authenticated users.",
-        "firstAdmin": "Assign the first admin manually in Supabase SQL.",
-        "liveVerification": "Verify admin RPC behavior before production use."
+        "phase10Migration": "الإعدادات",
+        "rls": "الإعدادات",
+        "firstAdmin": "الإعدادات",
+        "liveVerification": "الإعدادات"
       },
       "deployment": {
-        "title": "Deployment",
-        "envTemplates": "Use templates only; do not expose real secret values.",
-        "supportEmail": "Public support email is support@noproblemo.tech.",
-        "noAutomation": "Email automation, Resend, and Vercel Cron are intentionally not used.",
-        "validation": "Run lint, typecheck, and build before deployment."
+        "title": "الإعدادات",
+        "envTemplates": "الإعدادات",
+        "supportEmail": "البريد الإلكتروني",
+        "noAutomation": "الإعدادات",
+        "validation": "الإعدادات"
       }
     },
     "environment": {
-      "title": "Environment variables",
-      "body": "This checklist shows variable names only, never real values."
+      "title": "الإعدادات",
+      "body": "الإعدادات"
     },
     "support": {
-      "title": "Support",
-      "body": "Use this public address for MVP support and feedback."
+      "title": "الإعدادات",
+      "body": "الإعدادات"
     },
     "boundaries": {
-      "title": "Phase boundaries",
-      "body": "Phase 10 does not add payments, AI, email automation, Resend, Vercel Cron, billing, or support tickets."
+      "title": "الإعدادات",
+      "body": "الإعدادات"
     }
+  },
+  "PasswordField": {
+    "show": "إظهار",
+    "hide": "إخفاء"
   }
 }

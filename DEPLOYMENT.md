@@ -151,6 +151,21 @@ Supabase Auth must allow locale-specific callback URLs. Email confirmation and O
 
 If an email confirmation callback cannot exchange the auth code for a session but the account was confirmed by Supabase, the app shows a calm login-required success state instead of saying the link is invalid. Password recovery callback failures still send the user to the reset page with instructions to request a new link.
 
+Minimum redirect patterns that must be represented in Supabase Auth configuration:
+
+- `http://localhost:3000/**`
+- `http://localhost:3000/<locale>/auth/callback`
+- `http://localhost:3000/<locale>/reset-password`
+- `https://noproblemo.tech/**`
+- `https://noproblemo.tech/<locale>/auth/callback`
+- `https://noproblemo.tech/<locale>/reset-password`
+
+Password reset links should be requested from the browser app. Forgot/reset password use an isolated browser-only Supabase recovery client. This avoids coupling the reset flow to the main SSR/cookie auth client, which was not reliably preserving the PKCE verifier locally and produced `verifier-missing-or-expired`.
+
+For local testing, request a new reset link after this fix and open it in the same browser/profile where `/[locale]/forgot-password` requested it. The recovery flow may use browser hash tokens; those fragments stay in the browser and are not sent to the server. After password update, the app signs out and redirects to localized login success. Reset links requested before the isolated recovery fix may fail and should be resent.
+
+If `/[locale]/forgot-password` reports that the reset email could not be sent, inspect Supabase Auth logs for provider/SMTP errors, rate limiting, redirect allow-list denial, and Site URL mismatch. Do not log or paste user email addresses, auth codes, tokens, sessions, cookies, service-role values, or `.env.local` values while troubleshooting.
+
 Local development:
 
 - `http://localhost:3000/**`

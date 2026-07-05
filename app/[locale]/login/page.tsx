@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
+import { PasswordField } from "../_components/password-field";
 import { SiteFooter } from "../_components/site-footer";
 import { loginWithEmail, signInWithOAuth } from "../auth/actions";
 
@@ -50,6 +51,7 @@ const errorKeys = [
 const statusKeys = [
   "signed-out",
   "password-updated",
+  "password-reset-success",
   "email-confirmed-login-required",
   "account-deleted",
 ] as const;
@@ -70,6 +72,7 @@ export default async function LoginPage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "Auth" });
+  const passwordT = await getTranslations({ locale, namespace: "PasswordField" });
   const nextPath = getNextPath(query, locale);
   const error = getQueryValue(query, "error");
   const status = getQueryValue(query, "status");
@@ -114,19 +117,17 @@ export default async function LoginPage({
                 placeholder={t("fields.emailPlaceholder")}
               />
             </label>
-            <label className="grid gap-2">
-              <span className="text-sm font-semibold text-[#373632]">
-                {t("fields.password")}
-              </span>
-              <input
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
-                placeholder={t("fields.passwordPlaceholder")}
-              />
-            </label>
+            <PasswordField
+              name="password"
+              label={t("fields.password")}
+              autoComplete="current-password"
+              required
+              placeholder={t("fields.passwordPlaceholder")}
+              buttonLabels={{
+                show: passwordT("show"),
+                hide: passwordT("hide"),
+              }}
+            />
             <Link
               href="/forgot-password"
               className="w-fit text-sm font-semibold text-[#373632] underline-offset-4 hover:underline"

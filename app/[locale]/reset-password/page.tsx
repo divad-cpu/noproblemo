@@ -40,6 +40,7 @@ export default async function ResetPasswordPage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "Auth" });
+  const passwordT = await getTranslations({ locale, namespace: "PasswordField" });
   const status = getQueryValue(query, "status");
   const error = getQueryValue(query, "error");
 
@@ -68,11 +69,14 @@ export default async function ResetPasswordPage({
           ) : null}
 
           <ResetPasswordForm
+            locale={locale}
             labels={{
               newPassword: t("fields.newPassword"),
               newPasswordPlaceholder: t("fields.newPasswordPlaceholder"),
               confirmPassword: t("fields.confirmPassword"),
               confirmPasswordPlaceholder: t("fields.confirmPasswordPlaceholder"),
+              showPassword: passwordT("show"),
+              hidePassword: passwordT("hide"),
               submit: t("reset.submit"),
               preparing: t("status.recovery-checking"),
               ready: t("status.recovery-ready"),
@@ -81,6 +85,7 @@ export default async function ResetPasswordPage({
               mismatch: t("errors.password-mismatch"),
               updateFailed: t("errors.password-update-failed"),
               linkInvalid: t("errors.reset-link-invalid"),
+              recoveryHelp: t("reset.recoveryHelp"),
             }}
           />
 
