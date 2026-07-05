@@ -229,7 +229,7 @@ function SaveMessage({
 }) {
   if (isKnownKey(status, statusKeys)) {
     return (
-      <p className="rounded-md border border-[#cbd8c5] bg-[#f6fbf4] p-4 text-sm leading-6 text-[#2f5f2d]">
+      <p className="rounded-2xl border border-[#cbd8c5] bg-[#f6fbf4] p-4 text-sm leading-6 text-[#2f5f2d]">
         {t(`statusMessages.${status}`)}
       </p>
     );
@@ -237,7 +237,7 @@ function SaveMessage({
 
   if (isKnownKey(error, errorKeys)) {
     return (
-      <p className="rounded-md border border-[#e3b8ad] bg-[#fff7f4] p-4 text-sm leading-6 text-[#7a2f1d]">
+      <p className="rounded-2xl border border-[#e3b8ad] bg-[#fff7f4] p-4 text-sm leading-6 text-[#7a2f1d]">
         {t(`errorMessages.${error}`)}
       </p>
     );
@@ -367,8 +367,8 @@ export default async function ChallengePage({
   ) as Record<ChallengeSectionKey, string>;
 
   return (
-    <div className="grid gap-6">
-      <section className="rounded-lg border border-[#dad8d0] bg-white p-6 shadow-sm sm:p-8">
+    <div className="grid gap-7">
+      <section className="overflow-hidden rounded-3xl border border-slate-200/70 bg-white/85 p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur sm:p-8">
         <Link
           href="/app"
           className="text-sm font-semibold text-[#373632] underline-offset-4 hover:underline"
@@ -395,13 +395,13 @@ export default async function ChallengePage({
               {t("updated")}: {formatDate(challenge.updated_at, locale)}
             </p>
           </div>
-          <span className="inline-flex w-fit rounded-md border border-[#e5e2da] bg-[#fbfaf7] px-3 py-1 text-sm font-semibold text-[#373632]">
+          <span className="inline-flex w-fit rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-semibold text-[#373632]">
             {t("fields.status")}: {t(`statuses.${challenge.status}`)}
           </span>
         </div>
       </section>
 
-      <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+      <section className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6">
         <h2 className="text-2xl font-semibold text-[#22211e]">
           {t("details.title")}
         </h2>
@@ -421,7 +421,7 @@ export default async function ChallengePage({
               required
               maxLength={160}
               defaultValue={challenge.title}
-              className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
+              className="min-h-12 rounded-2xl border border-slate-300/80 bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
             />
           </label>
           <label className="grid gap-2">
@@ -433,7 +433,7 @@ export default async function ChallengePage({
               rows={3}
               maxLength={500}
               defaultValue={challenge.short_description ?? ""}
-              className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
+              className="min-h-24 resize-y rounded-2xl border border-slate-300/80 bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
             />
           </label>
           <label className="grid gap-2">
@@ -443,7 +443,7 @@ export default async function ChallengePage({
             <select
               name="status"
               defaultValue={challenge.status}
-              className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
+              className="min-h-12 rounded-2xl border border-slate-300/80 bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
             >
               {statuses.map((option) => (
                 <option key={option} value={option}>
@@ -454,27 +454,27 @@ export default async function ChallengePage({
           </label>
           <button
             type="submit"
-            className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
+            className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
           >
             {t("actions.saveDetails")}
           </button>
         </form>
       </section>
 
-      <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+      <section className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6">
         <h2 className="text-2xl font-semibold text-[#22211e]">
           {t("workflow.title")}
         </h2>
         <p className="mt-2 text-sm leading-6 text-[#55544f]">
           {t("workflow.body")}
         </p>
-        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-7">
           {workflowSteps.map((step, index) => (
             <article
               key={step.key}
-              className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4"
+              className="relative rounded-2xl border border-slate-200/70 bg-gradient-to-br from-white to-slate-50/80 p-4 shadow-sm"
             >
-              <span className="text-sm font-semibold text-[#706f68]">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#22211e] text-sm font-semibold text-white">
                 {index + 1}
               </span>
               <h3 className="mt-2 font-semibold text-[#22211e]">
@@ -490,7 +490,7 @@ export default async function ChallengePage({
 
       <form
         action={saveChallengeSections}
-        className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6"
+        className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6"
       >
         <input type="hidden" name="locale" value={locale} />
         <input type="hidden" name="challengeId" value={challenge.id} />
@@ -504,8 +504,8 @@ export default async function ChallengePage({
           {workflowSteps
             .filter((step) => step.sections.length > 0)
             .map((step) => (
-              <section key={step.key} className="grid gap-4">
-                <div>
+              <section key={step.key} className="grid gap-4 rounded-3xl border border-slate-200/70 bg-slate-50/70 p-4 sm:p-5">
+                <div className="border-b border-slate-200/70 pb-3">
                   <h3 className="text-xl font-semibold text-[#22211e]">
                     {t(`workflow.steps.${step.key}.title`)}
                   </h3>
@@ -525,7 +525,7 @@ export default async function ChallengePage({
                       name={sectionKey}
                       rows={sectionKey === "summary" ? 4 : 5}
                       defaultValue={getSectionContent(savedSections, sectionKey)}
-                      className="min-h-28 resize-y rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
+                      className="min-h-28 resize-y rounded-2xl border border-slate-300/80 bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
                     />
                   </label>
                 ))}
@@ -534,13 +534,13 @@ export default async function ChallengePage({
         </div>
         <button
           type="submit"
-          className="mt-6 inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
+          className="mt-6 inline-flex min-h-12 items-center justify-center rounded-full bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
         >
           {t("actions.saveSections")}
         </button>
       </form>
 
-      <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+      <section className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6">
         <h2 className="text-2xl font-semibold text-[#22211e]">
           {t("solutions.title")}
         </h2>
@@ -551,7 +551,7 @@ export default async function ChallengePage({
           {savedSolutions.map((solution) => (
             <article
               key={solution.id}
-              className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4"
+              className="rounded-2xl border border-[#e5e2da] bg-[#fbfaf7] p-4"
             >
               <form action={saveSolution} className="grid gap-4">
                 <input type="hidden" name="locale" value={locale} />
@@ -566,7 +566,7 @@ export default async function ChallengePage({
                       name="title"
                       required
                       defaultValue={solution.title}
-                      className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                      className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                     />
                   </label>
                   <label className="grid gap-2">
@@ -577,7 +577,7 @@ export default async function ChallengePage({
                       name="priority"
                       type="number"
                       defaultValue={numberValue(solution.priority)}
-                      className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                      className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                     />
                   </label>
                 </div>
@@ -589,7 +589,7 @@ export default async function ChallengePage({
                     name="description"
                     rows={3}
                     defaultValue={solution.description ?? ""}
-                    className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                    className="min-h-24 resize-y rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                   />
                 </label>
                 <div className="grid gap-4 md:grid-cols-2">
@@ -601,7 +601,7 @@ export default async function ChallengePage({
                       name="pros"
                       rows={3}
                       defaultValue={solution.pros ?? ""}
-                      className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                      className="min-h-24 resize-y rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                     />
                   </label>
                   <label className="grid gap-2">
@@ -612,7 +612,7 @@ export default async function ChallengePage({
                       name="cons"
                       rows={3}
                       defaultValue={solution.cons ?? ""}
-                      className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                      className="min-h-24 resize-y rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                     />
                   </label>
                 </div>
@@ -625,7 +625,7 @@ export default async function ChallengePage({
                       <select
                         name={field}
                         defaultValue={numberValue(solution[field])}
-                        className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                        className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                       >
                         {scoreOptions(t)}
                       </select>
@@ -640,13 +640,13 @@ export default async function ChallengePage({
                     name="resourcesNeeded"
                     rows={2}
                     defaultValue={solution.resources_needed ?? ""}
-                    className="min-h-20 resize-y rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                    className="min-h-20 resize-y rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                   />
                 </label>
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <button
                     type="submit"
-                    className="inline-flex min-h-11 items-center justify-center rounded-md bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]"
+                    className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]"
                   >
                     {t("actions.saveSolution")}
                   </button>
@@ -666,7 +666,7 @@ export default async function ChallengePage({
             </article>
           ))}
 
-          <article className="rounded-md border border-[#dad8d0] bg-white p-4">
+          <article className="rounded-2xl border border-[#dad8d0] bg-white p-4">
             <h3 className="text-xl font-semibold text-[#22211e]">
               {t("solutions.newTitle")}
             </h3>
@@ -679,14 +679,14 @@ export default async function ChallengePage({
                   required
                   aria-label={t("solutions.fields.title")}
                   placeholder={t("solutions.fields.title")}
-                  className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                  className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
                 <input
                   name="priority"
                   type="number"
                   aria-label={t("solutions.fields.priority")}
                   placeholder={t("solutions.fields.priority")}
-                  className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                  className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
               </div>
               <textarea
@@ -694,7 +694,7 @@ export default async function ChallengePage({
                 rows={3}
                 aria-label={t("solutions.fields.description")}
                 placeholder={t("solutions.fields.description")}
-                className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                className="min-h-24 resize-y rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
               />
               <div className="grid gap-4 md:grid-cols-2">
                 <textarea
@@ -702,14 +702,14 @@ export default async function ChallengePage({
                   rows={3}
                   aria-label={t("solutions.fields.pros")}
                   placeholder={t("solutions.fields.pros")}
-                  className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                  className="min-h-24 resize-y rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
                 <textarea
                   name="cons"
                   rows={3}
                   aria-label={t("solutions.fields.cons")}
                   placeholder={t("solutions.fields.cons")}
-                  className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                  className="min-h-24 resize-y rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
               </div>
               <div className="grid gap-4 sm:grid-cols-3">
@@ -720,7 +720,7 @@ export default async function ChallengePage({
                     </span>
                     <select
                       name={field}
-                      className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                      className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                     >
                       {scoreOptions(t)}
                     </select>
@@ -732,11 +732,11 @@ export default async function ChallengePage({
                 rows={2}
                 aria-label={t("solutions.fields.resourcesNeeded")}
                 placeholder={t("solutions.fields.resourcesNeeded")}
-                className="min-h-20 resize-y rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                className="min-h-20 resize-y rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
               />
               <button
                 type="submit"
-                className="inline-flex min-h-11 items-center justify-center rounded-md bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]"
+                className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]"
               >
                 {t("actions.addSolution")}
               </button>
@@ -745,7 +745,7 @@ export default async function ChallengePage({
         </div>
       </section>
 
-      <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+      <section className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6">
         <h2 className="text-2xl font-semibold text-[#22211e]">
           {t("tasks.title")}
         </h2>
@@ -754,7 +754,7 @@ export default async function ChallengePage({
           {savedTasks.map((task) => (
             <article
               key={task.id}
-              className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4"
+              className="rounded-2xl border border-slate-200/70 bg-slate-50/80 p-4"
             >
               <form action={saveTask} className="grid gap-4">
                 <input type="hidden" name="locale" value={locale} />
@@ -769,7 +769,7 @@ export default async function ChallengePage({
                       name="title"
                       required
                       defaultValue={task.title}
-                      className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                      className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                     />
                   </label>
                   <label className="grid gap-2">
@@ -780,7 +780,7 @@ export default async function ChallengePage({
                       name="position"
                       type="number"
                       defaultValue={task.position}
-                      className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                      className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                     />
                   </label>
                 </div>
@@ -789,20 +789,20 @@ export default async function ChallengePage({
                   rows={3}
                   defaultValue={task.description ?? ""}
                   placeholder={t("tasks.fields.description")}
-                  className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                  className="min-h-24 resize-y rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
                 <div className="grid gap-4 md:grid-cols-2">
                   <input
                     name="responsiblePerson"
                     defaultValue={task.responsible_person ?? ""}
                     placeholder={t("tasks.fields.responsiblePerson")}
-                    className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                    className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                   />
                   <input
                     name="deadline"
                     type="date"
                     defaultValue={task.deadline ?? ""}
-                    className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                    className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                   />
                 </div>
                 <label className="flex items-center gap-3 text-sm font-semibold text-[#373632]">
@@ -816,7 +816,7 @@ export default async function ChallengePage({
                 </label>
                 <button
                   type="submit"
-                  className="inline-flex min-h-11 items-center justify-center rounded-md bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]"
+                  className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]"
                 >
                   {t("actions.saveTask")}
                 </button>
@@ -835,7 +835,7 @@ export default async function ChallengePage({
             </article>
           ))}
 
-          <article className="rounded-md border border-[#dad8d0] bg-white p-4">
+          <article className="rounded-2xl border border-slate-200/70 bg-white p-4">
             <h3 className="text-xl font-semibold text-[#22211e]">
               {t("tasks.newTitle")}
             </h3>
@@ -848,14 +848,14 @@ export default async function ChallengePage({
                   required
                   aria-label={t("tasks.fields.title")}
                   placeholder={t("tasks.fields.title")}
-                  className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                  className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
                 <input
                   name="position"
                   type="number"
                   aria-label={t("tasks.fields.position")}
                   placeholder={t("tasks.fields.position")}
-                  className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                  className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
               </div>
               <textarea
@@ -863,25 +863,25 @@ export default async function ChallengePage({
                 rows={3}
                 aria-label={t("tasks.fields.description")}
                 placeholder={t("tasks.fields.description")}
-                className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                className="min-h-24 resize-y rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
               />
               <div className="grid gap-4 md:grid-cols-2">
                 <input
                   name="responsiblePerson"
                   aria-label={t("tasks.fields.responsiblePerson")}
                   placeholder={t("tasks.fields.responsiblePerson")}
-                  className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                  className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
                 <input
                   name="deadline"
                   type="date"
                   aria-label={t("tasks.fields.deadline")}
-                  className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
+                  className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
               </div>
               <button
                 type="submit"
-                className="inline-flex min-h-11 items-center justify-center rounded-md bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]"
+                className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]"
               >
                 {t("actions.addTask")}
               </button>
@@ -900,7 +900,7 @@ export default async function ChallengePage({
         statusLabel={t(`statuses.${challenge.status}`)}
       />
 
-      <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+      <section className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6">
         <h2 className="text-2xl font-semibold text-[#22211e]">
           {t("messages.title")}
         </h2>
@@ -918,14 +918,14 @@ export default async function ChallengePage({
               rows={3}
               aria-label={t("messages.placeholder")}
               placeholder={t("messages.placeholder")}
-              className="min-h-24 resize-y rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
+              className="min-h-24 resize-y rounded-2xl border border-slate-300/80 bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
             />
-            <button className="inline-flex min-h-11 items-center justify-center rounded-md bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]">
+            <button className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]">
               {t("messages.send")}
             </button>
           </form>
         ) : (
-          <p className="mt-4 rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4 text-sm leading-6 text-[#55544f]">
+          <p className="mt-4 rounded-2xl border border-slate-200/70 bg-slate-50/80 p-4 text-sm leading-6 text-[#55544f]">
             {t("messages.viewerReadOnly")}
           </p>
         )}
@@ -955,7 +955,7 @@ export default async function ChallengePage({
         </div>
       </section>
 
-      <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+      <section className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6">
         <h2 className="text-2xl font-semibold text-[#22211e]">
           {t("activity.title")}
         </h2>
@@ -964,7 +964,7 @@ export default async function ChallengePage({
             savedActivityEvents.map((event) => (
               <div
                 key={event.id}
-                className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4"
+                className="rounded-2xl border border-slate-200/70 bg-slate-50/80 p-4"
               >
                 <p className="font-semibold text-[#22211e]">
                   {t(`activity.types.${event.type}`)}
@@ -1001,7 +1001,7 @@ function ChallengeMessageRow({
   canDelete: boolean;
 }) {
   return (
-    <article className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4">
+    <article className="rounded-2xl border border-slate-200/70 bg-slate-50/80 p-4">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
           <p className="break-words font-semibold text-[#22211e]">{author}</p>

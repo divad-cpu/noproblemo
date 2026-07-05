@@ -141,7 +141,7 @@ export function ChallengeMarkdownExport({
   }
 
   return (
-    <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+    <section className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6">
       <h2 className="text-2xl font-semibold text-[#22211e]">{t("title")}</h2>
       <p className="mt-2 text-sm leading-6 text-[#55544f]">{t("body")}</p>
       <div className="mt-5 flex flex-col gap-3 sm:flex-row">
@@ -149,21 +149,21 @@ export function ChallengeMarkdownExport({
           href={printHref}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
+          className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
         >
           {t("pdfButton")}
         </Link>
         <button
           type="button"
           onClick={copyMarkdown}
-          className="inline-flex min-h-12 items-center justify-center rounded-md border border-[#dad8d0] bg-white px-5 py-3 font-semibold text-[#22211e] hover:border-[#8b897f]"
+          className="inline-flex min-h-12 items-center justify-center rounded-full border border-slate-300/80 bg-white px-5 py-3 font-semibold text-[#22211e] hover:border-slate-500"
         >
           {t("copy")}
         </button>
         <button
           type="button"
           onClick={downloadMarkdown}
-          className="inline-flex min-h-12 items-center justify-center rounded-md border border-[#dad8d0] bg-white px-5 py-3 font-semibold text-[#22211e] hover:border-[#8b897f]"
+          className="inline-flex min-h-12 items-center justify-center rounded-full border border-slate-300/80 bg-white px-5 py-3 font-semibold text-[#22211e] hover:border-slate-500"
         >
           {t("download")}
         </button>

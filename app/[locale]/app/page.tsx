@@ -61,7 +61,7 @@ function ChallengeCard({
   };
 }) {
   return (
-    <article className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm">
+    <article className="rounded-3xl border border-slate-200/70 bg-white/85 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
           <h3 className="break-words text-xl font-semibold text-[#22211e]">
@@ -71,7 +71,7 @@ function ChallengeCard({
             {challenge.short_description || labels.noDescription}
           </p>
         </div>
-        <span className="inline-flex w-fit rounded-md border border-[#e5e2da] bg-[#fbfaf7] px-3 py-1 text-sm font-semibold text-[#373632]">
+        <span className="inline-flex w-fit rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-semibold text-[#373632]">
           {labels.status}: {labels.statuses[challenge.status]}
         </span>
       </div>
@@ -81,7 +81,7 @@ function ChallengeCard({
         </p>
         <Link
           href={`/app/challenges/${challenge.id}`}
-          className="inline-flex min-h-11 items-center justify-center rounded-md bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]"
+          className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#22211e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3a3832]"
         >
           {labels.continue}
         </Link>
@@ -167,8 +167,8 @@ export default async function DashboardPage({
   };
 
   return (
-    <div className="grid gap-6">
-      <section className="rounded-lg border border-[#dad8d0] bg-white p-6 shadow-sm sm:p-8">
+    <div className="grid gap-7">
+      <section className="overflow-hidden rounded-3xl border border-slate-200/70 bg-white/80 p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur sm:p-8">
         <p className="text-sm font-medium uppercase tracking-[0.18em] text-[#706f68]">
           {t("eyebrow")}
         </p>
@@ -180,20 +180,20 @@ export default async function DashboardPage({
         <p className="mt-4 max-w-3xl leading-7 text-[#55544f]">
           {t("body")}
         </p>
-        <div className="mt-6 grid gap-3 border-t border-[#e5e2da] pt-5 sm:grid-cols-3">
-          <div>
+        <div className="mt-7 grid gap-3 border-t border-slate-200/80 pt-5 sm:grid-cols-3">
+          <div className="rounded-2xl bg-blue-50/80 p-4">
             <p className="text-sm text-[#706f68]">{t("summary.total")}</p>
             <p className="mt-1 text-2xl font-semibold text-[#22211e]">
               {savedChallenges.length}
             </p>
           </div>
-          <div>
+          <div className="rounded-2xl bg-emerald-50/80 p-4">
             <p className="text-sm text-[#706f68]">{t("summary.active")}</p>
             <p className="mt-1 text-2xl font-semibold text-[#22211e]">
               {activeChallenges.length}
             </p>
           </div>
-          <div>
+          <div className="rounded-2xl bg-amber-50/80 p-4">
             <p className="text-sm text-[#706f68]">{t("summary.pending")}</p>
             <p className="mt-1 text-2xl font-semibold text-[#22211e]">
               {pendingTotal}
@@ -203,25 +203,25 @@ export default async function DashboardPage({
       </section>
 
       {isKnownKey(status, statusKeys) ? (
-        <p className="rounded-md border border-[#cbd8c5] bg-[#f6fbf4] p-4 text-sm leading-6 text-[#2f5f2d]">
+        <p className="rounded-2xl border border-emerald-200/80 bg-emerald-50/90 p-4 text-sm leading-6 text-[#2f5f2d]">
           {t(`status.${status}`)}
         </p>
       ) : null}
 
-      <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+      <section className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6">
         <h2 className="text-xl font-semibold text-[#22211e]">
           {t("quick.title")}
         </h2>
         <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:max-w-xl">
           <Link
             href="/app/challenges/new"
-            className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
+            className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
           >
             {t("actions.newChallenge")}
           </Link>
           <Link
             href="/app/settings"
-            className="inline-flex min-h-12 items-center justify-center rounded-md border border-[#dad8d0] bg-white px-5 py-3 font-semibold text-[#22211e] hover:border-[#8b897f]"
+            className="inline-flex min-h-12 items-center justify-center rounded-full border border-slate-300/80 bg-white px-5 py-3 font-semibold text-[#22211e] hover:border-slate-500"
           >
             {t("actions.settings")}
           </Link>
@@ -231,7 +231,7 @@ export default async function DashboardPage({
       <GuestImportCard locale={locale} />
 
       {challengesError ? (
-        <section className="rounded-lg border border-[#e3b8ad] bg-[#fff7f4] p-5 text-[#7a2f1d]">
+        <section className="rounded-3xl border border-orange-200/80 bg-orange-50/90 p-5 text-[#7a2f1d]">
           <h2 className="text-xl font-semibold">{t("errors.listTitle")}</h2>
           <p className="mt-2 text-sm leading-6">{t("errors.listBody")}</p>
         </section>
@@ -260,14 +260,14 @@ export default async function DashboardPage({
                 />
               ))
             ) : (
-              <div className="rounded-lg border border-[#dad8d0] bg-white p-6">
+              <div className="rounded-3xl border border-slate-200/70 bg-white/85 p-6 shadow-sm">
                 <h3 className="text-xl font-semibold text-[#22211e]">
                   {t("empty.title")}
                 </h3>
                 <p className="mt-2 leading-7 text-[#55544f]">{t("empty.body")}</p>
                 <Link
                   href="/app/challenges/new"
-                  className="mt-5 inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
+                  className="mt-5 inline-flex min-h-12 items-center justify-center rounded-full bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
                 >
                   {t("empty.action")}
                 </Link>
@@ -277,14 +277,14 @@ export default async function DashboardPage({
         </div>
 
         <aside className="grid gap-5">
-          <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+          <section className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6">
             <h2 className="text-xl font-semibold text-[#22211e]">
               {t("pending.title")}
             </h2>
             <div className="mt-4 grid gap-2">
               <Link
                 href="/app/friends"
-                className="flex items-center justify-between rounded-md border border-[#e5e2da] bg-[#fbfaf7] px-4 py-3 hover:border-[#8b897f]"
+                className="flex items-center justify-between rounded-2xl border border-slate-200/70 bg-slate-50/80 px-4 py-3 hover:border-slate-400 hover:bg-white"
               >
                 <span className="text-sm text-[#55544f]">
                   {t("social.friendRequests")}
@@ -295,7 +295,7 @@ export default async function DashboardPage({
               </Link>
               <Link
                 href="/app/groups"
-                className="flex items-center justify-between rounded-md border border-[#e5e2da] bg-[#fbfaf7] px-4 py-3 hover:border-[#8b897f]"
+                className="flex items-center justify-between rounded-2xl border border-slate-200/70 bg-slate-50/80 px-4 py-3 hover:border-slate-400 hover:bg-white"
               >
                 <span className="text-sm text-[#55544f]">
                   {t("social.groupInvitations")}
@@ -306,7 +306,7 @@ export default async function DashboardPage({
               </Link>
               <Link
                 href="/app/notifications"
-                className="flex items-center justify-between rounded-md border border-[#e5e2da] bg-[#fbfaf7] px-4 py-3 hover:border-[#8b897f]"
+                className="flex items-center justify-between rounded-2xl border border-slate-200/70 bg-slate-50/80 px-4 py-3 hover:border-slate-400 hover:bg-white"
               >
                 <span className="text-sm text-[#55544f]">
                   {t("social.notifications")}
@@ -318,7 +318,7 @@ export default async function DashboardPage({
             </div>
           </section>
 
-          <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+          <section className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6">
             <h2 className="text-xl font-semibold text-[#22211e]">
               {t("recent.title")}
             </h2>
@@ -328,7 +328,7 @@ export default async function DashboardPage({
                   <Link
                     key={challenge.id}
                     href={`/app/challenges/${challenge.id}`}
-                    className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-3 hover:border-[#8b897f]"
+                    className="rounded-2xl border border-slate-200/70 bg-slate-50/80 p-3 hover:border-slate-400 hover:bg-white"
                   >
                     <span className="block break-words text-sm font-semibold text-[#22211e]">
                       {challenge.title}
@@ -348,7 +348,7 @@ export default async function DashboardPage({
         </aside>
       </section>
 
-      <section className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
+      <section className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6">
         <h2 className="text-2xl font-semibold text-[#22211e]">
           {t("activity.title")}
         </h2>
@@ -357,7 +357,7 @@ export default async function DashboardPage({
             recentActivity.map((event) => (
               <div
                 key={event.id}
-                className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4"
+                className="rounded-2xl border border-slate-200/70 bg-slate-50/80 p-4"
               >
                 <p className="font-semibold text-[#22211e]">
                   {t(`activity.types.${event.type}`)}

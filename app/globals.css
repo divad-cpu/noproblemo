@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7fbf8;
+  --background: #f8fbff;
   --foreground: #111827;
   --surface: #ffffff;
-  --surface-soft: #f4f8f5;
-  --border: #d8e0d7;
-  --muted: #5b6470;
-  --primary: #1f6feb;
-  --primary-hover: #1858c7;
+  --surface-soft: #f3f7fb;
+  --border: rgba(100, 116, 139, 0.22);
+  --muted: #5f6b7a;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
   --success: #1f8a4c;
   --warning: #f2b46d;
   --danger: #9f341f;
@@ -23,12 +23,13 @@
 
 body {
   background:
-    radial-gradient(circle at 18% 8%, rgba(242, 180, 109, 0.18), transparent 28rem),
-    radial-gradient(circle at 86% 2%, rgba(31, 111, 235, 0.12), transparent 30rem),
-    linear-gradient(90deg, rgba(31, 138, 76, 0.045) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(31, 111, 235, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 16% -8%, rgba(251, 191, 36, 0.22), transparent 32rem),
+    radial-gradient(circle at 88% 4%, rgba(37, 99, 235, 0.16), transparent 34rem),
+    radial-gradient(circle at 50% 42%, rgba(34, 197, 94, 0.09), transparent 36rem),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(15, 23, 42, 0.025) 1px, transparent 1px),
     var(--background);
-  background-size: auto, auto, 44px 44px, 44px 44px, auto;
+  background-size: auto, auto, auto, 56px 56px, 56px 56px, auto;
   color: var(--foreground);
   font-family: var(--font-sans);
 }
@@ -56,9 +57,12 @@ body {
     transform 160ms ease;
 }
 
-button:hover,
-a:hover {
+:where(button, a):hover {
   text-decoration-thickness: 2px;
+}
+
+:where(button, a):active {
+  transform: translateY(1px);
 }
 
 .bg-\[\#22211e\] {
@@ -93,9 +97,36 @@ a:hover {
   background-color: var(--surface-soft);
 }
 
-.rounded-lg.border,
+.rounded-lg.border {
+  border-color: rgba(100, 116, 139, 0.22);
+  border-radius: 1.5rem;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+}
+
 .rounded-md.border {
-  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+  border-color: rgba(100, 116, 139, 0.2);
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.045);
+}
+
+.rounded-lg.border:hover,
+.rounded-md.border:hover {
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.09);
+}
+
+:where(input, textarea, select) {
+  border-radius: 1rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+:where(button, a).bg-\[\#22211e\] {
+  border-radius: 999px;
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.22);
+}
+
+:where(button, a).bg-\[\#22211e\]:hover {
+  box-shadow: 0 16px 34px rgba(37, 99, 235, 0.28);
+  transform: translateY(-1px);
 }
 
 .print-only {

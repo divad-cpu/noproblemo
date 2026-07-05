@@ -48,9 +48,9 @@ export default async function ProtectedAppLayout({
   ];
 
   return (
-    <main className="min-h-screen bg-[#f7f7f4] px-4 py-6 text-[#161616] sm:px-8 sm:py-8 lg:px-12">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6">
-        <header className="no-print rounded-lg border border-[#dad8d0] bg-white p-4 shadow-sm">
+    <main className="min-h-screen bg-transparent px-4 py-6 text-[#161616] sm:px-8 sm:py-8 lg:px-12">
+      <div className="mx-auto flex max-w-6xl flex-col gap-7">
+        <header className="no-print rounded-3xl border border-slate-200/70 bg-white/80 p-4 shadow-sm backdrop-blur">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <Link
               href="/app"
@@ -67,7 +67,7 @@ export default async function ProtectedAppLayout({
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="inline-flex min-h-10 items-center rounded-md px-3 py-2 text-sm font-semibold text-[#373632] hover:bg-[#f1f0ec]"
+                  className="inline-flex min-h-10 items-center rounded-full px-3 py-2 text-sm font-semibold text-[#373632] hover:bg-slate-100"
                 >
                   {item.label}
                 </Link>
@@ -75,7 +75,7 @@ export default async function ProtectedAppLayout({
               {isAdmin ? (
                 <Link
                   href="/app/admin"
-                  className="inline-flex min-h-10 items-center rounded-md px-3 py-2 text-sm font-semibold text-[#373632] hover:bg-[#f1f0ec]"
+                  className="inline-flex min-h-10 items-center rounded-full px-3 py-2 text-sm font-semibold text-[#373632] hover:bg-slate-100"
                 >
                   {t("nav.admin")}
                 </Link>
@@ -91,7 +91,7 @@ export default async function ProtectedAppLayout({
                 <form action={`/${locale}/auth/logout`} method="post">
                   <button
                     type="submit"
-                    className="inline-flex min-h-10 items-center justify-center rounded-md border border-[#dad8d0] bg-white px-4 py-2 text-sm font-semibold text-[#22211e] hover:border-[#8b897f]"
+                    className="inline-flex min-h-10 items-center justify-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-sm font-semibold text-[#22211e] hover:border-slate-500"
                   >
                     {t("nav.logout")}
                   </button>
