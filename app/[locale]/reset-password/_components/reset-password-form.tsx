@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { Locale } from "@/i18n/routing";
-import { createRecoverySupabaseClient } from "@/lib/supabase/recovery-client";
+import { getRecoverySupabaseClient } from "@/lib/supabase/recovery-client";
 import { PasswordField } from "../../_components/password-field";
 
 type ResetPasswordFormProps = {
@@ -70,7 +70,7 @@ function warnRecoveryFailure(reason: RecoveryFailureReason) {
 export function ResetPasswordForm({ locale, labels }: ResetPasswordFormProps) {
   const [recoveryState, setRecoveryState] = useState<RecoveryState>("checking");
   const [message, setMessage] = useState("");
-  const supabase = useMemo(() => createRecoverySupabaseClient(), []);
+  const supabase = useMemo(() => getRecoverySupabaseClient(), []);
 
   useEffect(() => {
     let active = true;

@@ -2,7 +2,7 @@
 
 import { FormEvent, useMemo, useState } from "react";
 import type { Locale } from "@/i18n/routing";
-import { createRecoverySupabaseClient } from "@/lib/supabase/recovery-client";
+import { getRecoverySupabaseClient } from "@/lib/supabase/recovery-client";
 
 type ForgotPasswordFormProps = {
   locale: Locale;
@@ -98,7 +98,7 @@ function warnResetFailure(reason: ResetFailureReason) {
 }
 
 export function ForgotPasswordForm({ locale, labels }: ForgotPasswordFormProps) {
-  const supabase = useMemo(() => createRecoverySupabaseClient(), []);
+  const supabase = useMemo(() => getRecoverySupabaseClient(), []);
   const [state, setState] = useState<FormState>("idle");
   const [message, setMessage] = useState("");
 

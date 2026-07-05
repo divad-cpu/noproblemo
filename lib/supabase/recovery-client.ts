@@ -1,7 +1,13 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "./types";
 
-export function createRecoverySupabaseClient() {
+let recoverySupabaseClient: SupabaseClient<Database> | undefined;
+
+export function getRecoverySupabaseClient() {
+  if (recoverySupabaseClient) {
+    return recoverySupabaseClient;
+  }
+
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -9,7 +15,7 @@ export function createRecoverySupabaseClient() {
     throw new Error("Missing public Supabase environment variables.");
   }
 
-  return createClient<Database>(supabaseUrl, supabaseAnonKey, {
+  recoverySupabaseClient = createClient<Database>(supabaseUrl, supabaseAnonKey, {
     auth: {
       autoRefreshToken: true,
       detectSessionInUrl: true,
@@ -18,4 +24,6 @@ export function createRecoverySupabaseClient() {
       storageKey: "noproblemo-password-recovery",
     },
   });
+
+  return recoverySupabaseClient;
 }
