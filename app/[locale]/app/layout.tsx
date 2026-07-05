@@ -51,7 +51,7 @@ export default async function ProtectedAppLayout({
     <main className="min-h-screen bg-transparent px-4 py-6 text-[#161616] sm:px-8 sm:py-8 lg:px-12">
       <div className="mx-auto flex max-w-6xl flex-col gap-7">
         <header className="no-print rounded-3xl border border-slate-200/70 bg-white/80 p-4 shadow-sm backdrop-blur">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
             <Link
               href="/app"
               className="text-lg font-semibold text-[#22211e]"
@@ -61,7 +61,7 @@ export default async function ProtectedAppLayout({
 
             <nav
               aria-label={t("nav.primary")}
-              className="flex flex-wrap gap-2"
+              className="flex flex-wrap gap-1.5 sm:gap-2"
             >
               {navItems.map((item) => (
                 <Link
@@ -82,7 +82,7 @@ export default async function ProtectedAppLayout({
               ) : null}
             </nav>
 
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:justify-end">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center xl:justify-end">
               <LanguageSwitcher locale={locale} compact />
               <div className="flex items-center gap-3">
                 <span className="text-sm text-[#706f68]">

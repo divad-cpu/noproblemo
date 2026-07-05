@@ -30,13 +30,13 @@ export default function Home({ params }: HomeProps) {
                 <p className="text-sm font-medium uppercase tracking-[0.18em] text-[#706f68]">
                   {t("eyebrow")}
                 </p>
-                <h1 className="mt-4 text-4xl font-semibold leading-tight tracking-tight text-slate-950 sm:text-6xl">
+                <h1 className="mt-4 max-w-4xl break-words text-3xl font-semibold leading-tight tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
                   {t("title")}
                 </h1>
                 <p className="mt-4 max-w-2xl text-base leading-7 text-[#55544f] sm:text-lg">
                   {t("description")}
                 </p>
-                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                   <Link
                     href="/solve"
                     className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#22211e] px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-[#3a3832]"
@@ -63,14 +63,14 @@ export default function Home({ params }: HomeProps) {
               </div>
             </header>
 
-            <div className="mt-10 grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+            <div className="mt-10 grid gap-5 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end">
               <div className="rounded-3xl border border-blue-100/80 bg-gradient-to-br from-blue-50 via-white to-emerald-50 p-5 shadow-inner">
                 <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-700">
                   {t("workflow.eyebrow")}
                 </p>
                 <div className="mt-5 grid gap-3">
                   {workflowSteps.map((step, index) => (
-                    <div key={step} className="flex gap-4 rounded-2xl bg-white/75 p-4 shadow-sm">
+                    <div key={step} className="flex min-w-0 gap-4 rounded-2xl bg-white/75 p-4 shadow-sm">
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white">
                         {index + 1}
                       </span>

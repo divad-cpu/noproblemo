@@ -385,7 +385,7 @@ export default async function ChallengePage({
         </p>
         <div className="mt-3 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div className="min-w-0">
-            <h1 className="break-words text-4xl font-semibold leading-tight text-[#22211e]">
+            <h1 className="break-words text-3xl font-semibold leading-tight text-[#22211e] sm:text-4xl">
               {challenge.title}
             </h1>
             <p className="mt-4 max-w-3xl break-words leading-7 text-[#55544f]">
@@ -468,11 +468,11 @@ export default async function ChallengePage({
         <p className="mt-2 text-sm leading-6 text-[#55544f]">
           {t("workflow.body")}
         </p>
-        <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-7">
+        <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7">
           {workflowSteps.map((step, index) => (
             <article
               key={step.key}
-              className="relative rounded-2xl border border-slate-200/70 bg-gradient-to-br from-white to-slate-50/80 p-4 shadow-sm"
+              className="relative min-w-0 rounded-2xl border border-slate-200/70 bg-gradient-to-br from-white to-slate-50/80 p-4 shadow-sm"
             >
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#22211e] text-sm font-semibold text-white">
                 {index + 1}
@@ -557,7 +557,7 @@ export default async function ChallengePage({
                 <input type="hidden" name="locale" value={locale} />
                 <input type="hidden" name="challengeId" value={challenge.id} />
                 <input type="hidden" name="solutionId" value={solution.id} />
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="grid gap-4 lg:grid-cols-2">
                   <label className="grid gap-2">
                     <span className="text-sm font-semibold text-[#373632]">
                       {t("solutions.fields.title")}
@@ -592,7 +592,7 @@ export default async function ChallengePage({
                     className="min-h-24 resize-y rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                   />
                 </label>
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="grid gap-4 lg:grid-cols-2">
                   <label className="grid gap-2">
                     <span className="text-sm font-semibold text-[#373632]">
                       {t("solutions.fields.pros")}
@@ -673,7 +673,7 @@ export default async function ChallengePage({
             <form action={saveSolution} className="mt-4 grid gap-4">
               <input type="hidden" name="locale" value={locale} />
               <input type="hidden" name="challengeId" value={challenge.id} />
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 lg:grid-cols-2">
                 <input
                   name="title"
                   required
@@ -696,7 +696,7 @@ export default async function ChallengePage({
                 placeholder={t("solutions.fields.description")}
                 className="min-h-24 resize-y rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
               />
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 lg:grid-cols-2">
                 <textarea
                   name="pros"
                   rows={3}
@@ -760,7 +760,7 @@ export default async function ChallengePage({
                 <input type="hidden" name="locale" value={locale} />
                 <input type="hidden" name="challengeId" value={challenge.id} />
                 <input type="hidden" name="taskId" value={task.id} />
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="grid gap-4 lg:grid-cols-2">
                   <label className="grid gap-2">
                     <span className="text-sm font-semibold text-[#373632]">
                       {t("tasks.fields.title")}
@@ -791,7 +791,7 @@ export default async function ChallengePage({
                   placeholder={t("tasks.fields.description")}
                   className="min-h-24 resize-y rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                 />
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="grid gap-4 lg:grid-cols-2">
                   <input
                     name="responsiblePerson"
                     defaultValue={task.responsible_person ?? ""}
@@ -842,7 +842,7 @@ export default async function ChallengePage({
             <form action={saveTask} className="mt-4 grid gap-4">
               <input type="hidden" name="locale" value={locale} />
               <input type="hidden" name="challengeId" value={challenge.id} />
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 lg:grid-cols-2">
                 <input
                   name="title"
                   required

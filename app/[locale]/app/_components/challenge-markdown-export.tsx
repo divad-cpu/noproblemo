@@ -144,7 +144,7 @@ export function ChallengeMarkdownExport({
     <section className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6">
       <h2 className="text-2xl font-semibold text-[#22211e]">{t("title")}</h2>
       <p className="mt-2 text-sm leading-6 text-[#55544f]">{t("body")}</p>
-      <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+      <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <Link
           href={printHref}
           target="_blank"
