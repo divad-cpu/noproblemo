@@ -217,7 +217,7 @@ Recommended scope:
 - Verify RLS/RPC behavior with multiple test users.
 - Configure Supabase Auth redirect URLs and OAuth providers.
 - Configure Vercel environment variables and `noproblemo.tech`.
-- Configure Domeneshop DNS and `support@noproblemo.tech` outside the app.
+- Configure Domeneshop DNS and `david@fideli.no` outside the app.
 - Manually test all MVP flows on mobile, desktop, and supported locales.
 - Do not add unrelated product features.
 

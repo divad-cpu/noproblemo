@@ -65,7 +65,7 @@ In scope:
 - Verify Apple OAuth if credentials/provider access are available and approved.
 - Verify Vercel env vars and deployment settings only after approval.
 - Verify `noproblemo.tech` custom domain and Domeneshop DNS only after approval.
-- Verify `support@noproblemo.tech` mailbox or alias setup outside the app.
+- Verify `david@fideli.no` mailbox or alias setup outside the app.
 - Verify RLS with multiple users:
   - User A normal user
   - User B normal user

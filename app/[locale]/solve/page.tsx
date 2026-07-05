@@ -23,7 +23,7 @@ export default function SolvePage({ params }: SolvePageProps) {
             <Link href="/" className="text-sm font-semibold text-[#373632] underline-offset-4 hover:underline">
               {t("backHome")}
             </Link>
-            <p className="text-sm text-[#706f68]">{t("supportHint")} support@noproblemo.tech</p>
+            <p className="text-sm text-[#706f68]">{t("supportHint")} david@fideli.no</p>
           </nav>
 
           <section className="rounded-lg border border-[#dad8d0] bg-white p-6 shadow-sm sm:p-10">

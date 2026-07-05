@@ -191,7 +191,7 @@
     "signup": {
       "eyebrow": "Buat akun",
       "title": "Buat akun",
-      "body": "Buat akun",
+      "body": "Gunakan pendaftaran email untuk menyimpan pekerjaan, mengimpor draf tamu, dan melanjutkan proyek di perangkat lain.",
       "submit": "Buat akun",
       "logIn": "Masuk"
     },
@@ -234,7 +234,7 @@
       "signup-rate-limited": "Terlalu banyak percobaan daftar. Tunggu sebentar lalu coba lagi.",
       "signup-invalid-email": "Masukkan alamat email yang valid.",
       "signup-provider-disabled": "Pendaftaran email belum tersedia. Periksa pengaturan Supabase Auth.",
-      "reset-rate-limited": "Terlalu banyak permintaan. Minta tautan baru nanti.",
+      "reset-rate-limited": "Terlalu banyak email reset diminta. Tunggu sebelum mencoba lagi. Saat pengujian, Supabase mungkin meminta menunggu setidaknya 1 jam atau menggunakan penyedia SMTP yang dikonfigurasi.",
       "reset-provider-or-smtp": "Email reset belum dapat dikirim. Coba lagi nanti atau hubungi dukungan.",
       "reset-invalid-email": "Masukkan alamat email yang valid.",
       "reset-redirect-not-allowed": "Konfigurasi tautan reset belum lengkap. Hubungi dukungan.",
@@ -261,7 +261,8 @@
       "title": "Perlu email konfirmasi baru?",
       "body": "Masukkan email Anda dan kami akan mengirim tautan konfirmasi jika akun dapat menerimanya.",
       "submit": "Kirim ulang konfirmasi"
-    }
+    },
+    "emailOnly": "Login dan pendaftaran email tersedia saat ini. Google dan Apple direncanakan nanti."
   },
   "AuthStatus": {
     "login": "Masuk",
@@ -650,7 +651,7 @@
     },
     "export": {
       "title": "Lanjutkan",
-      "body": "Teks ini menjelaskan fitur ini dan langkah berikutnya.",
+      "body": "Salin, unduh, atau cetak ringkasan tantangan ini. Gunakan dialog cetak browser untuk menyimpan PDF.",
       "copy": "Lanjutkan",
       "download": "Lanjutkan",
       "copySuccess": "Tindakan selesai.",
@@ -672,7 +673,16 @@
       "completed": "Lanjutkan",
       "position": "Lanjutkan",
       "yes": "Ya",
-      "no": "Tidak"
+      "no": "Tidak",
+      "pdfButton": "Simpan sebagai PDF",
+      "pdfHint": "Membuka tampilan laporan yang bersih. Gunakan dialog cetak browser dan pilih Simpan sebagai PDF.",
+      "reportTitle": "Laporan NoProblemo",
+      "createdAt": "Dibuat",
+      "updatedAt": "Diperbarui",
+      "emptyReport": "Laporan ini belum memiliki isi tantangan yang diisi.",
+      "task": "Tugas",
+      "printButton": "Cetak atau simpan PDF",
+      "backToChallenge": "Kembali ke tantangan"
     },
     "messages": {
       "title": "Pesan",

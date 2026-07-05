@@ -191,7 +191,7 @@
     "signup": {
       "eyebrow": "创建账户",
       "title": "创建账户",
-      "body": "创建账户",
+      "body": "现在使用电子邮件注册，以保存工作、导入访客草稿，并在不同设备上继续项目。",
       "submit": "创建账户",
       "logIn": "登录"
     },
@@ -234,7 +234,7 @@
       "signup-rate-limited": "注册尝试过多。请稍后再试。",
       "signup-invalid-email": "请输入有效的邮箱地址。",
       "signup-provider-disabled": "邮箱注册尚不可用。请检查 Supabase Auth 提供方设置。",
-      "reset-rate-limited": "请求过于频繁。请稍后再请求新链接。",
+      "reset-rate-limited": "请求重置邮件过多。请等待后再试。测试期间，Supabase 可能要求至少等待 1 小时，或使用已配置的 SMTP 提供商。",
       "reset-provider-or-smtp": "目前无法发送重置邮件。请稍后再试，或联系支持。",
       "reset-invalid-email": "请输入有效的邮箱地址。",
       "reset-redirect-not-allowed": "重置链接配置不完整。请联系支持。",
@@ -261,7 +261,8 @@
       "title": "需要新的确认邮件吗？",
       "body": "输入邮箱。如果该账号可以接收确认链接，我们会发送新的邮件。",
       "submit": "重新发送确认"
-    }
+    },
+    "emailOnly": "目前可使用电子邮件登录和注册。Google 和 Apple 登录计划稍后提供。"
   },
   "AuthStatus": {
     "login": "登录",
@@ -650,7 +651,7 @@
     },
     "export": {
       "title": "继续",
-      "body": "这里说明此功能的用途和下一步。",
+      "body": "复制、下载或打印此挑战的清晰摘要。使用浏览器打印对话框保存 PDF。",
       "copy": "继续",
       "download": "继续",
       "copySuccess": "操作已完成。",
@@ -672,7 +673,16 @@
       "completed": "继续",
       "position": "继续",
       "yes": "是",
-      "no": "否"
+      "no": "否",
+      "pdfButton": "保存为 PDF",
+      "pdfHint": "打开干净的报告视图。使用浏览器打印对话框并选择保存为 PDF。",
+      "reportTitle": "NoProblemo 报告",
+      "createdAt": "创建时间",
+      "updatedAt": "更新时间",
+      "emptyReport": "此报告还没有填写的挑战内容。",
+      "task": "任务",
+      "printButton": "打印或保存为 PDF",
+      "backToChallenge": "返回挑战"
     },
     "messages": {
       "title": "消息",

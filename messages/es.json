@@ -191,7 +191,7 @@
     "signup": {
       "eyebrow": "Crear cuenta",
       "title": "Crear cuenta",
-      "body": "Crear cuenta",
+      "body": "Usa el registro por correo para guardar trabajo, importar borradores de invitado y continuar proyectos en otros dispositivos.",
       "submit": "Crear cuenta",
       "logIn": "Iniciar sesión"
     },
@@ -234,7 +234,7 @@
       "signup-rate-limited": "Demasiados intentos de registro. Espera un poco e inténtalo de nuevo.",
       "signup-invalid-email": "Introduce un correo válido.",
       "signup-provider-disabled": "El registro por email aún no está disponible. Revisa la configuración de Supabase Auth.",
-      "reset-rate-limited": "Se hicieron demasiadas solicitudes. Solicita un nuevo enlace más tarde.",
+      "reset-rate-limited": "Se solicitaron demasiados correos de restablecimiento. Espera antes de intentarlo de nuevo. Durante las pruebas, Supabase puede requerir esperar al menos 1 hora o usar un proveedor SMTP configurado.",
       "reset-provider-or-smtp": "No se pudo enviar el correo de restablecimiento ahora. Intenta más tarde o contacta soporte.",
       "reset-invalid-email": "Escribe una dirección de correo válida.",
       "reset-redirect-not-allowed": "La configuración del enlace de restablecimiento está incompleta. Contacta soporte.",
@@ -261,7 +261,8 @@
       "title": "¿Necesitas otro email de confirmación?",
       "body": "Introduce tu email y enviaremos un enlace de confirmación si la cuenta puede recibirlo.",
       "submit": "Reenviar confirmación"
-    }
+    },
+    "emailOnly": "El inicio de sesión y registro por correo están disponibles ahora. Google y Apple se añadirán más adelante."
   },
   "AuthStatus": {
     "login": "Iniciar sesión",
@@ -650,7 +651,7 @@
     },
     "export": {
       "title": "Continuar",
-      "body": "Este texto explica esta función y el siguiente paso.",
+      "body": "Copia, descarga o imprime un resumen legible de este reto. Usa el diálogo de impresión del navegador para guardar un PDF.",
       "copy": "Continuar",
       "download": "Continuar",
       "copySuccess": "La acción se completó.",
@@ -672,7 +673,16 @@
       "completed": "Continuar",
       "position": "Continuar",
       "yes": "Sí",
-      "no": "No"
+      "no": "No",
+      "pdfButton": "Guardar como PDF",
+      "pdfHint": "Abre una vista de informe limpia. Usa el diálogo de impresión del navegador y elige Guardar como PDF.",
+      "reportTitle": "Informe de NoProblemo",
+      "createdAt": "Creado",
+      "updatedAt": "Actualizado",
+      "emptyReport": "Este informe aún no tiene contenido de desafío completado.",
+      "task": "Tarea",
+      "printButton": "Imprimir o guardar como PDF",
+      "backToChallenge": "Volver al desafío"
     },
     "messages": {
       "title": "Mensaje",

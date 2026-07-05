@@ -191,7 +191,7 @@
     "signup": {
       "eyebrow": "Criar conta",
       "title": "Criar conta",
-      "body": "Criar conta",
+      "body": "Use o cadastro por email para salvar trabalho, importar rascunhos de convidado e continuar projetos em outros dispositivos.",
       "submit": "Criar conta",
       "logIn": "Entrar"
     },
@@ -234,7 +234,7 @@
       "signup-rate-limited": "Muitas tentativas de cadastro. Aguarde um pouco e tente novamente.",
       "signup-invalid-email": "Digite um endereço de email válido.",
       "signup-provider-disabled": "Cadastro por email ainda não está disponível. Verifique as configurações do Supabase Auth.",
-      "reset-rate-limited": "Muitas solicitações. Peça um novo link mais tarde.",
+      "reset-rate-limited": "Muitos e-mails de redefinição foram solicitados. Aguarde antes de tentar novamente. Durante testes, o Supabase pode exigir esperar pelo menos 1 hora ou usar um provedor SMTP configurado.",
       "reset-provider-or-smtp": "Não foi possível enviar o e-mail de redefinição agora. Tente mais tarde ou fale com o suporte.",
       "reset-invalid-email": "Digite um endereço de e-mail válido.",
       "reset-redirect-not-allowed": "A configuração do link de redefinição está incompleta. Fale com o suporte.",
@@ -261,7 +261,8 @@
       "title": "Precisa de um novo email de confirmação?",
       "body": "Digite seu email e enviaremos um link de confirmação se a conta puder recebê-lo.",
       "submit": "Reenviar confirmação"
-    }
+    },
+    "emailOnly": "Login e cadastro por email estão disponíveis agora. Google e Apple serão planejados para depois."
   },
   "AuthStatus": {
     "login": "Entrar",
@@ -650,7 +651,7 @@
     },
     "export": {
       "title": "Continuar",
-      "body": "Este texto explica este recurso e o próximo passo.",
+      "body": "Copie, baixe ou imprima um resumo legível deste desafio. Use a janela de impressão do navegador para salvar um PDF.",
       "copy": "Continuar",
       "download": "Continuar",
       "copySuccess": "A ação foi concluída.",
@@ -672,7 +673,16 @@
       "completed": "Continuar",
       "position": "Continuar",
       "yes": "Sim",
-      "no": "Não"
+      "no": "Não",
+      "pdfButton": "Salvar como PDF",
+      "pdfHint": "Abre uma visualização limpa do relatório. Use a janela de impressão do navegador e escolha Salvar como PDF.",
+      "reportTitle": "Relatório NoProblemo",
+      "createdAt": "Criado",
+      "updatedAt": "Atualizado",
+      "emptyReport": "Este relatório ainda não tem conteúdo de desafio preenchido.",
+      "task": "Tarefa",
+      "printButton": "Imprimir ou salvar como PDF",
+      "backToChallenge": "Voltar ao desafio"
     },
     "messages": {
       "title": "Mensagem",

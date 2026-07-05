@@ -27,7 +27,7 @@ Implemented:
 - Markdown copy/export for guest summary.
 - Login prompt for unavailable guest save/collaboration actions.
 - Support page.
-- Email login/signup pages.
+- Email login/signup pages. Google and Apple OAuth actions remain future/planned and are not currently visible in the auth UI.
 - Supabase auth callback and logout routes.
 - Protected dashboard at `/[locale]/app`.
 - Minimal challenge creation at `/[locale]/app/challenges/new`.
@@ -36,7 +36,7 @@ Implemented:
 - Guest import from `noproblemo.guestWorkspace.v1` to Supabase `challenges` and `challenge_sections`.
 - Display name and preferred locale profile settings.
 - Seven-step problem-solving workflow.
-- Editable challenge sections, solutions, tasks, final recommendation, summary, and Markdown export.
+- Editable challenge sections, solutions, tasks, final recommendation, summary, Markdown export, and protected print-route browser PDF export.
 - Friends page with request send, accept, decline, cancel, and remove friend actions.
 - Groups pages with group creation, invitations, roles, member removal, and explicit group challenge links.
 - Group messages and challenge discussion messages.
@@ -71,8 +71,8 @@ Not implemented:
 - `/[locale]`: landing page.
 - `/[locale]/solve`: guest workspace.
 - `/[locale]/support`: support/contact.
-- `/[locale]/login`: email login and OAuth start.
-- `/[locale]/signup`: email signup and OAuth start.
+- `/[locale]/login`: email login.
+- `/[locale]/signup`: email signup.
 - `/[locale]/forgot-password`: password reset request.
 - `/[locale]/reset-password`: password reset completion after callback recovery session exchange.
 - `/[locale]/auth/callback`: Supabase auth callback.
@@ -80,6 +80,7 @@ Not implemented:
 - `/[locale]/app`: protected dashboard.
 - `/[locale]/app/challenges/new`: minimal protected challenge creation.
 - `/[locale]/app/challenges/[id]`: protected saved challenge workspace.
+- `/[locale]/app/challenges/[id]/print`: protected print-only saved challenge report for browser Save as PDF.
 - `/[locale]/app/friends`: protected friends page.
 - `/[locale]/app/groups`: protected groups list and pending invitations.
 - `/[locale]/app/groups/new`: protected group creation.
@@ -145,8 +146,8 @@ See `DATABASE_SCHEMA.md` before any future migration work.
 Current:
 
 - Guest data is local-only.
-- Supabase Auth email UI/actions exist.
-- Google and Apple OAuth starts exist, but require provider setup before production use.
+- Supabase Auth email UI/actions exist and are the only visible auth method for now.
+- Google and Apple OAuth starts exist in code for future use, but their buttons are temporarily hidden from login/signup.
 - Email confirmation, OAuth, and password recovery use locale-specific `/[locale]/auth/callback` routes.
 - Password changes and reset completions use Supabase Auth and do not store password values in application tables.
 - Account deletion uses a server-only Supabase admin helper and deletes only the current authenticated user after explicit confirmation.

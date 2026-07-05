@@ -191,7 +191,7 @@
     "signup": {
       "eyebrow": "Opprett konto",
       "title": "Opprett en konto for lagret arbeid.",
-      "body": "Bruk e-postregistrering nå. Dashbord og import av gjestearbeid er tilgjengelig etter innlogging.",
+      "body": "Bruk e-postregistrering nå for å lagre arbeid, importere gjesteutkast og fortsette prosjekter på tvers av enheter.",
       "submit": "Opprett konto",
       "logIn": "Har du allerede konto? Logg inn"
     },
@@ -234,7 +234,7 @@
       "signup-rate-limited": "For mange registreringsforsøk. Vent litt og prøv igjen.",
       "signup-invalid-email": "Skriv inn en gyldig e-postadresse.",
       "signup-provider-disabled": "E-postregistrering er ikke tilgjengelig ennå. Sjekk Supabase Auth-innstillingene.",
-      "reset-rate-limited": "For mange forespørsler. Be om en ny lenke senere.",
+      "reset-rate-limited": "For mange tilbakestillings-e-poster ble bedt om. Vent før du prøver igjen. Under testing kan Supabase kreve at du venter minst 1 time eller bruker en konfigurert SMTP-leverandør.",
       "reset-provider-or-smtp": "Tilbakestillings-e-posten kunne ikke sendes akkurat nå. Prøv senere eller kontakt støtte.",
       "reset-invalid-email": "Skriv inn en gyldig e-postadresse.",
       "reset-redirect-not-allowed": "Oppsettet for tilbakestillingslenken er ufullstendig. Kontakt støtte.",
@@ -261,7 +261,8 @@
       "title": "Trenger du en ny bekreftelses-e-post?",
       "body": "Skriv inn e-posten din, så sender vi en bekreftelseslenke hvis kontoen kan motta en.",
       "submit": "Send bekreftelse på nytt"
-    }
+    },
+    "emailOnly": "E-postinnlogging og registrering er tilgjengelig nå. Google- og Apple-innlogging er planlagt senere."
   },
   "AuthStatus": {
     "login": "Logg inn",
@@ -650,7 +651,7 @@
     },
     "export": {
       "title": "Markdown-eksport",
-      "body": "Kopier eller last ned et lesbart Markdown-sammendrag av denne utfordringen. PDF-eksport er en fremtidig funksjon.",
+      "body": "Kopier, last ned eller skriv ut et lesbart sammendrag av denne utfordringen. Bruk nettleserens utskriftsdialog for å lagre som PDF.",
       "copy": "Kopier Markdown",
       "download": "Last ned .md",
       "copySuccess": "Markdown kopiert.",
@@ -672,7 +673,16 @@
       "completed": "Fullført",
       "position": "Plassering",
       "yes": "Ja",
-      "no": "Nei"
+      "no": "Nei",
+      "pdfButton": "Lagre som PDF",
+      "pdfHint": "Åpner en ren rapportvisning. Bruk nettleserens utskriftsdialog og velg Lagre som PDF.",
+      "reportTitle": "NoProblemo-rapport",
+      "createdAt": "Opprettet",
+      "updatedAt": "Oppdatert",
+      "emptyReport": "Rapporten har ingen utfylt utfordringsinformasjon ennå.",
+      "task": "Oppgave",
+      "printButton": "Skriv ut eller lagre som PDF",
+      "backToChallenge": "Tilbake til utfordringen"
     },
     "messages": {
       "title": "Diskusjon",
@@ -1013,7 +1023,7 @@
       "deployment": {
         "title": "Utrulling",
         "envTemplates": "Bruk bare maler; ikke eksponer ekte hemmelige verdier.",
-        "supportEmail": "Offentlig støtteadresse er support@noproblemo.tech.",
+        "supportEmail": "Offentlig støtteadresse er david@fideli.no.",
         "noAutomation": "E-postautomatisering, Resend og Vercel Cron brukes med vilje ikke.",
         "validation": "Kjør lint, typecheck og build før utrulling."
       }

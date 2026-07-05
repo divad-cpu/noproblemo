@@ -160,7 +160,7 @@ Reviewed locally in Phase 11:
 - `SUPABASE_SERVICE_ROLE_KEY` is used only in the server-only `lib/supabase/admin.ts` helper for current-user account deletion; the app reference outside server actions is an admin checklist variable name.
 - `.env.example` and `.env.local.example` contain placeholders only.
 - `.env.local` was not read or printed.
-- `support@noproblemo.tech` remains the public support address.
+- `david@fideli.no` is the public support address.
 - `da.jernaes@gmail.com` was not found in public app files.
 - Protected app routes and admin routes continue to check authenticated Supabase users server-side.
 - Admin routes continue to check `profiles.role = 'admin'` server-side.
@@ -219,6 +219,7 @@ Phase 7 workspace operations use `lib/supabase/server.ts`, the public Supabase a
 - Solution writes validate 1-to-5 risk, effort, and impact scores.
 - Task writes keep responsible person as plain text and do not assign real users.
 - Markdown export runs in the browser from already-authorized page data and does not call privileged APIs.
+- PDF export uses the browser print dialog from a protected print-only report route. The route uses the authenticated Supabase server client and RLS, renders a compact report from already-authorized challenge data, omits empty sections where practical, does not call external PDF services, and does not use service-role credentials.
 
 ## Group Access Rules
 
@@ -259,7 +260,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
-NEXT_PUBLIC_SUPPORT_EMAIL=support@noproblemo.tech
+NEXT_PUBLIC_SUPPORT_EMAIL=david@fideli.no
 ```
 
 Rules:
@@ -284,6 +285,7 @@ Rules:
 - The recovery client is intentionally separate from the main SSR Supabase client. Local password recovery was producing `verifier-missing-or-expired` with the SSR/cookie-oriented client, so reset now uses a browser-only implicit recovery flow where hash tokens stay in the browser URL fragment and are cleared after session setup.
 - Password reset request diagnostics must not log email addresses, codes, tokens, sessions, cookies, full URLs, or env values. Development logs may include only generic labels such as rate-limit, provider-or-smtp, redirect-url, invalid-email, or unknown.
 - Password reset exchange diagnostics must not log auth codes, tokens, sessions, cookies, URLs, passwords, or email addresses. Development logs may include only generic labels such as verifier-missing-or-expired, expired-link, or unknown.
+- Supabase built-in reset email sending can return `over_email_send_rate_limit` / 429 during repeated testing. The UI must show a privacy-safe rate-limit message and must not attempt to bypass provider limits.
 - If reset email sending fails, check Supabase Auth logs and provider/SMTP settings before changing app code.
 - Old recovery links requested before this browser-client flow may still fail; users should request a fresh reset link.
 - Password reset uses Supabase Auth `updateUser({ password })`; reset passwords are never stored in application database tables.

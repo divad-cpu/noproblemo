@@ -4,9 +4,12 @@
 
 ### Added
 
+- Added a protected print-only challenge report route at `/[locale]/app/challenges/[id]/print` for reliable browser Save as PDF export.
+- Added compact print report styling for saved challenge Save as PDF output, including A4 margins, hidden app chrome, compact solution blocks, task table formatting, and omitted empty sections where practical.
 - Added privacy-safe forgot-password failure categories for reset rate limits, provider/SMTP issues, invalid email format, redirect URL configuration, and generic send failure.
 - Added localized same-browser/profile guidance for reset links that fail because Supabase PKCE verifier state is missing or expired.
 - Added an isolated browser-only Supabase recovery client for forgot-password and reset-password.
+- Added browser print-based Save as PDF export for saved challenges.
 - Added shared translated show/hide password controls for login, signup, reset-password, and settings password change.
 - Added browser-side Supabase password-reset request handling so PKCE recovery links can be exchanged by `/[locale]/reset-password`.
 - Added forgot-password and reset-password routes using Supabase Auth reset links.
@@ -27,8 +30,12 @@
 
 ### Changed
 
+- Improved password reset rate-limit UX with clearer localized `over_email_send_rate_limit` / 429 guidance and a short local cooldown after a rate-limit response.
 - Changed browser password-reset requests to use exactly `/<locale>/reset-password` on the current origin, without extra query parameters.
 - Changed password reset recovery to use a dedicated implicit browser recovery flow instead of the main SSR/cookie-oriented client.
+- Changed the visual system toward a light, modern, minimal identity with blue, green, soft orange, white surfaces, dark text, and subtle digital-grid texture.
+- Changed public support email to `david@fideli.no`.
+- Changed visible login/signup UI to email-only for now; Google and Apple remain future/planned.
 - Changed forgot-password help text to mention that local reset links should be opened in the same browser/profile where they were requested.
 - Cleaned non-English locale files with machine-quality translations for exact English fallback values.
 - Changed reset-password to show a checking state, enable fields only after recovery readiness, and redirect to localized login success after update.
@@ -49,6 +56,7 @@
 
 ### Fixed
 
+- Fixed Firefox PDF export blank pages caused by same-page print CSS hiding the workspace with `visibility: hidden`, which preserved the app layout height in print preview.
 - Fixed password reset links requested from the app by keeping Supabase PKCE recovery state in the browser client.
 - Fixed local password recovery links that still failed with `verifier-missing-or-expired` by isolating reset recovery from the main SSR Supabase client.
 - Fixed the forgot-password success crash by capturing the form element before async Supabase work and resetting that stable reference.
@@ -106,7 +114,7 @@
 - Added localStorage draft persistence for guest work.
 - Added Markdown summary copy and export actions.
 - Added login prompt for guest actions that require cloud saving or collaboration.
-- Added support page at `/[locale]/support` with `support@noproblemo.tech`.
+- Added support page at `/[locale]/support` with `david@fideli.no`.
 - Added placeholder login and signup routes without implementing authentication.
 - Updated documentation for Phase 4 Supabase foundation handoff.
 - Confirmed lint, typecheck, and production build pass.

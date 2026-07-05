@@ -50,7 +50,7 @@ export default async function ProtectedAppLayout({
   return (
     <main className="min-h-screen bg-[#f7f7f4] px-4 py-6 text-[#161616] sm:px-8 sm:py-8 lg:px-12">
       <div className="mx-auto flex max-w-6xl flex-col gap-6">
-        <header className="rounded-lg border border-[#dad8d0] bg-white p-4 shadow-sm">
+        <header className="no-print rounded-lg border border-[#dad8d0] bg-white p-4 shadow-sm">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <Link
               href="/app"

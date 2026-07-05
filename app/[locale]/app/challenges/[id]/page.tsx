@@ -164,6 +164,7 @@ function numberValue(value: number | null) {
 }
 
 function ExportData({
+  locale,
   challenge,
   sections,
   solutions,
@@ -171,6 +172,7 @@ function ExportData({
   sectionLabels,
   statusLabel,
 }: {
+  locale: Locale;
   challenge: Challenge;
   sections: Section[];
   solutions: Solution[];
@@ -184,7 +186,10 @@ function ExportData({
         title: challenge.title,
         shortDescription: challenge.short_description ?? "",
         status: statusLabel,
+        createdAt: formatDate(challenge.created_at, locale),
+        updatedAt: formatDate(challenge.updated_at, locale),
       }}
+      printHref={`/app/challenges/${challenge.id}/print`}
       sections={sectionKeys.map((sectionKey) => ({
         key: sectionKey,
         title: sectionLabels[sectionKey],
@@ -886,6 +891,7 @@ export default async function ChallengePage({
       </section>
 
       <ExportData
+        locale={locale}
         challenge={challenge}
         sections={savedSections}
         solutions={savedSolutions}

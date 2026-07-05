@@ -191,7 +191,7 @@
     "signup": {
       "eyebrow": "Create account",
       "title": "Create an account for future saved work.",
-      "body": "Use email signup now. Saved dashboards and guest import are planned for the next phase.",
+      "body": "Use email signup now to save work, import guest drafts, and continue projects across devices.",
       "submit": "Create account",
       "logIn": "Already have an account? Log in"
     },
@@ -234,7 +234,7 @@
       "signup-rate-limited": "Too many signup attempts. Wait a little and try again.",
       "signup-invalid-email": "Enter a valid email address.",
       "signup-provider-disabled": "Email signup is not available yet. Check Supabase Auth provider settings.",
-      "reset-rate-limited": "Too many reset requests. Request a new link later.",
+      "reset-rate-limited": "Too many reset emails were requested. Please wait before trying again. During testing, Supabase may require waiting at least 1 hour or using a configured SMTP provider.",
       "reset-provider-or-smtp": "The reset email could not be sent right now. Try again later or contact support.",
       "reset-invalid-email": "Enter a valid email address.",
       "reset-redirect-not-allowed": "The reset link configuration is incomplete. Contact support.",
@@ -261,7 +261,8 @@
       "title": "Need a new confirmation email?",
       "body": "Enter your email and we will send a confirmation link if the account can receive one.",
       "submit": "Resend confirmation"
-    }
+    },
+    "emailOnly": "Email login and signup are currently available. Google and Apple sign-in are planned for later."
   },
   "AuthStatus": {
     "login": "Log in",
@@ -650,7 +651,7 @@
     },
     "export": {
       "title": "Markdown export",
-      "body": "Copy or download a readable Markdown summary of this challenge. PDF export remains a future feature.",
+      "body": "Copy, download, or print a readable summary of this challenge. Use your browser print dialog to save a PDF.",
       "copy": "Copy Markdown",
       "download": "Download .md",
       "copySuccess": "Markdown copied.",
@@ -672,7 +673,16 @@
       "completed": "Completed",
       "position": "Position",
       "yes": "Yes",
-      "no": "No"
+      "no": "No",
+      "pdfButton": "Save as PDF",
+      "pdfHint": "Opens a clean report view. Use the browser print dialog and choose Save as PDF.",
+      "reportTitle": "NoProblemo report",
+      "createdAt": "Created",
+      "updatedAt": "Updated",
+      "emptyReport": "This report has no filled-in challenge content yet.",
+      "task": "Task",
+      "printButton": "Print or save as PDF",
+      "backToChallenge": "Back to challenge"
     },
     "messages": {
       "title": "Discussion",
@@ -1013,7 +1023,7 @@
       "deployment": {
         "title": "Deployment",
         "envTemplates": "Use templates only; do not expose real secret values.",
-        "supportEmail": "Public support email is support@noproblemo.tech.",
+        "supportEmail": "Public support email is david@fideli.no.",
         "noAutomation": "Email automation, Resend, and Vercel Cron are intentionally not used.",
         "validation": "Run lint, typecheck, and build before deployment."
       }

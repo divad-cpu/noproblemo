@@ -31,7 +31,8 @@ Implemented locally:
 
 - Public landing, support, login, signup, and guest solve routes.
 - Guest workspace stored only in browser localStorage.
-- Supabase email auth and prepared Google/Apple OAuth starts.
+- Supabase email auth. Google/Apple OAuth starts remain in code for future setup, but visible auth UI is email-only for now.
+- Compact browser print-based PDF export for saved challenges.
 - Protected dashboard, profile settings, saved challenge creation, saved challenge workspace, and guest import.
 - Friends, groups, group invitations, group roles, and explicit group challenge links.
 - Group messages, challenge discussion messages, private notifications, and scoped activity events.
@@ -45,7 +46,7 @@ Still requiring real Supabase/Vercel verification:
 - Supabase Auth email/OAuth provider configuration and redirect URLs.
 - Vercel environment variables, custom domain, and Domeneshop DNS.
 - Production manual testing across mobile, desktop, all 11 locales, and Arabic/Urdu RTL.
-- Support mailbox or alias setup for `support@noproblemo.tech`.
+- Support mailbox or alias setup for `david@fideli.no`.
 
 ## Internationalization
 
@@ -72,8 +73,8 @@ Arabic (`ar`) and Urdu (`ur`) render with `dir="rtl"`. All other supported local
 - `/[locale]` public landing page
 - `/[locale]/solve` guest problem-solving workspace
 - `/[locale]/support` support/contact page
-- `/[locale]/login` email login and Google/Apple OAuth start route
-- `/[locale]/signup` email signup and Google/Apple OAuth start route
+- `/[locale]/login` email login route
+- `/[locale]/signup` email signup route
 - `/[locale]/forgot-password` password reset request route
 - `/[locale]/reset-password` password reset completion route
 - `/[locale]/auth/callback` Supabase auth callback
@@ -81,6 +82,7 @@ Arabic (`ar`) and Urdu (`ur`) render with `dir="rtl"`. All other supported local
 - `/[locale]/app` protected dashboard
 - `/[locale]/app/challenges/new` minimal protected challenge creation
 - `/[locale]/app/challenges/[id]` protected saved challenge workspace
+- `/[locale]/app/challenges/[id]/print` protected saved challenge print/PDF report
 - `/[locale]/app/friends` protected friends page
 - `/[locale]/app/groups` protected groups list
 - `/[locale]/app/groups/new` protected group creation
@@ -100,7 +102,7 @@ Logged-in users can import the current guest draft from the dashboard. Import cr
 
 ## Authentication
 
-Email login/signup uses Supabase Auth. Signup failures are mapped to safe categories such as invalid email, weak password, rate limit, pending confirmation, provider configuration, or generic failure without exposing raw provider details. Google and Apple login buttons are prepared through Supabase OAuth, but they require provider configuration in Supabase, Google Cloud, and Apple Developer before production use.
+Email login/signup uses Supabase Auth and is the only visible auth method for now. Signup failures are mapped to safe categories such as invalid email, weak password, rate limit, pending confirmation, provider configuration, or generic failure without exposing raw provider details. Google and Apple OAuth actions remain prepared in code for future setup, but their buttons are temporarily hidden from login/signup.
 
 Email confirmation and OAuth use locale-specific `/[locale]/auth/callback` routes. If Supabase confirms an email but the server callback cannot exchange the PKCE code for a session, the login page shows a calm "email may already be confirmed" state instead of a false invalid-link error.
 
@@ -114,7 +116,7 @@ The Phase 4 database trigger is expected to create `profiles` rows after signup,
 
 The dashboard lists the authenticated user's saved challenges through Supabase RLS, shows empty/error states, keeps pending friend/group/notification items separate, and provides minimal quick actions.
 
-The saved challenge workspace supports the seven-step problem-solving workflow, editable challenge sections, possible solutions, pros/cons, risk/effort/impact scoring, tasks/actions, final recommendation, summary, and Markdown copy/download export.
+The saved challenge workspace supports the seven-step problem-solving workflow, editable challenge sections, possible solutions, pros/cons, risk/effort/impact scoring, tasks/actions, final recommendation, summary, Markdown copy/download export, and a compact browser print-based PDF export. For PDF, users click Save as PDF to open the protected print-only report route, then choose Save to PDF in the browser print dialog. The print report omits normal app chrome, editing controls, and empty sections where practical. No external PDF service is used.
 
 Profile settings can update `display_name` and `preferred_locale`. The preferred locale is saved to `profiles.preferred_locale`, then the settings page reopens in the selected locale. Logged-in users can also change their password through Supabase Auth.
 
@@ -173,7 +175,7 @@ NEXT_PUBLIC_SITE_URL=
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
-NEXT_PUBLIC_SUPPORT_EMAIL=support@noproblemo.tech
+NEXT_PUBLIC_SUPPORT_EMAIL=david@fideli.no
 ```
 
 `SUPABASE_SERVICE_ROLE_KEY` is server-only and is used by `lib/supabase/admin.ts` for current-user account deletion. It is not used by the frontend and must never be exposed to the browser.
@@ -222,7 +224,7 @@ Do not build public admin signup or self-service admin promotion.
 
 ## Deployment Direction
 
-Use GitHub plus Vercel for the app and Supabase for Auth/Postgres/RLS. Configure `noproblemo.tech` as a Vercel custom domain, point DNS from Domeneshop according to Vercel's current instructions, and configure `support@noproblemo.tech` as a mailbox or alias outside the app.
+Use GitHub plus Vercel for the app and Supabase for Auth/Postgres/RLS. Configure `noproblemo.tech` as a Vercel custom domain, point DNS from Domeneshop according to Vercel's current instructions, and use `david@fideli.no` as the public support mailbox.
 
 Use these verification documents before public launch:
 
@@ -248,7 +250,7 @@ Production readiness requires manual verification of guest mode, login/signup/lo
 
 - Locale-prefixed routes control visible UI language through `next-intl` message files.
 - The language switcher preserves the current route while replacing the locale segment.
-- Password reset is a browser-client Supabase recovery flow; old reset emails requested before the latest fixes may need a fresh reset link.
+- Password reset is a browser-client Supabase recovery flow; old reset emails requested before the latest fixes may need a fresh reset link. Supabase reset email requests can be rate-limited during testing, including `over_email_send_rate_limit` / 429 responses from the built-in email provider. Avoid repeated reset tests, wait for the limit to clear, and configure custom SMTP in Supabase for serious testing or production.
 - Reset email failures are mapped to safe categories. If sending still fails, check Supabase Auth logs, SMTP/provider configuration, rate limits, and redirect URL allow-list settings.
 - Required Supabase Auth redirects include local and production wildcard routes plus every locale-specific `/auth/callback` and `/reset-password` URL.
 - Account deletion is guarded by explicit confirmation, uses a server-only service-role helper, and must be tested only with disposable accounts.

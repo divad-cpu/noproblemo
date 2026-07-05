@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 type ExportSection = {
   key: string;
@@ -35,7 +36,10 @@ type ChallengeMarkdownExportProps = {
     title: string;
     shortDescription: string;
     status: string;
+    createdAt: string;
+    updatedAt: string;
   };
+  printHref: string;
   sections: ExportSection[];
   solutions: ExportSolution[];
   tasks: ExportTask[];
@@ -49,6 +53,7 @@ function valueOrDash(value: string | number | null) {
 
 export function ChallengeMarkdownExport({
   challenge,
+  printHref,
   sections,
   solutions,
   tasks,
@@ -140,10 +145,18 @@ export function ChallengeMarkdownExport({
       <h2 className="text-2xl font-semibold text-[#22211e]">{t("title")}</h2>
       <p className="mt-2 text-sm leading-6 text-[#55544f]">{t("body")}</p>
       <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+        <Link
+          href={printHref}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
+        >
+          {t("pdfButton")}
+        </Link>
         <button
           type="button"
           onClick={copyMarkdown}
-          className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
+          className="inline-flex min-h-12 items-center justify-center rounded-md border border-[#dad8d0] bg-white px-5 py-3 font-semibold text-[#22211e] hover:border-[#8b897f]"
         >
           {t("copy")}
         </button>
@@ -155,6 +168,7 @@ export function ChallengeMarkdownExport({
           {t("download")}
         </button>
       </div>
+      <p className="mt-3 text-sm leading-6 text-[#706f68]">{t("pdfHint")}</p>
       {status ? <p className="mt-3 text-sm text-[#55544f]">{status}</p> : null}
     </section>
   );

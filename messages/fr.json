@@ -191,7 +191,7 @@
     "signup": {
       "eyebrow": "Créer un compte",
       "title": "Créer un compte",
-      "body": "Créer un compte",
+      "body": "Utilisez l’inscription par e-mail pour enregistrer votre travail, importer des brouillons invités et continuer vos projets sur plusieurs appareils.",
       "submit": "Créer un compte",
       "logIn": "Connexion"
     },
@@ -234,7 +234,7 @@
       "signup-rate-limited": "Trop de tentatives d’inscription. Attendez un peu puis réessayez.",
       "signup-invalid-email": "Saisissez une adresse e-mail valide.",
       "signup-provider-disabled": "L’inscription par e-mail n’est pas encore disponible. Vérifiez les paramètres Supabase Auth.",
-      "reset-rate-limited": "Trop de demandes. Demandez un nouveau lien plus tard.",
+      "reset-rate-limited": "Trop d’e-mails de réinitialisation ont été demandés. Veuillez attendre avant de réessayer. Pendant les tests, Supabase peut demander d’attendre au moins 1 heure ou d’utiliser un fournisseur SMTP configuré.",
       "reset-provider-or-smtp": "L’e-mail de réinitialisation ne peut pas être envoyé pour le moment. Réessayez plus tard ou contactez le support.",
       "reset-invalid-email": "Saisissez une adresse e-mail valide.",
       "reset-redirect-not-allowed": "La configuration du lien de réinitialisation est incomplète. Contactez le support.",
@@ -261,7 +261,8 @@
       "title": "Besoin d’un nouvel e-mail de confirmation ?",
       "body": "Saisissez votre e-mail et nous enverrons un lien de confirmation si le compte peut le recevoir.",
       "submit": "Renvoyer la confirmation"
-    }
+    },
+    "emailOnly": "La connexion et l’inscription par e-mail sont disponibles maintenant. Google et Apple sont prévus plus tard."
   },
   "AuthStatus": {
     "login": "Connexion",
@@ -650,7 +651,7 @@
     },
     "export": {
       "title": "Continuer",
-      "body": "Ce texte explique cette fonction et la prochaine étape.",
+      "body": "Copiez, téléchargez ou imprimez un résumé lisible de ce défi. Utilisez la fenêtre d’impression du navigateur pour enregistrer un PDF.",
       "copy": "Continuer",
       "download": "Continuer",
       "copySuccess": "L’action est terminée.",
@@ -672,7 +673,16 @@
       "completed": "Continuer",
       "position": "Continuer",
       "yes": "Oui",
-      "no": "Non"
+      "no": "Non",
+      "pdfButton": "Enregistrer en PDF",
+      "pdfHint": "Ouvre une vue de rapport propre. Utilisez la fenêtre d’impression du navigateur et choisissez Enregistrer en PDF.",
+      "reportTitle": "Rapport NoProblemo",
+      "createdAt": "Créé",
+      "updatedAt": "Mis à jour",
+      "emptyReport": "Ce rapport ne contient pas encore de contenu de défi rempli.",
+      "task": "Tâche",
+      "printButton": "Imprimer ou enregistrer en PDF",
+      "backToChallenge": "Retour au défi"
     },
     "messages": {
       "title": "Message",

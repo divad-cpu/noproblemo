@@ -5,7 +5,6 @@ import { PasswordField } from "../_components/password-field";
 import { SiteFooter } from "../_components/site-footer";
 import {
   resendSignupConfirmation,
-  signInWithOAuth,
   signUpWithEmail,
 } from "../auth/actions";
 
@@ -184,27 +183,9 @@ export default async function SignupPage({
             </form>
           </div>
 
-          <div className="mt-8 grid gap-3 border-t border-[#e5e2da] pt-6">
-            <p className="text-sm font-semibold text-[#373632]">
-              {t("oauth.title")}
-            </p>
-            {(["google", "apple"] as const).map((provider) => (
-              <form key={provider} action={signInWithOAuth}>
-                <input type="hidden" name="locale" value={locale} />
-                <input type="hidden" name="next" value={nextPath} />
-                <input type="hidden" name="provider" value={provider} />
-                <button
-                  type="submit"
-                  className="inline-flex min-h-12 w-full items-center justify-center rounded-md border border-[#dad8d0] bg-white px-5 py-3 font-semibold text-[#22211e] hover:border-[#8b897f]"
-                >
-                  {t(`oauth.${provider}`)}
-                </button>
-              </form>
-            ))}
-            <p className="text-sm leading-6 text-[#706f68]">
-              {t("oauth.note")}
-            </p>
-          </div>
+          <p className="mt-6 rounded-md border border-[#d8e0d7] bg-[#f4f8f5] p-4 text-sm leading-6 text-[#55544f]">
+            {t("emailOnly")}
+          </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link

@@ -54,6 +54,7 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 - Possible solution create/edit/delete with pros, cons, risk, effort, impact, resources, and priority
 - Task/action create/edit/delete with completion, responsible person, deadline, and position
 - Markdown copy/download export for saved challenges
+- Compact browser print-based PDF export for saved challenges through a protected print-only report route at `/[locale]/app/challenges/[id]/print`; users choose Save to PDF from the print dialog. The report omits empty sections and editing controls where practical.
 - Protected friends page at `/[locale]/app/friends`
 - Friend request send, accept, decline, cancel, and remove friend actions
 - Protected groups pages at `/[locale]/app/groups`, `/[locale]/app/groups/new`, and `/[locale]/app/groups/[id]`
@@ -76,7 +77,8 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 - Production verification preparation docs for Supabase, Vercel, Domeneshop DNS, Auth providers, RLS, multi-user manual testing, and launch readiness
 - Notification/activity triggers for friend requests, group invitations, group/member events, group challenge links, and messages
 - Phase 10 local migration for admin helper functions, admin audit log, admin-only RPCs, profile role hardening, and admin profile read policy
-- Google and Apple OAuth start actions prepared through Supabase Auth
+- Google and Apple OAuth start actions remain prepared for future use, but visible login/signup UI currently shows email auth only.
+- Refreshed visual direction uses a light, modern, minimal palette with blue primary actions, green success accents, soft orange highlights, white surfaces, dark readable text, and subtle digital-grid texture.
 - Auth callback handling writes session cookies on the final redirect response and shows localized success/error states for email confirmation and recovery flows
 - Email confirmation fallback now avoids false invalid-link errors when Supabase confirms the account but the callback session exchange fails; users are sent to login with a clear "email may already be confirmed" state.
 - Password recovery links now target `/[locale]/reset-password` directly. Forgot/reset password use an isolated browser-only Supabase recovery client so password recovery can establish a browser session before updating the password.
@@ -107,7 +109,7 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 - Admin user management is read-only in Phase 10. Role changing, moderation, and system setting mutations remain future work.
 - Admin audit logging storage exists in `admin_audit_log`; Phase 10 has no sensitive admin mutations to log yet.
 - Phase 11 reviewed migrations and documented required manual Supabase/Vercel production checks, but did not perform live Supabase verification.
-- Google and Apple login buttons are present, but they require Supabase provider setup and external provider configuration before they work in production.
+- Google and Apple OAuth actions exist for future use, but buttons are temporarily hidden from the public auth UI while email login/signup is the active method.
 - Supabase schema exists as local migrations but has not been verified against the live Supabase project in this task.
 - Supabase helpers are used by auth actions, callback/logout handlers, auth-aware landing links, and the protected app layout.
 - Deployment works on Vercel, but production hardening is ongoing.
@@ -189,6 +191,9 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 - Supabase Auth redirect URLs must also include locale-specific `/[locale]/reset-password` routes for password recovery.
 - Password reset recovery is isolated from the main SSR Supabase client because the SSR/cookie-oriented client was not reliably preserving the PKCE verifier for local recovery links and produced `verifier-missing-or-expired`.
 - Reset links requested before the isolated browser recovery fix may need to be resent.
+- Supabase Auth reset email requests can be rate-limited during testing, including `over_email_send_rate_limit` / 429 responses from the built-in email provider. Avoid repeated reset tests, wait for the provider limit to clear, and use a configured SMTP provider for serious testing or production.
+- Saved challenge PDF export no longer prints from hidden same-page workspace DOM. The dedicated print route avoids Firefox blank pages caused by hidden app layout preserving print height.
+- Non-English translation quality still needs native review even though key parity is maintained.
 - Guest drafts are browser-local and can be lost if localStorage is cleared.
 - Non-English translations need human review.
 - Supabase `.temp` files exist from linking/local CLI state; do not print their contents.
@@ -332,6 +337,7 @@ Final auth diagnostics and locale cleanup follow-up:
 
 - Forgot-password reset requests are confirmed to use the browser Supabase client. The reset redirect is exactly `/<locale>/reset-password` on the current origin and does not include the user's email in the URL.
 - Password reset request failures now map to privacy-safe categories: rate limit, provider/SMTP, invalid email format, redirect URL not allowed, and generic send failure. Development warnings log only those labels.
+- Rate-limit responses now show a clearer localized message and hold a short client-side cooldown to prevent repeated clicks. This does not bypass Supabase email limits.
 - If reset email sending still fails after this code path, likely remaining causes are Supabase-side: SMTP/provider configuration, Auth rate limits, redirect URL allow-list, Site URL mismatch, or Supabase Auth email template/provider errors.
 - Non-English locale files received a machine-quality cleanup pass to remove obvious English fallback values. Native review is still required before public launch.
 - Reset links requested before the latest reset-password fixes may need to be resent.

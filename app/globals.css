@@ -1,35 +1,287 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7fbf8;
+  --foreground: #111827;
+  --surface: #ffffff;
+  --surface-soft: #f4f8f5;
+  --border: #d8e0d7;
+  --muted: #5b6470;
+  --primary: #1f6feb;
+  --primary-hover: #1858c7;
+  --success: #1f8a4c;
+  --warning: #f2b46d;
+  --danger: #9f341f;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: Arial, Helvetica, sans-serif;
+  --font-sans: Inter, Geist, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at 18% 8%, rgba(242, 180, 109, 0.18), transparent 28rem),
+    radial-gradient(circle at 86% 2%, rgba(31, 111, 235, 0.12), transparent 30rem),
+    linear-gradient(90deg, rgba(31, 138, 76, 0.045) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(31, 111, 235, 0.035) 1px, transparent 1px),
+    var(--background);
+  background-size: auto, auto, 44px 44px, 44px 44px, auto;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
 
 :where(a, button, input, textarea, select):focus-visible {
-  outline: 2px solid #22211e;
-  outline-offset: 2px;
+  outline: 3px solid rgba(31, 111, 235, 0.35);
+  outline-offset: 3px;
 }
 
 :where(input, textarea, select, button) {
   font: inherit;
+}
+
+:where(input, textarea, select) {
+  border-color: var(--border);
+  background-color: var(--surface);
+}
+
+:where(button, a) {
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+button:hover,
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.bg-\[\#22211e\] {
+  background-color: var(--primary);
+}
+
+.hover\:bg-\[\#3a3832\]:hover {
+  background-color: var(--primary-hover);
+}
+
+.text-\[\#22211e\] {
+  color: #111827;
+}
+
+.text-\[\#373632\] {
+  color: #253041;
+}
+
+.text-\[\#55544f\],
+.text-\[\#706f68\] {
+  color: var(--muted);
+}
+
+.border-\[\#dad8d0\],
+.border-\[\#e5e2da\] {
+  border-color: var(--border);
+}
+
+.bg-\[\#f7f7f4\],
+.bg-\[\#fbfaf7\],
+.bg-\[\#f1f0ec\] {
+  background-color: var(--surface-soft);
+}
+
+.rounded-lg.border,
+.rounded-md.border {
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+}
+
+.print-only {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  html,
+  body,
+  main {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  main,
+  main > div {
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  .no-print,
+  .print-screen-only {
+    display: none !important;
+  }
+
+  .print-report-page {
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: #ffffff;
+    color: #111111;
+    box-shadow: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-report {
+    font-family: Inter, Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.35;
+  }
+
+  .print-report h1 {
+    margin: 0 0 4mm;
+    font-size: 20pt;
+    line-height: 1.1;
+  }
+
+  .print-report h2 {
+    margin: 3mm 0 1.5mm;
+    padding-top: 2mm;
+    border-top: 1px solid #d8d8d8;
+    font-size: 12pt;
+    line-height: 1.2;
+  }
+
+  .print-report h3 {
+    margin: 0 0 1mm;
+    font-size: 10pt;
+    line-height: 1.25;
+  }
+
+  .print-report p {
+    margin: 0 0 2mm;
+  }
+
+  .print-report strong {
+    font-weight: 700;
+  }
+
+  .print-report-header {
+    margin-bottom: 4mm;
+    padding-bottom: 3mm;
+    border-bottom: 2px solid #111111;
+  }
+
+  .print-report-kicker {
+    margin: 0 0 2mm;
+    color: #333333;
+    font-size: 7.5pt;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .print-report-meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2mm;
+    margin: 0 0 3mm;
+  }
+
+  .print-report-meta div {
+    padding: 1.5mm 2mm;
+    border: 1px solid #d8d8d8;
+  }
+
+  .print-report-meta dt {
+    margin: 0;
+    color: #555555;
+    font-size: 7pt;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .print-report-meta dd {
+    margin: 0.5mm 0 0;
+    font-weight: 700;
+  }
+
+  .print-report-summary {
+    font-size: 10.5pt;
+  }
+
+  .print-section {
+    margin: 0 0 3.5mm;
+  }
+
+  .print-compact-list {
+    display: grid;
+    gap: 2.5mm;
+  }
+
+  .print-compact-block {
+    padding: 2mm;
+    border: 1px solid #dddddd;
+  }
+
+  .print-muted {
+    color: #444444;
+    font-size: 8.8pt;
+  }
+
+  .print-task-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8.6pt;
+  }
+
+  .print-task-table th,
+  .print-task-table td {
+    padding: 1.5mm 2mm;
+    border: 1px solid #d8d8d8;
+    text-align: start;
+    vertical-align: top;
+  }
+
+  .print-task-table th {
+    background: #f2f2f2;
+    font-weight: 700;
+  }
+
+  .print-task-table p {
+    margin: 1mm 0 0;
+  }
+
+  .print-report h1,
+  .print-report h2,
+  .print-report h3 {
+    break-after: avoid;
+    color: #111111;
+  }
+
+  .print-avoid-break,
+  .print-report article,
+  .print-task-table tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
 }

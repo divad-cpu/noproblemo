@@ -26,7 +26,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
-NEXT_PUBLIC_SUPPORT_EMAIL=support@noproblemo.tech
+NEXT_PUBLIC_SUPPORT_EMAIL=david@fideli.no
 ```
 
 `SUPABASE_SERVICE_ROLE_KEY` is server-only. It must never be exposed to the browser and must never be committed.
@@ -85,7 +85,7 @@ When ready to attach the domain:
 - Point DNS records to Vercel according to Vercel's current instructions.
 - Verify HTTPS after DNS propagation.
 - Keep email/DNS records documented if support email setup changes.
-- Configure `support@noproblemo.tech` as a mailbox or alias outside the app.
+- Use `david@fideli.no` as the public support mailbox outside the app.
 - Do not add in-app email automation for support or project logs.
 
 ## Local Development Commands
@@ -139,11 +139,11 @@ Current app includes localized public pages, a guest localStorage workspace, Sup
 - Message RLS, notification privacy, activity visibility, and message soft-delete are tested against Supabase.
 - Admin route protection, admin RPCs, audit-log RLS, and profile role self-promotion prevention are tested against Supabase.
 - Auth redirect URLs match production domain before real auth launches.
-- Google and Apple OAuth provider starts are tested after provider setup.
+- Google and Apple OAuth remain planned/future; visible auth UI is email-only until provider setup is intentionally enabled.
 - All 11 locales are smoke-tested.
 - Arabic and Urdu RTL layouts are smoke-tested.
 - Mobile and desktop layouts are smoke-tested.
-- Support contact remains `support@noproblemo.tech` unless intentionally changed.
+- Support contact remains `david@fideli.no` unless intentionally changed.
 
 ## Required Supabase Redirect URLs
 
@@ -164,7 +164,9 @@ Password reset links should be requested from the browser app. Forgot/reset pass
 
 For local testing, request a new reset link after this fix and open it in the same browser/profile where `/[locale]/forgot-password` requested it. The recovery flow may use browser hash tokens; those fragments stay in the browser and are not sent to the server. After password update, the app signs out and redirects to localized login success. Reset links requested before the isolated recovery fix may fail and should be resent.
 
-If `/[locale]/forgot-password` reports that the reset email could not be sent, inspect Supabase Auth logs for provider/SMTP errors, rate limiting, redirect allow-list denial, and Site URL mismatch. Do not log or paste user email addresses, auth codes, tokens, sessions, cookies, service-role values, or `.env.local` values while troubleshooting.
+If `/[locale]/forgot-password` reports that the reset email could not be sent, inspect Supabase Auth logs for provider/SMTP errors, rate limiting, redirect allow-list denial, and Site URL mismatch. Supabase Auth reset requests can return `over_email_send_rate_limit` / 429 during repeated local testing with the built-in email provider; wait, avoid repeated reset tests, and configure a custom SMTP provider for serious testing or production rather than changing app code. Do not log or paste user email addresses, auth codes, tokens, sessions, cookies, service-role values, or `.env.local` values while troubleshooting.
+
+Saved challenge PDF export uses the protected `/[locale]/app/challenges/[id]/print` report route and the browser print dialog. Users click Save as PDF, open the clean report view, and choose Save to PDF locally; the app does not call an external PDF service or require deployment/provider settings.
 
 Local development:
 

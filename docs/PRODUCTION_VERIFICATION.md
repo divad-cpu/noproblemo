@@ -24,9 +24,9 @@ Do not use this document as permission to deploy, apply remote migrations, chang
 - Access to the intended Vercel project.
 - Access to the intended Supabase project.
 - Access to Domeneshop DNS for `noproblemo.tech`.
-- Access to Google Cloud OAuth configuration if Google login is enabled.
-- Access to Apple Developer configuration if Apple login is enabled.
-- A mailbox or alias plan for `support@noproblemo.tech` outside the app.
+- Access to Google Cloud OAuth configuration if Google login is enabled in a later phase.
+- Access to Apple Developer configuration if Apple login is enabled in a later phase.
+- Access to the public support mailbox `david@fideli.no`.
 - Three test users:
   - User A: normal user.
   - User B: normal user.
@@ -40,7 +40,7 @@ Do not use this document as permission to deploy, apply remote migrations, chang
 - Domeneshop account with DNS access.
 - Google Cloud account for OAuth credentials.
 - Apple Developer account for Apple OAuth.
-- Email provider account for `support@noproblemo.tech`.
+- Email provider account for `david@fideli.no`.
 
 ## Supabase Checklist
 
@@ -95,6 +95,7 @@ Do not use this document as permission to deploy, apply remote migrations, chang
 - The reset flow does not use `SUPABASE_SERVICE_ROLE_KEY` and does not store reset passwords in app database tables.
 - Confirm email confirmation shows either `email-confirmed` in the app or a login-required success state if Supabase confirmed the account but the server callback could not exchange the PKCE code.
 - Confirm login, signup, callback, and logout on production.
+- Confirm visible login/signup UI is email-only until Google/Apple providers are intentionally enabled later.
 - Confirm account deletion with a disposable user only after `SUPABASE_SERVICE_ROLE_KEY` is configured server-side.
 - Confirm failed auth attempts return calm error states.
 - Confirm `NEXT_PUBLIC_SITE_URL` in Vercel matches the deployed domain.
@@ -158,7 +159,8 @@ Required production callback URLs:
 - Configure authorized redirect URLs required by Supabase.
 - Enable the Google provider in Supabase.
 - Store Google client secret only in Supabase/provider settings.
-- Test Google login with a non-admin user.
+- Keep Google login treated as planned/future until the UI and provider setup are intentionally enabled.
+- Test Google login with a non-admin user only after that future enablement.
 - Confirm profile creation and dashboard access after login.
 
 ## Apple OAuth Checklist
@@ -168,17 +170,33 @@ Required production callback URLs:
 - Configure the return URL required by Supabase.
 - Enable the Apple provider in Supabase.
 - Store Apple private key/secret only in Supabase/provider settings.
-- Test Apple login with a non-admin user.
+- Keep Apple login treated as planned/future until the UI and provider setup are intentionally enabled.
+- Test Apple login with a non-admin user only after that future enablement.
 - Confirm profile creation and dashboard access after login.
 
 ## Support Email Checklist
 
-- Configure `support@noproblemo.tech` as a mailbox or alias outside the app.
+- Use `david@fideli.no` as the public support mailbox outside the app.
 - Verify inbound delivery.
 - Verify reply/send behavior.
 - Confirm DNS records required by the email provider.
-- Confirm the public app references `support@noproblemo.tech`.
+- Confirm the public app references `david@fideli.no`.
 - Do not add Resend, email automation, Vercel Cron, or project-log email reporting.
+
+## PDF Export Checklist
+
+- Open a saved challenge.
+- Click Save as PDF in the export panel.
+- Confirm a protected `/[locale]/app/challenges/[id]/print` report view opens.
+- Click Print or save as PDF.
+- Confirm the browser print dialog opens.
+- Choose Save to PDF.
+- Confirm the print preview uses the compact report layout rather than the normal app page.
+- Confirm navigation, forms, buttons, messages, status banners, language switcher, and private app chrome are hidden from the print output.
+- Confirm empty challenge sections are omitted where practical and no repeated placeholder text fills the PDF.
+- Confirm Firefox print preview does not create blank trailing pages.
+- Confirm the PDF includes challenge title, description, status, sections, solutions, scores, resources, priority, tasks, recommendation, and summary from the already-authorized page data.
+- Confirm no external PDF service is called.
 
 ## Environment Variable Checklist
 
@@ -189,7 +207,7 @@ NEXT_PUBLIC_SITE_URL=
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
-NEXT_PUBLIC_SUPPORT_EMAIL=support@noproblemo.tech
+NEXT_PUBLIC_SUPPORT_EMAIL=david@fideli.no
 ```
 
 Rules:
@@ -309,7 +327,7 @@ Hard i18n audit notes:
 - Set a new password, confirm the app signs out, and confirm redirect to localized login success.
 - Confirm an expired or old link shows the invalid/expired message and offers a new link request.
 - Do not log or copy recovery codes, tokens, sessions, cookies, emails, or passwords into docs or issue trackers.
-- If the email is not sent, check Supabase Auth logs for rate limit, provider/SMTP, redirect URL, Site URL, or template errors. Keep troubleshooting notes free of email addresses and secrets.
+- If the email is not sent, check Supabase Auth logs for rate limit, provider/SMTP, redirect URL, Site URL, or template errors. Supabase built-in email sending can return `over_email_send_rate_limit` / 429 during repeated testing; avoid repeated reset tests, wait for the limit to clear, or configure custom SMTP for serious testing. Keep troubleshooting notes free of email addresses and secrets.
 
 Required Supabase redirect URL coverage:
 
@@ -329,7 +347,7 @@ Reset links requested before the latest reset-password fixes may need to be rese
 - Google and Apple providers not verified.
 - Vercel environment variables not verified.
 - Custom domain and Domeneshop DNS not verified.
-- `support@noproblemo.tech` mailbox or alias not verified.
+- `david@fideli.no` mailbox or alias not verified.
 - Native translation QA not complete.
 - `npm audit` reports moderate PostCSS advisories via Next.js bundled dependency tree.
 

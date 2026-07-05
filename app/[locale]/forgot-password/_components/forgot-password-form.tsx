@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import type { Locale } from "@/i18n/routing";
 import { getRecoverySupabaseClient } from "@/lib/supabase/recovery-client";
 
@@ -101,9 +101,26 @@ export function ForgotPasswordForm({ locale, labels }: ForgotPasswordFormProps) 
   const supabase = useMemo(() => getRecoverySupabaseClient(), []);
   const [state, setState] = useState<FormState>("idle");
   const [message, setMessage] = useState("");
+  const [cooldownSeconds, setCooldownSeconds] = useState(0);
+
+  useEffect(() => {
+    if (cooldownSeconds <= 0) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setCooldownSeconds((seconds) => Math.max(0, seconds - 1));
+    }, 1000);
+
+    return () => window.clearTimeout(timer);
+  }, [cooldownSeconds]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (state === "submitting" || cooldownSeconds > 0) {
+      return;
+    }
+
     const form = event.currentTarget;
     setState("submitting");
     setMessage("");
@@ -125,6 +142,9 @@ export function ForgotPasswordForm({ locale, labels }: ForgotPasswordFormProps) 
     if (error) {
       const reason = classifyResetFailure(error);
       warnResetFailure(reason);
+      if (reason === "rate-limit") {
+        setCooldownSeconds(60);
+      }
       setState("error");
       setMessage(messageForReason(reason, labels));
       return;
@@ -136,6 +156,7 @@ export function ForgotPasswordForm({ locale, labels }: ForgotPasswordFormProps) 
   }
 
   const isSubmitting = state === "submitting";
+  const isSubmitDisabled = isSubmitting || cooldownSeconds > 0;
 
   return (
     <form onSubmit={handleSubmit} className="mt-8 grid gap-4">
@@ -159,14 +180,14 @@ export function ForgotPasswordForm({ locale, labels }: ForgotPasswordFormProps) 
           type="email"
           autoComplete="email"
           required
-          disabled={isSubmitting}
+          disabled={isSubmitDisabled}
           className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e] disabled:cursor-not-allowed disabled:bg-[#f1f0ec]"
           placeholder={labels.emailPlaceholder}
         />
       </label>
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isSubmitDisabled}
         className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832] disabled:cursor-not-allowed disabled:bg-[#8b897f]"
       >
         {isSubmitting ? labels.submitting : labels.submit}

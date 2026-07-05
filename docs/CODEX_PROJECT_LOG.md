@@ -31,7 +31,7 @@ Phase 3 public landing page and guest mode:
 - Inspected current project structure, package scripts, app routes, message files, language switcher, and Phase 3 prompt.
 - Built a localized public landing page with guest start, login/signup placeholders, workflow preview, collaboration explanation, benefits, language switcher, and support footer.
 - Added `/[locale]/solve` guest workspace with localStorage drafts, Markdown copy/export, and guarded account-required actions.
-- Added `/[locale]/support` contact page with `support@noproblemo.tech`.
+- Added `/[locale]/support` contact page with `david@fideli.no`.
 - Added placeholder `/[locale]/login` and `/[locale]/signup` routes without implementing authentication.
 - Kept guest data local to the browser and did not add Supabase migrations or cloud persistence.
 - Validation passed: `npm run lint`, `npm run typecheck`, and `npm run build`.
@@ -273,3 +273,31 @@ Isolated browser password recovery follow-up:
 - Security: no service-role key is used for reset and reset passwords are never stored in app database tables.
 - Known problems: reset links created before this fix may fail; request a fresh reset link for testing.
 - Explicitly not changed: email confirmation flow, remote Supabase Auth settings, remote migrations, Vercel settings, DNS, deployments, or environment values.
+
+Design refresh, support email, email-only auth, and PDF export:
+
+- Phase completed: focused MVP improvement, not a new product phase.
+- Visual direction: added global light modern design tokens with blue primary actions, green success accents, soft orange highlights, white surfaces, dark readable text, and a subtle digital-grid background.
+- Support: public support email changed to `david@fideli.no` in app UI, env examples, and docs.
+- Auth UI: Google/Apple buttons were removed from visible login/signup pages; email login/signup remains active. OAuth actions remain future/planned in code.
+- Export: saved challenge workspace now includes browser print-based Save as PDF alongside Markdown copy/download. The printable view uses already-authorized challenge data and no external PDF service.
+- Known problems: Supabase reset email requests can be rate-limited during repeated testing; retest password reset later rather than changing remote Auth settings.
+- Native review: non-English copy still needs fluent/native review before public launch.
+- Explicitly not changed: remote Supabase Auth settings, remote migrations, Vercel settings, DNS, deployments, or environment values.
+
+PDF export and reset rate-limit polish:
+
+- Phase completed: focused MVP polish/fix, not a new product phase.
+- Export: saved challenge Save as PDF now uses a compact print report layout with app chrome hidden, A4 margins, tighter typography, compact solution blocks, task table layout, and omitted empty sections where practical.
+- Auth UX: forgot-password rate-limit failures now use clearer localized copy and a short client-side cooldown to reduce repeated clicks. Supabase `over_email_send_rate_limit` / 429 remains an external provider limit and is not bypassed.
+- Recovery client: verified the password recovery Supabase client remains a browser singleton with the separate recovery storage key and public anon credentials only.
+- Documentation: updated current state, README, security, deployment, production verification, changelog, and project log with compact PDF and Supabase email rate-limit guidance.
+- Explicitly not changed: remote Supabase Auth settings, remote migrations, Vercel settings, DNS, deployments, or environment values.
+
+PDF blank-page fix:
+
+- Phase completed: focused PDF export bugfix, not a new product phase.
+- Root cause: same-page print CSS used `visibility: hidden` on the normal challenge workspace. Firefox preserved the hidden workspace layout height, so the absolutely positioned report produced multiple blank trailing pages.
+- Fix: Save as PDF now opens a protected print-only report route at `/[locale]/app/challenges/[id]/print`. The route renders only report content plus screen-only Back/Print controls, uses the authenticated Supabase server client, relies on RLS, and does not use service-role credentials.
+- Print layout: app chrome and screen controls are hidden in print; the report uses A4 margins, compact typography, compact solution blocks, task table formatting, and omits empty fields where practical.
+- Security: no external PDF service, no dependency, no migration, no deployment setting, and no remote Supabase setting changed.

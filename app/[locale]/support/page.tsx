@@ -27,8 +27,8 @@ export default function SupportPage({ params }: SupportPageProps) {
           <p className="mt-4 leading-7 text-[#55544f]">{t("body")}</p>
           <div className="mt-6 rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4">
             <p className="text-sm font-medium text-[#706f68]">{t("emailLabel")}</p>
-            <a className="mt-1 inline-block text-lg font-semibold text-[#22211e] underline-offset-4 hover:underline" href="mailto:support@noproblemo.tech">
-              support@noproblemo.tech
+            <a className="mt-1 inline-block text-lg font-semibold text-[#22211e] underline-offset-4 hover:underline" href="mailto:david@fideli.no">
+              david@fideli.no
             </a>
           </div>
           <p className="mt-5 text-sm leading-6 text-[#706f68]">{t("helpText")}</p>
