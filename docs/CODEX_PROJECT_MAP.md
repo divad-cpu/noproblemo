@@ -46,6 +46,7 @@ Implemented:
 - Protected admin settings checklist.
 - Admin role protection using `profiles.role = 'admin'`.
 - Admin audit-log storage and admin-only overview RPCs.
+- Secured, non-cacheable Supabase database health endpoint for an external cron client.
 - Phase 11 responsive/accessibility/security/deployment polish.
 - Google and Apple OAuth provider start actions prepared through Supabase Auth.
 - Supabase migration for profiles and core challenge tables.
@@ -56,7 +57,7 @@ Implemented:
 
 Not implemented:
 
-- AI, payments, email sending, cron.
+- AI, payments, email sending, and in-app or Vercel scheduling.
 
 ## Verification Documents
 
@@ -89,6 +90,7 @@ Not implemented:
 - `/[locale]/app/admin`: protected admin overview.
 - `/[locale]/app/admin/settings`: protected admin readiness/settings checklist.
 - `/[locale]/app/settings`: protected profile/settings.
+- `/api/health/supabase`: server-only Bearer-protected Supabase RPC reachability check.
 
 ## Data Model Map
 
@@ -99,6 +101,7 @@ Current:
 - Supabase migration: `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`.
 - Supabase migration: `supabase/migrations/20260703210000_phase8_friends_groups.sql`.
 - Supabase migration: `supabase/migrations/20260703220000_phase9_messaging_notifications_activity.sql`.
+- Supabase migration: `supabase/migrations/20260714120000_supabase_health_check.sql`.
 - Typed helpers: `lib/supabase/`.
 - Dashboard reads/writes use the authenticated Supabase session and Phase 4 tables.
 - Guest import maps `problem`, `context`, `outcome`, `options`, and `nextStep` into `challenge_sections`.
@@ -116,6 +119,7 @@ Current:
 - Basic group/challenge activity uses `activity_events`.
 - Admin audit metadata uses `admin_audit_log`.
 - Admin overview data uses admin-only RPCs for aggregate counts and limited metadata.
+- Keepalive health checks use the anon-only `noproblemo_health_check()` RPC and return no table data.
 
 Implemented Phase 4 tables:
 
@@ -166,6 +170,7 @@ Current:
 - Admin RPCs use `public.is_admin(auth.uid())`.
 - `admin_audit_log` is readable only by admins and has no authenticated write grant.
 - Normal users cannot self-promote through profile settings or authenticated self role updates.
+- The keepalive endpoint uses a separate server-only Bearer secret and anon RPC credentials without cookies or a user session.
 - RLS migrations must still be verified in Supabase.
 - `lib/supabase/admin.ts` is a server-only service-role helper used only for current-user account deletion. It must never be imported into Client Components.
 

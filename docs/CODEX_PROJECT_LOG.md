@@ -1,5 +1,16 @@
 # Codex Project Log
 
+## 2026-07-14
+
+Supabase keepalive health check:
+
+- Added the non-locale `GET /api/health/supabase` Route Handler for an external Linux cron client.
+- Required a server-only `NOPROBLEMO_KEEPALIVE_SECRET` Bearer token, used constant-time digest comparison, and returned generic `401` or `503` failures with explicit no-store headers.
+- Added `public.noproblemo_health_check()` through `20260714120000_supabase_health_check.sql` as a stable `SECURITY INVOKER` function with an empty `search_path`, no table access, revoked `PUBLIC` execution, and `anon`-only execution.
+- Used a cookie-free typed Supabase client with public anon credentials. No authenticated user session, write, service-role key, remote migration, Vercel change, deployment, or real secret was used.
+- Updated environment templates and the relevant security, deployment, production verification, Supabase verification, project map, current state, and changelog documentation.
+- Local dummy-RPC branch checks, migration/security assertions, `npm run lint`, `npm run typecheck`, `npm run build`, and `git diff --check` passed. The production build classified the endpoint as dynamic.
+
 ## 2026-07-03
 
 Phase 1 foundation work:

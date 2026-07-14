@@ -628,6 +628,10 @@ export type Database = {
         };
         Returns: boolean;
       };
+      noproblemo_health_check: {
+        Args: Record<PropertyKey, never>;
+        Returns: boolean;
+      };
       search_profiles: {
         Args: {
           search_term: string;

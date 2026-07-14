@@ -26,10 +26,31 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
+NOPROBLEMO_KEEPALIVE_SECRET=
 NEXT_PUBLIC_SUPPORT_EMAIL=david@fideli.no
 ```
 
-`SUPABASE_SERVICE_ROLE_KEY` is server-only. It must never be exposed to the browser and must never be committed.
+`SUPABASE_SERVICE_ROLE_KEY` and `NOPROBLEMO_KEEPALIVE_SECRET` are server-only. They must never be exposed to the browser, use a `NEXT_PUBLIC_` prefix, or be committed with real values. Configure `NOPROBLEMO_KEEPALIVE_SECRET` in Vercel Production and configure the cron client to send the same value as a Bearer token.
+
+## Supabase Health Check
+
+`GET /api/health/supabase` is intended for the trusted Linux cron client. It validates the server-only Bearer token and calls the harmless `public.noproblemo_health_check()` RPC with the public anon credentials. It does not use a user session or `SUPABASE_SERVICE_ROLE_KEY`, does not write data, and is explicitly non-cacheable.
+
+Expected responses:
+
+- `200`: the authorized RPC returned successfully.
+- `401`: the Bearer token is missing or invalid.
+- `503`: required server configuration is missing or Supabase is unavailable.
+
+After setting placeholder-free local environment values and applying the migration to the intended Supabase project, start the app with `npm run dev`. Test locally without placing the token in shell history:
+
+```bash
+read -rsp "Keepalive secret: " NOPROBLEMO_KEEPALIVE_SECRET; printf '\n'
+printf 'header = "Authorization: Bearer %s"\n' "$NOPROBLEMO_KEEPALIVE_SECRET" | curl --fail-with-body --silent --show-error --config - http://localhost:3000/api/health/supabase
+unset NOPROBLEMO_KEEPALIVE_SECRET
+```
+
+Use the same pattern with the production HTTPS URL after an approved deployment. Do not enable shell tracing while testing. Never paste the real secret into documentation, commits, logs, screenshots, URLs, or command output. This endpoint is a narrow database reachability check, not a full monitoring or uptime guarantee.
 
 ## Auth Deployment Setup
 
@@ -108,7 +129,7 @@ Do not print `.env.local` values.
 
 ## Current Deployment Scope
 
-Current app includes localized public pages, a guest localStorage workspace, Supabase helpers, local migrations, Supabase Auth UI/actions, protected dashboard, guest import, profile settings, cloud challenge creation, saved challenge workspace, friends, groups, invitations, roles, explicit group challenge links, group/challenge messages, private notifications, basic activity events, and a read-only protected admin/settings foundation. It does not include payments, email sending, AI, scheduled jobs, or realtime subscriptions.
+Current app includes localized public pages, a guest localStorage workspace, Supabase helpers, local migrations, Supabase Auth UI/actions, protected dashboard, guest import, profile settings, cloud challenge creation, saved challenge workspace, friends, groups, invitations, roles, explicit group challenge links, group/challenge messages, private notifications, basic activity events, a read-only protected admin/settings foundation, and a secured endpoint that can be called by an external scheduler. It does not include an in-app scheduler, payments, email sending, AI, or realtime subscriptions.
 
 ## Production Checklist
 
@@ -126,7 +147,9 @@ Current app includes localized public pages, a guest localStorage workspace, Sup
 - Supabase project URL and anon key match the intended project.
 - Supabase Auth site URL and redirect URLs match local and production routes.
 - Supabase RLS policies are tested before any private data ships.
-- Phase 4, Phase 8, Phase 9, and Phase 10 migrations are applied in order.
+- Phase 4, Phase 8, Phase 9, Phase 10, and Supabase health-check migrations are applied in order.
+- `NOPROBLEMO_KEEPALIVE_SECRET` is configured only in the required server environments, including Vercel Production.
+- The authorized and unauthorized `/api/health/supabase` responses are verified without exposing the real secret.
 - Profile creation trigger is tested after signup.
 - First admin is assigned manually in trusted Supabase SQL.
 - Guest mode is tested without login and confirmed local-only.
@@ -226,7 +249,7 @@ Project logs remain local repository documentation. Do not add Resend, Vercel Cr
 
 ## Current Phase 11 Review Notes
 
-- Supabase CLI is not installed in this environment, so `supabase db lint` and migration-list checks were not run.
+- Supabase CLI 2.109.1 is installed. CLI help was checked, but `supabase db lint`, migration listing, linking, and remote operations were not run.
 - No live Supabase project was modified.
 - No production Vercel settings or DNS records were changed.
 - Manual production verification remains required before launch.

@@ -1,6 +1,6 @@
 # Production Verification
 
-Last updated: 2026-07-05
+Last updated: 2026-07-14
 
 ## Purpose
 
@@ -60,6 +60,7 @@ Do not use this document as permission to deploy, apply remote migrations, chang
 - Confirm admin RPCs reject non-admin users.
 - Confirm `admin_audit_log` is readable only by admins.
 - Confirm no app code queries `auth.users` from the frontend.
+- Confirm `public.noproblemo_health_check()` is `SECURITY INVOKER`, has an empty `search_path`, exposes no table data, and is executable only by `anon` among API roles.
 
 ## Vercel Checklist
 
@@ -67,12 +68,33 @@ Do not use this document as permission to deploy, apply remote migrations, chang
 - Confirm the framework preset is Next.js.
 - Confirm the build command is `npm run build`.
 - Configure production environment variables without exposing values in logs or docs.
+- Configure server-only `NOPROBLEMO_KEEPALIVE_SECRET` in Production without a `NEXT_PUBLIC_` prefix.
 - Configure preview environment variables separately if previews are used.
 - Confirm `NEXT_PUBLIC_SITE_URL` matches the production URL.
 - Deploy only after local validation passes.
 - Smoke-test the deployed URL before adding the custom domain.
 - Add `noproblemo.tech` only after explicit approval.
 - Confirm HTTPS after DNS propagation.
+
+## Supabase Health Check Verification
+
+- Apply `20260714120000_supabase_health_check.sql` through the approved migration workflow.
+- Confirm `GET /api/health/supabase` is outside locale routing and is not redirected.
+- Confirm a request without authorization and a request with an invalid Bearer token both return `401` with no secret or internal error details.
+- Confirm an authorized request returns `200`, `status: ok`, `supabase: reachable`, and an ISO timestamp only when the harmless database RPC succeeds.
+- Confirm missing configuration or a failed RPC returns `503` without stack traces, environment values, Supabase errors, row counts, or database details.
+- Confirm every response includes `Cache-Control: no-store` plus the Vercel/CDN no-store headers.
+- Confirm the endpoint uses the anon key without cookies, an authenticated user session, writes, or `SUPABASE_SERVICE_ROLE_KEY`.
+
+For local or production verification, enter the real secret only at the hidden prompt and do not enable shell tracing:
+
+```bash
+read -rsp "Keepalive secret: " NOPROBLEMO_KEEPALIVE_SECRET; printf '\n'
+printf 'header = "Authorization: Bearer %s"\n' "$NOPROBLEMO_KEEPALIVE_SECRET" | curl --fail-with-body --silent --show-error --config - https://noproblemo.tech/api/health/supabase
+unset NOPROBLEMO_KEEPALIVE_SECRET
+```
+
+The endpoint verifies narrow Vercel-to-Supabase database reachability. It is not a complete uptime, latency, Auth, RLS, application workflow, or monitoring guarantee. The real secret must never appear in documentation, commits, logs, screenshots, URLs, or command output.
 
 ## Domeneshop DNS Checklist
 
@@ -230,6 +252,7 @@ Rules:
   - `20260703210000_phase8_friends_groups.sql`
   - `20260703220000_phase9_messaging_notifications_activity.sql`
   - `20260704090000_phase10_admin_settings_logs.sql`
+  - `20260714120000_supabase_health_check.sql`
 - Check for migration errors.
 - Record applied migration versions.
 - Run manual RLS tests with separate users.
@@ -346,6 +369,7 @@ Reset links requested before the latest reset-password fixes may need to be rese
 - Production Auth redirect URLs not verified.
 - Google and Apple providers not verified.
 - Vercel environment variables not verified.
+- Production keepalive secret and health endpoint not verified.
 - Custom domain and Domeneshop DNS not verified.
 - `david@fideli.no` mailbox or alias not verified.
 - Native translation QA not complete.
@@ -356,6 +380,7 @@ Reset links requested before the latest reset-password fixes may need to be rese
 - Monitor Vercel build and runtime logs.
 - Monitor Supabase Auth errors.
 - Monitor Supabase database errors and RLS denials.
+- Monitor sanitized `/api/health/supabase` failures from the external cron client.
 - Monitor support mailbox.
 - Track failed login and callback reports.
 - Track unexpected admin access denials.

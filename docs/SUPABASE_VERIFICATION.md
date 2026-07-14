@@ -1,6 +1,6 @@
 # Supabase Verification
 
-Last updated: 2026-07-04
+Last updated: 2026-07-14
 
 ## Purpose
 
@@ -14,6 +14,7 @@ Migrations expected in `supabase/migrations/`:
 - `20260703210000_phase8_friends_groups.sql`
 - `20260703220000_phase9_messaging_notifications_activity.sql`
 - `20260704090000_phase10_admin_settings_logs.sql`
+- `20260714120000_supabase_health_check.sql`
 
 Safe local commands if Supabase CLI is installed and configured:
 
@@ -32,7 +33,7 @@ Do not run `supabase db reset`, push to a remote database, or link to a remote p
 - Confirm backups/snapshots as appropriate.
 - Apply migrations in timestamp order through the approved workflow.
 - Record any migration errors exactly, without exposing secrets.
-- Confirm all four migration files are represented in the project migration history.
+- Confirm all five migration files are represented in the project migration history.
 
 ## Metadata Checks
 
@@ -63,6 +64,22 @@ where schemaname = 'public'
   )
 order by tablename;
 ```
+
+Confirm the health-check function is invoker security, stable, and configured with an empty search path:
+
+```sql
+select
+  p.prosecdef as is_security_definer,
+  p.provolatile as volatility,
+  p.proconfig as runtime_settings
+from pg_proc p
+join pg_namespace n on n.oid = p.pronamespace
+where n.nspname = 'public'
+  and p.proname = 'noproblemo_health_check'
+  and p.pronargs = 0;
+```
+
+Expected: `is_security_definer = false`, `volatility = 's'`, and `runtime_settings` contains only the empty `search_path`. Inspect the function ACL and confirm default `PUBLIC` execution is absent, `anon` has `EXECUTE`, and neither `authenticated` nor `service_role` has execution. The function body must remain only `select true` and must not reference any application table.
 
 Confirm RLS:
 
@@ -229,6 +246,13 @@ where id = '<trusted-user-uuid>';
 - User A and User B cannot read or write `admin_audit_log`.
 - Admin overview does not expose emails, `auth.users`, message bodies, or private challenge content.
 
+## Keepalive RPC Check
+
+- Call `noproblemo_health_check` with the anon key in a trusted test and confirm it returns only `true`.
+- Confirm an authenticated API role has no broader grant added for this RPC.
+- Confirm the call creates no rows and reads no private application table.
+- Confirm the Route Handler converts RPC failure to a generic `503` and never returns the Supabase error.
+
 ## First Admin Assignment Process
 
 - Create User C normally.
@@ -246,4 +270,5 @@ where id = '<trusted-user-uuid>';
 - Profile trigger test result.
 - Multi-user RLS test results.
 - Admin RPC test results.
+- Keepalive RPC function security, ACL, and Route Handler results.
 - Any failures and follow-up actions.

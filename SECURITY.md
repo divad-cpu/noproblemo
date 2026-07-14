@@ -147,6 +147,16 @@ where id = '<trusted-user-uuid>';
 
 Do not build public admin signup, admin requests, or self-service role promotion.
 
+## Supabase Keepalive Health Check
+
+`GET /api/health/supabase` is a server-side operational endpoint for a trusted cron client. It requires `Authorization: Bearer <NOPROBLEMO_KEEPALIVE_SECRET>` and returns only a generic reachability state and timestamp. Missing or invalid authorization returns `401`; missing configuration or an unsuccessful Supabase RPC returns `503` without provider or database details.
+
+The endpoint uses the public Supabase URL and anon key without cookies or a user session. It never imports the service-role helper, writes to the database, or returns table data. Migration `supabase/migrations/20260714120000_supabase_health_check.sql` adds `public.noproblemo_health_check()` as a `SECURITY INVOKER` SQL function with an empty `search_path`, revokes default `PUBLIC` execution, and grants execution only to `anon`. The function performs only `select true` and has no access to private application tables.
+
+`NOPROBLEMO_KEEPALIVE_SECRET` is server-only and must never use the `NEXT_PUBLIC_` prefix. A strong unique value must be configured in Vercel Production and supplied by the cron client as a Bearer token. The real value must never appear in documentation, commits, logs, screenshots, URLs, or command output.
+
+This check confirms that one Vercel request can authenticate to the endpoint and complete a harmless PostgreSQL RPC. It is not a full uptime, latency, application-flow, Auth, RLS, or monitoring guarantee.
+
 ## Not Implemented Yet
 
 - Admin role-changing actions
@@ -180,7 +190,7 @@ Not verified in this environment:
 - Supabase Auth provider and redirect behavior in production.
 - Vercel production environment and domain configuration.
 
-Supabase CLI is not installed in this environment, so CLI database lint/list checks were not run.
+Supabase CLI 2.109.1 is installed. CLI help was checked, but database lint, migration listing, linking, and remote operations were not run.
 
 ## User Ownership Rules
 
@@ -260,6 +270,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
+NOPROBLEMO_KEEPALIVE_SECRET=
 NEXT_PUBLIC_SUPPORT_EMAIL=david@fideli.no
 ```
 
@@ -270,6 +281,7 @@ Rules:
 - `.env.example` and `.env.local.example` contain placeholders only.
 - Only variables prefixed with `NEXT_PUBLIC_` are intended for browser exposure.
 - `SUPABASE_SERVICE_ROLE_KEY` must never be used in frontend/client code.
+- `NOPROBLEMO_KEEPALIVE_SECRET` must remain server-only, must not use a `NEXT_PUBLIC_` prefix, and must be configured in Vercel Production without exposing its value.
 
 ## Supabase Helper Security
 

@@ -4,6 +4,9 @@
 
 ### Added
 
+- Added a Bearer-protected, non-cacheable `/api/health/supabase` endpoint for external keepalive and database reachability checks.
+- Added `public.noproblemo_health_check()` as a minimal `SECURITY INVOKER` RPC with an empty `search_path` and anon-only execution.
+- Added server-only `NOPROBLEMO_KEEPALIVE_SECRET` placeholders and operational verification guidance.
 - Added a protected print-only challenge report route at `/[locale]/app/challenges/[id]/print` for reliable browser Save as PDF export.
 - Added compact print report styling for saved challenge Save as PDF output, including A4 margins, hidden app chrome, compact solution blocks, task table formatting, and omitted empty sections where practical.
 - Added privacy-safe forgot-password failure categories for reset rate limits, provider/SMTP issues, invalid email format, redirect URL configuration, and generic send failure.
@@ -69,6 +72,7 @@
 
 ### Security
 
+- Kept the Supabase health endpoint cookie-free and session-free, used only public anon credentials, returned sanitized failures, and did not use the service-role key.
 - Added development-only reset request warnings that log only generic classification labels and never email addresses, auth codes, tokens, sessions, cookies, full URLs, or env values.
 - Added development-only reset exchange warnings that log only generic classification labels and never auth codes, tokens, sessions, cookies, URLs, emails, passwords, or environment values.
 - Documented that reset recovery uses no service-role key and never stores reset passwords in app database tables.

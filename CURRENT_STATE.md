@@ -1,6 +1,6 @@
 # Current State
 
-Last updated: 2026-07-05
+Last updated: 2026-07-14
 
 Future Codex sessions must read this file first, then `docs/CODEX_PROJECT_MAP.md`, before changing files.
 
@@ -23,6 +23,8 @@ NoProblemo has completed:
 Production verification preparation is complete. Controlled Supabase/Vercel production verification is next. Payments, AI, email automation, Resend, and Vercel Cron remain future phases.
 
 A focused auth/settings verification fix was completed after Phase 11 to improve email-confirmation fallback handling, password recovery, route language switching, and dashboard usability.
+
+A focused Supabase keepalive health endpoint is implemented locally and awaits approved migration application, Vercel secret configuration, deployment, and production verification.
 
 ## Already Implemented
 
@@ -75,6 +77,8 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 - Phase 11 i18n key parity and RTL configuration checks
 - Phase 11 security/deployment documentation review
 - Production verification preparation docs for Supabase, Vercel, Domeneshop DNS, Auth providers, RLS, multi-user manual testing, and launch readiness
+- Bearer-protected, non-cacheable `/api/health/supabase` Route Handler using anon credentials and no user session or service-role key
+- Supabase migration `20260714120000_supabase_health_check.sql` for the minimal invoker `noproblemo_health_check()` RPC with `anon`-only execution
 - Notification/activity triggers for friend requests, group invitations, group/member events, group challenge links, and messages
 - Phase 10 local migration for admin helper functions, admin audit log, admin-only RPCs, profile role hardening, and admin profile read policy
 - Google and Apple OAuth start actions remain prepared for future use, but visible login/signup UI currently shows email auth only.
@@ -140,6 +144,7 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 - `app/[locale]/app/page.tsx`: logged-in dashboard with challenge lists and guest import prompt.
 - `app/[locale]/app/actions.ts`: server actions for challenge creation, guest import, and profile updates.
 - `lib/supabase/admin.ts`: server-only Supabase admin helper for current-user account deletion.
+- `app/api/health/supabase/route.ts`: server-only keepalive endpoint for a trusted cron client.
 - `app/[locale]/app/friends/page.tsx`: protected friend request and friendship management page.
 - `app/[locale]/app/groups/page.tsx`: protected groups list and pending group invitations page.
 - `app/[locale]/app/groups/new/page.tsx`: protected group creation page.
@@ -162,6 +167,7 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 - `supabase/migrations/20260703210000_phase8_friends_groups.sql`: Phase 8 friends, groups, group challenge access, helper functions, and RLS migration.
 - `supabase/migrations/20260703220000_phase9_messaging_notifications_activity.sql`: Phase 9 messages, notifications, activity events, triggers, and RLS migration.
 - `supabase/migrations/20260704090000_phase10_admin_settings_logs.sql`: Phase 10 admin helpers, audit log, admin RPCs, and profile role hardening migration.
+- `supabase/migrations/20260714120000_supabase_health_check.sql`: minimal Supabase reachability RPC with invoker security and anon-only execution.
 - `supabase/config.toml`: Supabase CLI config.
 - `supabase/seed.sql`: empty seed file.
 - `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`: Phase 4 schema and RLS migration.
@@ -178,9 +184,10 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 - Phase 8 migration needs to be applied and tested in Supabase.
 - Phase 9 migration needs to be applied and tested in Supabase.
 - Phase 10 migration needs to be applied and tested in Supabase.
+- Supabase health-check migration needs to be applied and the endpoint needs Vercel Production secret configuration and production verification.
 - RLS policies, profile trigger, workspace writes, friend/group writes, group challenge access, message writes, notification privacy, and activity visibility need verification with authenticated users.
 - Admin role checks, admin RPCs, admin audit log RLS, and profile role hardening need verification with authenticated admin and non-admin users.
-- Supabase CLI is not installed in this environment, so Supabase CLI lint/list checks were not run.
+- Supabase CLI 2.109.1 is installed; CLI help was checked, but database lint, migration listing, linking, and remote operations were not run.
 - Production Vercel environment variables, Supabase Auth redirect URLs, Domeneshop DNS, and support mailbox/alias setup still need manual verification.
 - Production verification preparation did not change real Supabase, Vercel, Domeneshop, DNS, or support mailbox settings.
 - `npm audit` reports moderate PostCSS advisories through Next.js 16.2.10's dependency tree. The suggested `npm audit fix --force` would install `next@9.3.3`, a breaking downgrade, so it was not applied.
@@ -342,3 +349,13 @@ Final auth diagnostics and locale cleanup follow-up:
 - Non-English locale files received a machine-quality cleanup pass to remove obvious English fallback values. Native review is still required before public launch.
 - Reset links requested before the latest reset-password fixes may need to be resent.
 - No remote Supabase Auth settings, remote migrations, Vercel settings, DNS, deployments, or env values were changed.
+
+Supabase keepalive health-check validation:
+
+- Local dummy RPC branch checks passed on 2026-07-14 for missing secret configuration, missing authorization, invalid Bearer token, successful RPC, failed RPC, no-store headers, and secret/internal error non-disclosure.
+- Migration inspection confirmed `SECURITY INVOKER`, empty `search_path`, `select true` only, revoked `PUBLIC`/`authenticated`/`service_role` execution, and `anon` execution.
+- `npm run lint`: passed on 2026-07-14.
+- `npm run typecheck`: passed on 2026-07-14.
+- `npm run build`: passed on 2026-07-14; the build classified `/api/health/supabase` as dynamic.
+- `git diff --check` and focused service-role/session/table-access/secret-tracking checks: passed on 2026-07-14.
+- No live Supabase project, Vercel environment, deployment, cron host, or real secret was changed or accessed.
