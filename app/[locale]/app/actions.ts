@@ -905,18 +905,32 @@ export async function createGroup(formData: FormData) {
     redirect(`/${locale}/app/groups/new?error=group-name-required`);
   }
 
-  const { data, error } = await supabase
+  const groupId = crypto.randomUUID();
+  const { error: insertError } = await supabase
     .from("groups")
-    .insert({ owner_id: user.id, name, description })
-    .select("id")
-    .single();
+    .insert({ id: groupId, owner_id: user.id, name, description });
 
-  if (error || !data) {
-    redirect(`/${locale}/app/groups/new?error=group-create-failed`);
+  if (insertError) {
+    redirect(
+      `/${locale}/app/groups/new?error=group-create-failed&failure=insert`,
+    );
+  }
+
+  const { data: createdGroup, error: verificationError } = await supabase
+    .from("groups")
+    .select("id")
+    .eq("id", groupId)
+    .eq("owner_id", user.id)
+    .maybeSingle();
+
+  if (verificationError || !createdGroup) {
+    redirect(
+      `/${locale}/app/groups/new?error=group-create-failed&failure=verification`,
+    );
   }
 
   revalidatePath(`/${locale}/app/groups`);
-  redirect(`/${locale}/app/groups/${data.id}?status=group-created`);
+  redirect(`/${locale}/app/groups/${createdGroup.id}?status=group-created`);
 }
 
 export async function updateGroup(formData: FormData) {
