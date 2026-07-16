@@ -4,7 +4,7 @@ NoProblemo is a minimal, secure, multilingual problem-solving workspace for turn
 
 ## Current Phase
 
-Phase 11 is complete. Production verification preparation is documented. The next step is controlled Supabase/Vercel production verification, with explicit approval required before applying remote migrations or changing production services.
+Phase 11 is complete. The application repair release was merged through PR #2 as `91cac6d`, deployed and promoted to `noproblemo.tech`, and production-verified with three disposable accounts. All six Supabase migrations are applied and aligned locally/remotely; the 2026-07-16 security repair passed production verification. Future remote migrations or production-service changes still require explicit approval.
 
 Not included in the current MVP:
 
@@ -27,7 +27,7 @@ Not included in the current MVP:
 
 ## MVP State
 
-Implemented locally:
+Implemented:
 
 - Public landing, support, login, signup, and guest solve routes.
 - Guest workspace stored only in browser localStorage.
@@ -39,13 +39,12 @@ Implemented locally:
 - Protected read-only admin overview and admin settings checklist.
 - Local Codex project logs in repository docs.
 
-Still requiring real Supabase/Vercel verification:
+Still requiring focused verification or operational setup:
 
-- Applying all migrations to a real Supabase project.
-- RLS behavior with multiple authenticated users.
-- Supabase Auth email/OAuth provider configuration and redirect URLs.
-- Vercel environment variables, custom domain, and Domeneshop DNS.
-- Production manual testing across mobile, desktop, all 11 locales, and Arabic/Urdu RTL.
+- Deliberately configured administrator-positive testing.
+- Google and Apple OAuth provider setup.
+- Health endpoint secret/deployment verification.
+- Fluent human review across all 11 locales, including Arabic/Urdu RTL, plus targeted device checks.
 - Support mailbox or alias setup for `david@fideli.no`.
 
 ## Internationalization
@@ -110,7 +109,7 @@ Password recovery links should open `/[locale]/reset-password` directly. Forgot/
 
 For local password-reset testing, request a fresh reset email after the latest recovery fix and open the link in the same browser/profile that requested it. The isolated recovery flow can use browser URL hash tokens, which stay in the browser and are cleared after session setup. Old reset links may need to be resent after recovery-flow fixes.
 
-The Phase 4 database trigger is expected to create `profiles` rows after signup, but it still needs verification after the migration is applied to the real Supabase project.
+The applied Phase 4 database trigger creates `profiles` rows after signup.
 
 ## Dashboard, Workspace And Settings
 
@@ -209,8 +208,10 @@ Local migrations live in `supabase/migrations/`:
 - Phase 8: friends, groups, invitations, group links, and group-aware RLS.
 - Phase 9: messages, notifications, activity events, and related triggers.
 - Phase 10: admin helpers, admin audit log, admin-only RPCs, and profile role hardening.
+- Health check: the minimal anon-only database reachability RPC.
+- Security repairs: least-privilege table/function access, the caller-scoped pending-invitation RPC, ownership protections, and challenge-section uniqueness.
 
-Before production, apply migrations to a real Supabase project only through an approved deployment workflow, then test RLS with separate normal and admin users.
+All six migrations are applied in production and the linked dry run reports no pending migrations. Apply any future migration only through an approved deployment workflow, then test affected RLS behavior with separate normal and admin users.
 
 The first admin must be assigned manually by a trusted project owner in Supabase SQL:
 
@@ -224,16 +225,16 @@ Do not build public admin signup or self-service admin promotion.
 
 ## Deployment Direction
 
-Use GitHub plus Vercel for the app and Supabase for Auth/Postgres/RLS. Configure `noproblemo.tech` as a Vercel custom domain, point DNS from Domeneshop according to Vercel's current instructions, and use `david@fideli.no` as the public support mailbox.
+The application is deployed on Vercel at `noproblemo.tech`, with Domeneshop providing domain/DNS and Supabase providing Auth/Postgres/RLS. The `david@fideli.no` support mailbox or alias still requires operational verification.
 
-Use these verification documents before public launch:
+Use these documents for release-specific and remaining operational verification:
 
 - `docs/PRODUCTION_VERIFICATION.md`
 - `docs/SUPABASE_VERIFICATION.md`
 - `docs/MANUAL_TEST_PLAN.md`
 - `docs/LAUNCH_READINESS_REPORT.md`
 
-Production readiness requires manual verification of guest mode, login/signup/logout, dashboard, challenge saving, guest import, friends/groups, group challenge access, messages, notifications, admin access, all 11 languages, Arabic/Urdu RTL, mobile, and desktop.
+Production verification with three disposable accounts covered authenticated redirects, protected deep links, duplicate-submit protection, friend/group acceptance, notification destinations, viewer/editor authorization, group roles, message/notification privacy, and ordinary-user admin denial. This does not replace deliberately configured administrator-positive testing, fluent review of all 11 languages, OAuth provider setup, or every possible device/workflow combination.
 
 ## Security Warnings
 
@@ -258,11 +259,11 @@ Production readiness requires manual verification of guest mode, login/signup/lo
 
 ## Known Limitations
 
-- Supabase migrations/RLS/RPC behavior still need live verification.
+- The six-migration history and ordinary-user collaboration authorization are production-verified; the pending-invitation RPC consumer and challenge-section `23505` retry remain separate application follow-ups.
 - Google and Apple OAuth require provider setup.
 - Realtime subscriptions are not implemented.
 - Admin user management is read-only.
-- Group-linked viewer read-only UX is still mostly enforced by RLS/server failures rather than hiding every edit control.
+- Group-linked viewers receive an inert, native-disabled read-only workspace, while RLS remains authoritative and denies viewer mutations.
 - Guest drafts can be lost if browser storage is cleared.
 
 ## Project Documents

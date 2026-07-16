@@ -4,6 +4,8 @@
 
 Phase 11 completed an MVP polish, security, i18n/RTL, and deployment-readiness review on top of the Phase 10 admin/settings foundation.
 
+The application repair release was merged through PR #2 as `91cac6d`, deployed and promoted to `noproblemo.tech`, and production-verified with three disposable ordinary-user accounts. Verified boundaries include authenticated redirects and protected deep links, pending-submit protection, trigger-owned friendship and group-membership acceptance, safe notification destinations, group creation and roles, editor persistence, RLS denial of viewer mutation, message/notification privacy, and ordinary-user admin denial. Deliberately configured administrator-positive testing and the OAuth, health-endpoint, support-mailbox, and translation/locale operational checks remain separate.
+
 Guest challenge drafts remain in browser localStorage until an authenticated user explicitly imports them from the dashboard.
 
 ## Authentication Security
@@ -22,7 +24,7 @@ Implemented in Phase 5:
 - Logged-in users can delete their own account from settings after explicit confirmation. The server action derives the user id from the authenticated session and never accepts a user id from the client.
 - Password reset requests use Supabase Auth reset links and locale-specific `/[locale]/reset-password` URLs; the browser client establishes the recovery session before calling `updateUser({ password })`.
 - Google and Apple OAuth start actions are prepared, but provider configuration is still required.
-- Profile creation relies on the Phase 4 database trigger and still needs verification after the migration is applied.
+- Profile creation relies on the applied Phase 4 database trigger.
 
 ## Supabase RLS Implemented In Phase 4
 
@@ -48,7 +50,7 @@ Current access model:
 - Users can read, create, update, and delete challenge solutions only through a parent challenge they own.
 - Users can read, create, update, and delete challenge tasks only through a parent challenge they own.
 
-These policies still need to be applied and tested in Supabase.
+These policies and the later security-repair migration are applied in production. The six-migration history aligns locally and remotely, and focused production verification passed; broader application workflows remain subject to release-specific testing.
 
 ## Phase 8 Friends And Groups Security
 
@@ -81,13 +83,13 @@ Current access model:
 - Groups are private; no public groups are implemented.
 - Group membership is limited to 100 members by database trigger.
 - `group_challenges` creates explicit challenge access for a group.
-- Group viewers can read linked challenges but should not be able to edit them.
+- Group viewers can read linked challenges through an inert, native-disabled workspace; RLS denies viewer mutations.
 - Group owners/admins/members can collaborate on linked challenges through RLS.
 - Users outside the group cannot read group content or linked group challenges.
 
 Profile discovery uses the authenticated `search_profiles(search_term)` RPC and returns only `id`, `display_name`, and `avatar_url`. It does not expose email addresses, `auth.users`, profile role, or support/private profile fields.
 
-Known MVP limitation: viewer read-only behavior is enforced by RLS and server-side write failures. The workspace UI may still render some edit controls for viewers until role-aware read-only rendering is added.
+Production verification confirmed that viewer mutation controls are inert and native-disabled, editor changes persist, and RLS remains authoritative by denying viewer mutation attempts.
 
 ## Phase 9 Messaging, Notifications And Activity Security
 
@@ -183,14 +185,14 @@ Reviewed locally in Phase 11:
 - Notifications remain recipient-scoped in the documented RLS model.
 - Activity remains group/challenge-scoped in the documented RLS model.
 
-Not verified in this environment:
+Not verified during the historical Phase 11 review:
 
 - Live Supabase RLS behavior with multiple authenticated users.
 - Supabase RPC behavior against a real project.
 - Supabase Auth provider and redirect behavior in production.
 - Vercel production environment and domain configuration.
 
-Supabase CLI 2.109.1 is installed. CLI help was checked, but database lint, migration listing, linking, and remote operations were not run.
+Those Phase 11 gaps were subsequently narrowed by production verification of ordinary-user Auth/RLS/RPC behavior and the aligned six-migration chain. Deliberately configured administrator-positive testing, Google/Apple provider setup, health endpoint secret/deployment verification, support mailbox setup, and fluent translation review remain current gaps.
 
 ## User Ownership Rules
 

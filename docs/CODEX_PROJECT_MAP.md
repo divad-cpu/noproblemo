@@ -13,7 +13,7 @@ NoProblemo is a minimalistic, secure, modern web application for structured prob
 - `next-intl`
 - Supabase Auth/Postgres/RLS foundation
 - Vercel deployment
-- Domeneshop planned for domain/DNS
+- Domeneshop domain/DNS for the production `noproblemo.tech` deployment
 
 ## Current Implemented State
 
@@ -52,6 +52,8 @@ Implemented:
 - Supabase migration for profiles and core challenge tables.
 - Phase 8 migration for friends, groups, profile search, group challenge links, and group-aware RLS.
 - Phase 9 migration for messages, notifications, activity events, triggers, and RLS.
+- Production-aligned security migration for least-privilege table/function access, a caller-scoped pending-invitation RPC, ownership protections, and challenge-section uniqueness.
+- Focused pgTAP regression coverage for the production-applied security migration.
 - Supabase client/server helper scaffolding.
 - Manual database types.
 
@@ -65,6 +67,7 @@ Not implemented:
 - `docs/SUPABASE_VERIFICATION.md`: manual Supabase migration, RLS, trigger, RPC, group access, message/notification/activity, and admin verification checklist.
 - `docs/MANUAL_TEST_PLAN.md`: three-user app test plan for guest mode, auth, dashboard, workspace, friends/groups, messages, notifications, activity, admin, locales, RTL, accessibility, and responsive layouts.
 - `docs/LAUNCH_READINESS_REPORT.md`: current launch readiness status, implemented/not implemented scope, blockers, recommendations, and verification evidence target.
+- `docs/qa/SECURITY_MIGRATION_PRODUCTION_VERIFICATION.md`: production security migration checksum, manual-apply evidence, local/remote history alignment, validation, and separate application follow-ups.
 
 ## Route Map
 
@@ -101,7 +104,10 @@ Current:
 - Supabase migration: `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`.
 - Supabase migration: `supabase/migrations/20260703210000_phase8_friends_groups.sql`.
 - Supabase migration: `supabase/migrations/20260703220000_phase9_messaging_notifications_activity.sql`.
+- Supabase migration: `supabase/migrations/20260704090000_phase10_admin_settings_logs.sql`.
 - Supabase migration: `supabase/migrations/20260714120000_supabase_health_check.sql`.
+- Supabase migration: `supabase/migrations/20260716120000_full_application_audit_security_repairs.sql`.
+- Database regression suite: `supabase/tests/database/security_migration_production_alignment.test.sql`.
 - Typed helpers: `lib/supabase/`.
 - Dashboard reads/writes use the authenticated Supabase session and Phase 4 tables.
 - Guest import maps `problem`, `context`, `outcome`, `options`, and `nextStep` into `challenge_sections`.
@@ -120,6 +126,7 @@ Current:
 - Admin audit metadata uses `admin_audit_log`.
 - Admin overview data uses admin-only RPCs for aggregate counts and limited metadata.
 - Keepalive health checks use the anon-only `noproblemo_health_check()` RPC and return no table data.
+- Pending invitation identity is available through the argument-free authenticated `pending_group_invitations()` RPC. It scopes by `auth.uid()` and returns only invitation ID, group ID, group name, and invited role; pending invitees do not receive base-table `groups` visibility.
 
 Implemented Phase 4 tables:
 
@@ -161,7 +168,7 @@ Current:
 - Phase 9 migration enables RLS for messages, notifications, and activity events.
 - Friendships alone do not grant challenge access.
 - Group invitation acceptance is required before membership access is granted.
-- Group challenge viewers should read but not edit linked challenges.
+- Group challenge viewers receive an inert, native-disabled read-only workspace; RLS remains authoritative and denies viewer mutations.
 - Group messages are visible only to group members.
 - Challenge messages are visible only to users with challenge read access.
 - Notifications are visible only to recipients.
@@ -171,12 +178,14 @@ Current:
 - `admin_audit_log` is readable only by admins and has no authenticated write grant.
 - Normal users cannot self-promote through profile settings or authenticated self role updates.
 - The keepalive endpoint uses a separate server-only Bearer secret and anon RPC credentials without cookies or a user session.
-- RLS migrations must still be verified in Supabase.
+- All six migrations align with the production migration history. The 2026-07-16 security migration passed production verification and focused local regression coverage.
 - `lib/supabase/admin.ts` is a server-only service-role helper used only for current-user account deletion. It must never be imported into Client Components.
 
 Planned:
 
-- Controlled Supabase/Vercel production verification with explicit approval before remote changes.
+- Deliberately configured administrator-positive testing and remaining OAuth, health endpoint, support-mailbox, translation, and release-specific operational verification.
+- Application consumption of `pending_group_invitations()`; production currently remains on application commit `91cac6d`.
+- A focused concurrent-save `23505` retry for challenge sections; the applied unique constraint is recorded here without that application behavior.
 - Later admin actions beyond the read-only MVP.
 
 Rules:
@@ -195,11 +204,11 @@ See `SECURITY.md` before implementing auth, database writes, or messaging.
 3. Dashboard: implemented.
 4. Create and save a challenge: implemented.
 5. Basic challenge workspace: implemented.
-6. Friends/invites: implemented locally.
-7. Groups: implemented locally.
-8. Simple messaging: implemented locally.
-9. Basic admin/settings: implemented locally.
-10. Deployment: Vercel direction documented; controlled production verification remains required.
+6. Friends/invites: implemented and ordinary-user production-verified.
+7. Groups: implemented and ordinary-user production-verified.
+8. Simple messaging: implemented and privacy production-verified.
+9. Basic admin/settings: implemented; ordinary-user denial is production-verified and deliberately configured administrator-positive testing remains.
+10. Deployment: application commit `91cac6d` is deployed and promoted to `noproblemo.tech`; targeted operational verification remains.
 
 ## Future Feature Map
 

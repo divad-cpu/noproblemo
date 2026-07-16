@@ -9,7 +9,7 @@
 - `next-intl` for locale routing and UI messages
 - Supabase Auth/Postgres/RLS foundation
 - Vercel production deployment
-- Domeneshop planned mainly for domain and DNS
+- Domeneshop domain/DNS for the production `noproblemo.tech` deployment
 
 ## Current Folder Structure
 
@@ -132,7 +132,7 @@ Implemented in Phase 10:
 - admin-only aggregate/profile/activity/audit RPCs
 - admin-only audit-log read policy
 
-The migrations still need to be applied and verified in Supabase.
+All six migrations are applied and aligned in production. The 2026-07-16 security repair is recorded in source and production-verified; broader application workflows remain subject to release-specific verification.
 
 Phase 11 did not add schema or major product architecture. It added focused responsive, accessibility, robustness, deployment, and security documentation polish.
 
@@ -184,12 +184,13 @@ Current data flow:
 
 Planned data flow:
 
-- Production verification against real Supabase and Vercel projects.
+- Application consumption of `pending_group_invitations()` and deterministic retry handling for challenge-section `23505` first-save conflicts.
+- Deliberately configured administrator-positive testing plus remaining OAuth, health endpoint, support-mailbox, translation, and release-specific operational verification.
 - Later: admin actions beyond read-only MVP and optional realtime messaging.
 
 ## Deployment Direction
 
-Deploy on Vercel. Configure production environment variables in Vercel, never in git. Domeneshop should be used for domain/DNS pointing to Vercel when the domain is ready.
+Production is deployed on Vercel and promoted to `noproblemo.tech`. Keep production environment variables in Vercel, never in git; remaining operational checks are release-specific and must not expose secret values.
 
 ## What Should Stay Simple During MVP
 

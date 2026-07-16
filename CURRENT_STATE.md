@@ -20,15 +20,17 @@ NoProblemo has completed:
 - Phase 10: admin/settings and local project logs
 - Phase 11: polish, security review and deployment preparation
 
-Production verification preparation is complete. Controlled Supabase/Vercel production verification is next. Payments, AI, email automation, Resend, and Vercel Cron remain future phases.
+The focused application repair release was merged through PR #2, recorded in `main` as `91cac6d`, deployed and promoted to `noproblemo.tech`, and production-verified with three disposable accounts. Payments, AI, email automation, Resend, and Vercel Cron remain future phases.
+
+The production Supabase security migration `20260716120000_full_application_audit_security_repairs.sql` was manually applied and verified on 2026-07-16. Its source SHA-256 is `a3a4c87061a845a04529e3cc0c328df386ad79b49de1b31b90559648fcd05c53`; all six migrations align locally and remotely, and the post-apply linked dry run reports no pending migrations. The production application remains on `91cac6d`. Recording this already-applied migration does not deploy application code or apply another database change. See `docs/qa/SECURITY_MIGRATION_PRODUCTION_VERIFICATION.md`.
 
 A focused auth/settings verification fix was completed after Phase 11 to improve email-confirmation fallback handling, password recovery, route language switching, and dashboard usability.
 
-A focused Supabase keepalive health endpoint is implemented locally and awaits approved migration application, Vercel secret configuration, deployment, and production verification.
+A focused Supabase keepalive health endpoint is implemented locally. Its migration is one of the six migrations now aligned with production; Vercel secret configuration, endpoint deployment, and endpoint production verification remain separate work.
 
-A minimal group-creation hotfix was isolated from `main` on 2026-07-16. It avoids requesting a returned group row before the owner-membership trigger is visible, verifies the generated group ID and authenticated owner in a separate query, and preserves trigger-owned membership creation. Focused application and production-baseline pgTAP regressions pass, and disposable User A verified the fix on a non-production Vercel Preview. No migration or production deployment was performed. See `docs/qa/GROUP_CREATION_HOTFIX.md`.
+The group-creation hotfix was initially isolated and verified on a non-production Vercel Preview on 2026-07-16. Its generated-ID, separate owner verification, and trigger-owned membership behavior is now present in production application commit `91cac6d`, where group creation and role boundaries passed three-account verification. No database migration was required. See `docs/qa/GROUP_CREATION_HOTFIX.md`.
 
-A focused application repair release is Preview-verified on `fix/production-ux-feedback`. It removes duplicate trigger-owned friendship and group-membership inserts, verifies the resulting relationship state, corrects safe localized notification destinations, gives group challenge viewers a clear inert and native-disabled read-only workspace while preserving editor actions, restores authenticated and protected deep-link redirects, and adds login/signup pending protection. Local validation and focused one-worker Preview authentication/collaboration workflows pass with the three disposable accounts. The pending invitee group-name policy remains excluded and migration-dependent. No Supabase migration is included or applied, and production is not deployed. See `docs/qa/PRODUCTION_UX_REPAIRS.md`.
+The production application repair release on `91cac6d` was verified with the three disposable accounts. Authenticated redirects and protected deep-link restoration, pending/duplicate-submit protection, trigger-owned friend and group-invitation acceptance, safe notification destinations, inert/native-disabled viewer controls, editor persistence with RLS denial of viewer mutation, group creation and role boundaries, message and notification privacy, and ordinary-user admin denial all passed. The pending-invitation RPC consumer and deterministic retry handling for challenge-section `23505` first-save conflicts remain separate, undeployed application follow-ups. See `docs/qa/PRODUCTION_UX_REPAIRS.md`.
 
 ## Already Implemented
 
@@ -83,6 +85,8 @@ A focused application repair release is Preview-verified on `fix/production-ux-f
 - Production verification preparation docs for Supabase, Vercel, Domeneshop DNS, Auth providers, RLS, multi-user manual testing, and launch readiness
 - Bearer-protected, non-cacheable `/api/health/supabase` Route Handler using anon credentials and no user session or service-role key
 - Supabase migration `20260714120000_supabase_health_check.sql` for the minimal invoker `noproblemo_health_check()` RPC with `anon`-only execution
+- Production-aligned Supabase migration `20260716120000_full_application_audit_security_repairs.sql` for least-privilege table/function access, the minimal pending-invitation RPC, ownership protections, and challenge-section uniqueness
+- Focused local pgTAP regression coverage for the production-aligned security migration
 - Notification/activity triggers for friend requests, group invitations, group/member events, group challenge links, and messages
 - Phase 10 local migration for admin helper functions, admin audit log, admin-only RPCs, profile role hardening, and admin profile read policy
 - Google and Apple OAuth start actions remain prepared for future use, but visible login/signup UI currently shows email auth only.
@@ -118,7 +122,7 @@ A focused application repair release is Preview-verified on `fix/production-ux-f
 - Admin audit logging storage exists in `admin_audit_log`; Phase 10 has no sensitive admin mutations to log yet.
 - Phase 11 reviewed migrations and documented required manual Supabase/Vercel production checks, but did not perform live Supabase verification.
 - Google and Apple OAuth actions exist for future use, but buttons are temporarily hidden from the public auth UI while email login/signup is the active method.
-- Supabase schema exists as local migrations but has not been verified against the live Supabase project in this task.
+- All six Supabase migrations align with the live production migration history. The 2026-07-16 security migration passed production verification; broader application workflow verification remains tracked separately.
 - Supabase helpers are used by auth actions, callback/logout handlers, auth-aware landing links, and the protected app layout.
 - Deployment works on Vercel, but production hardening is ongoing.
 - Translations currently include complete UI keys, but non-English content quality should be reviewed by fluent speakers before launch.
@@ -172,6 +176,9 @@ A focused application repair release is Preview-verified on `fix/production-ux-f
 - `supabase/migrations/20260703220000_phase9_messaging_notifications_activity.sql`: Phase 9 messages, notifications, activity events, triggers, and RLS migration.
 - `supabase/migrations/20260704090000_phase10_admin_settings_logs.sql`: Phase 10 admin helpers, audit log, admin RPCs, and profile role hardening migration.
 - `supabase/migrations/20260714120000_supabase_health_check.sql`: minimal Supabase reachability RPC with invoker security and anon-only execution.
+- `supabase/migrations/20260716120000_full_application_audit_security_repairs.sql`: byte-identical record of the production-applied security migration.
+- `supabase/tests/database/security_migration_production_alignment.test.sql`: focused pgTAP regression coverage for the production-applied security guarantees.
+- `docs/qa/SECURITY_MIGRATION_PRODUCTION_VERIFICATION.md`: durable production application, checksum, history-alignment, and follow-up record.
 - `supabase/config.toml`: Supabase CLI config.
 - `supabase/seed.sql`: empty seed file.
 - `supabase/migrations/20260703190000_phase4_supabase_foundation.sql`: Phase 4 schema and RLS migration.
@@ -184,19 +191,15 @@ A focused application repair release is Preview-verified on `fix/production-ux-f
 
 ## Known Issues
 
-- Phase 4 migration needs to be applied and tested in Supabase.
-- Phase 8 migration needs to be applied and tested in Supabase.
-- Phase 9 migration needs to be applied and tested in Supabase.
-- Phase 10 migration needs to be applied and tested in Supabase.
-- Supabase health-check migration needs to be applied and the endpoint needs Vercel Production secret configuration and production verification.
-- RLS policies, profile trigger, workspace writes, friend/group writes, group challenge access, message writes, notification privacy, and activity visibility need verification with authenticated users.
-- Admin role checks, admin RPCs, admin audit log RLS, and profile role hardening need verification with authenticated admin and non-admin users.
-- Supabase CLI 2.109.1 is installed; CLI help was checked, but database lint, migration listing, linking, and remote operations were not run.
-- Production Vercel environment variables, Supabase Auth redirect URLs, Domeneshop DNS, and support mailbox/alias setup still need manual verification.
-- Production verification preparation did not change real Supabase, Vercel, Domeneshop, DNS, or support mailbox settings.
+- All six migrations are applied and aligned in production; no production migration is pending. Future schema changes must preserve that alignment and use a separately approved workflow.
+- The health-check endpoint still needs Vercel Production secret configuration and endpoint production verification; its database migration is already applied.
+- The production application remains on `91cac6d`. Consuming `pending_group_invitations()` in the groups UI and adding a challenge-section concurrent-save `23505` retry remain separate application follow-ups.
+- Ordinary-user authentication, collaboration, viewer/editor authorization, message/notification privacy, and admin denial were production-verified with three disposable accounts. Deliberately configured administrator-positive testing of admin routes, RPCs, audit-log RLS, and profile-role hardening remains outstanding.
+- Supabase CLI 2.109.0 is installed. On 2026-07-16, local database lint passed, linked history showed all six migrations aligned, and the linked push dry run reported the remote database up to date; no remote write was run.
+- Remaining operational verification includes the health endpoint secret/deployment, Google/Apple OAuth provider setup, and the support mailbox or alias.
 - `npm audit` reports moderate PostCSS advisories through Next.js 16.2.10's dependency tree. The suggested `npm audit fix --force` would install `next@9.3.3`, a breaking downgrade, so it was not applied.
 - Google and Apple OAuth require provider configuration in Supabase, Google Cloud, and Apple Developer.
-- Signup failures are classified into safe user-facing states, but live Supabase Auth provider configuration still needs manual verification.
+- Email authentication and redirect behavior were production-verified; Google and Apple provider configuration still needs manual setup and verification.
 - Account deletion requires `SUPABASE_SERVICE_ROLE_KEY` to be configured server-side in the deployment environment.
 - Supabase Auth redirect URLs must include locale-specific `/[locale]/auth/callback` routes for email confirmation and OAuth.
 - Supabase Auth redirect URLs must also include locale-specific `/[locale]/reset-password` routes for password recovery.
@@ -214,25 +217,24 @@ A focused application repair release is Preview-verified on `fix/production-ux-f
 
 - Future agents must not add payments, AI, email automation, Resend, or Vercel Cron before explicitly scoped.
 - Future agents might use service role keys in frontend code; do not do this.
-- RLS policies are written but still need live/local Supabase verification.
+- The production-applied security migration has focused local pgTAP coverage and passed production verification. The pending-invitation consumer and challenge-section `23505` retry will require focused regression checks when released; no follow-up migration is pending.
 - User-generated problem content may be sensitive; privacy must be designed into auth and dashboard phases.
 - Feature expansion could overload the minimal UI if not kept incremental.
 
 ## Next Recommended Phase
 
-Controlled Supabase/Vercel production verification.
+Focused application and operational follow-ups.
 
 Recommended scope:
 
-- Apply migrations to a real Supabase project only with explicit approval.
-- Verify RLS with multiple test users.
-- Configure Supabase Auth redirect URLs and OAuth providers.
-- Configure Vercel environment variables and custom domain.
-- Configure Domeneshop DNS and the support mailbox or alias.
-- Manually test all core app flows on mobile, desktop, and all supported locales.
-- Record results in `docs/LAUNCH_READINESS_REPORT.md` and `CURRENT_STATE.md`.
+- Consume `pending_group_invitations()` so pending invitations display the real group name.
+- Add deterministic retry handling for challenge-section `23505` first-save conflicts.
+- Run deliberately configured administrator-positive verification without weakening ordinary-user denial.
+- Complete Google/Apple OAuth provider setup, health endpoint secret/deployment verification, and support mailbox or alias setup.
+- Obtain fluent human translation review and run targeted locale/device checks without claiming every possible production workflow is covered.
+- Record release-specific results in `docs/LAUNCH_READINESS_REPORT.md` and `CURRENT_STATE.md`.
 
-Do not add unrelated product features during production verification.
+Do not add unrelated product features or another migration during these follow-ups.
 
 ## Validation Commands
 
