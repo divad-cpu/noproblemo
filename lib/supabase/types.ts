@@ -632,6 +632,15 @@ export type Database = {
         Args: Record<PropertyKey, never>;
         Returns: boolean;
       };
+      pending_group_invitations: {
+        Args: Record<PropertyKey, never>;
+        Returns: Array<{
+          invitation_id: string;
+          group_id: string;
+          group_name: string;
+          invited_role: GroupRole;
+        }>;
+      };
       search_profiles: {
         Args: {
           search_term: string;

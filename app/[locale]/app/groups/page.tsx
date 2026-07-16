@@ -12,6 +12,8 @@ type GroupsPageProps = {
 };
 
 type Group = Database["public"]["Tables"]["groups"]["Row"];
+type PendingGroupInvitation =
+  Database["public"]["Functions"]["pending_group_invitations"]["Returns"][number];
 
 const statusKeys = [
   "group-invitation-accepted",
@@ -54,7 +56,11 @@ export default async function GroupsPage({ params, searchParams }: GroupsPagePro
 
   const status = getQueryValue(query, "status");
   const error = getQueryValue(query, "error");
-  const [{ data: memberships }, { data: invitations }] = await Promise.all([
+  const [
+    { data: memberships },
+    { data: invitations },
+    { data: pendingInvitationDetails },
+  ] = await Promise.all([
     supabase
       .from("group_members")
       .select("id, role, group_id")
@@ -66,16 +72,21 @@ export default async function GroupsPage({ params, searchParams }: GroupsPagePro
       .eq("invitee_id", user.id)
       .eq("status", "pending")
       .order("created_at", { ascending: false }),
+    supabase.rpc("pending_group_invitations"),
   ]);
-  const groupIds = [
-    ...(memberships ?? []).map((membership) => membership.group_id),
-    ...(invitations ?? []).map((invitation) => invitation.group_id),
-  ];
+  const memberGroupIds = (memberships ?? []).map(
+    (membership) => membership.group_id,
+  );
   const { data: groups } =
-    groupIds.length > 0
-      ? await supabase.from("groups").select("*").in("id", groupIds)
+    memberGroupIds.length > 0
+      ? await supabase.from("groups").select("*").in("id", memberGroupIds)
       : { data: [] as Group[] };
   const groupMap = new Map((groups ?? []).map((group) => [group.id, group]));
+  const pendingInvitationMap = new Map(
+    ((pendingInvitationDetails ?? []) as PendingGroupInvitation[]).map(
+      (invitation) => [invitation.invitation_id, invitation],
+    ),
+  );
 
   return (
     <div className="grid gap-6">
@@ -114,31 +125,43 @@ export default async function GroupsPage({ params, searchParams }: GroupsPagePro
         </h2>
         <div className="mt-5 grid gap-3">
           {invitations && invitations.length > 0 ? (
-            invitations.map((invitation) => (
-              <div
-                key={invitation.id}
-                className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4"
-              >
-                <p className="break-words font-semibold text-[#22211e]">
-                  {groupMap.get(invitation.group_id)?.name ?? t("unnamed")}
-                </p>
-                <p className="mt-1 text-sm text-[#706f68]">
-                  {t("role")}: {t(`roles.${invitation.role}`)}
-                </p>
-                <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-                  {(["accepted", "declined"] as const).map((response) => (
-                    <form key={response} action={respondGroupInvitation}>
-                      <input type="hidden" name="locale" value={locale} />
-                      <input type="hidden" name="invitationId" value={invitation.id} />
-                      <input type="hidden" name="response" value={response} />
-                      <button className="inline-flex min-h-10 items-center justify-center rounded-md border border-[#dad8d0] bg-white px-4 py-2 text-sm font-semibold text-[#22211e] hover:border-[#8b897f]">
-                        {t(`invitations.${response}`)}
-                      </button>
-                    </form>
-                  ))}
+            invitations.map((invitation) => {
+              const pendingDetails = pendingInvitationMap.get(invitation.id);
+              const safePendingDetails =
+                pendingDetails?.group_id === invitation.group_id
+                  ? pendingDetails
+                  : null;
+
+              return (
+                <div
+                  key={invitation.id}
+                  className="rounded-md border border-[#e5e2da] bg-[#fbfaf7] p-4"
+                >
+                  <p className="break-words font-semibold text-[#22211e]">
+                    {safePendingDetails?.group_name ?? t("unnamed")}
+                  </p>
+                  <p className="mt-1 text-sm text-[#706f68]">
+                    {t("role")}: {t(`roles.${safePendingDetails?.invited_role ?? invitation.role}`)}
+                  </p>
+                  <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+                    {(["accepted", "declined"] as const).map((response) => (
+                      <form key={response} action={respondGroupInvitation}>
+                        <input type="hidden" name="locale" value={locale} />
+                        <input
+                          type="hidden"
+                          name="invitationId"
+                          value={invitation.id}
+                        />
+                        <input type="hidden" name="response" value={response} />
+                        <button className="inline-flex min-h-10 items-center justify-center rounded-md border border-[#dad8d0] bg-white px-4 py-2 text-sm font-semibold text-[#22211e] hover:border-[#8b897f]">
+                          {t(`invitations.${response}`)}
+                        </button>
+                      </form>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           ) : (
             <p className="text-sm leading-6 text-[#55544f]">
               {t("invitations.empty")}

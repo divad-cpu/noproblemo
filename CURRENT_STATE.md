@@ -32,6 +32,8 @@ The group-creation hotfix was initially isolated and verified on a non-productio
 
 The production application repair release on `91cac6d` was verified with the three disposable accounts. Authenticated redirects and protected deep-link restoration, pending/duplicate-submit protection, trigger-owned friend and group-invitation acceptance, safe notification destinations, inert/native-disabled viewer controls, editor persistence with RLS denial of viewer mutation, group creation and role boundaries, message and notification privacy, and ordinary-user admin denial all passed. The pending-invitation RPC consumer and deterministic retry handling for challenge-section `23505` first-save conflicts remain separate, undeployed application follow-ups. See `docs/qa/PRODUCTION_UX_REPAIRS.md`.
 
+The focused pending-invitation and challenge-section follow-up is implemented on `fix/pending-invite-section-retry`. It consumes the already-applied `pending_group_invitations()` RPC and adds one verified exact-key update after a first-insert `23505`; it includes no migration. The localized `Unnamed group` and privacy-safe section-save fallbacks remain. Local validation, exact-commit Preview verification, and production deployment are recorded separately; production deployment remains pending. See `docs/qa/PENDING_INVITATION_SECTION_SAVE_FOLLOWUP.md`.
+
 ## Already Implemented
 
 - Next.js 16 App Router
@@ -86,6 +88,8 @@ The production application repair release on `91cac6d` was verified with the thr
 - Bearer-protected, non-cacheable `/api/health/supabase` Route Handler using anon credentials and no user session or service-role key
 - Supabase migration `20260714120000_supabase_health_check.sql` for the minimal invoker `noproblemo_health_check()` RPC with `anon`-only execution
 - Production-aligned Supabase migration `20260716120000_full_application_audit_security_repairs.sql` for least-privilege table/function access, the minimal pending-invitation RPC, ownership protections, and challenge-section uniqueness
+- Authenticated pending-invitation UI consumption of `pending_group_invitations()` without pending-invitee base `groups` access
+- One bounded, exact-key challenge-section recovery update after a concurrent first-insert `23505`, with returned-row verification
 - Focused local pgTAP regression coverage for the production-aligned security migration
 - Notification/activity triggers for friend requests, group invitations, group/member events, group challenge links, and messages
 - Phase 10 local migration for admin helper functions, admin audit log, admin-only RPCs, profile role hardening, and admin profile read policy
@@ -193,7 +197,7 @@ The production application repair release on `91cac6d` was verified with the thr
 
 - All six migrations are applied and aligned in production; no production migration is pending. Future schema changes must preserve that alignment and use a separately approved workflow.
 - The health-check endpoint still needs Vercel Production secret configuration and endpoint production verification; its database migration is already applied.
-- The production application remains on `91cac6d`. Consuming `pending_group_invitations()` in the groups UI and adding a challenge-section concurrent-save `23505` retry remain separate application follow-ups.
+- The production application remains on `91cac6d`. The pending-invitation consumer and challenge-section `23505` recovery are implemented on an isolated release branch, include no migration, and remain pending exact-commit Preview verification and staged production deployment.
 - Ordinary-user authentication, collaboration, viewer/editor authorization, message/notification privacy, and admin denial were production-verified with three disposable accounts. Deliberately configured administrator-positive testing of admin routes, RPCs, audit-log RLS, and profile-role hardening remains outstanding.
 - Supabase CLI 2.109.0 is installed. On 2026-07-16, local database lint passed, linked history showed all six migrations aligned, and the linked push dry run reported the remote database up to date; no remote write was run.
 - Remaining operational verification includes the health endpoint secret/deployment, Google/Apple OAuth provider setup, and the support mailbox or alias.
@@ -227,8 +231,7 @@ Focused application and operational follow-ups.
 
 Recommended scope:
 
-- Consume `pending_group_invitations()` so pending invitations display the real group name.
-- Add deterministic retry handling for challenge-section `23505` first-save conflicts.
+- Stage the focused pending-invitation and challenge-section follow-up only after its exact-commit Preview and cleanup record passes.
 - Run deliberately configured administrator-positive verification without weakening ordinary-user denial.
 - Complete Google/Apple OAuth provider setup, health endpoint secret/deployment verification, and support mailbox or alias setup.
 - Obtain fluent human translation review and run targeted locale/device checks without claiming every possible production workflow is covered.

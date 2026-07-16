@@ -611,7 +611,19 @@ export async function saveChallengeSections(formData: FormData) {
         position,
       });
 
-      if (error) {
+      if (error?.code === "23505") {
+        const { data: recoveredSection, error: recoveryError } = await supabase
+          .from("challenge_sections")
+          .update({ content, position })
+          .eq("challenge_id", challengeId)
+          .eq("section_key", sectionKey)
+          .select("id")
+          .maybeSingle();
+
+        if (recoveryError || !recoveredSection) {
+          redirect(workspaceErrorUrl(locale, challengeId, "sections-save-failed"));
+        }
+      } else if (error) {
         redirect(workspaceErrorUrl(locale, challengeId, "sections-save-failed"));
       }
     }
