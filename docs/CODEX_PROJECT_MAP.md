@@ -13,7 +13,7 @@ NoProblemo is a minimalistic, secure, modern web application for structured prob
 - `next-intl`
 - Supabase Auth/Postgres/RLS foundation
 - Vercel deployment
-- Domeneshop planned for domain/DNS
+- Domeneshop domain/DNS for the production `noproblemo.tech` deployment
 
 ## Current Implemented State
 
@@ -168,7 +168,7 @@ Current:
 - Phase 9 migration enables RLS for messages, notifications, and activity events.
 - Friendships alone do not grant challenge access.
 - Group invitation acceptance is required before membership access is granted.
-- Group challenge viewers should read but not edit linked challenges.
+- Group challenge viewers receive an inert, native-disabled read-only workspace; RLS remains authoritative and denies viewer mutations.
 - Group messages are visible only to group members.
 - Challenge messages are visible only to users with challenge read access.
 - Notifications are visible only to recipients.
@@ -183,7 +183,7 @@ Current:
 
 Planned:
 
-- Controlled Supabase/Vercel production verification with explicit approval before remote changes.
+- Deliberately configured administrator-positive testing and remaining OAuth, health endpoint, support-mailbox, translation, and release-specific operational verification.
 - Application consumption of `pending_group_invitations()`; production currently remains on application commit `91cac6d`.
 - A focused concurrent-save `23505` retry for challenge sections; the applied unique constraint is recorded here without that application behavior.
 - Later admin actions beyond the read-only MVP.
@@ -204,11 +204,11 @@ See `SECURITY.md` before implementing auth, database writes, or messaging.
 3. Dashboard: implemented.
 4. Create and save a challenge: implemented.
 5. Basic challenge workspace: implemented.
-6. Friends/invites: implemented locally.
-7. Groups: implemented locally.
-8. Simple messaging: implemented locally.
-9. Basic admin/settings: implemented locally.
-10. Deployment: Vercel direction documented; controlled production verification remains required.
+6. Friends/invites: implemented and ordinary-user production-verified.
+7. Groups: implemented and ordinary-user production-verified.
+8. Simple messaging: implemented and privacy production-verified.
+9. Basic admin/settings: implemented; ordinary-user denial is production-verified and deliberately configured administrator-positive testing remains.
+10. Deployment: application commit `91cac6d` is deployed and promoted to `noproblemo.tech`; targeted operational verification remains.
 
 ## Future Feature Map
 

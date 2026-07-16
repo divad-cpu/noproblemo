@@ -4,7 +4,7 @@ NoProblemo is a minimal, secure, multilingual problem-solving workspace for turn
 
 ## Current Phase
 
-Phase 11 is complete. All six Supabase migrations, including the 2026-07-16 production security repair, are applied and aligned locally and remotely. Broader Supabase/Vercel application verification remains controlled, and future remote migrations or production-service changes still require explicit approval.
+Phase 11 is complete. The application repair release was merged through PR #2 as `91cac6d`, deployed and promoted to `noproblemo.tech`, and production-verified with three disposable accounts. All six Supabase migrations are applied and aligned locally/remotely; the 2026-07-16 security repair passed production verification. Future remote migrations or production-service changes still require explicit approval.
 
 Not included in the current MVP:
 
@@ -27,7 +27,7 @@ Not included in the current MVP:
 
 ## MVP State
 
-Implemented locally:
+Implemented:
 
 - Public landing, support, login, signup, and guest solve routes.
 - Guest workspace stored only in browser localStorage.
@@ -39,12 +39,12 @@ Implemented locally:
 - Protected read-only admin overview and admin settings checklist.
 - Local Codex project logs in repository docs.
 
-Still requiring broader Supabase/Vercel verification:
+Still requiring focused verification or operational setup:
 
-- RLS behavior with multiple authenticated users.
-- Supabase Auth email/OAuth provider configuration and redirect URLs.
-- Vercel environment variables, custom domain, and Domeneshop DNS.
-- Production manual testing across mobile, desktop, all 11 locales, and Arabic/Urdu RTL.
+- Deliberately configured administrator-positive testing.
+- Google and Apple OAuth provider setup.
+- Health endpoint secret/deployment verification.
+- Fluent human review across all 11 locales, including Arabic/Urdu RTL, plus targeted device checks.
 - Support mailbox or alias setup for `david@fideli.no`.
 
 ## Internationalization
@@ -109,7 +109,7 @@ Password recovery links should open `/[locale]/reset-password` directly. Forgot/
 
 For local password-reset testing, request a fresh reset email after the latest recovery fix and open the link in the same browser/profile that requested it. The isolated recovery flow can use browser URL hash tokens, which stay in the browser and are cleared after session setup. Old reset links may need to be resent after recovery-flow fixes.
 
-The Phase 4 database trigger is expected to create `profiles` rows after signup, but it still needs verification after the migration is applied to the real Supabase project.
+The applied Phase 4 database trigger creates `profiles` rows after signup.
 
 ## Dashboard, Workspace And Settings
 
@@ -225,16 +225,16 @@ Do not build public admin signup or self-service admin promotion.
 
 ## Deployment Direction
 
-Use GitHub plus Vercel for the app and Supabase for Auth/Postgres/RLS. Configure `noproblemo.tech` as a Vercel custom domain, point DNS from Domeneshop according to Vercel's current instructions, and use `david@fideli.no` as the public support mailbox.
+The application is deployed on Vercel at `noproblemo.tech`, with Domeneshop providing domain/DNS and Supabase providing Auth/Postgres/RLS. The `david@fideli.no` support mailbox or alias still requires operational verification.
 
-Use these verification documents before public launch:
+Use these documents for release-specific and remaining operational verification:
 
 - `docs/PRODUCTION_VERIFICATION.md`
 - `docs/SUPABASE_VERIFICATION.md`
 - `docs/MANUAL_TEST_PLAN.md`
 - `docs/LAUNCH_READINESS_REPORT.md`
 
-Production readiness requires manual verification of guest mode, login/signup/logout, dashboard, challenge saving, guest import, friends/groups, group challenge access, messages, notifications, admin access, all 11 languages, Arabic/Urdu RTL, mobile, and desktop.
+Production verification with three disposable accounts covered authenticated redirects, protected deep links, duplicate-submit protection, friend/group acceptance, notification destinations, viewer/editor authorization, group roles, message/notification privacy, and ordinary-user admin denial. This does not replace deliberately configured administrator-positive testing, fluent review of all 11 languages, OAuth provider setup, or every possible device/workflow combination.
 
 ## Security Warnings
 
@@ -259,11 +259,11 @@ Production readiness requires manual verification of guest mode, login/signup/lo
 
 ## Known Limitations
 
-- The six-migration history and the 2026-07-16 security repair are production-verified; broader RLS/RPC application workflows still need release-specific verification.
+- The six-migration history and ordinary-user collaboration authorization are production-verified; the pending-invitation RPC consumer and challenge-section `23505` retry remain separate application follow-ups.
 - Google and Apple OAuth require provider setup.
 - Realtime subscriptions are not implemented.
 - Admin user management is read-only.
-- Group-linked viewer read-only UX is still mostly enforced by RLS/server failures rather than hiding every edit control.
+- Group-linked viewers receive an inert, native-disabled read-only workspace, while RLS remains authoritative and denies viewer mutations.
 - Guest drafts can be lost if browser storage is cleared.
 
 ## Project Documents
