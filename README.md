@@ -4,7 +4,7 @@ NoProblemo is a minimal, secure, multilingual problem-solving workspace for turn
 
 ## Current Phase
 
-Phase 11 is complete. Production verification preparation is documented. The next step is controlled Supabase/Vercel production verification, with explicit approval required before applying remote migrations or changing production services.
+Phase 11 is complete. All six Supabase migrations, including the 2026-07-16 production security repair, are applied and aligned locally and remotely. Broader Supabase/Vercel application verification remains controlled, and future remote migrations or production-service changes still require explicit approval.
 
 Not included in the current MVP:
 
@@ -39,9 +39,8 @@ Implemented locally:
 - Protected read-only admin overview and admin settings checklist.
 - Local Codex project logs in repository docs.
 
-Still requiring real Supabase/Vercel verification:
+Still requiring broader Supabase/Vercel verification:
 
-- Applying all migrations to a real Supabase project.
 - RLS behavior with multiple authenticated users.
 - Supabase Auth email/OAuth provider configuration and redirect URLs.
 - Vercel environment variables, custom domain, and Domeneshop DNS.
@@ -209,8 +208,10 @@ Local migrations live in `supabase/migrations/`:
 - Phase 8: friends, groups, invitations, group links, and group-aware RLS.
 - Phase 9: messages, notifications, activity events, and related triggers.
 - Phase 10: admin helpers, admin audit log, admin-only RPCs, and profile role hardening.
+- Health check: the minimal anon-only database reachability RPC.
+- Security repairs: least-privilege table/function access, the caller-scoped pending-invitation RPC, ownership protections, and challenge-section uniqueness.
 
-Before production, apply migrations to a real Supabase project only through an approved deployment workflow, then test RLS with separate normal and admin users.
+All six migrations are applied in production and the linked dry run reports no pending migrations. Apply any future migration only through an approved deployment workflow, then test affected RLS behavior with separate normal and admin users.
 
 The first admin must be assigned manually by a trusted project owner in Supabase SQL:
 
@@ -258,7 +259,7 @@ Production readiness requires manual verification of guest mode, login/signup/lo
 
 ## Known Limitations
 
-- Supabase migrations/RLS/RPC behavior still need live verification.
+- The six-migration history and the 2026-07-16 security repair are production-verified; broader RLS/RPC application workflows still need release-specific verification.
 - Google and Apple OAuth require provider setup.
 - Realtime subscriptions are not implemented.
 - Admin user management is read-only.

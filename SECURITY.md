@@ -48,7 +48,7 @@ Current access model:
 - Users can read, create, update, and delete challenge solutions only through a parent challenge they own.
 - Users can read, create, update, and delete challenge tasks only through a parent challenge they own.
 
-These policies still need to be applied and tested in Supabase.
+These policies and the later security-repair migration are applied in production. The six-migration history aligns locally and remotely, and focused production verification passed; broader application workflows remain subject to release-specific testing.
 
 ## Phase 8 Friends And Groups Security
 

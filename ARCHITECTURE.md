@@ -132,7 +132,7 @@ Implemented in Phase 10:
 - admin-only aggregate/profile/activity/audit RPCs
 - admin-only audit-log read policy
 
-The migrations still need to be applied and verified in Supabase.
+All six migrations are applied and aligned in production. The 2026-07-16 security repair is recorded in source and production-verified; broader application workflows remain subject to release-specific verification.
 
 Phase 11 did not add schema or major product architecture. It added focused responsive, accessibility, robustness, deployment, and security documentation polish.
 
