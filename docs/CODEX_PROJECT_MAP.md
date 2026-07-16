@@ -68,6 +68,7 @@ Not implemented:
 - `docs/MANUAL_TEST_PLAN.md`: three-user app test plan for guest mode, auth, dashboard, workspace, friends/groups, messages, notifications, activity, admin, locales, RTL, accessibility, and responsive layouts.
 - `docs/LAUNCH_READINESS_REPORT.md`: current launch readiness status, implemented/not implemented scope, blockers, recommendations, and verification evidence target.
 - `docs/qa/SECURITY_MIGRATION_PRODUCTION_VERIFICATION.md`: production security migration checksum, manual-apply evidence, local/remote history alignment, validation, and separate application follow-ups.
+- `docs/qa/PENDING_INVITATION_SECTION_SAVE_FOLLOWUP.md`: focused application consumer/recovery boundary, validation, Preview, cleanup, and staged-deployment record.
 
 ## Route Map
 
@@ -127,6 +128,8 @@ Current:
 - Admin overview data uses admin-only RPCs for aggregate counts and limited metadata.
 - Keepalive health checks use the anon-only `noproblemo_health_check()` RPC and return no table data.
 - Pending invitation identity is available through the argument-free authenticated `pending_group_invitations()` RPC. It scopes by `auth.uid()` and returns only invitation ID, group ID, group name, and invited role; pending invitees do not receive base-table `groups` visibility.
+- The groups page consumes pending invitation identity through that RPC, matches by invitation ID, and keeps `Unnamed group` as its safe fallback while ordinary member group reads remain unchanged.
+- Missing challenge-section inserts recover only from `23505` through one authenticated exact-challenge/exact-section update whose returned row is verified; the database unique index remains authoritative.
 
 Implemented Phase 4 tables:
 
@@ -184,8 +187,7 @@ Current:
 Planned:
 
 - Deliberately configured administrator-positive testing and remaining OAuth, health endpoint, support-mailbox, translation, and release-specific operational verification.
-- Application consumption of `pending_group_invitations()`; production currently remains on application commit `91cac6d`.
-- A focused concurrent-save `23505` retry for challenge sections; the applied unique constraint is recorded here without that application behavior.
+- Staged production deployment of the focused pending-invitation consumer and challenge-section conflict recovery; production currently remains on application commit `91cac6d`.
 - Later admin actions beyond the read-only MVP.
 
 Rules:
