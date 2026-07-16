@@ -1,12 +1,16 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { redirect } from "next/navigation";
 import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import { PasswordField } from "../_components/password-field";
+import { PendingSubmitButton } from "../_components/pending-submit-button";
 import { SiteFooter } from "../_components/site-footer";
 import {
   resendSignupConfirmation,
   signUpWithEmail,
 } from "../auth/actions";
+import { getSafeLocalizedPath } from "@/lib/auth/safe-redirect";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 type SignupPageProps = {
   params: Promise<{ locale: Locale }>;
@@ -20,25 +24,6 @@ function getQueryValue(
   const value = searchParams[key];
 
   return Array.isArray(value) ? value[0] : value;
-}
-
-function getNextPath(
-  searchParams: Record<string, string | string[] | undefined>,
-  locale: Locale,
-) {
-  const value = getQueryValue(searchParams, "next");
-  const fallback = `/${locale}/app`;
-
-  if (
-    value &&
-    value.startsWith(`/${locale}/`) &&
-    !value.startsWith("//") &&
-    !value.includes("://")
-  ) {
-    return value;
-  }
-
-  return fallback;
 }
 
 const errorKeys = [
@@ -75,7 +60,16 @@ export default async function SignupPage({
 
   const t = await getTranslations({ locale, namespace: "Auth" });
   const passwordT = await getTranslations({ locale, namespace: "PasswordField" });
-  const nextPath = getNextPath(query, locale);
+  const nextPath = getSafeLocalizedPath(getQueryValue(query, "next"), locale);
+  const supabase = await createServerSupabaseClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) {
+    redirect(nextPath);
+  }
+
   const error = getQueryValue(query, "error");
   const status = getQueryValue(query, "status");
 
@@ -143,12 +137,11 @@ export default async function SignupPage({
                 hide: passwordT("hide"),
               }}
             />
-            <button
-              type="submit"
-              className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
-            >
-              {t("signup.submit")}
-            </button>
+            <PendingSubmitButton
+              idleLabel={t("signup.submit")}
+              pendingLabel={`${t("signup.submit")}…`}
+              className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832] disabled:cursor-not-allowed disabled:bg-[#8b897f]"
+            />
           </form>
 
           <div className="mt-8 grid gap-3 border-t border-[#e5e2da] pt-6">
@@ -174,12 +167,11 @@ export default async function SignupPage({
                   placeholder={t("fields.emailPlaceholder")}
                 />
               </label>
-              <button
-                type="submit"
-                className="inline-flex min-h-12 items-center justify-center rounded-md border border-[#dad8d0] bg-white px-5 py-3 font-semibold text-[#22211e] hover:border-[#8b897f]"
-              >
-                {t("resend.submit")}
-              </button>
+              <PendingSubmitButton
+                idleLabel={t("resend.submit")}
+                pendingLabel={`${t("resend.submit")}…`}
+                className="inline-flex min-h-12 items-center justify-center rounded-md border border-[#dad8d0] bg-white px-5 py-3 font-semibold text-[#22211e] hover:border-[#8b897f] disabled:cursor-not-allowed disabled:bg-[#f1f0ec]"
+              />
             </form>
           </div>
 

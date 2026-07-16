@@ -497,6 +497,10 @@
   "Workspace": {
     "back": "Volver",
     "eyebrow": "Continuar",
+    "readOnly": {
+      "title": "Acceso de solo lectura",
+      "body": "Puedes leer, exportar, imprimir y navegar por este reto. Solo los propietarios y editores pueden cambiar su contenido."
+    },
     "noDescription": "Aún no hay contenido.",
     "updated": "Continuar",
     "sectionsTitle": "Continuar",

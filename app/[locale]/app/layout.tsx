@@ -1,9 +1,11 @@
 import { getTranslations } from "next-intl/server";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { defaultLocale, routing, type Locale } from "@/i18n/routing";
 import { LanguageSwitcher } from "../_components/language-switcher";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { getSafeLocalizedPath } from "@/lib/auth/safe-redirect";
 
 type ProtectedAppLayoutProps = {
   children: React.ReactNode;
@@ -28,7 +30,16 @@ export default async function ProtectedAppLayout({
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect(`/${locale}/login?error=auth-required&next=/${locale}/app`);
+    const requestHeaders = await headers();
+    const nextPath = getSafeLocalizedPath(
+      requestHeaders.get("x-noproblemo-pathname"),
+      locale,
+    );
+    const search = new URLSearchParams({
+      error: "auth-required",
+      next: nextPath,
+    });
+    redirect(`/${locale}/login?${search.toString()}`);
   }
 
   const { data: profile } = await supabase

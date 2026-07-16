@@ -194,6 +194,31 @@ function RelatedLink({
   notification: Notification;
   t: Awaited<ReturnType<typeof getTranslations>>;
 }) {
+  if (
+    notification.type === "friend_request" ||
+    notification.type === "friend_request_accepted"
+  ) {
+    return (
+      <Link
+        href="/app/friends"
+        className="mt-3 inline-flex text-sm font-semibold text-[#373632] underline-offset-4 hover:underline"
+      >
+        {t(`types.${notification.type}`)}
+      </Link>
+    );
+  }
+
+  if (notification.type === "group_invitation") {
+    return (
+      <Link
+        href="/app/groups"
+        className="mt-3 inline-flex text-sm font-semibold text-[#373632] underline-offset-4 hover:underline"
+      >
+        {t("types.group_invitation")}
+      </Link>
+    );
+  }
+
   if (notification.related_group_id) {
     return (
       <Link

@@ -349,6 +349,7 @@ export default async function ChallengePage({
     (currentUserMemberships ?? []).some((membership) =>
       ["owner", "admin", "member"].includes(membership.role),
     );
+  const canEdit = canSendMessage;
   const profiles = await getProfileMap(supabase, [
     ...savedMessages.flatMap((message) =>
       message.sender_id ? [message.sender_id] : [],
@@ -401,6 +402,16 @@ export default async function ChallengePage({
         </div>
       </section>
 
+      {!canEdit ? (
+        <section
+          data-viewer-read-only="true"
+          className="rounded-3xl border border-sky-200 bg-sky-50/80 p-5 text-sky-950 shadow-sm"
+        >
+          <h2 className="text-lg font-semibold">{t("readOnly.title")}</h2>
+          <p className="mt-2 text-sm leading-6">{t("readOnly.body")}</p>
+        </section>
+      ) : null}
+
       <section className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6">
         <h2 className="text-2xl font-semibold text-[#22211e]">
           {t("details.title")}
@@ -408,7 +419,12 @@ export default async function ChallengePage({
         <p className="mt-2 text-sm leading-6 text-[#55544f]">
           {t("details.body")}
         </p>
-        <form action={updateChallengeDetails} className="mt-5 grid gap-4">
+        <form
+          action={canEdit ? updateChallengeDetails : undefined}
+          inert={!canEdit}
+          className={`mt-5 grid gap-4 ${!canEdit ? "opacity-70" : ""}`}
+        >
+          <fieldset disabled={!canEdit} className="contents">
           <input type="hidden" name="locale" value={locale} />
           <input type="hidden" name="challengeId" value={challenge.id} />
           <label className="grid gap-2">
@@ -458,6 +474,7 @@ export default async function ChallengePage({
           >
             {t("actions.saveDetails")}
           </button>
+          </fieldset>
         </form>
       </section>
 
@@ -489,9 +506,11 @@ export default async function ChallengePage({
       </section>
 
       <form
-        action={saveChallengeSections}
+        action={canEdit ? saveChallengeSections : undefined}
+        inert={!canEdit}
         className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6"
       >
+        <fieldset disabled={!canEdit} className="contents">
         <input type="hidden" name="locale" value={locale} />
         <input type="hidden" name="challengeId" value={challenge.id} />
         <h2 className="text-2xl font-semibold text-[#22211e]">
@@ -538,6 +557,7 @@ export default async function ChallengePage({
         >
           {t("actions.saveSections")}
         </button>
+        </fieldset>
       </form>
 
       <section className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6">
@@ -553,7 +573,12 @@ export default async function ChallengePage({
               key={solution.id}
               className="rounded-2xl border border-[#e5e2da] bg-[#fbfaf7] p-4"
             >
-              <form action={saveSolution} className="grid gap-4">
+              <form
+                action={canEdit ? saveSolution : undefined}
+                inert={!canEdit}
+                className="grid gap-4"
+              >
+                <fieldset disabled={!canEdit} className="contents">
                 <input type="hidden" name="locale" value={locale} />
                 <input type="hidden" name="challengeId" value={challenge.id} />
                 <input type="hidden" name="solutionId" value={solution.id} />
@@ -651,8 +676,14 @@ export default async function ChallengePage({
                     {t("actions.saveSolution")}
                   </button>
                 </div>
+                </fieldset>
               </form>
-              <form action={deleteSolution} className="mt-3">
+              <form
+                action={canEdit ? deleteSolution : undefined}
+                inert={!canEdit}
+                className="mt-3"
+              >
+                <fieldset disabled={!canEdit} className="contents">
                 <input type="hidden" name="locale" value={locale} />
                 <input type="hidden" name="challengeId" value={challenge.id} />
                 <input type="hidden" name="solutionId" value={solution.id} />
@@ -662,6 +693,7 @@ export default async function ChallengePage({
                 >
                   {t("actions.deleteSolution")}
                 </button>
+                </fieldset>
               </form>
             </article>
           ))}
@@ -670,7 +702,12 @@ export default async function ChallengePage({
             <h3 className="text-xl font-semibold text-[#22211e]">
               {t("solutions.newTitle")}
             </h3>
-            <form action={saveSolution} className="mt-4 grid gap-4">
+            <form
+              action={canEdit ? saveSolution : undefined}
+              inert={!canEdit}
+              className="mt-4 grid gap-4"
+            >
+              <fieldset disabled={!canEdit} className="contents">
               <input type="hidden" name="locale" value={locale} />
               <input type="hidden" name="challengeId" value={challenge.id} />
               <div className="grid gap-4 lg:grid-cols-2">
@@ -740,6 +777,7 @@ export default async function ChallengePage({
               >
                 {t("actions.addSolution")}
               </button>
+              </fieldset>
             </form>
           </article>
         </div>
@@ -756,7 +794,12 @@ export default async function ChallengePage({
               key={task.id}
               className="rounded-2xl border border-slate-200/70 bg-slate-50/80 p-4"
             >
-              <form action={saveTask} className="grid gap-4">
+              <form
+                action={canEdit ? saveTask : undefined}
+                inert={!canEdit}
+                className="grid gap-4"
+              >
+                <fieldset disabled={!canEdit} className="contents">
                 <input type="hidden" name="locale" value={locale} />
                 <input type="hidden" name="challengeId" value={challenge.id} />
                 <input type="hidden" name="taskId" value={task.id} />
@@ -820,8 +863,14 @@ export default async function ChallengePage({
                 >
                   {t("actions.saveTask")}
                 </button>
+                </fieldset>
               </form>
-              <form action={deleteTask} className="mt-3">
+              <form
+                action={canEdit ? deleteTask : undefined}
+                inert={!canEdit}
+                className="mt-3"
+              >
+                <fieldset disabled={!canEdit} className="contents">
                 <input type="hidden" name="locale" value={locale} />
                 <input type="hidden" name="challengeId" value={challenge.id} />
                 <input type="hidden" name="taskId" value={task.id} />
@@ -831,6 +880,7 @@ export default async function ChallengePage({
                 >
                   {t("actions.deleteTask")}
                 </button>
+                </fieldset>
               </form>
             </article>
           ))}
@@ -839,7 +889,12 @@ export default async function ChallengePage({
             <h3 className="text-xl font-semibold text-[#22211e]">
               {t("tasks.newTitle")}
             </h3>
-            <form action={saveTask} className="mt-4 grid gap-4">
+            <form
+              action={canEdit ? saveTask : undefined}
+              inert={!canEdit}
+              className="mt-4 grid gap-4"
+            >
+              <fieldset disabled={!canEdit} className="contents">
               <input type="hidden" name="locale" value={locale} />
               <input type="hidden" name="challengeId" value={challenge.id} />
               <div className="grid gap-4 lg:grid-cols-2">
@@ -885,6 +940,7 @@ export default async function ChallengePage({
               >
                 {t("actions.addTask")}
               </button>
+              </fieldset>
             </form>
           </article>
         </div>
@@ -944,7 +1000,7 @@ export default async function ChallengePage({
                   t("messages.unknownSender"),
                 )}
                 t={t}
-                canDelete={message.sender_id === user.id}
+                canDelete={canEdit && message.sender_id === user.id}
               />
             ))
           ) : (

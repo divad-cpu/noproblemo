@@ -497,6 +497,10 @@
   "Workspace": {
     "back": "Tilbake til dashbordet",
     "eyebrow": "Arbeidsområde for utfordring",
+    "readOnly": {
+      "title": "Skrivebeskyttet tilgang",
+      "body": "Du kan lese, eksportere, skrive ut og navigere i denne utfordringen. Bare eiere og redaktører kan endre innholdet."
+    },
     "noDescription": "Ingen kort beskrivelse ennå.",
     "updated": "Oppdatert",
     "sectionsTitle": "Problemløsingsseksjoner",
