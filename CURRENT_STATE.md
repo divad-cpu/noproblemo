@@ -26,6 +26,8 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 
 A focused Supabase keepalive health endpoint is implemented locally and awaits approved migration application, Vercel secret configuration, deployment, and production verification.
 
+A minimal group-creation hotfix was isolated from `main` on 2026-07-16. It avoids requesting a returned group row before the owner-membership trigger is visible, verifies the generated group ID and authenticated owner in a separate query, and preserves trigger-owned membership creation. Focused application and production-baseline pgTAP regressions pass, and disposable User A verified the fix on a non-production Vercel Preview. No migration or production deployment was performed. See `docs/qa/GROUP_CREATION_HOTFIX.md`.
+
 ## Already Implemented
 
 - Next.js 16 App Router
