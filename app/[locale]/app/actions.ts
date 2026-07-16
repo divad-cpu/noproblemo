@@ -227,7 +227,34 @@ async function requireOwnedChallenge(
     .eq("id", challengeId)
     .maybeSingle();
 
-  return { supabase, userId: user.id, challenge };
+  if (!challenge || challenge.owner_id === user.id) {
+    return { supabase, userId: user.id, challenge };
+  }
+
+  const { data: links } = await supabase
+    .from("group_challenges")
+    .select("group_id")
+    .eq("challenge_id", challengeId);
+  const groupIds = (links ?? []).map((link) => link.group_id);
+
+  if (groupIds.length === 0) {
+    return { supabase, userId: user.id, challenge: null };
+  }
+
+  const { data: memberships } = await supabase
+    .from("group_members")
+    .select("role")
+    .eq("user_id", user.id)
+    .in("group_id", groupIds);
+  const canEdit = (memberships ?? []).some((membership) =>
+    ["owner", "admin", "member"].includes(membership.role),
+  );
+
+  return {
+    supabase,
+    userId: user.id,
+    challenge: canEdit ? challenge : null,
+  };
 }
 
 function canonicalFriendPair(userA: string, userB: string) {
@@ -852,11 +879,15 @@ export async function respondFriendRequest(formData: FormData) {
   }
 
   if (response === "accepted") {
-    const { error: friendshipError } = await supabase.from("friendships").insert(
-      canonicalFriendPair(request.sender_id, request.receiver_id),
-    );
+    const pair = canonicalFriendPair(request.sender_id, request.receiver_id);
+    const { data: friendship, error: friendshipError } = await supabase
+      .from("friendships")
+      .select("id")
+      .eq("user_one_id", pair.user_one_id)
+      .eq("user_two_id", pair.user_two_id)
+      .maybeSingle();
 
-    if (friendshipError) {
+    if (friendshipError || !friendship) {
       redirect(`/${locale}/app/friends?error=friend-response-failed`);
     }
   }
@@ -1041,13 +1072,14 @@ export async function respondGroupInvitation(formData: FormData) {
   }
 
   if (response === "accepted") {
-    const { error: memberError } = await supabase.from("group_members").insert({
-      group_id: invitation.group_id,
-      user_id: user.id,
-      role: invitation.role,
-    });
+    const { data: membership, error: memberError } = await supabase
+      .from("group_members")
+      .select("role")
+      .eq("group_id", invitation.group_id)
+      .eq("user_id", user.id)
+      .maybeSingle();
 
-    if (memberError) {
+    if (memberError || membership?.role !== invitation.role) {
       redirect(`/${locale}/app/groups?error=group-invitation-response-failed`);
     }
   }

@@ -1,6 +1,6 @@
 # Current State
 
-Last updated: 2026-07-14
+Last updated: 2026-07-16
 
 Future Codex sessions must read this file first, then `docs/CODEX_PROJECT_MAP.md`, before changing files.
 
@@ -27,6 +27,8 @@ A focused auth/settings verification fix was completed after Phase 11 to improve
 A focused Supabase keepalive health endpoint is implemented locally and awaits approved migration application, Vercel secret configuration, deployment, and production verification.
 
 A minimal group-creation hotfix was isolated from `main` on 2026-07-16. It avoids requesting a returned group row before the owner-membership trigger is visible, verifies the generated group ID and authenticated owner in a separate query, and preserves trigger-owned membership creation. Focused application and production-baseline pgTAP regressions pass, and disposable User A verified the fix on a non-production Vercel Preview. No migration or production deployment was performed. See `docs/qa/GROUP_CREATION_HOTFIX.md`.
+
+A focused application repair release is Preview-verified on `fix/production-ux-feedback`. It removes duplicate trigger-owned friendship and group-membership inserts, verifies the resulting relationship state, corrects safe localized notification destinations, gives group challenge viewers a clear inert and native-disabled read-only workspace while preserving editor actions, restores authenticated and protected deep-link redirects, and adds login/signup pending protection. Local validation and focused one-worker Preview authentication/collaboration workflows pass with the three disposable accounts. The pending invitee group-name policy remains excluded and migration-dependent. No Supabase migration is included or applied, and production is not deployed. See `docs/qa/PRODUCTION_UX_REPAIRS.md`.
 
 ## Already Implemented
 
@@ -109,7 +111,7 @@ A minimal group-creation hotfix was isolated from `main` on 2026-07-16. It avoid
 ## Partially Implemented
 
 - Problem-solving workflow exists as guest browser-local form fields and as an editable saved workspace for authenticated challenge owners.
-- Group-linked challenge read/edit access is represented in RLS. The workspace now reads challenges through RLS, but viewer read-only UX is still mostly enforced by server/RLS failures rather than fully hiding every edit control.
+- Group-linked challenge read/edit access is represented in RLS. The workspace reads challenges through RLS; viewers receive a clear read-only presentation with mutation forms inert, controls native-disabled, and no active server actions, while owner/admin/member editors retain intended controls.
 - Group challenge linking currently links a user's own challenges to a group. Linking challenges owned by another group member remains future refinement.
 - Supabase Realtime is documented as future work; Phase 9 uses server-rendered refresh/revalidation after message actions.
 - Admin user management is read-only in Phase 10. Role changing, moderation, and system setting mutations remain future work.

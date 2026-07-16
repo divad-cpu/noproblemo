@@ -497,6 +497,10 @@
   "Workspace": {
     "back": "Back to dashboard",
     "eyebrow": "Challenge workspace",
+    "readOnly": {
+      "title": "Read-only access",
+      "body": "You can read, export, print, and navigate this challenge. Only owners and editors can change its content."
+    },
     "noDescription": "No short description yet.",
     "updated": "Updated",
     "sectionsTitle": "Problem-solving sections",

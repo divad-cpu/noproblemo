@@ -497,6 +497,10 @@
   "Workspace": {
     "back": "Kembali",
     "eyebrow": "Lanjutkan",
+    "readOnly": {
+      "title": "Akses hanya-baca",
+      "body": "Anda dapat membaca, mengekspor, mencetak, dan menavigasi tantangan ini. Hanya pemilik dan editor yang dapat mengubah kontennya."
+    },
     "noDescription": "Belum ada konten.",
     "updated": "Lanjutkan",
     "sectionsTitle": "Lanjutkan",

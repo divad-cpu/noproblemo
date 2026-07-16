@@ -497,6 +497,10 @@
   "Workspace": {
     "back": "返回",
     "eyebrow": "继续",
+    "readOnly": {
+      "title": "只读访问",
+      "body": "您可以阅读、导出、打印和浏览此挑战。只有所有者和编辑者可以更改内容。"
+    },
     "noDescription": "暂无内容。",
     "updated": "继续",
     "sectionsTitle": "继续",

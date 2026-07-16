@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { defaultLocale, routing, type Locale } from "@/i18n/routing";
+import { getSafeLocalizedPath } from "@/lib/auth/safe-redirect";
 
 type OAuthProvider = "google" | "apple";
 
@@ -36,18 +37,7 @@ function getSiteUrl() {
 }
 
 function getSafeNextPath(value: FormDataEntryValue | null, locale: Locale) {
-  const next = firstString(value);
-  const localePrefix = `/${locale}`;
-
-  if (
-    next.startsWith(`${localePrefix}/`) &&
-    !next.startsWith("//") &&
-    !next.includes("://")
-  ) {
-    return next;
-  }
-
-  return `${localePrefix}/app`;
+  return getSafeLocalizedPath(firstString(value), locale);
 }
 
 function authUrl(
