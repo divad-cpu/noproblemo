@@ -227,13 +227,34 @@ async function requireOwnedChallenge(
     .eq("id", challengeId)
     .maybeSingle();
 
-  return { supabase, userId: user.id, challenge };
-}
+  if (!challenge || challenge.owner_id === user.id) {
+    return { supabase, userId: user.id, challenge };
+  }
 
-function canonicalFriendPair(userA: string, userB: string) {
-  return userA < userB
-    ? { user_one_id: userA, user_two_id: userB }
-    : { user_one_id: userB, user_two_id: userA };
+  const { data: links } = await supabase
+    .from("group_challenges")
+    .select("group_id")
+    .eq("challenge_id", challengeId);
+  const groupIds = (links ?? []).map((link) => link.group_id);
+
+  if (groupIds.length === 0) {
+    return { supabase, userId: user.id, challenge: null };
+  }
+
+  const { data: memberships } = await supabase
+    .from("group_members")
+    .select("role")
+    .eq("user_id", user.id)
+    .in("group_id", groupIds);
+  const canEdit = (memberships ?? []).some((membership) =>
+    ["owner", "admin", "member"].includes(membership.role),
+  );
+
+  return {
+    supabase,
+    userId: user.id,
+    challenge: canEdit ? challenge : null,
+  };
 }
 
 async function logChallengeActivity(
@@ -851,16 +872,6 @@ export async function respondFriendRequest(formData: FormData) {
     redirect(`/${locale}/app/friends?error=friend-response-failed`);
   }
 
-  if (response === "accepted") {
-    const { error: friendshipError } = await supabase.from("friendships").insert(
-      canonicalFriendPair(request.sender_id, request.receiver_id),
-    );
-
-    if (friendshipError) {
-      redirect(`/${locale}/app/friends?error=friend-response-failed`);
-    }
-  }
-
   revalidatePath(`/${locale}/app/friends`);
   redirect(`/${locale}/app/friends?status=friend-${response}`);
 }
@@ -1006,8 +1017,20 @@ export async function respondGroupInvitation(formData: FormData) {
     redirect(`/${locale}/app/groups?error=group-invitation-response-failed`);
   }
 
+  let canCancel = response === "canceled" && invitation.inviter_id === user.id;
+
+  if (response === "canceled" && !canCancel) {
+    const { data: membership } = await supabase
+      .from("group_members")
+      .select("role")
+      .eq("group_id", invitation.group_id)
+      .eq("user_id", user.id)
+      .maybeSingle();
+    canCancel = membership?.role === "owner" || membership?.role === "admin";
+  }
+
   const canRespond =
-    (response === "canceled" && invitation.inviter_id === user.id) ||
+    canCancel ||
     (["accepted", "declined"].includes(response) && invitation.invitee_id === user.id);
 
   if (!canRespond) {
@@ -1024,18 +1047,6 @@ export async function respondGroupInvitation(formData: FormData) {
 
   if (updateError) {
     redirect(`/${locale}/app/groups?error=group-invitation-response-failed`);
-  }
-
-  if (response === "accepted") {
-    const { error: memberError } = await supabase.from("group_members").insert({
-      group_id: invitation.group_id,
-      user_id: user.id,
-      role: invitation.role,
-    });
-
-    if (memberError) {
-      redirect(`/${locale}/app/groups?error=group-invitation-response-failed`);
-    }
   }
 
   const destination =

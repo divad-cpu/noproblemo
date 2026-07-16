@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { defaultLocale, routing, type Locale } from "@/i18n/routing";
+import { getSafeLocalizedPath } from "@/lib/auth/safe-redirect";
 
 type OAuthProvider = "google" | "apple";
 
@@ -36,18 +37,7 @@ function getSiteUrl() {
 }
 
 function getSafeNextPath(value: FormDataEntryValue | null, locale: Locale) {
-  const next = firstString(value);
-  const localePrefix = `/${locale}`;
-
-  if (
-    next.startsWith(`${localePrefix}/`) &&
-    !next.startsWith("//") &&
-    !next.includes("://")
-  ) {
-    return next;
-  }
-
-  return `${localePrefix}/app`;
+  return getSafeLocalizedPath(firstString(value), locale);
 }
 
 function authUrl(
@@ -109,6 +99,21 @@ function classifySignupError(error: { message?: string; code?: string; status?: 
   return signupErrorMap.failed;
 }
 
+function classifyLoginError(error: { message?: string; code?: string; status?: number }) {
+  const message = (error.message ?? "").toLowerCase();
+  const code = (error.code ?? "").toLowerCase();
+
+  if (
+    error.status === 400 ||
+    code.includes("invalid_credentials") ||
+    message.includes("invalid login credentials")
+  ) {
+    return "invalid-credentials";
+  }
+
+  return "login-unavailable";
+}
+
 function warnSignupFailure(reason: string) {
   if (process.env.NODE_ENV === "development") {
     console.warn(`Signup failed: ${reason}`);
@@ -137,7 +142,7 @@ export async function loginWithEmail(formData: FormData) {
 
   if (error) {
     const params = new URLSearchParams({
-      error: "invalid-credentials",
+      error: classifyLoginError(error),
       next: nextPath,
     });
     redirect(authUrl(locale, "login", params));

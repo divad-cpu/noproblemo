@@ -2,8 +2,10 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import { PasswordField } from "../_components/password-field";
+import { PendingSubmitButton } from "../_components/pending-submit-button";
 import { SiteFooter } from "../_components/site-footer";
 import { loginWithEmail } from "../auth/actions";
+import { getSafeLocalizedPath } from "@/lib/auth/safe-redirect";
 
 type LoginPageProps = {
   params: Promise<{ locale: Locale }>;
@@ -19,28 +21,10 @@ function getQueryValue(
   return Array.isArray(value) ? value[0] : value;
 }
 
-function getNextPath(
-  searchParams: Record<string, string | string[] | undefined>,
-  locale: Locale,
-) {
-  const value = getQueryValue(searchParams, "next");
-  const fallback = `/${locale}/app`;
-
-  if (
-    value &&
-    value.startsWith(`/${locale}/`) &&
-    !value.startsWith("//") &&
-    !value.includes("://")
-  ) {
-    return value;
-  }
-
-  return fallback;
-}
-
 const errorKeys = [
   "missing-fields",
   "invalid-credentials",
+  "login-unavailable",
   "oauth-provider",
   "oauth-start",
   "callback",
@@ -73,7 +57,7 @@ export default async function LoginPage({
 
   const t = await getTranslations({ locale, namespace: "Auth" });
   const passwordT = await getTranslations({ locale, namespace: "PasswordField" });
-  const nextPath = getNextPath(query, locale);
+  const nextPath = getSafeLocalizedPath(getQueryValue(query, "next"), locale);
   const error = getQueryValue(query, "error");
   const status = getQueryValue(query, "status");
 
@@ -134,12 +118,11 @@ export default async function LoginPage({
             >
               {t("login.forgotPassword")}
             </Link>
-            <button
-              type="submit"
-              className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832]"
-            >
-              {t("login.submit")}
-            </button>
+            <PendingSubmitButton
+              idleLabel={t("login.submit")}
+              pendingLabel={`${t("login.submit")}…`}
+              className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832] disabled:cursor-not-allowed disabled:bg-[#8b897f]"
+            />
           </form>
 
           <p className="mt-6 rounded-md border border-[#d8e0d7] bg-[#f4f8f5] p-4 text-sm leading-6 text-[#55544f]">

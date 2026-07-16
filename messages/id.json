@@ -84,7 +84,8 @@
     "supportHint": "Dukungan",
     "workspace": {
       "title": "Alur kerja pemecahan masalah",
-      "localNotice": "Simpan",
+      "localNotice": "Draf tamu disimpan secara lokal di browser ini dan tidak dikirim ke Supabase.",
+      "storageUnavailable": "Browser ini tidak dapat menyimpan draf tamu. Salin atau ekspor sebelum keluar.",
       "summaryTitle": "Lanjutkan",
       "emptyValue": "Belum diisi.",
       "fields": {
@@ -218,6 +219,7 @@
     "errors": {
       "missing-fields": "Tindakan tidak dapat diselesaikan. Coba lagi nanti.",
       "invalid-credentials": "Tindakan tidak dapat diselesaikan. Coba lagi nanti.",
+      "login-unavailable": "Login sementara tidak tersedia. Tunggu sebentar lalu coba lagi.",
       "weak-password": "Kata sandi",
       "signup-failed": "Akun tidak dapat dibuat. Periksa detail atau coba lagi.",
       "oauth-provider": "Tindakan tidak dapat diselesaikan. Coba lagi nanti.",

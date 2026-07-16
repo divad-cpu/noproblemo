@@ -1,6 +1,6 @@
 # Current State
 
-Last updated: 2026-07-14
+Last updated: 2026-07-16
 
 Future Codex sessions must read this file first, then `docs/CODEX_PROJECT_MAP.md`, before changing files.
 
@@ -21,6 +21,8 @@ NoProblemo has completed:
 - Phase 11: polish, security review and deployment preparation
 
 Production verification preparation is complete. Controlled Supabase/Vercel production verification is next. Payments, AI, email automation, Resend, and Vercel Cron remain future phases.
+
+A full multi-agent browser/source audit was completed on 2026-07-16. It added Playwright coverage for public, auth, guest, anonymous permissions, responsive behavior, all locales, and production smoke; repaired confirmed public/guest/auth/accessibility defects; and added a focused forward-only authorization hardening migration. The migration has not been applied to any Supabase project. Authenticated multi-user verification remains blocked until disposable credentials and a proven test/preview Supabase target are available. See `docs/qa/FULL_APPLICATION_AUDIT.md`.
 
 A focused auth/settings verification fix was completed after Phase 11 to improve email-confirmation fallback handling, password recovery, route language switching, and dashboard usability.
 
@@ -179,6 +181,11 @@ A focused Supabase keepalive health endpoint is implemented locally and awaits a
 - `docs/LAUNCH_READINESS_REPORT.md`: launch readiness status and blocker report.
 
 ## Known Issues
+
+- The 2026-07-16 audit migration `20260716120000_full_application_audit_security_repairs.sql` must be reviewed, applied through an approved workflow, and verified with disposable users before relying on the repaired RLS/function ACL behavior.
+- Full authenticated Playwright coverage remains blocked because no disposable user/admin credentials were available and the local Supabase target could not be identified without reading prohibited `.env.local` values.
+- Nine non-English locale catalogs still contain extensive generic placeholder-quality copy and require fluent human review/replacement.
+- Remaining database QA priorities include affected-row verification, mutation idempotency, activity-event insert hardening, helper RPC exposure review, and a safe uniqueness strategy for challenge section keys.
 
 - Phase 4 migration needs to be applied and tested in Supabase.
 - Phase 8 migration needs to be applied and tested in Supabase.

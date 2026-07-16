@@ -374,7 +374,6 @@ export default async function GroupDetailPage({
               groupId={group.id}
               name={profileName(profiles.get(member.user_id) ?? null, member.user_id)}
               t={t}
-              canManage={canManage}
               isOwner={isOwner}
               isSelf={member.user_id === user.id}
             />
@@ -609,7 +608,6 @@ function MemberRow({
   groupId,
   name,
   t,
-  canManage,
   isOwner,
   isSelf,
 }: {
@@ -618,7 +616,6 @@ function MemberRow({
   groupId: string;
   name: string;
   t: Awaited<ReturnType<typeof getTranslations>>;
-  canManage: boolean;
   isOwner: boolean;
   isSelf: boolean;
 }) {
@@ -652,7 +649,9 @@ function MemberRow({
           </button>
         </form>
       ) : null}
-      {canManage && !isSelf && member.role !== "owner" ? (
+      {!isSelf &&
+      member.role !== "owner" &&
+      (isOwner || ["member", "viewer"].includes(member.role)) ? (
         <form action={removeGroupMember}>
           <input type="hidden" name="locale" value={locale} />
           <input type="hidden" name="groupId" value={groupId} />

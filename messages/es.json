@@ -84,7 +84,8 @@
     "supportHint": "Soporte",
     "workspace": {
       "title": "Flujo de resolución de problemas",
-      "localNotice": "Guardar",
+      "localNotice": "El borrador de invitado se guarda localmente en este navegador y no se envía a Supabase.",
+      "storageUnavailable": "Este navegador no pudo guardar el borrador. Cópialo o expórtalo antes de salir.",
       "summaryTitle": "Continuar",
       "emptyValue": "Aún no completado.",
       "fields": {
@@ -218,6 +219,7 @@
     "errors": {
       "missing-fields": "La acción no se pudo completar. Inténtalo más tarde.",
       "invalid-credentials": "La acción no se pudo completar. Inténtalo más tarde.",
+      "login-unavailable": "El inicio de sesión no está disponible temporalmente. Espera un momento e inténtalo de nuevo.",
       "weak-password": "Contraseña",
       "signup-failed": "No se pudo crear la cuenta. Revisa los datos o inténtalo de nuevo.",
       "oauth-provider": "La acción no se pudo completar. Inténtalo más tarde.",

@@ -84,7 +84,8 @@
     "supportHint": "支持",
     "workspace": {
       "title": "问题解决流程",
-      "localNotice": "保存",
+      "localNotice": "访客草稿仅保存在此浏览器本地，不会发送到 Supabase。",
+      "storageUnavailable": "此浏览器无法保存访客草稿。离开前请复制或导出草稿。",
       "summaryTitle": "继续",
       "emptyValue": "尚未填写。",
       "fields": {
@@ -218,6 +219,7 @@
     "errors": {
       "missing-fields": "操作无法完成。请稍后再试。",
       "invalid-credentials": "操作无法完成。请稍后再试。",
+      "login-unavailable": "登录暂时不可用。请稍等片刻后重试。",
       "weak-password": "密码",
       "signup-failed": "无法创建账号。请检查信息或重试。",
       "oauth-provider": "操作无法完成。请稍后再试。",

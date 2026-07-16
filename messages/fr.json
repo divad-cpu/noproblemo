@@ -84,7 +84,8 @@
     "supportHint": "Support",
     "workspace": {
       "title": "Flux de résolution de problème",
-      "localNotice": "Enregistrer",
+      "localNotice": "Le brouillon invité est enregistré localement dans ce navigateur et n’est pas envoyé à Supabase.",
+      "storageUnavailable": "Ce navigateur n’a pas pu enregistrer le brouillon. Copiez-le ou exportez-le avant de quitter.",
       "summaryTitle": "Continuer",
       "emptyValue": "Pas encore rempli.",
       "fields": {
@@ -218,6 +219,7 @@
     "errors": {
       "missing-fields": "L’action n’a pas pu être terminée. Réessayez plus tard.",
       "invalid-credentials": "L’action n’a pas pu être terminée. Réessayez plus tard.",
+      "login-unavailable": "La connexion est temporairement indisponible. Patientez un instant puis réessayez.",
       "weak-password": "Mot de passe",
       "signup-failed": "Le compte n’a pas pu être créé. Vérifiez les informations ou réessayez.",
       "oauth-provider": "L’action n’a pas pu être terminée. Réessayez plus tard.",

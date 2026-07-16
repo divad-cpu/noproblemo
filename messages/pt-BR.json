@@ -84,7 +84,8 @@
     "supportHint": "Suporte",
     "workspace": {
       "title": "Fluxo de resolução de problemas",
-      "localNotice": "Salvar",
+      "localNotice": "O rascunho de convidado é salvo localmente neste navegador e não é enviado ao Supabase.",
+      "storageUnavailable": "Este navegador não conseguiu salvar o rascunho. Copie ou exporte antes de sair.",
       "summaryTitle": "Continuar",
       "emptyValue": "Ainda não preenchido.",
       "fields": {
@@ -218,6 +219,7 @@
     "errors": {
       "missing-fields": "A ação não pôde ser concluída. Tente mais tarde.",
       "invalid-credentials": "A ação não pôde ser concluída. Tente mais tarde.",
+      "login-unavailable": "O login está temporariamente indisponível. Aguarde um momento e tente novamente.",
       "weak-password": "Senha",
       "signup-failed": "A conta não pôde ser criada. Verifique os dados ou tente novamente.",
       "oauth-provider": "A ação não pôde ser concluída. Tente mais tarde.",

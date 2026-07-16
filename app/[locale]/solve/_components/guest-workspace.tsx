@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { KeyboardEvent, MouseEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
@@ -37,11 +38,19 @@ export function GuestWorkspace() {
   const prompt = useTranslations("LoginPrompt");
   const [draft, setDraft] = useState<GuestDraft>(emptyDraft);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [storageUnavailable, setStorageUnavailable] = useState(false);
   const [isPromptOpen, setIsPromptOpen] = useState(false);
   const [copyStatus, setCopyStatus] = useState("");
+  const promptRef = useRef<HTMLDivElement>(null);
+  const firstPromptButtonRef = useRef<HTMLButtonElement>(null);
+  const promptTriggerRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    const timeout = window.setTimeout(() => {
+    let active = true;
+
+    window.queueMicrotask(() => {
+      if (!active) return;
+
       try {
         const saved = window.localStorage.getItem(storageKey);
         if (saved) {
@@ -49,17 +58,28 @@ export function GuestWorkspace() {
         }
       } catch {
         setDraft(emptyDraft);
+        setStorageUnavailable(true);
       } finally {
         setIsLoaded(true);
       }
-    }, 0);
+    });
 
-    return () => window.clearTimeout(timeout);
+    return () => {
+      active = false;
+    };
   }, []);
 
   useEffect(() => {
     if (!isLoaded) return;
-    window.localStorage.setItem(storageKey, JSON.stringify(draft));
+    let unavailable = false;
+
+    try {
+      window.localStorage.setItem(storageKey, JSON.stringify(draft));
+    } catch {
+      unavailable = true;
+    }
+
+    window.queueMicrotask(() => setStorageUnavailable(unavailable));
   }, [draft, isLoaded]);
 
   const markdownSummary = useMemo(() => {
@@ -108,6 +128,49 @@ export function GuestWorkspace() {
     URL.revokeObjectURL(url);
   }
 
+  function openPrompt(event: MouseEvent<HTMLButtonElement>) {
+    promptTriggerRef.current = event.currentTarget;
+    setIsPromptOpen(true);
+  }
+
+  function closePrompt() {
+    setIsPromptOpen(false);
+    window.setTimeout(() => promptTriggerRef.current?.focus(), 0);
+  }
+
+  function handlePromptKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closePrompt();
+      return;
+    }
+
+    if (event.key !== "Tab") return;
+
+    const focusable = Array.from(
+      promptRef.current?.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      ) ?? [],
+    );
+    const first = focusable[0];
+    const last = focusable.at(-1);
+
+    if (!first || !last) return;
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  useEffect(() => {
+    if (isPromptOpen) {
+      firstPromptButtonRef.current?.focus();
+    }
+  }, [isPromptOpen]);
+
   return (
     <section className="grid gap-6 lg:grid-cols-[1fr_0.85fr]">
       <div className="rounded-lg border border-[#dad8d0] bg-white p-5 shadow-sm sm:p-6">
@@ -125,10 +188,11 @@ export function GuestWorkspace() {
                 </span>
                 <textarea
                   value={draft[field]}
+                  disabled={!isLoaded}
                   onChange={(event) => updateDraft(field, event.target.value)}
                   placeholder={t(`fields.${field}.placeholder`)}
                   rows={field === "problem" ? 3 : 4}
-                  className="min-h-24 resize-y rounded-md border border-[#d7d3c9] bg-[#fbfaf7] px-3 py-3 text-base leading-7 text-[#22211e] outline-none transition-colors placeholder:text-[#8b897f] focus:border-[#706f68]"
+                  className="min-h-24 resize-y rounded-md border border-[#d7d3c9] bg-[#fbfaf7] px-3 py-3 text-base leading-7 text-[#22211e] outline-none transition-colors placeholder:text-[#8b897f] focus:border-[#706f68] disabled:cursor-wait disabled:bg-[#f1f0ec]"
                 />
               </label>
             ),
@@ -152,12 +216,17 @@ export function GuestWorkspace() {
           </button>
           <button
             type="button"
-            onClick={() => setIsPromptOpen(true)}
+            onClick={openPrompt}
             className="inline-flex min-h-12 items-center justify-center rounded-md border border-[#dad8d0] bg-white px-5 py-3 font-semibold text-[#22211e] hover:border-[#8b897f]"
           >
             {t("save")}
           </button>
         </div>
+        {storageUnavailable ? (
+          <p role="status" className="mt-3 text-sm leading-6 text-[#7a2f1d]">
+            {t("storageUnavailable")}
+          </p>
+        ) : null}
         {copyStatus ? <p className="mt-3 text-sm text-[#55544f]">{copyStatus}</p> : null}
       </div>
 
@@ -183,7 +252,7 @@ export function GuestWorkspace() {
               <button
                 key={action}
                 type="button"
-                onClick={() => setIsPromptOpen(true)}
+                onClick={openPrompt}
                 className="min-h-11 rounded-md border border-[#dad8d0] bg-white px-4 py-2 text-start text-sm font-semibold text-[#373632] hover:border-[#8b897f]"
               >
                 {t(`blockedActions.${action}`)}
@@ -196,9 +265,11 @@ export function GuestWorkspace() {
       {isPromptOpen ? (
         <div className="fixed inset-0 z-50 flex items-end bg-black/25 p-4 sm:items-center sm:justify-center">
           <div
+            ref={promptRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="guest-login-prompt-title"
+            onKeyDown={handlePromptKeyDown}
             className="w-full max-w-lg rounded-lg border border-[#dad8d0] bg-white p-5 shadow-xl sm:p-6"
           >
             <h2
@@ -210,8 +281,9 @@ export function GuestWorkspace() {
             <p className="mt-3 leading-7 text-[#55544f]">{prompt("body")}</p>
             <div className="mt-6 grid gap-3">
               <button
+                ref={firstPromptButtonRef}
                 type="button"
-                onClick={() => setIsPromptOpen(false)}
+                onClick={closePrompt}
                 className="min-h-12 rounded-md border border-[#dad8d0] bg-white px-5 py-3 font-semibold text-[#22211e] hover:border-[#8b897f]"
               >
                 {prompt("continueWithoutSaving")}

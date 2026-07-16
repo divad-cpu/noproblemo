@@ -69,6 +69,7 @@
     "workspace": {
       "title": "Problem-solving workflow",
       "localNotice": "Your guest draft is saved in local browser storage. It is not sent to Supabase.",
+      "storageUnavailable": "This browser could not save the guest draft. Copy or export it before leaving.",
       "summaryTitle": "Guest challenge summary",
       "emptyValue": "Not filled in yet.",
       "fields": {
@@ -218,6 +219,7 @@
     "errors": {
       "missing-fields": "Enter both email and password to continue.",
       "invalid-credentials": "The email or password did not match an account.",
+      "login-unavailable": "Login is temporarily unavailable. Wait a moment and try again.",
       "weak-password": "Use a password with at least 8 characters.",
       "signup-failed": "The account could not be created. Check the details or try again.",
       "oauth-provider": "That login provider is not available.",

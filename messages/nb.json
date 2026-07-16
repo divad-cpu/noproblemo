@@ -85,6 +85,7 @@
     "workspace": {
       "title": "Arbeidsflyt for problemløsing",
       "localNotice": "Gjestekladden lagres i lokal nettleserlagring. Den sendes ikke til Supabase.",
+      "storageUnavailable": "Nettleseren kunne ikke lagre gjestekladden. Kopier eller eksporter den før du går videre.",
       "summaryTitle": "Sammendrag av gjesteutfordring",
       "emptyValue": "Ikke fylt ut ennå.",
       "fields": {
@@ -218,6 +219,7 @@
     "errors": {
       "missing-fields": "Fyll inn både e-post og passord for å fortsette.",
       "invalid-credentials": "E-post eller passord samsvarte ikke med en konto.",
+      "login-unavailable": "Innlogging er midlertidig utilgjengelig. Vent litt og prøv igjen.",
       "weak-password": "Bruk et passord med minst 8 tegn.",
       "signup-failed": "Kontoen kunne ikke opprettes. Sjekk detaljene eller prøv igjen.",
       "oauth-provider": "Denne innloggingsleverandøren er ikke tilgjengelig.",

@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createRouteHandlerSupabaseClient } from "@/lib/supabase/server";
 import { defaultLocale, routing, type Locale } from "@/i18n/routing";
+import { getSafeLocalizedPath } from "@/lib/auth/safe-redirect";
 
 type CallbackContext = {
   params: Promise<{ locale: string }>;
@@ -10,22 +11,6 @@ function getSafeLocale(locale: string): Locale {
   return routing.locales.includes(locale as Locale)
     ? (locale as Locale)
     : defaultLocale;
-}
-
-function getSafeNextPath(value: string | null, locale: Locale) {
-  const fallback = `/${locale}/app`;
-  const localePrefix = `/${locale}`;
-
-  if (
-    value &&
-    value.startsWith(`${localePrefix}/`) &&
-    !value.startsWith("//") &&
-    !value.includes("://")
-  ) {
-    return value;
-  }
-
-  return fallback;
 }
 
 function getSuccessUrl(request: NextRequest, nextPath: string, source: string | null) {
@@ -60,7 +45,7 @@ export async function GET(request: NextRequest, context: CallbackContext) {
   const locale = getSafeLocale(rawLocale);
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
-  const nextPath = getSafeNextPath(requestUrl.searchParams.get("next"), locale);
+  const nextPath = getSafeLocalizedPath(requestUrl.searchParams.get("next"), locale);
   const source = requestUrl.searchParams.get("source");
 
   if (!code) {

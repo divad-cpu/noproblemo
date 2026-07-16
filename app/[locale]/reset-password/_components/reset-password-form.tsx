@@ -26,7 +26,7 @@ type ResetPasswordFormProps = {
   };
 };
 
-type RecoveryState = "checking" | "ready" | "error" | "updated";
+type RecoveryState = "checking" | "ready" | "submitting" | "error" | "updated";
 type RecoveryFailureReason =
   | "expired-link"
   | "verifier-missing-or-expired"
@@ -166,6 +166,7 @@ export function ResetPasswordForm({ locale, labels }: ResetPasswordFormProps) {
       return;
     }
 
+    setRecoveryState("submitting");
     const { error } = await supabase.auth.updateUser({ password });
 
     if (error) {
@@ -229,7 +230,7 @@ export function ResetPasswordForm({ locale, labels }: ResetPasswordFormProps) {
         disabled={!isReady}
         className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#22211e] px-5 py-3 font-semibold text-white hover:bg-[#3a3832] disabled:cursor-not-allowed disabled:bg-[#8b897f]"
       >
-        {labels.submit}
+        {recoveryState === "submitting" ? `${labels.submit}…` : labels.submit}
       </button>
     </form>
   );

@@ -349,6 +349,7 @@ export default async function ChallengePage({
     (currentUserMemberships ?? []).some((membership) =>
       ["owner", "admin", "member"].includes(membership.role),
     );
+  const canEdit = canSendMessage;
   const profiles = await getProfileMap(supabase, [
     ...savedMessages.flatMap((message) =>
       message.sender_id ? [message.sender_id] : [],
@@ -408,7 +409,11 @@ export default async function ChallengePage({
         <p className="mt-2 text-sm leading-6 text-[#55544f]">
           {t("details.body")}
         </p>
-        <form action={updateChallengeDetails} className="mt-5 grid gap-4">
+        <form
+          action={updateChallengeDetails}
+          inert={!canEdit}
+          className={`mt-5 grid gap-4 ${!canEdit ? "opacity-70" : ""}`}
+        >
           <input type="hidden" name="locale" value={locale} />
           <input type="hidden" name="challengeId" value={challenge.id} />
           <label className="grid gap-2">
@@ -490,6 +495,7 @@ export default async function ChallengePage({
 
       <form
         action={saveChallengeSections}
+        inert={!canEdit}
         className="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur sm:p-6"
       >
         <input type="hidden" name="locale" value={locale} />
@@ -553,7 +559,7 @@ export default async function ChallengePage({
               key={solution.id}
               className="rounded-2xl border border-[#e5e2da] bg-[#fbfaf7] p-4"
             >
-              <form action={saveSolution} className="grid gap-4">
+              <form action={saveSolution} inert={!canEdit} className="grid gap-4">
                 <input type="hidden" name="locale" value={locale} />
                 <input type="hidden" name="challengeId" value={challenge.id} />
                 <input type="hidden" name="solutionId" value={solution.id} />
@@ -652,7 +658,7 @@ export default async function ChallengePage({
                   </button>
                 </div>
               </form>
-              <form action={deleteSolution} className="mt-3">
+              <form action={deleteSolution} inert={!canEdit} className="mt-3">
                 <input type="hidden" name="locale" value={locale} />
                 <input type="hidden" name="challengeId" value={challenge.id} />
                 <input type="hidden" name="solutionId" value={solution.id} />
@@ -670,7 +676,7 @@ export default async function ChallengePage({
             <h3 className="text-xl font-semibold text-[#22211e]">
               {t("solutions.newTitle")}
             </h3>
-            <form action={saveSolution} className="mt-4 grid gap-4">
+            <form action={saveSolution} inert={!canEdit} className="mt-4 grid gap-4">
               <input type="hidden" name="locale" value={locale} />
               <input type="hidden" name="challengeId" value={challenge.id} />
               <div className="grid gap-4 lg:grid-cols-2">
@@ -756,7 +762,7 @@ export default async function ChallengePage({
               key={task.id}
               className="rounded-2xl border border-slate-200/70 bg-slate-50/80 p-4"
             >
-              <form action={saveTask} className="grid gap-4">
+              <form action={saveTask} inert={!canEdit} className="grid gap-4">
                 <input type="hidden" name="locale" value={locale} />
                 <input type="hidden" name="challengeId" value={challenge.id} />
                 <input type="hidden" name="taskId" value={task.id} />
@@ -786,6 +792,7 @@ export default async function ChallengePage({
                 </div>
                 <textarea
                   name="description"
+                  aria-label={t("tasks.fields.description")}
                   rows={3}
                   defaultValue={task.description ?? ""}
                   placeholder={t("tasks.fields.description")}
@@ -794,6 +801,7 @@ export default async function ChallengePage({
                 <div className="grid gap-4 lg:grid-cols-2">
                   <input
                     name="responsiblePerson"
+                    aria-label={t("tasks.fields.responsiblePerson")}
                     defaultValue={task.responsible_person ?? ""}
                     placeholder={t("tasks.fields.responsiblePerson")}
                     className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
@@ -801,6 +809,7 @@ export default async function ChallengePage({
                   <input
                     name="deadline"
                     type="date"
+                    aria-label={t("tasks.fields.deadline")}
                     defaultValue={task.deadline ?? ""}
                     className="min-h-11 rounded-2xl border border-[#dad8d0] bg-white px-3 py-2 text-[#161616]"
                   />
@@ -821,7 +830,7 @@ export default async function ChallengePage({
                   {t("actions.saveTask")}
                 </button>
               </form>
-              <form action={deleteTask} className="mt-3">
+              <form action={deleteTask} inert={!canEdit} className="mt-3">
                 <input type="hidden" name="locale" value={locale} />
                 <input type="hidden" name="challengeId" value={challenge.id} />
                 <input type="hidden" name="taskId" value={task.id} />
@@ -839,7 +848,7 @@ export default async function ChallengePage({
             <h3 className="text-xl font-semibold text-[#22211e]">
               {t("tasks.newTitle")}
             </h3>
-            <form action={saveTask} className="mt-4 grid gap-4">
+            <form action={saveTask} inert={!canEdit} className="mt-4 grid gap-4">
               <input type="hidden" name="locale" value={locale} />
               <input type="hidden" name="challengeId" value={challenge.id} />
               <div className="grid gap-4 lg:grid-cols-2">

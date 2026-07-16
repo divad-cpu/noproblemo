@@ -162,6 +162,7 @@ export default async function FriendsPage({
         <form className="mt-5 flex flex-col gap-3 sm:flex-row">
           <input
             name="search"
+            aria-label={t("search.placeholder")}
             defaultValue={search}
             className="min-h-12 flex-1 rounded-md border border-[#dad8d0] bg-white px-4 py-3 text-[#161616] outline-none focus:border-[#22211e]"
             placeholder={t("search.placeholder")}

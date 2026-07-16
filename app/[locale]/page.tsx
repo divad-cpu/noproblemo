@@ -68,6 +68,7 @@ export default function Home({ params }: HomeProps) {
                 <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-700">
                   {t("workflow.eyebrow")}
                 </p>
+                <h2 className="sr-only">{t("workflow.title")}</h2>
                 <div className="mt-5 grid gap-3">
                   {workflowSteps.map((step, index) => (
                     <div key={step} className="flex min-w-0 gap-4 rounded-2xl bg-white/75 p-4 shadow-sm">

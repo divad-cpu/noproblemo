@@ -31,8 +31,13 @@ export function PasswordField({
   const buttonLabel = isVisible ? buttonLabels.hide : buttonLabels.show;
 
   return (
-    <label className="grid gap-2">
-      <span className="text-sm font-semibold text-[#373632]">{label}</span>
+    <div className="grid gap-2">
+      <label
+        htmlFor={inputId}
+        className="text-sm font-semibold text-[#373632]"
+      >
+        {label}
+      </label>
       <span className="relative block">
         <input
           id={inputId}
@@ -57,6 +62,6 @@ export function PasswordField({
           <span className="truncate">{buttonLabel}</span>
         </button>
       </span>
-    </label>
+    </div>
   );
 }
