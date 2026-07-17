@@ -38,7 +38,9 @@ The focused pending-invitation RPC consumer and bounded challenge-section confli
 
 The complete seven-migration chain passed against a disposable local Docker Supabase stack. The focused cancellation pgTAP file passed 10/10 assertions, the three related database regressions passed 45/45, and the combined database result was 55/55. All SQL tests ran inside transactions and rolled back; no fixture data, Docker containers, volumes, networks, or generated runtime metadata remained. The structural security suite passed 4/4 and typecheck passed.
 
-**PENDING DEPLOYMENT — application code.** The matching server-action and group-detail UI implementation remains on open, unmerged PR #6 at commit `a15d14156767ed1ecdc5df4411147066c818cbaa`; it has not been deployed to production. Focused Playwright discovery passed, but runtime execution was not performed because no isolated local/Preview Supabase environment with six disposable accounts was configured. Focused application-level production verification remains pending until after a separately approved merge and deployment.
+**DEPLOYED, NOT YET INDEPENDENTLY EXERCISED IN PRODUCTION — application flow.** PR #6, "Fix group invitation cancellation authorization," was squash-merged on 2026-07-17 through application commit `dc91a671`. The matching server-action authorization and group-detail cancellation UI are deployed in production through Vercel deployment `dpl_936NXseFjYk7vkwE5uk5Kdd1BNpb` at immutable URL `https://noproblemo-h7dycjrml-no-problemo.vercel.app`. The `production` deployment was created at `2026-07-17T03:48:14.869Z` and reached `READY` at `2026-07-17T03:49:01.696Z` from Git commit `dc91a6710b1c6e2d583fa38a1649ca7fa73080d1`.
+
+Production aliases include `noproblemo.tech`, `www.noproblemo.tech`, `noproblemo-jet.vercel.app`, `noproblemo-no-problemo.vercel.app`, and `noproblemo-git-main-no-problemo.vercel.app`. HTTP verification confirmed that the apex, www, and immutable deployment redirect to `/en`, `/en` returns 200, no localhost redirect or 5xx response occurred, and filtered Vercel logs contained zero error-level or HTTP 500 entries. The deployed source and production database policy therefore agree on the cancellation authorization matrix, and manager cancellation authorization is present in production. Focused Playwright discovery passed, but runtime execution was not performed because no isolated local/Preview Supabase environment with six disposable accounts was configured. The authenticated mutating cancellation workflow has not been independently replayed in production, and no broader group-workflow or locale retest is claimed.
 
 ## Already Implemented
 
@@ -134,7 +136,7 @@ The complete seven-migration chain passed against a disposable local Docker Supa
 - Admin audit logging storage exists in `admin_audit_log`; Phase 10 has no sensitive admin mutations to log yet.
 - Phase 11 reviewed migrations and documented required manual Supabase/Vercel production checks, but did not perform live Supabase verification.
 - Google and Apple OAuth actions exist for future use, but buttons are temporarily hidden from the public auth UI while email login/signup is the active method.
-- Seven Supabase migrations align with the live production migration history. The cancellation-authorization database policy is applied and verified; its matching PR #6 server-action/UI code remains unmerged and undeployed, and focused application-level production verification remains pending.
+- Seven Supabase migrations align with the live production migration history. The cancellation-authorization database policy and matching PR #6 server-action/UI code are deployed and agree on the approved authorization matrix; the authenticated mutating flow has not yet been independently replayed in production.
 - Supabase helpers are used by auth actions, callback/logout handlers, auth-aware landing links, and the protected app layout.
 - Deployment works on Vercel, but production hardening is ongoing.
 - Translations currently include complete UI keys, but non-English content quality should be reviewed by fluent speakers before launch.
@@ -205,7 +207,7 @@ The complete seven-migration chain passed against a disposable local Docker Supa
 
 ## Known Issues
 
-- Exactly seven migrations are applied and aligned locally and in production. The cancellation-authorization migration is database-verified; PR #6 application deployment and focused post-deployment application verification remain release work.
+- Exactly seven migrations are applied and aligned locally and in production. The cancellation-authorization migration and PR #6 application implementation are deployed; focused independent production exercise of the authenticated mutating flow remains release follow-up work.
 - The health-check endpoint still needs Vercel Production secret configuration and endpoint production verification; its database migration is already applied.
 - Ordinary-user authentication, collaboration, viewer/editor authorization, message/notification privacy, and admin denial were production-verified with three disposable accounts. Deliberately configured administrator-positive testing of admin routes, RPCs, audit-log RLS, and profile-role hardening remains outstanding.
 - Supabase CLI 2.109.0 is installed. On 2026-07-16, local database lint passed, linked history showed all six migrations aligned, and the linked push dry run reported the remote database up to date; no remote write was run.
@@ -229,7 +231,7 @@ The complete seven-migration chain passed against a disposable local Docker Supa
 
 - Future agents must not add payments, AI, email automation, Resend, or Vercel Cron before explicitly scoped.
 - Future agents might use service role keys in frontend code; do not do this.
-- The cancellation-authorization database policy is production-applied and locally regression-tested, but the matching PR #6 server-action/UI change is not merged or deployed. Do not claim application-level production verification until the deployed flow is tested separately.
+- The cancellation-authorization database policy and matching PR #6 server-action/UI change are deployed and consistent. Do not claim that the authenticated mutating workflow was independently verified in production until the deployed flow is exercised separately.
 - User-generated problem content may be sensitive; privacy must be designed into auth and dashboard phases.
 - Feature expansion could overload the minimal UI if not kept incremental.
 
@@ -239,8 +241,7 @@ Focused application and operational follow-ups.
 
 Recommended scope:
 
-- Complete final review of PR #6, then merge and deploy the application change only through a separately approved workflow.
-- After deployment, run focused application-level production verification of inviter and accepted owner/admin cancellation without claiming broader group-flow coverage.
+- Independently exercise the deployed inviter and accepted owner/admin cancellation workflow in production through a separately approved, controlled verification without claiming broader group-flow coverage.
 - Run deliberately configured administrator-positive verification without weakening ordinary-user denial.
 - Complete Google/Apple OAuth provider setup, health endpoint secret/deployment verification, and support mailbox or alias setup.
 - Obtain fluent human translation review and run targeted locale/device checks without claiming every possible production workflow is covered.
@@ -268,7 +269,7 @@ Validation for the focused group-invitation cancellation repair on 2026-07-17:
 - Focused Playwright discovery (`--list`): passed. Runtime execution is blocked because no explicitly configured isolated local/Preview URL and six disposable accounts are available; the test rejects `noproblemo.tech` and requires an explicit gate.
 - Focused pgTAP runtime: passed 10/10; the three related database files passed 45/45, for 55/55 combined assertions against the complete seven-migration chain. Every SQL test rolled back, and no fixture data or local Docker/runtime resource remained.
 - Production database migration: `20260717120000` was applied as the only pending version and verified on project `jxjoyugkozbldwimqjuw`; all seven histories align and the migration checksum remains `fada70b50a2307bf1ca8dc0811bc92c99e7355d33b4cab5c6bb6c05b62538a01`.
-- No application record was directly mutated, no application deployment occurred, and PR #6 remains open and unmerged. Focused application-level production verification remains pending.
+- At the pre-merge validation checkpoint, no application record was directly mutated and no application deployment occurred. PR #6 was subsequently squash-merged as `dc91a671` and deployed through `dpl_936NXseFjYk7vkwE5uk5Kdd1BNpb`; the authenticated mutating production workflow remains not independently exercised.
 
 Validation for Phase 4:
 

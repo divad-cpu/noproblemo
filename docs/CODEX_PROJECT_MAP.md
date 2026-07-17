@@ -54,6 +54,7 @@ Implemented:
 - Phase 9 migration for messages, notifications, activity events, triggers, and RLS.
 - Production-aligned security migration for least-privilege table/function access, a caller-scoped pending-invitation RPC, ownership protections, and challenge-section uniqueness.
 - Production-applied cancellation-authorization migration for pending-only group-invitation transitions and immutable terminal states.
+- Production-deployed manager cancellation server authorization and group-detail UI from PR #6.
 - Focused pgTAP regression coverage for the production-applied security migration.
 - Focused cancellation database coverage passed 10/10 assertions, with 45/45 related regressions and 55/55 combined assertions.
 - Supabase client/server helper scaffolding.
@@ -124,7 +125,7 @@ Current:
 - Friendships use canonical rows in `friendships`.
 - Groups use `groups`, `group_members`, and `group_invitations`.
 - The production `group_invitations_update_related` policy permits only pending-row transitions: invitees may accept/decline, and original inviters or accepted owners/admins may cancel. Accepted, declined, and canceled rows are immutable.
-- PR #6 contains the matching server-action and group-detail UI implementation, but it remains open, unmerged, and not production-deployed.
+- PR #6 supplied the matching server-action and group-detail UI implementation; it was squash-merged as `dc91a671` and is deployed in production.
 - Group challenge access uses explicit `group_challenges` links.
 - Profile discovery uses authenticated RPC `search_profiles(search_term)` and exposes only `id`, `display_name`, and `avatar_url`.
 - Group and challenge messages use `messages`.
@@ -178,8 +179,8 @@ Current:
 - Friendships alone do not grant challenge access.
 - Group invitation acceptance is required before membership access is granted.
 - **VERIFIED — database policy:** pending group invitations may be canceled by the original inviter or a currently accepted owner/admin. Accept/decline remains invitee-only, and the production pending-only policy preserves accepted, declined, and canceled terminal states.
-- **PENDING DEPLOYMENT — application code:** PR #6 contains the matching server-action authorization, pending-only update verification, and disabled-while-submitting manager UI, but is not merged or production-deployed.
-- **DOCUMENTED BUT NOT YET APPLICATION-VERIFIED:** focused Playwright discovery passed, but runtime and post-deployment production verification remain pending until an isolated six-account environment and the deployed application change are available.
+- **VERIFIED — deployed source and policy consistency:** PR #6 application commit `dc91a671` contains the matching server-action authorization, pending-only update verification, and disabled-while-submitting manager UI; it is deployed with the production policy.
+- **DEPLOYED, NOT YET INDEPENDENTLY EXERCISED IN PRODUCTION:** focused Playwright discovery passed, but runtime remains blocked until an isolated local/Preview environment with six disposable accounts is available. The authenticated mutating production workflow was not replayed, and broader group workflows and locales were not all retested.
 - Group challenge viewers receive an inert, native-disabled read-only workspace; RLS remains authoritative and denies viewer mutations.
 - Group messages are visible only to group members.
 - Challenge messages are visible only to users with challenge read access.
@@ -218,13 +219,13 @@ See `SECURITY.md` before implementing auth, database writes, or messaging.
 7. Groups: implemented and ordinary-user production-verified.
 8. Simple messaging: implemented and privacy production-verified.
 9. Basic admin/settings: implemented; ordinary-user denial is production-verified and deliberately configured administrator-positive testing remains.
-10. Deployment: application commit `264a435` is deployed and production-verified at `noproblemo.tech` through Vercel deployment `dpl_Bfo7GChwmpZh2oUeYvC1pXJNZKc7`; targeted operational verification outside this release remains.
+10. Deployment: the latest production application commit is PR #6 squash merge `dc91a671`, deployed with status `READY` through Vercel deployment `dpl_936NXseFjYk7vkwE5uk5Kdd1BNpb` at immutable URL `https://noproblemo-h7dycjrml-no-problemo.vercel.app`. PR #4 commit `264a435` and deployment `dpl_Bfo7GChwmpZh2oUeYvC1pXJNZKc7` remain historical verified release evidence.
 
 Current invitation-cancellation release status:
 
 - **VERIFIED:** migration `20260717120000` is production-applied, its policy matches the approved authorization matrix, and all seven local/remote migration versions align.
-- **PENDING DEPLOYMENT:** the PR #6 server-action/UI implementation remains open and unmerged and has not been deployed to production.
-- **DOCUMENTED BUT NOT YET APPLICATION-VERIFIED:** focused application-level production verification remains pending; Playwright runtime was not executed and no broader group workflow retest is claimed.
+- **VERIFIED:** the PR #6 server-action/UI implementation was squash-merged as `dc91a671` and is deployed in production; deployed source and database authorization behavior agree.
+- **DEPLOYED, NOT YET INDEPENDENTLY EXERCISED IN PRODUCTION:** focused application-level production verification remains pending. Playwright runtime was not executed, the authenticated mutating flow was not replayed in production, and no broader group-workflow or locale retest is claimed.
 
 ## Future Feature Map
 

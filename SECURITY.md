@@ -10,7 +10,7 @@ PR #4 added the pending-invitation RPC consumer and bounded exact-key challenge-
 
 **VERIFIED — database policy.** Migration `20260717120000_group_invitation_cancellation_authorization.sql` was subsequently applied as the only pending migration and inspected on production project `jxjoyugkozbldwimqjuw`. Local and production histories now align across seven versions. The resulting `group_invitations_update_related` policy matches the approved pending-only authorization matrix and makes accepted, declined, and canceled invitation states immutable. The migration used no service-role access, required no history repair, and did not directly mutate application records.
 
-**PENDING DEPLOYMENT — application code.** The matching server-action and UI repair remains on open, unmerged PR #6 and has not been production-deployed. Focused application-level production verification therefore remains pending.
+**DEPLOYED, NOT YET INDEPENDENTLY EXERCISED IN PRODUCTION — application flow.** PR #6 was squash-merged as `dc91a671` and its matching manager-cancellation server authorization and UI are deployed. Vercel production deployment `dpl_936NXseFjYk7vkwE5uk5Kdd1BNpb`, immutable URL `https://noproblemo-h7dycjrml-no-problemo.vercel.app`, reached `READY` at `2026-07-17T03:49:01.696Z` from commit `dc91a6710b1c6e2d583fa38a1649ca7fa73080d1`. The production aliases route to `/en`, `/en` returns 200, and verification found no localhost redirect, 5xx response, filtered Vercel error-level entry, or HTTP 500 entry. The deployed policy and application implementation agree, but the authenticated mutating cancellation workflow has not been independently replayed in production and no broad production workflow claim is made.
 
 Guest challenge drafts remain in browser localStorage until an authenticated user explicitly imports them from the dashboard.
 
@@ -85,7 +85,7 @@ Current access model:
 - Users can see only groups they belong to.
 - Group owners/admins can manage group settings, regular members, and invitations.
 - A pending group invitation may be canceled only by its original inviter or a currently accepted group owner/admin. Ordinary members, viewers, unrelated authenticated users, invitees acting through cancellation, and unauthenticated users have no cancellation authority.
-- Group invitation accept/decline remains invitee-only. Accepted, declined, and already canceled rows are immutable at the database boundary through the production-applied pending-only update policy. PR #6 adds the matching server-action filter but remains unmerged and undeployed.
+- Group invitation accept/decline remains invitee-only. Accepted, declined, and already canceled rows are immutable at the database boundary through the production-applied pending-only update policy. The deployed PR #6 server action applies the matching pending-only authorization and update verification.
 - Invited users must accept before membership is created.
 - Accepting a pending group invitation creates the group membership through a database trigger.
 - Pending invitations do not grant group access.
@@ -100,7 +100,7 @@ Profile discovery uses the authenticated `search_profiles(search_term)` RPC and 
 
 Production verification confirmed that viewer mutation controls are inert and native-disabled, editor changes persist, and RLS remains authoritative by denying viewer mutation attempts.
 
-The cancellation repair uses the authenticated anon/session client only; it does not use service-role access. Cancellation remains a status update with `responded_at`, not a row deletion. Existing notification triggers still notify only invitation creation and accepted/declined responses, and cancellation adds no activity event. Local database validation passed 10/10 focused pgTAP assertions plus 45/45 related regressions, for 55/55 combined assertions; all SQL tests rolled back and left no fixture or Docker/runtime state. Structural security tests passed 4/4. Focused Playwright discovery passed, but runtime execution remains blocked pending an isolated local/Preview Supabase environment with six disposable accounts. The production database policy is verified, while application deployment and focused application-level production verification remain separate next steps.
+The cancellation repair uses the authenticated anon/session client only; it does not use service-role access. Cancellation remains a status update with `responded_at`, not a row deletion. Existing notification triggers still notify only invitation creation and accepted/declined responses, and cancellation adds no activity event. The production policy matches the approved migration, and both the policy and manager-cancellation server authorization are deployed. Local database validation passed 10/10 focused pgTAP assertions plus 45/45 related regressions, for 55/55 combined assertions; all SQL tests rolled back and left no fixture or Docker/runtime state. Structural security tests passed 4/4. Focused Playwright discovery passed, but runtime execution remains blocked pending an isolated local/Preview Supabase environment with six disposable accounts. Live mutating workflow verification remains pending, and broader group workflows were not all retested.
 
 ## Phase 9 Messaging, Notifications And Activity Security
 
@@ -203,7 +203,7 @@ Not verified during the historical Phase 11 review:
 - Supabase Auth provider and redirect behavior in production.
 - Vercel production environment and domain configuration.
 
-Those Phase 11 gaps were subsequently narrowed by production verification of ordinary-user Auth/RLS/RPC behavior and the now-aligned seven-migration chain. The cancellation policy is database-verified, but its PR #6 application flow remains pending deployment and focused application-level production verification. Deliberately configured administrator-positive testing, Google/Apple provider setup, health endpoint secret/deployment verification, support mailbox setup, and fluent translation review remain current gaps.
+Those Phase 11 gaps were subsequently narrowed by production verification of ordinary-user Auth/RLS/RPC behavior and the now-aligned seven-migration chain. The cancellation policy and PR #6 application implementation are deployed and consistent, but the authenticated mutating cancellation flow has not been independently exercised in production. Deliberately configured administrator-positive testing, Google/Apple provider setup, health endpoint secret/deployment verification, support mailbox setup, and fluent translation review remain current gaps.
 
 ## User Ownership Rules
 
