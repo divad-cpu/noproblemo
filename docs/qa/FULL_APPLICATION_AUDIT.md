@@ -260,6 +260,402 @@ Use a dedicated preview/test Supabase project and `E2E_USER_A_*`, `E2E_USER_B_*`
 5. Replace placeholder translations with fluent human-reviewed copy.
 6. Re-run the complete suite on a Vercel Preview before any production deployment.
 
+## 21. Production disposable-account continuation — 2026-07-16
+
+### Safety boundary and accounts
+
+- The linked project reference and the ignored E2E configuration both match the expected production project `jxjoyugkozbldwimqjuw`.
+- `.env.e2e.local` is ignored, untracked, and permission mode `600`. All required variable names are present. No credential value, cookie, token, key, or connection string was added to the repository or report.
+- Browser attempts identified the configured accounts only as User A, User B, and User C.
+- No remote reset, truncation, SQL authorization test, migration application, deployment, commit, push, merge, password change, recovery request, account deletion, or role change was performed.
+
+### Local migration result
+
+**PASS.** Docker 29.6.1 and Supabase CLI 2.109.1 were available. `supabase start` started only the local stack. `supabase db reset --local` applied all six migrations in order, including `20260716120000_full_application_audit_security_repairs.sql`. The complete chain passed before and after the pending migration correction.
+
+Local inspection confirmed 61 RLS policies and 27 public-schema triggers. A 32-assertion pgTAP suite passes for challenge ownership, linked challenge editor/viewer boundaries, invitation immutability, friendship and membership insert restrictions, last-owner preservation, self-promotion prevention, notification RPC privileges, activity insertion scope, message and notification privacy, section uniqueness, and affected-row behavior. `supabase db lint --local` reports no schema errors.
+
+The pending forward migration was corrected without changing historical migrations:
+
+- Revoke browser-role `TRUNCATE`, `REFERENCES`, and `TRIGGER` table privileges, which RLS does not protect.
+- Restrict updateable child-record columns so challenge relationships are not client-mutable.
+- Add unique `(challenge_id, section_key)` enforcement.
+- Remove default anonymous/public function execution and re-grant only intended RPCs.
+- Retain the existing `notify_user` denial.
+- Pair the uniqueness rule with a duplicate-key retry in section saves for deterministic repeated/concurrent saves.
+
+### Remote migration review
+
+**PASS, dry run only.** `supabase migration list --linked` shows the first five migrations on both local and remote history. `20260716120000` is the only local-only migration. `supabase db push --dry-run --linked` reports that only `20260716120000_full_application_audit_security_repairs.sql` would be applied.
+
+No remote migration was applied. The exact manual apply command is:
+
+```bash
+supabase db push --linked
+```
+
+Before approval, a trusted operator should check production for duplicate `(challenge_id, section_key)` rows because the new unique index intentionally fails rather than deleting or rewriting existing data.
+
+### Authentication results
+
+Five distinct production authentication cases were executed with one worker and credential-bearing traces/screenshots disabled:
+
+- User A login: **BLOCKED**, production returned the privacy-safe invalid-credentials state.
+- User B login: **BLOCKED**, same result.
+- User C login: **BLOCKED**, same result.
+- Protected deep-link preservation: **FAIL on deployed production**; `/en/app/challenges/new` was reduced to `/en/app` before login. The branch already contains the undeployed correction.
+- Incorrect-password/pending-state check: incorrect credentials were rejected safely, but the deployed submit button remained enabled while the request was held. The branch already contains the undeployed pending-state correction.
+
+Both shell loading and Node's dotenv parser produced the same three-account login result. No successful session was established. Session persistence, authenticated redirect away from login/signup, and logout therefore remain blocked. Password recovery was not invoked.
+
+### Authenticated workflow results
+
+| Domain | Result |
+|---|---|
+| Challenge lifecycle, autosave, explicit saves, sections, solutions, tasks, summary | BLOCKED: no disposable account could authenticate |
+| Friends request/accept/remove/decline matrix | BLOCKED: no disposable account could authenticate |
+| Groups invitations and owner/admin/member/viewer controls | BLOCKED: no disposable account could authenticate |
+| Group-linked challenges and collaborator/viewer behavior | BLOCKED in production; PASS in the 32-test local database suite |
+| Messages, Unicode/multiline/order/reload/privacy | BLOCKED in production; privacy and empty-message boundaries PASS locally |
+| Notifications, read state, and destination links | BLOCKED in production; privacy and RPC ACL boundaries PASS locally |
+| Admin positive/negative browser checks | BLOCKED: User C's role could not be determined without a session; no role was changed |
+| Cross-user private challenge/group/message access | BLOCKED in production; representative RLS boundaries PASS locally |
+| Print layout and PDF rendering | BLOCKED: no authenticated challenge could be opened |
+
+No multi-user production test could begin. No unexpected real-user data became visible.
+
+### Defects found and local repair status
+
+1. **Confirmed locally and fixed in the pending migration:** browser roles retained non-DML table privileges not protected by RLS.
+2. **Confirmed locally and fixed in the pending migration/application:** challenge sections lacked database uniqueness and deterministic duplicate-save recovery.
+3. **Confirmed in deployed production, already fixed on this branch:** protected deep links collapse to `/app`.
+4. **Confirmed in deployed production, already fixed on this branch:** login submit has no pending/duplicate-submit protection.
+5. **Blocking prerequisite, not yet classified as an application defect:** all three configured disposable credentials are rejected by production.
+
+Remaining security risks include the unapplied migration, authenticated relationship helper RPC oracles for known UUIDs, client-authorized activity-event inserts that can create permitted-scope noise, and server actions that may report success after an RLS-filtered zero-row mutation. These require follow-up hardening or authenticated production verification; they were not broadened into unapproved production SQL tests.
+
+### Cleanup and disposable records
+
+- Production records created: **none**.
+- Production records deleted or modified: **none**.
+- Disposable records left behind by this continuation: **none**.
+- Stored browser authentication state: **none created**.
+- Failure artifacts from credential-bearing attempts: **deleted**.
+- Local pgTAP fixture rows: rolled back by the test transaction.
+
+### Validation commands and results
+
+| Command | Result |
+|---|---|
+| `supabase start` | PASS, local stack only |
+| `supabase db reset --local` | PASS before and after migration correction; six migrations applied |
+| `supabase test db --local supabase/tests/database/full_application_audit.test.sql` | PASS, 32 tests |
+| `supabase db lint --local` | PASS, no schema errors |
+| `supabase migration list --linked` | PASS, only `20260716120000` is local-only |
+| `supabase db push --dry-run --linked` | PASS, would apply only the expected migration |
+| `npm run lint` | PASS |
+| `npm run typecheck` | PASS |
+| `npm run test:security` | PASS |
+| `npm run test:e2e -- --workers=2 --reporter=list` | 41 PASS, 6 SKIP, 1 transient Spanish dev-server failure |
+| `npx playwright test tests/e2e/i18n.spec.ts --workers=1 --reporter=list --grep 'es boots'` | PASS on focused rerun |
+| `node --env-file=.env.e2e.local node_modules/@playwright/test/cli.js test tests/e2e/production-smoke.spec.ts --workers=1 --reporter=list` | PASS, 1 test |
+| Production authenticated spec with Node dotenv loading and one worker | 5 FAIL: three invalid-credential blockers plus two confirmed deployed regressions |
+| 11-locale JSON parse/key parity | PASS, 722 leaf keys |
+| `npm run build` | PASS, 180 static pages generated |
+| `git diff --check` | PASS |
+
+### Residual production risks and decision
+
+- Production still lacks the pending RLS/ACL/uniqueness migration and all undeployed application repairs on this branch.
+- The unique-index migration is locally valid, but manual approval should include a duplicate-row preflight that does not mutate data.
+- Authenticated, multi-user, admin, notification-link, and print/PDF behavior remains unverified because the disposable credentials do not authenticate.
+- The migration is ready for security review and conditional manual production approval after the duplicate-row preflight.
+- Application changes are ready for code review, lint/type/build validation, and preview testing, but not for production deployment approval until working disposable credentials allow the blocked matrix to complete.
+
+## 22. Corrected-credential authenticated production continuation — 2026-07-16
+
+### Safety and account precheck
+
+- User A, User B, and User C all authenticated successfully from the ignored `.env.e2e.local` file. No credential value, cookie, token, key, or stored browser-authentication state was printed or committed.
+- `.env.e2e.local` remains ignored and permission mode `600`; the configured production reference and URL still match `jxjoyugkozbldwimqjuw` and `https://noproblemo.tech`.
+- Every stateful production run used one Playwright worker and a separate browser context for each user.
+- No remote reset, truncation, direct production SQL authorization test, migration application, deployment, commit, push, merge, password change, recovery request, account deletion, or role change was performed.
+- During the focused local group regression, `supabase start` printed its standard disposable local-development credentials to the terminal. No production credential was exposed, copied into a file, or committed.
+
+### Counts and authentication results
+
+Thirteen distinct authenticated production Playwright cases were defined and executed: six authentication cases, one complete User A challenge/print case, five admin/inventory cases, and one stateful three-user case. The stateful multi-user case completed the friend and private-challenge steps but stopped at group creation. Three temporary profile-recovery executions were cleanup-only and are not included in the authenticated test count.
+
+| Case | Result |
+|---|---|
+| User A login, reload persistence, logout | PASS |
+| User B login, reload persistence, logout | PASS |
+| User C login, reload persistence, logout | PASS |
+| Authenticated redirect away from login/signup | FAIL on deployed production; fixed locally in both server pages with a focused regression |
+| Protected deep-link restoration | FAIL on deployed production; existing undeployed branch repair retained |
+| Incorrect-password, pending, duplicate-submit behavior | Incorrect password PASS; pending/duplicate prevention FAIL on deployed production; existing undeployed branch repair retained |
+
+### Challenge and print/PDF results
+
+**PASS with cleanup limitation.** User A created an owned `CODEX-QA-` challenge, edited title/description/status, saved all eight workflow sections, used Norwegian characters, Chinese text and multiline content, repeated section saves conservatively, and verified reload persistence. Solution scores/pros/cons/priority/resources and a task/deadline/responsible person were created and then deleted through the UI. Sequential repeated saves remained stable. The UI has explicit saves but no autosave; an unsaved summary edit correctly disappeared after reload.
+
+The protected print route rendered the saved summary, hid both application chrome and print controls under print media, and generated a non-empty A4 PDF in memory. No screenshot or credential-bearing PDF artifact was retained. The application has no challenge-delete action, so owned challenge rows and their sections remain.
+
+### Friends, notifications and privacy results
+
+- Self-request prevention: PASS; the current profile was not actionable.
+- Friend request creation and duplicate prevention: PASS; the duplicate normal-UI request was rejected.
+- Accept, remove and second-request decline: PASS by final application state.
+- Accept feedback: FAIL on deployed production; the friendship appeared correctly but the page displayed `friend-response-failed` instead of the success state. This is consistent with the deployed affected-row/status mismatch already identified as a risk.
+- Friend-request notification generation and read-state mutation: PASS.
+- Friend-request notification destination: FAIL on deployed production; the rendered card had no destination link. The current branch source already renders the friends destination, so production contains older behavior.
+- User B direct navigation to User A's unlinked private challenge: PASS denial with HTTP 404.
+- User C remained unrelated to the A/B workflow. No unexpected real-user content became visible.
+
+### Groups, linked challenges, messages and broader notifications
+
+**BLOCKED by production group creation.** User A submitted the normal create-group form with an owned `CODEX-QA-` name and production returned `group-create-failed`. Read-only inventory confirmed that no prefixed group was created. The test stopped the dependent invitation, role, linked-challenge, group-message and group-notification branches instead of bypassing the application.
+
+The newly relevant local regression passes: under the authenticated database role, an owner can insert a group and the trusted trigger creates exactly one owner membership. The focused pgTAP file now passes 34 assertions. This isolates the blocker to deployed production state/application behavior rather than the pending migration chain. Because no group could be created, editor/viewer browser checks, removed-member access, multiline group messages, message order/reload, third-user conversation privacy and group notification destinations remain blocked in production. Their database authorization boundaries continue to pass locally.
+
+### Admin results
+
+User A, User B and User C are ordinary users. All three were denied the admin overview with HTTP 404 and none received an Admin navigation link. User C is not an intentionally configured disposable administrator, so administrator-positive testing remains blocked. No admin role or real-user data was changed or opened.
+
+### Defects and local repairs
+
+1. Authenticated login/signup pages did not redirect an existing session. Fixed locally by checking the server Supabase session and redirecting to the sanitized destination; a security regression covers both pages.
+2. Protected deep-link restoration and login pending/duplicate-submit behavior still fail in production; both already have undeployed branch repairs.
+3. Friend acceptance reaches the correct relationship state but reports failure in production. The deployed result remains unresolved; no speculative local database change was made.
+4. Friend-request notification destination links are missing in production. The current branch already renders them.
+5. Normal production group creation fails. The same authenticated create plus owner-trigger path passes locally, so the pending migration was not changed.
+6. Autosave and challenge/group deletion are not implemented, limiting requested behavior and cleanup.
+
+### Cleanup and records remaining
+
+- Temporary `CODEX-QA-` display names were cleared/restored; no password or account was changed.
+- No prefixed group, group membership, group invitation, or message was created.
+- The completed solution and task were deleted through the application.
+- The friend workflow ended without an intended active friendship or pending request. Historical disposable request and notification rows remain because the application exposes no history-delete control.
+- Four owned challenges remain because the application exposes no challenge-delete control:
+  - User A: `CODEX-QA-mrnmjn7j-153286-challenge-A`
+  - User A: `CODEX-QA-mrnlzp4u-149985-utfordring-æøå-你好`
+  - User A: `CODEX-QA-mrnlyfe3-149680-utfordring-æøå-你好`
+  - User B: `CODEX-QA-mrnmjn7j-153286-challenge-B-private`
+- No stored authentication-state file was created. Generated Playwright failure output is ignored and will be removed after the final validation summary is captured.
+
+### Exact validation results
+
+| Command | Result |
+|---|---|
+| Production authenticated account spec, one worker | 3 PASS login/session/logout; 3 FAIL deployed redirect/deep-link/pending regressions |
+| Production User A challenge/print spec, one worker | 1 PASS after one selector-only aborted setup |
+| Production stateful three-user spec, one worker | 1 PARTIAL/FAIL: friends and private challenge denial completed; group creation blocked remaining steps |
+| Production admin/inventory spec, one worker | 5 PASS; all users ordinary, owned prefixed inventory only |
+| Focused User C admin rerun | 1 PASS, ordinary user denied |
+| `supabase test db --local supabase/tests/database/full_application_audit.test.sql` | PASS, 34 tests including authenticated group creation and owner membership |
+| `npm run test:security` | PASS |
+| `npm run typecheck` | PASS |
+| `npm run lint` | PASS |
+| `node node_modules/@playwright/test/cli.js test tests/e2e/auth.spec.ts --workers=1 --reporter=list` | PASS, 5 tests |
+| `npm run build` | PASS, 180 static pages generated |
+| `git diff --check` | PASS |
+
+The previously completed remote review was not repeated: `20260716120000_full_application_audit_security_repairs.sql` remains the only intended pending migration from the successful dry run. No remote migration was applied. The exact manual command remains:
+
+```bash
+supabase db push --linked
+```
+
+Do not run it without manual approval and the documented duplicate `(challenge_id, section_key)` preflight. The migration remains ready for conditional manual production approval. Application changes are ready for code review, but production deployment approval remains blocked by the reproducible group-creation failure and the uncompleted group/message/viewer/editor matrix.
+
+## 23. Production group-creation blocker diagnosis and local repair — 2026-07-16
+
+### Safety boundary and exact failure
+
+The investigation used the existing production browser result, a schema-only read of the linked production database, and rollback-scoped/local database tests. It did not query production row data or execute a production write. No remote reset, truncation, migration application, deployment, configuration change, commit, push, or merge occurred.
+
+The safe failure category is `42501 / returning-row-select-denied`. The failing operation was the deployed `createGroup` server action's single PostgREST request:
+
+```text
+INSERT groups (...) RETURNING id
+```
+
+The INSERT policy permits an authenticated user to create a group whose `owner_id` matches `auth.uid()`. The SELECT policy permits the row only after `is_group_member(id, auth.uid())` is true. Owner membership is created by an after-insert security-definer trigger. PostgreSQL applies returned-row RLS before that trigger-created membership can authorize the returned representation, so `RETURNING id` is rejected with `42501`. The statement and all trigger work are transactional: the group, owner membership, group-created activity and member-joined activity are all rolled back. This matches the production inventory result of no prefixed group or partial side-effect data.
+
+### Production/local metadata comparison
+
+The schema-only production dump and the local schema after all six migrations agree on the blocker-relevant database objects:
+
+- `groups` and `group_members` columns, UUID defaults, foreign keys and the four-value group-role check are equivalent. UUID generation uses `gen_random_uuid()`; no sequence privilege is involved.
+- RLS is enabled on both tables. Production and local both have `groups_insert_owner` and the membership-dependent `groups_select_member` policy.
+- Both have `groups_create_owner_member`, `groups_activity_created` and `group_members_activity_joined` after-insert triggers.
+- `create_owner_group_member()` and `create_group_activity()` are owned by `postgres`, are `SECURITY DEFINER`, and set `search_path` to `public` in both environments.
+- Group ownership and membership reference `auth.users`; group creation has no profile-row dependency. The successful local ordinary-user test deliberately has no matching profile row.
+- Production grants authenticated users group INSERT capability. Its broader table/function grants and direct membership-insert policy are narrowed by the pending audit migration, while local also has the pending-invitee group SELECT policy. Those expected pending-migration differences do not affect the reproduced `INSERT ... RETURNING` failure.
+- The owner-membership and activity trigger bodies are identical in production and local. Duplicate group names are allowed, defaults are present, and the trusted owner trigger uses `ON CONFLICT` defensively.
+
+The pending migration is therefore not the cause of group creation failure and was not changed for this repair.
+
+### Local correction and regression coverage
+
+`createGroup` now generates an explicit UUID, performs the group insert without requesting a returned representation, then makes a separate owner-scoped SELECT for that exact UUID. Success is reported only after that verification finds the expected row. It continues to rely on the trusted owner-membership trigger and does not insert a membership from application code.
+
+Insert failures and post-insert verification failures now produce distinct safe query categories (`failure=insert` and `failure=verification`) for controlled regression diagnosis. The translated production-facing error remains the existing generic `group-create-failed` message; no database detail, row data, credential, token, or SQL text is exposed.
+
+The database regression suite now proves all of the following:
+
+- authenticated `INSERT ... RETURNING id` fails with `42501` under the current secure policy/trigger design;
+- that rejected statement leaves zero partial group rows;
+- a minimal authenticated insert succeeds for a user with no profile row;
+- the owner trigger creates exactly one owner membership;
+- a separate owner-scoped statement can read the group after trigger completion; and
+- both expected group/member activity events commit.
+
+The focused application security regression asserts the explicit ID, minimal insert, separate ID-and-owner verification read, distinct safe failure categories, and absence of a duplicate application-side membership insert.
+
+### Release dependency and remaining blocker
+
+This is an application-code defect, not a database, migration, or external-configuration defect. Application deployment is required; migration application is not required to fix group creation. They do not need to be released atomically. Recommended order:
+
+1. Review and deploy the application correction through the normal approved workflow.
+2. Re-run one `CODEX-QA-` group creation through the normal production application and verify the owner membership/activity UI.
+3. Resume the invitation, accept/decline, owner/admin/member, linked-challenge, editor/viewer, messaging, third-user privacy and group-notification matrix with one worker.
+4. Review and apply the independent pending security migration only after its documented duplicate-section preflight and separate manual approval.
+
+The production group creation attempt was not repeated because production cannot contain this local correction without the prohibited deployment. The dependent collaboration matrix remains blocked for the same reason. No new production data was created, so no additional cleanup was required.
+
+### Exact validation results
+
+| Command or check | Result |
+|---|---|
+| Local authenticated `INSERT ... RETURNING id` reproduction | PASS: safely reproduced SQLSTATE `42501` and transaction rollback |
+| Read-only production/local public-schema comparison | PASS: blocker-relevant tables, constraints, policies, triggers and function security settings match; only expected pending-migration differences found |
+| `supabase test db supabase/tests/database/full_application_audit.test.sql --local` | PASS, 38/38 |
+| `supabase db lint --local --level warning` | PASS, no schema errors |
+| `npm run test:security` | PASS |
+| `npm run typecheck` | PASS |
+| `npm run lint` | PASS |
+| `npm run build` | PASS, 180 static pages generated |
+| Focused production Playwright group rerun | Not run: would exercise the unchanged deployed action and cannot validate the prohibited undeployed correction |
+
+Changed for this repair: `app/[locale]/app/actions.ts`, `supabase/tests/database/full_application_audit.test.sql`, `tests/security/authorization-hardening.test.mjs`, `CURRENT_STATE.md`, and this audit report. The pending migration was unchanged by the group repair.
+
+## 24. Post-hotfix production collaboration continuation — 2026-07-16
+
+### Safety, accounts, and test count
+
+- Production behavior from hotfix source commit `28ababe8ae134d46b4fea597d3b15f289ccf14db` is active: normal application group creation completed without `group-create-failed`, and no migration was needed for that result.
+- User A, User B, and User C all authenticated from the ignored, mode-`600` `.env.e2e.local` file. Each user had an isolated browser context and the stateful workflow used one Playwright worker.
+- No password, token, cookie, key, connection string, or stored authentication state was printed or persisted. No unexpected real-user data became visible.
+- The authenticated suite remains 13 distinct production cases cumulatively. This continuation completed the one distinct stateful three-user case through all seven test steps; repeated harness-resume attempts are not counted as additional tests.
+- No deployment, commit, push, merge, remote reset, direct production SQL, production configuration change, account/admin-role change, or migration application occurred. The only role transitions were the explicitly requested disposable group-member checks.
+
+### Group creation and collaboration results
+
+The normal production UI created `CODEX-QA-mrnoqjsw-192105-group` (`4d7bb92a-d008-4079-b0be-127c9f551594`). The detail route opened, User A was Owner, the group appeared in inventory, group-created and member-joined activity were visible, reload persistence passed, and non-member User C received a 404. The hotfix therefore resolves the original production blocker without the pending migration.
+
+| Area | Production result |
+|---|---|
+| Invitation create and duplicate prevention | PASS; the first invite persisted and a second pending invite was rejected |
+| Invitation cancel and decline | PASS; both states disappeared from the invitee inventory after bounded reload polling |
+| Invitation accept | PARTIAL; membership and the assigned role were created, but the deployed action displayed `group-invitation-response-failed` because it performs a redundant membership insert after the trigger |
+| Pending invitation identity | FAIL; Users B/C saw `Unnamed group` because the pending-invitee group SELECT policy is still only in the unapplied migration |
+| Owner/member/admin controls | PASS; User A remained Owner, Member B had no management/self-promotion controls, Admin B could edit group settings but could not assign roles, and User A restored B to Member |
+| Last-owner behavior | PASS through the normal UI; User A had no self-demotion, self-removal, or leave control |
+| Non-member access | PASS; User C received 404 before invitation acceptance and Users B/C received 404 for the group and linked challenge after removal |
+| Linked challenge eligibility | PASS; each user saw only their own eligible private challenge, and User A linked only User A's challenge |
+| Editor boundary | PASS; User B's editor update persisted and no ownership mutation input was exposed |
+| Viewer boundary | SECURITY PASS / UI FAIL; User C could read but not send messages, the attempted detail mutation did not persist after reload, and no ownership input was exposed, but the deployed page still exposed an editable/save form |
+| Group messages | PASS; empty HTML validation, normal text, multiline Norwegian/Unicode, sender identity, newest-first order, reload persistence, and message notification behavior passed |
+| Removed-member message/privacy boundary | PASS; removed users lost group/challenge access and User C received no notification for the post-removal message |
+| Activity | PASS; group creation was verified before it aged out of the recent window; later reads confirmed group update, member join/removal, challenge-link, and group-message activity |
+| Admin | PASS negative / BLOCKED positive; A, B, and C are ordinary disposable users and were denied admin access; no production role was changed |
+
+### Notifications and existing friend issue
+
+- Friend request creation, duplicate/self prevention, read state, friendship creation, removal, a second request, and decline all passed.
+- Friend acceptance feedback still fails: the friendship is created by the database trigger, but deployed production reports `friend-response-failed` after its redundant friendship insert.
+- Friend-request notifications still have no destination link. The QA branch's notification link correction remains undeployed.
+- Group-invitation notifications are generated, but their deployed destination is the private group route. A pending invitee cannot open that route, so the safe destination must be the group invitation list. The QA branch contains that application correction.
+- Group acceptance/decline response notifications and group-message notifications were present for the disposable accounts. Group-message destination/read-state checks passed.
+
+### Defects and local repair status
+
+No new application code repair was needed during this continuation. The run reconfirmed four undeployed QA repairs and one migration-dependent display repair:
+
+1. Friend acceptance reports failure after successfully creating the friendship; the QA action already relies on the trigger instead of performing a duplicate insert.
+2. Friend-request notifications lack a destination; the QA notification page routes them to `/app/friends`.
+3. Group acceptance reports failure after successfully creating membership; the QA action already relies on the trigger instead of performing a duplicate insert.
+4. Group-invitation notifications point at an unreadable private group; the QA notification page routes pending invitations to `/app/groups`.
+5. At the time of this continuation, pending invitees could not read the group name and the reviewed migration used `groups_select_pending_invitee`; section 25 replaces that broad base-table policy with a minimal RPC.
+6. The deployed viewer challenge page exposes mutation controls even though RLS prevents persistence; the QA branch's inert-viewer UI remains undeployed.
+
+Focused production-spec corrections added in this continuation cover interrupted-state normalization, retained-group/challenge reuse, bounded invitation-list refresh, and the viewer persistence assertion. They do not alter production application behavior.
+
+### Cleanup and retained disposable records
+
+- PASS through normal application actions: friendship/request state, all pending invitations, B/C memberships, linked challenge, and all generated group messages were removed. Profile display names were restored.
+- Read-only final inventory: zero cancelable invitations, zero B/C removal controls, zero invitee accept/decline controls, zero linked challenges, and zero prefixed message articles for the audit group.
+- Production has no group-delete UI, so these proven disposable groups remain:
+
+| Group name | Group id | Source |
+|---|---|---|
+| `CODEX-QA-mrnoqjsw-192105-group` | `4d7bb92a-d008-4079-b0be-127c9f551594` | This production continuation |
+| `CODEX-QA-HOTFIX-mrno52nv` | `8ea4421a-0e31-4475-8c9a-2e7bccdb9558` | Prior hotfix Preview verification against the same production Supabase project |
+
+- Ten prefixed disposable challenges remain across the five known A/B challenge pairs (`mrnmjn7j`, `mrnoqjsw`, `mrnovzgc`, `mrnp2fli`, and `mrnp7gb5`). The final run reused the `mrnp7gb5` pair instead of creating more.
+- Disposable notification and activity history remains because the UI exposes no delete action. All such records belong to the three disposable accounts and the proven disposable group/challenges.
+
+### Exact validation results
+
+| Command or check | Result |
+|---|---|
+| Production multi-user Playwright spec with the existing group/challenge overrides and `--workers=1` | Completed all seven steps and cleanup; test process FAIL only because eight expected production defects were retained as soft assertions |
+| Final normal-UI cleanup inventory | PASS: no pending invites, B/C membership controls, linked challenge, or prefixed messages remain |
+| `npm run test:security` | PASS, 1/1 |
+| `npm run typecheck` | PASS |
+| `npm run lint` | PASS |
+| `npm run build` | PASS, 180 static pages generated |
+| `git diff --check` | PASS after documentation update |
+
+The isolated group-creation hotfix is ready to merge into `main`. The broader QA branch is ready for review, but not for a blind production release: the application fixes above need preview/release review, and the independent pending migration still requires its documented duplicate-section preflight and separate manual approval.
+
+## 25. Final least-privilege migration preflight — 2026-07-16
+
+### Pending invitation correction
+
+The unapplied audit migration no longer grants pending invitees a `groups` SELECT policy. It now defines the argument-free, stable, `SECURITY DEFINER` RPC `pending_group_invitations()` with an empty fixed `search_path`, explicit `postgres` ownership, and explicit execution revocation from `PUBLIC`, `anon`, and `authenticated` before re-granting only to `authenticated`.
+
+The function filters internally on `auth.uid()`, requires `pending` status, and returns only invitation ID, group ID, group name, and invited role. It exposes no owner ID, description, group timestamps, arbitrary user argument, membership data, challenge data, or message data.
+
+The QA groups page keeps its RLS-protected pending-invitation query so it can render the existing localized `Unnamed group` fallback before the migration exists. It calls the minimal RPC for pending invitation identity when available and queries base `groups` rows only for actual memberships. Group-invitation notifications continue linking to the localized group invitation list. No service-role or privileged browser client was added.
+
+### Local and production-safe evidence
+
+| Command or check | Result |
+|---|---|
+| Complete empty local six-migration chain | PASS |
+| `supabase test db --local supabase/tests/database/full_application_audit.test.sql` | PASS, 50/50 |
+| Pending invitee base group read | PASS denial |
+| Minimal RPC own-pending filtering and output shape | PASS |
+| Anonymous RPC execution | PASS denial |
+| Existing member group read and invitation accept/decline | PASS |
+| `supabase db lint --local --level warning` | PASS, no schema errors |
+| `npm run test:security` | PASS, 1/1 |
+| `npm run typecheck` | PASS |
+| `npm run lint` | PASS |
+| `npm run build` | PASS, 180 static pages generated |
+| `git diff --check` | PASS |
+| Secret-value scan | PASS, zero matches |
+| Generated-artifact scan | PASS, no tracked output |
+| Production duplicate refresh | PASS: 21 rows, zero duplicate groups |
+| Fresh linked migration history | BLOCKED: Supabase CLI access token unavailable |
+| Fresh linked dry run | BLOCKED: Supabase CLI access token unavailable |
+| Fresh roles/schema/data backup | BLOCKED: Supabase CLI access token unavailable |
+
+No migration, deployment, production write, credential change, commit, push, merge, or history repair was performed. The local Supabase stack was stopped after validation. Manual production migration approval remains blocked until a trusted operator provides CLI authentication and successfully completes the linked history check, expected-only dry run, and fresh external backup.
+
 ## Generated files excluded from Git
 
 - `test-results/`
