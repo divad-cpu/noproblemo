@@ -68,7 +68,7 @@ Not implemented:
 - `docs/MANUAL_TEST_PLAN.md`: three-user app test plan for guest mode, auth, dashboard, workspace, friends/groups, messages, notifications, activity, admin, locales, RTL, accessibility, and responsive layouts.
 - `docs/LAUNCH_READINESS_REPORT.md`: current launch readiness status, implemented/not implemented scope, blockers, recommendations, and verification evidence target.
 - `docs/qa/SECURITY_MIGRATION_PRODUCTION_VERIFICATION.md`: production security migration checksum, manual-apply evidence, local/remote history alignment, validation, and separate application follow-ups.
-- `docs/qa/PENDING_INVITATION_SECTION_SAVE_FOLLOWUP.md`: focused application consumer/recovery boundary, validation, Preview, cleanup, and staged-deployment record.
+- `docs/qa/PENDING_INVITATION_SECTION_SAVE_FOLLOWUP.md`: focused application consumer/recovery boundary, validation, production deployment, production verification, and cleanup record.
 
 ## Route Map
 
@@ -187,7 +187,6 @@ Current:
 Planned:
 
 - Deliberately configured administrator-positive testing and remaining OAuth, health endpoint, support-mailbox, translation, and release-specific operational verification.
-- Staged production deployment of the focused pending-invitation consumer and challenge-section conflict recovery; production currently remains on application commit `91cac6d`.
 - Later admin actions beyond the read-only MVP.
 
 Rules:
@@ -210,7 +209,7 @@ See `SECURITY.md` before implementing auth, database writes, or messaging.
 7. Groups: implemented and ordinary-user production-verified.
 8. Simple messaging: implemented and privacy production-verified.
 9. Basic admin/settings: implemented; ordinary-user denial is production-verified and deliberately configured administrator-positive testing remains.
-10. Deployment: application commit `91cac6d` is deployed and promoted to `noproblemo.tech`; targeted operational verification remains.
+10. Deployment: application commit `264a435` is deployed and production-verified at `noproblemo.tech` through Vercel deployment `dpl_Bfo7GChwmpZh2oUeYvC1pXJNZKc7`; targeted operational verification outside this release remains.
 
 ## Future Feature Map
 

@@ -1,12 +1,12 @@
 # Pending Invitation And Section Save Follow-up
 
-Date: 2026-07-16
+Date: 2026-07-17
 
-Status: **IMPLEMENTED — PRODUCTION DEPLOYMENT PENDING**
+Status: **PRODUCTION RELEASE VERIFIED**
 
 ## Release Boundary
 
-This focused application release consumes database behavior that was already applied and production-verified in `20260716120000_full_application_audit_security_repairs.sql`. It includes no migration, policy, grant, function, trigger, constraint, or schema change.
+This focused application release consumes database behavior that was already applied and production-verified in `20260716120000_full_application_audit_security_repairs.sql`. All six Supabase migrations were applied before this application release. PR #4 includes no migration, policy, grant, function, trigger, constraint, or schema change.
 
 The release contains only:
 
@@ -14,7 +14,7 @@ The release contains only:
 2. One bounded `23505` recovery update for concurrent first saves of challenge sections.
 3. Manual typing for the existing RPC and focused application/database/Preview regressions.
 
-Production remains on application commit `91cac6d` until this release is staged and explicitly promoted. This branch must not run a production deployment, Vercel alias change, linked database write, or migration operation.
+The release was merged through PR #4 as commit `264a435` (`Use pending invitation RPC and handle section conflicts (#4)`). It is deployed to production through Vercel deployment `dpl_Bfo7GChwmpZh2oUeYvC1pXJNZKc7` at immutable URL `https://noproblemo-4vprlluxd-no-problemo.vercel.app` and production domain `https://noproblemo.tech`.
 
 ## Pending Invitation Consumer
 
@@ -50,8 +50,73 @@ Local validation completed against only the local Supabase stack:
 - `npm run typecheck`, `npm run lint`, the production build, and `git diff --check` passed. The build used local Supabase configuration and required the documented sandbox escape for Turbopack's internal local port.
 - The local Supabase stack was stopped, and no matching container remained running.
 
-The exact pushed commit, Preview URL, disposable-account verification, cleanup result, and any unavoidable `CODEX-QA-` or blank-section history will be recorded in the final handoff after Preview verification completes.
+The production checks below are the durable closeout for the deployed application behavior and replace the earlier pending-deployment note.
 
-## Deployment Recommendation
+## Production Deployment
 
-Do not promote this release until all local validation, exact-commit Preview checks, and supported cleanup complete. No Supabase migration or remote database write is required for deployment because the RPC and unique index are already active in production.
+- `main` and `origin/main` both matched application commit `264a435`.
+- Vercel deployment `dpl_Bfo7GChwmpZh2oUeYvC1pXJNZKc7` reported `Ready` with target `production`.
+- `noproblemo.tech`, `www.noproblemo.tech`, and the immutable deployment URL returned the expected `/en` locale redirect.
+- Production aliases remained unchanged.
+- No Vercel error logs were found during or after verification.
+
+Result: **PRODUCTION RELEASE VERIFIED**
+
+## Production Behavior Verification
+
+Pending invitation behavior passed:
+
+- The pending invitee saw the real group name; `Unnamed group` was not shown when the RPC succeeded.
+- No owner ID or group description was exposed.
+- User C could not see User B's pending invitation.
+- Localized notification routing, accept, decline, and accepted-member group listing passed.
+
+Challenge section conflict behavior passed:
+
+- Both concurrent first-save callers succeeded, and exactly one row remained for the tested challenge ID and section key.
+- Two sequential saves persisted correctly.
+- The original empty content was restored.
+- No duplicate section keys or temporary content remained.
+- An existing empty challenge materialized eight unique empty section rows through normal first-save behavior. This is verification evidence for section materialization, not a duplicate-data defect.
+
+## Regression Verification
+
+The focused production regression covered and passed:
+
+- login, session persistence, logout, and authenticated redirects;
+- protected deep-link restoration;
+- group list and challenge workspace;
+- disabled/inert viewer controls and editor saving;
+- notification destinations; and
+- ordinary-user admin denial.
+
+This focused release verification does not claim that every application workflow, locale, device, or browser has been verified. Deliberately configured administrator-positive testing, OAuth provider setup, health endpoint operational verification, support mailbox setup, fluent translation review, and targeted device/browser review remain separate operational work.
+
+## Cleanup And Immutable History
+
+Mutable test cleanup completed with:
+
+- no pending invitations;
+- no disposable non-owner memberships;
+- no temporary challenge links;
+- no temporary profile names;
+- no visible test messages;
+- no friendship or friend-request state;
+- no new disposable groups or challenges; and
+- no temporary section content.
+
+Expected immutable history remained:
+
+- 2 accepted invitation records;
+- 1 declined invitation record;
+- 3 invitation notifications;
+- 6 group activity records; and
+- no soft-deleted messages.
+
+## Production Safety Record
+
+- No migration was added or applied; all six migrations predated PR #4.
+- No direct production SQL was used.
+- No deployment, alias, environment, or configuration change occurred during verification.
+- All database mutations used supported application actions.
+- No reports, traces, screenshots, auth-state files, temporary scripts, or secret-value matches remained.

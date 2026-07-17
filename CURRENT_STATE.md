@@ -1,6 +1,6 @@
 # Current State
 
-Last updated: 2026-07-16
+Last updated: 2026-07-17
 
 Future Codex sessions must read this file first, then `docs/CODEX_PROJECT_MAP.md`, before changing files.
 
@@ -22,7 +22,7 @@ NoProblemo has completed:
 
 The focused application repair release was merged through PR #2, recorded in `main` as `91cac6d`, deployed and promoted to `noproblemo.tech`, and production-verified with three disposable accounts. Payments, AI, email automation, Resend, and Vercel Cron remain future phases.
 
-The production Supabase security migration `20260716120000_full_application_audit_security_repairs.sql` was manually applied and verified on 2026-07-16. Its source SHA-256 is `a3a4c87061a845a04529e3cc0c328df386ad79b49de1b31b90559648fcd05c53`; all six migrations align locally and remotely, and the post-apply linked dry run reports no pending migrations. The production application remains on `91cac6d`. Recording this already-applied migration does not deploy application code or apply another database change. See `docs/qa/SECURITY_MIGRATION_PRODUCTION_VERIFICATION.md`.
+The production Supabase security migration `20260716120000_full_application_audit_security_repairs.sql` was manually applied and verified on 2026-07-16. Its source SHA-256 is `a3a4c87061a845a04529e3cc0c328df386ad79b49de1b31b90559648fcd05c53`; all six migrations align locally and remotely, and the post-apply linked dry run reports no pending migrations. All six migrations were applied before the later PR #4 application release, and PR #4 contained no migration. See `docs/qa/SECURITY_MIGRATION_PRODUCTION_VERIFICATION.md`.
 
 A focused auth/settings verification fix was completed after Phase 11 to improve email-confirmation fallback handling, password recovery, route language switching, and dashboard usability.
 
@@ -30,9 +30,9 @@ A focused Supabase keepalive health endpoint is implemented locally. Its migrati
 
 The group-creation hotfix was initially isolated and verified on a non-production Vercel Preview on 2026-07-16. Its generated-ID, separate owner verification, and trigger-owned membership behavior is now present in production application commit `91cac6d`, where group creation and role boundaries passed three-account verification. No database migration was required. See `docs/qa/GROUP_CREATION_HOTFIX.md`.
 
-The production application repair release on `91cac6d` was verified with the three disposable accounts. Authenticated redirects and protected deep-link restoration, pending/duplicate-submit protection, trigger-owned friend and group-invitation acceptance, safe notification destinations, inert/native-disabled viewer controls, editor persistence with RLS denial of viewer mutation, group creation and role boundaries, message and notification privacy, and ordinary-user admin denial all passed. The pending-invitation RPC consumer and deterministic retry handling for challenge-section `23505` first-save conflicts remain separate, undeployed application follow-ups. See `docs/qa/PRODUCTION_UX_REPAIRS.md`.
+The production application repair release on `91cac6d` was verified with the three disposable accounts. Authenticated redirects and protected deep-link restoration, pending/duplicate-submit protection, trigger-owned friend and group-invitation acceptance, safe notification destinations, inert/native-disabled viewer controls, editor persistence with RLS denial of viewer mutation, group creation and role boundaries, message and notification privacy, and ordinary-user admin denial all passed. See `docs/qa/PRODUCTION_UX_REPAIRS.md`.
 
-The focused pending-invitation and challenge-section follow-up is implemented on `fix/pending-invite-section-retry`. It consumes the already-applied `pending_group_invitations()` RPC and adds one verified exact-key update after a first-insert `23505`; it includes no migration. The localized `Unnamed group` and privacy-safe section-save fallbacks remain. Local validation, exact-commit Preview verification, and production deployment are recorded separately; production deployment remains pending. See `docs/qa/PENDING_INVITATION_SECTION_SAVE_FOLLOWUP.md`.
+The focused pending-invitation RPC consumer and bounded challenge-section conflict recovery were merged through PR #4 in application commit `264a435`, deployed to production, and verified on 2026-07-17. Vercel deployment `dpl_Bfo7GChwmpZh2oUeYvC1pXJNZKc7` was `Ready` with target `production`; the production domains and immutable deployment URL redirected to `/en` as expected, aliases remained unchanged, and no Vercel errors were found. Pending-invitation identity/privacy, accept/decline and accepted-member listing, concurrent and sequential section saves, regression coverage, and supported cleanup passed. PR #4 contained no migration because all six Supabase migrations, including the RPC and uniqueness guarantee it consumes, were already applied. See `docs/qa/PENDING_INVITATION_SECTION_SAVE_FOLLOWUP.md`.
 
 ## Already Implemented
 
@@ -197,7 +197,6 @@ The focused pending-invitation and challenge-section follow-up is implemented on
 
 - All six migrations are applied and aligned in production; no production migration is pending. Future schema changes must preserve that alignment and use a separately approved workflow.
 - The health-check endpoint still needs Vercel Production secret configuration and endpoint production verification; its database migration is already applied.
-- The production application remains on `91cac6d`. The pending-invitation consumer and challenge-section `23505` recovery are implemented on an isolated release branch, include no migration, and remain pending exact-commit Preview verification and staged production deployment.
 - Ordinary-user authentication, collaboration, viewer/editor authorization, message/notification privacy, and admin denial were production-verified with three disposable accounts. Deliberately configured administrator-positive testing of admin routes, RPCs, audit-log RLS, and profile-role hardening remains outstanding.
 - Supabase CLI 2.109.0 is installed. On 2026-07-16, local database lint passed, linked history showed all six migrations aligned, and the linked push dry run reported the remote database up to date; no remote write was run.
 - Remaining operational verification includes the health endpoint secret/deployment, Google/Apple OAuth provider setup, and the support mailbox or alias.
@@ -221,7 +220,7 @@ The focused pending-invitation and challenge-section follow-up is implemented on
 
 - Future agents must not add payments, AI, email automation, Resend, or Vercel Cron before explicitly scoped.
 - Future agents might use service role keys in frontend code; do not do this.
-- The production-applied security migration has focused local pgTAP coverage and passed production verification. The pending-invitation consumer and challenge-section `23505` retry will require focused regression checks when released; no follow-up migration is pending.
+- The production-applied security migration has focused local pgTAP coverage and passed production verification. Its pending-invitation consumer and bounded challenge-section `23505` recovery also passed focused production verification in application commit `264a435`; no follow-up migration is pending.
 - User-generated problem content may be sensitive; privacy must be designed into auth and dashboard phases.
 - Feature expansion could overload the minimal UI if not kept incremental.
 
@@ -231,7 +230,6 @@ Focused application and operational follow-ups.
 
 Recommended scope:
 
-- Stage the focused pending-invitation and challenge-section follow-up only after its exact-commit Preview and cleanup record passes.
 - Run deliberately configured administrator-positive verification without weakening ordinary-user denial.
 - Complete Google/Apple OAuth provider setup, health endpoint secret/deployment verification, and support mailbox or alias setup.
 - Obtain fluent human translation review and run targeted locale/device checks without claiming every possible production workflow is covered.

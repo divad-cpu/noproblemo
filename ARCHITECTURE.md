@@ -165,12 +165,12 @@ Current data flow:
 - Minimal create challenge creates a private draft `challenges` row.
 - Profile settings update `profiles.display_name` and `profiles.preferred_locale`.
 - Workspace saves challenge title, short description, and status to `challenges`.
-- Workspace saves structured text to `challenge_sections`, creating missing section rows when needed.
+- Workspace saves structured text to `challenge_sections`, creating missing section rows when needed and using one bounded exact-key recovery update when concurrent first inserts conflict with the existing uniqueness guarantee.
 - Workspace creates, edits, and deletes possible solutions in `challenge_solutions`.
 - Workspace creates, edits, completes, and deletes tasks/actions in `challenge_tasks`.
 - Markdown export is generated client-side from server-fetched challenge data.
 - Friends page reads friend requests and friendships involving the authenticated user, and uses a limited profile search RPC for display-name lookup.
-- Groups pages read only groups the authenticated user belongs to, pending invitations involving the user, and linked group challenges visible through RLS.
+- Groups pages read only groups the authenticated user belongs to and linked group challenges visible through RLS; pending invitation identity comes from the caller-scoped `pending_group_invitations()` RPC without granting pending invitees base `groups` visibility.
 - Group challenge linking marks a linked challenge with `visibility = 'group'` and records the explicit link in `group_challenges`.
 - Group members can open linked challenges through the existing workspace route when RLS permits access.
 - Group detail reads and writes `messages` scoped to the current group.
@@ -184,7 +184,6 @@ Current data flow:
 
 Planned data flow:
 
-- Application consumption of `pending_group_invitations()` and deterministic retry handling for challenge-section `23505` first-save conflicts.
 - Deliberately configured administrator-positive testing plus remaining OAuth, health endpoint, support-mailbox, translation, and release-specific operational verification.
 - Later: admin actions beyond read-only MVP and optional realtime messaging.
 

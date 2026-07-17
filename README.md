@@ -4,7 +4,7 @@ NoProblemo is a minimal, secure, multilingual problem-solving workspace for turn
 
 ## Current Phase
 
-Phase 11 is complete. The application repair release was merged through PR #2 as `91cac6d`, deployed and promoted to `noproblemo.tech`, and production-verified with three disposable accounts. All six Supabase migrations are applied and aligned locally/remotely; the 2026-07-16 security repair passed production verification. Future remote migrations or production-service changes still require explicit approval.
+Phase 11 is complete. The application repair release was merged through PR #2 as `91cac6d`, and its pending-invitation RPC consumer and bounded challenge-section conflict follow-ups were merged through PR #4 as `264a435`. Commit `264a435` is deployed and production-verified at `noproblemo.tech` through Vercel deployment `dpl_Bfo7GChwmpZh2oUeYvC1pXJNZKc7`. All six Supabase migrations were already applied and aligned locally/remotely before PR #4, which contained no migration. Future remote migrations or production-service changes still require explicit approval.
 
 Not included in the current MVP:
 
@@ -259,7 +259,7 @@ Production verification with three disposable accounts covered authenticated red
 
 ## Known Limitations
 
-- The six-migration history and ordinary-user collaboration authorization are production-verified; the pending-invitation RPC consumer and challenge-section `23505` retry remain separate application follow-ups.
+- The six-migration history, pending-invitation RPC consumer, bounded challenge-section `23505` recovery, and ordinary-user collaboration authorization are production-verified. This does not claim coverage of every application workflow, locale, device, or browser.
 - Google and Apple OAuth require provider setup.
 - Realtime subscriptions are not implemented.
 - Admin user management is read-only.

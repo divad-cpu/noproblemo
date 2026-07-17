@@ -26,7 +26,7 @@ Explicitly excluded:
 - Challenge-section uniqueness, activity/helper hardening, admin-role work, deletion features, autosave, translation rewrites, and unrelated audit repairs.
 - Payments, AI, Resend, email automation, and Cron.
 
-Pending invitees may continue to see `Unnamed group` until the separately reviewed security migration is approved and applied.
+At this release boundary, pending invitees could continue to see `Unnamed group` until the separately reviewed security migration and application consumer were released. That follow-up was subsequently completed and production-verified in PR #4 application commit `264a435`; see `docs/qa/PENDING_INVITATION_SECTION_SAVE_FOLLOWUP.md`.
 
 ## Changed files
 
