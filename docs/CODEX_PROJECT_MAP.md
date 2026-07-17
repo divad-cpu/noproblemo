@@ -53,7 +53,9 @@ Implemented:
 - Phase 8 migration for friends, groups, profile search, group challenge links, and group-aware RLS.
 - Phase 9 migration for messages, notifications, activity events, triggers, and RLS.
 - Production-aligned security migration for least-privilege table/function access, a caller-scoped pending-invitation RPC, ownership protections, and challenge-section uniqueness.
+- Production-applied cancellation-authorization migration for pending-only group-invitation transitions and immutable terminal states.
 - Focused pgTAP regression coverage for the production-applied security migration.
+- Focused cancellation database coverage passed 10/10 assertions, with 45/45 related regressions and 55/55 combined assertions.
 - Supabase client/server helper scaffolding.
 - Manual database types.
 
@@ -108,7 +110,7 @@ Current:
 - Supabase migration: `supabase/migrations/20260704090000_phase10_admin_settings_logs.sql`.
 - Supabase migration: `supabase/migrations/20260714120000_supabase_health_check.sql`.
 - Supabase migration: `supabase/migrations/20260716120000_full_application_audit_security_repairs.sql`.
-- Locally prepared Supabase migration: `supabase/migrations/20260717120000_group_invitation_cancellation_authorization.sql` (not applied remotely).
+- Production-applied Supabase migration: `supabase/migrations/20260717120000_group_invitation_cancellation_authorization.sql`.
 - Database regression suite: `supabase/tests/database/security_migration_production_alignment.test.sql`.
 - Focused cancellation regression suite: `supabase/tests/database/group_invitation_cancellation_authorization.test.sql`.
 - Typed helpers: `lib/supabase/`.
@@ -121,6 +123,8 @@ Current:
 - Friend requests use `friend_requests`.
 - Friendships use canonical rows in `friendships`.
 - Groups use `groups`, `group_members`, and `group_invitations`.
+- The production `group_invitations_update_related` policy permits only pending-row transitions: invitees may accept/decline, and original inviters or accepted owners/admins may cancel. Accepted, declined, and canceled rows are immutable.
+- PR #6 contains the matching server-action and group-detail UI implementation, but it remains open, unmerged, and not production-deployed.
 - Group challenge access uses explicit `group_challenges` links.
 - Profile discovery uses authenticated RPC `search_profiles(search_term)` and exposes only `id`, `display_name`, and `avatar_url`.
 - Group and challenge messages use `messages`.
@@ -173,7 +177,9 @@ Current:
 - Phase 9 migration enables RLS for messages, notifications, and activity events.
 - Friendships alone do not grant challenge access.
 - Group invitation acceptance is required before membership access is granted.
-- Pending group invitations may be canceled by the original inviter or a currently accepted owner/admin. Accept/decline remains invitee-only, and pending-only mutation guards preserve accepted, declined, and canceled terminal states.
+- **VERIFIED — database policy:** pending group invitations may be canceled by the original inviter or a currently accepted owner/admin. Accept/decline remains invitee-only, and the production pending-only policy preserves accepted, declined, and canceled terminal states.
+- **PENDING DEPLOYMENT — application code:** PR #6 contains the matching server-action authorization, pending-only update verification, and disabled-while-submitting manager UI, but is not merged or production-deployed.
+- **DOCUMENTED BUT NOT YET APPLICATION-VERIFIED:** focused Playwright discovery passed, but runtime and post-deployment production verification remain pending until an isolated six-account environment and the deployed application change are available.
 - Group challenge viewers receive an inert, native-disabled read-only workspace; RLS remains authoritative and denies viewer mutations.
 - Group messages are visible only to group members.
 - Challenge messages are visible only to users with challenge read access.
@@ -184,7 +190,7 @@ Current:
 - `admin_audit_log` is readable only by admins and has no authenticated write grant.
 - Normal users cannot self-promote through profile settings or authenticated self role updates.
 - The keepalive endpoint uses a separate server-only Bearer secret and anon RPC credentials without cookies or a user session.
-- The original six migrations align with the production migration history. The 2026-07-16 security migration passed production verification and focused local regression coverage; the new cancellation-authorization migration remains local and unapplied.
+- Exactly seven migrations align with production history. Migration `20260717120000` and its resulting policy are production-verified; local database regression coverage passed 55/55 combined assertions without persistent fixture or runtime state.
 - `lib/supabase/admin.ts` is a server-only service-role helper used only for current-user account deletion. It must never be imported into Client Components.
 
 Planned:
@@ -213,6 +219,12 @@ See `SECURITY.md` before implementing auth, database writes, or messaging.
 8. Simple messaging: implemented and privacy production-verified.
 9. Basic admin/settings: implemented; ordinary-user denial is production-verified and deliberately configured administrator-positive testing remains.
 10. Deployment: application commit `264a435` is deployed and production-verified at `noproblemo.tech` through Vercel deployment `dpl_Bfo7GChwmpZh2oUeYvC1pXJNZKc7`; targeted operational verification outside this release remains.
+
+Current invitation-cancellation release status:
+
+- **VERIFIED:** migration `20260717120000` is production-applied, its policy matches the approved authorization matrix, and all seven local/remote migration versions align.
+- **PENDING DEPLOYMENT:** the PR #6 server-action/UI implementation remains open and unmerged and has not been deployed to production.
+- **DOCUMENTED BUT NOT YET APPLICATION-VERIFIED:** focused application-level production verification remains pending; Playwright runtime was not executed and no broader group workflow retest is claimed.
 
 ## Future Feature Map
 

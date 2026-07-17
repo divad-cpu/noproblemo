@@ -8,6 +8,10 @@ The application repair release was merged through PR #2 as `91cac6d`, deployed a
 
 PR #4 added the pending-invitation RPC consumer and bounded exact-key challenge-section conflict recovery without a migration. Application commit `264a435` was deployed and production-verified on 2026-07-17 through Vercel deployment `dpl_Bfo7GChwmpZh2oUeYvC1pXJNZKc7`. Verification confirmed pending-invitee identity privacy and caller isolation, deterministic concurrent and sequential section saves with one row per challenge/section key, ordinary-user admin denial, and the existing authentication, collaboration, viewer/editor, and notification regression boundaries. All six Supabase migrations had already been applied before this application release; this focused evidence does not claim every workflow or locale was verified.
 
+**VERIFIED — database policy.** Migration `20260717120000_group_invitation_cancellation_authorization.sql` was subsequently applied as the only pending migration and inspected on production project `jxjoyugkozbldwimqjuw`. Local and production histories now align across seven versions. The resulting `group_invitations_update_related` policy matches the approved pending-only authorization matrix and makes accepted, declined, and canceled invitation states immutable. The migration used no service-role access, required no history repair, and did not directly mutate application records.
+
+**PENDING DEPLOYMENT — application code.** The matching server-action and UI repair remains on open, unmerged PR #6 and has not been production-deployed. Focused application-level production verification therefore remains pending.
+
 Guest challenge drafts remain in browser localStorage until an authenticated user explicitly imports them from the dashboard.
 
 ## Authentication Security
@@ -52,14 +56,14 @@ Current access model:
 - Users can read, create, update, and delete challenge solutions only through a parent challenge they own.
 - Users can read, create, update, and delete challenge tasks only through a parent challenge they own.
 
-These policies and the later security-repair migration are applied in production. The six-migration history aligns locally and remotely, and focused production verification passed; broader application workflows remain subject to release-specific testing.
+These policies and the later security-repair and cancellation-authorization migrations are applied in production. The seven-migration history aligns locally and remotely, and the focused database verification passed; broader application workflows remain subject to release-specific testing.
 
 ## Phase 8 Friends And Groups Security
 
 Migration:
 
 - `supabase/migrations/20260703210000_phase8_friends_groups.sql`
-- `supabase/migrations/20260717120000_group_invitation_cancellation_authorization.sql` (locally prepared; not applied to production)
+- `supabase/migrations/20260717120000_group_invitation_cancellation_authorization.sql` (production-applied and policy-verified)
 
 RLS is enabled on:
 
@@ -81,7 +85,7 @@ Current access model:
 - Users can see only groups they belong to.
 - Group owners/admins can manage group settings, regular members, and invitations.
 - A pending group invitation may be canceled only by its original inviter or a currently accepted group owner/admin. Ordinary members, viewers, unrelated authenticated users, invitees acting through cancellation, and unauthenticated users have no cancellation authority.
-- Group invitation accept/decline remains invitee-only. Accepted, declined, and already canceled rows are immutable through the pending-only update policy and the matching server-action filter.
+- Group invitation accept/decline remains invitee-only. Accepted, declined, and already canceled rows are immutable at the database boundary through the production-applied pending-only update policy. PR #6 adds the matching server-action filter but remains unmerged and undeployed.
 - Invited users must accept before membership is created.
 - Accepting a pending group invitation creates the group membership through a database trigger.
 - Pending invitations do not grant group access.
@@ -96,7 +100,7 @@ Profile discovery uses the authenticated `search_profiles(search_term)` RPC and 
 
 Production verification confirmed that viewer mutation controls are inert and native-disabled, editor changes persist, and RLS remains authoritative by denying viewer mutation attempts.
 
-The cancellation repair uses the authenticated anon/session client only; it does not use service-role access. Cancellation remains a status update with `responded_at`, not a row deletion. Existing notification triggers still notify only invitation creation and accepted/declined responses, and cancellation adds no activity event. Focused local pgTAP execution remains blocked until an already-running disposable local Supabase stack is available; the new migration has not been applied to production.
+The cancellation repair uses the authenticated anon/session client only; it does not use service-role access. Cancellation remains a status update with `responded_at`, not a row deletion. Existing notification triggers still notify only invitation creation and accepted/declined responses, and cancellation adds no activity event. Local database validation passed 10/10 focused pgTAP assertions plus 45/45 related regressions, for 55/55 combined assertions; all SQL tests rolled back and left no fixture or Docker/runtime state. Structural security tests passed 4/4. Focused Playwright discovery passed, but runtime execution remains blocked pending an isolated local/Preview Supabase environment with six disposable accounts. The production database policy is verified, while application deployment and focused application-level production verification remain separate next steps.
 
 ## Phase 9 Messaging, Notifications And Activity Security
 
@@ -199,7 +203,7 @@ Not verified during the historical Phase 11 review:
 - Supabase Auth provider and redirect behavior in production.
 - Vercel production environment and domain configuration.
 
-Those Phase 11 gaps were subsequently narrowed by production verification of ordinary-user Auth/RLS/RPC behavior and the aligned six-migration chain. Deliberately configured administrator-positive testing, Google/Apple provider setup, health endpoint secret/deployment verification, support mailbox setup, and fluent translation review remain current gaps.
+Those Phase 11 gaps were subsequently narrowed by production verification of ordinary-user Auth/RLS/RPC behavior and the now-aligned seven-migration chain. The cancellation policy is database-verified, but its PR #6 application flow remains pending deployment and focused application-level production verification. Deliberately configured administrator-positive testing, Google/Apple provider setup, health endpoint secret/deployment verification, support mailbox setup, and fluent translation review remain current gaps.
 
 ## User Ownership Rules
 
