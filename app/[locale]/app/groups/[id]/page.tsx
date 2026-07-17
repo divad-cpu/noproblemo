@@ -4,6 +4,7 @@ import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { Database, GroupRole } from "@/lib/supabase/types";
+import { PendingSubmitButton } from "../../../_components/pending-submit-button";
 import {
   inviteUserToGroup,
   linkChallengeToGroup,
@@ -470,9 +471,11 @@ export default async function GroupDetailPage({
                     <input type="hidden" name="invitationId" value={invitation.id} />
                     <input type="hidden" name="response" value="canceled" />
                     <input type="hidden" name="returnTo" value="detail" />
-                    <button className="text-sm font-semibold text-[#7a2f1d] underline-offset-4 hover:underline">
-                      {t("invitations.cancel")}
-                    </button>
+                    <PendingSubmitButton
+                      idleLabel={t("invitations.cancel")}
+                      pendingLabel={`${t("invitations.cancel")}…`}
+                      className="text-sm font-semibold text-[#7a2f1d] underline-offset-4 hover:underline disabled:cursor-not-allowed disabled:text-[#8b897f]"
+                    />
                   </form>
                 </div>
               ))

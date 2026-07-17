@@ -1063,23 +1063,45 @@ export async function respondGroupInvitation(formData: FormData) {
     redirect(`/${locale}/app/groups?error=group-invitation-response-failed`);
   }
 
+  let canCancel = false;
+  if (response === "canceled") {
+    if (invitation.inviter_id === user.id) {
+      canCancel = true;
+    } else {
+      const { data: managerMembership, error: membershipError } = await supabase
+        .from("group_members")
+        .select("role")
+        .eq("group_id", invitation.group_id)
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+      canCancel =
+        !membershipError &&
+        !!managerMembership &&
+        ["owner", "admin"].includes(managerMembership.role);
+    }
+  }
+
   const canRespond =
-    (response === "canceled" && invitation.inviter_id === user.id) ||
+    (response === "canceled" && canCancel) ||
     (["accepted", "declined"].includes(response) && invitation.invitee_id === user.id);
 
   if (!canRespond) {
     redirect(`/${locale}/app/groups?error=group-invitation-response-failed`);
   }
 
-  const { error: updateError } = await supabase
+  const { data: updatedInvitation, error: updateError } = await supabase
     .from("group_invitations")
     .update({
       status: response as "accepted" | "declined" | "canceled",
       responded_at: new Date().toISOString(),
     })
-    .eq("id", invitation.id);
+    .eq("id", invitation.id)
+    .eq("status", "pending")
+    .select("id, status")
+    .maybeSingle();
 
-  if (updateError) {
+  if (updateError || updatedInvitation?.status !== response) {
     redirect(`/${locale}/app/groups?error=group-invitation-response-failed`);
   }
 

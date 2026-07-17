@@ -34,6 +34,8 @@ The production application repair release on `91cac6d` was verified with the thr
 
 The focused pending-invitation RPC consumer and bounded challenge-section conflict recovery were merged through PR #4 in application commit `264a435`, deployed to production, and verified on 2026-07-17. Vercel deployment `dpl_Bfo7GChwmpZh2oUeYvC1pXJNZKc7` was `Ready` with target `production`; the production domains and immutable deployment URL redirected to `/en` as expected, aliases remained unchanged, and no Vercel errors were found. Pending-invitation identity/privacy, accept/decline and accepted-member listing, concurrent and sequential section saves, regression coverage, and supported cleanup passed. PR #4 contained no migration because all six Supabase migrations, including the RPC and uniqueness guarantee it consumes, were already applied. See `docs/qa/PENDING_INVITATION_SECTION_SAVE_FOLLOWUP.md`.
 
+A focused group-invitation cancellation repair is prepared on `fix/group-invitation-cancellation`. Pending invitations may be canceled by their original inviter or a currently accepted group owner/admin; accept and decline remain invitee-only. The server action checks the exact pending row, verifies manager membership explicitly, performs a pending-only update, and verifies the returned final status. The group-detail manager UI retains its cancellation control and now disables it while submission is pending. Static inspection also found that the existing RLS update policy did not restrict the old row to `pending`, so additive migration `20260717120000_group_invitation_cancellation_authorization.sql` is required to make accepted, declined, and canceled rows immutable at the database boundary. This migration has not been applied to any local or remote database.
+
 ## Already Implemented
 
 - Next.js 16 App Router
@@ -91,6 +93,7 @@ The focused pending-invitation RPC consumer and bounded challenge-section confli
 - Authenticated pending-invitation UI consumption of `pending_group_invitations()` without pending-invitee base `groups` access
 - One bounded, exact-key challenge-section recovery update after a concurrent first-insert `23505`, with returned-row verification
 - Focused local pgTAP regression coverage for the production-aligned security migration
+- Focused structural, pgTAP, and explicitly gated Playwright coverage for group-invitation cancellation authorization
 - Notification/activity triggers for friend requests, group invitations, group/member events, group challenge links, and messages
 - Phase 10 local migration for admin helper functions, admin audit log, admin-only RPCs, profile role hardening, and admin profile read policy
 - Google and Apple OAuth start actions remain prepared for future use, but visible login/signup UI currently shows email auth only.
@@ -126,7 +129,7 @@ The focused pending-invitation RPC consumer and bounded challenge-section confli
 - Admin audit logging storage exists in `admin_audit_log`; Phase 10 has no sensitive admin mutations to log yet.
 - Phase 11 reviewed migrations and documented required manual Supabase/Vercel production checks, but did not perform live Supabase verification.
 - Google and Apple OAuth actions exist for future use, but buttons are temporarily hidden from the public auth UI while email login/signup is the active method.
-- All six Supabase migrations align with the live production migration history. The 2026-07-16 security migration passed production verification; broader application workflow verification remains tracked separately.
+- The original six Supabase migrations align with the live production migration history. The 2026-07-16 security migration passed production verification; the new local cancellation-authorization migration remains unapplied, and broader application workflow verification remains tracked separately.
 - Supabase helpers are used by auth actions, callback/logout handlers, auth-aware landing links, and the protected app layout.
 - Deployment works on Vercel, but production hardening is ongoing.
 - Translations currently include complete UI keys, but non-English content quality should be reviewed by fluent speakers before launch.
@@ -181,7 +184,9 @@ The focused pending-invitation RPC consumer and bounded challenge-section confli
 - `supabase/migrations/20260704090000_phase10_admin_settings_logs.sql`: Phase 10 admin helpers, audit log, admin RPCs, and profile role hardening migration.
 - `supabase/migrations/20260714120000_supabase_health_check.sql`: minimal Supabase reachability RPC with invoker security and anon-only execution.
 - `supabase/migrations/20260716120000_full_application_audit_security_repairs.sql`: byte-identical record of the production-applied security migration.
+- `supabase/migrations/20260717120000_group_invitation_cancellation_authorization.sql`: pending-only group-invitation transition policy; locally prepared and not applied remotely.
 - `supabase/tests/database/security_migration_production_alignment.test.sql`: focused pgTAP regression coverage for the production-applied security guarantees.
+- `supabase/tests/database/group_invitation_cancellation_authorization.test.sql`: transaction-wrapped role and terminal-state cancellation policy coverage.
 - `docs/qa/SECURITY_MIGRATION_PRODUCTION_VERIFICATION.md`: durable production application, checksum, history-alignment, and follow-up record.
 - `supabase/config.toml`: Supabase CLI config.
 - `supabase/seed.sql`: empty seed file.
@@ -195,7 +200,7 @@ The focused pending-invitation RPC consumer and bounded challenge-section confli
 
 ## Known Issues
 
-- All six migrations are applied and aligned in production; no production migration is pending. Future schema changes must preserve that alignment and use a separately approved workflow.
+- The original six migrations remain applied and aligned in production. The new local cancellation-authorization migration is intentionally unapplied and requires a separate approved database workflow before release.
 - The health-check endpoint still needs Vercel Production secret configuration and endpoint production verification; its database migration is already applied.
 - Ordinary-user authentication, collaboration, viewer/editor authorization, message/notification privacy, and admin denial were production-verified with three disposable accounts. Deliberately configured administrator-positive testing of admin routes, RPCs, audit-log RLS, and profile-role hardening remains outstanding.
 - Supabase CLI 2.109.0 is installed. On 2026-07-16, local database lint passed, linked history showed all six migrations aligned, and the linked push dry run reported the remote database up to date; no remote write was run.
@@ -220,7 +225,7 @@ The focused pending-invitation RPC consumer and bounded challenge-section confli
 
 - Future agents must not add payments, AI, email automation, Resend, or Vercel Cron before explicitly scoped.
 - Future agents might use service role keys in frontend code; do not do this.
-- The production-applied security migration has focused local pgTAP coverage and passed production verification. Its pending-invitation consumer and bounded challenge-section `23505` recovery also passed focused production verification in application commit `264a435`; no follow-up migration is pending.
+- The production-applied security migration has focused local pgTAP coverage and passed production verification. Its pending-invitation consumer and bounded challenge-section `23505` recovery also passed focused production verification in application commit `264a435`. The new cancellation-authorization migration remains locally prepared and unapplied.
 - User-generated problem content may be sensitive; privacy must be designed into auth and dashboard phases.
 - Feature expansion could overload the minimal UI if not kept incremental.
 
@@ -246,6 +251,17 @@ npm run lint
 npm run typecheck
 npm run build
 ```
+
+Validation for the focused group-invitation cancellation repair on 2026-07-17:
+
+- `git diff --check`: passed.
+- `npm run lint`: passed.
+- `npm run typecheck`: passed.
+- `npm run test:security`: passed, including the new focused structural suite and the existing acceptance and bounded `23505` recovery checks.
+- `npm run build`: passed with non-secret localhost Supabase placeholders after the sandboxed attempt was unable to bind Turbopack's internal port and the first unrestricted attempt lacked public Supabase build variables.
+- Focused Playwright discovery (`--list`): passed. Runtime execution is blocked because no explicitly configured isolated local/Preview URL and six disposable accounts are available; the test rejects `noproblemo.tech` and requires an explicit gate.
+- Focused pgTAP runtime: blocked because no local Supabase database container is running. No database was started, reset, linked, or modified.
+- No production application, database record, migration history, environment file, deployment, or external service was modified.
 
 Validation for Phase 4:
 

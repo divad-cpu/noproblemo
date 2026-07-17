@@ -59,6 +59,7 @@ These policies and the later security-repair migration are applied in production
 Migration:
 
 - `supabase/migrations/20260703210000_phase8_friends_groups.sql`
+- `supabase/migrations/20260717120000_group_invitation_cancellation_authorization.sql` (locally prepared; not applied to production)
 
 RLS is enabled on:
 
@@ -79,6 +80,8 @@ Current access model:
 - Friendship alone never grants access to private challenges.
 - Users can see only groups they belong to.
 - Group owners/admins can manage group settings, regular members, and invitations.
+- A pending group invitation may be canceled only by its original inviter or a currently accepted group owner/admin. Ordinary members, viewers, unrelated authenticated users, invitees acting through cancellation, and unauthenticated users have no cancellation authority.
+- Group invitation accept/decline remains invitee-only. Accepted, declined, and already canceled rows are immutable through the pending-only update policy and the matching server-action filter.
 - Invited users must accept before membership is created.
 - Accepting a pending group invitation creates the group membership through a database trigger.
 - Pending invitations do not grant group access.
@@ -92,6 +95,8 @@ Current access model:
 Profile discovery uses the authenticated `search_profiles(search_term)` RPC and returns only `id`, `display_name`, and `avatar_url`. It does not expose email addresses, `auth.users`, profile role, or support/private profile fields.
 
 Production verification confirmed that viewer mutation controls are inert and native-disabled, editor changes persist, and RLS remains authoritative by denying viewer mutation attempts.
+
+The cancellation repair uses the authenticated anon/session client only; it does not use service-role access. Cancellation remains a status update with `responded_at`, not a row deletion. Existing notification triggers still notify only invitation creation and accepted/declined responses, and cancellation adds no activity event. Focused local pgTAP execution remains blocked until an already-running disposable local Supabase stack is available; the new migration has not been applied to production.
 
 ## Phase 9 Messaging, Notifications And Activity Security
 

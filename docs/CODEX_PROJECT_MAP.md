@@ -108,7 +108,9 @@ Current:
 - Supabase migration: `supabase/migrations/20260704090000_phase10_admin_settings_logs.sql`.
 - Supabase migration: `supabase/migrations/20260714120000_supabase_health_check.sql`.
 - Supabase migration: `supabase/migrations/20260716120000_full_application_audit_security_repairs.sql`.
+- Locally prepared Supabase migration: `supabase/migrations/20260717120000_group_invitation_cancellation_authorization.sql` (not applied remotely).
 - Database regression suite: `supabase/tests/database/security_migration_production_alignment.test.sql`.
+- Focused cancellation regression suite: `supabase/tests/database/group_invitation_cancellation_authorization.test.sql`.
 - Typed helpers: `lib/supabase/`.
 - Dashboard reads/writes use the authenticated Supabase session and Phase 4 tables.
 - Guest import maps `problem`, `context`, `outcome`, `options`, and `nextStep` into `challenge_sections`.
@@ -171,6 +173,7 @@ Current:
 - Phase 9 migration enables RLS for messages, notifications, and activity events.
 - Friendships alone do not grant challenge access.
 - Group invitation acceptance is required before membership access is granted.
+- Pending group invitations may be canceled by the original inviter or a currently accepted owner/admin. Accept/decline remains invitee-only, and pending-only mutation guards preserve accepted, declined, and canceled terminal states.
 - Group challenge viewers receive an inert, native-disabled read-only workspace; RLS remains authoritative and denies viewer mutations.
 - Group messages are visible only to group members.
 - Challenge messages are visible only to users with challenge read access.
@@ -181,7 +184,7 @@ Current:
 - `admin_audit_log` is readable only by admins and has no authenticated write grant.
 - Normal users cannot self-promote through profile settings or authenticated self role updates.
 - The keepalive endpoint uses a separate server-only Bearer secret and anon RPC credentials without cookies or a user session.
-- All six migrations align with the production migration history. The 2026-07-16 security migration passed production verification and focused local regression coverage.
+- The original six migrations align with the production migration history. The 2026-07-16 security migration passed production verification and focused local regression coverage; the new cancellation-authorization migration remains local and unapplied.
 - `lib/supabase/admin.ts` is a server-only service-role helper used only for current-user account deletion. It must never be imported into Client Components.
 
 Planned:
