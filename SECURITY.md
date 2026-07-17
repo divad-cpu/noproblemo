@@ -6,6 +6,8 @@ Phase 11 completed an MVP polish, security, i18n/RTL, and deployment-readiness r
 
 The application repair release was merged through PR #2 as `91cac6d`, deployed and promoted to `noproblemo.tech`, and production-verified with three disposable ordinary-user accounts. Verified boundaries include authenticated redirects and protected deep links, pending-submit protection, trigger-owned friendship and group-membership acceptance, safe notification destinations, group creation and roles, editor persistence, RLS denial of viewer mutation, message/notification privacy, and ordinary-user admin denial. Deliberately configured administrator-positive testing and the OAuth, health-endpoint, support-mailbox, and translation/locale operational checks remain separate.
 
+PR #4 added the pending-invitation RPC consumer and bounded exact-key challenge-section conflict recovery without a migration. Application commit `264a435` was deployed and production-verified on 2026-07-17 through Vercel deployment `dpl_Bfo7GChwmpZh2oUeYvC1pXJNZKc7`. Verification confirmed pending-invitee identity privacy and caller isolation, deterministic concurrent and sequential section saves with one row per challenge/section key, ordinary-user admin denial, and the existing authentication, collaboration, viewer/editor, and notification regression boundaries. All six Supabase migrations had already been applied before this application release; this focused evidence does not claim every workflow or locale was verified.
+
 Guest challenge drafts remain in browser localStorage until an authenticated user explicitly imports them from the dashboard.
 
 ## Authentication Security

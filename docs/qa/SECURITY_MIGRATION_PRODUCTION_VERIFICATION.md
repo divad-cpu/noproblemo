@@ -2,7 +2,9 @@
 
 Date: 2026-07-16
 
-Status: **MIGRATION VERIFIED WITH FOLLOW-UP**
+Application follow-up closed: 2026-07-17
+
+Status: **MIGRATION VERIFIED — APPLICATION FOLLOW-UPS COMPLETED**
 
 ## Recorded Production State
 
@@ -43,16 +45,16 @@ The applied migration preserves these reviewed boundaries:
 - `git diff --check`, the focused secret-value scan, and the generated-artifact scan pass.
 - Production verification passed with the recorded result **MIGRATION VERIFIED WITH FOLLOW-UP**.
 
-## Application Boundary And Follow-ups
+## Application Boundary And Completed Follow-ups
 
-The production application remains on commit `91cac6d`. This source-alignment branch adds no application behavior and does not deploy.
+At the time of this migration verification, the production application was on commit `91cac6d`. This source-alignment branch added no application behavior and did not deploy.
 
-Two application changes remain deliberately separate:
+Two application changes were deliberately separate from the migration record:
 
 1. Update the pending-invitation UI to consume `pending_group_invitations()` and add only the corresponding generated/manual database typing needed by that consumer.
 2. Add a focused concurrent-save retry for challenge-section `23505` conflicts created by the new uniqueness guarantee.
 
-Neither follow-up is included in this branch. No pending-invitation UI, Supabase application types, challenge-save retry, auth, viewer/editor, notification, translation, or production harness code is changed here.
+Neither follow-up was included in this migration branch. They were subsequently merged through PR #4 in application commit `264a435`, which contained no migration, then deployed and production-verified through deployment `dpl_Bfo7GChwmpZh2oUeYvC1pXJNZKc7`. See `docs/qa/PENDING_INVITATION_SECTION_SAVE_FOLLOWUP.md` for the application release evidence.
 
 ## Remote Safety Record
 
