@@ -22,17 +22,23 @@ NoProblemo has completed:
 
 The focused application repair release was merged through PR #2, recorded in `main` as `91cac6d`, deployed and promoted to `noproblemo.tech`, and production-verified with three disposable accounts. Payments, AI, email automation, Resend, and Vercel Cron remain future phases.
 
-The production Supabase security migration `20260716120000_full_application_audit_security_repairs.sql` was manually applied and verified on 2026-07-16. Its source SHA-256 is `a3a4c87061a845a04529e3cc0c328df386ad79b49de1b31b90559648fcd05c53`; all six migrations align locally and remotely, and the post-apply linked dry run reports no pending migrations. All six migrations were applied before the later PR #4 application release, and PR #4 contained no migration. See `docs/qa/SECURITY_MIGRATION_PRODUCTION_VERIFICATION.md`.
+The production Supabase security migration `20260716120000_full_application_audit_security_repairs.sql` was manually applied and verified on 2026-07-16. Its source SHA-256 is `a3a4c87061a845a04529e3cc0c328df386ad79b49de1b31b90559648fcd05c53`; at that checkpoint, the then-current six migrations aligned locally and remotely, and the post-apply linked dry run reported no pending migrations. All six migrations were applied before the later PR #4 application release, and PR #4 contained no migration. See `docs/qa/SECURITY_MIGRATION_PRODUCTION_VERIFICATION.md`.
 
 A focused auth/settings verification fix was completed after Phase 11 to improve email-confirmation fallback handling, password recovery, route language switching, and dashboard usability.
 
-A focused Supabase keepalive health endpoint is implemented locally. Its migration is one of the six migrations now aligned with production; Vercel secret configuration, endpoint deployment, and endpoint production verification remain separate work.
+A focused Supabase keepalive health endpoint is implemented locally. Its migration is one of the seven migrations now aligned with production; Vercel secret configuration, endpoint deployment, and endpoint production verification remain separate work.
 
 The group-creation hotfix was initially isolated and verified on a non-production Vercel Preview on 2026-07-16. Its generated-ID, separate owner verification, and trigger-owned membership behavior is now present in production application commit `91cac6d`, where group creation and role boundaries passed three-account verification. No database migration was required. See `docs/qa/GROUP_CREATION_HOTFIX.md`.
 
 The production application repair release on `91cac6d` was verified with the three disposable accounts. Authenticated redirects and protected deep-link restoration, pending/duplicate-submit protection, trigger-owned friend and group-invitation acceptance, safe notification destinations, inert/native-disabled viewer controls, editor persistence with RLS denial of viewer mutation, group creation and role boundaries, message and notification privacy, and ordinary-user admin denial all passed. See `docs/qa/PRODUCTION_UX_REPAIRS.md`.
 
 The focused pending-invitation RPC consumer and bounded challenge-section conflict recovery were merged through PR #4 in application commit `264a435`, deployed to production, and verified on 2026-07-17. Vercel deployment `dpl_Bfo7GChwmpZh2oUeYvC1pXJNZKc7` was `Ready` with target `production`; the production domains and immutable deployment URL redirected to `/en` as expected, aliases remained unchanged, and no Vercel errors were found. Pending-invitation identity/privacy, accept/decline and accepted-member listing, concurrent and sequential section saves, regression coverage, and supported cleanup passed. PR #4 contained no migration because all six Supabase migrations, including the RPC and uniqueness guarantee it consumes, were already applied. See `docs/qa/PENDING_INVITATION_SECTION_SAVE_FOLLOWUP.md`.
+
+**VERIFIED — database policy.** Migration `20260717120000_group_invitation_cancellation_authorization.sql` was applied successfully as the only pending migration to production Supabase project `jxjoyugkozbldwimqjuw`. Its approved and applied SHA-256 is `fada70b50a2307bf1ca8dc0811bc92c99e7355d33b4cab5c6bb6c05b62538a01`. Local and production migration histories now align across exactly seven versions. Read-only post-apply policy inspection confirmed that only pending invitations are mutable: invitees may accept or decline, while original inviters and currently accepted owners/admins may cancel. Accepted, declined, and canceled invitations are immutable. No migration-history repair was used, no other migration remained pending, and the operation did not directly mutate application records.
+
+The complete seven-migration chain passed against a disposable local Docker Supabase stack. The focused cancellation pgTAP file passed 10/10 assertions, the three related database regressions passed 45/45, and the combined database result was 55/55. All SQL tests ran inside transactions and rolled back; no fixture data, Docker containers, volumes, networks, or generated runtime metadata remained. The structural security suite passed 4/4 and typecheck passed.
+
+**PENDING DEPLOYMENT — application code.** The matching server-action and group-detail UI implementation remains on open, unmerged PR #6 at commit `a15d14156767ed1ecdc5df4411147066c818cbaa`; it has not been deployed to production. Focused Playwright discovery passed, but runtime execution was not performed because no isolated local/Preview Supabase environment with six disposable accounts was configured. Focused application-level production verification remains pending until after a separately approved merge and deployment.
 
 ## Already Implemented
 
@@ -91,6 +97,8 @@ The focused pending-invitation RPC consumer and bounded challenge-section confli
 - Authenticated pending-invitation UI consumption of `pending_group_invitations()` without pending-invitee base `groups` access
 - One bounded, exact-key challenge-section recovery update after a concurrent first-insert `23505`, with returned-row verification
 - Focused local pgTAP regression coverage for the production-aligned security migration
+- Production-applied migration `20260717120000_group_invitation_cancellation_authorization.sql` for pending-only invitation transitions and immutable terminal states
+- Focused group-invitation cancellation coverage: 10/10 pgTAP assertions, 45/45 related database assertions, 4/4 structural security tests, and explicitly gated Playwright discovery without runtime execution
 - Notification/activity triggers for friend requests, group invitations, group/member events, group challenge links, and messages
 - Phase 10 local migration for admin helper functions, admin audit log, admin-only RPCs, profile role hardening, and admin profile read policy
 - Google and Apple OAuth start actions remain prepared for future use, but visible login/signup UI currently shows email auth only.
@@ -126,7 +134,7 @@ The focused pending-invitation RPC consumer and bounded challenge-section confli
 - Admin audit logging storage exists in `admin_audit_log`; Phase 10 has no sensitive admin mutations to log yet.
 - Phase 11 reviewed migrations and documented required manual Supabase/Vercel production checks, but did not perform live Supabase verification.
 - Google and Apple OAuth actions exist for future use, but buttons are temporarily hidden from the public auth UI while email login/signup is the active method.
-- All six Supabase migrations align with the live production migration history. The 2026-07-16 security migration passed production verification; broader application workflow verification remains tracked separately.
+- Seven Supabase migrations align with the live production migration history. The cancellation-authorization database policy is applied and verified; its matching PR #6 server-action/UI code remains unmerged and undeployed, and focused application-level production verification remains pending.
 - Supabase helpers are used by auth actions, callback/logout handlers, auth-aware landing links, and the protected app layout.
 - Deployment works on Vercel, but production hardening is ongoing.
 - Translations currently include complete UI keys, but non-English content quality should be reviewed by fluent speakers before launch.
@@ -181,7 +189,9 @@ The focused pending-invitation RPC consumer and bounded challenge-section confli
 - `supabase/migrations/20260704090000_phase10_admin_settings_logs.sql`: Phase 10 admin helpers, audit log, admin RPCs, and profile role hardening migration.
 - `supabase/migrations/20260714120000_supabase_health_check.sql`: minimal Supabase reachability RPC with invoker security and anon-only execution.
 - `supabase/migrations/20260716120000_full_application_audit_security_repairs.sql`: byte-identical record of the production-applied security migration.
+- `supabase/migrations/20260717120000_group_invitation_cancellation_authorization.sql`: production-applied and verified pending-only group-invitation transition policy; SHA-256 `fada70b50a2307bf1ca8dc0811bc92c99e7355d33b4cab5c6bb6c05b62538a01`.
 - `supabase/tests/database/security_migration_production_alignment.test.sql`: focused pgTAP regression coverage for the production-applied security guarantees.
+- `supabase/tests/database/group_invitation_cancellation_authorization.test.sql`: transaction-wrapped role and terminal-state cancellation policy coverage.
 - `docs/qa/SECURITY_MIGRATION_PRODUCTION_VERIFICATION.md`: durable production application, checksum, history-alignment, and follow-up record.
 - `supabase/config.toml`: Supabase CLI config.
 - `supabase/seed.sql`: empty seed file.
@@ -195,7 +205,7 @@ The focused pending-invitation RPC consumer and bounded challenge-section confli
 
 ## Known Issues
 
-- All six migrations are applied and aligned in production; no production migration is pending. Future schema changes must preserve that alignment and use a separately approved workflow.
+- Exactly seven migrations are applied and aligned locally and in production. The cancellation-authorization migration is database-verified; PR #6 application deployment and focused post-deployment application verification remain release work.
 - The health-check endpoint still needs Vercel Production secret configuration and endpoint production verification; its database migration is already applied.
 - Ordinary-user authentication, collaboration, viewer/editor authorization, message/notification privacy, and admin denial were production-verified with three disposable accounts. Deliberately configured administrator-positive testing of admin routes, RPCs, audit-log RLS, and profile-role hardening remains outstanding.
 - Supabase CLI 2.109.0 is installed. On 2026-07-16, local database lint passed, linked history showed all six migrations aligned, and the linked push dry run reported the remote database up to date; no remote write was run.
@@ -213,14 +223,13 @@ The focused pending-invitation RPC consumer and bounded challenge-section confli
 - Non-English translation quality still needs native review even though key parity is maintained.
 - Guest drafts are browser-local and can be lost if localStorage is cleared.
 - Non-English translations need human review.
-- Supabase `.temp` files exist from linking/local CLI state; do not print their contents.
 - `npm run build` may fail inside the sandbox because Turbopack needs to bind a local port. Rerun with approved escalation if that exact sandbox error occurs.
 
 ## Current Risks
 
 - Future agents must not add payments, AI, email automation, Resend, or Vercel Cron before explicitly scoped.
 - Future agents might use service role keys in frontend code; do not do this.
-- The production-applied security migration has focused local pgTAP coverage and passed production verification. Its pending-invitation consumer and bounded challenge-section `23505` recovery also passed focused production verification in application commit `264a435`; no follow-up migration is pending.
+- The cancellation-authorization database policy is production-applied and locally regression-tested, but the matching PR #6 server-action/UI change is not merged or deployed. Do not claim application-level production verification until the deployed flow is tested separately.
 - User-generated problem content may be sensitive; privacy must be designed into auth and dashboard phases.
 - Feature expansion could overload the minimal UI if not kept incremental.
 
@@ -230,6 +239,8 @@ Focused application and operational follow-ups.
 
 Recommended scope:
 
+- Complete final review of PR #6, then merge and deploy the application change only through a separately approved workflow.
+- After deployment, run focused application-level production verification of inviter and accepted owner/admin cancellation without claiming broader group-flow coverage.
 - Run deliberately configured administrator-positive verification without weakening ordinary-user denial.
 - Complete Google/Apple OAuth provider setup, health endpoint secret/deployment verification, and support mailbox or alias setup.
 - Obtain fluent human translation review and run targeted locale/device checks without claiming every possible production workflow is covered.
@@ -246,6 +257,18 @@ npm run lint
 npm run typecheck
 npm run build
 ```
+
+Validation for the focused group-invitation cancellation repair on 2026-07-17:
+
+- `git diff --check`: passed.
+- `npm run lint`: passed.
+- `npm run typecheck`: passed.
+- `npm run test:security`: passed, 4/4 test files, including the focused cancellation structural suite and the existing acceptance and bounded `23505` recovery checks.
+- `npm run build`: passed with non-secret localhost Supabase placeholders after the sandboxed attempt was unable to bind Turbopack's internal port and the first unrestricted attempt lacked public Supabase build variables.
+- Focused Playwright discovery (`--list`): passed. Runtime execution is blocked because no explicitly configured isolated local/Preview URL and six disposable accounts are available; the test rejects `noproblemo.tech` and requires an explicit gate.
+- Focused pgTAP runtime: passed 10/10; the three related database files passed 45/45, for 55/55 combined assertions against the complete seven-migration chain. Every SQL test rolled back, and no fixture data or local Docker/runtime resource remained.
+- Production database migration: `20260717120000` was applied as the only pending version and verified on project `jxjoyugkozbldwimqjuw`; all seven histories align and the migration checksum remains `fada70b50a2307bf1ca8dc0811bc92c99e7355d33b4cab5c6bb6c05b62538a01`.
+- No application record was directly mutated, no application deployment occurred, and PR #6 remains open and unmerged. Focused application-level production verification remains pending.
 
 Validation for Phase 4:
 
