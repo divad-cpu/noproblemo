@@ -112,8 +112,12 @@ Current:
 - Supabase migration: `supabase/migrations/20260714120000_supabase_health_check.sql`.
 - Supabase migration: `supabase/migrations/20260716120000_full_application_audit_security_repairs.sql`.
 - Production-applied Supabase migration: `supabase/migrations/20260717120000_group_invitation_cancellation_authorization.sql`.
+- Local-only pending Supabase migration: `supabase/migrations/20260722120000_fix_group_member_activity_actor.sql`.
 - Database regression suite: `supabase/tests/database/security_migration_production_alignment.test.sql`.
 - Focused cancellation regression suite: `supabase/tests/database/group_invitation_cancellation_authorization.test.sql`.
+- Focused account-deletion activity regression: `supabase/tests/database/account_deletion_group_member_activity.test.sql`.
+- Account lifecycle regression: `supabase/tests/database/account_deletion_lifecycle.test.sql`.
+- Local-only Auth Admin harness: `scripts/qa/verify-local-account-deletion.mjs`.
 - Typed helpers: `lib/supabase/`.
 - Dashboard reads/writes use the authenticated Supabase session and Phase 4 tables.
 - Guest import maps `problem`, `context`, `outcome`, `options`, and `nextStep` into `challenge_sections`.
@@ -186,12 +190,13 @@ Current:
 - Challenge messages are visible only to users with challenge read access.
 - Notifications are visible only to recipients.
 - Activity events are visible only through group/challenge access.
+- Group-member removal activity distinguishes the authenticated initiator from the removed subject. Manual manager removal uses the surviving `auth.uid()` actor; server-side account-deletion cascades use nullable system attribution. The summary remains generic and stores no subject email/profile metadata.
 - Admin pages require authenticated users with `profiles.role = 'admin'`.
 - Admin RPCs use `public.is_admin(auth.uid())`.
 - `admin_audit_log` is readable only by admins and has no authenticated write grant.
 - Normal users cannot self-promote through profile settings or authenticated self role updates.
 - The keepalive endpoint uses a separate server-only Bearer secret and anon RPC credentials without cookies or a user session.
-- Exactly seven migrations align with production history. Migration `20260717120000` and its resulting policy are production-verified; local database regression coverage passed 55/55 combined assertions without persistent fixture or runtime state.
+- Exactly seven migrations align with production history. Migration `20260717120000` and its resulting policy are production-verified. The account-deletion repair is an eighth local migration that passed the requested 134/134 local database assertions and the gated local Auth Admin harness, but has not been applied or verified in production.
 - `lib/supabase/admin.ts` is a server-only service-role helper used only for current-user account deletion. It must never be imported into Client Components.
 
 Planned:
