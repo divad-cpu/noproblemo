@@ -12,6 +12,8 @@ PR #4 added the pending-invitation RPC consumer and bounded exact-key challenge-
 
 **DEPLOYED, NOT YET INDEPENDENTLY EXERCISED IN PRODUCTION — application flow.** PR #6 was squash-merged as `dc91a671` and its matching manager-cancellation server authorization and UI are deployed. Vercel production deployment `dpl_936NXseFjYk7vkwE5uk5Kdd1BNpb`, immutable URL `https://noproblemo-h7dycjrml-no-problemo.vercel.app`, reached `READY` at `2026-07-17T03:49:01.696Z` from commit `dc91a6710b1c6e2d583fa38a1649ca7fa73080d1`. The production aliases route to `/en`, `/en` returns 200, and verification found no localhost redirect, 5xx response, filtered Vercel error-level entry, or HTTP 500 entry. The deployed policy and application implementation agree, but the authenticated mutating cancellation workflow has not been independently replayed in production and no broad production workflow claim is made.
 
+**LOCAL ACCOUNT-DELETION REPAIR VERIFIED, NOT APPLIED TO PRODUCTION.** Migration `20260722120000_fix_group_member_activity_actor.sql` replaces only the group-membership activity trigger function. For deletion, `actor_id` is the surviving authenticated `auth.uid()` when one exists; an Auth Admin cascade with no application actor records `NULL`, which is already valid under the existing nullable `auth.users(id) ON DELETE SET NULL` foreign key. The removed member is the subject, not the actor. No subject email or profile data is stored, no RLS/FK is weakened, and owner protections remain unchanged. Production remains on the verified seven-migration history until a separate approved apply.
+
 Guest challenge drafts remain in browser localStorage until an authenticated user explicitly imports them from the dashboard.
 
 ## Authentication Security
@@ -64,6 +66,7 @@ Migration:
 
 - `supabase/migrations/20260703210000_phase8_friends_groups.sql`
 - `supabase/migrations/20260717120000_group_invitation_cancellation_authorization.sql` (production-applied and policy-verified)
+- `supabase/migrations/20260722120000_fix_group_member_activity_actor.sql` (local repair; production apply pending)
 
 RLS is enabled on:
 
@@ -127,6 +130,8 @@ Current access model:
 - Activity events are visible only to authorized members of the related group or users who can read the related challenge.
 - Notification creation for cross-user events is handled by database triggers, not arbitrary client inserts.
 - Activity creation is handled by database triggers and limited authenticated app actions.
+- Manual group-member removal records the authenticated surviving manager as actor. Supported self-removal records the authenticated member while that Auth row remains valid. Account-deletion cascades use `NULL` system attribution and never fabricate another actor.
+- Membership-removal activity keeps the generic summary `Group member removed.`; there is no new subject metadata, email, or sensitive profile retention.
 
 Realtime subscriptions are not implemented in Phase 9. Message actions use server action redirects and route revalidation.
 

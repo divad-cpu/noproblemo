@@ -1,6 +1,6 @@
 # Current State
 
-Last updated: 2026-07-17
+Last updated: 2026-07-22
 
 Future Codex sessions must read this file first, then `docs/CODEX_PROJECT_MAP.md`, before changing files.
 
@@ -37,6 +37,10 @@ The focused pending-invitation RPC consumer and bounded challenge-section confli
 **VERIFIED — database policy.** Migration `20260717120000_group_invitation_cancellation_authorization.sql` was applied successfully as the only pending migration to production Supabase project `jxjoyugkozbldwimqjuw`. Its approved and applied SHA-256 is `fada70b50a2307bf1ca8dc0811bc92c99e7355d33b4cab5c6bb6c05b62538a01`. Local and production migration histories now align across exactly seven versions. Read-only post-apply policy inspection confirmed that only pending invitations are mutable: invitees may accept or decline, while original inviters and currently accepted owners/admins may cancel. Accepted, declined, and canceled invitations are immutable. No migration-history repair was used, no other migration remained pending, and the operation did not directly mutate application records.
 
 The complete seven-migration chain passed against a disposable local Docker Supabase stack. The focused cancellation pgTAP file passed 10/10 assertions, the three related database regressions passed 45/45, and the combined database result was 55/55. All SQL tests ran inside transactions and rolled back; no fixture data, Docker containers, volumes, networks, or generated runtime metadata remained. The structural security suite passed 4/4 and typecheck passed.
+
+**LOCAL ACCOUNT-DELETION REPAIR VERIFIED, NOT APPLIED TO PRODUCTION.** Additive migration `20260722120000_fix_group_member_activity_actor.sql` repairs the confirmed `activity_events_actor_id_fkey` rollback affecting ordinary group members and non-owner group administrators. Membership removals now attribute an intentional authenticated action to the surviving `auth.uid()` actor; a server-side Auth Admin account-deletion cascade records the removal activity with `actor_id = NULL`. The existing generic summary remains the only subject representation and stores no email or profile data. Existing owner and last-owner deletion blocks, RLS, activity visibility, invitation terminal states, and retained message/activity/audit semantics are unchanged. No application source changed.
+
+The repair passed 27/27 focused pgTAP assertions and the complete requested seven-file local database matrix passed 134/134. The loopback-only Auth Admin harness passed ordinary-member deletion, non-owner-admin deletion, co-owner creator protection, last-owner protection, FK integrity, and zero-fixture cleanup. Production still has exactly the previously verified seven migrations; the new eighth migration requires a reviewed PR and separately approved production apply before the production defect is repaired. See `docs/qa/ACCOUNT_DELETION_GROUP_MEMBER_ACTIVITY_REPAIR.md`.
 
 **DEPLOYED, NOT YET INDEPENDENTLY EXERCISED IN PRODUCTION — application flow.** PR #6, "Fix group invitation cancellation authorization," was squash-merged on 2026-07-17 through application commit `dc91a671`. The matching server-action authorization and group-detail cancellation UI are deployed in production through Vercel deployment `dpl_936NXseFjYk7vkwE5uk5Kdd1BNpb` at immutable URL `https://noproblemo-h7dycjrml-no-problemo.vercel.app`. The `production` deployment was created at `2026-07-17T03:48:14.869Z` and reached `READY` at `2026-07-17T03:49:01.696Z` from Git commit `dc91a6710b1c6e2d583fa38a1649ca7fa73080d1`.
 
@@ -258,6 +262,19 @@ npm run lint
 npm run typecheck
 npm run build
 ```
+
+Validation for the local account-deletion group-member activity repair on 2026-07-22:
+
+- `git diff --check`: passed.
+- `npm run lint`: passed.
+- `npm run typecheck`: passed.
+- `npm run test:security`: passed, 6/6 test files.
+- `npm run build`: passed with non-secret loopback placeholders after the missing-env and sandbox port-bind prerequisites were resolved.
+- Focused account-deletion activity pgTAP: passed 27/27.
+- Complete requested seven-file local database matrix: passed 134/134.
+- Gated loopback-only Auth Admin deletion harness: passed ordinary-member deletion, non-owner-admin deletion, unchanged owner protections, FK integrity, and zero-fixture cleanup.
+- SQL transactions rolled back; zero fixture users/groups/memberships and zero idle transactions remained. The local stack was stopped without backup, with zero NoProblemo Supabase containers, volumes, networks, or runtime metadata remaining.
+- Production Supabase, Vercel, DNS, Auth providers, and environment configuration were not changed.
 
 Validation for the focused group-invitation cancellation repair on 2026-07-17:
 
