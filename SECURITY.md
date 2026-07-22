@@ -32,6 +32,12 @@ Implemented in Phase 5:
 - Google and Apple OAuth start actions are prepared, but provider configuration is still required.
 - Profile creation relies on the applied Phase 4 database trigger.
 
+### Account deletion lifecycle finding (local QA, 2026-07-22)
+
+The server action remains correctly session-scoped, explicitly confirmed, and isolated behind the `server-only` Auth Admin helper. However, disposable local runtime verification found that Auth deletion fails atomically for any user with a non-owner group membership. The membership cascade fires `create_group_member_activity()`, which inserts `activity_events.actor_id = old.user_id` while that Auth user is being deleted; the resulting `activity_events_actor_id_fkey` violation aborts the whole deletion.
+
+Empty users, challenge owners, and users with relationship/communication history but no group membership delete with the documented cascade and anonymization behavior. Group creators are safely blocked by the last-owner guard; no group is silently left ownerless. A focused migration is required before account deletion can work for ordinary group members or group administrators. Production was not tested or changed during this verification.
+
 ## Supabase RLS Implemented In Phase 4
 
 Migration:

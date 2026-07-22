@@ -1,8 +1,16 @@
 # Current State
 
-Last updated: 2026-07-17
+Last updated: 2026-07-22
 
 Future Codex sessions must read this file first, then `docs/CODEX_PROJECT_MAP.md`, before changing files.
+
+## Admin And Account Lifecycle QA (2026-07-22)
+
+An isolated disposable local Supabase verification at production base commit `0d2115ecb63cb0de64d27d1d043d888594c82077` confirmed positive administrator access, ordinary-user denial, RPC output minimization, role-revocation behavior, and self-promotion denial. It also confirmed empty-user, challenge-owner, and non-member relationship/history deletion behavior.
+
+A concrete account-deletion defect was found: deleting an Auth user who has any non-owner `group_members` row fails atomically with `23503:activity_events_actor_id_fkey`. The `group_members_activity_removed` cascade trigger inserts a removal activity whose `actor_id` is the user currently being deleted, conflicting with the Auth-user foreign-key cascade. The local Auth Admin API reproduced this for an ordinary member; pgTAP reproduced it for member and group-admin roles. No partial deletion occurred.
+
+Group creator deletion is separately and safely blocked by the existing last-owner trigger, including a creator with another accepted owner, because deleting `groups.owner_id` cascades the group and eventually attempts to remove its last owner membership. No transfer behavior exists. See `docs/qa/ADMIN_ACCOUNT_LIFECYCLE_VERIFICATION.md`. This is local verification only; production was not exercised or changed.
 
 ## Current Project Status
 
