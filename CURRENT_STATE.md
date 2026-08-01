@@ -1,6 +1,6 @@
 # Current State
 
-Last updated: 2026-07-17
+Last updated: 2026-08-01
 
 Future Codex sessions must read this file first, then `docs/CODEX_PROJECT_MAP.md`, before changing files.
 
@@ -20,7 +20,9 @@ NoProblemo has completed:
 - Phase 10: admin/settings and local project logs
 - Phase 11: polish, security review and deployment preparation
 
-The focused application repair release was merged through PR #2, recorded in `main` as `91cac6d`, deployed and promoted to `noproblemo.tech`, and production-verified with three disposable accounts. Payments, AI, email automation, Resend, and Vercel Cron remain future phases.
+The focused application repair release was merged through PR #2, recorded in `main` as `91cac6d`, deployed and promoted to `noproblemo.tech`, and production-verified with three disposable accounts. Payments, AI, marketing/email automation, and Vercel Cron remain future phases.
+
+**VERIFIED — Custom SMTP and email/password Auth.** On 2026-08-01, Resend Custom SMTP was configured for Supabase Auth using the verified `mail.noproblemo.tech` sending domain, with Vercel DNS authoritative and Domeneshop as registrar. Controlled checks verified DNS, Resend domain status, SMTP authentication, hosted Supabase read-back, the project-wide Auth email limit of 30, one direct delivery, signup confirmation, password recovery, password update, sign-in/out, disposable-user/profile cleanup, and revocation of the two temporary setup credentials. See `docs/SMTP_CONFIGURATION.md` for the authoritative operations record, evidence limits, credential lifecycle, and rollback. Runtime-evidence cleanup is complete; a separately approved documentation commit remains local follow-up work.
 
 The production Supabase security migration `20260716120000_full_application_audit_security_repairs.sql` was manually applied and verified on 2026-07-16. Its source SHA-256 is `a3a4c87061a845a04529e3cc0c328df386ad79b49de1b31b90559648fcd05c53`; at that checkpoint, the then-current six migrations aligned locally and remotely, and the post-apply linked dry run reported no pending migrations. All six migrations were applied before the later PR #4 application release, and PR #4 contained no migration. See `docs/qa/SECURITY_MIGRATION_PRODUCTION_VERIFICATION.md`.
 
@@ -146,7 +148,6 @@ Production aliases include `noproblemo.tech`, `www.noproblemo.tech`, `noproblemo
 - Real-time collaboration
 - AI features
 - Payments
-- Resend email
 - Vercel Cron
 
 ## Important Files And Folders
@@ -220,7 +221,7 @@ Production aliases include `noproblemo.tech`, `www.noproblemo.tech`, `noproblemo
 - Supabase Auth redirect URLs must also include locale-specific `/[locale]/reset-password` routes for password recovery.
 - Password reset recovery is isolated from the main SSR Supabase client because the SSR/cookie-oriented client was not reliably preserving the PKCE verifier for local recovery links and produced `verifier-missing-or-expired`.
 - Reset links requested before the isolated browser recovery fix may need to be resent.
-- Supabase Auth reset email requests can be rate-limited during testing, including `over_email_send_rate_limit` / 429 responses from the built-in email provider. Avoid repeated reset tests, wait for the provider limit to clear, and use a configured SMTP provider for serious testing or production.
+- Supabase Auth email delivery now uses verified Custom SMTP with a project-wide email limit of 30 requests per hour. Avoid repeated reset tests and do not attempt to bypass endpoint cooldowns or provider limits.
 - Saved challenge PDF export no longer prints from hidden same-page workspace DOM. The dedicated print route avoids Firefox blank pages caused by hidden app layout preserving print height.
 - Non-English translation quality still needs native review even though key parity is maintained.
 - Guest drafts are browser-local and can be lost if localStorage is cleared.
@@ -229,7 +230,7 @@ Production aliases include `noproblemo.tech`, `www.noproblemo.tech`, `noproblemo
 
 ## Current Risks
 
-- Future agents must not add payments, AI, email automation, Resend, or Vercel Cron before explicitly scoped.
+- Future agents must not add payments, AI, marketing/email automation, unreviewed Resend use beyond documented Auth SMTP, or Vercel Cron before explicitly scoped.
 - Future agents might use service role keys in frontend code; do not do this.
 - The cancellation-authorization database policy and matching PR #6 server-action/UI change are deployed and consistent. Do not claim that the authenticated mutating workflow was independently verified in production until the deployed flow is exercised separately.
 - User-generated problem content may be sensitive; privacy must be designed into auth and dashboard phases.

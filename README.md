@@ -10,7 +10,6 @@ Not included in the current MVP:
 
 - Payments
 - AI features
-- Resend email
 - Vercel Cron
 - Email automation
 - Advanced realtime collaboration
@@ -32,6 +31,7 @@ Implemented:
 - Public landing, support, login, signup, and guest solve routes.
 - Guest workspace stored only in browser localStorage.
 - Supabase email auth. Google/Apple OAuth starts remain in code for future setup, but visible auth UI is email-only for now.
+- Resend Custom SMTP for production Supabase Auth transactional email; see `docs/SMTP_CONFIGURATION.md`.
 - Compact browser print-based PDF export for saved challenges.
 - Protected dashboard, profile settings, saved challenge creation, saved challenge workspace, and guest import.
 - Friends, groups, group invitations, group roles, and explicit group challenge links.
@@ -225,11 +225,12 @@ Do not build public admin signup or self-service admin promotion.
 
 ## Deployment Direction
 
-The application is deployed on Vercel at `noproblemo.tech`, with Domeneshop providing domain/DNS and Supabase providing Auth/Postgres/RLS. The `david@fideli.no` support mailbox or alias still requires operational verification.
+The application is deployed on Vercel at `noproblemo.tech`. Domeneshop is the registrar, Vercel DNS is authoritative, Supabase provides Auth/Postgres/RLS, and Resend provides transactional Auth email. The `david@fideli.no` support mailbox or alias still requires operational verification.
 
 Use these documents for release-specific and remaining operational verification:
 
 - `docs/PRODUCTION_VERIFICATION.md`
+- `docs/SMTP_CONFIGURATION.md`
 - `docs/SUPABASE_VERIFICATION.md`
 - `docs/MANUAL_TEST_PLAN.md`
 - `docs/LAUNCH_READINESS_REPORT.md`
@@ -287,7 +288,7 @@ Production verification with three disposable accounts covered authenticated red
 - `docs/NEXT_CODEX_PROMPT.md`
 - `docs/CHANGELOG.md`
 
-Project logs are local repository documents only. No email automation, Resend integration, Vercel Cron job, or weekly email reporting is used for project logs.
+Project logs are local repository documents only. No email automation, Resend-driven project-log delivery, Vercel Cron job, or weekly email reporting is used for project logs.
 
 ## Repository Hygiene
 

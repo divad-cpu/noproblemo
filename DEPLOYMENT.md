@@ -3,8 +3,8 @@
 ## Intended Setup
 
 - Hosting: Vercel or similar, with Vercel currently working for production.
-- Backend: Supabase for future auth, database, and row-level security.
-- Domain/DNS: Domeneshop mainly for domain registration and DNS management.
+- Backend: Supabase for Auth, database, and row-level security.
+- Domain registrar: Domeneshop. Authoritative DNS: Vercel DNS.
 
 ## Vercel Direction
 
@@ -98,14 +98,14 @@ Apple login preparation requires:
 - Return URL matching the deployed site.
 - A manual login test on the production domain.
 
-## Domeneshop DNS Direction
+## Domain and DNS Direction
 
-When ready to attach the domain:
+Current production responsibility:
 
-- Keep domain ownership and DNS in Domeneshop unless the user chooses otherwise.
-- Point DNS records to Vercel according to Vercel's current instructions.
-- Verify HTTPS after DNS propagation.
-- Keep email/DNS records documented if support email setup changes.
+- Keep `noproblemo.tech` registered with Domeneshop.
+- Manage authoritative DNS through Vercel DNS; do not change nameservers merely to configure transactional email.
+- Preserve Vercel platform records and the verified Resend DKIM/return-path records.
+- See `docs/SMTP_CONFIGURATION.md` for Custom SMTP, DNS, rotation, rollback, and troubleshooting.
 - Use `david@fideli.no` as the public support mailbox outside the app.
 - Do not add in-app email automation for support or project logs.
 
@@ -187,7 +187,7 @@ Password reset links should be requested from the browser app. Forgot/reset pass
 
 For local testing, request a new reset link after this fix and open it in the same browser/profile where `/[locale]/forgot-password` requested it. The recovery flow may use browser hash tokens; those fragments stay in the browser and are not sent to the server. After password update, the app signs out and redirects to localized login success. Reset links requested before the isolated recovery fix may fail and should be resent.
 
-If `/[locale]/forgot-password` reports that the reset email could not be sent, inspect Supabase Auth logs for provider/SMTP errors, rate limiting, redirect allow-list denial, and Site URL mismatch. Supabase Auth reset requests can return `over_email_send_rate_limit` / 429 during repeated local testing with the built-in email provider; wait, avoid repeated reset tests, and configure a custom SMTP provider for serious testing or production rather than changing app code. Do not log or paste user email addresses, auth codes, tokens, sessions, cookies, service-role values, or `.env.local` values while troubleshooting.
+If `/[locale]/forgot-password` reports that the reset email could not be sent, inspect Supabase Auth logs for provider/SMTP errors, rate limiting, redirect allow-list denial, and Site URL mismatch. Production uses verified Resend Custom SMTP; avoid repeated requests and follow `docs/SMTP_CONFIGURATION.md` rather than changing application code. Do not log or paste user email addresses, auth codes, tokens, sessions, cookies, service-role values, or `.env.local` values while troubleshooting.
 
 Saved challenge PDF export uses the protected `/[locale]/app/challenges/[id]/print` report route and the browser print dialog. Users click Save as PDF, open the clean report view, and choose Save to PDF locally; the app does not call an external PDF service or require deployment/provider settings.
 
@@ -245,7 +245,7 @@ Production:
 
 If Vercel preview auth is needed, add the specific preview redirect pattern approved for the Vercel team/account. Do not use broad production wildcards beyond the intended domain.
 
-Project logs remain local repository documentation. Do not add Resend, Vercel Cron, CRON_SECRET, or email automation for Codex project logs.
+Project logs remain local repository documentation. Do not add Resend-driven project-log delivery, Vercel Cron, CRON_SECRET, or email automation for Codex project logs.
 
 ## Current Phase 11 Review Notes
 
@@ -256,4 +256,4 @@ Project logs remain local repository documentation. Do not add Resend, Vercel Cr
 
 ## Controlled Verification Rule
 
-Production verification is the next step, but it is not automatic deployment permission. Apply remote Supabase migrations, change Vercel settings, change Domeneshop DNS records, or configure production auth providers only after explicit project-owner approval.
+Further production changes are not automatic permission. Apply remote Supabase migrations, change Vercel DNS, change registrar settings, or configure providers only after explicit project-owner approval.

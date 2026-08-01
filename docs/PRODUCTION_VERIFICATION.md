@@ -1,6 +1,6 @@
 # Production Verification
 
-Last updated: 2026-07-14
+Last updated: 2026-08-01
 
 ## Purpose
 
@@ -12,10 +12,19 @@ Do not use this document as permission to deploy, apply remote migrations, chang
 
 - Phase 1 through Phase 11 are complete in the repository.
 - Local validation previously passed for lint, typecheck, and build.
-- Production verification preparation is documented.
-- Real Supabase migrations, RLS, RPCs, Auth redirects, OAuth providers, Vercel environment variables, custom domain, Domeneshop DNS, and support mailbox/alias are still unverified.
+- Production Custom SMTP, email/password Auth redirects, and the `mail.noproblemo.tech` sending domain were verified on 2026-08-01. See `SMTP_CONFIGURATION.md`.
+- Google and Apple OAuth providers, Vercel environment-variable review, the health endpoint, support mailbox/alias, native translation QA, and other launch work remain separate.
 - Public launch is blocked until real production verification is complete.
-- Controlled internal testing can begin after migrations and environment configuration are verified.
+
+## 2026-08-01 Custom SMTP and Auth Verification Supplement
+
+- Domeneshop is the registrar and Vercel DNS is authoritative for `noproblemo.tech`.
+- Resend domain `mail.noproblemo.tech` is verified with DKIM and return-path MX/SPF; sending is enabled, receiving and tracking are disabled.
+- Supabase Auth Custom SMTP uses Resend on implicit-TLS port 465. Confirmation remains required, secure email change remains enabled, and the hosted Auth email limit is 30 requests per hour.
+- One direct delivery, one signup confirmation, one password recovery, password update, replacement-password sign-in, sign-out, and disposable-user/profile cleanup were controlled and verified. This is not a load or capacity test.
+- No localhost or preview redirect occurred during the email/password production flow.
+
+The authoritative operational procedure, limitations, evidence identifiers, rotation, rollback, and hardening backlog are in `docs/SMTP_CONFIGURATION.md`.
 
 ## Prerequisites
 
@@ -23,7 +32,7 @@ Do not use this document as permission to deploy, apply remote migrations, chang
 - Access to the GitHub repository.
 - Access to the intended Vercel project.
 - Access to the intended Supabase project.
-- Access to Domeneshop DNS for `noproblemo.tech`.
+- Access to the Domeneshop registrar and Vercel DNS for `noproblemo.tech`.
 - Access to Google Cloud OAuth configuration if Google login is enabled in a later phase.
 - Access to Apple Developer configuration if Apple login is enabled in a later phase.
 - Access to the public support mailbox `david@fideli.no`.
@@ -96,15 +105,12 @@ unset NOPROBLEMO_KEEPALIVE_SECRET
 
 The endpoint verifies narrow Vercel-to-Supabase database reachability. It is not a complete uptime, latency, Auth, RLS, application workflow, or monitoring guarantee. The real secret must never appear in documentation, commits, logs, screenshots, URLs, or command output.
 
-## Domeneshop DNS Checklist
+## Domain and Authoritative DNS Checklist
 
-- Confirm the domain owner and active DNS zone for `noproblemo.tech`.
-- Add only the DNS records requested by Vercel.
-- Preserve existing required email records if a support mailbox or alias is already configured.
+- Confirm that Domeneshop remains the registrar and Vercel DNS remains authoritative.
+- Preserve verified Vercel platform records and the Resend DKIM/return-path records.
 - Do not remove MX, SPF, DKIM, or DMARC records without explicit approval.
-- Wait for propagation.
-- Verify `https://noproblemo.tech`.
-- Verify any `www` behavior chosen for the project.
+- See `SMTP_CONFIGURATION.md` before any email-DNS change.
 
 ## Auth Redirect URL Checklist
 
@@ -350,7 +356,7 @@ Hard i18n audit notes:
 - Set a new password, confirm the app signs out, and confirm redirect to localized login success.
 - Confirm an expired or old link shows the invalid/expired message and offers a new link request.
 - Do not log or copy recovery codes, tokens, sessions, cookies, emails, or passwords into docs or issue trackers.
-- If the email is not sent, check Supabase Auth logs for rate limit, provider/SMTP, redirect URL, Site URL, or template errors. Supabase built-in email sending can return `over_email_send_rate_limit` / 429 during repeated testing; avoid repeated reset tests, wait for the limit to clear, or configure custom SMTP for serious testing. Keep troubleshooting notes free of email addresses and secrets.
+- If the email is not sent, check Supabase Auth logs for rate limit, provider/SMTP, redirect URL, Site URL, or template errors. Production uses verified Custom SMTP; avoid repeated reset requests and follow `SMTP_CONFIGURATION.md`. Keep troubleshooting notes free of email addresses and secrets.
 
 Required Supabase redirect URL coverage:
 
@@ -366,11 +372,9 @@ Reset links requested before the latest reset-password fixes may need to be rese
 ## Launch Blockers
 
 - Real Supabase migrations/RLS/RPC behavior not verified.
-- Production Auth redirect URLs not verified.
 - Google and Apple providers not verified.
 - Vercel environment variables not verified.
 - Production keepalive secret and health endpoint not verified.
-- Custom domain and Domeneshop DNS not verified.
 - `david@fideli.no` mailbox or alias not verified.
 - Native translation QA not complete.
 - `npm audit` reports moderate PostCSS advisories via Next.js bundled dependency tree.

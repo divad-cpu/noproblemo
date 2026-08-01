@@ -1,5 +1,17 @@
 # Codex Project Log
 
+## 2026-08-01
+
+Production Custom SMTP and email/password Auth verification:
+
+- Configured and verified Resend Custom SMTP for Supabase Auth using the verified `mail.noproblemo.tech` sending domain.
+- Confirmed Domeneshop as registrar and Vercel DNS as authoritative; preserved unrelated DNS and platform records.
+- Verified confirmation-required signup, secure email change, sender identity, direct delivery, signup confirmation, password recovery, password update, sign-in/out, and disposable-user/profile cleanup through controlled tests.
+- Updated the project-wide Auth email limit to 30 only after Custom SMTP was verified; no load test was performed.
+- Recorded operations, evidence limits, credential lifecycle, rotation, rollback, and troubleshooting in `docs/SMTP_CONFIGURATION.md`.
+- Revoked the temporary Resend Full-access setup key and the temporary Supabase PAT after verification; retained the permanent `NoProblemo Supabase SMTP` sending-only key.
+- Did not add application code, migrations, email automation, project-log delivery, a commit, push, or deployment.
+
 ## 2026-07-14
 
 Supabase keepalive health check:

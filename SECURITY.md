@@ -19,6 +19,7 @@ Guest challenge drafts remain in browser localStorage until an authenticated use
 Implemented in Phase 5:
 
 - Email signup and login use Supabase Auth.
+- Production Auth transactional email uses verified Resend Custom SMTP through `mail.noproblemo.tech`; the permanent sending key is restricted to that domain, receiving and tracking are disabled, and operational details are in `docs/SMTP_CONFIGURATION.md`.
 - Signup failures are mapped to safe user-facing categories and development-only warnings without logging email addresses, passwords, tokens, sessions, cookies, or environment values.
 - No custom password storage exists in app code.
 - Auth callbacks and redirects are locale-aware.
@@ -184,7 +185,7 @@ Reviewed locally in Phase 11:
 - `.env.example` and `.env.local.example` contain placeholders only.
 - `.env.local` was not read or printed.
 - `david@fideli.no` is the public support address.
-- `da.jernaes@gmail.com` was not found in public app files.
+- No personal test address was retained in public app files.
 - Protected app routes and admin routes continue to check authenticated Supabase users server-side.
 - Admin routes continue to check `profiles.role = 'admin'` server-side.
 - Profile settings do not update `profiles.role`.
@@ -200,7 +201,7 @@ Not verified during the historical Phase 11 review:
 
 - Live Supabase RLS behavior with multiple authenticated users.
 - Supabase RPC behavior against a real project.
-- Supabase Auth provider and redirect behavior in production.
+- Email/password Auth redirects and Custom SMTP behavior in production are verified; Google and Apple provider configuration remains separate.
 - Vercel production environment and domain configuration.
 
 Those Phase 11 gaps were subsequently narrowed by production verification of ordinary-user Auth/RLS/RPC behavior and the now-aligned seven-migration chain. The cancellation policy and PR #6 application implementation are deployed and consistent, but the authenticated mutating cancellation flow has not been independently exercised in production. Deliberately configured administrator-positive testing, Google/Apple provider setup, health endpoint secret/deployment verification, support mailbox setup, and fluent translation review remain current gaps.
@@ -310,7 +311,7 @@ Rules:
 - The recovery client is intentionally separate from the main SSR Supabase client. Local password recovery was producing `verifier-missing-or-expired` with the SSR/cookie-oriented client, so reset now uses a browser-only implicit recovery flow where hash tokens stay in the browser URL fragment and are cleared after session setup.
 - Password reset request diagnostics must not log email addresses, codes, tokens, sessions, cookies, full URLs, or env values. Development logs may include only generic labels such as rate-limit, provider-or-smtp, redirect-url, invalid-email, or unknown.
 - Password reset exchange diagnostics must not log auth codes, tokens, sessions, cookies, URLs, passwords, or email addresses. Development logs may include only generic labels such as verifier-missing-or-expired, expired-link, or unknown.
-- Supabase built-in reset email sending can return `over_email_send_rate_limit` / 429 during repeated testing. The UI must show a privacy-safe rate-limit message and must not attempt to bypass provider limits.
+- Supabase Auth email delivery now uses Custom SMTP with a verified project-wide limit of 30 email-triggering requests per hour. The UI must still show privacy-safe rate-limit feedback and must not attempt to bypass provider limits.
 - If reset email sending fails, check Supabase Auth logs and provider/SMTP settings before changing app code.
 - Old recovery links requested before this browser-client flow may still fail; users should request a fresh reset link.
 - Password reset uses Supabase Auth `updateUser({ password })`; reset passwords are never stored in application database tables.

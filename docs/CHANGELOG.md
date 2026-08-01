@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added verified Resend Custom SMTP operations, DNS, credential-lifecycle, rollback, troubleshooting, and evidence-provenance documentation for Supabase Auth.
 - Added a Bearer-protected, non-cacheable `/api/health/supabase` endpoint for external keepalive and database reachability checks.
 - Added `public.noproblemo_health_check()` as a minimal `SECURITY INVOKER` RPC with an empty `search_path` and anon-only execution.
 - Added server-only `NOPROBLEMO_KEEPALIVE_SECRET` placeholders and operational verification guidance.
@@ -33,6 +34,8 @@
 
 ### Changed
 
+- Changed production Auth email delivery to verified Resend Custom SMTP, with confirmation required, secure email change retained, and a controlled project-wide email limit of 30 requests per hour.
+- Changed operational DNS documentation to identify Domeneshop as registrar and Vercel DNS as authoritative.
 - Improved password reset rate-limit UX with clearer localized `over_email_send_rate_limit` / 429 guidance and a short local cooldown after a rate-limit response.
 - Changed browser password-reset requests to use exactly `/<locale>/reset-password` on the current origin, without extra query parameters.
 - Changed password reset recovery to use a dedicated implicit browser recovery flow instead of the main SSR/cookie-oriented client.
@@ -72,6 +75,7 @@
 
 ### Security
 
+- Verified the production email/password Auth flow with one disposable user, then removed that user and its profile through the approved Dashboard workflow; no credential or private test data was documented.
 - Kept the Supabase health endpoint cookie-free and session-free, used only public anon credentials, returned sanitized failures, and did not use the service-role key.
 - Added development-only reset request warnings that log only generic classification labels and never email addresses, auth codes, tokens, sessions, cookies, full URLs, or env values.
 - Added development-only reset exchange warnings that log only generic classification labels and never auth codes, tokens, sessions, cookies, URLs, emails, passwords, or environment values.
