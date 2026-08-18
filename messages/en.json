@@ -1027,7 +1027,7 @@
       "deployment": {
         "title": "Deployment",
         "envTemplates": "Use templates only; do not expose real secret values.",
-        "supportEmail": "Public support email is david@fideli.no.",
+        "supportEmail": "Public support email is fremtidsbloggen@gmail.com.",
         "noAutomation": "Email automation, Resend, and Vercel Cron are intentionally not used.",
         "validation": "Run lint, typecheck, and build before deployment."
       }

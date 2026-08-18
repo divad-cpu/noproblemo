@@ -184,7 +184,7 @@ Reviewed locally in Phase 11:
 - `SUPABASE_SERVICE_ROLE_KEY` is used only in the server-only `lib/supabase/admin.ts` helper for current-user account deletion; the app reference outside server actions is an admin checklist variable name.
 - `.env.example` and `.env.local.example` contain placeholders only.
 - `.env.local` was not read or printed.
-- `david@fideli.no` is the public support address.
+- `fremtidsbloggen@gmail.com` is the public support address.
 - No personal test address was retained in public app files.
 - Protected app routes and admin routes continue to check authenticated Supabase users server-side.
 - Admin routes continue to check `profiles.role = 'admin'` server-side.
@@ -285,7 +285,7 @@ NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 NOPROBLEMO_KEEPALIVE_SECRET=
-NEXT_PUBLIC_SUPPORT_EMAIL=david@fideli.no
+NEXT_PUBLIC_SUPPORT_EMAIL=fremtidsbloggen@gmail.com
 ```
 
 Rules:

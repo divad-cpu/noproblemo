@@ -125,10 +125,10 @@ export default async function AdminSettingsPage({
           {t("support.body")}
         </p>
         <a
-          href="mailto:david@fideli.no"
-          className="mt-3 inline-block font-semibold text-[#22211e] underline-offset-4 hover:underline"
+          href="mailto:fremtidsbloggen@gmail.com"
+          className="mt-3 inline-block break-all font-semibold text-[#22211e] underline-offset-4 hover:underline"
         >
-          david@fideli.no
+          fremtidsbloggen@gmail.com
         </a>
       </div>
 

@@ -23,14 +23,14 @@ export default function SolvePage({ params }: SolvePageProps) {
             <Link href="/" className="text-sm font-semibold text-[#373632] underline-offset-4 hover:underline">
               {t("backHome")}
             </Link>
-            <p className="text-sm text-[#706f68]">{t("supportHint")} david@fideli.no</p>
+            <p className="text-sm text-[#706f68]">{t("supportHint")} fremtidsbloggen@gmail.com</p>
           </nav>
 
           <section className="rounded-lg border border-[#dad8d0] bg-white p-6 shadow-sm sm:p-10">
             <p className="text-sm font-medium uppercase tracking-[0.18em] text-[#706f68]">
               {t("eyebrow")}
             </p>
-            <h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-tight text-[#22211e]">
+            <h1 className="mt-3 max-w-3xl break-words text-3xl font-semibold leading-tight text-[#22211e] sm:text-4xl">
               {t("title")}
             </h1>
             <p className="mt-4 max-w-3xl leading-7 text-[#55544f]">{t("body")}</p>

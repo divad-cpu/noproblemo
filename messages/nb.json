@@ -1027,7 +1027,7 @@
       "deployment": {
         "title": "Utrulling",
         "envTemplates": "Bruk bare maler; ikke eksponer ekte hemmelige verdier.",
-        "supportEmail": "Offentlig støtteadresse er david@fideli.no.",
+        "supportEmail": "Offentlig støtteadresse er fremtidsbloggen@gmail.com.",
         "noAutomation": "E-postautomatisering, Resend og Vercel Cron brukes med vilje ikke.",
         "validation": "Kjør lint, typecheck og build før utrulling."
       }

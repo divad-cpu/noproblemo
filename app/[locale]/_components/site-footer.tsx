@@ -20,8 +20,8 @@ export async function SiteFooter({ locale }: SiteFooterProps) {
           <Link href="/support" className="font-medium text-[#22211e] underline-offset-4 hover:underline">
             {t("supportLink")}
           </Link>
-          <a className="text-[#55544f] underline-offset-4 hover:underline" href="mailto:david@fideli.no">
-            david@fideli.no
+          <a className="text-[#55544f] underline-offset-4 hover:underline" href="mailto:fremtidsbloggen@gmail.com">
+            fremtidsbloggen@gmail.com
           </a>
         </div>
       </div>

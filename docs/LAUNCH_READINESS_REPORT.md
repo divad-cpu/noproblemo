@@ -66,7 +66,7 @@ Phase 11 polish, security review, and deployment preparation are complete. Produ
 - Vercel environment variables.
 - `noproblemo.tech` custom domain.
 - Domeneshop DNS.
-- `david@fideli.no` mailbox or alias.
+- `fremtidsbloggen@gmail.com` mailbox or alias.
 - Native translation quality.
 - Browser/device QA against production deployment.
 

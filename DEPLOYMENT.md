@@ -27,7 +27,7 @@ NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 NOPROBLEMO_KEEPALIVE_SECRET=
-NEXT_PUBLIC_SUPPORT_EMAIL=david@fideli.no
+NEXT_PUBLIC_SUPPORT_EMAIL=fremtidsbloggen@gmail.com
 ```
 
 `SUPABASE_SERVICE_ROLE_KEY` and `NOPROBLEMO_KEEPALIVE_SECRET` are server-only. They must never be exposed to the browser, use a `NEXT_PUBLIC_` prefix, or be committed with real values. Configure `NOPROBLEMO_KEEPALIVE_SECRET` in Vercel Production and configure the cron client to send the same value as a Bearer token.
@@ -106,7 +106,7 @@ Current production responsibility:
 - Manage authoritative DNS through Vercel DNS; do not change nameservers merely to configure transactional email.
 - Preserve Vercel platform records and the verified Resend DKIM/return-path records.
 - See `docs/SMTP_CONFIGURATION.md` for Custom SMTP, DNS, rotation, rollback, and troubleshooting.
-- Use `david@fideli.no` as the public support mailbox outside the app.
+- Use `fremtidsbloggen@gmail.com` as the public support mailbox outside the app.
 - Do not add in-app email automation for support or project logs.
 
 ## Local Development Commands
@@ -166,7 +166,7 @@ Current app includes localized public pages, a guest localStorage workspace, Sup
 - All 11 locales are smoke-tested.
 - Arabic and Urdu RTL layouts are smoke-tested.
 - Mobile and desktop layouts are smoke-tested.
-- Support contact remains `david@fideli.no` unless intentionally changed.
+- Support contact remains `fremtidsbloggen@gmail.com` unless intentionally changed.
 
 ## Required Supabase Redirect URLs
 

@@ -45,7 +45,7 @@ Still requiring focused verification or operational setup:
 - Google and Apple OAuth provider setup.
 - Health endpoint secret/deployment verification.
 - Fluent human review across all 11 locales, including Arabic/Urdu RTL, plus targeted device checks.
-- Support mailbox or alias setup for `david@fideli.no`.
+- Support mailbox or alias setup for `fremtidsbloggen@gmail.com`.
 
 ## Internationalization
 
@@ -174,7 +174,7 @@ NEXT_PUBLIC_SITE_URL=
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
-NEXT_PUBLIC_SUPPORT_EMAIL=david@fideli.no
+NEXT_PUBLIC_SUPPORT_EMAIL=fremtidsbloggen@gmail.com
 ```
 
 `SUPABASE_SERVICE_ROLE_KEY` is server-only and is used by `lib/supabase/admin.ts` for current-user account deletion. It is not used by the frontend and must never be exposed to the browser.
@@ -225,7 +225,7 @@ Do not build public admin signup or self-service admin promotion.
 
 ## Deployment Direction
 
-The application is deployed on Vercel at `noproblemo.tech`. Domeneshop is the registrar, Vercel DNS is authoritative, Supabase provides Auth/Postgres/RLS, and Resend provides transactional Auth email. The `david@fideli.no` support mailbox or alias still requires operational verification.
+The application is deployed on Vercel at `noproblemo.tech`. Domeneshop is the registrar, Vercel DNS is authoritative, Supabase provides Auth/Postgres/RLS, and Resend provides transactional Auth email. The `fremtidsbloggen@gmail.com` support mailbox or alias still requires operational verification.
 
 Use these documents for release-specific and remaining operational verification:
 

@@ -35,7 +35,7 @@ The authoritative operational procedure, limitations, evidence identifiers, rota
 - Access to the Domeneshop registrar and Vercel DNS for `noproblemo.tech`.
 - Access to Google Cloud OAuth configuration if Google login is enabled in a later phase.
 - Access to Apple Developer configuration if Apple login is enabled in a later phase.
-- Access to the public support mailbox `david@fideli.no`.
+- Access to the public support mailbox `fremtidsbloggen@gmail.com`.
 - Three test users:
   - User A: normal user.
   - User B: normal user.
@@ -49,7 +49,7 @@ The authoritative operational procedure, limitations, evidence identifiers, rota
 - Domeneshop account with DNS access.
 - Google Cloud account for OAuth credentials.
 - Apple Developer account for Apple OAuth.
-- Email provider account for `david@fideli.no`.
+- Email provider account for `fremtidsbloggen@gmail.com`.
 
 ## Supabase Checklist
 
@@ -204,11 +204,11 @@ Required production callback URLs:
 
 ## Support Email Checklist
 
-- Use `david@fideli.no` as the public support mailbox outside the app.
+- Use `fremtidsbloggen@gmail.com` as the public support mailbox outside the app.
 - Verify inbound delivery.
 - Verify reply/send behavior.
 - Confirm DNS records required by the email provider.
-- Confirm the public app references `david@fideli.no`.
+- Confirm the public app references `fremtidsbloggen@gmail.com`.
 - Do not add Resend, email automation, Vercel Cron, or project-log email reporting.
 
 ## PDF Export Checklist
@@ -235,7 +235,7 @@ NEXT_PUBLIC_SITE_URL=
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
-NEXT_PUBLIC_SUPPORT_EMAIL=david@fideli.no
+NEXT_PUBLIC_SUPPORT_EMAIL=fremtidsbloggen@gmail.com
 ```
 
 Rules:
@@ -375,7 +375,7 @@ Reset links requested before the latest reset-password fixes may need to be rese
 - Google and Apple providers not verified.
 - Vercel environment variables not verified.
 - Production keepalive secret and health endpoint not verified.
-- `david@fideli.no` mailbox or alias not verified.
+- `fremtidsbloggen@gmail.com` mailbox or alias not verified.
 - Native translation QA not complete.
 - `npm audit` reports moderate PostCSS advisories via Next.js bundled dependency tree.
 
