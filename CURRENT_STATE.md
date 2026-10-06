@@ -1,6 +1,14 @@
-# Current Backend Migration — 2026-10-06
+# Current Backend — Neon Free, 2026-10-06
 
-Neon Free is the approved destination. The isolated migration implementation has passed lint, typecheck, build, group role/invitation browser tests, direct private-data denial and group-deletion checks, and hosted Preview login/private routes/logout. The initial 557 source records matched every field after remapping the four approved test identities. Production cutover and Supabase deletion are pending. See `docs/NEON_MIGRATION.md`.
+NoProblemo is live on Neon Free at `https://noproblemo.tech` and `https://www.noproblemo.tech`. The migration implementation is on GitHub main and the canonical local repository. Production application commit `f37ee364b88731f6310be155ff1af8d23b829fdf` was deployed by GitHub as `dpl_pswfw1bAZU7wHFu5UvLoGL3FkXFz` and verified; later documentation commits do not alter runtime code.
+
+All 557 original records across 15 public tables matched every typed field after remapping the four approved test identities, and still matched after cutover. The 60 RLS policies, all user triggers and constraints are enabled. All four migrated accounts passed production login, ownership, private notification, private-page and administrator-boundary checks. A fifth, owner-authorized email-test account was created and confirmed; new user data is retained.
+
+Native/browser/hosted checks passed for groups, invitation roles, concurrent section saves, password reset (controlled single-use token), password change, logout, caller-only account deletion and owned-data cascades. Anonymous account deletion, target-ID substitution and private-data access were denied. The owner confirmed receipt and opening of the one verification email, and verified-account login succeeded on the live domain.
+
+The old Supabase source is **paused (`INACTIVE`)**, not permanently deleted. Automatic approval review rejected whole-project deletion as major irreversible destruction despite explicit user authorization. Paused projects do not count toward the free active-project quota: one active project remains, and one free slot is available. `world-election-countdowns` remains `ACTIVE_HEALTHY`. Full source code/history/schema/auth/data backups and final hashes are retained in the protected migration folder. Temporary source write guards remain with a prepared rollback script; unpausing or restoring the source requires deliberate review.
+
+See `docs/NEON_MIGRATION.md` for provider IDs, validation, operational notes and the precise deletion limitation.
 
 The release records below describe the historical Supabase deployment. Preserve them as evidence.
 

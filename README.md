@@ -4,7 +4,7 @@ NoProblemo is a minimal, secure, multilingual problem-solving workspace for turn
 
 ## Current Phase
 
-The Neon migration implementation is verified in an isolated branch and Vercel Preview as of 2026-10-06. Production cutover and source removal are tracked in `docs/NEON_MIGRATION.md`. The following Phase 11 release records are historical.
+The Neon Free migration is live and production-verified as of 2026-10-06. The old Supabase project is paused and no longer counts against the active free-project quota. Permanent deletion was blocked by automatic approval review. See `docs/NEON_MIGRATION.md`. The following Phase 11 release records are historical.
 
 Phase 11 is complete. The application repair release was merged through PR #2 as `91cac6d`, and its pending-invitation RPC consumer and bounded challenge-section conflict follow-ups were merged through PR #4 as `264a435`. Commit `264a435` is deployed and production-verified at `noproblemo.tech` through Vercel deployment `dpl_Bfo7GChwmpZh2oUeYvC1pXJNZKc7`. All six Supabase migrations were already applied and aligned locally/remotely before PR #4, which contained no migration. Future remote migrations or production-service changes still require explicit approval.
 
@@ -177,10 +177,10 @@ NEXT_PUBLIC_SUPPORT_EMAIL=fremtidsbloggen@gmail.com
 
 All Neon configuration stays server-side. `NEON_AUTH_COOKIE_SECRET` must be a random secret of at least 32 characters. SMTP is configured directly in Neon; the app needs no SMTP key or database owner credential.
 
-Run the development server:
+Run the development server with the isolated Neon Development settings from the linked Vercel project, preserving existing local secret files:
 
 ```bash
-npm run dev
+vercel env run -- npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
