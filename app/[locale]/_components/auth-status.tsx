@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createServerNeonClient } from "@/lib/neon/server";
 
 type AuthStatusProps = {
   locale: Locale;
@@ -9,7 +9,7 @@ type AuthStatusProps = {
 
 export async function AuthStatus({ locale }: AuthStatusProps) {
   const t = await getTranslations({ locale, namespace: "AuthStatus" });
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createServerNeonClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

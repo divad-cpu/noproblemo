@@ -11,7 +11,7 @@ NoProblemo is a minimalistic, secure, modern web application for structured prob
 - TypeScript
 - Tailwind CSS 4
 - `next-intl`
-- Supabase Auth/Postgres/RLS foundation
+- Neon Auth/Postgres/Data API with RLS
 - Vercel deployment
 - Domeneshop domain/DNS for the production `noproblemo.tech` deployment
 
@@ -28,12 +28,12 @@ Implemented:
 - Login prompt for unavailable guest save/collaboration actions.
 - Support page.
 - Email login/signup pages. Google and Apple OAuth actions remain future/planned and are not currently visible in the auth UI.
-- Supabase auth callback and logout routes.
+- Neon auth callback and logout routes.
 - Protected dashboard at `/[locale]/app`.
 - Minimal challenge creation at `/[locale]/app/challenges/new`.
 - Saved challenge workspace at `/[locale]/app/challenges/[id]`.
 - Profile/settings page at `/[locale]/app/settings`.
-- Guest import from `noproblemo.guestWorkspace.v1` to Supabase `challenges` and `challenge_sections`.
+- Guest import from `noproblemo.guestWorkspace.v1` to Neon `challenges` and `challenge_sections`.
 - Display name and preferred locale profile settings.
 - Seven-step problem-solving workflow.
 - Editable challenge sections, solutions, tasks, final recommendation, summary, Markdown export, and protected print-route browser PDF export.
@@ -46,7 +46,7 @@ Implemented:
 - Protected admin settings checklist.
 - Admin role protection using `profiles.role = 'admin'`.
 - Admin audit-log storage and admin-only overview RPCs.
-- Secured, non-cacheable Supabase database health endpoint for an external cron client.
+- Secured, non-cacheable Neon database health endpoint (legacy `/api/health/supabase` path) for an external cron client.
 - Phase 11 responsive/accessibility/security/deployment polish.
 - Google and Apple OAuth provider start actions prepared through Supabase Auth.
 - Supabase migration for profiles and core challenge tables.
@@ -83,7 +83,7 @@ Not implemented:
 - `/[locale]/signup`: email signup.
 - `/[locale]/forgot-password`: password reset request.
 - `/[locale]/reset-password`: password reset completion after callback recovery session exchange.
-- `/[locale]/auth/callback`: Supabase auth callback.
+- `/[locale]/auth/callback`: Neon auth callback.
 - `/[locale]/auth/logout`: logout handler.
 - `/[locale]/app`: protected dashboard.
 - `/[locale]/app/challenges/new`: minimal protected challenge creation.
@@ -114,7 +114,7 @@ Current:
 - Production-applied Supabase migration: `supabase/migrations/20260717120000_group_invitation_cancellation_authorization.sql`.
 - Database regression suite: `supabase/tests/database/security_migration_production_alignment.test.sql`.
 - Focused cancellation regression suite: `supabase/tests/database/group_invitation_cancellation_authorization.test.sql`.
-- Typed helpers: `lib/supabase/`.
+- Typed helpers: `lib/neon/`.
 - Dashboard reads/writes use the authenticated Supabase session and Phase 4 tables.
 - Guest import maps `problem`, `context`, `outcome`, `options`, and `nextStep` into `challenge_sections`.
 - Workspace saves challenge details to `challenges`.
@@ -192,7 +192,7 @@ Current:
 - Normal users cannot self-promote through profile settings or authenticated self role updates.
 - The keepalive endpoint uses a separate server-only Bearer secret and anon RPC credentials without cookies or a user session.
 - Exactly seven migrations align with production history. Migration `20260717120000` and its resulting policy are production-verified; local database regression coverage passed 55/55 combined assertions without persistent fixture or runtime state.
-- `lib/supabase/admin.ts` is a server-only service-role helper used only for current-user account deletion. It must never be imported into Client Components.
+- `lib/neon/admin.ts` is a server-only service-role helper used only for current-user account deletion. It must never be imported into Client Components.
 
 Planned:
 

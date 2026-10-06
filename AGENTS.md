@@ -20,7 +20,7 @@ Every Codex session must read these files before changing code:
 - Inspect the current repository state before changing files.
 - Do not rebuild from scratch.
 - Do not duplicate existing routes, components, docs, or architecture.
-- Preserve the current stack: Next.js App Router, React, TypeScript, Tailwind CSS, `next-intl`, Supabase, and Vercel.
+- Preserve the current stack: Next.js App Router, React, TypeScript, Tailwind CSS, `next-intl`, Neon Auth/Postgres/Data API, and Vercel.
 - Prefer small, safe, incremental changes.
 - Keep the design minimalistic, clean, calm, professional, and responsive.
 - Avoid unnecessary abstractions, heavy dependencies, and broad refactors.
@@ -35,9 +35,9 @@ Every Codex session must read these files before changing code:
 
 - Never read, print, commit, or expose `.env.local` values.
 - Never commit real secrets, Supabase service role keys, OAuth secrets, payment keys, email keys, AI keys, or Vercel tokens.
-- Protect authentication, Supabase row-level security policies, environment variables, private messages, group data, and challenge content.
+- Protect authentication, Postgres row-level security policies, environment variables, private messages, group data, and challenge content.
 - Do not add real authentication, additional Supabase migrations, cloud saving, groups, invites, messaging, payments, AI, Resend, or Vercel Cron unless explicitly scoped.
-- Guest work currently stays in local browser storage only and must not be sent to Supabase unless a future phase explicitly requests it.
+- Guest work currently stays in local browser storage only and must not be sent to the hosted database unless a future phase explicitly requests it.
 
 ## Validation
 

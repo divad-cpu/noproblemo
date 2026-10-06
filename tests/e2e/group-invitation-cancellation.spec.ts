@@ -1,6 +1,6 @@
 import { expect, test, type BrowserContext, type Page, type Request } from "@playwright/test";
-import { createClient } from "@supabase/supabase-js";
-import type { Database, GroupRole } from "../../lib/supabase/types";
+import { createClient } from "./neon-client";
+import type { Database, GroupRole } from "../../lib/neon/types";
 
 type AccountName = "A" | "B" | "C" | "D" | "E" | "F";
 
@@ -25,7 +25,7 @@ async function login(page: Page, name: AccountName) {
   await page.getByRole("textbox", { name: "Email" }).fill(credentials.email);
   await page.locator('input[name="password"]').fill(credentials.password);
   await page.getByRole("button", { name: "Log in", exact: true }).click();
-  await expect(page).toHaveURL(/\/en\/app(?:[/?]|$)/);
+  await expect(page).toHaveURL(/\/en\/app(?:[/?]|$)/, { timeout: 30_000 });
 }
 
 async function openInvitationForm(page: Page, groupPath: string, inviteeId: string) {
@@ -64,8 +64,8 @@ test.describe("group invitation cancellation authorization", () => {
     process.env.E2E_INVITATION_CANCELLATION !== "true" ||
       !process.env.E2E_BASE_URL ||
       !process.env.E2E_PRODUCTION_URL ||
-      !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-      !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+      !process.env.NEON_DATA_API_URL ||
+      !process.env.E2E_BASE_URL ||
       !process.env.E2E_USER_A_EMAIL ||
       !process.env.E2E_USER_A_PASSWORD ||
       !process.env.E2E_USER_B_EMAIL ||
@@ -99,9 +99,8 @@ test.describe("group invitation cancellation authorization", () => {
     expect(isIsolatedHost).toBe(true);
 
     const api = createClient<Database>(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      { auth: { persistSession: false, autoRefreshToken: false } },
+      process.env.NEON_DATA_API_URL!,
+      process.env.E2E_BASE_URL!,
     );
     const contexts: BrowserContext[] = [];
     const pages = {} as Record<AccountName, Page>;
@@ -111,21 +110,15 @@ test.describe("group invitation cancellation authorization", () => {
 
     try {
       for (const name of ["A", "B", "C", "D", "E", "F"] as const) {
-        const identity = createClient<Database>(
-          process.env.NEXT_PUBLIC_SUPABASE_URL!,
-          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-          { auth: { persistSession: false, autoRefreshToken: false } },
-        );
-        const { data, error } = await identity.auth.signInWithPassword(account(name));
-        expect(error).toBeNull();
-        expect(data.user).not.toBeNull();
-        userIds[name] = data.user!.id;
-        await identity.auth.signOut();
-
-        const context = await browser.newContext({ baseURL });
+        const context = await browser.newContext({ baseURL, ignoreHTTPSErrors: baseURL.startsWith("https://localhost:") });
         contexts.push(context);
         pages[name] = await context.newPage();
         await login(pages[name], name);
+        const sessionResponse = await context.request.get("/api/auth/get-session");
+        expect(sessionResponse.ok()).toBe(true);
+        userIds[name] = (await sessionResponse.json()).user.id;
+        // Keep six test sign-ins within the provider's anti-abuse limits.
+        await pages[name].waitForTimeout(15_000);
       }
 
       const { error: ownerSignInError } = await api.auth.signInWithPassword(account("A"));

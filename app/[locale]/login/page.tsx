@@ -7,7 +7,7 @@ import { PendingSubmitButton } from "../_components/pending-submit-button";
 import { SiteFooter } from "../_components/site-footer";
 import { loginWithEmail } from "../auth/actions";
 import { getSafeLocalizedPath } from "@/lib/auth/safe-redirect";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createServerNeonClient } from "@/lib/neon/server";
 
 type LoginPageProps = {
   params: Promise<{ locale: Locale }>;
@@ -59,7 +59,7 @@ export default async function LoginPage({
   const t = await getTranslations({ locale, namespace: "Auth" });
   const passwordT = await getTranslations({ locale, namespace: "PasswordField" });
   const nextPath = getSafeLocalizedPath(getQueryValue(query, "next"), locale);
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createServerNeonClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

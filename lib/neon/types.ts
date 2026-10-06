@@ -575,6 +575,7 @@ export type Database = {
     };
     Views: Record<string, never>;
     Functions: {
+      delete_current_account: { Args: Record<PropertyKey, never>; Returns: boolean };
       admin_list_profiles: {
         Args: {
           profile_limit?: number;

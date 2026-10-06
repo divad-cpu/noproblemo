@@ -11,7 +11,7 @@ const notificationsPagePath = new URL(
   "../../app/[locale]/app/notifications/page.tsx",
   import.meta.url,
 );
-const typesPath = new URL("../../lib/supabase/types.ts", import.meta.url);
+const typesPath = new URL("../../lib/neon/types.ts", import.meta.url);
 
 function functionSlice(source, start, end) {
   return source.slice(source.indexOf(start), source.indexOf(end));
@@ -29,7 +29,7 @@ test("pending invitations use the caller-scoped RPC without widening group reads
     "search_profiles:",
   );
 
-  assert.match(groupsPage, /createServerSupabaseClient\(\)/);
+  assert.match(groupsPage, /createServerNeonClient\(\)/);
   assert.match(groupsPage, /supabase\.rpc\("pending_group_invitations"\)/);
   assert.match(groupsPage, /\.from\("group_invitations"\)/);
   assert.match(groupsPage, /\.eq\("invitee_id", user\.id\)/);

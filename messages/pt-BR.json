@@ -233,8 +233,8 @@
       "signup-weak-password": "Use uma senha com pelo menos 8 caracteres.",
       "signup-rate-limited": "Muitas tentativas de cadastro. Aguarde um pouco e tente novamente.",
       "signup-invalid-email": "Digite um endereço de email válido.",
-      "signup-provider-disabled": "Cadastro por email ainda não está disponível. Verifique as configurações do Supabase Auth.",
-      "reset-rate-limited": "Muitos e-mails de redefinição foram solicitados. Aguarde antes de tentar novamente. Durante testes, o Supabase pode exigir esperar pelo menos 1 hora ou usar um provedor SMTP configurado.",
+      "signup-provider-disabled": "Cadastro por email ainda não está disponível. Verifique as configurações do Neon Auth.",
+      "reset-rate-limited": "Muitos e-mails de redefinição foram solicitados. Aguarde antes de tentar novamente. Durante testes, o Neon pode exigir esperar pelo menos 1 hora ou usar um provedor SMTP configurado.",
       "reset-provider-or-smtp": "Não foi possível enviar o e-mail de redefinição agora. Tente mais tarde ou fale com o suporte.",
       "reset-invalid-email": "Digite um endereço de e-mail válido.",
       "reset-redirect-not-allowed": "A configuração do link de redefinição está incompleta. Fale com o suporte.",
@@ -448,6 +448,8 @@
       "displayName": "Configurações",
       "displayNamePlaceholder": "Configurações",
       "preferredLocale": "Configurações",
+      "currentPassword": "Senha atual",
+      "currentPasswordPlaceholder": "Digite sua senha atual",
       "newPassword": "Nova senha",
       "newPasswordPlaceholder": "Pelo menos 8 caracteres",
       "confirmPassword": "Confirmar senha",
@@ -462,7 +464,7 @@
     },
     "errors": {
       "updateFailed": "Configurações",
-      "profile-update-failed": "Não foi possível salvar o perfil. Verifique o Supabase e as políticas RLS.",
+      "profile-update-failed": "Não foi possível salvar o perfil. Verifique o Neon e as políticas RLS.",
       "password-weak": "Use uma senha com pelo menos 8 caracteres.",
       "password-mismatch": "As senhas não coincidem.",
       "password-update-failed": "Não foi possível atualizar a senha. Tente novamente.",
@@ -476,14 +478,14 @@
     },
     "password": {
       "title": "Alterar senha",
-      "body": "Defina uma nova senha para esta conta. Senhas são enviadas apenas ao Supabase Auth e não ficam em tabelas de perfil.",
+      "body": "Defina uma nova senha para esta conta. Senhas são enviadas apenas ao Neon Auth e não ficam em tabelas de perfil.",
       "submit": "Atualizar senha"
     },
     "danger": {
       "title": "Zona de perigo",
       "body": "Exclua esta conta somente se tiver certeza. Esta ação é permanente.",
       "effects": {
-        "auth": "Seu usuário do Supabase Auth será removido.",
+        "auth": "Seu usuário do Neon Auth será removido.",
         "data": "Seu perfil e dados próprios são removidos conforme as chaves estrangeiras do banco.",
         "anonymized": "Algumas mensagens ou atividades podem permanecer sem seu id de usuário quando o esquema preserva histórico.",
         "irreversible": "Esta ação não pode ser desfeita."
@@ -1018,7 +1020,7 @@
         "messages": "Configurações"
       },
       "supabase": {
-        "title": "Supabase",
+        "title": "Neon",
         "phase10Migration": "Configurações",
         "rls": "Configurações",
         "firstAdmin": "Configurações",

@@ -56,7 +56,7 @@
       },
       "private": {
         "title": "Local by default",
-        "body": "Guest work stays in browser storage and is not sent to Supabase."
+        "body": "Guest work stays in browser storage and is not sent to Neon."
       }
     }
   },
@@ -68,7 +68,7 @@
     "supportHint": "Need help?",
     "workspace": {
       "title": "Problem-solving workflow",
-      "localNotice": "Your guest draft is saved in local browser storage. It is not sent to Supabase.",
+      "localNotice": "Your guest draft is saved in local browser storage. It is not sent to Neon.",
       "summaryTitle": "Guest challenge summary",
       "emptyValue": "Not filled in yet.",
       "fields": {
@@ -199,7 +199,7 @@
       "title": "Or continue with a provider",
       "google": "Continue with Google",
       "apple": "Continue with Apple",
-      "note": "Google and Apple require provider configuration in Supabase before they work in production."
+      "note": "Google and Apple require provider configuration in Neon before they work in production."
     },
     "status": {
       "check-email": "Account created. Check your email to confirm the account, then return to NoProblemo.",
@@ -221,7 +221,7 @@
       "weak-password": "Use a password with at least 8 characters.",
       "signup-failed": "The account could not be created. Check the details or try again.",
       "oauth-provider": "That login provider is not available.",
-      "oauth-start": "The provider login could not start. Check Supabase provider setup.",
+      "oauth-start": "The provider login could not start. Check Neon provider setup.",
       "callback": "The confirmation link could not be completed. It may be invalid or expired. Try logging in or request a new link.",
       "auth-required": "Log in to access saved work. Guest mode remains available without an account.",
       "missing-email": "Enter your email address to request a reset link.",
@@ -233,8 +233,8 @@
       "signup-weak-password": "Use a password with at least 8 characters.",
       "signup-rate-limited": "Too many signup attempts. Wait a little and try again.",
       "signup-invalid-email": "Enter a valid email address.",
-      "signup-provider-disabled": "Email signup is not available yet. Check Supabase Auth provider settings.",
-      "reset-rate-limited": "Too many reset emails were requested. Please wait before trying again. During testing, Supabase may require waiting at least 1 hour or using a configured SMTP provider.",
+      "signup-provider-disabled": "Email signup is not available yet. Check Neon Auth provider settings.",
+      "reset-rate-limited": "Too many reset emails were requested. Please wait before trying again. During testing, Neon may require waiting at least 1 hour or using a configured SMTP provider.",
       "reset-provider-or-smtp": "The reset email could not be sent right now. Try again later or contact support.",
       "reset-invalid-email": "Enter a valid email address.",
       "reset-redirect-not-allowed": "The reset link configuration is incomplete. Contact support.",
@@ -360,7 +360,7 @@
     },
     "errors": {
       "listTitle": "Challenges could not be loaded.",
-      "listBody": "Check Supabase configuration, migration status, and RLS policies."
+      "listBody": "Check Neon configuration, migration status, and RLS policies."
     },
     "social": {
       "friendRequests": "Incoming friend requests",
@@ -411,7 +411,7 @@
     "submit": "Create draft challenge",
     "errors": {
       "missing-title": "Add a title before creating the challenge.",
-      "create-failed": "The challenge could not be created. Check Supabase setup and RLS policies."
+      "create-failed": "The challenge could not be created. Check Neon setup and RLS policies."
     }
   },
   "ChallengeDetail": {
@@ -448,6 +448,8 @@
       "displayName": "Display name",
       "displayNamePlaceholder": "Your name",
       "preferredLocale": "Preferred language",
+      "currentPassword": "Current password",
+      "currentPasswordPlaceholder": "Enter your current password",
       "newPassword": "New password",
       "newPasswordPlaceholder": "At least 8 characters",
       "confirmPassword": "Confirm password",
@@ -461,8 +463,8 @@
       "password-saved": "Password was updated."
     },
     "errors": {
-      "updateFailed": "Profile settings could not be saved. Check Supabase setup and RLS policies.",
-      "profile-update-failed": "Profile settings could not be saved. Check Supabase setup and RLS policies.",
+      "updateFailed": "Profile settings could not be saved. Check Neon setup and RLS policies.",
+      "profile-update-failed": "Profile settings could not be saved. Check Neon setup and RLS policies.",
       "password-weak": "Use a password with at least 8 characters.",
       "password-mismatch": "The passwords do not match.",
       "password-update-failed": "Password could not be updated. Try again.",
@@ -476,14 +478,14 @@
     },
     "password": {
       "title": "Change password",
-      "body": "Set a new password for this account. Passwords are sent only to Supabase Auth and are not stored in profile tables.",
+      "body": "Set a new password for this account. Passwords are sent only to Neon Auth and are not stored in profile tables.",
       "submit": "Update password"
     },
     "danger": {
       "title": "Danger zone",
       "body": "Delete this account only if you are sure. This action is permanent.",
       "effects": {
-        "auth": "Your Supabase Auth user will be removed.",
+        "auth": "Your Neon Auth user will be removed.",
         "data": "Your profile and owned records are removed according to database foreign keys.",
         "anonymized": "Some messages or activity may remain without your user id where the schema keeps history.",
         "irreversible": "This action cannot be undone."
@@ -952,8 +954,8 @@
       "settings": "Admin settings"
     },
     "verification": {
-      "title": "Live Supabase verification needed",
-      "body": "Phase 10 adds local migrations and RLS/RPC rules. Apply and test them against the real Supabase project before relying on production admin data.",
+      "title": "Live Neon verification needed",
+      "body": "Phase 10 adds local migrations and RLS/RPC rules. Apply and test them against the real Neon project before relying on production admin data.",
       "error": "Some admin data could not be loaded. Check that the Phase 10 migration is applied."
     },
     "metrics": {
@@ -1008,7 +1010,7 @@
     "back": "Back to admin",
     "eyebrow": "Admin settings",
     "title": "Admin readiness checklist",
-    "body": "A local status view for deployment, Supabase verification, and support setup.",
+    "body": "A local status view for deployment, Neon verification, and support setup.",
     "checklists": {
       "appStatus": {
         "title": "App status",
@@ -1018,10 +1020,10 @@
         "messages": "Messages, notifications, and activity remain protected by RLS."
       },
       "supabase": {
-        "title": "Supabase",
-        "phase10Migration": "Apply the Phase 10 migration in Supabase.",
+        "title": "Neon",
+        "phase10Migration": "Apply the Phase 10 migration in Neon.",
         "rls": "Review RLS policies with real authenticated users.",
-        "firstAdmin": "Assign the first admin manually in Supabase SQL.",
+        "firstAdmin": "Assign the first admin manually in Neon SQL.",
         "liveVerification": "Verify admin RPC behavior before production use."
       },
       "deployment": {

@@ -1,8 +1,8 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
 import type { Locale } from "@/i18n/routing";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
-import type { Database } from "@/lib/supabase/types";
+import { createServerNeonClient } from "@/lib/neon/server";
+import type { Database } from "@/lib/neon/types";
 import {
   removeFriend,
   respondFriendRequest,
@@ -50,7 +50,7 @@ function isKnownKey<T extends readonly string[]>(
 }
 
 async function getProfileMap(
-  supabase: Awaited<ReturnType<typeof createServerSupabaseClient>>,
+  supabase: Awaited<ReturnType<typeof createServerNeonClient>>,
   ids: string[],
 ) {
   const entries = await Promise.all(
@@ -79,7 +79,7 @@ export default async function FriendsPage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "Friends" });
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createServerNeonClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

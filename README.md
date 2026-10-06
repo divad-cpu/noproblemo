@@ -1,8 +1,10 @@
 # NoProblemo
 
-NoProblemo is a minimal, secure, multilingual problem-solving workspace for turning messy challenges into clearer decisions, action plans, and group discussions. It is built as a Next.js App Router MVP with Supabase Auth/Postgres/RLS.
+NoProblemo is a minimal, secure, multilingual problem-solving workspace for turning messy challenges into clearer decisions, action plans, and group discussions. It is built as a Next.js App Router MVP with Neon Auth/Postgres/RLS.
 
 ## Current Phase
+
+The Neon migration implementation is verified in an isolated branch and Vercel Preview as of 2026-10-06. Production cutover and source removal are tracked in `docs/NEON_MIGRATION.md`. The following Phase 11 release records are historical.
 
 Phase 11 is complete. The application repair release was merged through PR #2 as `91cac6d`, and its pending-invitation RPC consumer and bounded challenge-section conflict follow-ups were merged through PR #4 as `264a435`. Commit `264a435` is deployed and production-verified at `noproblemo.tech` through Vercel deployment `dpl_Bfo7GChwmpZh2oUeYvC1pXJNZKc7`. All six Supabase migrations were already applied and aligned locally/remotely before PR #4, which contained no migration. Future remote migrations or production-service changes still require explicit approval.
 
@@ -21,7 +23,7 @@ Not included in the current MVP:
 - TypeScript
 - Tailwind CSS 4
 - `next-intl`
-- Supabase Auth and database/RLS foundation
+- Neon managed email authentication and Postgres/Data API with RLS
 - Vercel deployment
 
 ## MVP State
@@ -30,8 +32,8 @@ Implemented:
 
 - Public landing, support, login, signup, and guest solve routes.
 - Guest workspace stored only in browser localStorage.
-- Supabase email auth. Google/Apple OAuth starts remain in code for future setup, but visible auth UI is email-only for now.
-- Resend Custom SMTP for production Supabase Auth transactional email; see `docs/SMTP_CONFIGURATION.md`.
+- Neon email auth. Google/Apple OAuth starts remain in code for future setup, but visible auth UI is email-only for now.
+- Resend Custom SMTP for production Neon Auth transactional email; see `docs/SMTP_CONFIGURATION.md`.
 - Compact browser print-based PDF export for saved challenges.
 - Protected dashboard, profile settings, saved challenge creation, saved challenge workspace, and guest import.
 - Friends, groups, group invitations, group roles, and explicit group challenge links.
@@ -76,7 +78,7 @@ Arabic (`ar`) and Urdu (`ur`) render with `dir="rtl"`. All other supported local
 - `/[locale]/signup` email signup route
 - `/[locale]/forgot-password` password reset request route
 - `/[locale]/reset-password` password reset completion route
-- `/[locale]/auth/callback` Supabase auth callback
+- `/[locale]/auth/callback` Neon auth callback
 - `/[locale]/auth/logout` logout handler
 - `/[locale]/app` protected dashboard
 - `/[locale]/app/challenges/new` minimal protected challenge creation
@@ -97,35 +99,31 @@ Guest users can start a problem-solving session without login. Drafts are stored
 
 Actions that require cloud saving or collaboration show a login prompt instead of performing the action.
 
-Logged-in users can import the current guest draft from the dashboard. Import creates a private draft challenge and related challenge sections through the authenticated Supabase session, then marks the local draft with `importedChallengeId` to avoid repeated imports from the same browser draft.
+Logged-in users can import the current guest draft from the dashboard. Import creates a private draft challenge and related challenge sections through the authenticated Neon session, then marks the local draft with `importedChallengeId` to avoid repeated imports from the same browser draft.
 
 ## Authentication
 
-Email login/signup uses Supabase Auth and is the only visible auth method for now. Signup failures are mapped to safe categories such as invalid email, weak password, rate limit, pending confirmation, provider configuration, or generic failure without exposing raw provider details. Google and Apple OAuth actions remain prepared in code for future setup, but their buttons are temporarily hidden from login/signup.
+Email login/signup uses Neon Auth and is the only visible auth method for now. Signup failures are mapped to safe categories such as invalid email, weak password, rate limit, pending confirmation, provider configuration, or generic failure without exposing raw provider details. Google and Apple OAuth actions remain prepared in code for future setup, but their buttons are temporarily hidden from login/signup.
 
-Email confirmation and OAuth use locale-specific `/[locale]/auth/callback` routes. If Supabase confirms an email but the server callback cannot exchange the PKCE code for a session, the login page shows a calm "email may already be confirmed" state instead of a false invalid-link error.
+Email confirmation and OAuth use locale-specific `/[locale]/auth/callback` routes and the native Neon SDK verifier exchange. Production email confirmation is required, using Resend SMTP and trusted redirect origins.
 
-Password recovery links should open `/[locale]/reset-password` directly. Forgot/reset password use an isolated browser-only Supabase recovery client to establish the recovery session and then update the password through Supabase Auth. This reset flow uses only the public Supabase URL and anon key, and it does not use the service-role key.
-
-For local password-reset testing, request a fresh reset email after the latest recovery fix and open the link in the same browser/profile that requested it. The isolated recovery flow can use browser URL hash tokens, which stay in the browser and are cleared after session setup. Old reset links may need to be resent after recovery-flow fixes.
-
-The applied Phase 4 database trigger creates `profiles` rows after signup.
+Password recovery opens `/[locale]/reset-password` with a single-use token. The token is captured in browser memory and removed from the address bar; the native Neon endpoint validates it when the new password is submitted. No database password, SMTP key, or administrator credential is available to the browser.
 
 ## Dashboard, Workspace And Settings
 
-The dashboard lists the authenticated user's saved challenges through Supabase RLS, shows empty/error states, keeps pending friend/group/notification items separate, and provides minimal quick actions.
+The dashboard lists the authenticated user's saved challenges through Neon Postgres RLS, shows empty/error states, keeps pending friend/group/notification items separate, and provides minimal quick actions.
 
 The saved challenge workspace supports the seven-step problem-solving workflow, editable challenge sections, possible solutions, pros/cons, risk/effort/impact scoring, tasks/actions, final recommendation, summary, Markdown copy/download export, and a compact browser print-based PDF export. For PDF, users click Save as PDF to open the protected print-only report route, then choose Save to PDF in the browser print dialog. The print report omits normal app chrome, editing controls, and empty sections where practical. No external PDF service is used.
 
-Profile settings can update `display_name` and `preferred_locale`. The preferred locale is saved to `profiles.preferred_locale`, then the settings page reopens in the selected locale. Logged-in users can also change their password through Supabase Auth.
+Profile settings can update `display_name` and `preferred_locale`. The preferred locale is saved to `profiles.preferred_locale`, then the settings page reopens in the selected locale. Logged-in users can also change their password through Neon Auth.
 
-Settings also include account deletion. The delete action requires a checkbox plus typing `DELETE`, verifies the current authenticated user server-side, and uses a server-only Supabase admin helper with `SUPABASE_SERVICE_ROLE_KEY`. The key must be configured only in the server environment and never exposed to the browser.
+Settings include account deletion. The action requires a checkbox plus typing `DELETE`, validates the current Neon session server-side, and calls `delete_current_account()`. The function accepts no user ID and deletes only `auth.uid()` with foreign-key cascades; anonymous execution is denied. Password changes require the current password.
 
 ## Friends And Groups
 
 Logged-in users can send friend requests, accept or decline incoming requests, cancel outgoing requests, view friends, and remove friendships. Friendship alone does not grant challenge access.
 
-Logged-in users can create private groups, invite users, accept or decline group invitations, manage basic roles, and link selected owned challenges to a group. Group challenge access is explicit through `group_challenges` and protected by Supabase RLS. The 100-member group limit is enforced in the Phase 8 migration.
+Logged-in users can create private groups, invite users, accept or decline group invitations, manage basic roles, and link selected owned challenges to a group. Group challenge access is explicit through `group_challenges` and protected by Postgres RLS. The 100-member group limit is enforced in the Phase 8 migration.
 
 The limited profile search RPC returns only `id`, `display_name`, and `avatar_url`; it does not expose emails or `auth.users`.
 
@@ -137,11 +135,11 @@ Notifications are private to the recipient and appear under `/[locale]/app/notif
 
 ## Admin
 
-Admins are identified by `profiles.role = 'admin'`. Admin routes check the authenticated Supabase session and the database profile role server-side before rendering. Non-admin users receive a not-found response and do not receive admin data.
+Admins are identified by `profiles.role = 'admin'`. Admin routes check the authenticated Neon session and the database profile role server-side before rendering. Non-admin users receive a not-found response and do not receive admin data.
 
 The Phase 10 admin overview shows aggregate counts, limited profile metadata, recent activity metadata, and recent admin audit-log entries. It does not query `auth.users`, expose emails, or show private message bodies or challenge content.
 
-The first admin should be assigned manually in the Supabase SQL editor by a trusted project owner, for example:
+The first admin should be assigned manually through a trusted Neon database connection by a trusted project owner, for example:
 
 ```sql
 update public.profiles
@@ -167,17 +165,17 @@ cp .env.local.example .env.local
 
 Do not commit `.env.local` or any real secret values.
 
-Required local variables are listed in `.env.local.example`. Use real values only in local `.env.local` and Vercel project settings:
+Required local variables are listed in `.env.example`. Use real values only in local `.env.local` and Vercel project settings:
 
 ```bash
 NEXT_PUBLIC_SITE_URL=
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
+NEON_AUTH_BASE_URL=
+NEON_DATA_API_URL=
+NEON_AUTH_COOKIE_SECRET=
 NEXT_PUBLIC_SUPPORT_EMAIL=fremtidsbloggen@gmail.com
 ```
 
-`SUPABASE_SERVICE_ROLE_KEY` is server-only and is used by `lib/supabase/admin.ts` for current-user account deletion. It is not used by the frontend and must never be exposed to the browser.
+All Neon configuration stays server-side. `NEON_AUTH_COOKIE_SECRET` must be a random secret of at least 32 characters. SMTP is configured directly in Neon; the app needs no SMTP key or database owner credential.
 
 Run the development server:
 
@@ -200,7 +198,9 @@ npm audit
 
 Do not run broad automatic `npm audit fix` changes without reviewing dependency impact.
 
-## Supabase Migration Notes
+## Historical Supabase Migration Notes
+
+Current migrations are in `neon/migrations/`; apply the four files in order only after Neon Auth and the Data API have been enabled. The following Supabase migrations are retained as source history. See `docs/NEON_MIGRATION.md`.
 
 Local migrations live in `supabase/migrations/`:
 

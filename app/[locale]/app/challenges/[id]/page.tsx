@@ -2,12 +2,12 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
 import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createServerNeonClient } from "@/lib/neon/server";
 import type {
   ChallengeSectionKey,
   ChallengeStatus,
   Database,
-} from "@/lib/supabase/types";
+} from "@/lib/neon/types";
 import {
   deleteSolution,
   deleteTask,
@@ -135,7 +135,7 @@ function formatDateTime(value: string, locale: Locale) {
 }
 
 async function getProfileMap(
-  supabase: Awaited<ReturnType<typeof createServerSupabaseClient>>,
+  supabase: Awaited<ReturnType<typeof createServerNeonClient>>,
   ids: string[],
 ) {
   const entries = await Promise.all(
@@ -268,7 +268,7 @@ export default async function ChallengePage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "Workspace" });
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createServerNeonClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/i18n/routing";
-import { getRecoverySupabaseClient } from "@/lib/supabase/recovery-client";
+import { authClient } from "@/lib/neon/client";
 import { PasswordField } from "../../_components/password-field";
 
 type ResetPasswordFormProps = {
@@ -27,128 +27,23 @@ type ResetPasswordFormProps = {
 };
 
 type RecoveryState = "checking" | "ready" | "error" | "updated";
-type RecoveryFailureReason =
-  | "expired-link"
-  | "verifier-missing-or-expired"
-  | "unknown";
-
-function classifyRecoveryFailure(error?: {
-  code?: string;
-  message?: string;
-  status?: number;
-}): RecoveryFailureReason {
-  const code = (error?.code ?? "").toLowerCase();
-  const message = (error?.message ?? "").toLowerCase();
-
-  if (code.includes("expired") || message.includes("expired")) {
-    return "expired-link";
-  }
-
-  if (
-    code.includes("verifier") ||
-    code.includes("pkce") ||
-    code.includes("flow_state") ||
-    code.includes("invalid_grant") ||
-    message.includes("verifier") ||
-    message.includes("pkce") ||
-    message.includes("flow state") ||
-    message.includes("invalid grant") ||
-    message.includes("auth code")
-  ) {
-    return "verifier-missing-or-expired";
-  }
-
-  return "unknown";
-}
-
-function warnRecoveryFailure(reason: RecoveryFailureReason) {
-  if (process.env.NODE_ENV === "development") {
-    console.warn(`Password reset exchange failed: ${reason}`);
-  }
-}
-
 export function ResetPasswordForm({ locale, labels }: ResetPasswordFormProps) {
   const [recoveryState, setRecoveryState] = useState<RecoveryState>("checking");
   const [message, setMessage] = useState("");
-  const supabase = useMemo(() => getRecoverySupabaseClient(), []);
+  const token = useRef<string | null>(null);
 
   useEffect(() => {
-    let active = true;
-
-    function markReady() {
-      if (!active) return;
-      setRecoveryState("ready");
-      setMessage(labels.ready);
-    }
-
-    function markFailed(reason: RecoveryFailureReason) {
-      if (!active) return;
-      warnRecoveryFailure(reason);
-      setRecoveryState("error");
-      setMessage(labels.linkInvalid);
-    }
-
-    async function prepareRecoverySession() {
-      const url = new URL(window.location.href);
-      const code = url.searchParams.get("code");
-      const hashParams = new URLSearchParams(url.hash.replace(/^#/, ""));
-      const accessToken = hashParams.get("access_token");
-      const refreshToken = hashParams.get("refresh_token");
-
-      if (code) {
-        const { error } = await supabase.auth.exchangeCodeForSession(code);
-        if (!active) return;
-        if (error) {
-          markFailed(classifyRecoveryFailure(error));
-          return;
-        }
-        window.history.replaceState(null, "", url.pathname);
-        markReady();
-        return;
-      }
-
-      if (accessToken && refreshToken) {
-        const { error } = await supabase.auth.setSession({
-          access_token: accessToken,
-          refresh_token: refreshToken,
-        });
-        if (!active) return;
-        if (error) {
-          markFailed(classifyRecoveryFailure(error));
-          return;
-        }
-        window.history.replaceState(null, "", url.pathname);
-        markReady();
-        return;
-      }
-
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      if (!active) return;
-
-      if (session) {
-        markReady();
-      } else {
-        markFailed("verifier-missing-or-expired");
-      }
-    }
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === "PASSWORD_RECOVERY" && session) {
-        markReady();
-      }
-    });
-
-    prepareRecoverySession();
-
-    return () => {
-      active = false;
-      subscription.unsubscribe();
-    };
-  }, [labels.linkInvalid, labels.ready, supabase]);
+    const url = new URL(window.location.href);
+    token.current ??= url.searchParams.get("token");
+    const invalid = url.searchParams.has("error") || !token.current;
+    url.searchParams.delete("token");
+    window.history.replaceState(null, "", `${url.pathname}${url.search}`);
+    const timer = window.setTimeout(() => {
+      setRecoveryState(invalid ? "error" : "ready");
+      setMessage(invalid ? labels.linkInvalid : labels.ready);
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, [labels.linkInvalid, labels.ready]);
 
   async function handleSubmit(formData: FormData) {
     const password = String(formData.get("password") ?? "");
@@ -166,7 +61,10 @@ export function ResetPasswordForm({ locale, labels }: ResetPasswordFormProps) {
       return;
     }
 
-    const { error } = await supabase.auth.updateUser({ password });
+    if (recoveryState !== "ready" || !token.current) return;
+    setRecoveryState("checking");
+    const { error } = await authClient.resetPassword({ newPassword: password, token: token.current })
+      .catch(() => ({ error: { message: "Request failed" } }));
 
     if (error) {
       setRecoveryState("ready");
@@ -174,7 +72,8 @@ export function ResetPasswordForm({ locale, labels }: ResetPasswordFormProps) {
       return;
     }
 
-    await supabase.auth.signOut();
+    token.current = null;
+    await authClient.signOut().catch(() => undefined);
     setRecoveryState("updated");
     setMessage(labels.success);
     window.location.assign(`/${locale}/login?status=password-reset-success`);

@@ -1,7 +1,8 @@
 import { createHash, timingSafeEqual } from "node:crypto";
-import { createClient } from "@supabase/supabase-js";
+import { NeonPostgrestClient, fetchWithToken } from "@neondatabase/postgrest-js";
+import { getNeonAuth } from "@/lib/neon/auth";
 import { NextResponse, type NextRequest } from "next/server";
-import type { Database } from "@/lib/supabase/types";
+import type { Database } from "@/lib/neon/types";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -31,7 +32,7 @@ export async function GET(request: NextRequest) {
   const keepaliveSecret = process.env.NOPROBLEMO_KEEPALIVE_SECRET;
 
   if (!keepaliveSecret) {
-    console.error("Supabase health check configuration is incomplete.");
+    console.error("Database health check configuration is incomplete.");
     return jsonResponse({ status: "unavailable" }, 503);
   }
 
@@ -45,39 +46,39 @@ export async function GET(request: NextRequest) {
     return jsonResponse({ status: "unauthorized" }, 401);
   }
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const dataApiUrl = process.env.NEON_DATA_API_URL;
 
-  if (!supabaseUrl || !supabaseAnonKey) {
-    console.error("Supabase health check configuration is incomplete.");
+  if (!dataApiUrl) {
+    console.error("Database health check configuration is incomplete.");
     return jsonResponse({ status: "unavailable" }, 503);
   }
 
   try {
-    const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
-      auth: {
-        autoRefreshToken: false,
-        detectSessionInUrl: false,
-        persistSession: false,
-      },
+    const supabase = new NeonPostgrestClient<Database>({
+      dataApiUrl,
+      options: { global: { fetch: fetchWithToken(async () => {
+        const { data, error } = await getNeonAuth().getAnonymousToken();
+        if (error || !data?.token) throw new Error("Health check authentication unavailable.");
+        return data.token;
+      }, (input, init) => fetch(input, { ...init, cache: "no-store" })) } },
     });
     const { data, error } = await supabase.rpc("noproblemo_health_check");
 
     if (error || data !== true) {
-      console.error("Supabase health check RPC failed.");
+      console.error("Database health check RPC failed.");
       return jsonResponse({ status: "unavailable" }, 503);
     }
 
     return jsonResponse(
       {
         status: "ok",
-        supabase: "reachable",
+        neon: "reachable",
         checkedAt: new Date().toISOString(),
       },
       200,
     );
   } catch {
-    console.error("Supabase health check request failed.");
+    console.error("Database health check request failed.");
     return jsonResponse({ status: "unavailable" }, 503);
   }
 }

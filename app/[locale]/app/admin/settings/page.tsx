@@ -2,7 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
 import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createServerNeonClient } from "@/lib/neon/server";
 
 type AdminSettingsPageProps = {
   params: Promise<{ locale: Locale }>;
@@ -25,14 +25,14 @@ const checklistGroups = [
 
 const envNames = [
   "NEXT_PUBLIC_SITE_URL",
-  "NEXT_PUBLIC_SUPABASE_URL",
-  "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+  "NEON_AUTH_BASE_URL",
+  "NEON_DATA_API_URL",
   "NEXT_PUBLIC_SUPPORT_EMAIL",
-  "SUPABASE_SERVICE_ROLE_KEY",
+  "NEON_AUTH_COOKIE_SECRET",
 ];
 
 async function requireAdmin(locale: Locale) {
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createServerNeonClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

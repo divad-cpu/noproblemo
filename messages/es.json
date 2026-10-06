@@ -233,8 +233,8 @@
       "signup-weak-password": "Usa una contraseña de al menos 8 caracteres.",
       "signup-rate-limited": "Demasiados intentos de registro. Espera un poco e inténtalo de nuevo.",
       "signup-invalid-email": "Introduce un correo válido.",
-      "signup-provider-disabled": "El registro por email aún no está disponible. Revisa la configuración de Supabase Auth.",
-      "reset-rate-limited": "Se solicitaron demasiados correos de restablecimiento. Espera antes de intentarlo de nuevo. Durante las pruebas, Supabase puede requerir esperar al menos 1 hora o usar un proveedor SMTP configurado.",
+      "signup-provider-disabled": "El registro por email aún no está disponible. Revisa la configuración de Neon Auth.",
+      "reset-rate-limited": "Se solicitaron demasiados correos de restablecimiento. Espera antes de intentarlo de nuevo. Durante las pruebas, Neon puede requerir esperar al menos 1 hora o usar un proveedor SMTP configurado.",
       "reset-provider-or-smtp": "No se pudo enviar el correo de restablecimiento ahora. Intenta más tarde o contacta soporte.",
       "reset-invalid-email": "Escribe una dirección de correo válida.",
       "reset-redirect-not-allowed": "La configuración del enlace de restablecimiento está incompleta. Contacta soporte.",
@@ -448,6 +448,8 @@
       "displayName": "Configuración",
       "displayNamePlaceholder": "Configuración",
       "preferredLocale": "Configuración",
+      "currentPassword": "Contraseña actual",
+      "currentPasswordPlaceholder": "Introduce tu contraseña actual",
       "newPassword": "Nueva contraseña",
       "newPasswordPlaceholder": "Al menos 8 caracteres",
       "confirmPassword": "Confirmar contraseña",
@@ -462,7 +464,7 @@
     },
     "errors": {
       "updateFailed": "Configuración",
-      "profile-update-failed": "No se pudo guardar el perfil. Revisa Supabase y las políticas RLS.",
+      "profile-update-failed": "No se pudo guardar el perfil. Revisa Neon y las políticas RLS.",
       "password-weak": "Usa una contraseña de al menos 8 caracteres.",
       "password-mismatch": "Las contraseñas no coinciden.",
       "password-update-failed": "No se pudo actualizar la contraseña. Inténtalo de nuevo.",
@@ -476,14 +478,14 @@
     },
     "password": {
       "title": "Cambiar contraseña",
-      "body": "Define una nueva contraseña para esta cuenta. Las contraseñas solo se envían a Supabase Auth y no se guardan en tablas de perfil.",
+      "body": "Define una nueva contraseña para esta cuenta. Las contraseñas solo se envían a Neon Auth y no se guardan en tablas de perfil.",
       "submit": "Actualizar contraseña"
     },
     "danger": {
       "title": "Zona de peligro",
       "body": "Elimina esta cuenta solo si estás seguro. Esta acción es permanente.",
       "effects": {
-        "auth": "Tu usuario de Supabase Auth será eliminado.",
+        "auth": "Tu usuario de Neon Auth será eliminado.",
         "data": "Tu perfil y datos propios se eliminarán según las claves foráneas de la base de datos.",
         "anonymized": "Algunos mensajes o actividad pueden permanecer sin tu id de usuario cuando el esquema conserva historial.",
         "irreversible": "Esta acción no se puede deshacer."
@@ -1018,7 +1020,7 @@
         "messages": "Configuración"
       },
       "supabase": {
-        "title": "Supabase",
+        "title": "Neon",
         "phase10Migration": "Configuración",
         "rls": "Configuración",
         "firstAdmin": "Configuración",

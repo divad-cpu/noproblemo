@@ -2,8 +2,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
 import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
-import type { ActivityType, Database } from "@/lib/supabase/types";
+import { createServerNeonClient } from "@/lib/neon/server";
+import type { ActivityType, Database } from "@/lib/neon/types";
 
 type AdminPageProps = {
   params: Promise<{ locale: Locale }>;
@@ -55,7 +55,7 @@ function profileRoleLabelKey(role: string) {
 }
 
 async function requireAdmin(locale: Locale) {
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createServerNeonClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

@@ -1,3 +1,9 @@
+# Current provider — 2026-10-06
+
+SMTP has been transferred to Neon Auth using the owner-supplied sending key. Host, TLS port, sender address and sending domain remain the same. SMTP authentication has passed; native app password recovery and account operations are separately verified. Mailbox delivery under Neon has not yet been checked.
+
+The following verification records describe the historical Supabase configuration and are preserved unchanged. See `NEON_MIGRATION.md` for current runtime and production gates.
+
 # NoProblemo Custom SMTP and Auth Email Operations
 
 Last verified: 2026-08-01

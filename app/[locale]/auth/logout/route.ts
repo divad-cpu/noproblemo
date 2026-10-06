@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createServerNeonClient } from "@/lib/neon/server";
 import { defaultLocale, routing, type Locale } from "@/i18n/routing";
 
 type LogoutContext = {
@@ -15,12 +15,13 @@ function getSafeLocale(locale: string): Locale {
 async function signOutAndRedirect(request: NextRequest, context: LogoutContext) {
   const { locale: rawLocale } = await context.params;
   const locale = getSafeLocale(rawLocale);
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createServerNeonClient();
 
   await supabase.auth.signOut();
 
   return NextResponse.redirect(
     new URL(`/${locale}/login?status=signed-out`, request.url),
+    { status: 303 },
   );
 }
 

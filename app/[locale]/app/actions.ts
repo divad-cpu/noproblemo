@@ -2,15 +2,15 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { createAdminSupabaseClient } from "@/lib/supabase/admin";
+import { createServerNeonClient } from "@/lib/neon/server";
+import { getNeonAuth } from "@/lib/neon/auth";
 import { defaultLocale, routing, type Locale } from "@/i18n/routing";
 import type {
   ChallengeSectionKey,
   ChallengeStatus,
   Database,
   GroupRole,
-} from "@/lib/supabase/types";
+} from "@/lib/neon/types";
 
 type GuestDraft = {
   problem?: unknown;
@@ -193,7 +193,7 @@ function sectionsFromDraft(draft: GuestDraft) {
 }
 
 async function getAuthenticatedUser() {
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createServerNeonClient();
   const {
     data: { user },
     error,
@@ -209,7 +209,7 @@ async function getAuthenticatedUser() {
 async function requireOwnedChallenge(
   challengeId: string,
 ): Promise<{
-  supabase: Awaited<ReturnType<typeof createServerSupabaseClient>>;
+  supabase: Awaited<ReturnType<typeof createServerNeonClient>>;
   userId: string;
   challenge:
     Database["public"]["Tables"]["challenges"]["Row"]
@@ -264,7 +264,7 @@ function canonicalFriendPair(userA: string, userB: string) {
 }
 
 async function logChallengeActivity(
-  supabase: Awaited<ReturnType<typeof createServerSupabaseClient>>,
+  supabase: Awaited<ReturnType<typeof createServerNeonClient>>,
   userId: string,
   challengeId: string,
   type: "challenge_updated" | "task_updated" | "solution_updated",
@@ -449,8 +449,9 @@ export async function updateProfile(formData: FormData) {
 
 export async function updatePassword(formData: FormData) {
   const locale = getLocale(formData);
-  const password = firstString(formData.get("password"));
-  const confirmPassword = firstString(formData.get("confirmPassword"));
+  const password = String(formData.get("password") ?? "");
+  const currentPassword = String(formData.get("currentPassword") ?? "");
+  const confirmPassword = String(formData.get("confirmPassword") ?? "");
 
   if (password.length < 8) {
     redirect(`/${locale}/app/settings?error=password-weak`);
@@ -460,13 +461,13 @@ export async function updatePassword(formData: FormData) {
     redirect(`/${locale}/app/settings?error=password-mismatch`);
   }
 
-  const { supabase, user } = await getAuthenticatedUser();
+  const { user } = await getAuthenticatedUser();
 
   if (!user) {
     redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/settings`);
   }
 
-  const { error } = await supabase.auth.updateUser({ password });
+  const { error } = await getNeonAuth().changePassword({ currentPassword, newPassword: password, revokeOtherSessions: true });
 
   if (error) {
     redirect(`/${locale}/app/settings?error=password-update-failed`);
@@ -490,20 +491,13 @@ export async function deleteCurrentAccount(formData: FormData) {
     redirect(`/${locale}/login?error=auth-required&next=/${locale}/app/settings`);
   }
 
-  let adminSupabase: ReturnType<typeof createAdminSupabaseClient>;
-  try {
-    adminSupabase = createAdminSupabaseClient();
-  } catch {
-    redirect(`/${locale}/app/settings?error=account-delete-unavailable`);
-  }
+  const { data: deleted, error } = await supabase.rpc("delete_current_account");
 
-  const { error } = await adminSupabase.auth.admin.deleteUser(user.id);
-
-  if (error) {
+  if (error || deleted !== true) {
     redirect(`/${locale}/app/settings?error=account-delete-failed`);
   }
 
-  await supabase.auth.signOut();
+  await getNeonAuth().signOut();
   redirect(`/${locale}/login?status=account-deleted`);
 }
 

@@ -1,6 +1,6 @@
 import { expect, test, type BrowserContext, type Page, type Request } from "@playwright/test";
-import { createClient } from "@supabase/supabase-js";
-import type { Database } from "../../lib/supabase/types";
+import { createClient } from "./neon-client";
+import type { Database } from "../../lib/neon/types";
 
 type AccountName = "A" | "B" | "C";
 
@@ -40,12 +40,14 @@ function waitForSectionSaveResponse(page: Page, challengePath: string) {
 }
 
 async function login(page: Page, name: AccountName) {
+  // Pace isolated fixture logins to respect the managed auth burst limit.
+  await page.waitForTimeout(15_000);
   const credentials = account(name);
   await page.goto("/en/login");
   await page.getByRole("textbox", { name: "Email" }).fill(credentials.email);
   await page.locator('input[name="password"]').fill(credentials.password);
   await page.getByRole("button", { name: "Log in", exact: true }).click();
-  await expect(page).toHaveURL(/\/en\/app(?:[/?]|$)/);
+  await expect(page).toHaveURL(/\/en\/app(?:[/?]|$)/, { timeout: 30_000 });
 }
 
 async function setDisplayName(page: Page, displayName: string) {
@@ -95,15 +97,15 @@ test.describe("pending invitation and section conflict Preview follow-up", () =>
     process.env.E2E_FOLLOWUP_PREVIEW !== "true" ||
       !process.env.E2E_BASE_URL ||
       !process.env.E2E_PRODUCTION_URL ||
-      !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-      !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+      !process.env.NEON_DATA_API_URL ||
+      !process.env.E2E_BASE_URL ||
       !process.env.E2E_USER_A_EMAIL ||
       !process.env.E2E_USER_A_PASSWORD ||
       !process.env.E2E_USER_B_EMAIL ||
       !process.env.E2E_USER_B_PASSWORD ||
       !process.env.E2E_USER_C_EMAIL ||
       !process.env.E2E_USER_C_PASSWORD,
-    "Explicit Preview URL, Supabase anon configuration, and disposable accounts are required.",
+    "Explicit Preview URL, Neon Data API configuration, and disposable accounts are required.",
   );
 
   test("three disposable users verify invitation identity and a bounded concurrent first save", async ({
@@ -114,7 +116,7 @@ test.describe("pending invitation and section conflict Preview follow-up", () =>
     const baseURL = process.env.E2E_BASE_URL!;
     const productionURL = process.env.E2E_PRODUCTION_URL!;
     expect(new URL(baseURL).origin).not.toBe(new URL(productionURL).origin);
-    expect(new URL(baseURL).hostname).toMatch(/\.vercel\.app$/);
+    expect(new URL(baseURL).hostname).toMatch(/^(localhost|127\.0\.0\.1)$|\.vercel\.app$/);
 
     const runId = `${Date.now().toString(36)}-${process.pid}`;
     const prefix = `CODEX-QA-${runId}`;
@@ -136,14 +138,12 @@ test.describe("pending invitation and section conflict Preview follow-up", () =>
     let primaryError: unknown;
 
     const api = createClient<Database>(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      { auth: { persistSession: false, autoRefreshToken: false } },
+      process.env.NEON_DATA_API_URL!,
+      process.env.E2E_BASE_URL!,
     );
     const identityApi = createClient<Database>(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      { auth: { persistSession: false, autoRefreshToken: false } },
+      process.env.NEON_DATA_API_URL!,
+      process.env.E2E_BASE_URL!,
     );
 
     try {
@@ -160,7 +160,7 @@ test.describe("pending invitation and section conflict Preview follow-up", () =>
       const userBId = userBIdentity.user!.id;
 
       for (const name of ["A", "B", "C"] as const) {
-        const context = await browser.newContext({ baseURL });
+        const context = await browser.newContext({ baseURL, ignoreHTTPSErrors: baseURL.startsWith("https://localhost:") });
         contexts.push(context);
         const page = await context.newPage();
         pages[name] = page;
@@ -168,7 +168,7 @@ test.describe("pending invitation and section conflict Preview follow-up", () =>
         originalNames[name] = await setDisplayName(page, names[name]);
       }
 
-      const a2Context = await browser.newContext({ baseURL });
+      const a2Context = await browser.newContext({ baseURL, ignoreHTTPSErrors: baseURL.startsWith("https://localhost:") });
       contexts.push(a2Context);
       pages.A2 = await a2Context.newPage();
       await login(pages.A2, "A");
@@ -314,7 +314,7 @@ test.describe("pending invitation and section conflict Preview follow-up", () =>
             targetSection = missingKey;
             sectionApi = identityApi;
             sectionPrimaryPage = pages.B;
-            const b2Context = await browser.newContext({ baseURL });
+            const b2Context = await browser.newContext({ baseURL, ignoreHTTPSErrors: baseURL.startsWith("https://localhost:") });
             contexts.push(b2Context);
             pages.B2 = await b2Context.newPage();
             await login(pages.B2, "B");
@@ -335,6 +335,7 @@ test.describe("pending invitation and section conflict Preview follow-up", () =>
           sectionPrimaryPage.goto(challengePath),
           sectionSecondaryPage.goto(challengePath),
         ]);
+        await Promise.all([sectionPrimaryPage.waitForLoadState("networkidle"), sectionSecondaryPage.waitForLoadState("networkidle")]);
         originalSections = Object.fromEntries(
           await Promise.all(
             sectionKeys.map(async (key) => [
@@ -395,6 +396,7 @@ test.describe("pending invitation and section conflict Preview follow-up", () =>
         await sectionPrimaryPage.unrouteAll({ behavior: "wait" });
         await sectionSecondaryPage.unrouteAll({ behavior: "wait" });
         await sectionPrimaryPage.reload();
+        await sectionPrimaryPage.waitForLoadState("networkidle");
         const sequentialValue = `${prefix}-sequential`;
         await sectionPrimaryPage
           .locator(`textarea[name="${targetSection}"]`)
@@ -417,6 +419,7 @@ test.describe("pending invitation and section conflict Preview follow-up", () =>
         expect(sequentialRows?.[0].content).toBe(sequentialValue);
 
         await sectionPrimaryPage.goto(challengePath);
+        await sectionPrimaryPage.waitForLoadState("networkidle");
         for (const key of sectionKeys) {
           await sectionPrimaryPage
             .locator(`textarea[name="${key}"]`)
@@ -437,6 +440,7 @@ test.describe("pending invitation and section conflict Preview follow-up", () =>
       if (challengePath && originalSections && restorationPage) {
         await safeCleanup(async () => {
           await restorationPage.goto(challengePath);
+          await restorationPage.waitForLoadState("networkidle");
           for (const key of sectionKeys) {
             await restorationPage
               .locator(`textarea[name="${key}"]`)

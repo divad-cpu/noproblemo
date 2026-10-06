@@ -2,8 +2,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
 import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
-import type { Database } from "@/lib/supabase/types";
+import { createServerNeonClient } from "@/lib/neon/server";
+import type { Database } from "@/lib/neon/types";
 import { markAllNotificationsRead, markNotificationRead } from "../actions";
 
 type NotificationsPageProps = {
@@ -51,7 +51,7 @@ export default async function NotificationsPage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "Notifications" });
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createServerNeonClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

@@ -1,3 +1,9 @@
+# Current Backend Migration — 2026-10-06
+
+Neon Free is the approved destination. The isolated migration implementation has passed lint, typecheck, build, group role/invitation browser tests, direct private-data denial and group-deletion checks, and hosted Preview login/private routes/logout. The initial 557 source records matched every field after remapping the four approved test identities. Production cutover and Supabase deletion are pending. See `docs/NEON_MIGRATION.md`.
+
+The release records below describe the historical Supabase deployment. Preserve them as evidence.
+
 # Current State
 
 Last updated: 2026-08-01

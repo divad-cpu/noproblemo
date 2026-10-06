@@ -1,8 +1,8 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import type { Locale } from "@/i18n/routing";
-import { getRecoverySupabaseClient } from "@/lib/supabase/recovery-client";
+import { authClient } from "@/lib/neon/client";
 
 type ForgotPasswordFormProps = {
   locale: Locale;
@@ -98,7 +98,6 @@ function warnResetFailure(reason: ResetFailureReason) {
 }
 
 export function ForgotPasswordForm({ locale, labels }: ForgotPasswordFormProps) {
-  const supabase = useMemo(() => getRecoverySupabaseClient(), []);
   const [state, setState] = useState<FormState>("idle");
   const [message, setMessage] = useState("");
   const [cooldownSeconds, setCooldownSeconds] = useState(0);
@@ -135,9 +134,7 @@ export function ForgotPasswordForm({ locale, labels }: ForgotPasswordFormProps) 
     }
 
     const redirectTo = `${window.location.origin}/${locale}/reset-password`;
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo,
-    });
+    const { error } = await authClient.requestPasswordReset({ email, redirectTo }).catch(() => ({ error: { message: "Request failed" } }));
 
     if (error) {
       const reason = classifyResetFailure(error);

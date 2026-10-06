@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { defaultLocale, routing, type Locale } from "@/i18n/routing";
 import { LanguageSwitcher } from "../_components/language-switcher";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createServerNeonClient } from "@/lib/neon/server";
 import { getSafeLocalizedPath } from "@/lib/auth/safe-redirect";
 
 type ProtectedAppLayoutProps = {
@@ -24,7 +24,7 @@ export default async function ProtectedAppLayout({
 }: ProtectedAppLayoutProps) {
   const { locale: rawLocale } = await params;
   const locale = getSafeLocale(rawLocale);
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createServerNeonClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

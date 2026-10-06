@@ -2,8 +2,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
 import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
-import type { ChallengeStatus, Database } from "@/lib/supabase/types";
+import { createServerNeonClient } from "@/lib/neon/server";
+import type { ChallengeStatus, Database } from "@/lib/neon/types";
 import { GuestImportCard } from "./_components/guest-import-card";
 
 type DashboardPageProps = {
@@ -99,7 +99,7 @@ export default async function DashboardPage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "Dashboard" });
   const status = getQueryValue(query, "status");
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createServerNeonClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

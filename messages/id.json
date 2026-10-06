@@ -233,8 +233,8 @@
       "signup-weak-password": "Gunakan kata sandi minimal 8 karakter.",
       "signup-rate-limited": "Terlalu banyak percobaan daftar. Tunggu sebentar lalu coba lagi.",
       "signup-invalid-email": "Masukkan alamat email yang valid.",
-      "signup-provider-disabled": "Pendaftaran email belum tersedia. Periksa pengaturan Supabase Auth.",
-      "reset-rate-limited": "Terlalu banyak email reset diminta. Tunggu sebelum mencoba lagi. Saat pengujian, Supabase mungkin meminta menunggu setidaknya 1 jam atau menggunakan penyedia SMTP yang dikonfigurasi.",
+      "signup-provider-disabled": "Pendaftaran email belum tersedia. Periksa pengaturan Neon Auth.",
+      "reset-rate-limited": "Terlalu banyak email reset diminta. Tunggu sebelum mencoba lagi. Saat pengujian, Neon mungkin meminta menunggu setidaknya 1 jam atau menggunakan penyedia SMTP yang dikonfigurasi.",
       "reset-provider-or-smtp": "Email reset belum dapat dikirim. Coba lagi nanti atau hubungi dukungan.",
       "reset-invalid-email": "Masukkan alamat email yang valid.",
       "reset-redirect-not-allowed": "Konfigurasi tautan reset belum lengkap. Hubungi dukungan.",
@@ -448,6 +448,8 @@
       "displayName": "Pengaturan",
       "displayNamePlaceholder": "Pengaturan",
       "preferredLocale": "Pengaturan",
+      "currentPassword": "Kata sandi saat ini",
+      "currentPasswordPlaceholder": "Masukkan kata sandi saat ini",
       "newPassword": "Kata sandi baru",
       "newPasswordPlaceholder": "Minimal 8 karakter",
       "confirmPassword": "Konfirmasi kata sandi",
@@ -462,7 +464,7 @@
     },
     "errors": {
       "updateFailed": "Pengaturan",
-      "profile-update-failed": "Pengaturan profil tidak dapat disimpan. Periksa Supabase dan kebijakan RLS.",
+      "profile-update-failed": "Pengaturan profil tidak dapat disimpan. Periksa Neon dan kebijakan RLS.",
       "password-weak": "Gunakan kata sandi minimal 8 karakter.",
       "password-mismatch": "Kata sandi tidak sama.",
       "password-update-failed": "Kata sandi tidak dapat diperbarui. Coba lagi.",
@@ -476,14 +478,14 @@
     },
     "password": {
       "title": "Ubah kata sandi",
-      "body": "Tetapkan kata sandi baru untuk akun ini. Kata sandi hanya dikirim ke Supabase Auth dan tidak disimpan di tabel profil.",
+      "body": "Tetapkan kata sandi baru untuk akun ini. Kata sandi hanya dikirim ke Neon Auth dan tidak disimpan di tabel profil.",
       "submit": "Perbarui kata sandi"
     },
     "danger": {
       "title": "Zona bahaya",
       "body": "Hapus akun ini hanya jika Anda yakin. Tindakan ini permanen.",
       "effects": {
-        "auth": "Pengguna Supabase Auth Anda akan dihapus.",
+        "auth": "Pengguna Neon Auth Anda akan dihapus.",
         "data": "Profil dan data milik Anda dihapus sesuai foreign key database.",
         "anonymized": "Beberapa pesan atau aktivitas mungkin tetap ada tanpa id pengguna Anda jika skema menyimpan riwayat.",
         "irreversible": "Tindakan ini tidak dapat dibatalkan."
@@ -1018,7 +1020,7 @@
         "messages": "Pengaturan"
       },
       "supabase": {
-        "title": "Supabase",
+        "title": "Neon",
         "phase10Migration": "Pengaturan",
         "rls": "Pengaturan",
         "firstAdmin": "Pengaturan",

@@ -1,8 +1,8 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
 import type { Locale } from "@/i18n/routing";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
-import type { ChallengeSectionKey, Database } from "@/lib/supabase/types";
+import { createServerNeonClient } from "@/lib/neon/server";
+import type { ChallengeSectionKey, Database } from "@/lib/neon/types";
 import { ChallengePrintControls } from "../../../_components/challenge-print-controls";
 import { ChallengePrintReport } from "../../../_components/challenge-print-report";
 
@@ -70,7 +70,7 @@ export default async function ChallengePrintPage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "Workspace" });
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createServerNeonClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

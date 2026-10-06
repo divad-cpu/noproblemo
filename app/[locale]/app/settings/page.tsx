@@ -5,7 +5,7 @@ import { routing } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "../../_components/language-switcher";
 import { PasswordField } from "../../_components/password-field";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createServerNeonClient } from "@/lib/neon/server";
 import { deleteCurrentAccount, updatePassword, updateProfile } from "../actions";
 
 type SettingsPageProps = {
@@ -54,7 +54,7 @@ export default async function SettingsPage({
     locale,
     namespace: "LanguageSwitcher.locales",
   });
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createServerNeonClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -169,6 +169,14 @@ export default async function SettingsPage({
             {t("password.body")}
           </p>
         </div>
+        <PasswordField
+          name="currentPassword"
+          label={t("fields.currentPassword")}
+          autoComplete="current-password"
+          required
+          placeholder={t("fields.currentPasswordPlaceholder")}
+          buttonLabels={{ show: passwordT("show"), hide: passwordT("hide") }}
+        />
         <PasswordField
           name="password"
           label={t("fields.newPassword")}

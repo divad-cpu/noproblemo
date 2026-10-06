@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { getNeonAuth } from "@/lib/neon/auth";
 import { defaultLocale, routing, type Locale } from "@/i18n/routing";
 import { getSafeLocalizedPath } from "@/lib/auth/safe-redirect";
 
@@ -30,6 +30,9 @@ function getLocale(formData: FormData): Locale {
 }
 
 function getSiteUrl() {
+  if (process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
   return (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(
     /\/$/,
     "",
@@ -108,7 +111,7 @@ function warnSignupFailure(reason: string) {
 export async function loginWithEmail(formData: FormData) {
   const locale = getLocale(formData);
   const email = firstString(formData.get("email"));
-  const password = firstString(formData.get("password"));
+  const password = String(formData.get("password") ?? "");
   const nextPath = getSafeNextPath(formData.get("next"), locale);
 
   if (!email || !password) {
@@ -119,8 +122,8 @@ export async function loginWithEmail(formData: FormData) {
     redirect(authUrl(locale, "login", params));
   }
 
-  const supabase = await createServerSupabaseClient();
-  const { error } = await supabase.auth.signInWithPassword({
+  const auth = getNeonAuth();
+  const { error } = await auth.signIn.email({
     email,
     password,
   });
@@ -140,7 +143,7 @@ export async function signUpWithEmail(formData: FormData) {
   const locale = getLocale(formData);
   const displayName = firstString(formData.get("displayName"));
   const email = firstString(formData.get("email"));
-  const password = firstString(formData.get("password"));
+  const password = String(formData.get("password") ?? "");
   const nextPath = getSafeNextPath(formData.get("next"), locale);
 
   if (!email || !password) {
@@ -159,18 +162,13 @@ export async function signUpWithEmail(formData: FormData) {
     redirect(authUrl(locale, "signup", params));
   }
 
-  const supabase = await createServerSupabaseClient();
+  const auth = getNeonAuth();
   const emailRedirectTo = `${getSiteUrl()}/${locale}/auth/callback?next=${encodeURIComponent(nextPath)}&source=email`;
-  const { data, error } = await supabase.auth.signUp({
+  const { data, error } = await auth.signUp.email({
     email,
     password,
-    options: {
-      emailRedirectTo,
-      data: {
-        display_name: displayName || null,
-        preferred_locale: locale,
-      },
-    },
+    name: displayName || email.split("@")[0],
+    callbackURL: emailRedirectTo,
   });
 
   if (error) {
@@ -183,15 +181,7 @@ export async function signUpWithEmail(formData: FormData) {
     redirect(authUrl(locale, "signup", params));
   }
 
-  if (!data.session && data.user?.identities?.length === 0) {
-    const params = new URLSearchParams({
-      status: "signup-existing-or-pending",
-      next: nextPath,
-    });
-    redirect(authUrl(locale, "signup", params));
-  }
-
-  if (data.session) {
+  if (data?.token) {
     redirect(withStatus(nextPath, "account-created"));
   }
 
@@ -217,14 +207,11 @@ export async function resendSignupConfirmation(formData: FormData) {
     );
   }
 
-  const supabase = await createServerSupabaseClient();
+  const auth = getNeonAuth();
   const emailRedirectTo = `${getSiteUrl()}/${locale}/auth/callback?next=${encodeURIComponent(nextPath)}&source=email`;
-  const { error } = await supabase.auth.resend({
-    type: "signup",
+  const { error } = await auth.sendVerificationEmail({
     email,
-    options: {
-      emailRedirectTo,
-    },
+    callbackURL: emailRedirectTo,
   });
 
   if (error) {
@@ -256,16 +243,14 @@ export async function signInWithOAuth(formData: FormData) {
     redirect(authUrl(locale, "login", params));
   }
 
-  const supabase = await createServerSupabaseClient();
+  const auth = getNeonAuth();
   const redirectTo = `${getSiteUrl()}/${locale}/auth/callback?next=${encodeURIComponent(nextPath)}&source=oauth`;
-  const { data, error } = await supabase.auth.signInWithOAuth({
+  const { data, error } = await auth.signIn.social({
     provider,
-    options: {
-      redirectTo,
-    },
+    callbackURL: redirectTo,
   });
 
-  if (error || !data.url) {
+  if (error || !data?.url) {
     const params = new URLSearchParams({
       error: "oauth-start",
       next: nextPath,
@@ -290,11 +275,9 @@ export async function requestPasswordReset(formData: FormData) {
     );
   }
 
-  const supabase = await createServerSupabaseClient();
+  const auth = getNeonAuth();
   const redirectTo = `${getSiteUrl()}/${locale}/reset-password`;
-  const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo,
-  });
+  const { error } = await auth.requestPasswordReset({ email, redirectTo });
 
   if (error) {
     redirect(
@@ -317,8 +300,8 @@ export async function requestPasswordReset(formData: FormData) {
 
 export async function resetPassword(formData: FormData) {
   const locale = getLocale(formData);
-  const password = firstString(formData.get("password"));
-  const confirmPassword = firstString(formData.get("confirmPassword"));
+  const password = String(formData.get("password") ?? "");
+  const confirmPassword = String(formData.get("confirmPassword") ?? "");
 
   if (password.length < 8) {
     redirect(
@@ -340,22 +323,12 @@ export async function resetPassword(formData: FormData) {
     );
   }
 
-  const supabase = await createServerSupabaseClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect(
-      authUrl(
-        locale,
-        "reset-password",
-        new URLSearchParams({ error: "reset-link-invalid" }),
-      ),
-    );
+  const auth = getNeonAuth();
+  const token = firstString(formData.get("token"));
+  if (!token) {
+    redirect(authUrl(locale, "reset-password", new URLSearchParams({ error: "reset-link-invalid" })));
   }
-
-  const { error } = await supabase.auth.updateUser({ password });
+  const { error } = await auth.resetPassword({ newPassword: password, token });
 
   if (error) {
     redirect(
@@ -367,7 +340,7 @@ export async function resetPassword(formData: FormData) {
     );
   }
 
-  await supabase.auth.signOut();
+  await auth.signOut();
   redirect(
     authUrl(
       locale,

@@ -56,7 +56,7 @@
       },
       "private": {
         "title": "Lokalt som standard",
-        "body": "Gjestearbeid blir i nettleserens lagring og sendes ikke til Supabase."
+        "body": "Gjestearbeid blir i nettleserens lagring og sendes ikke til Neon."
       }
     }
   },
@@ -84,7 +84,7 @@
     "supportHint": "Trenger du hjelp?",
     "workspace": {
       "title": "Arbeidsflyt for problemløsing",
-      "localNotice": "Gjestekladden lagres i lokal nettleserlagring. Den sendes ikke til Supabase.",
+      "localNotice": "Gjestekladden lagres i lokal nettleserlagring. Den sendes ikke til Neon.",
       "summaryTitle": "Sammendrag av gjesteutfordring",
       "emptyValue": "Ikke fylt ut ennå.",
       "fields": {
@@ -199,7 +199,7 @@
       "title": "Eller fortsett med en leverandør",
       "google": "Fortsett med Google",
       "apple": "Fortsett med Apple",
-      "note": "Google og Apple krever leverandøroppsett i Supabase før de virker i produksjon."
+      "note": "Google og Apple krever leverandøroppsett i Neon før de virker i produksjon."
     },
     "status": {
       "check-email": "Kontoen er opprettet. Sjekk e-posten for å bekrefte kontoen, og gå tilbake til NoProblemo.",
@@ -221,7 +221,7 @@
       "weak-password": "Bruk et passord med minst 8 tegn.",
       "signup-failed": "Kontoen kunne ikke opprettes. Sjekk detaljene eller prøv igjen.",
       "oauth-provider": "Denne innloggingsleverandøren er ikke tilgjengelig.",
-      "oauth-start": "Leverandørinnlogging kunne ikke starte. Kontroller Supabase-oppsettet.",
+      "oauth-start": "Leverandørinnlogging kunne ikke starte. Kontroller Neon-oppsettet.",
       "callback": "Bekreftelseslenken kunne ikke fullføres. Den kan være ugyldig eller utløpt. Prøv å logge inn eller be om en ny lenke.",
       "auth-required": "Logg inn for å åpne lagret arbeid. Gjestemodus er fortsatt tilgjengelig uten konto.",
       "missing-email": "Skriv inn e-postadressen for å be om en lenke.",
@@ -233,8 +233,8 @@
       "signup-weak-password": "Bruk et passord med minst 8 tegn.",
       "signup-rate-limited": "For mange registreringsforsøk. Vent litt og prøv igjen.",
       "signup-invalid-email": "Skriv inn en gyldig e-postadresse.",
-      "signup-provider-disabled": "E-postregistrering er ikke tilgjengelig ennå. Sjekk Supabase Auth-innstillingene.",
-      "reset-rate-limited": "For mange tilbakestillings-e-poster ble bedt om. Vent før du prøver igjen. Under testing kan Supabase kreve at du venter minst 1 time eller bruker en konfigurert SMTP-leverandør.",
+      "signup-provider-disabled": "E-postregistrering er ikke tilgjengelig ennå. Sjekk Neon Auth-innstillingene.",
+      "reset-rate-limited": "For mange tilbakestillings-e-poster ble bedt om. Vent før du prøver igjen. Under testing kan Neon kreve at du venter minst 1 time eller bruker en konfigurert SMTP-leverandør.",
       "reset-provider-or-smtp": "Tilbakestillings-e-posten kunne ikke sendes akkurat nå. Prøv senere eller kontakt støtte.",
       "reset-invalid-email": "Skriv inn en gyldig e-postadresse.",
       "reset-redirect-not-allowed": "Oppsettet for tilbakestillingslenken er ufullstendig. Kontakt støtte.",
@@ -360,7 +360,7 @@
     },
     "errors": {
       "listTitle": "Utfordringer kunne ikke lastes.",
-      "listBody": "Kontroller Supabase-konfigurasjon, migreringsstatus og RLS-regler."
+      "listBody": "Kontroller Neon-konfigurasjon, migreringsstatus og RLS-regler."
     },
     "social": {
       "friendRequests": "Innkommende venneforespørsler",
@@ -411,7 +411,7 @@
     "submit": "Opprett utkast",
     "errors": {
       "missing-title": "Legg til en tittel før du oppretter utfordringen.",
-      "create-failed": "Utfordringen kunne ikke opprettes. Kontroller Supabase-oppsett og RLS-regler."
+      "create-failed": "Utfordringen kunne ikke opprettes. Kontroller Neon-oppsett og RLS-regler."
     }
   },
   "ChallengeDetail": {
@@ -448,6 +448,8 @@
       "displayName": "Visningsnavn",
       "displayNamePlaceholder": "Navnet ditt",
       "preferredLocale": "Foretrukket språk",
+      "currentPassword": "Nåværende passord",
+      "currentPasswordPlaceholder": "Skriv inn nåværende passord",
       "newPassword": "Nytt passord",
       "newPasswordPlaceholder": "Minst 8 tegn",
       "confirmPassword": "Bekreft passord",
@@ -461,8 +463,8 @@
       "password-saved": "Passordet ble oppdatert."
     },
     "errors": {
-      "updateFailed": "Profilinnstillingene kunne ikke lagres. Kontroller Supabase-oppsett og RLS-regler.",
-      "profile-update-failed": "Profilinnstillingene kunne ikke lagres. Sjekk Supabase-oppsett og RLS-regler.",
+      "updateFailed": "Profilinnstillingene kunne ikke lagres. Kontroller Neon-oppsett og RLS-regler.",
+      "profile-update-failed": "Profilinnstillingene kunne ikke lagres. Sjekk Neon-oppsett og RLS-regler.",
       "password-weak": "Bruk et passord med minst 8 tegn.",
       "password-mismatch": "Passordene er ikke like.",
       "password-update-failed": "Passordet kunne ikke oppdateres. Prøv igjen.",
@@ -476,14 +478,14 @@
     },
     "password": {
       "title": "Endre passord",
-      "body": "Sett et nytt passord for denne kontoen. Passord sendes bare til Supabase Auth og lagres ikke i profiltabeller.",
+      "body": "Sett et nytt passord for denne kontoen. Passord sendes bare til Neon Auth og lagres ikke i profiltabeller.",
       "submit": "Oppdater passord"
     },
     "danger": {
       "title": "Faresone",
       "body": "Slett denne kontoen bare hvis du er sikker. Handlingen er permanent.",
       "effects": {
-        "auth": "Supabase Auth-brukeren din blir fjernet.",
+        "auth": "Neon Auth-brukeren din blir fjernet.",
         "data": "Profilen din og data du eier fjernes i henhold til databasekoblinger.",
         "anonymized": "Noen meldinger eller aktivitet kan bli stående uten bruker-id der skjemaet bevarer historikk.",
         "irreversible": "Denne handlingen kan ikke angres."
@@ -952,8 +954,8 @@
       "settings": "Admininnstillinger"
     },
     "verification": {
-      "title": "Live Supabase-verifisering kreves",
-      "body": "Fase 10 legger til lokale migreringer og RLS/RPC-regler. Bruk og test dem mot det virkelige Supabase-prosjektet før du stoler på produksjonsdata.",
+      "title": "Live Neon-verifisering kreves",
+      "body": "Fase 10 legger til lokale migreringer og RLS/RPC-regler. Bruk og test dem mot det virkelige Neon-prosjektet før du stoler på produksjonsdata.",
       "error": "Noen admindata kunne ikke lastes. Kontroller at fase 10-migreringen er brukt."
     },
     "metrics": {
@@ -1008,7 +1010,7 @@
     "back": "Tilbake til admin",
     "eyebrow": "Admininnstillinger",
     "title": "Sjekkliste for adminberedskap",
-    "body": "En lokal statusvisning for utrulling, Supabase-verifisering og støtteoppsett.",
+    "body": "En lokal statusvisning for utrulling, Neon-verifisering og støtteoppsett.",
     "checklists": {
       "appStatus": {
         "title": "Appstatus",
@@ -1018,10 +1020,10 @@
         "messages": "Meldinger, varsler og aktivitet er fortsatt beskyttet av RLS."
       },
       "supabase": {
-        "title": "Supabase",
-        "phase10Migration": "Bruk fase 10-migreringen i Supabase.",
+        "title": "Neon",
+        "phase10Migration": "Bruk fase 10-migreringen i Neon.",
         "rls": "Gå gjennom RLS-regler med ekte autentiserte brukere.",
-        "firstAdmin": "Tildel første admin manuelt i Supabase SQL.",
+        "firstAdmin": "Tildel første admin manuelt i Neon SQL.",
         "liveVerification": "Verifiser admin-RPC-er før produksjonsbruk."
       },
       "deployment": {
